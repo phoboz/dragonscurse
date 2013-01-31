@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<mouseman walk_speed="2"
+          weight="5"
+          jump_speed="4"
+          jump_limit="16">
+    <object image="mouseman.png"
+            width="32" height="24" margin="1" spacing="1"
+            treshold="5"
+            right_stand="0"
+            right_walk_start="0" right_walk_end="2"
+            right_jump="2"
+            right_crouch="0"
+            left_stand="5"
+            left_walk_start="5" left_walk_end="7"
+            left_jump="7"
+            left_crouch="5" />
+</mouseman>
+
