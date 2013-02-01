@@ -8,6 +8,7 @@
 #include "SDL.h"
 #include "phoboz/sprite.h"
 #include "pngfuncs.h"
+#include <iostream>
 
 struct Options {
 public:
