@@ -119,21 +119,39 @@ bool Object::check_collision(int x, int y, Map *map)
 
 bool Object::check_below(Map *map)
 {
-    int right = get_attribute("right");
     int bottom = get_attribute("bottom");
     int min_dy = m_dy;
 
-    for (int i = 1; i < right - 1; i++) {
-        int dy;
-        for (dy = m_dy; dy > 0; dy--) {
-            if (!check_collision(m_x + i, m_y + bottom + dy, map)) {
-                break;
+    if (m_dir == Right) {
+        int right = get_attribute("right");
+        for (int i = 0; i < right; i++) {
+            int dy;
+            for (dy = m_dy; dy > 0; dy--) {
+                if (!check_collision(m_x + i, m_y + bottom + dy, map)) {
+                    break;
+                }
+            }
+            if (dy < min_dy) {
+                min_dy = dy;
             }
         }
-        if (dy < min_dy) {
-            min_dy = dy;
+    }
+    else if (m_dir == Left) {
+        int left = get_attribute("left");
+        int w = m_spr->get_width();
+        for (int i = left; i < w; i++) {
+            int dy;
+            for (dy = m_dy; dy > 0; dy--) {
+                if (!check_collision(m_x + i, m_y + bottom + dy, map)) {
+                    break;
+                }
+            }
+            if (dy < min_dy) {
+                min_dy = dy;
+            }
         }
     }
+
 
     bool result;
     if (min_dy != m_dy) {
@@ -155,7 +173,7 @@ bool Object::check_ahead(Map *map)
 
     if (m_dir == Right) {
         int right = get_attribute("right");
-        for (int i = top + 1; i < bottom - 1; i++) {
+        for (int i = top; i < bottom; i++) {
             int dx;
             for (dx = m_dx; dx > 0; dx--) {
                 if (!check_collision(m_x + right + dx, m_y + i, map)) {
@@ -169,11 +187,11 @@ bool Object::check_ahead(Map *map)
     }
     else if (m_dir == Left) {
         int left = get_attribute("left");
-        for (int i = top + 1; i < bottom - 1; i++) {
+        for (int i = top; i < bottom; i++) {
             int dx;
             for (dx = m_dx; dx > 0; dx--) {
                 // TODO: For some reason a 2 has to be substracted
-                if (!check_collision(m_x + left - 2 + dx, m_y + i, map)) {
+                if (!check_collision(m_x + left - dx, m_y + i, map)) {
                     break;
                 }
             }
@@ -197,19 +215,36 @@ bool Object::check_ahead(Map *map)
 
 bool Object::check_above(Map *map)
 {
-    int right = get_attribute("right");
     int top = get_attribute("top");
     int min_dy = m_dy;
 
-    for (int i = 1; i < right - 1; i++) {
-        int dy;
-        for (dy = m_dy; dy > 0; dy--) {
-            if (!check_collision(m_x + i, m_y + top - dy, map)) {
-                break;
+    if (m_dir == Right) {
+        int right = get_attribute("right");
+        for (int i = 0; i < right; i++) {
+            int dy;
+            for (dy = m_dy; dy > 0; dy--) {
+                if (!check_collision(m_x + i, m_y + top - dy, map)) {
+                    break;
+                }
+            }
+            if (dy < min_dy) {
+                min_dy = dy;
             }
         }
-        if (dy < min_dy) {
-            min_dy = dy;
+    }
+    else if (m_dir == Left) {
+        int left = get_attribute("left");
+        int w = m_spr->get_width();
+        for (int i = left; i < w; i++) {
+            int dy;
+            for (dy = m_dy; dy > 0; dy--) {
+                if (!check_collision(m_x + i, m_y + top - dy, map)) {
+                    break;
+                }
+            }
+            if (dy < min_dy) {
+                min_dy = dy;
+            }
         }
     }
 
