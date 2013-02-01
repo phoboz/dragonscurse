@@ -7,12 +7,12 @@
             width="32" height="48" margin="1" spacing="1"
             treshold="5"
             right_stand="0"
-            right_walk_start="0" right_walk_end="3"
-            right_jump="4"
-            right_crouch="5"
-            left_stand="6"
-            left_walk_start="6" left_walk_end="9"
-            left_jump="10"
-            left_crouch="11" />
+            right_walk_start="0" right_walk_end="2"
+            right_jump="3"
+            right_crouch="4"
+            left_stand="8"
+            left_walk_start="8" left_walk_end="10"
+            left_jump="11"
+            left_crouch="12" />
 </actor>
 
