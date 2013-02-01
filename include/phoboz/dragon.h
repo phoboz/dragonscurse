@@ -1,7 +1,7 @@
 #ifndef _Dragon_H
 #define _Dragon_H
 
-#include "object.h"
+#include "phoboz/object.h"
 
 class Dragon : public Object {
 public:

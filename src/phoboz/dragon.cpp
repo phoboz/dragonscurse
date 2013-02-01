@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "phoboz/ctrl.h"
-#include "dragon.h"
+#include "phoboz/dragon.h"
 
 void Dragon::move(Map *map)
 {
