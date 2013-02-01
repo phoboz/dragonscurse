@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
-<actor walk_speed="2"
-       weight="10"
-       jump_speed="4"
-       jump_limit="20">
+<salamander walk_speed="2"
+            weight="10"
+            jump_speed="4"
+            jump_limit="20">
     <object image="salamander.png"
             width="32" height="48" margin="1" spacing="1"
             treshold="5"
@@ -14,5 +14,5 @@
             left_walk_start="8" left_walk_end="10"
             left_jump="11"
             left_crouch="12" />
-</actor>
+</salamander>
 
