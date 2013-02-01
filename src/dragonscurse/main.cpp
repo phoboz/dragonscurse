@@ -7,7 +7,7 @@
 #include "phoboz/sprite.h"
 #include "phoboz/ctrl.h"
 #include "phoboz/map.h"
-#include "dragon.h"
+#include "phoboz/dragon.h"
 
 static SDL_Surface *screen;
 static int screen_width = 640;

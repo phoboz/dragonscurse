@@ -12,7 +12,7 @@ public:
     enum Type { Player, Enemy };
     enum AnimDirection { AnimUp, AnimDown };
     enum Direction { Keep, Right, Left };
-    enum Action { Stand, Walk, Fall, Jump, Crouch };
+    enum Action { Stand, Walk, Fall, Jump, Crouch, Ability };
 
     Object(Type type)
         : m_x(0), m_y(0), m_dx(0), m_dy(0),
