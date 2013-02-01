@@ -119,12 +119,11 @@ bool Object::check_collision(int x, int y, Map *map)
 
 bool Object::check_below(Map *map)
 {
-    int left = get_attribute("left");
     int right = get_attribute("right");
     int bottom = get_attribute("bottom");
     int min_dy = m_dy;
 
-    for (int i = left + 1; i < right - 1; i++) {
+    for (int i = 1; i < right - 1; i++) {
         int dy;
         for (dy = m_dy; dy > 0; dy--) {
             if (!check_collision(m_x + i, m_y + bottom + dy, map)) {
@@ -198,12 +197,11 @@ bool Object::check_ahead(Map *map)
 
 bool Object::check_above(Map *map)
 {
-    int left = get_attribute("left");
     int right = get_attribute("right");
     int top = get_attribute("top");
     int min_dy = m_dy;
 
-    for (int i = left + 1; i < right - 1; i++) {
+    for (int i = 1; i < right - 1; i++) {
         int dy;
         for (dy = m_dy; dy > 0; dy--) {
             if (!check_collision(m_x + i, m_y + top - dy, map)) {

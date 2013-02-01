@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<human walk_speed="2"
+       weight="10"
+       jump_speed="4"
+       jump_limit="20">
+    <object image="human.png"
+            width="39" height="37" margin="1" spacing="1"
+            left="0" right="30" top="2" bottom="36"
+            treshold="5"
+            right_stand="0"
+            right_walk_start="0" right_walk_end="2"
+            right_jump="3"
+            right_crouch="4"
+            left_stand="8"
+            left_walk_start="8" left_walk_end="10"
+            left_jump="11"
+            left_crouch="12" />
+</human>
+
