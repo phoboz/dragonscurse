@@ -21,115 +21,120 @@ void Player::check(Map *map)
         }
     }
 
-    // Check leave crouch
-    if (m_action == Crouch) {
-        set_stand();
-    }
+    switch(m_action) {
+        case Stand:
+        case Walk:
+            if (input & PRESS_RIGHT) {
+                set_dir(Right);
+                m_action = Walk;
+                animate_walk();
+                m_dx = get_attribute("walk_speed");
+            }
+            else if (input & PRESS_LEFT) {
+                set_dir(Left);
+                m_action = Walk;
+                animate_walk();
+                m_dx = get_attribute("walk_speed");
+            }
+            else if (m_action == Walk) {
+                set_stand();
+                m_dx = 0;
+            }
 
-    // Check walk
-    if (m_action == Stand || m_action == Walk) {
-        if (input & PRESS_RIGHT) {
-            set_dir(Right);
-            m_action = Walk;
-            animate_walk();
-            m_dx = get_attribute("walk_speed");
-        }
-        else if (input & PRESS_LEFT) {
-            set_dir(Left);
-            m_action = Walk;
-            animate_walk();
-            m_dx = get_attribute("walk_speed");
-        }
-        else if (m_action == Walk) {
+            // Check for jump
+            if (input & PRESS_SPACE) {
+                if (m_jump_ready) {
+                    m_jump_ready = false;
+                    m_dy = get_attribute("jump_speed");
+                    set_jump();
+                }
+            }
+            else {
+                m_jump_ready = true;
+
+                // Check for crouch
+                if (input & PRESS_DOWN) {
+                    set_crouch();
+                }
+            }
+            check_ahead(map);
+            break;
+
+        case Fall:
+            // Below is already checked if action is not Jump
+            check_ahead(map);
+            break;
+
+        case Jump:
+            if (check_above(map)) {
+                m_action = Fall;
+            }
+
+            if (input & PRESS_RIGHT) {
+                set_dir(Right);
+                m_dx = get_attribute("walk_speed");
+            }
+            else if (input & PRESS_LEFT) {
+                set_dir(Left);
+                m_dx = get_attribute("walk_speed");
+            }
+            else {
+                m_dx = 0;
+            }
+
+            // Check jump height
+            if (++m_jump_counter == get_attribute("jump_limit")) {
+                m_jump_counter = 0;
+                m_action = Fall;
+            }
+
+            // Check horizontal direction
+            check_ahead(map);
+            break;
+
+        case Crouch:
             set_stand();
-            m_dx = 0;
-        }
+            break;
 
-        // Check for jump
-        if (input & PRESS_SPACE) {
-            if (m_jump_ready) {
-                m_jump_ready = false;
-                m_dy = get_attribute("jump_speed");
-                set_jump();
-            }
-        }
-        else {
-            m_jump_ready = true;
-
-            // Check for crouch
-            if (input & PRESS_DOWN) {
-                set_crouch();
-            }
-        }
-        check_ahead(map);
-    }
-
-    // Check jump
-    else if (m_action == Jump) {
-        if (check_above(map)) {
-            m_action = Fall;
-        }
-
-        if (input & PRESS_RIGHT) {
-            set_dir(Right);
-            m_dx = get_attribute("walk_speed");
-        }
-        else if (input & PRESS_LEFT) {
-            set_dir(Left);
-            m_dx = get_attribute("walk_speed");
-        }
-        else {
-            m_dx = 0;
-        }
-
-        // Check jump height
-        if (++m_jump_counter == get_attribute("jump_limit")) {
-            m_jump_counter = 0;
-            m_action = Fall;
-        }
-
-        // Check horizontal direction
-        check_ahead(map);
-    }
-
-    // Check fall
-    else if (m_action == Fall) {
-        check_ahead(map);
+        default:
+            break;
     }
 }
 
 void Player::move(Map *map)
 {
-    // Movement for walk
-    if (m_action == Walk) {
-        if (m_dir == Right) {
-            m_x += m_dx;
-        }
-        else if (m_dir == Left) {
-            m_x -= m_dx;
-        }
-    }
+    switch(m_action) {
+        case Walk:
+            if (m_dir == Right) {
+                m_x += m_dx;
+            }
+            else if (m_dir == Left) {
+                m_x -= m_dx;
+            }
+            break;
 
-    // Movement for fall
-    else if (m_action == Fall) {
-        if (m_dir == Right) {
-            m_x += m_dx;
-        }
-        else if (m_dir == Left) {
-            m_x -= m_dx;
-        }
-        m_y += m_dy;
-    }
+        case Fall:
+            if (m_dir == Right) {
+                m_x += m_dx;
+            }
+            else if (m_dir == Left) {
+                m_x -= m_dx;
+            }
+            m_y += m_dy;
+            break;
 
-    // Movement for jump
-    else if (m_action == Jump) {
-        if (m_dir == Right) {
-            m_x += m_dx;
-        }
-        else if (m_dir == Left) {
-            m_x -= m_dx;
-        }
-        m_y -= m_dy;
+        case Jump:
+            if (m_dir == Right) {
+                m_x += m_dx;
+            }
+            else if (m_dir == Left) {
+                m_x -= m_dx;
+            }
+            m_y -= m_dy;
+            break;
+
+        default:
+            break;
     }
 }
 
