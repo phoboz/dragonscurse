@@ -13,8 +13,14 @@ Sprite::~Sprite()
 
 bool Sprite::load(const char *fn, int w, int h, int margin, int spacing)
 {
-    m_img = IMG_Load(fn);
-    if (m_img) {
+    SDL_Surface* tmp = IMG_Load(fn);
+    if (tmp) {
+      m_img = SDL_DisplayFormatAlpha(tmp);
+      SDL_FreeSurface(tmp);
+      if (!m_img) {
+          m_loaded = false;
+          return m_loaded;
+      }
       m_w = w;
       m_h = h;
       m_margin = margin;
