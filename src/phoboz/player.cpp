@@ -93,7 +93,9 @@ void Player::check(Map *map)
             break;
 
         case Crouch:
-            set_stand();
+            if (!(input & PRESS_DOWN)) {
+                set_stand();
+            }
             break;
 
         default:
