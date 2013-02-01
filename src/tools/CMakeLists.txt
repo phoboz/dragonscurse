@@ -1,0 +1,12 @@
+FIND_PACKAGE(Boost 1.40 COMPONENTS program_options REQUIRED)
+FIND_PACKAGE(PNG REQUIRED)
+INCLUDE_DIRECTORIES(
+    ${Boost_INCLUDE_DIR}
+    ${PNG_INCLUDE_DIR}
+    )
+ADD_EXECUTABLE(sprtool pngfuncs.cpp sprtool.cpp)
+TARGET_LINK_LIBRARIES(sprtool
+    tmx phoboz
+    ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${TINYXML_LIBRARIES}
+    ${Boost_LIBRARIES} ${PNG_LIBRARY}
+    )
