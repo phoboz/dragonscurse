@@ -68,6 +68,7 @@ void Player::check(Map *map)
         case Jump:
             if (check_above(map)) {
                 m_action = Fall;
+                m_jump_counter = 0;
             }
 
             if (input & PRESS_RIGHT) {
