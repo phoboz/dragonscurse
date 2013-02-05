@@ -5,7 +5,7 @@
        jump_limit="18">
     <object image="human.png"
             width="91" height="63" margin="1" spacing="1"
-            left="27" right="64" top="7" bottom="61"
+            left="24" right="66" top="7" bottom="61"
             treshold="6"
             right_stand="0"
             right_walk_start="0" right_walk_end="2"
