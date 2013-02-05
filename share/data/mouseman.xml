@@ -2,10 +2,10 @@
 <mouseman walk_speed="2"
           weight="5"
           jump_speed="6"
-          jump_limit="12">
+          jump_limit="14">
     <object image="mouseman.png"
-            width="34" height="34" margin="1" spacing="1"
-            left="8" right="26" top="15" bottom="33"
+            width="60" height="60" margin="1" spacing="1"
+            left="16" right="46" top="28" bottom="58"
             treshold="5"
             right_stand="0"
             right_walk_start="0" right_walk_end="2"

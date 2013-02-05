@@ -57,8 +57,16 @@ bool init(const char *map_fn, const char *player_fn)
 void move(void)
 {
     player->move(map);
-    map->set_x(player->get_x() - screen_width / 2);
-    map->set_y(player->get_y() - screen_height / 2);
+    int map_x = player->get_x() - screen_width / 2;
+    int map_y = player->get_y() - screen_height / 2;
+    if (map_x < 0) {
+        map_x = 0;
+    }
+    if (map_y < 0) {
+        map_y = 0;
+    }
+    map->set_x(map_x);
+    map->set_y(map_y);
 }
 
 void redraw(void)
