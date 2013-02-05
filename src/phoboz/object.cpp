@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 #include <string.h>
 #include "phoboz/object.h"
 
@@ -135,7 +135,6 @@ bool Object::check_below(Map *map)
             min_dy = dy;
         }
     }
-
 
     bool result;
     if (min_dy != m_dy) {

@@ -4,8 +4,8 @@
             jump_speed="4"
             jump_limit="20">
     <object image="salamander.png"
-            width="32" height="48" margin="1" spacing="1"
-            left="2" right="30" top="14" bottom="47"
+            width="68" height="65" margin="1" spacing="1"
+            left="12" right="56" top="0" bottom="63"
             treshold="5"
             right_stand="0"
             right_walk_start="0" right_walk_end="2"

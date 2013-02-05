@@ -5,7 +5,6 @@
 
 void Dragon::move(Map *map)
 {
-    Player::check(map);
     Player::move(map);
 }
 

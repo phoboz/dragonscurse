@@ -10,9 +10,6 @@ public:
           m_jump_counter(0), m_jump_ready(true) { load(fn); }
     virtual void move(Map *map);
 
-protected:
-    void check(Map *map);
-
 private:
     int m_jump_counter;
     bool m_jump_ready;
