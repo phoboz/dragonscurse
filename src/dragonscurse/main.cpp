@@ -14,7 +14,7 @@ static SDL_Surface *screen;
 static int screen_width = 640;
 static int screen_height = 480;
 static Map *map;
-static Player *player;
+static Object *player;
 
 bool init(const char *map_fn, const char *player_fn)
 {
