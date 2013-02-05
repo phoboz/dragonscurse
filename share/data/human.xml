@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
 <human walk_speed="2"
        weight="10"
-       jump_speed="4"
-       jump_limit="20">
+       jump_speed="6"
+       jump_limit="18">
     <object image="human.png"
-            width="53" height="37" margin="1" spacing="1"
-            left="16" right="38" top="1" bottom="36"
-            treshold="5"
+            width="91" height="63" margin="1" spacing="1"
+            left="27" right="64" top="7" bottom="61"
+            treshold="6"
             right_stand="0"
             right_walk_start="0" right_walk_end="2"
             right_jump="3"
