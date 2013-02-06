@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
-<salamander walk_speed="2"
-            weight="10"
-            jump_speed="4"
-            jump_limit="20">
+<dragon walk_speed="2"
+        weight="10"
+        jump_speed="4"
+        jump_limit="20">
     <object image="salamander.png"
             width="68" height="65" margin="1" spacing="1"
             left="12" right="56" top="0" bottom="63"
@@ -15,5 +15,6 @@
             left_walk_start="8" left_walk_end="10"
             left_jump="11"
             left_crouch="12" />
-</salamander>
+    <string bullet="firebreath.xml" />
+</dragon>
 

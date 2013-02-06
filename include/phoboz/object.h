@@ -9,7 +9,7 @@
 
 class Object {
 public:
-    enum Type { Player, Enemy };
+    enum Type { Player, Enemy, Projectile };
     enum AnimDirection { AnimUp, AnimDown };
     enum Direction { Keep, Right, Left };
     enum Action { Stand, Walk, Fall, Jump, Crouch, Ability };
@@ -24,16 +24,21 @@ public:
     bool get_loaded() const { return m_loaded; }
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }
-    void draw(SDL_Surface *dest, Map *map,
-              int clip_x, int clip_y, int clip_w, int clip_h) const {
+    int get_image_width() const { return m_spr->get_image_width(); }
+    int get_image_height() const { return m_spr->get_image_height(); }
+    virtual void move(Map *map) = 0;
+    virtual void draw(SDL_Surface *dest, Map *map,
+                      int clip_x, int clip_y, int clip_w, int clip_h) const {
         m_spr->draw(dest, m_x - map->get_x(), m_y - map->get_y(), m_frame,
                     clip_x, clip_y, clip_w, clip_h);
     }
-    virtual void move(Map *map) = 0;
 
 protected:
     int  get_attribute(const char *name) {
         return m_attributes[std::string(name)];
+    }
+    const char* get_string(const char *name) {
+        return m_strings[std::string(name)].c_str();
     }
 
     bool check_collision(int x, int y, Map *map);
@@ -48,6 +53,8 @@ protected:
     void animate_walk();
 
     std::map<std::string, int> m_attributes;
+    std::map<std::string, std::string> m_strings;
+
     int m_x, m_y;
     int m_dx, m_dy;
     AnimDirection m_anim_dir;
@@ -59,7 +66,8 @@ protected:
 
 private:
     bool load_object_attributes(TiXmlElement *elmt);
-    void load_extra_attributes(TiXmlElement *elmt);
+    void load_strings(TiXmlElement *elmt);
+    void load_attributes(TiXmlElement *elmt);
     bool load_nodes(TiXmlNode *node);
 
     bool m_loaded;

@@ -47,7 +47,16 @@ bool Object::load_object_attributes(TiXmlElement *elmt)
     return m_loaded;
 }
 
-void Object::load_extra_attributes(TiXmlElement *elmt)
+void Object::load_strings(TiXmlElement *elmt)
+{
+    TiXmlAttribute *attr = elmt->FirstAttribute();
+    while (attr) {
+        m_strings[std::string(attr->Name())] = std::string(attr->Value());
+        attr = attr->Next();
+    }
+}
+
+void Object::load_attributes(TiXmlElement *elmt)
 {
     TiXmlAttribute *attr = elmt->FirstAttribute();
     while (attr) {
@@ -64,8 +73,11 @@ bool Object::load_nodes(TiXmlNode *node)
         if (strcmp(node->Value(), "object") == 0) {
             result = load_object_attributes(node->ToElement());
         }
+        else if (strcmp(node->Value(), "string") == 0) {
+            load_strings(node->ToElement());
+        }
         else {
-            load_extra_attributes(node->ToElement());
+            load_attributes(node->ToElement());
         }
     }
 

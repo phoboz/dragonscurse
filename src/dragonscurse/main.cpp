@@ -8,7 +8,7 @@
 #include "phoboz/ctrl.h"
 #include "phoboz/map.h"
 #include "phoboz/timer.h"
-#include "phoboz/dragon.h"
+#include "phoboz/player.h"
 
 static SDL_Surface *screen;
 static int screen_width = 640;
@@ -45,7 +45,7 @@ bool init(const char *map_fn, const char *player_fn)
         return false;
     }
 
-    player = new Dragon(player_fn);
+    player = new Player(player_fn);
     if (!player->get_loaded()) {
         fprintf(stderr, "Fatal Error -- Unable to load sprite\n");
         return false;
