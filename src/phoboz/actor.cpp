@@ -34,7 +34,6 @@ bool Actor::set_still(void)
     if (++m_counter == get_attribute("treshold")) {
         m_counter = 0;
         m_anim_dir = AnimUp;
-        m_action = Still;
         done = true;
         switch(m_dir) {
             case Right:
@@ -48,6 +47,7 @@ bool Actor::set_still(void)
             default:
                 break;
         }
+        m_action = Still;
     }
 
     return done;
@@ -55,7 +55,6 @@ bool Actor::set_still(void)
 
 void Actor::set_jump()
 {
-    m_action = Jump;
     switch(m_dir) {
         case Right:
             m_frame = get_attribute("right_jump");
@@ -68,11 +67,11 @@ void Actor::set_jump()
         default:
             break;
     }
+    m_action = Jump;
 }
 
 void Actor::set_crouch(void)
 {
-    m_action = Crouch;
     switch(m_dir) {
         case Right:
             m_frame = get_attribute("right_crouch");
@@ -85,6 +84,34 @@ void Actor::set_crouch(void)
         default:
             break;
     }
+    m_action = Crouch;
+}
+
+void Actor::set_attack(void)
+{
+    switch(m_dir) {
+        case Right:
+            if (m_action == Crouch) {
+                m_frame = get_attribute("right_attack_low");
+            }
+            else {
+                m_frame = get_attribute("right_attack");
+            }
+            break;
+
+        case Left:
+            if (m_action == Crouch) {
+                m_frame = get_attribute("left_attack_low");
+            }
+            else {
+                m_frame = get_attribute("left_attack");
+            }
+            break;
+
+        default:
+            break;
+    }
+    m_action = Attack;
 }
 
 void Actor::animate_move()

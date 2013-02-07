@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
-<dragon>
+<dragon attack_high="10"
+        attack_low="26">
     <player jump_speed="4"
             jump_limit="20">
         <actor move_speed="2"
@@ -9,10 +10,14 @@
                right_move_start="0" right_move_end="2"
                right_jump="3"
                right_crouch="4"
+               right_attack="5"
+               right_attack_low="6"
                left_still="8"
                left_move_start="8" left_move_end="10"
                left_jump="11"
-               left_crouch="12">
+               left_crouch="12"
+               left_attack="13"
+               left_attack_low="14">
             <object image="salamander.png"
                     width="68" height="65" margin="1" spacing="1"
                     left="12" right="56" top="0" bottom="63" />

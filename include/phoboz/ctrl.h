@@ -7,8 +7,8 @@
 #define PRESS_LEFT 2
 #define PRESS_UP 4
 #define PRESS_DOWN 8
-#define PRESS_ENTER 16
-#define PRESS_SPACE 32
+#define PRESS_JUMP 16
+#define PRESS_ATTACK 32
 #define PRESS_ESC 64
 #define SET_BITS(x,bits) (x|bits)
 #define RESET_BITS(x,bits) (x&~bits)

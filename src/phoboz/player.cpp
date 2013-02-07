@@ -39,7 +39,7 @@ void Player::move(Map *map)
             }
 
             // Check for jump
-            if (input & PRESS_SPACE) {
+            if (input & PRESS_JUMP) {
                 if (m_jump_ready) {
                     m_jump_ready = false;
                     m_dy = get_attribute("jump_speed");

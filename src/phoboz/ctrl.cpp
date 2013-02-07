@@ -22,11 +22,11 @@ int get_input(void)
   if(keys[SDLK_DOWN])
     input=SET_BITS(input,PRESS_DOWN);
 
-  if(keys[SDLK_RETURN])
-    input=SET_BITS(input,PRESS_ENTER);
-
   if(keys[SDLK_SPACE])
-    input=SET_BITS(input,PRESS_SPACE);
+    input=SET_BITS(input,PRESS_JUMP);
+
+  if(keys[SDLK_LCTRL])
+    input=SET_BITS(input,PRESS_ATTACK);
 
   return input;
 }
@@ -52,11 +52,11 @@ int get_input_keydown(int ks)
       case SDLK_DOWN:
          input=SET_BITS(input,PRESS_DOWN);
          break;
-      case SDLK_RETURN:
-         input=SET_BITS(input,PRESS_ENTER);
-         break;
       case SDLK_SPACE:
-         input=SET_BITS(input,PRESS_SPACE);
+         input=SET_BITS(input,PRESS_JUMP);
+         break;
+      case SDLK_LCTRL:
+         input=SET_BITS(input,PRESS_ATTACK);
          break;
       default: break;
    }
@@ -85,11 +85,11 @@ int get_input_keyup(int ks)
       case SDLK_DOWN:
          input=RESET_BITS(input,PRESS_DOWN);
          break;
-      case SDLK_RETURN:
-         input=RESET_BITS(input,PRESS_ENTER);
-         break;
       case SDLK_SPACE:
-         input=RESET_BITS(input,PRESS_SPACE);
+         input=RESET_BITS(input,PRESS_JUMP);
+         break;
+      case SDLK_LCTRL:
+         input=RESET_BITS(input,PRESS_ATTACK);
          break;
       default: break;
    }

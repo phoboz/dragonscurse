@@ -18,13 +18,32 @@ void Dragon::move(Map *map)
     int input = get_input();
 
     // TODO: Check in which state it shall be possible to fire
-    if (input & PRESS_ENTER) {
-        if (m_dir == Right) {
-            m_bullet->fire(m_x + get_attribute("right"), m_y, m_dir);
+    if (input & PRESS_ATTACK) {
+        int y;
+        if (m_action == Crouch) {
+            y = get_attribute("attack_low");
         }
         else {
-            m_bullet->fire(m_x + get_attribute("left"), m_y, m_dir);
+            y = get_attribute("attack_high");
         }
+
+        if (m_dir == Right) {
+            if (m_bullet->fire(m_x + get_attribute("right"),
+                               m_y + get_attribute("top") + y,
+                               m_dir)) {
+                set_attack();
+            }
+        }
+        else {
+            if (m_bullet->fire(m_x + get_attribute("left"),
+                               m_y + get_attribute("top") + y,
+                               m_dir)) {
+                set_attack();
+            }
+        }
+    }
+    else if (m_action == Attack) {
+        set_still();
     }
 
     // Move bullet
