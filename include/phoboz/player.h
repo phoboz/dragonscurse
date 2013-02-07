@@ -1,12 +1,12 @@
 #ifndef _Player_H
 #define _Player_H
 
-#include "phoboz/object.h"
+#include "phoboz/actor.h"
 
-class Player : public Object {
+class Player : public Actor {
 public:
     Player(const char *fn)
-        : Object(Object::TypePlayer),
+        : Actor(Object::TypePlayer),
           m_jump_counter(0), m_jump_ready(true) { load(fn); }
     virtual void move(Map *map);
 

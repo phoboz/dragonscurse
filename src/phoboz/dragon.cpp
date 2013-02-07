@@ -5,8 +5,7 @@
 
 Dragon::Dragon(const char *fn)
         : Player(fn),
-          m_jump_counter(0), m_jump_ready(true),
-          m_bullet(0)
+          m_jump_counter(0), m_jump_ready(true)
 {
     m_bullet = new Bullet(get_string("bullet"));
     if (!m_bullet->get_loaded()) exit(1);

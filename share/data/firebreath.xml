@@ -2,6 +2,7 @@
 <bullet move_speed="5">
     <object image="firebreath.png"
             width="36" height="26" margin="1" spacing="1"
+            left="0" right="36" top="0" bottom="26"
             right_still="0"
             right_move_start="0" right_move_end="0"
             left_still="1"

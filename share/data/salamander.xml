@@ -1,20 +1,23 @@
 <?xml version="1.0" ?>
-<dragon move_speed="2"
-        weight="10"
-        jump_speed="4"
-        jump_limit="20">
-    <object image="salamander.png"
-            width="68" height="65" margin="1" spacing="1"
-            left="12" right="56" top="0" bottom="63"
-            treshold="5"
-            right_still="0"
-            right_move_start="0" right_move_end="2"
-            right_jump="3"
-            right_crouch="4"
-            left_still="8"
-            left_move_start="8" left_move_end="10"
-            left_jump="11"
-            left_crouch="12" />
+<dragon>
+    <player jump_speed="4"
+            jump_limit="20">
+        <actor move_speed="2"
+               treshold="5"
+               weight="10"
+               right_still="0"
+               right_move_start="0" right_move_end="2"
+               right_jump="3"
+               right_crouch="4"
+               left_still="8"
+               left_move_start="8" left_move_end="10"
+               left_jump="11"
+               left_crouch="12">
+            <object image="salamander.png"
+                    width="68" height="65" margin="1" spacing="1"
+                    left="12" right="56" top="0" bottom="63" />
+        </actor>
+    </player>
     <string bullet="firebreath.xml" />
 </dragon>
 

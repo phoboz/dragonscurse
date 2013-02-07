@@ -1,19 +1,22 @@
 <?xml version="1.0" ?>
-<mouseman move_speed="2"
-          weight="5"
-          jump_speed="6"
-          jump_limit="14">
-    <object image="mouseman.png"
-            width="60" height="60" margin="1" spacing="1"
-            left="16" right="46" top="28" bottom="58"
-            treshold="5"
-            right_still="0"
-            right_move_start="0" right_move_end="2"
-            right_jump="2"
-            right_crouch="0"
-            left_still="5"
-            left_move_start="5" left_move_end="7"
-            left_jump="7"
-            left_crouch="5" />
+<mouseman>
+    <player jump_speed="6"
+            jump_limit="14">
+        <actor move_speed="2"
+               treshold="5"
+               weight="5"
+               right_still="0"
+               right_move_start="0" right_move_end="2"
+               right_jump="2"
+               right_crouch="0"
+               left_still="5"
+               left_move_start="5" left_move_end="7"
+               left_jump="7"
+               left_crouch="5">
+            <object image="mouseman.png"
+                    width="60" height="60" margin="1" spacing="1"
+                    left="16" right="46" top="28" bottom="58" />
+        </actor>
+    </player>
 </mouseman>
 
