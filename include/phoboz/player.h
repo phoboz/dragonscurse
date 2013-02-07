@@ -6,7 +6,7 @@
 class Player : public Object {
 public:
     Player(const char *fn)
-        : Object(Object::Player),
+        : Object(Object::TypePlayer),
           m_jump_counter(0), m_jump_ready(true) { load(fn); }
     virtual void move(Map *map);
 

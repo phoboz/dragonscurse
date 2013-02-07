@@ -238,8 +238,10 @@ bool Object::check_above(Map *map)
     return result;
 }
 
-bool Object::set_dir(Direction dir)
+bool Object::set_move_dir(Direction dir)
 {
+    m_action = Move;
+
     if (dir == Keep || dir == m_dir) {
         return false;
     }
@@ -247,12 +249,12 @@ bool Object::set_dir(Direction dir)
     m_anim_dir = AnimUp;
     switch(dir) {
         case Right:
-            m_frame = get_attribute("right_walk_start");
+            m_frame = get_attribute("right_move_start");
             m_dir = dir;
             break;
 
         case Left:
-            m_frame = get_attribute("left_walk_start");
+            m_frame = get_attribute("left_move_start");
             m_dir = dir;
             break;
 
@@ -263,22 +265,22 @@ bool Object::set_dir(Direction dir)
     return true;
 }
 
-bool Object::set_stand(void)
+bool Object::set_still(void)
 {
     bool done = false;
 
     if (++m_counter == get_attribute("treshold")) {
         m_counter = 0;
         m_anim_dir = AnimUp;
-        m_action = Stand;
+        m_action = Still;
         done = true;
         switch(m_dir) {
             case Right:
-                m_frame = get_attribute("right_stand");
+                m_frame = get_attribute("right_still");
                 break;
 
             case Left:
-                m_frame = get_attribute("left_stand");
+                m_frame = get_attribute("left_still");
                 break;
 
             default:
@@ -323,19 +325,19 @@ void Object::set_crouch(void)
     }
 }
 
-void Object::animate_walk()
+void Object::animate_move()
 {
     if (++m_counter == get_attribute("treshold")) {
         m_counter = 0;
         switch(m_dir) {
             case Right:
                 if (m_anim_dir == AnimUp) {
-                    if (++m_frame == get_attribute("right_walk_end")) {
+                    if (++m_frame == get_attribute("right_move_end")) {
                         m_anim_dir = AnimDown;
                     }
                 }
                 else if (m_anim_dir == AnimDown) {
-                    if (--m_frame == get_attribute("right_walk_start")) {
+                    if (--m_frame == get_attribute("right_move_start")) {
                         m_anim_dir = AnimUp;
                     }
                 }
@@ -343,12 +345,12 @@ void Object::animate_walk()
 
             case Left:
                 if (m_anim_dir == AnimUp) {
-                    if (++m_frame == get_attribute("left_walk_end")) {
+                    if (++m_frame == get_attribute("left_move_end")) {
                         m_anim_dir = AnimDown;
                     }
                 }
                 else if (m_anim_dir == AnimDown) {
-                    if (--m_frame == get_attribute("left_walk_start")) {
+                    if (--m_frame == get_attribute("left_move_start")) {
                         m_anim_dir = AnimUp;
                     }
                 }

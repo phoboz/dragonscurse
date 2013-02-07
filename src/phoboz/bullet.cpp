@@ -8,12 +8,12 @@ void Bullet::fire(int x, int y, Direction dir)
         m_y = y;
         m_dir = dir;
         if (dir == Right) {
-            m_dx = get_attribute("speed");
-            m_frame = get_attribute("right_start");
+            m_dx = get_attribute("move_speed");
+            m_frame = get_attribute("right_move_start");
         }
         else if (dir == Left) {
-            m_dx = -get_attribute("speed");
-            m_frame = get_attribute("left_start");
+            m_dx = -get_attribute("move_speed");
+            m_frame = get_attribute("left_move_start");
         }
     }
 }

@@ -9,6 +9,7 @@
 #include "phoboz/map.h"
 #include "phoboz/timer.h"
 #include "phoboz/player.h"
+#include "phoboz/dragon.h"
 
 static SDL_Surface *screen;
 static int screen_width = 640;

@@ -15,28 +15,26 @@ void Player::move(Map *map)
             m_action = Fall;
         }
         else if (m_action == Fall) {
-            set_stand();
+            set_still();
         }
     }
 
     switch(m_action) {
-        case Stand:
+        case Still:
             m_dx = 0;
-        case Walk:
+        case Move:
             if (input & PRESS_RIGHT) {
-                set_dir(Right);
-                m_action = Walk;
-                animate_walk();
-                m_dx = get_attribute("walk_speed");
+                set_move_dir(Right);
+                animate_move();
+                m_dx = get_attribute("move_speed");
             }
             else if (input & PRESS_LEFT) {
-                set_dir(Left);
-                m_action = Walk;
-                animate_walk();
-                m_dx = get_attribute("walk_speed");
+                set_move_dir(Left);
+                animate_move();
+                m_dx = get_attribute("move_speed");
             }
-            else if (m_action == Walk) {
-                set_stand();
+            else if (m_action == Move) {
+                set_still();
                 m_dx = 0;
             }
 
@@ -85,14 +83,14 @@ void Player::move(Map *map)
 
         case Jump:
             if (input & PRESS_RIGHT) {
-                set_dir(Right);
+                set_move_dir(Right);
                 set_jump();
-                m_dx = get_attribute("walk_speed");
+                m_dx = get_attribute("move_speed");
             }
             else if (input & PRESS_LEFT) {
-                set_dir(Left);
+                set_move_dir(Left);
                 set_jump();
-                m_dx = get_attribute("walk_speed");
+                m_dx = get_attribute("move_speed");
             }
             else {
                 m_dx = 0;
@@ -125,7 +123,7 @@ void Player::move(Map *map)
 
         case Crouch:
             if (!(input & PRESS_DOWN)) {
-                set_stand();
+                set_still();
             }
             break;
 

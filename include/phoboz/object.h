@@ -9,15 +9,15 @@
 
 class Object {
 public:
-    enum Type { Player, Enemy, Projectile };
+    enum Type { TypePlayer, TypeEnemy, TypeBullet };
     enum AnimDirection { AnimUp, AnimDown };
     enum Direction { Keep, Right, Left };
-    enum Action { Stand, Walk, Fall, Jump, Crouch, Ability };
+    enum Action { Still, Move, Fall, Jump, Crouch, Ability };
 
     Object(Type type)
         : m_x(0), m_y(0), m_dx(0), m_dy(0),
           m_anim_dir(AnimUp), m_counter(0), m_frame(0),
-          m_dir(Right), m_action(Stand),
+          m_dir(Right), m_action(Still),
           m_loaded(false), m_type(type) { }
     ~Object();
     bool load(const char *fn);
@@ -46,11 +46,11 @@ protected:
     bool check_ahead(Map *map);
     bool check_above(Map *map);
 
-    bool set_dir(Direction dir);
-    bool set_stand();
+    bool set_move_dir(Direction dir);
+    bool set_still();
     void set_jump();
     void set_crouch();
-    void animate_walk();
+    void animate_move();
 
     std::map<std::string, int> m_attributes;
     std::map<std::string, std::string> m_strings;

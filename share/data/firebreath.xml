@@ -1,8 +1,10 @@
 <?xml version="1.0" ?>
-<bullet speed="5">
+<bullet move_speed="5">
     <object image="firebreath.png"
             width="36" height="26" margin="1" spacing="1"
-            right_start="0" right_end="0"
-            left_start="1" left_end="1" />
+            right_still="0"
+            right_move_start="0" right_move_end="0"
+            left_still="1"
+            left_move_start="1" left_move_end="1" />
 </bullet>
 

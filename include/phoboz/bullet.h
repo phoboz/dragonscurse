@@ -6,7 +6,7 @@
 class Bullet : public Object {
 public:
     Bullet(const char *fn)
-        : Object(Object::Projectile),
+        : Object(Object::TypeBullet),
           m_moving(false) { load(fn); }
     void fire(int x, int y, Direction dir);
     virtual void move(Map *map);

@@ -1,10 +1,10 @@
 #ifndef _Dragon_H
 #define _Dragon_H
 
-#include "phoboz/object.h"
+#include "phoboz/player.h"
 #include "phoboz/bullet.h"
 
-class Dragon : public Object {
+class Dragon : public Player {
 public:
     Dragon(const char *fn);
     virtual void move(Map *map);

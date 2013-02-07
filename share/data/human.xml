@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<human walk_speed="2"
+<human move_speed="2"
        weight="10"
        jump_speed="6"
        jump_limit="18">
@@ -7,12 +7,12 @@
             width="91" height="63" margin="1" spacing="1"
             left="24" right="66" top="7" bottom="61"
             treshold="6"
-            right_stand="0"
-            right_walk_start="0" right_walk_end="2"
+            right_still="0"
+            right_move_start="0" right_move_end="2"
             right_jump="3"
             right_crouch="4"
-            left_stand="8"
-            left_walk_start="8" left_walk_end="10"
+            left_still="8"
+            left_move_start="8" left_move_end="10"
             left_jump="11"
             left_crouch="12" />
 </human>
