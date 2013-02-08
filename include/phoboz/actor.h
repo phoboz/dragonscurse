@@ -14,6 +14,7 @@ public:
 
 protected:
     bool set_move_dir(Direction dir);
+    void swap_move_dir();
     bool set_still();
     void set_jump();
     void set_crouch();

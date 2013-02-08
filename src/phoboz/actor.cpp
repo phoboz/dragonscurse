@@ -27,6 +27,22 @@ bool Actor::set_move_dir(Direction dir)
     return true;
 }
 
+void Actor::swap_move_dir()
+{
+    switch(m_dir) {
+        case Right:
+            set_move_dir(Left);
+            break;
+
+        case Left:
+            set_move_dir(Right);
+            break;
+
+        default:
+            break;
+    }
+}
+
 bool Actor::set_still(void)
 {
     bool done = false;

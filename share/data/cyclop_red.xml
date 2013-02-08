@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<cyclop>
+    <walker>
+        <actor move_speed="2"
+               treshold="10"
+               weight="5"
+               right_still="2"
+               right_move_start="2" right_move_end="3"
+               left_still="0"
+               left_move_start="0" left_move_end="1">
+            <object image="cyclop_red.png"
+                    width="50" height="66" margin="1" spacing="1"
+                    left="1" right="48" top="2" bottom="65" />
+        </actor>
+    </walker>
+</cyclop>
+

@@ -10,14 +10,16 @@
 #include "phoboz/timer.h"
 #include "phoboz/player.h"
 #include "phoboz/dragon.h"
+#include "phoboz/walker.h"
 
 static SDL_Surface *screen;
 static int screen_width = 640;
 static int screen_height = 480;
 static Map *map;
-static Object *player;
+static Object *player = 0;
+static Object *enemy = 0;
 
-bool init(const char *map_fn, const char *player_fn)
+bool init()
 {
     // Initlaize SDL with video and sound if possible
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -38,42 +40,39 @@ bool init(const char *map_fn, const char *player_fn)
         return false;
     }
 
-    Tmx::Map *tmx = new Tmx::Map();
-    tmx->ParseFile(map_fn);
-    map = new Map(tmx);
-    if (!map->get_loaded()) {
-        fprintf(stderr, "Fatal Error -- Unable to load map\n");
-        return false;
-    }
-
-    player = new Player(player_fn);
-    if (!player->get_loaded()) {
-        fprintf(stderr, "Fatal Error -- Unable to load sprite\n");
-        return false;
-    }
-
     return true;
 }
 
 void move(void)
 {
-    player->move(map);
-    int map_x = player->get_x() - screen_width / 2;
-    int map_y = player->get_y() - screen_height / 2;
-    if (map_x < 0) {
-        map_x = 0;
+    if (player) {
+        player->move(map);
+        int map_x = player->get_x() - screen_width / 2;
+        int map_y = player->get_y() - screen_height / 2;
+        if (map_x < 0) {
+            map_x = 0;
+        }
+        if (map_y < 0) {
+            map_y = 0;
+        }
+        map->set_x(map_x);
+        map->set_y(map_y);
     }
-    if (map_y < 0) {
-        map_y = 0;
+
+    if (enemy) {
+        enemy->move(map);
     }
-    map->set_x(map_x);
-    map->set_y(map_y);
 }
 
 void redraw(void)
 {
     map->draw_layer(screen, 0, 0, screen_width, screen_height, 0);
-    player->draw(screen, map, 0, 0, screen_width, screen_height);
+    if (player) {
+        player->draw(screen, map, 0, 0, screen_width, screen_height);
+    }
+    if (enemy) {
+        enemy->draw(screen, map, 0, 0, screen_width, screen_height);
+    }
 }
 
 void flip(void)
@@ -87,8 +86,32 @@ int main(int argc, char *argv[])
     Timer timer;
     int done = 0;
 
-    if (!init(argv[1], argv[2])) {
+    if (!init()) {
         return 1;
+    }
+
+    Tmx::Map *tmx = new Tmx::Map();
+    tmx->ParseFile(argv[1]);
+    map = new Map(tmx);
+    if (!map->get_loaded()) {
+        fprintf(stderr, "Fatal Error -- Unable to load map %s\n", argv[1]);
+        return 1;
+    }
+
+    if (argc > 2) {
+        player = new Player(argv[2]);
+        if (!player->get_loaded()) {
+            fprintf(stderr, "Fatal Error -- Unable to player %s\n", argv[2]);
+            return 1;
+        }
+    }
+
+    if (argc > 3) {
+        enemy = new Walker(argv[3], 22 * 32, 42 * 32, Object::Left);
+        if (!enemy->get_loaded()) {
+            fprintf(stderr, "Fatal Error -- Unable to enemy %s\n", argv[3]);
+            return 1;
+        }
     }
 
     while (!done) {
