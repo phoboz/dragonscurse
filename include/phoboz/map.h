@@ -20,6 +20,11 @@ public:
     void set_y(int value);
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }
+    int get_num_layers() const { return m_tmx->GetNumLayers(); }
+    int get_num_object_groups() const { return m_tmx->GetNumObjectGroups(); }
+    const Tmx::ObjectGroup* get_object_group(int index) const {
+        return m_tmx->GetObjectGroup(index);
+    }
     void draw_layer(SDL_Surface *dest, int x, int y, int w, int h, int layer_id) const;
 
 private:

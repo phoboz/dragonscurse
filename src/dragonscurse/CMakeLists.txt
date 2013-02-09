@@ -1,6 +1,6 @@
 ADD_EXECUTABLE(dragonscurse
-    object.cpp actor.cpp player.cpp bullet.cpp dragon.cpp walker.cpp
-    main.cpp
+    object.cpp actor.cpp player.cpp bullet.cpp dragon.cpp walker.cpp world.cpp
+    object_factory.cpp main.cpp
     )
 TARGET_LINK_LIBRARIES(dragonscurse
     tmx phoboz

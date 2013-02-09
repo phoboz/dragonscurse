@@ -1,0 +1,58 @@
+#include <string.h>
+#include "Tmx/Tmx.h"
+#include "object_factory.h"
+#include "player.h"
+#include "world.h"
+
+World::World(Map *map, int object_group)
+    : m_map(map)
+{
+    const Tmx::ObjectGroup *group = map->get_object_group(object_group);
+    int n = group->GetNumObjects();
+    for (int i = 0; i < n; i++) {
+        const Tmx::Object *obj = group->GetObject(i);
+        Object *object = ObjectFactory::create_object(obj->GetName().c_str(),
+                                                      obj->GetType().c_str(),
+                                                      obj->GetX(), obj->GetY());
+        if (object) {
+            m_objects.push_back(object);
+        }
+    }
+}
+
+void World::move(Player *player, int window_width, int window_height)
+{
+    unsigned n = m_objects.size();
+    for (unsigned i = 0; i < n; i++) {
+        m_objects[i]->move(m_map);
+    }
+
+    player->move(m_map);
+    int map_x = player->get_x() - window_width / 2;
+    int map_y = player->get_y() - window_height / 2;
+    if (map_x < 0) {
+        map_x = 0;
+    }
+    if (map_y < 0) {
+        map_y = 0;
+    }
+    m_map->set_x(map_x);
+    m_map->set_y(map_y);
+}
+
+void World::draw(SDL_Surface *dest, Player *player,
+                 int clip_x, int clip_y, int clip_w, int clip_h)
+{
+    int num_layers = m_map->get_num_layers();
+    for (int i = 0; i < num_layers; i++) {
+        m_map->draw_layer(dest, clip_x, clip_y, clip_w, clip_h, 0);
+    }
+
+    unsigned num_objects = m_objects.size();
+    for (unsigned i = 0; i < num_objects; i++) {
+        m_objects[i]->draw(dest, m_map, clip_x, clip_y, clip_w, clip_h);
+    }
+
+    player->draw(dest, m_map, clip_x, clip_y, clip_w, clip_h);
+}
+

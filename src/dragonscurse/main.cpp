@@ -8,16 +8,16 @@
 #include "phoboz/ctrl.h"
 #include "phoboz/map.h"
 #include "phoboz/timer.h"
-#include "player.h"
-#include "dragon.h"
-#include "walker.h"
+#include "object.h"
+#include "object_factory.h"
+#include "world.h"
 
 static SDL_Surface *screen;
 static int screen_width = 640;
 static int screen_height = 480;
 static Map *map;
-static Object *player = 0;
-static Object *enemy = 0;
+static Player *player;
+static World *world;
 
 bool init()
 {
@@ -45,34 +45,12 @@ bool init()
 
 void move(void)
 {
-    if (player) {
-        player->move(map);
-        int map_x = player->get_x() - screen_width / 2;
-        int map_y = player->get_y() - screen_height / 2;
-        if (map_x < 0) {
-            map_x = 0;
-        }
-        if (map_y < 0) {
-            map_y = 0;
-        }
-        map->set_x(map_x);
-        map->set_y(map_y);
-    }
-
-    if (enemy) {
-        enemy->move(map);
-    }
+    world->move(player, screen_width, screen_height);
 }
 
 void redraw(void)
 {
-    map->draw_layer(screen, 0, 0, screen_width, screen_height, 0);
-    if (player) {
-        player->draw(screen, map, 0, 0, screen_width, screen_height);
-    }
-    if (enemy) {
-        enemy->draw(screen, map, 0, 0, screen_width, screen_height);
-    }
+    world->draw(screen, player, 0, 0, screen_width, screen_height);
 }
 
 void flip(void)
@@ -98,20 +76,12 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    if (argc > 2) {
-        player = new Player(argv[2]);
-        if (!player->get_loaded()) {
-            fprintf(stderr, "Fatal Error -- Unable to player %s\n", argv[2]);
-            return 1;
-        }
-    }
+    world = new World(map, 0);
 
-    if (argc > 3) {
-        enemy = new Walker(argv[3], 22 * 32, 42 * 32, Object::Left);
-        if (!enemy->get_loaded()) {
-            fprintf(stderr, "Fatal Error -- Unable to enemy %s\n", argv[3]);
-            return 1;
-        }
+    player = (Player *) ObjectFactory::create_object(argv[2], "Player", 0, 0);
+    if (!player->get_loaded()) {
+        fprintf(stderr, "Fatal Error -- Unable to player %s\n", argv[2]);
+        return 1;
     }
 
     while (!done) {
