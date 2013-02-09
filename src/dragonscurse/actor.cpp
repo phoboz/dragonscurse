@@ -1,4 +1,4 @@
-#include "phoboz/actor.h"
+#include "actor.h"
 
 bool Actor::set_move_dir(Direction dir)
 {

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include "phoboz/ctrl.h"
-#include "phoboz/dragon.h"
+#include "dragon.h"
 
 Dragon::Dragon(const char *fn)
         : Player(fn),

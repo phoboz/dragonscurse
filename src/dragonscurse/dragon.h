@@ -1,8 +1,8 @@
 #ifndef _Dragon_H
 #define _Dragon_H
 
-#include "phoboz/player.h"
-#include "phoboz/bullet.h"
+#include "player.h"
+#include "bullet.h"
 
 class Dragon : public Player {
 public:

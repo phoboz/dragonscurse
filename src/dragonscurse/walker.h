@@ -1,7 +1,7 @@
 #ifndef _Walker_H
 #define _Walker_H
 
-#include "phoboz/actor.h"
+#include "actor.h"
 
 class Walker : public Actor {
 public:

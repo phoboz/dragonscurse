@@ -1,7 +1,7 @@
 #ifndef _Bullet_H
 #define _Bullet_H
 
-#include "phoboz/object.h"
+#include "object.h"
 
 class Bullet : public Object {
 public:

@@ -1,4 +1,4 @@
-#include "phoboz/walker.h"
+#include "walker.h"
 
 Walker::Walker(const char *fn, int x, int y, Direction dir)
     : Actor(Object::TypeEnemy)

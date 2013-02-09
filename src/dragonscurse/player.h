@@ -1,7 +1,7 @@
 #ifndef _Player_H
 #define _Player_H
 
-#include "phoboz/actor.h"
+#include "actor.h"
 
 class Player : public Actor {
 public:

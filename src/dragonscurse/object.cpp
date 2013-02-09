@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string.h>
-#include "phoboz/object.h"
+#include "object.h"
 
 Object::~Object()
 {

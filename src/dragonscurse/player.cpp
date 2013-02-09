@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include "phoboz/ctrl.h"
-#include "phoboz/player.h"
+#include "player.h"
 
 void Player::move(Map *map)
 {
