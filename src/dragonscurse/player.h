@@ -5,8 +5,8 @@
 
 class Player : public Actor {
 public:
-    Player(const char *fn)
-        : Actor(Object::TypePlayer),
+    Player(const char *fn, int x, int y, Direction dir)
+        : Actor(Object::TypePlayer, x, y, dir),
           m_jump_counter(0), m_jump_ready(true) { load(fn); }
     virtual void move(Map *map);
 

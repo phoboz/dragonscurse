@@ -1,4 +1,4 @@
-#include <string.h>
+#include <string>
 #include "Tmx/Tmx.h"
 #include "object_factory.h"
 #include "player.h"
@@ -11,11 +11,17 @@ World::World(Map *map, int object_group)
     int n = group->GetNumObjects();
     for (int i = 0; i < n; i++) {
         const Tmx::Object *obj = group->GetObject(i);
+        const Tmx::PropertySet prop = obj->GetProperties();
+        std::string dirname = prop.GetLiteralProperty(std::string("direction"));
         Object *object = ObjectFactory::create_object(obj->GetName().c_str(),
                                                       obj->GetType().c_str(),
-                                                      obj->GetX(), obj->GetY());
+                                                      obj->GetX(), obj->GetY(),
+                                                      dirname.c_str());
         if (object) {
             m_objects.push_back(object);
+        }
+        else {
+            std::cerr << "Warning - Unable to load object: " << i << std::endl;
         }
     }
 }

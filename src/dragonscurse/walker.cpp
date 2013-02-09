@@ -1,14 +1,5 @@
 #include "walker.h"
 
-Walker::Walker(const char *fn, int x, int y, Direction dir)
-    : Actor(Object::TypeEnemy)
-{
-    m_x = x;
-    m_y = y;
-    m_dir = dir;
-    load(fn);
-}
-
 void Walker::move(Map *map)
 {
     // Check ground

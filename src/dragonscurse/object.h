@@ -15,6 +15,9 @@ public:
     Object(Type type)
         : m_x(0), m_y(0), m_dx(0), m_dy(0), m_frame(0),
           m_dir(Right), m_loaded(false), m_type(type) { }
+    Object(Type type, int x, int y, Direction dir)
+        : m_x(x), m_y(y), m_dx(0), m_dy(0), m_frame(0),
+          m_dir(dir), m_loaded(false), m_type(type) { }
     ~Object();
     bool load(const char *fn);
     bool get_loaded() const { return m_loaded; }
@@ -22,6 +25,8 @@ public:
     int get_y() const { return m_y; }
     int get_image_width() const { return m_spr->get_image_width(); }
     int get_image_height() const { return m_spr->get_image_height(); }
+    void set_x(int value) { m_x = value; }
+    void set_y(int value) { m_y = value; }
     virtual void move(Map *map) = 0;
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h) const {

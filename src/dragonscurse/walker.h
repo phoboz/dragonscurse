@@ -5,7 +5,8 @@
 
 class Walker : public Actor {
 public:
-    Walker(const char *fn, int x, int y, Direction dir);
+    Walker(const char *fn, int x, int y, Direction dir)
+        : Actor(Object::TypeEnemy, x, y, dir) { load(fn); }
     virtual void move(Map *map);
 };
 

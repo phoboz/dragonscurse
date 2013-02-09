@@ -9,7 +9,15 @@
   </data>
  </layer>
  <objectgroup name="Monsters" width="100" height="100">
-  <object name="cyclop_red.xml" type="Walker" x="672" y="1357"/>
-  <object name="cyclop_red.xml" type="Walker" x="1153" y="1363"/>
+  <object name="cyclop_red.xml" type="Walker" x="713" y="1370" width="50" height="66">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="cyclop_red.xml" type="Walker" x="1289" y="1371" width="50" height="66">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

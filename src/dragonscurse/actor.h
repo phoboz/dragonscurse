@@ -8,8 +8,8 @@ public:
     enum AnimDirection { AnimUp, AnimDown };
     enum Action { Still, Move, Fall, Jump, Crouch, Attack, Ability };
 
-    Actor(Type type)
-        : Object(type),
+    Actor(Type type, int x, int y, Direction dir)
+        : Object(type, x, y, dir),
           m_anim_dir(AnimUp), m_counter(0), m_action(Still) { }
 
 protected:

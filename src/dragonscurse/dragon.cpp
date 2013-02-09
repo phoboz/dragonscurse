@@ -3,8 +3,8 @@
 #include "phoboz/ctrl.h"
 #include "dragon.h"
 
-Dragon::Dragon(const char *fn)
-        : Player(fn),
+Dragon::Dragon(const char *fn, int x, int y, Direction dir)
+        : Player(fn, x, y, dir),
           m_jump_counter(0), m_jump_ready(true)
 {
     m_bullet = new Bullet(get_string("bullet"));

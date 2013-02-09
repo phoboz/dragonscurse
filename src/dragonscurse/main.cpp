@@ -78,7 +78,8 @@ int main(int argc, char *argv[])
 
     world = new World(map, 0);
 
-    player = (Player *) ObjectFactory::create_object(argv[2], "Player", 0, 0);
+    player = (Player *) ObjectFactory::create_object(argv[2], "Player",
+                                                     0, 0, Object::Right);
     if (!player->get_loaded()) {
         fprintf(stderr, "Fatal Error -- Unable to player %s\n", argv[2]);
         return 1;
