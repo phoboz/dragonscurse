@@ -26,7 +26,8 @@ World::World(Map *map, int object_group)
     }
 }
 
-void World::move(Player *player, int window_width, int window_height)
+void World::move(Player *player,
+                 int clip_x, int clip_y, int clip_w, int clip_h)
 {
     unsigned n = m_objects.size();
     for (unsigned i = 0; i < n; i++) {
@@ -34,6 +35,8 @@ void World::move(Player *player, int window_width, int window_height)
     }
 
     player->move(m_map);
+    int window_width = clip_w - clip_x;
+    int window_height = clip_h - clip_y;
     int map_x = player->get_x() - window_width / 2;
     int map_y = player->get_y() - window_height / 2;
     if (map_x < 0) {
