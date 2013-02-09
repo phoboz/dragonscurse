@@ -4,6 +4,7 @@
 #include "player.h"
 #include "dragon.h"
 #include "walker.h"
+#include "guardian.h"
 
 Object* ObjectFactory::create_object(const char *name,
                                      const char *type,
@@ -20,6 +21,9 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "Walker") == 0) {
         object = new Walker(name, x, y, dir);
+    }
+    else if (strcmp(type, "Guardian") == 0) {
+        object = new Guardian(name, x, y, dir);
     }
 
     if (object) {

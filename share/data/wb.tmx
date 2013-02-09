@@ -19,5 +19,10 @@
     <property name="direction" value="left"/>
    </properties>
   </object>
+  <object name="cobra_red.xml" type="Guardian" x="181" y="1258" width="38" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
