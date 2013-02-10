@@ -45,7 +45,7 @@ bool init()
 
 void move(void)
 {
-    world->move(player, 0, 0, screen_height, screen_height);
+    world->move(player, 0, 0, screen_width, screen_height);
 }
 
 void redraw(void)
