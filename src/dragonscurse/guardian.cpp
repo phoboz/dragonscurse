@@ -2,6 +2,8 @@
 
 void Guardian::move(Map *map)
 {
+    face_reference();
+
     // Check ground
     if (m_action != Jump) {
         m_dy = get_attribute("weight");

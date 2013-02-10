@@ -29,11 +29,6 @@ World::World(Map *map, int object_group)
 void World::move(Player *player,
                  int clip_x, int clip_y, int clip_w, int clip_h)
 {
-    unsigned n = m_objects.size();
-    for (unsigned i = 0; i < n; i++) {
-        m_objects[i]->move(m_map);
-    }
-
     player->move(m_map);
     int window_width = clip_w - clip_x;
     int window_height = clip_h - clip_y;
@@ -47,6 +42,18 @@ void World::move(Player *player,
     }
     m_map->set_x(map_x);
     m_map->set_y(map_y);
+
+    unsigned n = m_objects.size();
+    for (unsigned i = 0; i < n; i++) {
+        if (m_objects[i]->get_visible(m_map, clip_x, clip_y, clip_w, clip_h)) {
+            if (m_objects[i]->get_type() == Object::TypeEnemy) {
+                Actor *actor = (Actor *) m_objects[i];
+                actor->set_reference(player->get_x(), player->get_y());
+            }
+            m_objects[i]->move(m_map);
+        }
+    }
+
 }
 
 void World::draw(SDL_Surface *dest, Player *player,
@@ -57,11 +64,11 @@ void World::draw(SDL_Surface *dest, Player *player,
         m_map->draw_layer(dest, clip_x, clip_y, clip_w, clip_h, 0);
     }
 
+    player->draw(dest, m_map, clip_x, clip_y, clip_w, clip_h);
+
     unsigned num_objects = m_objects.size();
     for (unsigned i = 0; i < num_objects; i++) {
         m_objects[i]->draw(dest, m_map, clip_x, clip_y, clip_w, clip_h);
     }
-
-    player->draw(dest, m_map, clip_x, clip_y, clip_w, clip_h);
 }
 

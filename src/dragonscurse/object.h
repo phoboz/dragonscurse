@@ -21,12 +21,14 @@ public:
     ~Object();
     bool load(const char *fn);
     bool get_loaded() const { return m_loaded; }
+    Type get_type() const { return m_type; }
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }
     int get_image_width() const { return m_spr->get_image_width(); }
     int get_image_height() const { return m_spr->get_image_height(); }
     void set_x(int value) { m_x = value; }
     void set_y(int value) { m_y = value; }
+    bool get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_h) const;
     virtual void move(Map *map) = 0;
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h) const {
@@ -54,7 +56,6 @@ protected:
     int m_dx, m_dy;
     int m_frame;
     Direction m_dir;
-    Sprite *m_spr;
 
 private:
     bool load_object_attributes(TiXmlElement *elmt);
@@ -64,6 +65,7 @@ private:
 
     bool m_loaded;
     Type m_type;
+    Sprite *m_spr;
 };
 
 #endif

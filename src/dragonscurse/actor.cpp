@@ -185,3 +185,13 @@ void Actor::animate_move()
     }
 }
 
+void Actor::face_reference()
+{
+    if (m_xref > m_x) {
+        set_move_dir(Right);
+    }
+    else if (m_xref < m_x) {
+        set_move_dir(Left);
+    }
+}
+
