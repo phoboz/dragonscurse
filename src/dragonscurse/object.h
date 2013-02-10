@@ -32,7 +32,10 @@ public:
     virtual void move(Map *map) = 0;
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h) const {
-        m_spr->draw(dest, m_x - map->get_x(), m_y - map->get_y(), m_frame,
+        m_spr->draw(dest,
+                    m_x - map->get_x() + clip_x,
+                    m_y - map->get_y() + clip_y,
+                    m_frame,
                     clip_x, clip_y, clip_w, clip_h);
     }
 
