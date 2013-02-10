@@ -1,6 +1,8 @@
 <?xml version="1.0" ?>
-<dragon attack_medium="10"
-        attack_low="26"
+<dragon attack_right="47"
+        attack_left="12"
+        attack_medium="10"
+        attack_low="30"
         attack_time="20">
     <player jump_speed="4"
             jump_limit="20">
