@@ -41,6 +41,7 @@ void Player::move(Map *map)
             // Check for jump
             if (input & PRESS_JUMP) {
                 if (m_jump_ready) {
+                    m_jump_counter = 0;
                     m_jump_ready = false;
                     m_dy = get_attribute("jump_speed");
                     set_jump();
@@ -115,8 +116,8 @@ void Player::move(Map *map)
 
             // Check if hit head
             if (check_above(map)) {
-                m_action = Fall;
                 m_jump_counter = 0;
+                m_action = Fall;
             }
             m_y -= m_dy;
             break;

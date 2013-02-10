@@ -2,9 +2,8 @@
 
 bool Actor::set_move_dir(Direction dir)
 {
-    m_action = Move;
-
-    if (dir == Keep || dir == m_dir) {
+    if (dir == Keep || (m_action == Move && dir == m_dir)) {
+        m_action = Move;
         return false;
     }
 
@@ -23,6 +22,7 @@ bool Actor::set_move_dir(Direction dir)
         default:
             return false;
     }
+    m_action = Move;
 
     return true;
 }
@@ -43,6 +43,23 @@ void Actor::swap_move_dir()
     }
 }
 
+void Actor::set_still_instant()
+{
+    switch(m_dir) {
+        case Right:
+            m_frame = get_attribute("right_still");
+            break;
+
+        case Left:
+            m_frame = get_attribute("left_still");
+            break;
+
+        default:
+            break;
+    }
+    m_action = Still;
+}
+
 bool Actor::set_still(void)
 {
     bool done = false;
@@ -50,20 +67,8 @@ bool Actor::set_still(void)
     if (++m_counter == get_attribute("treshold")) {
         m_counter = 0;
         m_anim_dir = AnimUp;
+        set_still_instant();
         done = true;
-        switch(m_dir) {
-            case Right:
-                m_frame = get_attribute("right_still");
-                break;
-
-            case Left:
-                m_frame = get_attribute("left_still");
-                break;
-
-            default:
-                break;
-        }
-        m_action = Still;
     }
 
     return done;
@@ -109,25 +114,38 @@ void Actor::set_attack(void)
         case Right:
             if (m_action == Crouch) {
                 m_frame = get_attribute("right_attack_low");
+                m_action = AttackLow;
             }
             else {
                 m_frame = get_attribute("right_attack");
+                m_action = Attack;
             }
             break;
 
         case Left:
             if (m_action == Crouch) {
                 m_frame = get_attribute("left_attack_low");
+                m_action = AttackLow;
             }
             else {
                 m_frame = get_attribute("left_attack");
+                m_action = Attack;
             }
             break;
 
         default:
             break;
     }
-    m_action = Attack;
+}
+
+void Actor::reset_attack()
+{
+    if (m_action == AttackLow) {
+        set_crouch();
+    }
+    else {
+        set_still_instant();
+    }
 }
 
 void Actor::animate_move()

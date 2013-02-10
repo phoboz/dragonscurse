@@ -63,6 +63,14 @@ int main(int argc, char *argv[])
     SDL_Event event;
     Timer timer;
     int done = 0;
+    char type[32];
+
+    if (argc > 3) {
+        strcpy(type, argv[3]);
+    }
+    else {
+        strcpy(type, "Player");
+    }
 
     if (!init()) {
         return 1;
@@ -78,7 +86,7 @@ int main(int argc, char *argv[])
 
     world = new World(map, 0);
 
-    player = (Player *) ObjectFactory::create_object(argv[2], "Player",
+    player = (Player *) ObjectFactory::create_object(argv[2], type,
                                                      6 * 32, 42 * 32,
                                                      Object::Right);
     if (!player->get_loaded()) {

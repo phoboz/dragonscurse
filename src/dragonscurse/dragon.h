@@ -12,8 +12,8 @@ public:
                       int clip_x, int clip_y, int clip_w, int clip_h) const;
 
 private:
-    int m_jump_counter;
-    bool m_jump_ready;
+    bool m_attack_ready;
+    int m_attack_counter;
     Bullet *m_bullet;
 };
 
