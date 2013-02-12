@@ -1,5 +1,9 @@
 <?xml version="1.0" ?>
-<human>
+<human attack_right="67"
+       attack_left="24"
+       attack_medium="38"
+       attack_low="50"
+       attack_time="16">
     <player jump_speed="6"
             jump_limit="18">
         <actor move_speed="2"
@@ -9,10 +13,14 @@
                right_move_start="0" right_move_end="2"
                right_jump="3"
                right_crouch="4"
+               right_attack="5"
+               right_attack_low="6"
                left_still="8"
                left_move_start="8" left_move_end="10"
                left_jump="11"
-               left_crouch="12">
+               left_crouch="12"
+               left_attack="13"
+               left_attack_low="14">
             <object image="human.png"
                     width="91" height="63" margin="1" spacing="1"
                     left="24" right="66" top="7" bottom="61" />

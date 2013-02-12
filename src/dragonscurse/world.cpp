@@ -64,11 +64,11 @@ void World::draw(SDL_Surface *dest, Player *player,
         m_map->draw_layer(dest, clip_x, clip_y, clip_w, clip_h, 0);
     }
 
-    player->draw(dest, m_map, clip_x, clip_y, clip_w, clip_h);
-
     unsigned num_objects = m_objects.size();
     for (unsigned i = 0; i < num_objects; i++) {
         m_objects[i]->draw(dest, m_map, clip_x, clip_y, clip_w, clip_h);
     }
+
+    player->draw(dest, m_map, clip_x, clip_y, clip_w, clip_h);
 }
 
