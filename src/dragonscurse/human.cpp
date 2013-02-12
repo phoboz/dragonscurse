@@ -3,12 +3,6 @@
 #include "phoboz/ctrl.h"
 #include "human.h"
 
-Human::Human(const char *fn, int x, int y, Direction dir)
-        : Player(fn, x, y, dir),
-          m_attack_ready(true)
-{
-}
-
 void Human::move(Map *map)
 {
     int input = get_input();
@@ -27,6 +21,7 @@ void Human::move(Map *map)
             if (m_attack_ready) {
                 m_attack_ready = false;
                 m_attack_counter = 0;
+#if 0
                 int y;
                 if (m_action == Crouch) {
                     y = get_attribute("attack_low");
@@ -34,13 +29,10 @@ void Human::move(Map *map)
                 else {
                     y = get_attribute("attack_medium");
                 }
+#endif
 
-                if (m_dir == Right) {
-                    set_attack();
-                }
-                else if (m_dir == Left) {
-                    set_attack();
-                }
+                // Attack
+                set_attack();
             }
         }
         else {
