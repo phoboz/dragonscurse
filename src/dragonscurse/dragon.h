@@ -1,6 +1,7 @@
 #ifndef _Dragon_H
 #define _Dragon_H
 
+#include "phoboz/timer.h"
 #include "player.h"
 #include "bullet.h"
 
@@ -13,7 +14,7 @@ public:
 
 private:
     bool m_attack_ready;
-    int m_attack_counter;
+    Timer m_attack_timer;
     Bullet *m_bullet;
 };
 

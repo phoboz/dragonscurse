@@ -1,6 +1,7 @@
 #ifndef _Human_H
 #define _Human_H
 
+#include "phoboz/timer.h"
 #include "player.h"
 
 class Human : public Player {
@@ -12,7 +13,7 @@ public:
 
 private:
     bool m_attack_ready;
-    int m_attack_counter;
+    Timer m_attack_timer;
 };
 
 #endif

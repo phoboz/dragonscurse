@@ -4,7 +4,7 @@ void Bullet::reload()
 {
     m_loaded = false;
     m_distance = 0;
-    m_counter = 0;
+    m_reload_timer.reset();
 }
 
 bool Bullet::fire(int x, int y, Direction dir)
@@ -35,8 +35,7 @@ bool Bullet::fire(int x, int y, Direction dir)
 
 void Bullet::move(Map *map)
 {
-    if (++m_counter == get_attribute("reload_time")) {
-        m_counter = 0;
+    if (m_reload_timer.expired(get_attribute("reload_time"))) {
         m_loaded = true;
     }
 

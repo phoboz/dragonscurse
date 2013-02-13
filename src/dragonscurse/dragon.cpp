@@ -19,8 +19,7 @@ void Dragon::move(Map *map)
 
     // Handle attack
     if (m_action == Attack || m_action == AttackLow) {
-        if (++m_attack_counter == get_attribute("attack_time")) {
-            m_attack_counter = 0;
+        if (m_attack_timer.expired(get_attribute("attack_time"))) {
             reset_attack();
         }
     }
@@ -28,7 +27,6 @@ void Dragon::move(Map *map)
         if (input & PRESS_ATTACK) {
             if (m_attack_ready) {
                 m_attack_ready = false;
-                m_attack_counter = 0;
                 int y;
                 if (m_action == Crouch) {
                     y = get_attribute("attack_low");

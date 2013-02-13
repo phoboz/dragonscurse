@@ -3,11 +3,12 @@
 
 class Timer {
 public:
-    Timer() : m_time(0) { }
-    bool lock_fps(int frame_rate);
+    Timer() : m_counter(0) { }
+    void reset() { m_counter = 0; }
+    bool expired(int treshold);
 
 private:
-    float m_time;
+    int m_counter;
 };
 
 #endif

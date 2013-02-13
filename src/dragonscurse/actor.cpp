@@ -64,8 +64,7 @@ bool Actor::set_still(void)
 {
     bool done = false;
 
-    if (++m_counter == get_attribute("treshold")) {
-        m_counter = 0;
+    if (m_anim_timer.expired(get_attribute("treshold"))) {
         m_anim_dir = AnimUp;
         set_still_instant();
         done = true;
@@ -162,8 +161,7 @@ void Actor::check_ground(Map *map)
 
 void Actor::animate_move()
 {
-    if (++m_counter == get_attribute("treshold")) {
-        m_counter = 0;
+    if (m_anim_timer.expired(get_attribute("treshold"))) {
         switch(m_dir) {
             case Right:
                 if (m_anim_dir == AnimUp) {

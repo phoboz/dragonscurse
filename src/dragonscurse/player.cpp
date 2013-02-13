@@ -34,7 +34,7 @@ void Player::move(Map *map)
             // Check for jump
             if (input & PRESS_JUMP) {
                 if (m_jump_ready) {
-                    m_jump_counter = 0;
+                    m_jump_timer.reset();
                     m_jump_ready = false;
                     m_dy = get_attribute("jump_speed");
                     set_jump();
@@ -90,8 +90,7 @@ void Player::move(Map *map)
             }
 
             // Check jump height
-            if (++m_jump_counter == get_attribute("jump_limit")) {
-                m_jump_counter = 0;
+            if (m_jump_timer.expired(get_attribute("jump_limit"))) {
                 m_action = Fall;
             }
 
@@ -108,7 +107,7 @@ void Player::move(Map *map)
 
             // Check if hit head
             if (check_above(map)) {
-                m_jump_counter = 0;
+                m_jump_timer.reset();
                 m_action = Fall;
             }
             m_y -= m_dy;
@@ -121,8 +120,7 @@ void Player::move(Map *map)
             break;
 
         case Hit:
-            if (++m_counter == get_attribute("hit_time")) {
-                m_counter = 0;
+            if (m_hit_timer.expired(get_attribute("hit_time"))) {
                 set_still_instant();
             }
             else {

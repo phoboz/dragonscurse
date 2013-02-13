@@ -7,7 +7,7 @@
 #include "phoboz/sprite.h"
 #include "phoboz/ctrl.h"
 #include "phoboz/map.h"
-#include "phoboz/timer.h"
+#include "phoboz/fps_timer.h"
 #include "object.h"
 #include "object_factory.h"
 #include "world.h"
@@ -81,7 +81,7 @@ void flip(void)
 int main(int argc, char *argv[])
 {
     SDL_Event event;
-    Timer timer;
+    FpsTimer timer;
     int done = 0;
     char type[32];
 
@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 
     while (!done) {
 
-        if (timer.lock_fps(60)) {
+        if (timer.expired(60)) {
 
             while (SDL_PollEvent(&event) ) {
                 if (event.type == SDL_QUIT) done = 1;

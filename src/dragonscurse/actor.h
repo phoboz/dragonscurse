@@ -1,6 +1,7 @@
 #ifndef _Actor_H
 #define _Actor_H
 
+#include "phoboz/timer.h"
 #include "object.h"
 
 class Actor : public Object {
@@ -17,7 +18,7 @@ public:
 
     Actor(Type type, int x, int y, Direction dir)
         : Object(type, x, y, dir),
-          m_anim_dir(AnimUp), m_counter(0), m_action(Still),
+          m_anim_dir(AnimUp), m_action(Still),
           m_xref(0), m_yref(0) { }
     void set_reference(int x, int y) { m_xref = x; m_yref = y; }
     void set_hit(Object *object);
@@ -36,7 +37,7 @@ protected:
     void face_reference();
 
     AnimDirection m_anim_dir;
-    int m_counter;
+    Timer m_anim_timer;
     Action m_action;
     int m_xref, m_yref;
 };
