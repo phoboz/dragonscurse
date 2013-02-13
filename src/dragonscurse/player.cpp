@@ -8,15 +8,8 @@ void Player::move(Map *map)
     int input = get_input();
 
     // Check ground
-    if (m_action != Jump) {
-        m_dy = get_attribute("weight");
-        check_below(map);
-        if (m_dy) {
-            m_action = Fall;
-        }
-        else if (m_action == Fall) {
-            set_still();
-        }
+    if (m_action != Jump && m_action != Hit) {
+        check_ground(map);
     }
 
     switch(m_action) {
@@ -67,7 +60,6 @@ void Player::move(Map *map)
             break;
 
         case Fall:
-            // Below is already checked if action is not Jump
             check_ahead(map);
 
             // Move
@@ -125,6 +117,30 @@ void Player::move(Map *map)
         case Crouch:
             if (!(input & PRESS_DOWN)) {
                 set_still();
+            }
+            break;
+
+        case Hit:
+            if (++m_counter == get_attribute("hit_time")) {
+                m_counter = 0;
+                set_still_instant();
+            }
+            else {
+                m_dx = get_attribute("move_speed");
+                m_dy = m_dx;
+
+                // TODO: Check for collision with map
+                check_behind(map);
+                check_above(map);
+
+                // Move
+                if (m_dir == Right) {
+                    m_x -= m_dx;
+                }
+                else if (m_dir == Left) {
+                    m_x += m_dx;
+                }
+                m_y -= m_dy;
             }
             break;
 

@@ -6,13 +6,21 @@
 class Actor : public Object {
 public:
     enum AnimDirection { AnimUp, AnimDown };
-    enum Action { Still, Move, Fall, Jump, Crouch, Attack, AttackLow, Ability };
+    enum Action { Still,
+                  Move,
+                  Fall,
+                  Jump,
+                  Crouch,
+                  Attack, AttackLow,
+                  Hit,
+                  Ability };
 
     Actor(Type type, int x, int y, Direction dir)
         : Object(type, x, y, dir),
           m_anim_dir(AnimUp), m_counter(0), m_action(Still),
           m_xref(0), m_yref(0) { }
     void set_reference(int x, int y) { m_xref = x; m_yref = y; }
+    void set_hit(Object *object);
 
 protected:
     bool set_move_dir(Direction dir);
@@ -23,6 +31,7 @@ protected:
     void set_crouch();
     void set_attack();
     void reset_attack();
+    void check_ground(Map *map);
     void animate_move();
     void face_reference();
 

@@ -108,22 +108,7 @@ bool Object::check_collision(int x, int y, Map *map)
 
     int tile_id = map->get_tile_id(x, y, 0);
     if (tile_id <= 14) {
-#if 0
-        const Sprite *tiles = map->get_tileset(0);
-        int tw = tiles->get_width();
-        int th = tiles->get_height();
-        int mx = map->get_x();
-        int my = map->get_y();
-        int tx = (x / tw) * tw - mx;
-        int ty = (y / th) * th - my;
-
-        if (m_spr->check_collision(m_frame, x - mx, y - my,
-                                   tiles, tile_id, tx, ty)) {
-            result = true;
-        }
-#else
         result = true;
-#endif
     }
 
     return result;
@@ -186,6 +171,53 @@ bool Object::check_ahead(Map *map)
             int dx;
             for (dx = m_dx; dx > 0; dx--) {
                 if (!check_collision(m_x + left - dx, m_y + i, map)) {
+                    break;
+                }
+            }
+            if (dx < min_dx) {
+                min_dx = dx;
+            }
+        }
+    }
+
+    bool result;
+    if (min_dx != m_dx) {
+        m_dx = min_dx;
+        result = true;
+    }
+    else {
+        result = false;
+    }
+
+    return result;
+}
+
+bool Object::check_behind(Map *map)
+{
+    int top = get_attribute("top");
+    int bottom = get_attribute("bottom");
+    int min_dx = m_dx;
+
+    if (m_dir == Right) {
+        int left = get_attribute("left");
+        for (int i = top; i <= bottom; i++) {
+            int dx;
+            for (dx = m_dx; dx > 0; dx--) {
+                if (!check_collision(m_x + left - dx, m_y + i, map)) {
+                    break;
+                }
+            }
+            if (dx < min_dx) {
+                min_dx = dx;
+            }
+        }
+    }
+    else if (m_dir == Left) {
+        int right = get_attribute("right");
+        for (int i = top; i <= bottom; i++) {
+            int dx;
+            for (dx = m_dx; dx > 0; dx--) {
+                if (!check_collision(m_x + right + dx, m_y + i, map)) {
                     break;
                 }
             }

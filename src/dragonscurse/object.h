@@ -29,6 +29,11 @@ public:
     void set_x(int value) { m_x = value; }
     void set_y(int value) { m_y = value; }
     bool get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_h) const;
+    bool check_collision(Object *object) {
+        return m_spr->check_collision(m_frame, m_x, m_y,
+                                      object->m_spr, object->m_frame,
+                                      object->m_x, object->m_y);
+    }
     virtual void move(Map *map) = 0;
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h) const {
@@ -50,6 +55,7 @@ protected:
     bool check_collision(int x, int y, Map *map);
     bool check_below(Map *map);
     bool check_ahead(Map *map);
+    bool check_behind(Map *map);
     bool check_above(Map *map);
 
     std::map<std::string, int> m_attributes;

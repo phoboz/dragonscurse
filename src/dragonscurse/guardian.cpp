@@ -5,15 +5,8 @@ void Guardian::move(Map *map)
     face_reference();
 
     // Check ground
-    if (m_action != Jump) {
-        m_dy = get_attribute("weight");
-        check_below(map);
-        if (m_dy) {
-            m_action = Fall;
-        }
-        else if (m_action == Fall) {
-            set_still();
-        }
+    if (m_action != Jump && m_action != Hit) {
+        check_ground(map);
     }
 
     switch(m_action) {

@@ -3,19 +3,13 @@
 void Walker::move(Map *map)
 {
     // Check ground
-    if (m_action != Jump) {
-        m_dy = get_attribute("weight");
-        check_below(map);
-        if (m_dy) {
-            m_action = Fall;
-        }
-        else if (m_action == Fall) {
-            set_still();
-        }
+    if (m_action != Jump && m_action != Hit) {
+        check_ground(map);
     }
 
     switch(m_action) {
         case Move:
+            check_ground(map);
             m_dx = get_attribute("move_speed");
             check_ahead(map);
             if (!m_dx) {
@@ -34,6 +28,7 @@ void Walker::move(Map *map)
             break;
 
         case Fall:
+            check_ground(map);
             check_ahead(map);
 
             // Move
@@ -49,6 +44,7 @@ void Walker::move(Map *map)
             break;
 
         default:
+            check_ground(map);
             set_move_dir(Keep);
             break;
     }

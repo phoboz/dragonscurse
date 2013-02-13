@@ -148,6 +148,18 @@ void Actor::reset_attack()
     }
 }
 
+void Actor::check_ground(Map *map)
+{
+    m_dy = get_attribute("weight");
+    check_below(map);
+    if (m_dy) {
+        m_action = Fall;
+    }
+    else if (m_action == Fall) {
+        set_still();
+    }
+}
+
 void Actor::animate_move()
 {
     if (++m_counter == get_attribute("treshold")) {
@@ -192,6 +204,14 @@ void Actor::face_reference()
     }
     else if (m_xref < m_x) {
         set_move_dir(Left);
+    }
+}
+
+void Actor::set_hit(Object *object)
+{
+    if (m_action != Hit) {
+        m_frame = get_attribute("hit");
+        m_action = Hit;
     }
 }
 
