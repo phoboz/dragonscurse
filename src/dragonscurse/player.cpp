@@ -3,6 +3,14 @@
 #include "phoboz/ctrl.h"
 #include "player.h"
 
+void Player::set_hit(Object *object)
+{
+    Actor::set_hit(object);
+
+    // Draw blinking character
+    set_blink(true);
+}
+
 void Player::move(Map *map)
 {
     int input = get_input();
@@ -122,12 +130,14 @@ void Player::move(Map *map)
         case Hit:
             if (m_hit_timer.expired(get_attribute("hit_time"))) {
                 set_still_instant();
+                set_blink(false);
             }
             else {
+                // Move backwards and upwards
                 m_dx = get_attribute("move_speed");
                 m_dy = m_dx;
 
-                // TODO: Check for collision with map
+                // Check for collision with map
                 check_behind(map);
                 check_above(map);
 

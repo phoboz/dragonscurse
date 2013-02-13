@@ -213,3 +213,15 @@ void Actor::set_hit(Object *object)
     }
 }
 
+void Actor::draw(SDL_Surface *dest, Map *map,
+                 int clip_x, int clip_y, int clip_w, int clip_h) {
+    if (m_blink) {
+        if (m_blink_timer.expired(2)) {
+            Object::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
+        }
+    }
+    else {
+        Object::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
+    }
+}
+

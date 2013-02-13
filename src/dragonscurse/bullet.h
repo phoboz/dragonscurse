@@ -13,7 +13,7 @@ public:
     bool fire(int x, int y, Direction dir);
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
-                      int clip_x, int clip_y, int clip_w, int clip_h) const {
+                      int clip_x, int clip_y, int clip_w, int clip_h) {
         if (m_moving) Object::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
     }
 

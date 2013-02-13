@@ -9,7 +9,6 @@ void Walker::move(Map *map)
 
     switch(m_action) {
         case Move:
-            check_ground(map);
             m_dx = get_attribute("move_speed");
             check_ahead(map);
             if (!m_dx) {
@@ -28,7 +27,6 @@ void Walker::move(Map *map)
             break;
 
         case Fall:
-            check_ground(map);
             check_ahead(map);
 
             // Move
@@ -44,7 +42,6 @@ void Walker::move(Map *map)
             break;
 
         default:
-            check_ground(map);
             set_move_dir(Keep);
             break;
     }
