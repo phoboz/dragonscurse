@@ -5,15 +5,19 @@
 
 void Player::set_hit(Object *object)
 {
-    Actor::set_hit(object);
+    if (!m_invisible) {
+        Actor::set_hit(object);
 
-    // Draw blinking character
-    set_blink(true);
+        // Make player invisible for a certain time
+        set_invisible(true);
+    }
 }
 
 void Player::move(Map *map)
 {
     int input = get_input();
+
+    Actor::move(map);
 
     // Check ground
     if (m_action != Jump && m_action != Hit) {
@@ -130,7 +134,6 @@ void Player::move(Map *map)
         case Hit:
             if (m_hit_timer.expired(get_attribute("hit_time"))) {
                 set_still_instant();
-                set_blink(false);
             }
             else {
                 // Move backwards and upwards

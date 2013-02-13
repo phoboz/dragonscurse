@@ -15,7 +15,7 @@ void Human::move(Map *map)
             reset_attack();
         }
     }
-    else {
+    else if (m_action != Hit && !get_invisible()) {
         if (input & PRESS_ATTACK) {
             if (m_attack_ready) {
                 m_attack_ready = false;

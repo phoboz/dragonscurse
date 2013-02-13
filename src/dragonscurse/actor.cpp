@@ -205,17 +205,33 @@ void Actor::face_reference()
     }
 }
 
+void Actor::set_invisible(bool invisible)
+{
+    if (invisible) {
+        m_invisible_timer.reset();
+    }
+
+    m_invisible = invisible;
+}
+
 void Actor::set_hit(Object *object)
 {
-    if (m_action != Hit) {
+    if (!m_invisible) {
         m_frame = get_attribute("hit");
         m_action = Hit;
     }
 }
 
+void Actor::move(Map *map)
+{
+    if (m_invisible_timer.expired(get_attribute("invisible_time"))) {
+        set_invisible(false);
+    }
+}
+
 void Actor::draw(SDL_Surface *dest, Map *map,
                  int clip_x, int clip_y, int clip_w, int clip_h) {
-    if (m_blink) {
+    if (m_invisible) {
         if (m_blink_timer.expired(2)) {
             Object::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
         }
