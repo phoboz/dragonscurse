@@ -49,7 +49,7 @@ void World::move(Player *player,
             if (m_objects[i]->get_type() == Object::TypeEnemy) {
                 Actor *actor = (Actor *) m_objects[i];
                 actor->set_reference(player->get_x(), player->get_y());
-                if (actor->check_collision(player)) {
+                if (player->check_collision(actor)) {
                     player->set_hit(actor);
                 }
             }

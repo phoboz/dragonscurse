@@ -1,3 +1,4 @@
+#include <iostream>
 #include <stdlib.h>
 #include "SDL_image.h"
 #include "phoboz/sprite.h"
@@ -113,6 +114,7 @@ void Sprite::draw(SDL_Surface *dest,
 }
 
 bool Sprite::check_collision(int index1, int x1, int y1,
+                             int left, int top, int right, int bottom,
                              const Sprite *spr2, int index2, int x2, int y2) const
 {
     int left1, left2, over_left;
@@ -122,13 +124,13 @@ bool Sprite::check_collision(int index1, int x1, int y1,
     int over_width, over_height;
     int i, j;
 
-    left1 = x1;
+    left1 = x1 + left;
     left2 = x2;
-    right1 = x1 + m_w;
+    right1 = x1 + right;
     right2 = x2 + spr2->m_w;
-    top1 = y1;
+    top1 = y1 + top;
     top2 = y2;
-    bottom1 = y1 + m_h;
+    bottom1 = y1 + bottom;
     bottom2 = y2 + spr2->m_h;
 
     // Trivial rejections:
@@ -147,17 +149,33 @@ bool Sprite::check_collision(int index1, int x1, int y1,
     }
 
     // Ok, compute the rectangle of overlap:
-    if (bottom1 > bottom2) over_bottom = bottom2;
-    else over_bottom = bottom1;
+    if (bottom1 > bottom2) {
+        over_bottom = bottom2;
+    }
+    else {
+        over_bottom = bottom1;
+    }
  
-    if (top1 < top2) over_top = top2;
-    else over_top = top1;
+    if (top1 < top2) {
+        over_top = top2;
+    }
+    else {
+        over_top = top1;
+    }
 
-    if (right1 > right2) over_right = right2;
-    else over_right = right1;
+    if (right1 > right2) {
+        over_right = right2;
+    }
+    else {
+        over_right = right1;
+    }
 
-    if (left1 < left2) over_left = left2;
-    else over_left = left1;
+    if (left1 < left2) {
+        over_left = left2;
+    }
+    else {
+        over_left = left1;
+    }
 
     over_width = over_right - over_left;
     over_height = over_bottom - over_top;
@@ -183,11 +201,13 @@ bool Sprite::check_collision(int index1, int x1, int y1,
     int cy2 = sy2 + over_top - y2;
 
     Color c1, c2;
-    for (j=0; j < over_height; j++) {
-        for (i=0; i < over_width; i++) {
+    for (j = 0; j < over_height; j++) {
+        for (i = 0; i < over_width; i++) {
 	    get_pixel(&c1, cx1 + i, cy1 + j, m_img);
 	    get_pixel(&c2, cx2 + i, cy2 + j, spr2->m_img);
-            if ((c1.a > 0) && (c2.a > 0)) return true;
+            if ((c1.a > 0) && (c2.a > 0)) {
+                return true;
+            }
         }
     }
 

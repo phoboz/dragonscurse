@@ -23,6 +23,13 @@ public:
               int x, int y, int index,
               int clip_x, int clip_y, int clip_w, int clip_h) const;
     bool check_collision(int index1, int x1, int y1,
+                         const Sprite *spr2, int index2, int x2, int y2) const {
+       return check_collision(index1, x1, y1,
+                              0, 0, m_w, m_h,
+                              spr2, index2, x2, y2);
+    }
+    bool check_collision(int index1, int x1, int y1,
+                         int left, int top, int right, int bottom,
                          const Sprite *spr2, int index2, int x2, int y2) const;
 private:
     bool m_loaded;
