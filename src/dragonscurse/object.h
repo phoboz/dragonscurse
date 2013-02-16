@@ -24,12 +24,14 @@ public:
     Type get_type() const { return m_type; }
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }
+    int get_frame() const { return m_frame; }
+    const Sprite* get_sprite() const { return m_spr; }
     int get_image_width() const { return m_spr->get_image_width(); }
     int get_image_height() const { return m_spr->get_image_height(); }
     void set_x(int value) { m_x = value; }
     void set_y(int value) { m_y = value; }
     bool get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_h) const;
-    bool check_collision(Object *object) {
+    virtual bool check_collision(Object *object) {
         return m_spr->check_collision(m_frame, m_x, m_y,
                                       object->m_spr, object->m_frame,
                                       object->m_x, object->m_y);

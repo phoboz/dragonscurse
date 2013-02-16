@@ -1,7 +1,8 @@
 <?xml version="1.0" ?>
-<human attack_right="67"
+<human attack_right="64"
        attack_left="24"
-       attack_medium="38"
+       attack_medium_top="33"
+       attack_medium_bottom="43"
        attack_low="50"
        attack_time="16">
     <player jump_speed="6"

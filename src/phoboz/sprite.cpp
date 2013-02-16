@@ -177,9 +177,6 @@ bool Sprite::check_collision(int index1, int x1, int y1,
         over_left = left1;
     }
 
-    over_width = over_right - over_left;
-    over_height = over_bottom - over_top;
-
     // Get starting position in pixels of indexed tile
     int col1 = index1 % m_stride;
     int row1 = index1 / m_stride;
@@ -190,6 +187,9 @@ bool Sprite::check_collision(int index1, int x1, int y1,
     int row2 = index2 / spr2->m_stride;
     int sx2 = spr2->m_margin + (spr2->m_spacing + spr2->m_w) * col2;
     int sy2 = spr2->m_margin + (spr2->m_spacing + spr2->m_h) * row2;
+
+    over_width = over_right - over_left;
+    over_height = over_bottom - over_top;
 
     // Now start scanning the whole rectangle of overlap,
     // checking the corresponding pixel of each object's
