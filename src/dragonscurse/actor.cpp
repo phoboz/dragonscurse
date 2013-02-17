@@ -11,17 +11,16 @@ bool Actor::set_move_dir(Direction dir)
     switch(dir) {
         case Right:
             m_frame = get_attribute("right_move_start");
-            m_dir = dir;
             break;
 
         case Left:
             m_frame = get_attribute("left_move_start");
-            m_dir = dir;
             break;
 
         default:
             return false;
     }
+    m_dir = dir;
     m_action = Move;
 
     return true;
@@ -43,50 +42,84 @@ void Actor::swap_move_dir()
     }
 }
 
-void Actor::set_still_instant()
+void Actor::set_still()
 {
-    switch(m_dir) {
-        case Right:
-            m_frame = get_attribute("right_still");
-            break;
+    if (m_attack == AttackNone) {
+        switch(m_dir) {
+            case Right:
+                m_frame = get_attribute("right_still");
+                break;
 
-        case Left:
-            m_frame = get_attribute("left_still");
-            break;
+            case Left:
+                m_frame = get_attribute("left_still");
+                break;
 
-        default:
-            break;
+            default:
+                break;
+        }
+    }
+    else {
+        switch(m_dir) {
+            case Right:
+                m_frame = get_attribute("right_attack");
+                break;
+
+            case Left:
+                m_frame = get_attribute("left_attack");
+                break;
+
+            default:
+                break;
+        }
     }
     m_action = Still;
 }
 
-bool Actor::set_still(void)
+void Actor::set_fall()
 {
-    bool done = false;
-
-    if (m_anim_timer.expired(get_attribute("treshold"))) {
-        m_anim_dir = AnimUp;
-        set_still_instant();
-        done = true;
-    }
-
-    return done;
+    m_action = Fall;
 }
 
-void Actor::set_jump()
+void Actor::set_jump_dir(Direction dir)
 {
-    switch(m_dir) {
-        case Right:
-            m_frame = get_attribute("right_jump");
-            break;
+    Direction set_dir;
 
-        case Left:
-            m_frame = get_attribute("left_jump");
-            break;
-
-        default:
-            break;
+    if (dir == Keep) {
+        set_dir = m_dir;
     }
+    else {
+        set_dir = dir;
+    }
+
+    if (m_attack == AttackNone) {
+        switch(set_dir) {
+            case Right:
+                m_frame = get_attribute("right_jump");
+                break;
+
+            case Left:
+                m_frame = get_attribute("left_jump");
+                break;
+
+            default:
+                break;
+        }
+    }
+    else {
+        switch(set_dir) {
+            case Right:
+                m_frame = get_attribute("right_attack");
+                break;
+
+            case Left:
+                m_frame = get_attribute("left_attack");
+                break;
+
+            default:
+                break;
+        }
+    }
+    m_dir = set_dir;
     m_action = Jump;
 }
 
@@ -113,22 +146,22 @@ void Actor::set_attack(void)
         case Right:
             if (m_action == Crouch) {
                 m_frame = get_attribute("right_attack_low");
-                m_action = AttackLow;
+                m_attack = AttackLow;
             }
             else {
                 m_frame = get_attribute("right_attack");
-                m_action = Attack;
+                m_attack = AttackMedium;
             }
             break;
 
         case Left:
             if (m_action == Crouch) {
                 m_frame = get_attribute("left_attack_low");
-                m_action = AttackLow;
+                m_attack = AttackLow;
             }
             else {
                 m_frame = get_attribute("left_attack");
-                m_action = Attack;
+                m_attack = AttackMedium;
             }
             break;
 
@@ -139,11 +172,12 @@ void Actor::set_attack(void)
 
 void Actor::reset_attack()
 {
-    if (m_action == AttackLow) {
+    m_attack = AttackNone;
+    if (m_attack == AttackLow) {
         set_crouch();
     }
     else {
-        set_still_instant();
+        set_still();
     }
 }
 
@@ -152,7 +186,7 @@ void Actor::check_ground(Map *map)
     m_dy = get_attribute("weight");
     check_below(map);
     if (m_dy) {
-        m_action = Fall;
+        set_fall();
     }
     else if (m_action == Fall) {
         set_still();

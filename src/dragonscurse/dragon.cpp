@@ -18,7 +18,7 @@ void Dragon::move(Map *map)
     Player::move(map);
 
     // Handle attack
-    if (m_action == Attack || m_action == AttackLow) {
+    if (m_attack != AttackNone) {
         if (m_attack_timer.expired(get_attribute("attack_time"))) {
             reset_attack();
         }

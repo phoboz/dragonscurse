@@ -39,46 +39,48 @@ void Player::move(Map *map)
         case Still:
             m_dx = 0;
         case Move:
-            if (input & PRESS_RIGHT) {
-                set_move_dir(Right);
-                animate_move();
-                m_dx = get_attribute("move_speed");
-            }
-            else if (input & PRESS_LEFT) {
-                set_move_dir(Left);
-                animate_move();
-                m_dx = get_attribute("move_speed");
-            }
-            else if (m_action == Move) {
-                set_still();
-                m_dx = 0;
-            }
-
-            // Check for jump
-            if (input & PRESS_JUMP) {
-                if (m_jump_ready) {
-                    m_jump_timer.reset();
-                    m_jump_ready = false;
-                    m_dy = get_attribute("jump_speed");
-                    set_jump();
+            if (m_attack == AttackNone) {
+                if (input & PRESS_RIGHT) {
+                    set_move_dir(Right);
+                    animate_move();
+                    m_dx = get_attribute("move_speed");
                 }
-            }
-            else {
-                m_jump_ready = true;
-
-                // Check for crouch
-                if (input & PRESS_DOWN) {
-                    set_crouch();
+                else if (input & PRESS_LEFT) {
+                    set_move_dir(Left);
+                    animate_move();
+                    m_dx = get_attribute("move_speed");
                 }
-            }
-            check_ahead(map);
+                else if (m_action == Move) {
+                    set_still();
+                    m_dx = 0;
+                }
 
-            // Move
-            if (m_dir == Right) {
-                m_x += m_dx;
-            }
-            else if (m_dir == Left) {
-                m_x -= m_dx;
+                // Check for jump
+                if (input & PRESS_JUMP) {
+                    if (m_jump_ready) {
+                        m_jump_timer.reset();
+                        m_jump_ready = false;
+                        m_dy = get_attribute("jump_speed");
+                        set_jump_dir(Keep);
+                    }
+                }
+                else {
+                    m_jump_ready = true;
+
+                    // Check for crouch
+                    if (input & PRESS_DOWN) {
+                        set_crouch();
+                    }
+                }
+                check_ahead(map);
+
+                // Move
+                if (m_dir == Right) {
+                    m_x += m_dx;
+                }
+                else if (m_dir == Left) {
+                    m_x -= m_dx;
+                }
             }
             break;
 
@@ -99,13 +101,11 @@ void Player::move(Map *map)
 
         case Jump:
             if (input & PRESS_RIGHT) {
-                set_move_dir(Right);
-                set_jump();
+                set_jump_dir(Right);
                 m_dx = get_attribute("move_speed");
             }
             else if (input & PRESS_LEFT) {
-                set_move_dir(Left);
-                set_jump();
+                set_jump_dir(Left);
                 m_dx = get_attribute("move_speed");
             }
             else {
@@ -114,7 +114,7 @@ void Player::move(Map *map)
 
             // Check jump height
             if (m_jump_timer.expired(get_attribute("jump_limit"))) {
-                m_action = Fall;
+                set_fall();
             }
 
             // Check horizontal direction
@@ -131,7 +131,7 @@ void Player::move(Map *map)
             // Check if hit head
             if (check_above(map)) {
                 m_jump_timer.reset();
-                m_action = Fall;
+                set_fall();
             }
             m_y -= m_dy;
             break;
@@ -144,7 +144,7 @@ void Player::move(Map *map)
 
         case Hit:
             if (m_hit_timer.expired(get_attribute("hit_time"))) {
-                set_still_instant();
+                set_still();
             }
             else {
                 // Move backwards and upwards

@@ -8,8 +8,7 @@ bool Human::attack_actor(Actor *actor)
     bool result = false;
     const Sprite *spr = get_sprite();
 
-    // TODO: How to handle attack when jumping and falling
-    if (m_action == Attack) {
+    if (m_attack == AttackMedium) {
         if (m_dir == Right) {
             if (spr->check_collision(m_frame, m_x, m_y,
                                      get_attribute("attack_right"),
@@ -44,7 +43,7 @@ void Human::move(Map *map)
     Player::move(map);
 
     // Handle attack
-    if (m_action == Attack || m_action == AttackLow) {
+    if (m_attack != AttackNone) {
         if (m_attack_timer.expired(get_attribute("attack_time"))) {
             reset_attack();
         }
