@@ -105,7 +105,7 @@ void Actor::set_jump_dir(Direction dir)
                 break;
         }
     }
-    else {
+    else if (m_action != Jump) {
         switch(set_dir) {
             case Right:
                 m_frame = get_attribute("right_attack");
