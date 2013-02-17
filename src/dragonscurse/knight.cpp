@@ -17,7 +17,7 @@ bool Knight::attack_actor(Actor *actor)
                                      get_attribute("attack_medium_bottom"),
                                      actor->get_sprite(), actor->get_frame(),
                                      actor->get_x(), actor->get_y())) {
-                std::cout << "Hit Medium Right" << std::endl;
+                result = true;
             }
         }
         else if (m_dir == Left) {
@@ -28,7 +28,7 @@ bool Knight::attack_actor(Actor *actor)
                                      get_attribute("attack_medium_bottom"),
                                      actor->get_sprite(), actor->get_frame(),
                                      actor->get_x(), actor->get_y())) {
-                std::cout << "Hit Medium Left" << std::endl;
+                result = true;
             }
         }
     }
@@ -41,7 +41,7 @@ bool Knight::attack_actor(Actor *actor)
                                      get_attribute("attack_low_bottom"),
                                      actor->get_sprite(), actor->get_frame(),
                                      actor->get_x(), actor->get_y())) {
-                std::cout << "Hit Low Right" << std::endl;
+                result = true;
             }
         }
         else if (m_dir == Left) {
@@ -52,7 +52,7 @@ bool Knight::attack_actor(Actor *actor)
                                      get_attribute("attack_low_bottom"),
                                      actor->get_sprite(), actor->get_frame(),
                                      actor->get_x(), actor->get_y())) {
-                std::cout << "Hit Low Left" << std::endl;
+                result = true;
             }
         }
     }

@@ -8,6 +8,7 @@ void Walker::move(Map *map)
     }
 
     switch(m_action) {
+        case Still:
         case Move:
             m_dx = get_attribute("move_speed");
             check_ahead(map);
@@ -41,8 +42,14 @@ void Walker::move(Map *map)
             m_y += m_dy;
             break;
 
+        case Hit:
+            if (m_hit_timer.expired(get_attribute("hit_time"))) {
+                m_dx = 0;
+                set_still();
+            }
+            break;
+
         default:
-            set_move_dir(Keep);
             break;
     }
 

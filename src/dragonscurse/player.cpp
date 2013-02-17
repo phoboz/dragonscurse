@@ -144,6 +144,7 @@ void Player::move(Map *map)
 
         case Hit:
             if (m_hit_timer.expired(get_attribute("hit_time"))) {
+                m_dx = 0;
                 set_still();
             }
             else {

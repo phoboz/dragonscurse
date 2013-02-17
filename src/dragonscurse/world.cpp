@@ -52,7 +52,9 @@ void World::move(Player *player,
                 if (player->check_collision(actor)) {
                     player->set_hit(actor);
                 }
-                player->attack_actor(actor);
+                if (player->attack_actor(actor)) {
+                    actor->set_hit(player);
+                }
             }
             m_objects[i]->move(m_map);
         }

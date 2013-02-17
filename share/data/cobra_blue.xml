@@ -1,12 +1,14 @@
 <?xml version="1.0" ?>
 <cobra>
-    <guardian>
-        <actor treshold="12"
+    <guardian hit_time="24">
+        <actor move_speed="2"
+               treshold="12"
                weight="2"
                right_still="4"
                right_move_start="4" right_move_end="5"
                left_still="0"
-               left_move_start="0" left_move_end="1">
+               left_move_start="0" left_move_end="1"
+               hit="3">
             <object image="cobra_blue.png"
                     width="50" height="50" margin="1" spacing="1"
                     left="8" right="42" top="2" bottom="49" />
