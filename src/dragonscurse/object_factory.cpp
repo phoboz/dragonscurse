@@ -2,6 +2,7 @@
 #include <string.h>
 #include "object_factory.h"
 #include "player.h"
+#include "knight.h"
 #include "human.h"
 #include "dragon.h"
 #include "walker.h"
@@ -16,6 +17,9 @@ Object* ObjectFactory::create_object(const char *name,
 
     if (strcmp(type, "Player") == 0) {
         object = new Player(name, x, y, dir);
+    }
+    else if (strcmp(type, "Knight") == 0) {
+        object = new Knight(name, x, y, dir);
     }
     else if (strcmp(type, "Human") == 0) {
         object = new Human(name, x, y, dir);

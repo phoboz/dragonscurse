@@ -1,34 +1,37 @@
 <?xml version="1.0" ?>
-<human attack_right="64"
-       attack_left="24"
-       attack_medium_top="33"
-       attack_medium_bottom="43"
-       attack_low="50"
-       attack_time="16">
-    <player jump_speed="6"
-            jump_limit="18">
-        <actor move_speed="2"
-               treshold="6"
-               weight="10"
-               hit_time="12"
-               invisible_time="42"
-               right_still="0"
-               right_move_start="0" right_move_end="2"
-               right_jump="3"
-               right_crouch="4"
-               right_attack="5"
-               right_attack_low="6"
-               left_still="8"
-               left_move_start="8" left_move_end="10"
-               left_jump="11"
-               left_crouch="12"
-               left_attack="13"
-               left_attack_low="14"
-               hit="7">
-            <object image="human.png"
-                    width="91" height="63" margin="1" spacing="1"
-                    left="24" right="66" top="7" bottom="61" />
-        </actor>
-    </player>
+<human>
+    <knight attack_right="64"
+            attack_left="24"
+            attack_medium_top="33"
+            attack_medium_bottom="43"
+            attack_low_top="46"
+            attack_low_bottom="54"
+            attack_time="16">
+        <player jump_speed="6"
+                jump_limit="18">
+            <actor move_speed="2"
+                   treshold="6"
+                   weight="10"
+                   hit_time="12"
+                   invisible_time="42"
+                   right_still="0"
+                   right_move_start="0" right_move_end="2"
+                   right_jump="3"
+                   right_crouch="4"
+                   right_attack="5"
+                   right_attack_low="6"
+                   hit="7"
+                   left_still="8"
+                   left_move_start="8" left_move_end="10"
+                   left_jump="11"
+                   left_crouch="12"
+                   left_attack="13"
+                   left_attack_low="14">
+                <object image="human.png"
+                        width="91" height="63" margin="1" spacing="1"
+                        left="24" right="66" top="7" bottom="61" />
+            </actor>
+        </player>
+    </knight>
 </human>
 

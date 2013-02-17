@@ -2,19 +2,12 @@
 #define _Human_H
 
 #include "phoboz/timer.h"
-#include "player.h"
+#include "knight.h"
 
-class Human : public Player {
+class Human : public Knight {
 public:
     Human(const char *fn, int x, int y, Direction dir)
-        : Player(fn, x, y, dir),
-          m_attack_ready(true) { }
-    virtual bool attack_actor(Actor *actor);
-    virtual void move(Map *map);
-
-private:
-    bool m_attack_ready;
-    Timer m_attack_timer;
+        : Knight(fn, x, y, dir) { }
 };
 
 #endif

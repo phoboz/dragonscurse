@@ -1,25 +1,37 @@
 <?xml version="1.0" ?>
 <mouseman>
-    <player jump_speed="6"
-            jump_limit="14">
-        <actor move_speed="2"
-               treshold="5"
-               weight="5"
-               hit_time="12"
-               invisible_time="42"
-               right_still="0"
-               right_move_start="0" right_move_end="2"
-               right_jump="2"
-               hit="4"
-               right_crouch="0"
-               left_still="5"
-               left_move_start="5" left_move_end="7"
-               left_jump="7"
-               left_crouch="5">
-            <object image="mouseman.png"
-                    width="60" height="60" margin="1" spacing="1"
-                    left="16" right="46" top="28" bottom="58" />
-        </actor>
-    </player>
+    <knight attack_right="46"
+            attack_left="14"
+            attack_medium_top="46"
+            attack_medium_bottom="52"
+            attack_low_top="46"
+            attack_low_bottom="52"
+            attack_time="12">
+        <player jump_speed="6"
+                jump_limit="14">
+            <actor move_speed="2"
+                   treshold="5"
+                   weight="5"
+                   hit_time="12"
+                   invisible_time="42"
+                   right_still="0"
+                   right_move_start="0" right_move_end="2"
+                   right_jump="2"
+                   right_crouch="0"
+                   right_attack="3"
+                   right_attack_low="3"
+                   hit="4"
+                   left_still="5"
+                   left_move_start="5" left_move_end="7"
+                   left_jump="7"
+                   left_crouch="5"
+                   left_attack="8"
+                   left_attack_low="8">
+                <object image="mouseman.png"
+                        width="60" height="60" margin="1" spacing="1"
+                        left="16" right="46" top="28" bottom="58" />
+            </actor>
+        </player>
+    </knight>
 </mouseman>
 
