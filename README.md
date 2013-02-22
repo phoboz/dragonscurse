@@ -12,7 +12,7 @@ cmake ../src
 make  
 cd ..  
   
-3. a) Play on Linux as Salamander:
+3. a) Play on Linux as Salamander:  
 cd share/data  
 ../../build/dragonscurse/dragonscurse wb.tmx salamander.xml Dragon  
   
