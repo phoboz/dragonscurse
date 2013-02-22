@@ -13,7 +13,8 @@ public:
                   Jump,
                   Crouch,
                   Hit,
-                  Ability };
+                  Perish,
+                  Perished };
     enum Attack { AttackNone, AttackMedium, AttackLow };
 
     Actor(Type type, int x, int y, Direction dir)
@@ -21,6 +22,8 @@ public:
           m_anim_dir(AnimUp), m_action(Still), m_attack(AttackNone),
           m_invisible(false) { }
     virtual bool set_hit(Object *object);
+    Action get_action() const { return m_action; }
+    bool get_invisible() const { return m_invisible; }
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
@@ -38,7 +41,6 @@ protected:
     void animate_move();
     void face_reference();
     void set_invisible(bool invisible);
-    bool get_invisible() const { return m_invisible; }
 
     AnimDirection m_anim_dir;
     Action m_action;

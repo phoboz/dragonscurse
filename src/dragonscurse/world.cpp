@@ -57,13 +57,15 @@ void World::move(Player *player,
                 Actor *actor = (Actor *) object;
                 actor->set_reference(player->get_x(), player->get_y());
                 if (player->check_collision(actor)) {
-                    player->set_hit(actor);
+                    if (!actor->get_invisible()) {
+                        player->set_hit(actor);
+                    }
                 }
                 if (player->attack_actor(actor)) {
-                    if (actor->set_hit(player)) {
-                        // TODO: Remove actor after animation
-                        perished.push_back(*it);
-                    }
+                    actor->set_hit(player);
+                }
+                if (actor->get_action() == Actor::Perished) {
+                    perished.push_back(*it);
                 }
             }
         }

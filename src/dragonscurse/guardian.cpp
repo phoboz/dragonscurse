@@ -2,7 +2,7 @@
 
 void Guardian::move(Map *map)
 {
-    Actor::move(map);
+    Monster::move(map);
 
     // Check ground
     if (m_action != Jump && m_action != Hit) {

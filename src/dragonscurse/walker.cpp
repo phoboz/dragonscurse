@@ -2,6 +2,8 @@
 
 void Walker::move(Map *map)
 {
+    Monster::move(map);
+
     // Check ground
     if (m_action != Jump && m_action != Hit) {
         check_ground(map);
