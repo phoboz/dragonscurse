@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include <string>
 #include "Tmx/Tmx.h"
 #include "object_factory.h"
@@ -44,26 +45,34 @@ void World::move(Player *player,
     m_map->set_x(map_x);
     m_map->set_y(map_y);
 
-    unsigned n = m_objects.size();
-    for (unsigned i = 0; i < n; i++) {
-        if (m_objects[i]->get_visible(m_map, clip_x, clip_y, clip_w, clip_h)) {
-            if (m_objects[i]->get_type() == Object::TypeEnemy) {
-                Actor *actor = (Actor *) m_objects[i];
+    std::vector<Object*> perished;
+
+    for (std::list<Object*>::iterator it = m_objects.begin();
+         it != m_objects.end();
+         ++it) {
+        Object *object = *it;
+        if (object->get_visible(m_map, clip_x, clip_y, clip_w, clip_h)) {
+            object->move(m_map);
+            if (object->get_type() == Object::TypeEnemy) {
+                Actor *actor = (Actor *) object;
                 actor->set_reference(player->get_x(), player->get_y());
                 if (player->check_collision(actor)) {
                     player->set_hit(actor);
                 }
                 if (player->attack_actor(actor)) {
                     if (actor->set_hit(player)) {
-                        // TODO: Remove monster after animation
-                        std::cout << "Monster perished" << std::endl;
+                        // TODO: Remove actor after animation
+                        perished.push_back(*it);
                     }
                 }
             }
-            m_objects[i]->move(m_map);
         }
     }
 
+    // Remove all perished objects
+    for (int i = 0; i < perished.size(); i++) {
+        m_objects.remove(perished[i]);
+    }
 }
 
 void World::draw(SDL_Surface *dest, Player *player,
@@ -74,9 +83,11 @@ void World::draw(SDL_Surface *dest, Player *player,
         m_map->draw_layer(dest, clip_x, clip_y, clip_w, clip_h, 0);
     }
 
-    unsigned num_objects = m_objects.size();
-    for (unsigned i = 0; i < num_objects; i++) {
-        m_objects[i]->draw(dest, m_map, clip_x, clip_y, clip_w, clip_h);
+    for (std::list<Object*>::iterator it = m_objects.begin();
+         it != m_objects.end();
+         ++it) {
+        Object *object = *it;
+        object->draw(dest, m_map, clip_x, clip_y, clip_w, clip_h);
     }
 
     player->draw(dest, m_map, clip_x, clip_y, clip_w, clip_h);

@@ -1,7 +1,7 @@
 #ifndef _World_H
 #define _World_H
 
-#include <vector>
+#include <list>
 #include "SDL.h"
 #include "phoboz/map.h"
 #include "object.h"
@@ -17,7 +17,7 @@ public:
 
 private:
     Map *m_map;
-    std::vector<Object*> m_objects;
+    std::list<Object*> m_objects;
 };
 
 #endif
