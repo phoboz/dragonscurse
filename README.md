@@ -17,9 +17,11 @@ cd share/data
 ../../build/dragonscurse/dragonscurse wb.tmx salamander.xml Dragon  
   
 3. b) Play on Linux as Mouseman:  
+cd share/data  
 ../../build/dragonscurse/dragonscurse wb.tmx mouseman.xml Knight  
   
 3. c) Play on Linux as Human:  
+cd share/data  
 ../../build/dragonscurse/dragonscurse wb.tmx human.xml Knight  
   
 Controls:  
