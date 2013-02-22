@@ -181,8 +181,10 @@ void Actor::set_attack(void)
 
 void Actor::reset_attack()
 {
+    Attack last_attack = m_attack;
+
     m_attack = AttackNone;
-    if (m_attack == AttackLow) {
+    if (last_attack == AttackLow) {
         set_crouch();
     }
     else {

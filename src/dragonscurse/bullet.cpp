@@ -33,6 +33,20 @@ bool Bullet::fire(int x, int y, Direction dir)
     return result;
 }
 
+bool Bullet::hit_object(Object *object)
+{
+    bool result = false;
+
+    if (m_moving) {
+        const Sprite *spr = get_sprite();
+        if (spr->check_collision(m_frame, m_x, m_y,
+                                 object->get_sprite(), object->get_frame(),
+                                 object->get_x(), object->get_y())) {
+            result = true;
+        }
+    }
+}
+
 void Bullet::move(Map *map)
 {
     if (m_reload_timer.expired(get_attribute("reload_time"))) {

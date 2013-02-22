@@ -11,6 +11,17 @@ Dragon::Dragon(const char *fn, int x, int y, Direction dir)
     if (!m_bullet->get_loaded()) exit(1);
 }
 
+bool Dragon::attack_actor(Actor *actor)
+{
+    bool result = false;
+
+    if (m_bullet->hit_object(actor)) {
+        result = true;
+    }
+
+    return result;
+}
+
 void Dragon::move(Map *map)
 {
     int input = get_input();

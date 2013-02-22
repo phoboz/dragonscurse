@@ -14,9 +14,17 @@ cd ..
   
 3. Play on Linux:  
 cd share/data  
-../../build/dragonscurse/dragonscurse wb.tmx salamander.xml  
+../../build/dragonscurse/dragonscurse wb.tmx salamander.xml Dragon  
+(to play as Salamander)  
+  
+../../build/dragonscurse/dragonscurse wb.tmx mouseman.xml Knight  
+(to play as Mouseman)  
+  
+../../build/dragonscurse/dragonscurse wb.tmx human.xml Knight  
+(to play as Human)  
   
 Controls:  
 - Arrow key to move  
 - Press [SPACE] to jump  
+- Press [Left Ctrl] to attack
   
