@@ -9,7 +9,7 @@ public:
     Player(const char *fn, int x, int y, Direction dir)
         : Actor(Object::TypePlayer, x, y, dir),
           m_jump_ready(true) { load(fn); }
-    virtual void set_hit(Object *object);
+    virtual bool set_hit(Object *object);
     virtual bool check_collision(Object *object);
     virtual bool attack_actor(Actor *actor) { return false; }
     virtual void move(Map *map);

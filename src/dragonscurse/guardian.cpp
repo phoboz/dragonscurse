@@ -1,12 +1,5 @@
 #include "guardian.h"
 
-void Guardian::set_hit(Object *object)
-{
-    if (m_action != Hit) {
-        Actor::set_hit(object);
-    }
-}
-
 void Guardian::move(Map *map)
 {
     Actor::move(map);

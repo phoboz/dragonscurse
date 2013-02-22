@@ -20,7 +20,7 @@ public:
         : Object(type, x, y, dir),
           m_anim_dir(AnimUp), m_action(Still), m_attack(AttackNone),
           m_invisible(false) { }
-    virtual void set_hit(Object *object);
+    virtual bool set_hit(Object *object);
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);

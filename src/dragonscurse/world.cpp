@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include "Tmx/Tmx.h"
 #include "object_factory.h"
@@ -53,7 +54,10 @@ void World::move(Player *player,
                     player->set_hit(actor);
                 }
                 if (player->attack_actor(actor)) {
-                    actor->set_hit(player);
+                    if (actor->set_hit(player)) {
+                        // TODO: Remove monster after animation
+                        std::cout << "Monster perished" << std::endl;
+                    }
                 }
             }
             m_objects[i]->move(m_map);

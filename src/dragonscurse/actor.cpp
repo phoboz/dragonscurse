@@ -257,12 +257,17 @@ void Actor::set_invisible(bool invisible)
     m_invisible = invisible;
 }
 
-void Actor::set_hit(Object *object)
+bool Actor::set_hit(Object *object)
 {
+    int result = false;
+
     if (!m_invisible) {
         m_frame = get_attribute("hit");
         m_action = Hit;
+        result = true;
     }
+
+    return result;
 }
 
 void Actor::move(Map *map)

@@ -3,14 +3,19 @@
 #include "phoboz/ctrl.h"
 #include "player.h"
 
-void Player::set_hit(Object *object)
+bool Player::set_hit(Object *object)
 {
+    bool result = false;
+
     if (!m_invisible) {
-        Actor::set_hit(object);
+        // TODO: Check if player hp is above zero instead
+        result = Actor::set_hit(object);
 
         // Make player invisible for a certain time
         set_invisible(true);
     }
+
+    return result;
 }
 
 bool Player::check_collision(Object *object)

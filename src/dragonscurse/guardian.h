@@ -2,13 +2,12 @@
 #define _Guardian_H
 
 #include "phoboz/timer.h"
-#include "actor.h"
+#include "monster.h"
 
-class Guardian : public Actor {
+class Guardian : public Monster {
 public:
     Guardian(const char *fn, int x, int y, Direction dir)
-        : Actor(Object::TypeEnemy, x, y, dir) { load(fn); }
-    virtual void set_hit(Object *object);
+        : Monster(fn, x, y, dir) { }
     virtual void move(Map *map);
 
 private:
