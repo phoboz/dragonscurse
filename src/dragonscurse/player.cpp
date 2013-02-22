@@ -36,7 +36,7 @@ void Player::move(Map *map)
     Actor::move(map);
 
     // Check ground
-    if (m_action != Jump && m_action != Hit) {
+    if (m_action != Hit) {
         check_ground(map);
     }
 

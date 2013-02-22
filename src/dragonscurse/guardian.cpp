@@ -5,9 +5,7 @@ void Guardian::move(Map *map)
     Monster::move(map);
 
     // Check ground
-    if (m_action != Jump && m_action != Hit) {
-        check_ground(map);
-    }
+    check_ground(map);
 
     switch(m_action) {
         case Still:
@@ -62,6 +60,5 @@ void Guardian::move(Map *map)
         default:
             break;
     }
-
 }
 

@@ -194,13 +194,16 @@ void Actor::reset_attack()
 
 void Actor::check_ground(Map *map)
 {
-    m_dy = get_attribute("weight");
-    check_below(map);
-    if (m_dy) {
-        set_fall();
-    }
-    else if (m_action == Fall) {
-        set_still();
+    if (m_action != Jump &&
+        m_action != Perish && m_action != Perished) {
+        m_dy = get_attribute("weight");
+        check_below(map);
+        if (m_dy) {
+            set_fall();
+        }
+        else if (m_action == Fall) {
+            set_still();
+        }
     }
 }
 

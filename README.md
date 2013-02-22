@@ -12,16 +12,15 @@ cmake ../src
 make  
 cd ..  
   
-3. Play on Linux:  
+3. a) Play on Linux as Salamander:
 cd share/data  
 ../../build/dragonscurse/dragonscurse wb.tmx salamander.xml Dragon  
-(to play as Salamander)  
   
+3. b) Play on Linux as Mouseman:
 ../../build/dragonscurse/dragonscurse wb.tmx mouseman.xml Knight  
-(to play as Mouseman)  
   
+3. c) Play on Linux as Human:
 ../../build/dragonscurse/dragonscurse wb.tmx human.xml Knight  
-(to play as Human)  
   
 Controls:  
 - Arrow key to move  
