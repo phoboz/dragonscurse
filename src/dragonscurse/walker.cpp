@@ -9,6 +9,9 @@ void Walker::move(Map *map)
 
     switch(m_action) {
         case Still:
+            set_move_dir();
+            break;
+
         case Move:
             m_dx = get_attribute("move_speed");
             check_ahead(map);

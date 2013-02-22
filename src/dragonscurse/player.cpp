@@ -61,7 +61,7 @@ void Player::move(Map *map)
                         m_jump_timer.reset();
                         m_jump_ready = false;
                         m_dy = get_attribute("jump_speed");
-                        set_jump_dir(Keep);
+                        set_jump_dir();
                     }
                 }
                 else {

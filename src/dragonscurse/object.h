@@ -14,10 +14,12 @@ public:
 
     Object(Type type)
         : m_x(0), m_y(0), m_dx(0), m_dy(0), m_frame(0),
-          m_dir(Right), m_loaded(false), m_type(type) { }
+          m_dir(Right), m_loaded(false), m_type(type),
+          m_xref(0), m_yref(0) { }
     Object(Type type, int x, int y, Direction dir)
         : m_x(x), m_y(y), m_dx(0), m_dy(0), m_frame(0),
-          m_dir(dir), m_loaded(false), m_type(type) { }
+          m_dir(dir), m_loaded(false), m_type(type),
+          m_xref(0), m_yref(0) { }
     ~Object();
     bool load(const char *fn);
     bool get_loaded() const { return m_loaded; }
@@ -30,6 +32,7 @@ public:
     int get_image_height() const { return m_spr->get_image_height(); }
     void set_x(int value) { m_x = value; }
     void set_y(int value) { m_y = value; }
+    void set_reference(int x, int y) { m_xref = x; m_yref = y; }
     bool get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_h) const;
     virtual bool check_collision(Object *object) {
         return m_spr->check_collision(m_frame, m_x, m_y,
@@ -67,6 +70,7 @@ protected:
     int m_dx, m_dy;
     int m_frame;
     Direction m_dir;
+    int m_xref, m_yref;
 
 private:
     bool load_object_attributes(TiXmlElement *elmt);

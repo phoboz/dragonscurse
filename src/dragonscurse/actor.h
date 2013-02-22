@@ -19,20 +19,18 @@ public:
     Actor(Type type, int x, int y, Direction dir)
         : Object(type, x, y, dir),
           m_anim_dir(AnimUp), m_action(Still), m_attack(AttackNone),
-          m_xref(0), m_yref(0),
           m_invisible(false) { }
-    void set_reference(int x, int y) { m_xref = x; m_yref = y; }
     virtual void set_hit(Object *object);
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
 protected:
-    bool set_move_dir(Direction dir);
+    bool set_move_dir(Direction dir = Keep);
     void swap_move_dir();
     void set_still();
     void set_fall();
-    void set_jump_dir(Direction dir);
+    void set_jump_dir(Direction dir = Keep);
     void set_crouch();
     void set_attack();
     void reset_attack();
@@ -45,7 +43,6 @@ protected:
     AnimDirection m_anim_dir;
     Action m_action;
     Attack m_attack;
-    int m_xref, m_yref;
     bool m_invisible;
     Timer m_anim_timer;
     Timer m_blink_timer;

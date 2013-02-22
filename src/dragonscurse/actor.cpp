@@ -2,13 +2,22 @@
 
 bool Actor::set_move_dir(Direction dir)
 {
-    if (dir == Keep || (m_action == Move && dir == m_dir)) {
+    Direction set_dir;
+
+    if (dir == Keep) {
+        set_dir = m_dir;
+    }
+    else {
+        set_dir = dir;
+    }
+
+    if (m_action == Move && set_dir == m_dir) {
         m_action = Move;
         return false;
     }
 
     m_anim_dir = AnimUp;
-    switch(dir) {
+    switch(set_dir) {
         case Right:
             m_frame = get_attribute("right_move_start");
             break;
@@ -20,7 +29,7 @@ bool Actor::set_move_dir(Direction dir)
         default:
             return false;
     }
-    m_dir = dir;
+    m_dir = set_dir;
     m_action = Move;
 
     return true;
