@@ -194,8 +194,7 @@ void Actor::reset_attack()
 
 void Actor::check_ground(Map *map)
 {
-    if (m_action != Jump &&
-        m_action != Perish && m_action != Perished) {
+    if (m_action != Jump) {
         m_dy = get_attribute("weight");
         check_below(map);
         if (m_dy) {
@@ -268,11 +267,18 @@ bool Actor::set_hit(Object *object)
 
     if (!m_invisible) {
         m_frame = get_attribute("hit");
-        m_action = Hit;
+        m_action = Still;
+        m_hit = HitOne;
         result = true;
     }
 
     return result;
+}
+
+void Actor::reset_hit()
+{
+    set_still();
+    m_hit = HitNone;
 }
 
 int Actor::get_front()

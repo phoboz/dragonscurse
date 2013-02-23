@@ -11,7 +11,7 @@ bool Monster::set_hit(Object *object)
 {
     bool result = false;
 
-    if (m_action != Hit) {
+    if (m_hit == HitNone) {
         Actor::set_hit(object);
 
         // Reduce hp
@@ -19,7 +19,7 @@ bool Monster::set_hit(Object *object)
         m_curr_hp--;
         if (m_curr_hp <= 0) {
             set_invisible(true);
-            m_action = Perish;
+            m_hit = HitPerish;
         }
 
         result = true;
@@ -30,9 +30,9 @@ bool Monster::set_hit(Object *object)
 
 void Monster::move(Map *map)
 {
-    if (m_action == Perish) {
+    if (m_hit == HitPerish) {
         if (m_perish_timer.expired(get_attribute("perish_time"))) {
-            m_action = Perished;
+            m_hit = HitPerished;
         }
     }
 }

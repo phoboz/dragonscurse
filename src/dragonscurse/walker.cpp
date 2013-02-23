@@ -7,9 +7,19 @@ void Walker::move(Map *map)
     // Check ground
     check_ground(map);
 
+    if (m_hit == HitOne) {
+        if (m_hit_timer.expired(get_attribute("hit_time"))) {
+            m_dx = 0;
+            reset_hit();
+        }
+        return;
+    }
+
     switch(m_action) {
         case Still:
-            set_move_dir();
+            if (m_hit == HitNone) {
+                set_move_dir();
+            }
             break;
 
         case Move:
@@ -43,13 +53,6 @@ void Walker::move(Map *map)
 
             check_below(map);
             m_y += m_dy;
-            break;
-
-        case Hit:
-            if (m_hit_timer.expired(get_attribute("hit_time"))) {
-                m_dx = 0;
-                set_still();
-            }
             break;
 
         default:

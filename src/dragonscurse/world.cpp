@@ -68,7 +68,7 @@ void World::move(Player *player,
                 if (player->attack_actor(actor)) {
                     actor->set_hit(player);
                 }
-                if (actor->get_action() == Actor::Perished) {
+                if (actor->get_hit() == Actor::HitPerished) {
                     perished.push_back(*it);
                 }
             }

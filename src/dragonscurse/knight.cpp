@@ -72,7 +72,7 @@ void Knight::move(Map *map)
             reset_attack();
         }
     }
-    else if (m_action != Hit && !get_invisible()) {
+    else if (m_hit == HitNone && !get_invisible()) {
         if (input & PRESS_ATTACK) {
             if (m_attack_ready) {
                 m_attack_ready = false;
