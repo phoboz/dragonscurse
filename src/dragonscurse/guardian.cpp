@@ -12,6 +12,15 @@ void Guardian::move(Map *map)
         case Move:
             face_reference();
             animate_move();
+
+            if (m_attack_timer.expired(get_attribute("attack_timer"))) {
+                if (abs(m_xref - get_front()) < get_attribute("attack_distance")) {
+                    set_jump_dir();
+                    m_dx = get_attribute("jump_forward");
+                    m_dy = get_attribute("jump_speed");
+                }
+            }
+
             break;
 
         case Fall:
@@ -27,6 +36,31 @@ void Guardian::move(Map *map)
 
             check_below(map);
             m_y += m_dy;
+            break;
+
+        case Jump:
+            // Check jump height
+            if (m_jump_timer.expired(get_attribute("jump_limit"))) {
+                set_fall();
+            }
+
+            // Check horizontal direction
+            check_ahead(map);
+
+            // Move
+            if (m_dir == Right) {
+                m_x += m_dx;
+            }
+            else if (m_dir == Left) {
+                m_x -= m_dx;
+            }
+
+            // Check if hit head
+            if (check_above(map)) {
+                m_jump_timer.reset();
+                set_fall();
+            }
+            m_y -= m_dy;
             break;
 
         case Hit:

@@ -52,10 +52,14 @@ void World::move(Player *player,
          ++it) {
         Object *object = *it;
         if (object->get_visible(m_map, clip_x, clip_y, clip_w, clip_h)) {
+
+            // Move object
             object->move(m_map);
+
+            // Handle actor object
             if (object->get_type() == Object::TypeEnemy) {
                 Actor *actor = (Actor *) object;
-                actor->set_reference(player->get_x(), player->get_y());
+                actor->set_reference(player->get_front(), player->get_bottom());
                 if (player->check_collision(actor)) {
                     if (!actor->get_invisible()) {
                         player->set_hit(actor);

@@ -11,6 +11,8 @@ public:
     virtual void move(Map *map);
 
 private:
+    Timer m_attack_timer;
+    Timer m_jump_timer;
     Timer m_hit_timer;
 };
 

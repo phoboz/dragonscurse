@@ -24,6 +24,8 @@ public:
     virtual bool set_hit(Object *object);
     Action get_action() const { return m_action; }
     bool get_invisible() const { return m_invisible; }
+    int get_front();
+    int get_bottom();
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
