@@ -169,11 +169,11 @@ void Player::move(Map *map)
 
             case Catapult:
                 if (input & PRESS_RIGHT) {
-                    set_jump_dir(Right);
+                    set_catapult_dir(Right);
                     m_dx = get_attribute("move_speed");
                 }
                 else if (input & PRESS_LEFT) {
-                    set_jump_dir(Left);
+                    set_catapult_dir(Left);
                     m_dx = get_attribute("move_speed");
                 }
                 else {

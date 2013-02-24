@@ -21,6 +21,7 @@ public:
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }
     int get_num_layers() const { return m_tmx->GetNumLayers(); }
+    int get_tileset_index(int index) const { return m_tmx->FindTilesetIndex(index); }
     int get_num_tilesets() const { return m_tmx->GetNumTilesets(); }
     const Tmx::Tileset* get_tileset(int index) const {
         return m_tmx->GetTileset(index);
@@ -32,7 +33,6 @@ public:
     void draw_layer(SDL_Surface *dest, int x, int y, int w, int h, int layer_id) const;
 
 private:
-    int get_tileset_index(int index) const { return m_tmx->FindTilesetIndex(index); }
     bool m_loaded;
     int m_x, m_y;
     Tmx::Map *m_tmx;

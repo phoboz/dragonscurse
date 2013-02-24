@@ -57,11 +57,11 @@ protected:
         return m_strings[std::string(name)].c_str();
     }
 
-    bool check_collision(int x, int y, Map *map);
-    bool check_below(Map *map);
-    bool check_ahead(Map *map);
-    bool check_behind(Map *map);
-    bool check_above(Map *map);
+    bool check_collision(int x, int y, Map *map, int id);
+    bool check_below(Map *map, int id = 0);
+    bool check_ahead(Map *map, int id = 0);
+    bool check_behind(Map *map, int id = 0);
+    bool check_above(Map *map, int id = 0);
 
     std::map<std::string, int> m_attributes;
     std::map<std::string, std::string> m_strings;

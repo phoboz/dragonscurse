@@ -221,14 +221,23 @@ void Actor::reset_attack()
 
 void Actor::check_ground(Map *map)
 {
-    if (m_action != Jump) {
+    int keep_dy = m_dy;
+
+    if (m_action != Jump && m_action != Catapult) {
         m_dy = get_attribute("weight");
         check_below(map);
         if (m_dy) {
             set_fall();
         }
         else if (m_action == Fall) {
-            set_still();
+            // TODO: Add a function to check base on dy as argument
+            m_dy = keep_dy;
+            if (check_below(map, 3)) {
+                set_catapult_dir();
+            }
+            else {
+                set_still();
+            }
         }
     }
 }
