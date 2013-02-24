@@ -5,6 +5,8 @@
 #include "SDL.h"
 #include "Tmx/Tmx.h"
 #include "Tmx/TmxLayer.h"
+#include "Tmx/TmxTileset.h"
+#include "Tmx/TmxObjectGroup.h"
 #include "phoboz/sprite.h"
 
 class Map {
@@ -13,14 +15,16 @@ public:
     ~Map() { }
     bool load(Tmx::Map *tmx);
     bool get_loaded() const { return m_loaded; }
-    int get_num_tilesets() const { return m_tiles.size(); }
-    const Sprite* get_tileset(int index) const { return m_tiles[index]; }
     int get_tile_id(int x, int y, int layer_id) const;
     void set_x(int value);
     void set_y(int value);
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }
     int get_num_layers() const { return m_tmx->GetNumLayers(); }
+    int get_num_tilesets() const { return m_tmx->GetNumTilesets(); }
+    const Tmx::Tileset* get_tileset(int index) const {
+        return m_tmx->GetTileset(index);
+    }
     int get_num_object_groups() const { return m_tmx->GetNumObjectGroups(); }
     const Tmx::ObjectGroup* get_object_group(int index) const {
         return m_tmx->GetObjectGroup(index);

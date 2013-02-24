@@ -12,7 +12,7 @@
             <actor move_speed="2"
                    treshold="6"
                    weight="10"
-                   hit_time="12"
+                   hit_time="24"
                    invisible_time="42"
                    right_still="0"
                    right_move_start="0" right_move_end="2"

@@ -34,8 +34,8 @@ bool Map::load(Tmx::Map *tmx)
 int Map::get_tile_id(int x, int y, int layer_id) const
 {
     const Tmx::Layer *layer = m_tmx->GetLayer(layer_id);
-    int tw = m_tiles[0]->get_width();
-    int th = m_tiles[0]->get_height();
+    int tw = m_tmx->GetTileWidth();
+    int th = m_tmx->GetTileHeight();
     int col = x / tw;
     int row = y / th;
     return layer->GetTileId(col, row);
@@ -60,8 +60,8 @@ void Map::set_y(int value)
 void Map::draw_layer(SDL_Surface *dest, int x, int y, int w, int h, int layer_id) const
 {
     const Tmx::Layer *layer = m_tmx->GetLayer(layer_id);
-    int tw = m_tiles[0]->get_width();
-    int th = m_tiles[0]->get_height();
+    int tw = m_tmx->GetTileWidth();
+    int th = m_tmx->GetTileHeight();
 
     int j = y - m_y % th;
     for(int row = m_y / th; ; row++) {

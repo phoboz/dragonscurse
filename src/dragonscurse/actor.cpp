@@ -271,10 +271,15 @@ void Actor::animate_move()
 
 void Actor::face_reference()
 {
-    if (m_xref > m_x) {
+    const Sprite *spr = get_sprite();
+
+    if (abs(m_xref - get_front()) < spr->get_width()) {
+        set_move_dir();
+    }
+    else if (m_xref > get_front()) {
         set_move_dir(Right);
     }
-    else if (m_xref < m_x) {
+    else if (m_xref < get_front()) {
         set_move_dir(Left);
     }
 }
