@@ -58,7 +58,7 @@ void draw_statusbar()
     dest_rect.x = 0;
     dest_rect.y = STATUSBAR_HEIGHT - 2;
     dest_rect.w = screen_width;
-    dest_rect.h = STATUSBAR_HEIGHT;
+    dest_rect.h = 2;
     SDL_FillRect(screen, &dest_rect, 0x55555555);
 }
 
@@ -106,8 +106,14 @@ int main(int argc, char *argv[])
 
     world = new World(map, 0);
 
+    const Tmx::PropertySet prop = tmx->GetProperties();
+    int start_x = prop.GetNumericProperty("start_x");
+    int start_y = prop.GetNumericProperty("start_y");
+
     player = (Player *) ObjectFactory::create_object(argv[2], type,
-                                                     6 * 32, 42 * 32,
+                                                     //6 * 32, 42 * 32,
+                                                     //32, 6 * 32,
+                                                     start_x, start_y,
                                                      Object::Right);
     if (!player->get_loaded()) {
         fprintf(stderr, "Fatal Error -- Unable to player %s\n", argv[2]);
