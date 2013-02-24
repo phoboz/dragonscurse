@@ -7,7 +7,7 @@
 class Actor : public Object {
 public:
     enum AnimDirection { AnimUp, AnimDown };
-    enum Action { Still, Move, Fall, Jump, Crouch };
+    enum Action { Still, Move, Fall, Jump, Catapult, Crouch };
     enum Attack { AttackNone, AttackMedium, AttackLow };
     enum Hit { HitNone, HitOne, HitPerish, HitPerished };
 
@@ -32,6 +32,7 @@ protected:
     void set_still();
     void set_fall();
     void set_jump_dir(Direction dir = Keep);
+    void set_catapult_dir(Direction dir = Keep);
     void set_crouch();
     void set_attack();
     void reset_attack();

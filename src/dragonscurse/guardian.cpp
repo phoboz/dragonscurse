@@ -38,8 +38,10 @@ void Guardian::move(Map *map)
                 animate_move();
 
                 if (m_attack_timer.expired(get_attribute("attack_timer"))) {
-                    if (abs(m_xref - get_front()) <
-                        get_attribute("attack_distance")) {
+                    int dist = get_attribute("attack_distance");
+                    int x = m_xref - get_front();
+                    int y = m_yref - get_bottom();
+                    if (x * x + y * y < dist * dist) {
                         set_jump_dir();
                         m_dx = get_attribute("jump_forward");
                         m_dy = get_attribute("jump_speed");

@@ -89,7 +89,6 @@ void Player::move(Map *map)
                         if (m_jump_ready) {
                             m_jump_timer.reset();
                             m_jump_ready = false;
-                            m_dy = get_attribute("jump_speed");
                             set_jump_dir();
                         }
                     }
@@ -144,6 +143,49 @@ void Player::move(Map *map)
                 // Check jump height
                 if (m_jump_timer.expired(get_attribute("jump_limit"))) {
                     set_fall();
+                }
+                else {
+                    m_dy = get_attribute("jump_speed");
+                }
+
+                // Check horizontal direction
+                check_ahead(map);
+
+                // Move
+                if (m_dir == Right) {
+                    m_x += m_dx;
+                }
+                else if (m_dir == Left) {
+                    m_x -= m_dx;
+                }
+
+                // Check if hit head
+                if (check_above(map)) {
+                    m_jump_timer.reset();
+                    set_fall();
+                }
+                m_y -= m_dy;
+                break;
+
+            case Catapult:
+                if (input & PRESS_RIGHT) {
+                    set_jump_dir(Right);
+                    m_dx = get_attribute("move_speed");
+                }
+                else if (input & PRESS_LEFT) {
+                    set_jump_dir(Left);
+                    m_dx = get_attribute("move_speed");
+                }
+                else {
+                    m_dx = 0;
+                }
+
+                // Check jump height
+                if (m_jump_timer.expired(2 * get_attribute("jump_limit"))) {
+                    set_fall();
+                }
+                else {
+                    m_dy = get_attribute("jump_speed");
                 }
 
                 // Check horizontal direction

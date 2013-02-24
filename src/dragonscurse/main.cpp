@@ -111,8 +111,6 @@ int main(int argc, char *argv[])
     int start_y = prop.GetNumericProperty("start_y");
 
     player = (Player *) ObjectFactory::create_object(argv[2], type,
-                                                     //6 * 32, 42 * 32,
-                                                     //32, 6 * 32,
                                                      start_x, start_y,
                                                      Object::Right);
     if (!player->get_loaded()) {

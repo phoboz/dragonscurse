@@ -132,6 +132,33 @@ void Actor::set_jump_dir(Direction dir)
     m_action = Jump;
 }
 
+void Actor::set_catapult_dir(Direction dir)
+{
+    Direction set_dir;
+
+    if (dir == Keep) {
+        set_dir = m_dir;
+    }
+    else {
+        set_dir = dir;
+    }
+
+    switch(set_dir) {
+        case Right:
+            m_frame = get_attribute("right_jump");
+            break;
+
+        case Left:
+            m_frame = get_attribute("left_jump");
+            break;
+
+        default:
+            break;
+    }
+    m_dir = set_dir;
+    m_action = Catapult;
+}
+
 void Actor::set_crouch(void)
 {
     switch(m_dir) {
