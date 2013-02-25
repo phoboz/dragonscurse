@@ -56,6 +56,7 @@ void Walker::move(Map *map)
             break;
 
         default:
+            set_move_dir();
             break;
     }
 
