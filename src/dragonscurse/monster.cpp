@@ -5,6 +5,7 @@ Monster::Monster(const char *fn, int x, int y, Direction dir)
 {
     load(fn);
     m_curr_hp = get_attribute("hp");
+    set_still();
 }
 
 bool Monster::set_hit(Object *object)

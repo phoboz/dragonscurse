@@ -24,6 +24,7 @@ void Walker::move(Map *map)
 
         case Move:
             m_dx = get_attribute("move_speed");
+
             check_ahead(map);
             if (!m_dx) {
                 swap_move_dir();

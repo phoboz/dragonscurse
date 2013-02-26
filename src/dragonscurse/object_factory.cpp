@@ -7,6 +7,7 @@
 #include "dragon.h"
 #include "walker.h"
 #include "guardian.h"
+#include "lock_flyer.h"
 
 Object* ObjectFactory::create_object(const char *name,
                                      const char *type,
@@ -32,6 +33,9 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "Guardian") == 0) {
         object = new Guardian(name, x, y, dir);
+    }
+    else if (strcmp(type, "LockFlyer") == 0) {
+        object = new LockFlyer(name, x, y, dir);
     }
 
     if (object) {

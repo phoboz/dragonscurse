@@ -59,7 +59,7 @@ void World::move(Player *player,
             // Handle actor object
             if (object->get_type() == Object::TypeEnemy) {
                 Actor *actor = (Actor *) object;
-                actor->set_reference(player->get_front(), player->get_bottom());
+                actor->set_reference(player->get_front(), player->get_y());
                 if (player->check_collision(actor)) {
                     if (!actor->get_invisible()) {
                         player->set_hit(actor);
