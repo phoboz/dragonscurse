@@ -45,20 +45,21 @@ void LockFlyer::move(Map *map)
 
         case Move:
             if (m_hit == HitNone) {
-                if (abs(m_lock_y - m_y) > 10) {
+                const Sprite *spr = get_sprite();
+                if (abs(m_lock_y - m_y) > get_attribute("move_speed")) {
                     if (m_y < m_lock_y) {
-                        m_vertical_dir = VerticalDown;
+                        m_vertical_dir = Object::VerticalDown;
                     }
                     else if (m_y > m_lock_y) {
-                        m_vertical_dir = VerticalUp;
+                        m_vertical_dir = Object::VerticalUp;
                     }
                 }
                 else {
-                    m_vertical_dir = VerticalNone;
+                    m_vertical_dir = Object::VerticalNone;
                 }
 
                 // Move
-                if (m_vertical_dir == VerticalDown) {
+                if (m_vertical_dir == Object::VerticalDown) {
                     m_dy = get_attribute("move_speed");
                     check_below(map);
                     if (!m_dy) {
@@ -68,7 +69,7 @@ void LockFlyer::move(Map *map)
                         m_y += m_dy;
                     }
                 }
-                else if (m_vertical_dir == VerticalUp) {
+                else if (m_vertical_dir == Object::VerticalUp) {
                     m_dy = get_attribute("move_speed");
                     check_above(map);
                     if (!m_dy) {

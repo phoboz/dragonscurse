@@ -11,6 +11,7 @@ class Object {
 public:
     enum Type { TypePlayer, TypeEnemy, TypeBullet };
     enum Direction { Keep, Right, Left };
+    enum VerticalDirection { VerticalNone, VerticalUp, VerticalDown };
 
     Object(Type type)
         : m_x(0), m_y(0), m_dx(0), m_dy(0), m_frame(0),
