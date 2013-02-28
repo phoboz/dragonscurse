@@ -61,22 +61,37 @@ void LockFlyer::move(Map *map)
                 if (m_vertical_dir == VerticalDown) {
                     m_dy = get_attribute("move_speed");
                     check_below(map);
-                    m_y += m_dy;
+                    if (!m_dy) {
+                        set_still();
+                    }
+                    else {
+                        m_y += m_dy;
+                    }
                 }
                 else if (m_vertical_dir == VerticalUp) {
                     m_dy = get_attribute("move_speed");
                     check_above(map);
-                    m_y -= m_dy;
+                    if (!m_dy) {
+                        set_still();
+                    }
+                    else {
+                        m_y -= m_dy;
+                    }
                 }
                 else {
                     m_dx = get_attribute("move_speed");
                     face_reference(get_attribute("turn_width"));
                     check_ahead(map);
-                    if (m_dir == Right) {
-                        m_x += m_dx;
+                    if (!m_dx) {
+                        set_still();
                     }
-                    else if (m_dir == Left) {
-                        m_x -= m_dx;
+                    else {
+                        if (m_dir == Right) {
+                            m_x += m_dx;
+                        }
+                        else if (m_dir == Left) {
+                            m_x -= m_dx;
+                        }
                     }
                 }
                 animate_move();
