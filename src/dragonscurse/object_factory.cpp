@@ -8,6 +8,7 @@
 #include "walker.h"
 #include "guardian.h"
 #include "lock_flyer.h"
+#include "dancer.h"
 
 Object* ObjectFactory::create_object(const char *name,
                                      const char *type,
@@ -36,6 +37,9 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "LockFlyer") == 0) {
         object = new LockFlyer(name, x, y, dir);
+    }
+    else if (strcmp(type, "Dancer") == 0) {
+        object = new Dancer(name, x, y, dir);
     }
 
     if (object) {

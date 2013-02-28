@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <bat>
-    <lock_flyer attack_timer="12"
+    <lock_flyer turn_width="80"
+                attack_timer="24"
                 attack_distance="120"
                 move_speed="4"
                 hit_time="12">

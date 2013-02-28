@@ -1,6 +1,6 @@
-#include "guardian.h"
+#include "dancer.h"
 
-void Guardian::move(Map *map)
+void Dancer::move(Map *map)
 {
     Monster::move(map);
 
@@ -29,6 +29,7 @@ void Guardian::move(Map *map)
         }
     }
 
+#include <iostream>
     switch(m_action) {
         case Still:
             if (m_hit == HitNone) {
@@ -38,19 +39,25 @@ void Guardian::move(Map *map)
 
         case Move:
             if (m_hit == HitNone) {
-                face_reference();
-                animate_move();
-
-                if (m_attack_timer.check(get_attribute("attack_timer"))) {
-                    int dist = get_attribute("attack_distance");
-                    int x = m_xref - get_front();
-                    int y = m_yref - get_y();
-                    if (x * x + y * y < dist * dist) {
-                        m_attack_timer.reset();
-                        set_jump_dir();
-                        m_dx = get_attribute("jump_forward");
-                        m_dy = get_attribute("jump_speed");
+                int dist = get_attribute("attack_distance");
+                int x = m_xref - get_front();
+                int y = m_yref - get_y();
+                if (x * x + y * y < dist * dist) {
+                    set_jump_dir();
+                    m_dx = get_attribute("jump_forward");
+                    m_dy = get_attribute("jump_speed");
+                }
+                else {
+                    m_dx = get_attribute("move_speed");
+                    face_reference(get_attribute("turn_width"));
+                    check_ahead(map);
+                    if (m_dir == Right) {
+                        m_x += m_dx;
                     }
+                    else if (m_dir == Left) {
+                        m_x -= m_dx;
+                    }
+                    animate_move();
                 }
             }
             break;

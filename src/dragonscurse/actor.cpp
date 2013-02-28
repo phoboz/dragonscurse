@@ -276,11 +276,19 @@ void Actor::animate_move()
     }
 }
 
-void Actor::face_reference()
+void Actor::face_reference(int width)
 {
     const Sprite *spr = get_sprite();
+    int check_width;
 
-    if (abs(m_xref - get_front()) < spr->get_width()) {
+    if (!width) {
+        check_width = spr->get_width();
+    }
+    else {
+        check_width = width;
+    }
+
+    if (abs(m_xref - get_front()) < check_width) {
         set_move_dir();
     }
     else if (m_xref > get_front()) {

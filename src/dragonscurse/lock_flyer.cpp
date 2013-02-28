@@ -29,12 +29,13 @@ void LockFlyer::move(Map *map)
     switch(m_action) {
         case Still:
             if (m_hit == HitNone) {
-                if (m_attack_timer.expired(get_attribute("attack_timer"))) {
+                if (m_attack_timer.check(get_attribute("attack_timer"))) {
                     const Sprite *spr = get_sprite();
                     int dist = get_attribute("attack_distance");
                     int x = m_xref - get_front();
                     int y = m_yref - (get_y() + spr->get_height() / 2);
                     if (x * x + y * y < dist * dist) {
+                        m_attack_timer.reset();
                         set_move_dir();
                         m_lock_y = m_yref + spr->get_height() / 2;
                     }
@@ -69,7 +70,7 @@ void LockFlyer::move(Map *map)
                 }
                 else {
                     m_dx = get_attribute("move_speed");
-                    face_reference();
+                    face_reference(get_attribute("turn_width"));
                     check_ahead(map);
                     if (m_dir == Right) {
                         m_x += m_dx;

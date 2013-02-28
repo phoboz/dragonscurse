@@ -38,7 +38,7 @@ protected:
     void reset_attack();
     void check_ground(Map *map);
     void animate_move();
-    void face_reference();
+    void face_reference(int width = 0);
     void set_invisible(bool invisible);
 
     AnimDirection m_anim_dir;
