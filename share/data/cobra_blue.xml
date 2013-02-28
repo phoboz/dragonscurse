@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <cobra>
     <guardian attack_timer="64"
-              attack_distance="40"
+              attack_distance="24"
               jump_speed="3"
               jump_forward="2"
               jump_limit="10"

@@ -15,7 +15,6 @@ void LockFlyer::move(Map *map)
 
             // Check for collision with map
             check_behind(map);
-            check_above(map);
 
             // Move
             if (m_dir == Right) {
