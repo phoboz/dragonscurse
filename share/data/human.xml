@@ -29,7 +29,7 @@
                    left_attack_low="14">
                 <object image="human.png"
                         width="91" height="63" margin="1" spacing="1"
-                        left="24" right="66" top="7" bottom="61" />
+                        left="24" right="66" top="7" bottom="62" />
             </actor>
         </player>
     </knight>

@@ -85,7 +85,8 @@ void World::draw(SDL_Surface *dest, Player *player,
                  int clip_x, int clip_y, int clip_w, int clip_h)
 {
     int num_layers = m_map->get_num_layers();
-    for (int i = 0; i < num_layers; i++) {
+
+    if (num_layers > 0) {
         m_map->draw_layer(dest, clip_x, clip_y, clip_w, clip_h, 0);
     }
 
@@ -97,5 +98,10 @@ void World::draw(SDL_Surface *dest, Player *player,
     }
 
     player->draw(dest, m_map, clip_x, clip_y, clip_w, clip_h);
+
+    if (num_layers > 1) {
+        m_map->draw_layer(dest, clip_x, clip_y, clip_w, clip_h, 1);
+    }
+
 }
 
