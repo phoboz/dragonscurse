@@ -1,4 +1,14 @@
+#include <stdlib.h>
 #include "meka_dragon.h"
+
+MekaDragon::MekaDragon(const char *fn, int x, int y, Direction dir)
+    : Monster(fn, x, y, dir)
+{
+    m_bullet = new Bullet(get_string("bullet"));
+    if (!m_bullet->get_loaded()) {
+        exit(1);
+    }
+}
 
 void MekaDragon::move(Map *map)
 {

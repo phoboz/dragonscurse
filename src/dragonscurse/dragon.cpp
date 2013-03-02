@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include <string.h>
 #include "phoboz/ctrl.h"
 #include "dragon.h"
@@ -8,7 +9,9 @@ Dragon::Dragon(const char *fn, int x, int y, Direction dir)
           m_attack_ready(true)
 {
     m_bullet = new Bullet(get_string("bullet"));
-    if (!m_bullet->get_loaded()) exit(1);
+    if (!m_bullet->get_loaded()) {
+        exit(1);
+    }
 }
 
 bool Dragon::attack_actor(Actor *actor)

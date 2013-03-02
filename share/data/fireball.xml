@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<bullet move_speed="6"
+        distance="100"
+        reload_time="16">
+    <object image="fireball.png"
+            width="34" height="34" margin="1" spacing="1"
+            left="2" right="32" top="2" bottom="32"
+            right_still="0"
+            right_move_start="0" right_move_end="0"
+            left_still="0"
+            left_move_start="0" left_move_end="0" />
+</bullet>
+
