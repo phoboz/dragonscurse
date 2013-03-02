@@ -9,6 +9,7 @@
 #include "guardian.h"
 #include "lock_flyer.h"
 #include "dancer.h"
+#include "meka_dragon.h"
 
 Object* ObjectFactory::create_object(const char *name,
                                      const char *type,
@@ -40,6 +41,9 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "Dancer") == 0) {
         object = new Dancer(name, x, y, dir);
+    }
+    else if (strcmp(type, "MekaDragon") == 0) {
+        object = new MekaDragon(name, x, y, dir);
     }
 
     if (object) {

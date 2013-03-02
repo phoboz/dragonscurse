@@ -313,7 +313,18 @@ bool Actor::set_hit(Object *object)
     int result = false;
 
     if (!m_invisible) {
-        m_frame = get_attribute("hit");
+        switch(m_dir) {
+            case Right:
+                m_frame = get_attribute("right_hit");
+                break;
+
+            case Left:
+                m_frame = get_attribute("left_hit");
+               break;
+
+            default:
+                break;
+        }
         m_action = Still;
         m_hit = HitOne;
         result = true;

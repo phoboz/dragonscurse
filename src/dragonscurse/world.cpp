@@ -4,26 +4,30 @@
 #include "Tmx/Tmx.h"
 #include "object_factory.h"
 #include "player.h"
+#include "statusbar.h"
 #include "world.h"
 
 World::World(Map *map, int object_group)
     : m_map(map)
 {
-    const Tmx::ObjectGroup *group = map->get_object_group(object_group);
-    int n = group->GetNumObjects();
-    for (int i = 0; i < n; i++) {
-        const Tmx::Object *obj = group->GetObject(i);
-        const Tmx::PropertySet prop = obj->GetProperties();
-        std::string dirname = prop.GetLiteralProperty(std::string("direction"));
-        Object *object = ObjectFactory::create_object(obj->GetName().c_str(),
-                                                      obj->GetType().c_str(),
-                                                      obj->GetX(), obj->GetY(),
-                                                      dirname.c_str());
-        if (object) {
-            m_objects.push_back(object);
-        }
-        else {
-            std::cerr << "Warning - Unable to load object: " << i << std::endl;
+    if (object_group < map->get_num_object_groups()) {
+        const Tmx::ObjectGroup *group = map->get_object_group(object_group);
+        int n = group->GetNumObjects();
+
+        for (int i = 0; i < n; i++) {
+            const Tmx::Object *obj = group->GetObject(i);
+            const Tmx::PropertySet prop = obj->GetProperties();
+            std::string dirname = prop.GetLiteralProperty(std::string("direction"));
+            Object *object = ObjectFactory::create_object(obj->GetName().c_str(),
+                                                          obj->GetType().c_str(),
+                                                          obj->GetX(), obj->GetY(),
+                                                          dirname.c_str());
+            if (object) {
+                m_objects.push_back(object);
+            }
+            else {
+                std::cerr << "Warning - Unable to load object: " << i << std::endl;
+            }
         }
     }
 }
@@ -42,8 +46,8 @@ void World::move(Player *player,
     if (map_y < 0) {
         map_y = 0;
     }
-    m_map->set_x(map_x);
-    m_map->set_y(map_y);
+    m_map->set_x(map_x, 640);
+    m_map->set_y(map_y, 480 - Statusbar::get_height());
 
     std::vector<Object*> perished;
 

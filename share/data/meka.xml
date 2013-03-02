@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+    <meka_dragon attack_timer="64"
+          attack_distance="24"
+          jump_speed="3"
+          jump_forward="2"
+          jump_limit="10"
+          hit_time="24">
+        <monster hp="8"
+                 perish_time="40">
+            <actor move_speed="2"
+                   treshold="12"
+                   weight="2"
+                   right_still="4"
+                   right_move_start="4" right_move_end="5"
+                   right_attack="6"
+                   right_hit="7"
+                   left_still="0"
+                   left_move_start="0" left_move_end="1"
+                   left_attack="2"
+                   left_hit="3">
+                <object image="meka.png"
+                        width="128" height="138" margin="1" spacing="1"
+                        left="4" right="124" top="8" bottom="136" />
+            </actor>
+        </monster>
+    </meka_dragon>
+

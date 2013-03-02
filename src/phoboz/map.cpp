@@ -41,19 +41,29 @@ int Map::get_tile_id(int x, int y, int layer_id) const
     return layer->GetTileId(col, row);
 }
 
-void Map::set_x(int value)
+void Map::set_x(int value, int window_width)
 {
+    int max_width = m_tmx->GetTileWidth() * m_tmx->GetWidth() - window_width;
+
     m_x = value;
     if (m_x < 0) {
         m_x = 0;
     }
+    if (m_x > max_width) {
+        m_x = max_width;
+    }
 }
 
-void Map::set_y(int value)
+void Map::set_y(int value, int window_height)
 {
+    int max_height = m_tmx->GetTileHeight() * m_tmx->GetHeight() - window_height;
+
     m_y = value;
     if (m_y < 0) {
         m_x = 0;
+    }
+    if (m_y > max_height) {
+        m_y = max_height;
     }
 }
 

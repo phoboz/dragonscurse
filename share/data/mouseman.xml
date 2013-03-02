@@ -20,13 +20,14 @@
                    right_crouch="0"
                    right_attack="3"
                    right_attack_low="3"
-                   hit="4"
+                   right_hit="4"
                    left_still="5"
                    left_move_start="5" left_move_end="7"
                    left_jump="7"
                    left_crouch="5"
                    left_attack="8"
-                   left_attack_low="8">
+                   left_attack_low="8"
+                   left_hit="4">
                 <object image="mouseman.png"
                         width="60" height="60" margin="1" spacing="1"
                         left="16" right="46" top="28" bottom="59" />

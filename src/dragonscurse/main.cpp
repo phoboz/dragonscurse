@@ -11,8 +11,7 @@
 #include "object.h"
 #include "object_factory.h"
 #include "world.h"
-
-#define STATUSBAR_HEIGHT 36
+#include "statusbar.h"
 
 static SDL_Surface *screen;
 static int screen_width = 640;
@@ -45,32 +44,15 @@ bool init()
     return true;
 }
 
-void draw_statusbar()
-{
-    SDL_Rect dest_rect;
-
-    dest_rect.x = 0;
-    dest_rect.y = 0;
-    dest_rect.w = screen_width;
-    dest_rect.h = STATUSBAR_HEIGHT - 2;
-    SDL_FillRect(screen, &dest_rect, 0x77777777);
-
-    dest_rect.x = 0;
-    dest_rect.y = STATUSBAR_HEIGHT - 2;
-    dest_rect.w = screen_width;
-    dest_rect.h = 2;
-    SDL_FillRect(screen, &dest_rect, 0x55555555);
-}
-
 void move(void)
 {
-    world->move(player, 0, STATUSBAR_HEIGHT, screen_width, screen_height);
+    world->move(player, 0, Statusbar::get_height(), screen_width, screen_height);
 }
 
 void redraw(void)
 {
-    draw_statusbar();
-    world->draw(screen, player, 0, STATUSBAR_HEIGHT, screen_width, screen_height);
+    Statusbar::draw(screen, screen_width, screen_height);
+    world->draw(screen, player, 0, Statusbar::get_height(), screen_width, screen_height);
 }
 
 void flip(void)
@@ -128,7 +110,7 @@ int main(int argc, char *argv[])
 
             SDL_Rect dest_rect;
             dest_rect.x = 0;
-            dest_rect.y = STATUSBAR_HEIGHT;
+            dest_rect.y = Statusbar::get_height();
             dest_rect.w = screen_width;
             dest_rect.h = screen_height;
             SDL_FillRect(screen, &dest_rect, 0x00000000);
