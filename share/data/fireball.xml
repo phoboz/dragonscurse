@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <bullet move_speed="6"
-        distance="100"
-        reload_time="16">
+        distance="112"
+        reload_time="2">
     <object image="fireball.png"
             width="34" height="34" margin="1" spacing="1"
             left="2" right="32" top="2" bottom="32"

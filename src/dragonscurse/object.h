@@ -12,14 +12,17 @@ public:
     enum Type { TypePlayer, TypeEnemy, TypeBullet };
     enum Direction { Keep, Right, Left };
     enum VerticalDirection { VerticalNone, VerticalUp, VerticalDown };
+    enum HorizontalDirection { HorizontalNone,
+                               HorizontalForward,
+                               HorizontalBackward };
 
     Object(Type type)
         : m_x(0), m_y(0), m_dx(0), m_dy(0), m_frame(0),
-          m_dir(Right), m_loaded(false), m_type(type),
+          m_dir(Right), m_loaded(false), m_type(type), m_always_visible(false),
           m_xref(0), m_yref(0) { }
     Object(Type type, int x, int y, Direction dir)
         : m_x(x), m_y(y), m_dx(0), m_dy(0), m_frame(0),
-          m_dir(dir), m_loaded(false), m_type(type),
+          m_dir(dir), m_loaded(false), m_type(type), m_always_visible(false),
           m_xref(0), m_yref(0) { }
     ~Object();
     bool load(const char *fn);
@@ -64,6 +67,8 @@ protected:
     bool check_behind(Map *map, int id = 0);
     bool check_above(Map *map, int id = 0);
 
+    void set_always_visible(bool value) { m_always_visible = value; }
+
     std::map<std::string, int> m_attributes;
     std::map<std::string, std::string> m_strings;
 
@@ -81,6 +86,7 @@ private:
 
     bool m_loaded;
     Type m_type;
+    bool m_always_visible;
     Sprite *m_spr;
 };
 

@@ -280,15 +280,21 @@ bool Object::check_above(Map *map, int id)
 bool Object::get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_h) const
 {
     bool result;
-    int x = m_x - map->get_x();
-    int y = m_y - map->get_y();
 
-    if((x + m_spr->get_width() <= 0) || (x >= clip_w) ||
-       (y + m_spr->get_height() <= 0) || (y >= clip_h)) {
-        result = false;
+    if (m_always_visible) {
+        result = true;
     }
     else {
-        result = true;
+        int x = m_x - map->get_x();
+        int y = m_y - map->get_y();
+
+        if((x + m_spr->get_width() <= 0) || (x >= clip_w) ||
+           (y + m_spr->get_height() <= 0) || (y >= clip_h)) {
+            result = false;
+        }
+        else {
+            result = true;
+        }
     }
 
     return result;

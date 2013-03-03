@@ -1,12 +1,23 @@
+#include <iostream>
 #include <stdlib.h>
 #include "meka_dragon.h"
 
 MekaDragon::MekaDragon(const char *fn, int x, int y, Direction dir)
-    : Monster(fn, x, y, dir)
+    : Monster(fn, x, y, dir),
+      m_horizontal_dir(HorizontalForward),
+      m_bullet_index(0)
 {
-    m_bullet = new Bullet(get_string("bullet"));
-    if (!m_bullet->get_loaded()) {
-        exit(1);
+    set_always_visible(true);
+
+    const char* bullet_name = get_string("bullet");
+    int num_bullets = get_attribute("num_bullets");
+
+    for (int i = 0; i < num_bullets; i++) {
+        Bullet *bullet = new Bullet(bullet_name);
+        if (!bullet->get_loaded()) {
+            exit(1);
+        }
+        m_bullets.push_back(bullet);
     }
 }
 
@@ -41,6 +52,88 @@ void MekaDragon::move(Map *map)
 
     switch(m_action)
     {
+        case Still:
+           if (m_hit == HitNone && m_attack == AttackNone) {
+                set_move_dir();
+            }
+            else if (m_attack == AttackMedium) {
+                if (m_fire_timer.expired(get_attribute("fire_next"))) {
+                    if (m_bullet_index < m_bullets.size()) {
+                        if (m_dir == Right) {
+                            m_bullets[m_bullet_index]->fire(
+                                           m_x + get_attribute("attack_right"),
+                                           m_y + get_attribute("attack_medium"),
+                                           m_dir,
+                                           VerticalDown);
+                        }
+                        else if (m_dir == Left) {
+                            m_bullets[m_bullet_index]->fire(
+                                           m_x + get_attribute("attack_left"),
+                                           m_y + get_attribute("attack_medium"),
+                                           m_dir,
+                                           VerticalDown);
+                        }
+                        m_bullet_index++;
+                    }
+                    else {
+                        m_bullet_index = 0;
+                        set_move_dir();
+                        reset_attack();
+                    }
+                }
+            }
+            break;
+
+        case Move:
+           if (m_hit == HitNone && m_attack == AttackNone) {
+                if (m_horizontal_dir == HorizontalForward) {
+
+                    face_reference(get_attribute("turn_width"));
+                    m_dx = get_attribute("move_speed");
+
+                    //check_ahead(map);
+
+                    // Move
+                    if (m_dir == Right) {
+                        m_x += m_dx;
+                    }
+                    else if (m_dir == Left) {
+                        m_x -= m_dx;
+                    }
+                    animate_move();
+
+                    if (abs(m_xref - m_x) < get_attribute("attack_distance")) {
+                        m_horizontal_dir = HorizontalBackward;
+                    }
+                }
+                else if (m_horizontal_dir == HorizontalBackward) {
+
+                    face_reference(get_attribute("turn_width"));
+                    m_dx = get_attribute("move_speed");
+
+                    //check_behind(map);
+
+                    // Move
+                    if (m_dir == Right) {
+                        m_x -= m_dx;
+                    }
+                    else if (m_dir == Left) {
+                        m_x += m_dx;
+                    }
+                    animate_move();
+
+                    if (abs(m_xref - m_x) > get_attribute("retreat_distance")) {
+                        m_horizontal_dir = HorizontalForward;
+                    }
+                }
+
+                if (m_attack_timer.expired(get_attribute("attack_timer"))) {
+                    set_still();
+                    set_attack();
+                }
+            }
+            break;
+
         case Fall:
             check_ahead(map);
 
@@ -58,6 +151,21 @@ void MekaDragon::move(Map *map)
 
         default:
             break;
+    }
+
+    unsigned n = m_bullets.size();
+    for (unsigned i = 0; i < n; i++) {
+        m_bullets[i]->move(map);
+    }
+}
+
+void MekaDragon::draw(SDL_Surface *dest, Map *map,
+                      int clip_x, int clip_y, int clip_w, int clip_h)
+{
+    Monster::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
+    unsigned n = m_bullets.size();
+    for (unsigned i = 0; i < n; i++) {
+        m_bullets[i]->draw(dest, map, clip_x, clip_y, clip_w, clip_h);
     }
 }
 

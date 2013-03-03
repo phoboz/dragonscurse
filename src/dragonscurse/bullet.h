@@ -10,7 +10,7 @@ public:
         : Object(Object::TypeBullet),
           m_moving(false), m_loaded(true),
           m_distance(0) { load(fn); }
-    bool fire(int x, int y, Direction dir);
+    bool fire(int x, int y, Direction dir, VerticalDirection vert_dir = VerticalNone);
     bool hit_object(Object *object);
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
@@ -21,6 +21,7 @@ public:
 private:
     void reload();
 
+    VerticalDirection m_vertical_dir;
     bool m_moving;
     bool m_loaded;
     int m_distance;

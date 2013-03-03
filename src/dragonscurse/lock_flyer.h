@@ -12,7 +12,7 @@ public:
     virtual void move(Map *map);
 
 private:
-    Object::VerticalDirection m_vertical_dir;
+    VerticalDirection m_vertical_dir;
     int m_lock_y;
     Timer m_attack_timer;
     Timer m_hit_timer;

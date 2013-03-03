@@ -1,3 +1,4 @@
+#include <math.h>
 #include "bullet.h"
 
 void Bullet::reload()
@@ -7,7 +8,7 @@ void Bullet::reload()
     m_reload_timer.reset();
 }
 
-bool Bullet::fire(int x, int y, Direction dir)
+bool Bullet::fire(int x, int y, Direction dir, VerticalDirection vert_dir)
 {
     bool result = false;
 
@@ -15,6 +16,7 @@ bool Bullet::fire(int x, int y, Direction dir)
         m_x = x;
         m_y = y;
         m_dir = dir;
+        m_vertical_dir = vert_dir;
 
         if (dir == Right) {
             m_dx = get_attribute("move_speed");
@@ -23,6 +25,13 @@ bool Bullet::fire(int x, int y, Direction dir)
         else if (dir == Left) {
             m_dx = get_attribute("move_speed");
             m_frame = get_attribute("left_move_start");
+        }
+
+        if (vert_dir == VerticalUp) {
+            m_dy = get_attribute("move_speed");
+        }
+        else if (vert_dir == VerticalDown) {
+            m_dy = get_attribute("move_speed");
         }
 
         m_moving = true;
@@ -55,8 +64,13 @@ void Bullet::move(Map *map)
 
     if (m_moving) {
         check_ahead(map);
-        if (m_dx) {
-            m_distance += m_dx;
+        if (m_vertical_dir == VerticalDown) {
+            check_below(map);
+        }
+        else if (m_vertical_dir == VerticalUp) {
+            check_above(map);
+        }
+        if (m_dx || m_dy) {
             if (m_distance < get_attribute("distance")) {
                 if (m_dir == Right) {
                     m_x += m_dx;
@@ -64,6 +78,13 @@ void Bullet::move(Map *map)
                 else if (m_dir == Left) {
                     m_x -= m_dx;
                 }
+                if (m_vertical_dir == VerticalDown) {
+                    m_y += m_dy;
+                }
+                else if (m_vertical_dir == VerticalUp) {
+                    m_y -= m_dy;
+                }
+                m_distance += sqrt(m_dx * m_dx + m_dy * m_dy);
             }
             else {
                 m_moving = false;
