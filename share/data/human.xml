@@ -9,7 +9,7 @@
             attack_time="16">
         <player jump_speed="6"
                 jump_limit="18">
-            <actor move_speed="2"
+            <actor move_speed="3"
                    treshold="6"
                    weight="10"
                    hit_time="24"
