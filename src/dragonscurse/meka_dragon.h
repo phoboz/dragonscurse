@@ -18,6 +18,7 @@ private:
     int m_bullet_index;
     std::vector<Bullet*> m_bullets;
     Timer m_attack_timer;
+    Timer m_idle_timer;
     Timer m_fire_timer;
     Timer m_hit_timer;
 };

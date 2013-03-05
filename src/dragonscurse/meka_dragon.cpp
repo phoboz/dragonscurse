@@ -32,6 +32,9 @@ void MekaDragon::move(Map *map)
         if (m_hit_timer.expired(get_attribute("hit_time"))) {
             m_dx = 0;
             reset_hit();
+            m_idle_timer.reset();
+            set_still();
+            set_attack();
         }
         else {
             // Move backwards
@@ -56,8 +59,9 @@ void MekaDragon::move(Map *map)
            if (m_hit == HitNone && m_attack == AttackNone) {
                 set_move_dir();
             }
-            else if (m_attack == AttackMedium) {
-                if (m_fire_timer.expired(get_attribute("fire_next"))) {
+            else if (m_hit == HitNone && m_attack == AttackMedium) {
+                if (m_idle_timer.check(get_attribute("attack_idle")) &&
+                    m_fire_timer.expired(get_attribute("fire_next"))) {
                     if (m_bullet_index < m_bullets.size()) {
                         if (m_dir == Right) {
                             m_bullets[m_bullet_index]->fire(
@@ -77,6 +81,7 @@ void MekaDragon::move(Map *map)
                     }
                     else {
                         m_bullet_index = 0;
+                        m_idle_timer.reset();
                         set_move_dir();
                         reset_attack();
                     }
