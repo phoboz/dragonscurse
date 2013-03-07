@@ -9,6 +9,7 @@
 #include "guardian.h"
 #include "lock_flyer.h"
 #include "dancer.h"
+#include "falling.h"
 #include "meka_dragon.h"
 
 Object* ObjectFactory::create_object(const char *name,
@@ -42,6 +43,9 @@ Object* ObjectFactory::create_object(const char *name,
     else if (strcmp(type, "Dancer") == 0) {
         object = new Dancer(name, x, y, dir);
     }
+    else if (strcmp(type, "Falling") == 0) {
+        object = new Falling(name, x, y, dir);
+    }
     else if (strcmp(type, "MekaDragon") == 0) {
         object = new MekaDragon(name, x, y, dir);
     }
@@ -63,7 +67,9 @@ Object* ObjectFactory::create_object(const char *name,
 {
     Object *object = 0;
 
-    if (strcmp(dirname, "right") == 0) {
+    if (!dirname) {
+    }
+    else if (strcmp(dirname, "right") == 0) {
         object = create_object(name, type, x, y, Object::Right);
     }
     else if (strcmp(dirname, "left") == 0) {

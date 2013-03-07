@@ -1,7 +1,8 @@
 #include "monster.h"
 
 Monster::Monster(const char *fn, int x, int y, Direction dir)
-    : Actor(Object::TypeEnemy, x, y, dir)
+    : Actor(Object::TypeEnemy, x, y, dir),
+      m_invinsible(false)
 {
     load(fn);
     m_curr_hp = get_attribute("hp");
@@ -12,7 +13,7 @@ bool Monster::set_hit(Object *object)
 {
     bool result = false;
 
-    if (m_hit == HitNone) {
+    if (!m_invinsible && m_hit == HitNone) {
         Actor::set_hit(object);
 
         // Reduce hp
