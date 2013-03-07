@@ -16,6 +16,7 @@ public:
     bool load(Tmx::Map *tmx);
     bool get_loaded() const { return m_loaded; }
     int get_tile_id(int x, int y, int layer_id) const;
+    void set_tile_id(int x, int y, int layer_id, int id);
     void set_x(int value, int window_width);
     void set_y(int value, int window_height);
     int get_x() const { return m_x; }

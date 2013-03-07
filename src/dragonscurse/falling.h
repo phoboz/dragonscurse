@@ -8,6 +8,9 @@ public:
     Falling(const char *fn, int x, int y, Direction dir)
         : Monster(fn, x, y, dir) { set_invinsible(true); }
     virtual void move(Map *map);
+
+private:
+    int m_fall_distance;
 };
 
 #endif

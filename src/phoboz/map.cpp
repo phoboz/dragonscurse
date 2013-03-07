@@ -41,6 +41,18 @@ int Map::get_tile_id(int x, int y, int layer_id) const
     return layer->GetTileId(col, row);
 }
 
+void Map::set_tile_id(int x, int y, int layer_id, int id)
+{
+    // Hack, not nice to cast from const to non const
+    // TODO: Add method to retreive non const layer
+    Tmx::Layer *layer = (Tmx::Layer *) m_tmx->GetLayer(layer_id);
+    int tw = m_tmx->GetTileWidth();
+    int th = m_tmx->GetTileHeight();
+    int col = x / tw;
+    int row = y / th;
+    layer->SetTileId(col, row, id);
+}
+
 void Map::set_x(int value, int window_width)
 {
     int max_width = m_tmx->GetTileWidth() * m_tmx->GetWidth() - window_width;
