@@ -37,6 +37,9 @@ public:
     void set_x(int value) { m_x = value; }
     void set_y(int value) { m_y = value; }
     void set_reference(int x, int y) { m_xref = x; m_yref = y; }
+    void set_attribute(const char *name, int value) {
+        m_attributes[std::string(name)] = value;
+    }
     bool get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_h) const;
     virtual bool check_collision(Object *object) {
         return m_spr->check_collision(m_frame, m_x, m_y,

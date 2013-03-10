@@ -21,7 +21,7 @@ World::World(Map *map, int object_group)
             Object *object = ObjectFactory::create_object(obj->GetName().c_str(),
                                                           obj->GetType().c_str(),
                                                           obj->GetX(), obj->GetY(),
-                                                          dirname.c_str());
+                                                          obj->GetProperties());
             if (object) {
                 m_objects.push_back(object);
             }

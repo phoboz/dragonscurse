@@ -1,6 +1,7 @@
 #ifndef _ObjectFactory_H
 #define _ObjectFactory_H
 
+#include "Tmx/TmxPropertySet.h"
 #include "object.h"
 
 class ObjectFactory {
@@ -8,11 +9,16 @@ public:
     static Object* create_object(const char *name,
                                  const char *type,
                                  int x, int y,
-                                 Object::Direction dir);
+                                 Object::Direction dir,
+                                 const Tmx::PropertySet &prop);
     static Object* create_object(const char *name,
                                  const char *type,
                                  int x, int y,
-                                 const char *dirname);
+                                 const Tmx::PropertySet &prop);
+    static Object* create_object(const char *name,
+                                 const char *type,
+                                 int x, int y,
+                                 Object::Direction dir);
 };
 
 #endif

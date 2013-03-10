@@ -1,9 +1,16 @@
 #include <iostream>
 #include "falling.h"
 
+void Falling::fall()
+{
+    set_fall();
+    m_fall_distance = 0;
+    m_dy = get_attribute("weight");
+}
+
 void Falling::move(Map *map)
 {
-    int x, dist;
+    int x, dist, tmr;
 
     Monster::move(map);
 
@@ -11,11 +18,22 @@ void Falling::move(Map *map)
         case Still:
             if (m_hit == HitNone) {
                 dist = get_attribute("attack_distance");
-                x = m_xref - get_front();
-                if (abs(x) < dist) {
-                    set_fall();
-                    m_fall_distance = 0;
-                    m_dy = get_attribute("weight");
+                if (dist) {
+                    x = m_xref - get_front();
+                    if (abs(x) < dist) {
+                        tmr = get_attribute("trigger_time");
+                        if (tmr) {
+                            if (m_trigger_timer.expired(tmr)) {
+                                fall();
+                            }
+                        }
+                        else {
+                            fall();
+                        }
+                    }
+                }
+                else {
+                    fall();
                 }
             }
             break;
@@ -35,9 +53,12 @@ void Falling::move(Map *map)
             m_y += m_dy;
             m_fall_distance += m_dy;
 
-            // TODO: Check if the block shall stay on the map
             if (m_hit == HitPerish) {
-                map->set_tile_id(get_front(), get_bottom(), 0, 1);
+                if (get_attribute("stay")) {
+                    map->set_tile_id(get_x() + get_image_width() / 2,
+                                     get_y() + get_image_height() / 2,
+                                     0, 1);
+                }
             }
             break;
 

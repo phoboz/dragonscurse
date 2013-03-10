@@ -1,5 +1,8 @@
 #include <iostream>
+#include <stdlib.h>
 #include <string.h>
+#include <map>
+#include <string>
 #include "object_factory.h"
 #include "player.h"
 #include "knight.h"
@@ -15,7 +18,8 @@
 Object* ObjectFactory::create_object(const char *name,
                                      const char *type,
                                      int x, int y,
-                                     Object::Direction dir)
+                                     Object::Direction dir,
+                                     const Tmx::PropertySet &prop)
 {
     Object *object = 0;
 
@@ -55,6 +59,14 @@ Object* ObjectFactory::create_object(const char *name,
             delete object;
             object = 0;
         }
+        std::map<std::string, std::string> pmap = prop.GetList();
+        for (std::map<std::string, std::string >::const_iterator it = pmap.begin();
+             it != pmap.end();
+             ++it) {
+            std::string name = it->first;
+            std::string value = it->second;
+            object->set_attribute(name.c_str(), atoi(value.c_str()));
+        }
     }
 
     return object;
@@ -63,19 +75,31 @@ Object* ObjectFactory::create_object(const char *name,
 Object* ObjectFactory::create_object(const char *name,
                                      const char *type,
                                      int x, int y,
-                                     const char *dirname)
+                                     const Tmx::PropertySet &prop)
 {
-    Object *object = 0;
+    Object *object;
+    std::string dirname = prop.GetLiteralProperty(std::string("direction"));
 
-    if (!dirname) {
+    if (dirname == std::string("No such property!")) {
+        object = create_object(name, type, x, y, Object::Right, prop);
     }
-    else if (strcmp(dirname, "right") == 0) {
-        object = create_object(name, type, x, y, Object::Right);
+    else if (dirname == std::string("right")) {
+        object = create_object(name, type, x, y, Object::Right, prop);
     }
-    else if (strcmp(dirname, "left") == 0) {
-        object = create_object(name, type, x, y, Object::Left);
+    else if (dirname == std::string("left")) {
+        object = create_object(name, type, x, y, Object::Left, prop);
     }
 
     return object;
+}
+
+Object* ObjectFactory::create_object(const char *name,
+                                     const char *type,
+                                     int x, int y,
+                                     Object::Direction dir)
+{
+    Tmx::PropertySet prop;
+
+    return create_object(name, type, x, y, dir, prop);
 }
 
