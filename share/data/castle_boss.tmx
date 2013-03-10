@@ -2,7 +2,7 @@
 <map version="1.0" orientation="orthogonal" width="20" height="14" tilewidth="32" tileheight="32">
  <properties>
   <property name="start_x" value="32"/>
-  <property name="start_y" value="352"/>
+  <property name="start_y" value="346"/>
  </properties>
  <tileset firstgid="1" name="castle" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <image source="castle.png" width="512" height="512"/>

@@ -277,6 +277,36 @@ bool Object::check_above(Map *map, int id)
     return result;
 }
 
+int Object::get_attribute(const char *name) const
+{
+    int value;
+
+    std::map<std::string, int>::const_iterator it = m_attributes.find(name);
+    if (it == m_attributes.end()) {
+        value = 0;
+    }
+    else {
+        value = it->second;
+    }
+
+    return value;
+}
+
+const char* Object::get_string(const char *name) const
+{
+    const char *str;
+
+    std::map<std::string, std::string>::const_iterator it = m_strings.find(name);
+    if (it == m_strings.end()) {
+        str = 0;
+    }
+    else {
+        str = it->second.c_str();
+    }
+
+    return str;
+}
+
 bool Object::get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_h) const
 {
     bool result;

@@ -16,7 +16,11 @@ bool Knight::attack_actor(Actor *actor)
                                      spr->get_width(),
                                      get_attribute("attack_medium_bottom"),
                                      actor->get_sprite(), actor->get_frame(),
-                                     actor->get_x(), actor->get_y())) {
+                                     actor->get_x(), actor->get_y(),
+                                     actor->get_attribute("weak_left"),
+                                     actor->get_attribute("weak_top"),
+                                     actor->get_attribute("weak_right"),
+                                     actor->get_attribute("weak_bottom"))) {
                 result = true;
             }
         }
@@ -27,7 +31,11 @@ bool Knight::attack_actor(Actor *actor)
                                      get_attribute("attack_left"),
                                      get_attribute("attack_medium_bottom"),
                                      actor->get_sprite(), actor->get_frame(),
-                                     actor->get_x(), actor->get_y())) {
+                                     actor->get_x(), actor->get_y(),
+                                     actor->get_attribute("weak_left"),
+                                     actor->get_attribute("weak_top"),
+                                     actor->get_attribute("weak_right"),
+                                     actor->get_attribute("weak_bottom"))) {
                 result = true;
             }
         }
@@ -40,7 +48,11 @@ bool Knight::attack_actor(Actor *actor)
                                      spr->get_width(),
                                      get_attribute("attack_low_bottom"),
                                      actor->get_sprite(), actor->get_frame(),
-                                     actor->get_x(), actor->get_y())) {
+                                     actor->get_x(), actor->get_y(),
+                                     actor->get_attribute("weak_left"),
+                                     actor->get_attribute("weak_top"),
+                                     actor->get_attribute("weak_right"),
+                                     actor->get_attribute("weak_bottom"))) {
                 result = true;
             }
         }
@@ -51,7 +63,11 @@ bool Knight::attack_actor(Actor *actor)
                                      get_attribute("attack_left"),
                                      get_attribute("attack_low_bottom"),
                                      actor->get_sprite(), actor->get_frame(),
-                                     actor->get_x(), actor->get_y())) {
+                                     actor->get_x(), actor->get_y(),
+                                     actor->get_attribute("weak_left"),
+                                     actor->get_attribute("weak_top"),
+                                     actor->get_attribute("weak_right"),
+                                     actor->get_attribute("weak_bottom"))) {
                 result = true;
             }
         }

@@ -6,8 +6,7 @@
 
 class Falling : public Monster {
 public:
-    Falling(const char *fn, int x, int y, Direction dir)
-        : Monster(fn, x, y, dir) { set_invinsible(true); }
+    Falling(const char *fn, int x, int y, Direction dir);
     virtual void move(Map *map);
 
 private:

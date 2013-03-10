@@ -60,12 +60,13 @@ Object* ObjectFactory::create_object(const char *name,
             object = 0;
         }
         std::map<std::string, std::string> pmap = prop.GetList();
-        for (std::map<std::string, std::string >::const_iterator it = pmap.begin();
+        for (std::map<std::string, std::string>::const_iterator it = pmap.begin();
              it != pmap.end();
              ++it) {
             std::string name = it->first;
-            std::string value = it->second;
-            object->set_attribute(name.c_str(), atoi(value.c_str()));
+            if (name != std::string("direction")) {
+                object->set_attribute(name.c_str(), atoi(it->second.c_str()));
+            }
         }
     }
 

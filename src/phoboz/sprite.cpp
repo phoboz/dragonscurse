@@ -114,8 +114,9 @@ void Sprite::draw(SDL_Surface *dest,
 }
 
 bool Sprite::check_collision(int index1, int x1, int y1,
-                             int left, int top, int right, int bottom,
-                             const Sprite *spr2, int index2, int x2, int y2) const
+                             int start_x1, int start_y1, int end_x1, int end_y1,
+                             const Sprite *spr2, int index2, int x2, int y2,
+                             int start_x2, int start_y2, int end_x2, int end_y2) const
 {
     int left1, left2, over_left;
     int right1, right2, over_right;
@@ -124,14 +125,14 @@ bool Sprite::check_collision(int index1, int x1, int y1,
     int over_width, over_height;
     int i, j;
 
-    left1 = x1 + left;
-    left2 = x2;
-    right1 = x1 + right;
-    right2 = x2 + spr2->m_w;
-    top1 = y1 + top;
-    top2 = y2;
-    bottom1 = y1 + bottom;
-    bottom2 = y2 + spr2->m_h;
+    left1 = x1 + start_x1;
+    left2 = x2 + start_x2;
+    right1 = x1 + end_x1;
+    right2 = x2 + end_x2;
+    top1 = y1 + start_y1;
+    top2 = y2 + start_y2;
+    bottom1 = y1 + end_y1;
+    bottom2 = y2 + end_y2;
 
     // Trivial rejections:
     if (bottom1 < top2) {

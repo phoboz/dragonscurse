@@ -11,7 +11,11 @@
              turn_width="400"
              hit_time="34">
     <monster hp="8"
-             perish_time="40">
+             perish_time="40"
+             weak_left="3"
+             weak_top="31"
+             weak_right="31"
+             weak_bottom="57">
         <actor move_speed="4"
                treshold="12"
                weight="2"

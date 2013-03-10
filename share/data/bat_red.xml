@@ -6,7 +6,11 @@
                 move_speed="4"
                 hit_time="12">
         <monster hp="2"
-                 perish_time="40">
+                 perish_time="40"
+                 weak_left="0"
+                 weak_top="0"
+                 weak_right="34"
+                 weak_bottom="34">
             <actor move_speed="2"
                    treshold="12"
                    right_still="3"

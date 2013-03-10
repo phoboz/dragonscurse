@@ -50,7 +50,11 @@ bool Bullet::hit_object(Object *object)
         const Sprite *spr = get_sprite();
         if (spr->check_collision(m_frame, m_x, m_y,
                                  object->get_sprite(), object->get_frame(),
-                                 object->get_x(), object->get_y())) {
+                                 object->get_x(), object->get_y(),
+                                 object->get_attribute("weak_left"),
+                                 object->get_attribute("weak_top"),
+                                 object->get_attribute("weak_right"),
+                                 object->get_attribute("weak_bottom"))) {
             result = true;
         }
     }

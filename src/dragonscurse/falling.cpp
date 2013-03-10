@@ -1,6 +1,13 @@
 #include <iostream>
 #include "falling.h"
 
+Falling::Falling(const char *fn, int x, int y, Direction dir)
+    : Monster(fn, x, y, dir)
+{
+    set_always_visible(true);
+    set_invinsible(true);
+}
+
 void Falling::fall()
 {
     set_fall();
@@ -55,8 +62,8 @@ void Falling::move(Map *map)
 
             if (m_hit == HitPerish) {
                 if (get_attribute("stay")) {
-                    map->set_tile_id(get_x() + get_image_width() / 2,
-                                     get_y() + get_image_height() / 2,
+                    map->set_tile_id(get_x() + get_image_width() / 4,
+                                     get_y() + get_image_height() / 4,
                                      0, 1);
                 }
             }

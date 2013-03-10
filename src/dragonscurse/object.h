@@ -37,6 +37,7 @@ public:
     void set_x(int value) { m_x = value; }
     void set_y(int value) { m_y = value; }
     void set_reference(int x, int y) { m_xref = x; m_yref = y; }
+    int  get_attribute(const char *name) const;
     void set_attribute(const char *name, int value) {
         m_attributes[std::string(name)] = value;
     }
@@ -57,12 +58,7 @@ public:
     }
 
 protected:
-    int  get_attribute(const char *name) {
-        return m_attributes[std::string(name)];
-    }
-    const char* get_string(const char *name) {
-        return m_strings[std::string(name)].c_str();
-    }
+    const char* get_string(const char *name) const;
 
     bool check_collision(int x, int y, Map *map, int id);
     bool check_below(Map *map, int id = 0);
