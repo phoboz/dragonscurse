@@ -27,6 +27,7 @@ public:
     ~Object();
     bool load(const char *fn);
     bool get_loaded() const { return m_loaded; }
+    virtual void initialize() { }
     Type get_type() const { return m_type; }
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }

@@ -108,7 +108,7 @@ bool Object::check_collision(int x, int y, Map *map, int id)
 
     int tile_id = map->get_tile_id(x, y, 0);
     if (!id) {
-        if (tile_id <= 14) {
+        if (tile_id >= 1 && tile_id <= 14) {
             result = true;
         }
     }

@@ -68,6 +68,7 @@ Object* ObjectFactory::create_object(const char *name,
                 object->set_attribute(name.c_str(), atoi(it->second.c_str()));
             }
         }
+        object->initialize();
     }
 
     return object;

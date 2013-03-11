@@ -2,10 +2,20 @@
 #include "falling.h"
 
 Falling::Falling(const char *fn, int x, int y, Direction dir)
-    : Monster(fn, x, y, dir)
+    : Monster(fn, x, y, dir),
+      m_initialized(false)
 {
-    set_always_visible(true);
     set_invinsible(true);
+}
+
+void Falling::initialize()
+{
+    if (!m_initialized) {
+        if (get_attribute("stay")) {
+            set_always_visible(true);
+        }
+        m_initialized = true;
+    }
 }
 
 void Falling::fall()

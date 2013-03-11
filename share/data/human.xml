@@ -6,7 +6,7 @@
             attack_medium_bottom="43"
             attack_low_top="46"
             attack_low_bottom="54"
-            attack_time="16">
+            attack_time="10">
         <player jump_speed="6"
                 jump_limit="18">
             <actor move_speed="3"
