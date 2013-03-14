@@ -27,7 +27,7 @@ bool Actor::set_move_dir(Direction dir)
             break;
 
         default:
-            return false;
+            break;
     }
     m_dir = set_dir;
     m_action = Move;
@@ -337,6 +337,24 @@ void Actor::reset_hit()
 {
     set_still();
     m_hit = HitNone;
+}
+
+void Actor::set_perish()
+{
+    set_invisible(true);
+    switch(m_dir) {
+        case Right:
+            m_frame = get_attribute("right_perish");
+            break;
+
+        case Left:
+            m_frame = get_attribute("left_perish");
+            break;
+
+        default:
+            break;
+    }
+    m_hit = HitPerish;
 }
 
 int Actor::get_front()

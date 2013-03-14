@@ -23,10 +23,12 @@
                right_move_start="4" right_move_end="5"
                right_attack="6"
                right_hit="7"
+               right_perish="7"
                left_still="0"
                left_move_start="0" left_move_end="1"
                left_attack="2"
-               left_hit="3">
+               left_hit="3"
+               left_perish="3">
             <object image="meka.png"
                     width="128" height="138" margin="1" spacing="1"
                     left="4" right="124" top="8" bottom="136" />

@@ -20,8 +20,7 @@ bool Monster::set_hit(Object *object)
         // TODO: Get attackers attack power
         m_curr_hp--;
         if (m_curr_hp <= 0) {
-            set_invisible(true);
-            m_hit = HitPerish;
+            set_perish();
         }
 
         result = true;

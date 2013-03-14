@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <cyclop>
     <walker hit_time="24">
-        <monster hp="1"
+        <monster hp="2"
                  perish_time="40"
                  weak_left="0"
                  weak_top="0"
@@ -18,7 +18,7 @@
                    left_move_start="0" left_move_end="1"
                    left_hit="4"
                    left_perish="5">
-                <object image="cyclop_red.png"
+                <object image="cyclop_green.png"
                         width="50" height="66" margin="1" spacing="1"
                         left="1" right="48" top="2" bottom="65" />
             </actor>

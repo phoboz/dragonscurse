@@ -18,6 +18,7 @@ public:
           m_invisible(false) { }
     virtual bool set_hit(Object *object);
     void reset_hit();
+    void set_perish();
     Hit get_hit() const { return m_hit; }
     bool get_invisible() const { return m_invisible; }
     int get_front();

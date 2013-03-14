@@ -19,10 +19,12 @@
                    right_move_start="4" right_move_end="5"
                    right_jump="6"
                    right_hit="3"
+                   right_perish="3"
                    left_still="0"
                    left_move_start="0" left_move_end="1"
                    left_jump="2"
-                   left_hit="3">
+                   left_hit="3"
+                   left_perish="3">
                 <object image="cobra_green.png"
                         width="50" height="50" margin="1" spacing="1"
                         left="8" right="42" top="2" bottom="49" />

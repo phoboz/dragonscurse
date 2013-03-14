@@ -21,13 +21,15 @@
                    right_attack="5"
                    right_attack_low="6"
                    right_hit="7"
+                   right_perish="7"
                    left_still="8"
                    left_move_start="8" left_move_end="10"
                    left_jump="11"
                    left_crouch="12"
                    left_attack="13"
                    left_attack_low="14"
-                   left_hit="7">
+                   left_hit="7"
+                   left_perish="7">
                 <object image="human.png"
                         width="91" height="63" margin="1" spacing="1"
                         left="24" right="66" top="7" bottom="62" />
