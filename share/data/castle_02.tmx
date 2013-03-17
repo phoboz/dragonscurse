@@ -5,6 +5,11 @@
   <property name="start_y" value="636"/>
  </properties>
  <tileset firstgid="1" name="castle" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <properties>
+   <property name="catapult" value="4"/>
+   <property name="solid_end" value="14"/>
+   <property name="solid_start" value="1"/>
+  </properties>
   <image source="castle.png" width="512" height="512"/>
  </tileset>
  <layer name="Corridor" width="131" height="24">

@@ -105,10 +105,13 @@ bool Object::load(const char *fn)
 bool Object::check_collision(int x, int y, Map *map, int id)
 {
     bool result = false;
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
 
     int tile_id = map->get_tile_id(x, y, 0);
     if (!id) {
-        if (tile_id >= 1 && tile_id <= 14) {
+        if (tile_id >= prop.GetNumericProperty("solid_start") &&
+            tile_id <= prop.GetNumericProperty("solid_end")) {
             result = true;
         }
     }
