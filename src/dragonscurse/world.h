@@ -17,6 +17,7 @@ public:
 
 private:
     Map *m_map;
+    int m_bg_color;
     std::list<Object*> m_objects;
 };
 

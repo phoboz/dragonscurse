@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="131" height="24" tilewidth="32" tileheight="32">
  <properties>
+  <property name="bg_color" value="13369344"/>
   <property name="start_x" value="16"/>
   <property name="start_y" value="636"/>
  </properties>

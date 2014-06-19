@@ -31,6 +31,7 @@ public:
     const Tmx::ObjectGroup* get_object_group(int index) const {
         return m_tmx->GetObjectGroup(index);
     }
+    int get_numeric_property(const std::string &name) const;
     void draw_layer(SDL_Surface *dest, int x, int y, int w, int h, int layer_id) const;
 
 private:

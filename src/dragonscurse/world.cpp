@@ -10,6 +10,9 @@
 World::World(Map *map, int object_group)
     : m_map(map)
 {
+    // Load attributes
+    m_bg_color = m_map->get_numeric_property("bg_color");
+
     if (object_group < map->get_num_object_groups()) {
         const Tmx::ObjectGroup *group = map->get_object_group(object_group);
         int n = group->GetNumObjects();
@@ -88,6 +91,15 @@ void World::move(Player *player,
 void World::draw(SDL_Surface *dest, Player *player,
                  int clip_x, int clip_y, int clip_w, int clip_h)
 {
+    // Draw background
+    SDL_Rect rect;
+    rect.x = clip_x;
+    rect.y = clip_y;
+    rect.w = clip_w;
+    rect.h = clip_h;
+
+    SDL_FillRect(dest, &rect, m_bg_color);
+
     int num_layers = m_map->get_num_layers();
 
     if (num_layers > 0) {
