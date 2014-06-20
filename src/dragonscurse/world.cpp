@@ -51,7 +51,9 @@ bool World::start()
     bool status;
 
     if (m_music) {
-        if(Mix_PlayMusic(m_music, 0) == -1) {
+
+        // Play music infinite looping
+        if(Mix_PlayMusic(m_music, -1) == -1) {
             status = false;
         }
         else {
