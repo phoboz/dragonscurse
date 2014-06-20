@@ -10,8 +10,19 @@
 World::World(Map *map, int object_group)
     : m_map(map)
 {
+    std::string music_fn;
+
     // Load attributes
     m_bg_color = m_map->get_numeric_property("bg_color");
+
+    // Load music
+    music_fn = m_map->get_literal_property("music");
+    if (music_fn.empty()) {
+        m_music = 0;
+    }
+    else {
+        m_music = Mix_LoadMUS(music_fn.c_str());
+    }
 
     if (object_group < map->get_num_object_groups()) {
         const Tmx::ObjectGroup *group = map->get_object_group(object_group);
@@ -33,6 +44,25 @@ World::World(Map *map, int object_group)
             }
         }
     }
+}
+
+bool World::start()
+{
+    bool status;
+
+    if (m_music) {
+        if(Mix_PlayMusic(m_music, 0) == -1) {
+            status = false;
+        }
+        else {
+            status = true;
+        }
+    }
+    else {
+        status = true;
+    }
+
+    return status;
 }
 
 void World::move(Player *player,

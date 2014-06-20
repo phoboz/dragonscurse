@@ -2,6 +2,7 @@
 #define _Map_H
 
 #include <vector>
+#include <string>
 #include "SDL.h"
 #include "Tmx/Tmx.h"
 #include "Tmx/TmxLayer.h"
@@ -32,6 +33,7 @@ public:
         return m_tmx->GetObjectGroup(index);
     }
     int get_numeric_property(const std::string &name) const;
+    std::string get_literal_property(const std::string &name) const;
     void draw_layer(SDL_Surface *dest, int x, int y, int w, int h, int layer_id) const;
 
 private:

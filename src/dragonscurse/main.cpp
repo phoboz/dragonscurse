@@ -3,6 +3,7 @@
 #include <time.h>
 
 #include "SDL.h"
+#include "SDL_mixer.h"
 
 #include "phoboz/sprite.h"
 #include "phoboz/ctrl.h"
@@ -40,6 +41,25 @@ bool init()
                 SDL_GetError());
         return false;
     }
+
+    // Initialize audio
+    int audio_rate = 44100;
+    Uint16 audio_format = AUDIO_S16; /* 16-bit stereo */
+    int audio_channels = 1;
+    int audio_buffers = 4096;
+
+    if(Mix_OpenAudio(audio_rate, audio_format, audio_channels,
+                     audio_buffers) < 0) {
+        fprintf(stderr, "Unable to open audio!\n");
+        return false;
+    }
+
+    if(Mix_Init(MIX_INIT_MOD) != MIX_INIT_MOD) {
+        fprintf(stderr, "Unable to initialize mixer\n");
+        return false;
+    }
+
+    Mix_Volume(-1, MIX_MAX_VOLUME);
 
     return true;
 }
@@ -97,6 +117,11 @@ int main(int argc, char *argv[])
                                                      Object::Right);
     if (!player->get_loaded()) {
         fprintf(stderr, "Fatal Error -- Unable to player %s\n", argv[2]);
+        return 1;
+    }
+
+    if (!world->start()) {
+        fprintf(stderr, "Fatal Error -- Unable to start map\n");
         return 1;
     }
 

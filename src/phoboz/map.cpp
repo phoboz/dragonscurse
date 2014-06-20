@@ -86,6 +86,13 @@ int Map::get_numeric_property(const std::string &name) const
     return prop.GetNumericProperty(name);
 }
 
+std::string Map::get_literal_property(const std::string &name) const
+{
+    const Tmx::PropertySet prop = m_tmx->GetProperties();
+
+    return prop.GetLiteralProperty(name);
+}
+
 void Map::draw_layer(SDL_Surface *dest, int x, int y, int w, int h, int layer_id) const
 {
     const Tmx::Layer *layer = m_tmx->GetLayer(layer_id);
