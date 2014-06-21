@@ -64,18 +64,71 @@ bool init()
     return true;
 }
 
-void move(void)
+bool load_area(const char *ar_name, bool load_music, bool new_game,
+               const char *pl_name, const char *pl_type,
+               int start_x = -1, int start_y = -1)
 {
-    world->move(player, 0, Statusbar::get_height(), screen_width, screen_height);
+    Tmx::Map *tmx = new Tmx::Map();
+    tmx->ParseFile(ar_name);
+    map = new Map(tmx);
+    if (!map->get_loaded()) {
+        fprintf(stderr, "Fatal Error -- Unable to load map %s\n", ar_name);
+        return false;
+    }
+
+    world = new World(map, load_music);
+
+    const Tmx::PropertySet prop = tmx->GetProperties();
+    if (start_x == -1) {
+        start_x = prop.GetNumericProperty("start_x");
+    }
+    if (start_y == -1) {
+        start_y = prop.GetNumericProperty("start_y");
+    }
+
+    if (new_game) {
+        player = (Player *) ObjectFactory::create_object(pl_name, pl_type,
+                                                         start_x, start_y,
+                                                         Object::Right);
+        if (!player->get_loaded()) {
+            fprintf(stderr, "Fatal Error -- Unable to player %s\n", pl_name);
+            return false;
+        }
+    }
+    else {
+        player->set_x(start_x);
+        player->set_y(start_y);
+    }
+
+    if (!world->start()) {
+        fprintf(stderr, "Fatal Error -- Unable to start map\n");
+        return 1;
+    }
 }
 
-void redraw(void)
+void move()
+{
+    Area *area;
+    area = world->move(player, 0, Statusbar::get_height(),
+                       screen_width, screen_height);
+    if (area) {
+        bool load_music = false;
+        if (area->get_type() != Area::TypeWarp) {
+            load_music = true;
+            world->end();
+        }
+        load_area(area->get_name().c_str(), load_music, false, 0, 0,
+                  area->get_sx(), area->get_sy());
+    }
+}
+
+void redraw()
 {
     Statusbar::draw(screen, screen_width, screen_height);
     world->draw(screen, player, 0, Statusbar::get_height(), screen_width, screen_height);
 }
 
-void flip(void)
+void flip()
 {
     SDL_Flip(screen);
 }
@@ -98,32 +151,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    Tmx::Map *tmx = new Tmx::Map();
-    tmx->ParseFile(argv[1]);
-    map = new Map(tmx);
-    if (!map->get_loaded()) {
-        fprintf(stderr, "Fatal Error -- Unable to load map %s\n", argv[1]);
-        return 1;
-    }
-
-    world = new World(map, 0);
-
-    const Tmx::PropertySet prop = tmx->GetProperties();
-    int start_x = prop.GetNumericProperty("start_x");
-    int start_y = prop.GetNumericProperty("start_y");
-
-    player = (Player *) ObjectFactory::create_object(argv[2], type,
-                                                     start_x, start_y,
-                                                     Object::Right);
-    if (!player->get_loaded()) {
-        fprintf(stderr, "Fatal Error -- Unable to player %s\n", argv[2]);
-        return 1;
-    }
-
-    if (!world->start()) {
-        fprintf(stderr, "Fatal Error -- Unable to start map\n");
-        return 1;
-    }
+    load_area(argv[1], true, true, argv[2], type);
 
     while (!done) {
 

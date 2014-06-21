@@ -7,7 +7,7 @@
 #include "statusbar.h"
 #include "world.h"
 
-World::World(Map *map, int object_group)
+World::World(Map *map, bool load_music)
     : m_map(map)
 {
     std::string music_fn;
@@ -16,31 +16,58 @@ World::World(Map *map, int object_group)
     m_bg_color = m_map->get_numeric_property("bg_color");
 
     // Load music
-    music_fn = m_map->get_literal_property("music");
-    if (music_fn.empty()) {
-        m_music = 0;
+    if (load_music) {
+        music_fn = m_map->get_literal_property("music");
+        if (music_fn.empty()) {
+            m_music = 0;
+        }
+        else {
+            m_music = Mix_LoadMUS(music_fn.c_str());
+        }
     }
     else {
-        m_music = Mix_LoadMUS(music_fn.c_str());
+        m_music = 0;
     }
 
-    if (object_group < map->get_num_object_groups()) {
+    int num_groups = map->get_num_object_groups();
+    for (int object_group = 0; object_group < num_groups; object_group++) {
         const Tmx::ObjectGroup *group = map->get_object_group(object_group);
-        int n = group->GetNumObjects();
+        std::string name = group->GetName();
+        int num_objects = group->GetNumObjects();
 
-        for (int i = 0; i < n; i++) {
-            const Tmx::Object *obj = group->GetObject(i);
-            const Tmx::PropertySet prop = obj->GetProperties();
-            std::string dirname = prop.GetLiteralProperty(std::string("direction"));
-            Object *object = ObjectFactory::create_object(obj->GetName().c_str(),
-                                                          obj->GetType().c_str(),
-                                                          obj->GetX(), obj->GetY(),
-                                                          obj->GetProperties());
-            if (object) {
-                m_objects.push_back(object);
+        if (name == std::string("Areas")) {
+            for (int i = 0; i < num_objects; i++) {
+                const Tmx::Object *obj = group->GetObject(i);
+                const Tmx::PropertySet prop = obj->GetProperties();
+                int sx = prop.GetNumericProperty(std::string("start_x"));
+                int sy = prop.GetNumericProperty(std::string("start_y"));
+                Area *area = new Area(obj->GetName().c_str(),
+                                      obj->GetType().c_str(),
+                                      obj->GetX(), obj->GetY(),
+                                      obj->GetWidth(), obj->GetHeight(),
+                                      sx, sy);
+
+                m_areas.push_back(area);
             }
-            else {
-                std::cerr << "Warning - Unable to load object: " << i << std::endl;
+        }
+        else if (name == std::string("Monsters")) {
+            for (int i = 0; i < num_objects; i++) {
+                const Tmx::Object *obj = group->GetObject(i);
+                const Tmx::PropertySet prop = obj->GetProperties();
+                std::string dirname =
+                    prop.GetLiteralProperty(std::string("direction"));
+                Object *object = ObjectFactory::create_object(obj->GetName().c_str(),
+                                                              obj->GetType().c_str(),
+                                                              obj->GetX(),
+                                                              obj->GetY(),
+                                                              prop);
+                if (object) {
+                    m_objects.push_back(object);
+                }
+                else {
+                    std::cerr << "Warning - Unable to load object: " << i <<
+                        std::endl;
+                }
             }
         }
     }
@@ -67,8 +94,15 @@ bool World::start()
     return status;
 }
 
-void World::move(Player *player,
-                 int clip_x, int clip_y, int clip_w, int clip_h)
+void World::end()
+{
+    if (m_music) {
+        Mix_HaltMusic();
+    }
+}
+
+Area* World::move(Player *player,
+                  int clip_x, int clip_y, int clip_w, int clip_h)
 {
     player->move(m_map);
     int window_width = clip_w - clip_x;
@@ -83,6 +117,16 @@ void World::move(Player *player,
     }
     m_map->set_x(map_x, 640);
     m_map->set_y(map_y, 480 - Statusbar::get_height());
+
+    // Handle area collisions
+    for (std::list<Area*>::iterator it = m_areas.begin();
+         it != m_areas.end();
+         ++it) {
+        Area *area = *it;
+        if (area->inside(player)) {
+            return area;
+        }
+    }
 
     std::vector<Object*> perished;
 
@@ -118,6 +162,8 @@ void World::move(Player *player,
     for (int i = 0; i < perished.size(); i++) {
         m_objects.remove(perished[i]);
     }
+
+    return 0;
 }
 
 void World::draw(SDL_Surface *dest, Player *player,
