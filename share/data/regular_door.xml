@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<area>
+    <object image="regular_door.png"
+          width="64" height="64" margin="1" spacing="1"
+          left="0" right="64" top="0" bottom="64" />
+</area>
+

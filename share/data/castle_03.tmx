@@ -20,10 +20,11 @@
   </data>
  </layer>
  <objectgroup name="Areas" width="131" height="24">
-  <object name="castle_04.tmx" type="Warp" x="3872" y="384" width="192" height="32">
+  <object name="castle_04.tmx" type="Area" x="3872" y="384" width="192" height="32">
    <properties>
     <property name="start_x" value="2872"/>
     <property name="start_y" value="352"/>
+    <property name="type" value="warp"/>
    </properties>
   </object>
  </objectgroup>

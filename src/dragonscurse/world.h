@@ -5,8 +5,8 @@
 #include "SDL.h"
 #include "SDL_mixer.h"
 #include "phoboz/map.h"
-#include "area.h"
 #include "object.h"
+#include "area.h"
 #include "player.h"
 
 class World {
@@ -23,7 +23,6 @@ private:
     Map *m_map;
     int m_bg_color;
     Mix_Music *m_music;
-    std::list<Area*> m_areas;
     std::list<Object*> m_objects;
 };
 

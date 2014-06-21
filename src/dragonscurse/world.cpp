@@ -35,39 +35,25 @@ World::World(Map *map, bool load_music)
         std::string name = group->GetName();
         int num_objects = group->GetNumObjects();
 
-        if (name == std::string("Areas")) {
-            for (int i = 0; i < num_objects; i++) {
-                const Tmx::Object *obj = group->GetObject(i);
-                const Tmx::PropertySet prop = obj->GetProperties();
-                int sx = prop.GetNumericProperty(std::string("start_x"));
-                int sy = prop.GetNumericProperty(std::string("start_y"));
-                Area *area = new Area(obj->GetName().c_str(),
-                                      obj->GetType().c_str(),
-                                      obj->GetX(), obj->GetY(),
-                                      obj->GetWidth(), obj->GetHeight(),
-                                      sx, sy);
-
-                m_areas.push_back(area);
+        for (int i = 0; i < num_objects; i++) {
+            const Tmx::Object *obj = group->GetObject(i);
+            const Tmx::PropertySet prop = obj->GetProperties();
+            std::string dirname =
+                prop.GetLiteralProperty(std::string("direction"));
+            Object *object = ObjectFactory::create_object(
+                                 obj->GetName().c_str(),
+                                 obj->GetType().c_str(),
+                                 obj->GetX(),
+                                 obj->GetY(),
+                                 obj->GetWidth(),
+                                 obj->GetHeight(),
+                                 prop);
+            if (object) {
+                m_objects.push_back(object);
             }
-        }
-        else if (name == std::string("Monsters")) {
-            for (int i = 0; i < num_objects; i++) {
-                const Tmx::Object *obj = group->GetObject(i);
-                const Tmx::PropertySet prop = obj->GetProperties();
-                std::string dirname =
-                    prop.GetLiteralProperty(std::string("direction"));
-                Object *object = ObjectFactory::create_object(obj->GetName().c_str(),
-                                                              obj->GetType().c_str(),
-                                                              obj->GetX(),
-                                                              obj->GetY(),
-                                                              prop);
-                if (object) {
-                    m_objects.push_back(object);
-                }
-                else {
-                    std::cerr << "Warning - Unable to load object: " << i <<
-                        std::endl;
-                }
+            else {
+                std::cerr << "Warning - Unable to load object: " << i
+                          << std::endl;
             }
         }
     }
@@ -104,6 +90,8 @@ void World::end()
 Area* World::move(Player *player,
                   int clip_x, int clip_y, int clip_w, int clip_h)
 {
+    Area *result = 0;
+
     player->move(m_map);
     int window_width = clip_w - clip_x;
     int window_height = clip_h - clip_y;
@@ -118,29 +106,30 @@ Area* World::move(Player *player,
     m_map->set_x(map_x, 640);
     m_map->set_y(map_y, 480 - Statusbar::get_height());
 
-    // Handle area collisions
-    for (std::list<Area*>::iterator it = m_areas.begin();
-         it != m_areas.end();
-         ++it) {
-        Area *area = *it;
-        if (area->inside(player)) {
-            return area;
-        }
-    }
-
     std::vector<Object*> perished;
 
     for (std::list<Object*>::iterator it = m_objects.begin();
          it != m_objects.end();
          ++it) {
         Object *object = *it;
+
         if (object->get_visible(m_map, clip_x, clip_y, clip_w, clip_h)) {
 
             // Move object
             object->move(m_map);
 
+            Object::Type object_type = object->get_type();
+
+            // Handle area objects
+            if (object_type == Object::TypeArea) {
+                Area *area = (Area *) object;
+                if (area->inside(player)) {
+                    result = area;
+                }
+            }
+
             // Handle actor object
-            if (object->get_type() == Object::TypeEnemy) {
+            else if (object_type == Object::TypeEnemy) {
                 Actor *actor = (Actor *) object;
                 actor->set_reference(player->get_front(), player->get_y());
                 if (player->check_collision(actor)) {
@@ -163,7 +152,7 @@ Area* World::move(Player *player,
         m_objects.remove(perished[i]);
     }
 
-    return 0;
+    return result;
 }
 
 void World::draw(SDL_Surface *dest, Player *player,
@@ -184,6 +173,7 @@ void World::draw(SDL_Surface *dest, Player *player,
         m_map->draw_layer(dest, clip_x, clip_y, clip_w, clip_h, 0);
     }
 
+    // Draw objects
     for (std::list<Object*>::iterator it = m_objects.begin();
          it != m_objects.end();
          ++it) {

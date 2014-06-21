@@ -9,16 +9,19 @@ public:
     static Object* create_object(const char *name,
                                  const char *type,
                                  int x, int y,
+                                 int w, int h,
                                  Object::Direction dir,
                                  const Tmx::PropertySet &prop);
     static Object* create_object(const char *name,
                                  const char *type,
                                  int x, int y,
+                                 int w, int h,
                                  const Tmx::PropertySet &prop);
     static Object* create_object(const char *name,
                                  const char *type,
                                  int x, int y,
-                                 Object::Direction dir);
+                                 int w = 0, int h = 0,
+                                 Object::Direction dir = Object::Right);
 };
 
 #endif

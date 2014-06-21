@@ -9,15 +9,15 @@
 
 class Object {
 public:
-    enum Type { TypePlayer, TypeEnemy, TypeBullet };
+    enum Type { TypePlayer, TypeEnemy, TypeBullet, TypeArea };
     enum Direction { Keep, Right, Left };
     enum VerticalDirection { VerticalNone, VerticalUp, VerticalDown };
     enum HorizontalDirection { HorizontalNone,
                                HorizontalForward,
                                HorizontalBackward };
 
-    Object(Type type)
-        : m_x(0), m_y(0), m_dx(0), m_dy(0), m_frame(0),
+    Object(Type type, int x = 0, int y = 0)
+        : m_x(x), m_y(y), m_dx(0), m_dy(0), m_frame(0),
           m_dir(Right), m_loaded(false), m_type(type), m_always_visible(false),
           m_xref(0), m_yref(0) { }
     Object(Type type, int x, int y, Direction dir)
@@ -42,7 +42,8 @@ public:
     void set_attribute(const char *name, int value) {
         m_attributes[std::string(name)] = value;
     }
-    bool get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_h) const;
+    virtual bool get_visible(Map *map, int clip_x, int clip_y,
+                             int clip_w, int clip_h) const;
     virtual bool check_collision(Object *object) {
         return m_spr->check_collision(m_frame, m_x, m_y,
                                       object->m_spr, object->m_frame,
