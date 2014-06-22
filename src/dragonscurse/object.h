@@ -89,7 +89,6 @@ private:
     Type m_type;
     bool m_always_visible;
     Sprite *m_spr;
-    std::string m_obj_type;
 };
 
 #endif
