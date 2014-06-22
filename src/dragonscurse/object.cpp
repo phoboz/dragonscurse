@@ -32,6 +32,9 @@ bool Object::load_object_attributes(TiXmlElement *elmt)
         else if (strcmp(attr->Name(), "spacing") == 0) {
             spacing = atoi(attr->Value());
         }
+        else if (strcmp(attr->Name(), "object_type") == 0) {
+            m_obj_type = attr->Value();
+        }
         else {
             m_attributes[std::string(attr->Name())] = atoi(attr->Value());
         }

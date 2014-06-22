@@ -1,37 +1,40 @@
 <?xml version="1.0" ?>
-<dragon attack_right="47"
-        attack_left="12"
-        attack_medium="10"
-        attack_low="30"
-        attack_time="20">
-    <player jump_speed="4"
-            jump_limit="20">
-        <actor move_speed="2"
-               treshold="5"
-               weight="10"
-               hit_time="12"
-               invisible_time="42"
-               right_still="0"
-               right_move_start="0" right_move_end="2"
-               right_jump="3"
-               right_crouch="4"
-               right_attack="5"
-               right_attack_low="6"
-               right_hit="7"
-               right_perish="7"
-               left_still="8"
-               left_move_start="8" left_move_end="10"
-               left_jump="11"
-               left_crouch="12"
-               left_attack="13"
-               left_attack_low="14"
-               left_hit="7"
-               left_perish="7">
-            <object image="salamander.png"
-                    width="68" height="65" margin="1" spacing="1"
-                    left="12" right="56" top="0" bottom="64" />
-        </actor>
-    </player>
-    <string bullet="firebreath.xml" />
-</dragon>
+<salamander>
+    <dragon attack_right="47"
+            attack_left="12"
+            attack_medium="10"
+            attack_low="30"
+            attack_time="20">
+        <player jump_speed="4"
+                jump_limit="20">
+            <actor move_speed="2"
+                   treshold="5"
+                   weight="10"
+                   hit_time="12"
+                   invisible_time="42"
+                   right_still="0"
+                   right_move_start="0" right_move_end="2"
+                   right_jump="3"
+                   right_crouch="4"
+                   right_attack="5"
+                   right_attack_low="6"
+                   right_hit="7"
+                   right_perish="7"
+                   left_still="8"
+                   left_move_start="8" left_move_end="10"
+                   left_jump="11"
+                   left_crouch="12"
+                   left_attack="13"
+                   left_attack_low="14"
+                   left_hit="7"
+                   left_perish="7">
+                <object image="salamander.png"
+                        object_type="dragon"
+                        width="68" height="65" margin="1" spacing="1"
+                        left="12" right="56" top="0" bottom="64" />
+            </actor>
+        </player>
+        <string bullet="firebreath.xml" />
+    </dragon>
+</salamander>
 

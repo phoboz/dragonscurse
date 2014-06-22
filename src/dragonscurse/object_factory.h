@@ -22,6 +22,10 @@ public:
                                  int x, int y,
                                  int w = 0, int h = 0,
                                  Object::Direction dir = Object::Right);
+
+private:
+    static bool match_node(TiXmlElement *elmt);
+    static bool search_nodes(TiXmlNode *node);
 };
 
 #endif

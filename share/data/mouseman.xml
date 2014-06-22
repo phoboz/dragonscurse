@@ -31,6 +31,7 @@
                    left_hit="4"
                    left_perish="4">
                 <object image="mouseman.png"
+                        object_type="knight"
                         width="60" height="60" margin="1" spacing="1"
                         left="16" right="46" top="28" bottom="59" />
             </actor>

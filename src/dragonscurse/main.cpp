@@ -64,8 +64,9 @@ bool init()
     return true;
 }
 
-bool load_area(const char *ar_name, bool load_music, bool new_game,
-               const char *pl_name, const char *pl_type,
+bool load_area(const char *ar_name,
+               bool load_music, bool new_game,
+               const char *pl_name,
                int start_x = -1, int start_y = -1)
 {
     Tmx::Map *tmx = new Tmx::Map();
@@ -87,7 +88,7 @@ bool load_area(const char *ar_name, bool load_music, bool new_game,
     }
 
     if (new_game) {
-        player = (Player *) ObjectFactory::create_object(pl_name, pl_type,
+        player = (Player *) ObjectFactory::create_object(pl_name, "Player",
                                                          start_x, start_y,
                                                          Object::Right);
         if (!player->get_loaded()) {
@@ -117,7 +118,7 @@ void move()
             load_music = true;
             world->end();
         }
-        load_area(area->get_name().c_str(), load_music, false, 0, 0,
+        load_area(area->get_name().c_str(), load_music, false, 0,
                   area->get_sx(), area->get_sy());
     }
 }
@@ -125,7 +126,8 @@ void move()
 void redraw()
 {
     Statusbar::draw(screen, screen_width, screen_height);
-    world->draw(screen, player, 0, Statusbar::get_height(), screen_width, screen_height);
+    world->draw(screen, player, 0, Statusbar::get_height(),
+                screen_width, screen_height);
 }
 
 void flip()
@@ -140,18 +142,11 @@ int main(int argc, char *argv[])
     int done = 0;
     char type[32];
 
-    if (argc > 3) {
-        strcpy(type, argv[3]);
-    }
-    else {
-        strcpy(type, "Player");
-    }
-
     if (!init()) {
         return 1;
     }
 
-    load_area(argv[1], true, true, argv[2], type);
+    load_area(argv[1], true, true, argv[2]);
 
     while (!done) {
 
