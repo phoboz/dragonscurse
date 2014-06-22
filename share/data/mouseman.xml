@@ -7,7 +7,8 @@
             attack_low_top="46"
             attack_low_bottom="52"
             attack_time="12">
-        <player jump_speed="6"
+        <player player_type="knight"
+                jump_speed="6"
                 jump_limit="14">
             <actor move_speed="2"
                    treshold="5"
@@ -31,7 +32,6 @@
                    left_hit="4"
                    left_perish="4">
                 <object image="mouseman.png"
-                        object_type="knight"
                         width="60" height="60" margin="1" spacing="1"
                         left="16" right="46" top="28" bottom="59" />
             </actor>

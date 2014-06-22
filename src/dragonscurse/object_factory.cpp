@@ -24,7 +24,7 @@ bool ObjectFactory::match_node(TiXmlElement *elmt)
 
     TiXmlAttribute *attr = elmt->FirstAttribute();
     while (attr) {
-        if (strcmp(attr->Name(), "object_type") == 0) {
+        if (strcmp(attr->Name(), "player_type") == 0) {
             strcpy(priv_object_type, attr->Value());
             result = true;
         }
@@ -40,7 +40,7 @@ bool ObjectFactory::search_nodes(TiXmlNode *node)
     int result = true;
 
     if (node->Type() == TiXmlNode::TINYXML_ELEMENT) {
-        if (strcmp(node->Value(), "object") == 0) {
+        if (strcmp(node->Value(), "player") == 0) {
             result = match_node(node->ToElement());
         }
     }

@@ -5,7 +5,8 @@
             attack_medium="10"
             attack_low="30"
             attack_time="20">
-        <player jump_speed="4"
+        <player player_type="dragon"
+                jump_speed="4"
                 jump_limit="20">
             <actor move_speed="2"
                    treshold="5"
@@ -29,7 +30,6 @@
                    left_hit="7"
                    left_perish="7">
                 <object image="salamander.png"
-                        object_type="dragon"
                         width="68" height="65" margin="1" spacing="1"
                         left="12" right="56" top="0" bottom="64" />
             </actor>

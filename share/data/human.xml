@@ -7,7 +7,8 @@
             attack_low_top="46"
             attack_low_bottom="54"
             attack_time="10">
-        <player jump_speed="6"
+        <player player_type="human"
+                jump_speed="6"
                 jump_limit="18">
             <actor move_speed="3"
                    treshold="6"
@@ -31,7 +32,6 @@
                    left_hit="7"
                    left_perish="7">
                 <object image="human.png"
-                        object_type="human"
                         width="91" height="63" margin="1" spacing="1"
                         left="24" right="66" top="7" bottom="62" />
             </actor>
