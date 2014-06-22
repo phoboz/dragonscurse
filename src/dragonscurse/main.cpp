@@ -141,12 +141,19 @@ int main(int argc, char *argv[])
     FpsTimer timer;
     int done = 0;
     char type[32];
+    int start_x = -1;
+    int start_y = -1;
+
+    if (argc > 4) {
+        start_x = atoi(argv[3]);
+        start_y = atoi(argv[4]);
+    }
 
     if (!init()) {
         return 1;
     }
 
-    load_area(argv[1], true, true, argv[2]);
+    load_area(argv[1], true, true, argv[2], start_x, start_y);
 
     while (!done) {
 

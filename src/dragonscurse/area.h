@@ -2,6 +2,7 @@
 #define _Area_H
 
 #include <string>
+#include "phoboz/timer.h"
 #include "object.h"
 
 class Actor;
@@ -9,10 +10,11 @@ class Actor;
 class Area : public Object {
 public:
     enum Type { TypeWarp, TypeTravel, TypeUser };
+    enum State { StateIdle, StateOpening, StateOpen };
 
     Area(const char *name, const char *type, int x, int y, int w, int h);
 
-    bool inside(Actor *actor) const;
+    bool inside(Actor *actor);
 
     std::string get_name() const { return m_name; }
     Type get_type() const { return m_type; }
@@ -25,7 +27,7 @@ public:
 
     virtual bool get_visible(Map *map, int clip_x, int clip_y,
                              int clip_w, int clip_h) const { return true; }
-    virtual void move(Map *map) { }
+    virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
@@ -33,6 +35,9 @@ private:
     std::string m_name;
     Type m_type;
     int m_w, m_h;
+    State m_state;
+    Timer m_open_timer;
+    Timer m_anim_timer;
 };
 
 #endif
