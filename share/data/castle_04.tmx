@@ -27,6 +27,14 @@
     <property name="type" value="travel"/>
    </properties>
   </object>
+  <object name="unknown.tmx" type="Area" x="2272" y="352" width="64" height="64">
+   <properties>
+    <property name="lock_id" value="1"/>
+    <property name="start_x" value="0"/>
+    <property name="start_y" value="0"/>
+    <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="96" height="14">
   <data encoding="base64">

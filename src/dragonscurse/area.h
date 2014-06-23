@@ -7,6 +7,7 @@
 #include "world_db.h"
 
 class Actor;
+class World;
 
 class Area : public Object {
 public:
@@ -15,8 +16,7 @@ public:
 
     Area(const char *name, const char *type,
          int x, int y, int w, int h, int lock_id);
-
-    void set_lock(WorldDB::LockType lock);
+    virtual void world_initialize(World *world);
 
     bool inside(Actor *actor);
 
@@ -33,7 +33,9 @@ public:
 
     virtual bool get_visible(Map *map, int clip_x, int clip_y,
                              int clip_w, int clip_h) const { return true; }
+
     virtual void move(Map *map);
+    void move_unlock(World *world);
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
@@ -42,7 +44,7 @@ private:
     Type m_type;
     int m_w, m_h;
     int m_lock_id;
-    WorldDB::LockType m_lock;
+    WorldDB::LockType m_lock_type;
     State m_state;
     Timer m_open_timer;
     Timer m_anim_timer;

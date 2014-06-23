@@ -13,6 +13,10 @@
 class World {
 public:
     World(Map *map, WorldDB *db, bool load_music = true);
+
+    WorldDB* get_db() const { return m_db; }
+    const char* get_filename() const { return m_map->get_filename().c_str(); }
+
     bool start();
     void end();
     Area* move(Player *player,

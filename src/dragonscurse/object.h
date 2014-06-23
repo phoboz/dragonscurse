@@ -7,6 +7,8 @@
 #include "phoboz/sprite.h"
 #include "phoboz/map.h"
 
+class World;
+
 class Object {
 public:
     enum Type { TypePlayer, TypeEnemy, TypeBullet, TypeArea };
@@ -28,6 +30,10 @@ public:
     bool load(const char *fn);
     bool get_loaded() const { return m_loaded; }
     virtual void initialize() { }
+
+    // Only called when objects are initialize from world
+    virtual void world_initialize(World *world) { }
+
     Type get_type() const { return m_type; }
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }
@@ -35,9 +41,11 @@ public:
     const Sprite* get_sprite() const { return m_spr; }
     int get_image_width() const { return m_spr->get_image_width(); }
     int get_image_height() const { return m_spr->get_image_height(); }
+
     void set_x(int value) { m_x = value; }
     void set_y(int value) { m_y = value; }
     void set_reference(int x, int y) { m_xref = x; m_yref = y; }
+
     int  get_attribute(const char *name) const;
     void set_attribute(const char *name, int value) {
         m_attributes[std::string(name)] = value;
@@ -49,6 +57,7 @@ public:
                                       object->m_spr, object->m_frame,
                                       object->m_x, object->m_y);
     }
+
     virtual void move(Map *map) = 0;
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h) {

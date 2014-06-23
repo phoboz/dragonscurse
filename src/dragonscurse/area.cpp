@@ -1,6 +1,7 @@
 #include <string.h>
 #include "phoboz/ctrl.h"
 #include "actor.h"
+#include "world.h"
 #include "area.h"
 
 Area::Area(const char *name, const char *type,
@@ -25,20 +26,26 @@ Area::Area(const char *name, const char *type,
     m_frame = get_attribute("open_start");
 }
 
-void Area::set_lock(WorldDB::LockType lock)
+void Area::world_initialize(World *world)
 {
-    if (m_lock_id) {
-        m_state = StateLocked;
-        switch(m_lock) {
-            case WorldDB::LockTypeGreen:
-                m_frame = get_attribute("green_lock");
-                break;
+    WorldDB *db = world->get_db();
 
-            case WorldDB::LockTypeRed:
-                m_frame = get_attribute("red_lock");
-                break;
+    if (m_lock_id) {
+        WorldDB::LockType lockType = db->get_lock_type(m_lock_id,
+                                                       world->get_filename());
+        if (lockType != WorldDB::LockTypeNone) {
+            m_state = StateLocked;
+            switch(lockType) {
+                case WorldDB::LockTypeGreen:
+                    m_frame = get_attribute("green_lock");
+                    break;
+
+                case WorldDB::LockTypeRed:
+                    m_frame = get_attribute("red_lock");
+                    break;
+            }
+            m_lock_type = lockType;
         }
-        m_lock = lock;
     }
 }
 
@@ -98,6 +105,31 @@ void Area::move(Map *map)
                     m_frame = get_attribute("open_start");
                     m_state = StateOpen;
                 }
+            }
+        }
+    }
+}
+
+void Area::move_unlock(World *world)
+{
+    if (m_type == TypeUser) {
+        if (m_state == StateLocked) {
+            int input = get_input();
+            if (input & PRESS_UP) {
+                if (m_open_timer.expired(get_attribute("open_time"))) {
+                    m_open_timer.reset();
+
+                    // Unlock in database
+                    WorldDB *db = world->get_db();
+                    db->unlock(m_lock_id, world->get_filename());
+
+                    // Mark as unlocked
+                    m_state = StateIdle;
+                    m_frame = get_attribute("open_start");
+                }
+            }
+            else {
+                m_open_timer.reset();
             }
         }
     }

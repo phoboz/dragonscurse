@@ -49,6 +49,7 @@ World::World(Map *map, WorldDB *db, bool load_music)
                                  obj->GetHeight(),
                                  prop);
             if (object) {
+                object->world_initialize(this);
                 m_objects.push_back(object);
             }
             else {
@@ -114,25 +115,20 @@ Area* World::move(Player *player,
         Object *object = *it;
 
         if (object->get_visible(m_map, clip_x, clip_y, clip_w, clip_h)) {
-
-            // Move object
-            object->move(m_map);
-
             Object::Type object_type = object->get_type();
 
             // Handle area objects
             if (object_type == Object::TypeArea) {
                 Area *area = (Area *) object;
 
-                // Lock area if in world lock database or check if inside area
-                if (true/* TODO: !area->is_locked()*/) {
-                    WorldDB::LockType lockType =
-                        m_db->get_lock_type(area->get_lock_id(),
-                                            m_map->get_filename().c_str());
-                    if (lockType != WorldDB::LockTypeNone) {
-                        area->set_lock(lockType);
-                    }
-                    else if (area->inside(player)) {
+                if (area->is_locked()) {
+                    // TODO: Check that the player actually has the key
+                    area->move_unlock(this);
+                }
+                else {
+                    area->move(m_map);
+
+                    if (area->inside(player)) {
                         result = area;
                     }
                 }
@@ -141,6 +137,8 @@ Area* World::move(Player *player,
             // Handle actor object
             else if (object_type == Object::TypeEnemy) {
                 Actor *actor = (Actor *) object;
+
+                actor->move(m_map);
                 actor->set_reference(player->get_front(), player->get_y());
                 if (player->check_collision(actor)) {
                     if (!actor->get_invisible()) {

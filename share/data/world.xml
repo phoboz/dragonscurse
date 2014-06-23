@@ -2,7 +2,7 @@
 <world>
     <locks>
         <lock id="1" type="green" location="castle_01.tmx" />
-        <lock id="1" type="red" location="castle_04.tmx" />
+        <lock id="1" type="green" location="castle_04.tmx" />
     </locks>
 </world>
 
