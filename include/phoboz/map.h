@@ -20,6 +20,7 @@ public:
     void set_tile_id(int x, int y, int layer_id, int id);
     void set_x(int value, int window_width);
     void set_y(int value, int window_height);
+    const std::string& get_filename() { return m_tmx->GetFilename(); }
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }
     int get_num_layers() const { return m_tmx->GetNumLayers(); }

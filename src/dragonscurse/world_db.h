@@ -1,5 +1,5 @@
-#ifndef _LockDB_H
-#define _LockDB_H
+#ifndef _WorldDB_H
+#define _WorldDB_H
 
 #include <list>
 #include <string>
@@ -7,9 +7,11 @@
 
 struct Lock;
 
-class LockDB {
+class WorldDB {
 public:
-    LockDB(const char *name);
+    enum KeyType { KeyTypeGreen, KeyTypeRed };
+
+    WorldDB(const char *name);
 
 private:
     bool load_attributes(Lock *lock, TiXmlElement *elmt);

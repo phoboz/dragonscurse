@@ -1,15 +1,13 @@
 #include <string.h>
-#include "lock_db.h"
+#include "world_db.h"
 
 struct Lock {
-    enum type { TypeGreen, TypeRed };
-
     int m_id;
-    type m_type;
+    WorldDB::KeyType m_type;
     std::string m_location;
 };
 
-bool LockDB::load_attributes(Lock *lock, TiXmlElement *elmt)
+bool WorldDB::load_attributes(Lock *lock, TiXmlElement *elmt)
 {
     bool result = true;
 
@@ -20,10 +18,10 @@ bool LockDB::load_attributes(Lock *lock, TiXmlElement *elmt)
         }
         else if (strcmp(attr->Name(), "type") == 0) {
             if (strcmp(attr->Value(), "green") == 0) {
-                lock->m_type = Lock::TypeGreen;
+                lock->m_type = KeyTypeGreen;
             }
             else if (strcmp(attr->Value(), "red") == 0) {
-                lock->m_type = Lock::TypeRed;
+                lock->m_type = KeyTypeRed;
             }
             else {
                 result = false;
@@ -44,7 +42,7 @@ bool LockDB::load_attributes(Lock *lock, TiXmlElement *elmt)
     return result;
 }
 
-bool LockDB::load_nodes(TiXmlNode *node)
+bool WorldDB::load_nodes(TiXmlNode *node)
 {
     int result = true;
 
@@ -67,7 +65,7 @@ bool LockDB::load_nodes(TiXmlNode *node)
     return result;
 }
 
-LockDB::LockDB(const char *name)
+WorldDB::WorldDB(const char *name)
 {
     TiXmlDocument doc(name);
     if (doc.LoadFile()) {

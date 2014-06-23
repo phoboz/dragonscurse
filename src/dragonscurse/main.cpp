@@ -11,8 +11,8 @@
 #include "phoboz/fps_timer.h"
 #include "object.h"
 #include "object_factory.h"
+#include "world_db.h"
 #include "world.h"
-#include "lock_db.h"
 #include "statusbar.h"
 
 static SDL_Surface *screen;
@@ -154,8 +154,8 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    LockDB *locks = new LockDB("locks.xml");
-    if (!locks) {
+    WorldDB *db = new WorldDB("world.xml");
+    if (!db) {
         fprintf(stderr, "Fatal Error -- Unable to load locks database\n");
         return 1;
     }
