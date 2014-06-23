@@ -2,7 +2,6 @@
 #define _WorldDB_H
 
 #include <list>
-#include <string>
 #include "tinyxml.h"
 
 struct Lock;
