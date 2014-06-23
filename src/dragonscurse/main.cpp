@@ -12,6 +12,7 @@
 #include "object.h"
 #include "object_factory.h"
 #include "world.h"
+#include "lock_db.h"
 #include "statusbar.h"
 
 static SDL_Surface *screen;
@@ -150,6 +151,12 @@ int main(int argc, char *argv[])
     }
 
     if (!init()) {
+        return 1;
+    }
+
+    LockDB *locks = new LockDB("locks.xml");
+    if (!locks) {
+        fprintf(stderr, "Fatal Error -- Unable to load locks database\n");
         return 1;
     }
 

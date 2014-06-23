@@ -1,6 +1,7 @@
 #ifndef _ObjectFactory_H
 #define _ObjectFactory_H
 
+#include "tinyxml.h"
 #include "Tmx/TmxPropertySet.h"
 #include "object.h"
 
