@@ -6,12 +6,13 @@
 #include "SDL_mixer.h"
 #include "phoboz/map.h"
 #include "object.h"
-#include "area.h"
 #include "player.h"
+#include "area.h"
+#include "world_db.h"
 
 class World {
 public:
-    World(Map *map, bool load_music = true);
+    World(Map *map, WorldDB *db, bool load_music = true);
     bool start();
     void end();
     Area* move(Player *player,
@@ -24,6 +25,7 @@ private:
     int m_bg_color;
     Mix_Music *m_music;
     std::list<Object*> m_objects;
+    WorldDB *m_db;
 };
 
 #endif

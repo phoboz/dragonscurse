@@ -20,6 +20,7 @@ static int screen_width = 640;
 static int screen_height = 480;
 static Map *map;
 static Player *player;
+WorldDB *db;
 static World *world;
 
 bool init()
@@ -78,7 +79,7 @@ bool load_area(const char *ar_name,
         return false;
     }
 
-    world = new World(map, load_music);
+    world = new World(map, db, load_music);
 
     const Tmx::PropertySet prop = tmx->GetProperties();
     if (start_x == -1) {
@@ -154,7 +155,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    WorldDB *db = new WorldDB("world.xml");
+    db = new WorldDB("world.xml");
     if (!db) {
         fprintf(stderr, "Fatal Error -- Unable to load locks database\n");
         return 1;

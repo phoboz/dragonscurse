@@ -7,8 +7,8 @@
 #include "statusbar.h"
 #include "world.h"
 
-World::World(Map *map, bool load_music)
-    : m_map(map)
+World::World(Map *map, WorldDB *db, bool load_music)
+    : m_map(map), m_db(db)
 {
     std::string music_fn;
 
@@ -123,8 +123,18 @@ Area* World::move(Player *player,
             // Handle area objects
             if (object_type == Object::TypeArea) {
                 Area *area = (Area *) object;
-                if (area->inside(player)) {
-                    result = area;
+
+                // Lock area if in world lock database or check if inside area
+                if (true/* TODO: !area->is_locked()*/) {
+                    WorldDB::LockType lockType =
+                        m_db->get_lock_type(area->get_lock_id(),
+                                            m_map->get_filename().c_str());
+                    if (lockType != WorldDB::LockTypeNone) {
+                        area->set_lock(lockType);
+                    }
+                    else if (area->inside(player)) {
+                        result = area;
+                    }
                 }
             }
 

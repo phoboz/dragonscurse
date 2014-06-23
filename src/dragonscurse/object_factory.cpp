@@ -104,7 +104,8 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "Area") == 0) {
         std::string tn = prop.GetLiteralProperty(std::string("type"));
-        object = new Area(name, tn.c_str(), x, y, w, h);
+        int lock_id = prop.GetNumericProperty(std::string("lock_id"));
+        object = new Area(name, tn.c_str(), x, y, w, h, lock_id);
     }
 
     if (object) {

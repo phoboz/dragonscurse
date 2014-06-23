@@ -4,15 +4,19 @@
 #include <string>
 #include "phoboz/timer.h"
 #include "object.h"
+#include "world_db.h"
 
 class Actor;
 
 class Area : public Object {
 public:
     enum Type { TypeWarp, TypeTravel, TypeUser };
-    enum State { StateIdle, StateOpening, StateOpen };
+    enum State { StateLocked, StateIdle, StateOpening, StateOpen };
 
-    Area(const char *name, const char *type, int x, int y, int w, int h);
+    Area(const char *name, const char *type,
+         int x, int y, int w, int h, int lock_id);
+
+    void set_lock(WorldDB::LockType lock);
 
     bool inside(Actor *actor);
 
@@ -24,6 +28,8 @@ public:
     int get_y2() const { return m_y + m_h; }
     int get_sx() const { return get_attribute("start_x"); }
     int get_sy() const { return get_attribute("start_y"); }
+    int get_lock_id() const { return m_lock_id; }
+    bool is_locked() const;
 
     virtual bool get_visible(Map *map, int clip_x, int clip_y,
                              int clip_w, int clip_h) const { return true; }
@@ -35,6 +41,8 @@ private:
     std::string m_name;
     Type m_type;
     int m_w, m_h;
+    int m_lock_id;
+    WorldDB::LockType m_lock;
     State m_state;
     Timer m_open_timer;
     Timer m_anim_timer;
