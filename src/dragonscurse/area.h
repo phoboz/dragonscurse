@@ -14,8 +14,8 @@ public:
     enum Type { TypeWarp, TypeTravel, TypeUser };
     enum State { StateLocked, StateIdle, StateOpening, StateOpen };
 
-    Area(const char *name, const char *type,
-         int x, int y, int w, int h, int lock_id);
+    Area(const char *name, const char *type, int x, int y, int w, int h);
+
     virtual void world_initialize(World *world);
 
     bool inside(Actor *actor);

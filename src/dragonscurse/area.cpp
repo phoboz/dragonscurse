@@ -4,12 +4,10 @@
 #include "world.h"
 #include "area.h"
 
-Area::Area(const char *name, const char *type,
-           int x, int y, int w, int h, int lock_id)
+Area::Area(const char *name, const char *type, int x, int y, int w, int h)
     : Object(Object::TypeArea, x, y),
       m_name(name),
       m_h(h), m_w(w),
-      m_lock_id(lock_id),
       m_state(StateIdle)
 {
     if (strcmp(type, "warp") == 0) {
@@ -28,10 +26,11 @@ Area::Area(const char *name, const char *type,
 
 void Area::world_initialize(World *world)
 {
-    WorldDB *db = world->get_db();
+    int lock_id = get_attribute("lock_id");
 
-    if (m_lock_id) {
-        WorldDB::LockType lockType = db->get_lock_type(m_lock_id,
+    if (lock_id) {
+        WorldDB *db = world->get_db();
+        WorldDB::LockType lockType = db->get_lock_type(lock_id,
                                                        world->get_filename());
         if (lockType != WorldDB::LockTypeNone) {
             m_state = StateLocked;
@@ -44,6 +43,7 @@ void Area::world_initialize(World *world)
                     m_frame = get_attribute("red_lock");
                     break;
             }
+            m_lock_id = lock_id;
             m_lock_type = lockType;
         }
     }

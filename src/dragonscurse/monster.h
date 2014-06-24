@@ -4,11 +4,17 @@
 #include "phoboz/timer.h"
 #include "actor.h"
 
+class World;
+
 class Monster : public Actor {
 public:
     Monster(const char *fn, int x, int y, Direction dir);
+
+    virtual void world_initialize(World *world);
+
     void set_invinsible(bool value) { m_invinsible = value; }
     virtual bool set_hit(Object *object);
+
     virtual void move(Map *map);
 
 private:

@@ -3,17 +3,50 @@
 #include <string.h>
 #include "world_db.h"
 
-struct Lock {
+struct WorldItem {
+    int m_id;
+    std::string m_name;
+    std::string m_location;
+};
+
+struct WorldLock {
     int m_id;
     WorldDB::LockType m_type;
     std::string m_location;
 };
 
 struct WorldLocation {
-    std::list<Lock*> m_locks;
+    std::list<WorldItem*> m_items;
+    std::list<WorldLock*> m_locks;
 };
 
-bool WorldDB::load_attributes(Lock *lock, TiXmlElement *elmt)
+bool WorldDB::load_item_attributes(WorldItem *item, TiXmlElement *elmt)
+{
+    bool result = true;
+
+    TiXmlAttribute *attr = elmt->FirstAttribute();
+    while (attr) {
+        if (strcmp(attr->Name(), "id") == 0) {
+            item->m_id = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "name") == 0) {
+            item->m_name = std::string(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "location") == 0) {
+            item->m_location = std::string(attr->Value());
+        }
+        else {
+            result = false;
+            break;
+        }
+
+        attr = attr->Next();
+    }
+
+    return result;
+}
+
+bool WorldDB::load_lock_attributes(WorldLock *lock, TiXmlElement *elmt)
 {
     bool result = true;
 
@@ -64,26 +97,47 @@ WorldLocation* WorldDB::find_location(const char *name) const
     return location;
 }
 
+WorldLocation* WorldDB::get_location(const char *name)
+{
+    // Check if location exists, otherwise allocate new and insert
+    WorldLocation *location = find_location(name);
+    if (!location) {
+        location = new WorldLocation;
+        m_locations[std::string(name)] = location;
+    }
+
+    return location;
+}
+
 bool WorldDB::load_nodes(TiXmlNode *node)
 {
     int result = true;
 
     if (node->Type() == TiXmlNode::TINYXML_ELEMENT) {
-        if (strcmp(node->Value(), "lock") == 0) {
-            Lock *lock = new Lock;
-            result = load_attributes(lock, node->ToElement());
+        if (strcmp(node->Value(), "item") == 0) {
+            WorldItem *item = new WorldItem;
+            result = load_item_attributes(item, node->ToElement());
             if (result) {
 
                 // Check if location exists, otherwise allocate new and insert
                 WorldLocation *location =
-                    find_location(lock->m_location.c_str());
-                if (!location) {
-                    location = new WorldLocation;
-                    m_locations[lock->m_location] = location;
+                    get_location(item->m_location.c_str());
+                if (location) {
+                    location->m_items.push_back(item);
                 }
+            }
+        }
+        else if (strcmp(node->Value(), "lock") == 0) {
+            WorldLock *lock = new WorldLock;
+            result = load_lock_attributes(lock, node->ToElement());
+            if (result) {
 
-                // Add lock to location
-                location->m_locks.push_back(lock);
+                // Check if location exists, otherwise allocate new and insert
+                WorldLocation *location =
+                    get_location(lock->m_location.c_str());
+                if (location) {
+                    location->m_locks.push_back(lock);
+                }
             }
         }
     }
@@ -107,16 +161,35 @@ WorldDB::WorldDB(const char *name)
     }
 }
 
+const char* WorldDB::get_item_name(int id, const char *location_name) const
+{
+    WorldLocation *location = find_location(location_name);
+
+    if (location) {
+        for (std::list<WorldItem*>::iterator it = location->m_items.begin();
+             it != location->m_items.end();
+             ++it) {
+            WorldItem *item = *it;
+            if (item->m_id == id) {
+                return item->m_name.c_str();
+                break;
+            }
+        }
+    }
+
+    return 0;
+}
+
 WorldDB::LockType WorldDB::get_lock_type(int id, const char *location_name) const
 {
     LockType result = LockTypeNone;
     WorldLocation *location = find_location(location_name);
 
     if (location) {
-        for (std::list<Lock*>::iterator it = location->m_locks.begin();
+        for (std::list<WorldLock*>::iterator it = location->m_locks.begin();
              it != location->m_locks.end();
              ++it) {
-            Lock *lock = *it;
+            WorldLock *lock = *it;
             if (lock->m_id == id) {
                 result = lock->m_type;
                 break;
@@ -133,11 +206,11 @@ bool WorldDB::unlock(int id, const char *location_name) const
     WorldLocation *location = find_location(location_name);
 
     if (location) {
-        std::list<Lock*>::iterator it = location->m_locks.begin();
+        std::list<WorldLock*>::iterator it = location->m_locks.begin();
         for (;
              it != location->m_locks.end();
              ++it) {
-            Lock *lock = *it;
+            WorldLock *lock = *it;
             if (lock->m_id == id) {
                 result = true;
                 break;

@@ -1,3 +1,4 @@
+#include "world.h"
 #include "monster.h"
 
 Monster::Monster(const char *fn, int x, int y, Direction dir)
@@ -7,6 +8,17 @@ Monster::Monster(const char *fn, int x, int y, Direction dir)
     load(fn);
     m_curr_hp = get_attribute("hp");
     set_still();
+}
+
+void Monster::world_initialize(World *world)
+{
+    int item_id = get_attribute("item_id");
+
+    if (item_id) {
+        WorldDB *db = world->get_db();
+        // TODO: Add item to monster somehow
+        // filename: db->get_item_name(item_id, world->get_filename());
+    }
 }
 
 bool Monster::set_hit(Object *object)
