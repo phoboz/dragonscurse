@@ -30,7 +30,9 @@ void Area::world_initialize(World *world)
 
     if (lock_id) {
         WorldDB *db = world->get_db();
-        const char *type = db->get_lock_type(lock_id, world->get_filename());
+        int key;
+        const char *type = db->get_lock_type(&key,
+                                             lock_id, world->get_filename());
         if (type) {
             m_state = StateLocked;
             if (strcmp(type, "small_key") == 0) { 
@@ -39,7 +41,7 @@ void Area::world_initialize(World *world)
             else if (strcmp(type, "large_key") == 0) {
                 m_frame = get_attribute("large_key");
             }
-            m_lock_id = lock_id;
+            m_world_key = key;
         }
     }
 }
@@ -116,7 +118,7 @@ void Area::move_unlock(World *world)
 
                     // Unlock in database
                     WorldDB *db = world->get_db();
-                    db->unlock(m_lock_id, world->get_filename());
+                    db->remove(m_world_key);
 
                     // Mark as unlocked
                     m_state = StateIdle;

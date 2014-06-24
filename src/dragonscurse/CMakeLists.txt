@@ -3,6 +3,7 @@ ADD_EXECUTABLE(dragonscurse
     knight.cpp human.cpp dragon.cpp
     monster.cpp walker.cpp guardian.cpp lock_flyer.cpp dancer.cpp falling.cpp
     meka_dragon.cpp
+    item.cpp
     object_factory.cpp statusbar.cpp main.cpp
     )
 TARGET_LINK_LIBRARIES(dragonscurse

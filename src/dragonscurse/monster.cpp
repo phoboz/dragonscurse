@@ -1,9 +1,11 @@
 #include "world.h"
+#include "item.h"
 #include "monster.h"
 
 Monster::Monster(const char *fn, int x, int y, Direction dir)
     : Actor(Object::TypeEnemy, x, y, dir),
-      m_invinsible(false)
+      m_invinsible(false),
+      m_item(0)
 {
     load(fn);
     m_curr_hp = get_attribute("hp");
@@ -16,8 +18,19 @@ void Monster::world_initialize(World *world)
 
     if (item_id) {
         WorldDB *db = world->get_db();
-        // TODO: Add item to monster somehow
-        // filename: db->get_item_name(item_id, world->get_filename());
+        int key;
+        const char *fn = db->get_item_name(&key,
+                                           item_id, world->get_filename());
+        if (fn) {
+            m_item = new Item(fn, key);
+        }
+    }
+}
+
+void Monster::world_deinitialize(World *world)
+{
+    if (m_item) {
+        m_item->aquire(world);
     }
 }
 

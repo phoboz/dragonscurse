@@ -97,6 +97,7 @@ bool Object::load(const char *fn)
     TiXmlDocument doc(fn);
     if (doc.LoadFile()) {
         load_nodes(&doc);
+        m_fn = std::string(fn);
     }
 
     return m_loaded;

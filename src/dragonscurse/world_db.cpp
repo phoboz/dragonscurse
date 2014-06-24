@@ -3,21 +3,33 @@
 #include <string.h>
 #include "world_db.h"
 
-struct WorldItem {
+static int db_key = 1;
+
+struct WorldNode {
+    enum Type { TypeItem, TypeLock };
+
+    WorldNode(Type type) : m_key(db_key++), m_type(type) { }
+
+    int m_key;
+    Type m_type;
+};
+
+struct WorldItem : public WorldNode {
+    WorldItem() : WorldNode(TypeItem) { }
     int m_id;
     std::string m_name;
     std::string m_location;
 };
 
-struct WorldLock {
+struct WorldLock : public WorldNode {
+    WorldLock() : WorldNode(TypeLock) { }
     int m_id;
     std::string m_type;
     std::string m_location;
 };
 
 struct WorldLocation {
-    std::list<WorldItem*> m_items;
-    std::list<WorldLock*> m_locks;
+    std::list<WorldNode*> m_nodes;
 };
 
 bool WorldDB::load_item_attributes(WorldItem *item, TiXmlElement *elmt)
@@ -114,7 +126,7 @@ bool WorldDB::load_nodes(TiXmlNode *node)
                 WorldLocation *location =
                     get_location(item->m_location.c_str());
                 if (location) {
-                    location->m_items.push_back(item);
+                    location->m_nodes.push_back(item);
                 }
             }
         }
@@ -127,7 +139,7 @@ bool WorldDB::load_nodes(TiXmlNode *node)
                 WorldLocation *location =
                     get_location(lock->m_location.c_str());
                 if (location) {
-                    location->m_locks.push_back(lock);
+                    location->m_nodes.push_back(lock);
                 }
             }
         }
@@ -152,18 +164,22 @@ WorldDB::WorldDB(const char *name)
     }
 }
 
-const char* WorldDB::get_item_name(int id, const char *location_name) const
+const char* WorldDB::get_item_name(int *key,
+                                   int id, const char *location_name) const
 {
     WorldLocation *location = find_location(location_name);
 
     if (location) {
-        for (std::list<WorldItem*>::iterator it = location->m_items.begin();
-             it != location->m_items.end();
+        for (std::list<WorldNode*>::iterator it = location->m_nodes.begin();
+             it != location->m_nodes.end();
              ++it) {
-            WorldItem *item = *it;
-            if (item->m_id == id) {
-                return item->m_name.c_str();
-                break;
+            if ((*it)->m_type == WorldNode::TypeItem) {
+                WorldItem *item = (WorldItem *) *it;
+                if (item->m_id == id) {
+                    *key = item->m_key;
+                    return item->m_name.c_str();
+                    break;
+                }
             }
         }
     }
@@ -171,43 +187,22 @@ const char* WorldDB::get_item_name(int id, const char *location_name) const
     return 0;
 }
 
-bool WorldDB::take_item(int id, const char *location_name)
-{
-    bool result = false;
-    WorldLocation *location = find_location(location_name);
-
-    if (location) {
-        std::list<WorldItem*>::iterator it = location->m_items.begin();
-        for (;
-             it != location->m_items.end();
-             ++it) {
-            WorldItem *item = *it;
-            if (item->m_id == id) {
-                result = true;
-                break;
-            }
-        }
-
-        if (result) {
-            location->m_items.erase(it);
-        }
-    }
-
-    return result;
-}
-
-const char* WorldDB::get_lock_type(int id, const char *location_name) const
+const char* WorldDB::get_lock_type(int *key,
+                                   int id, const char *location_name) const
 {
     WorldLocation *location = find_location(location_name);
 
     if (location) {
-        for (std::list<WorldLock*>::iterator it = location->m_locks.begin();
-             it != location->m_locks.end();
+        for (std::list<WorldNode*>::iterator it = location->m_nodes.begin();
+             it != location->m_nodes.end();
              ++it) {
-            WorldLock *lock = *it;
-            if (lock->m_id == id) {
-                return lock->m_type.c_str();
-                break;
+            if ((*it)->m_type == WorldNode::TypeLock) {
+                WorldLock *lock = (WorldLock *) *it;
+                if (lock->m_id == id) {
+                    *key = lock->m_key;
+                    return lock->m_type.c_str();
+                    break;
+                }
             }
         }
     }
@@ -215,28 +210,33 @@ const char* WorldDB::get_lock_type(int id, const char *location_name) const
     return 0;
 }
 
-bool WorldDB::unlock(int id, const char *location_name)
+bool WorldDB::remove(int key)
 {
-    bool result = false;
-    WorldLocation *location = find_location(location_name);
+    bool found = false;
 
-    if (location) {
-        std::list<WorldLock*>::iterator it = location->m_locks.begin();
+    for (std::map<std::string, WorldLocation*>::iterator it =
+             m_locations.begin();
+         it!=m_locations.end();
+         ++it) {
+        WorldLocation *location = it->second;
+
+        std::list<WorldNode*>::iterator jt = location->m_nodes.begin();
         for (;
-             it != location->m_locks.end();
-             ++it) {
-            WorldLock *lock = *it;
-            if (lock->m_id == id) {
-                result = true;
+             jt != location->m_nodes.end();
+             ++jt) {
+            if ((*jt)->m_key == key) {
+                found = true;
                 break;
             }
         }
 
-        if (result) {
-            location->m_locks.erase(it);
+        if (found) {
+            location->m_nodes.erase(jt);
+            goto end;
         }
     }
 
-    return result;
+end:
+    return found;
 }
 

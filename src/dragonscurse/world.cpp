@@ -158,6 +158,8 @@ Area* World::move(Player *player,
     // Remove all perished objects
     for (int i = 0; i < perished.size(); i++) {
         m_objects.remove(perished[i]);
+        perished[i]->world_deinitialize(this);
+        delete perished[i];
     }
 
     return result;

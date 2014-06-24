@@ -1,9 +1,10 @@
 <?xml version="1.0" ?>
 <item>
-    <key lock_type="red">
+    <key>
         <object image="large_key.png"
                 width="32" height="32" margin="1" spacing="1"
                 left="0" right="32" top="0" bottom="32" />
+        <string lock_type="large_key" />
     </key>
 </item>
 

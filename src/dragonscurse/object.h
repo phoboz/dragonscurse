@@ -11,7 +11,7 @@ class World;
 
 class Object {
 public:
-    enum Type { TypePlayer, TypeEnemy, TypeBullet, TypeArea };
+    enum Type { TypePlayer, TypeEnemy, TypeBullet, TypeItem, TypeArea };
     enum Direction { Keep, Right, Left };
     enum VerticalDirection { VerticalNone, VerticalUp, VerticalDown };
     enum HorizontalDirection { HorizontalNone,
@@ -31,8 +31,9 @@ public:
     bool get_loaded() const { return m_loaded; }
     virtual void initialize() { }
 
-    // Only called when objects are initialize from world
+    // Only called when objects are initialized/deinitialized from world
     virtual void world_initialize(World *world) { }
+    virtual void world_deinitialize(World *world) { }
 
     Type get_type() const { return m_type; }
     int get_x() const { return m_x; }
@@ -46,6 +47,7 @@ public:
     void set_y(int value) { m_y = value; }
     void set_reference(int x, int y) { m_xref = x; m_yref = y; }
 
+    const char* get_filename() { return m_fn.c_str(); }
     int  get_attribute(const char *name) const;
     void set_attribute(const char *name, int value) {
         m_attributes[std::string(name)] = value;
@@ -94,6 +96,7 @@ private:
     void load_attributes(TiXmlElement *elmt);
     bool load_nodes(TiXmlNode *node);
 
+    std::string m_fn;
     bool m_loaded;
     Type m_type;
     bool m_always_visible;

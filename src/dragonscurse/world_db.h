@@ -5,8 +5,8 @@
 #include <map>
 #include "tinyxml.h"
 
-struct WorldLock;
 struct WorldItem;
+struct WorldLock;
 
 struct WorldLocation;
 
@@ -16,12 +16,12 @@ public:
 
     WorldDB(const char *name);
 
-    const char* get_item_name(int id, const char *location_name) const;
-    bool take_item(int id, const char *location_name);
+    const char* get_item_name(int *key,
+                              int id, const char *location_name) const;
+    const char* get_lock_type(int *key,
+                              int id, const char *location_name) const;
 
-    const char* get_lock_type(int id, const char *location_name) const;
-    bool unlock(int id, const char *location_name);
-
+    bool remove(int key);
 private:
     bool load_item_attributes(WorldItem *item, TiXmlElement *elmt);
     bool load_lock_attributes(WorldLock *lock, TiXmlElement *elmt);
