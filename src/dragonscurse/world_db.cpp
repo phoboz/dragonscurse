@@ -11,7 +11,7 @@ struct WorldItem {
 
 struct WorldLock {
     int m_id;
-    WorldDB::LockType m_type;
+    std::string m_type;
     std::string m_location;
 };
 
@@ -56,16 +56,7 @@ bool WorldDB::load_lock_attributes(WorldLock *lock, TiXmlElement *elmt)
             lock->m_id = atoi(attr->Value());
         }
         else if (strcmp(attr->Name(), "type") == 0) {
-            if (strcmp(attr->Value(), "green") == 0) {
-                lock->m_type = LockTypeGreen;
-            }
-            else if (strcmp(attr->Value(), "red") == 0) {
-                lock->m_type = LockTypeRed;
-            }
-            else {
-                result = false;
-                break;
-            }
+            lock->m_type = std::string(attr->Value());
         }
         else if (strcmp(attr->Name(), "location") == 0) {
             lock->m_location = std::string(attr->Value());
@@ -180,9 +171,33 @@ const char* WorldDB::get_item_name(int id, const char *location_name) const
     return 0;
 }
 
-WorldDB::LockType WorldDB::get_lock_type(int id, const char *location_name) const
+bool WorldDB::take_item(int id, const char *location_name)
 {
-    LockType result = LockTypeNone;
+    bool result = false;
+    WorldLocation *location = find_location(location_name);
+
+    if (location) {
+        std::list<WorldItem*>::iterator it = location->m_items.begin();
+        for (;
+             it != location->m_items.end();
+             ++it) {
+            WorldItem *item = *it;
+            if (item->m_id == id) {
+                result = true;
+                break;
+            }
+        }
+
+        if (result) {
+            location->m_items.erase(it);
+        }
+    }
+
+    return result;
+}
+
+const char* WorldDB::get_lock_type(int id, const char *location_name) const
+{
     WorldLocation *location = find_location(location_name);
 
     if (location) {
@@ -191,16 +206,16 @@ WorldDB::LockType WorldDB::get_lock_type(int id, const char *location_name) cons
              ++it) {
             WorldLock *lock = *it;
             if (lock->m_id == id) {
-                result = lock->m_type;
+                return lock->m_type.c_str();
                 break;
             }
         }
     }
 
-    return result;
+    return 0;
 }
 
-bool WorldDB::unlock(int id, const char *location_name) const
+bool WorldDB::unlock(int id, const char *location_name)
 {
     bool result = false;
     WorldLocation *location = find_location(location_name);

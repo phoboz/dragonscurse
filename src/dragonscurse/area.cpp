@@ -30,21 +30,16 @@ void Area::world_initialize(World *world)
 
     if (lock_id) {
         WorldDB *db = world->get_db();
-        WorldDB::LockType lockType = db->get_lock_type(lock_id,
-                                                       world->get_filename());
-        if (lockType != WorldDB::LockTypeNone) {
+        const char *type = db->get_lock_type(lock_id, world->get_filename());
+        if (type) {
             m_state = StateLocked;
-            switch(lockType) {
-                case WorldDB::LockTypeGreen:
-                    m_frame = get_attribute("green_lock");
-                    break;
-
-                case WorldDB::LockTypeRed:
-                    m_frame = get_attribute("red_lock");
-                    break;
+            if (strcmp(type, "small_key") == 0) { 
+                m_frame = get_attribute("small_key");
+            }
+            else if (strcmp(type, "large_key") == 0) {
+                m_frame = get_attribute("large_key");
             }
             m_lock_id = lock_id;
-            m_lock_type = lockType;
         }
     }
 }

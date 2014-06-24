@@ -17,9 +17,10 @@ public:
     WorldDB(const char *name);
 
     const char* get_item_name(int id, const char *location_name) const;
+    bool take_item(int id, const char *location_name);
 
-    LockType get_lock_type(int id, const char *location_name) const;
-    bool unlock(int id, const char *location_name) const;
+    const char* get_lock_type(int id, const char *location_name) const;
+    bool unlock(int id, const char *location_name);
 
 private:
     bool load_item_attributes(WorldItem *item, TiXmlElement *elmt);
