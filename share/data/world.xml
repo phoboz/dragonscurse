@@ -4,9 +4,9 @@
         <item id="1" name="large_key.xml" location="castle_02.tmx" />
     </items>
     <locks>
-        <lock id="1" type="large_key" location="castle_01.tmx" />
-        <lock id="1" type="large_key" location="castle_02.tmx" />
-        <lock id="1" type="small_key" location="castle_04.tmx" />
+        <lock id="1" type="large_key.xml" location="castle_01.tmx" />
+        <lock id="1" type="large_key.xml" location="castle_02.tmx" />
+        <lock id="1" type="small_key.xml" location="castle_04.tmx" />
     </locks>
 </world>
 

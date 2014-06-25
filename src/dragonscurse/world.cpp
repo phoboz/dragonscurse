@@ -124,9 +124,14 @@ Area* World::move(Player *player,
                 Area *area = (Area *) object;
 
                 if (area->is_locked()) {
-                    // TODO: Check that the player actually has the key
-                    // LOck type: area->get_lock_type()
-                    area->move_unlock(this);
+
+                    // Check if the player has the key
+                    Item *item = player->check_item(area->get_lock_type());
+                    if (item) {
+                        if (area->move_unlock(this)) {
+                            player->remove_item(item);
+                        }
+                    }
                 }
                 else {
                     area->move(m_map);
@@ -162,7 +167,7 @@ Area* World::move(Player *player,
 
                 // Check if player picked up item
                 if (player->check_collision(item)) {
-                    // TODO: Store item in player intentory
+                    player->aquire_item(item);
                     item->aquire(this);
                     perished.push_back(*it);
                 }

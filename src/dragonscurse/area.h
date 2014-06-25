@@ -35,7 +35,7 @@ public:
                              int clip_w, int clip_h) const { return true; }
 
     virtual void move(Map *map);
-    void move_unlock(World *world);
+    bool move_unlock(World *world);
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 

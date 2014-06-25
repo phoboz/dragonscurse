@@ -35,10 +35,10 @@ void Area::world_initialize(World *world)
                                              lock_id, world->get_filename());
         if (type) {
             m_state = StateLocked;
-            if (strcmp(type, "small_key") == 0) { 
+            if (strcmp(type, "small_key.xml") == 0) { 
                 m_frame = get_attribute("small_key");
             }
-            else if (strcmp(type, "large_key") == 0) {
+            else if (strcmp(type, "large_key.xml") == 0) {
                 m_frame = get_attribute("large_key");
             }
             m_world_key = key;
@@ -108,8 +108,10 @@ void Area::move(Map *map)
     }
 }
 
-void Area::move_unlock(World *world)
+bool Area::move_unlock(World *world)
 {
+    bool result = false;
+
     if (m_type == TypeUser) {
         if (m_state == StateLocked) {
             int input = get_input();
@@ -124,6 +126,7 @@ void Area::move_unlock(World *world)
                     // Mark as unlocked
                     m_state = StateIdle;
                     m_frame = get_attribute("open_start");
+                    result = true;
                 }
             }
             else {
@@ -131,6 +134,8 @@ void Area::move_unlock(World *world)
             }
         }
     }
+
+    return result;
 }
 
 void Area::draw(SDL_Surface *dest, Map *map,

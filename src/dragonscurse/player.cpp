@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include "phoboz/ctrl.h"
+#include "item.h"
 #include "player.h"
 
 bool Player::set_hit(Object *object)
@@ -217,5 +218,23 @@ void Player::move(Map *map)
                 break;
         }
     }
+}
+
+Item* Player::check_item(const char *name)
+{
+    Item *result = 0;
+
+    for (std::list<Item*>::iterator it = m_items.begin();
+         it != m_items.end();
+         ++it) {
+
+        Item *item = *it;
+        if (strcmp(name, item->get_filename()) == 0) {
+            result = item;
+            break;
+        }
+    }
+
+    return result;
 }
 
