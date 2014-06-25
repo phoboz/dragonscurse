@@ -29,6 +29,7 @@ public:
     int get_sx() const { return get_attribute("start_x"); }
     int get_sy() const { return get_attribute("start_y"); }
     bool is_locked() const;
+    const char* get_lock_type() const { return m_lock_type.c_str(); }
 
     virtual bool get_visible(Map *map, int clip_x, int clip_y,
                              int clip_w, int clip_h) const { return true; }
@@ -42,7 +43,7 @@ private:
     std::string m_name;
     Type m_type;
     int m_w, m_h;
-    WorldDB::LockType m_lock_type;
+    std::string m_lock_type;
     int m_world_key;
     State m_state;
     Timer m_open_timer;

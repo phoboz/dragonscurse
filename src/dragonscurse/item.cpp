@@ -7,14 +7,23 @@ Item::Item(const char *fn, int world_key)
     load(fn);
 }
 
+Item::Item(const char *fn, int x, int y)
+    : Object(TypeItem, x, y)
+{
+    load(fn);
+}
+
 void Item::aquire(World *world)
 {
     WorldDB *db = world->get_db();
 
-    // TODO: Store item in player inventory
-    std::cout << "Aquired item: " << get_string("lock_type") << std::endl;
+    std::cout << "Aquired item: " << get_filename() << std::endl;
 
     // Remove item from world database
     db->remove(m_world_key);
+}
+
+void Item::move(Map *map)
+{
 }
 

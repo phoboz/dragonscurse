@@ -7,7 +7,6 @@
 #include "phoboz/map.h"
 #include "object.h"
 #include "player.h"
-#include "item.h"
 #include "area.h"
 #include "world_db.h"
 

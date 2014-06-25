@@ -5,6 +5,7 @@
 #include "object_factory.h"
 #include "player.h"
 #include "monster.h"
+#include "item.h"
 #include "statusbar.h"
 #include "world.h"
 
@@ -124,6 +125,7 @@ Area* World::move(Player *player,
 
                 if (area->is_locked()) {
                     // TODO: Check that the player actually has the key
+                    // LOck type: area->get_lock_type()
                     area->move_unlock(this);
                 }
                 else {
@@ -153,6 +155,18 @@ Area* World::move(Player *player,
                     perished.push_back(*it);
                 }
             }
+
+            // Handle item objects
+            else if (object_type == Object::TypeItem) {
+                Item *item = (Item *) object;
+
+                // Check if player picked up item
+                if (player->check_collision(item)) {
+                    // TODO: Store item in player intentory
+                    item->aquire(this);
+                    perished.push_back(*it);
+                }
+            }
         }
     }
 
@@ -164,7 +178,9 @@ Area* World::move(Player *player,
             Monster *monster = (Monster *) perished[i];
             Item *item = monster->get_item();
             if (item) {
-                item->aquire(this);
+                item->set_x(monster->get_x());
+                item->set_y(monster->get_y());
+                m_objects.push_back(item);
             }
         }
         m_objects.remove(perished[i]);

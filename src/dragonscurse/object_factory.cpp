@@ -14,6 +14,7 @@
 #include "dancer.h"
 #include "falling.h"
 #include "meka_dragon.h"
+#include "item.h"
 #include "area.h"
 
 static char priv_object_type[80];
@@ -101,6 +102,9 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "MekaDragon") == 0) {
         object = new MekaDragon(name, x, y, dir);
+    }
+    else if (strcmp(type, "Item") == 0) {
+        object = new Item(name, x, y);
     }
     else if (strcmp(type, "Area") == 0) {
         std::string tn = prop.GetLiteralProperty(std::string("type"));

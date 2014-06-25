@@ -42,6 +42,7 @@ void Area::world_initialize(World *world)
                 m_frame = get_attribute("large_key");
             }
             m_world_key = key;
+            m_lock_type = std::string(type);
         }
     }
 }
