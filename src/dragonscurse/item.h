@@ -14,6 +14,9 @@ public:
     void move(Map *map);
 
 private:
+    void check_ground(Map *map);
+
+    int m_delta_y;
     int m_world_key;
 };
 

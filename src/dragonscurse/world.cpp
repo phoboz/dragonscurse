@@ -165,6 +165,8 @@ Area* World::move(Player *player,
             else if (object_type == Object::TypeItem) {
                 Item *item = (Item *) object;
 
+                item->move(m_map);
+
                 // Check if player picked up item
                 if (player->check_collision(item)) {
                     player->aquire_item(item);

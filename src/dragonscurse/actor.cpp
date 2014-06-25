@@ -231,7 +231,7 @@ void Actor::check_ground(Map *map)
             set_fall();
         }
         else if (m_action == Fall) {
-            // TODO: Add a function to check base on dy as argument
+            // TODO: Add a function to check based on dy as argument
             m_dy = get_attribute("weight");
             if (check_below(map, prop.GetNumericProperty("catapult"))) {
                 set_catapult_dir();
