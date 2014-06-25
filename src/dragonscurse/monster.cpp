@@ -3,7 +3,7 @@
 #include "monster.h"
 
 Monster::Monster(const char *fn, int x, int y, Direction dir)
-    : Actor(Object::TypeEnemy, x, y, dir),
+    : Actor(Object::TypeMonster, x, y, dir),
       m_invinsible(false),
       m_item(0)
 {
@@ -24,13 +24,6 @@ void Monster::world_initialize(World *world)
         if (fn) {
             m_item = new Item(fn, key);
         }
-    }
-}
-
-void Monster::world_deinitialize(World *world)
-{
-    if (m_item) {
-        m_item->aquire(world);
     }
 }
 

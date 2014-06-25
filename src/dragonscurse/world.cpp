@@ -4,6 +4,7 @@
 #include "Tmx/Tmx.h"
 #include "object_factory.h"
 #include "player.h"
+#include "monster.h"
 #include "statusbar.h"
 #include "world.h"
 
@@ -134,8 +135,8 @@ Area* World::move(Player *player,
                 }
             }
 
-            // Handle actor object
-            else if (object_type == Object::TypeEnemy) {
+            // Handle monster object
+            else if (object_type == Object::TypeMonster) {
                 Actor *actor = (Actor *) object;
 
                 actor->move(m_map);
@@ -157,8 +158,16 @@ Area* World::move(Player *player,
 
     // Remove all perished objects
     for (int i = 0; i < perished.size(); i++) {
+
+        // If monster drop object
+        if (perished[i]->get_type() == Object::TypeMonster) {
+            Monster *monster = (Monster *) perished[i];
+            Item *item = monster->get_item();
+            if (item) {
+                item->aquire(this);
+            }
+        }
         m_objects.remove(perished[i]);
-        perished[i]->world_deinitialize(this);
         delete perished[i];
     }
 

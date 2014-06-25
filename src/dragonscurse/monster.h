@@ -12,10 +12,11 @@ public:
     Monster(const char *fn, int x, int y, Direction dir);
 
     virtual void world_initialize(World *world);
-    virtual void world_deinitialize(World *world);
 
     void set_invinsible(bool value) { m_invinsible = value; }
     virtual bool set_hit(Object *object);
+
+    Item* get_item() { return m_item; }
 
     virtual void move(Map *map);
 

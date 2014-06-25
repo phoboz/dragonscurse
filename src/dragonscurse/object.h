@@ -11,7 +11,7 @@ class World;
 
 class Object {
 public:
-    enum Type { TypePlayer, TypeEnemy, TypeBullet, TypeItem, TypeArea };
+    enum Type { TypePlayer, TypeMonster, TypeBullet, TypeItem, TypeArea };
     enum Direction { Keep, Right, Left };
     enum VerticalDirection { VerticalNone, VerticalUp, VerticalDown };
     enum HorizontalDirection { HorizontalNone,
@@ -31,9 +31,8 @@ public:
     bool get_loaded() const { return m_loaded; }
     virtual void initialize() { }
 
-    // Only called when objects are initialized/deinitialized from world
+    // Only called when objects are initialized from world
     virtual void world_initialize(World *world) { }
-    virtual void world_deinitialize(World *world) { }
 
     Type get_type() const { return m_type; }
     int get_x() const { return m_x; }
