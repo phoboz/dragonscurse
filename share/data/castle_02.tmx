@@ -4,7 +4,7 @@
   <property name="bg_color" value="13369344"/>
   <property name="music" value="castle_02.ogg"/>
   <property name="start_x" value="576"/>
-  <property name="start_y" value="224"/>
+  <property name="start_y" value="223"/>
  </properties>
  <tileset firstgid="1" name="castle" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>

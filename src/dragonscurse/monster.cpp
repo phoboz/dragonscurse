@@ -48,9 +48,10 @@ bool Monster::set_hit(Object *object)
 
 Object* Monster::release_object()
 {
-    Object *object = m_objects.back();
+    Object *object = 0;
 
-    if (object) {
+    if (m_objects.size()) {
+        object = m_objects.back();
         m_objects.pop_back();
     }
 
