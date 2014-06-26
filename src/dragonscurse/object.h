@@ -11,12 +11,27 @@ class World;
 
 class Object {
 public:
-    enum Type { TypePlayer, TypeMonster, TypeBullet, TypeItem, TypeArea };
+    enum Type {
+        TypeNone,
+        TypePlayer,
+        TypeMonster,
+        TypeBullet,
+        TypeItem,
+        TypeCurse,
+        TypeArea
+    };
+
     enum Direction { Keep, Right, Left };
+
     enum VerticalDirection { VerticalNone, VerticalUp, VerticalDown };
-    enum HorizontalDirection { HorizontalNone,
-                               HorizontalForward,
-                               HorizontalBackward };
+
+    enum HorizontalDirection {
+        HorizontalNone,
+        HorizontalForward,
+        HorizontalBackward
+    };
+
+    enum AnimDirection { AnimUp, AnimDown };
 
     Object(Type type, int x = 0, int y = 0)
         : m_x(x), m_y(y), m_dx(0), m_dy(0), m_frame(0),

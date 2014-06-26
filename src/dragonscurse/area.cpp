@@ -35,12 +35,7 @@ void Area::world_initialize(World *world)
                                              lock_id, world->get_filename());
         if (type) {
             m_state = StateLocked;
-            if (strcmp(type, "small_key.xml") == 0) { 
-                m_frame = get_attribute("small_key");
-            }
-            else if (strcmp(type, "large_key.xml") == 0) {
-                m_frame = get_attribute("large_key");
-            }
+            m_frame = get_attribute(type);
             m_world_key = key;
             m_lock_type = std::string(type);
         }

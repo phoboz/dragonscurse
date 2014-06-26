@@ -5,25 +5,24 @@
 #include <map>
 #include "tinyxml.h"
 
-struct WorldItem;
+struct WorldObject;
 struct WorldLock;
 
 struct WorldLocation;
 
 class WorldDB {
 public:
-    enum LockType { LockTypeNone, LockTypeGreen, LockTypeRed };
-
     WorldDB(const char *name);
 
-    const char* get_item_name(int *key,
-                              int id, const char *location_name) const;
+    Object::Type get_object_type(int id, const char *location_name) const;
+    const char* get_object_name(int *key,
+                                int id, const char *location_name) const;
     const char* get_lock_type(int *key,
                               int id, const char *location_name) const;
 
     bool remove(int key);
 private:
-    bool load_item_attributes(WorldItem *item, TiXmlElement *elmt);
+    bool load_object_attributes(WorldObject *object, TiXmlElement *elmt);
     bool load_lock_attributes(WorldLock *lock, TiXmlElement *elmt);
 
     WorldLocation* find_location(const char *name) const;

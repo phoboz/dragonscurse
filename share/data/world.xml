@@ -1,8 +1,15 @@
 <?xml version="1.0" ?>
 <world>
-    <items>
-        <item id="1" name="large_key.xml" location="castle_02.tmx" />
-    </items>
+    <objects>
+        <object id="1"
+                type="item"
+                name="large_key.xml"
+                location="castle_02.tmx" />
+        <object id="1"
+                type="curse"
+                name="blue_flame.xml"
+                location="wb.tmx" />
+    </objects>
     <locks>
         <lock id="1" type="large_key.xml" location="castle_01.tmx" />
         <lock id="1" type="large_key.xml" location="castle_02.tmx" />

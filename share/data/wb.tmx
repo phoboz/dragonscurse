@@ -33,6 +33,7 @@
   <object name="cobra_red.xml" type="Guardian" x="182" y="1257" width="38" height="50">
    <properties>
     <property name="direction" value="right"/>
+    <property name="object_id" value="1"/>
    </properties>
   </object>
   <object name="cobra_green.xml" type="Guardian" x="694" y="1161" width="38" height="50">

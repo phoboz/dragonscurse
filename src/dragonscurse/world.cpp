@@ -6,6 +6,7 @@
 #include "player.h"
 #include "monster.h"
 #include "item.h"
+#include "curse.h"
 #include "statusbar.h"
 #include "world.h"
 
@@ -144,19 +145,19 @@ Area* World::move(Player *player,
 
             // Handle monster object
             else if (object_type == Object::TypeMonster) {
-                Actor *actor = (Actor *) object;
+                Monster *monster = (Monster *) object;
 
-                actor->move(m_map);
-                actor->set_reference(player->get_front(), player->get_y());
-                if (player->check_collision(actor)) {
-                    if (!actor->get_invisible()) {
-                        player->set_hit(actor);
+                monster->move(m_map);
+                monster->set_reference(player->get_front(), player->get_y());
+                if (player->check_collision(monster)) {
+                    if (!monster->get_invisible()) {
+                        player->set_hit(monster);
                     }
                 }
-                if (player->attack_actor(actor)) {
-                    actor->set_hit(player);
+                if (player->attack_actor(monster)) {
+                    monster->set_hit(player);
                 }
-                if (actor->get_hit() == Actor::HitPerished) {
+                if (monster->get_hit() == Actor::HitPerished) {
                     perished.push_back(*it);
                 }
             }
@@ -174,6 +175,13 @@ Area* World::move(Player *player,
                     item->set_reused(true);
                     perished.push_back(*it);
                 }
+            }
+
+            // Handle curse objects
+            else if (object_type == Object::TypeCurse) {
+                Curse *curse = (Curse *) object;
+
+                curse->move(m_map);
             }
         }
     }

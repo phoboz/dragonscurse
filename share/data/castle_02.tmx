@@ -33,7 +33,7 @@
   <object name="wondering.xml" type="Dancer" x="4143" y="287" width="50" height="60">
    <properties>
     <property name="direction" value="left"/>
-    <property name="item_id" value="1"/>
+    <property name="object_id" value="1"/>
    </properties>
   </object>
   <object name="wondering.xml" type="Dancer" x="3496" y="288" width="50" height="60">

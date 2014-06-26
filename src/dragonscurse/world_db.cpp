@@ -1,12 +1,13 @@
 #include <list>
 #include <string>
 #include <string.h>
+#include "object.h"
 #include "world_db.h"
 
 static int db_key = 1;
 
 struct WorldNode {
-    enum Type { TypeItem, TypeLock };
+    enum Type { TypeObject, TypeLock };
 
     WorldNode(Type type) : m_key(db_key++), m_type(type) { }
 
@@ -14,9 +15,10 @@ struct WorldNode {
     Type m_type;
 };
 
-struct WorldItem : public WorldNode {
-    WorldItem() : WorldNode(TypeItem) { }
+struct WorldObject : public WorldNode {
+    WorldObject() : WorldNode(TypeObject) { }
     int m_id;
+    Object::Type m_type;
     std::string m_name;
     std::string m_location;
 };
@@ -32,20 +34,32 @@ struct WorldLocation {
     std::list<WorldNode*> m_nodes;
 };
 
-bool WorldDB::load_item_attributes(WorldItem *item, TiXmlElement *elmt)
+bool WorldDB::load_object_attributes(WorldObject *object, TiXmlElement *elmt)
 {
     bool result = true;
 
     TiXmlAttribute *attr = elmt->FirstAttribute();
     while (attr) {
         if (strcmp(attr->Name(), "id") == 0) {
-            item->m_id = atoi(attr->Value());
+            object->m_id = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "type") == 0) {
+            if (strcmp(attr->Value(), "item") == 0) {
+                object->m_type = Object::TypeItem;
+            }
+            else if (strcmp(attr->Value(), "curse") == 0) {
+                object->m_type = Object::TypeCurse;
+            }
+            else {
+                result = false;
+                break;
+            }
         }
         else if (strcmp(attr->Name(), "name") == 0) {
-            item->m_name = std::string(attr->Value());
+            object->m_name = std::string(attr->Value());
         }
         else if (strcmp(attr->Name(), "location") == 0) {
-            item->m_location = std::string(attr->Value());
+            object->m_location = std::string(attr->Value());
         }
         else {
             result = false;
@@ -117,16 +131,16 @@ bool WorldDB::load_nodes(TiXmlNode *node)
     int result = true;
 
     if (node->Type() == TiXmlNode::TINYXML_ELEMENT) {
-        if (strcmp(node->Value(), "item") == 0) {
-            WorldItem *item = new WorldItem;
-            result = load_item_attributes(item, node->ToElement());
+        if (strcmp(node->Value(), "object") == 0) {
+            WorldObject *object = new WorldObject;
+            result = load_object_attributes(object, node->ToElement());
             if (result) {
 
                 // Check if location exists, otherwise allocate new and insert
                 WorldLocation *location =
-                    get_location(item->m_location.c_str());
+                    get_location(object->m_location.c_str());
                 if (location) {
-                    location->m_nodes.push_back(item);
+                    location->m_nodes.push_back(object);
                 }
             }
         }
@@ -164,8 +178,7 @@ WorldDB::WorldDB(const char *name)
     }
 }
 
-const char* WorldDB::get_item_name(int *key,
-                                   int id, const char *location_name) const
+Object::Type WorldDB::get_object_type(int id, const char *location_name) const
 {
     WorldLocation *location = find_location(location_name);
 
@@ -173,11 +186,33 @@ const char* WorldDB::get_item_name(int *key,
         for (std::list<WorldNode*>::iterator it = location->m_nodes.begin();
              it != location->m_nodes.end();
              ++it) {
-            if ((*it)->m_type == WorldNode::TypeItem) {
-                WorldItem *item = (WorldItem *) *it;
-                if (item->m_id == id) {
-                    *key = item->m_key;
-                    return item->m_name.c_str();
+            if ((*it)->m_type == WorldNode::TypeObject) {
+                WorldObject *object = (WorldObject *) *it;
+                if (object->m_id == id) {
+                    return object->m_type;
+                    break;
+                }
+            }
+        }
+    }
+
+    return Object::TypeNone;
+}
+
+const char* WorldDB::get_object_name(int *key,
+                                     int id, const char *location_name) const
+{
+    WorldLocation *location = find_location(location_name);
+
+    if (location) {
+        for (std::list<WorldNode*>::iterator it = location->m_nodes.begin();
+             it != location->m_nodes.end();
+             ++it) {
+            if ((*it)->m_type == WorldNode::TypeObject) {
+                WorldObject *object = (WorldObject *) *it;
+                if (object->m_id == id) {
+                    *key = object->m_key;
+                    return object->m_name.c_str();
                     break;
                 }
             }

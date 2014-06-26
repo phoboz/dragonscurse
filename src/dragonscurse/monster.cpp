@@ -1,5 +1,6 @@
 #include "world.h"
 #include "item.h"
+#include "curse.h"
 #include "monster.h"
 
 Monster::Monster(const char *fn, int x, int y, Direction dir)
@@ -13,15 +14,29 @@ Monster::Monster(const char *fn, int x, int y, Direction dir)
 
 void Monster::world_initialize(World *world)
 {
-    int item_id = get_attribute("item_id");
+    int object_id = get_attribute("object_id");
 
-    if (item_id) {
+    if (object_id) {
         WorldDB *db = world->get_db();
         int key;
-        const char *fn = db->get_item_name(&key,
-                                           item_id, world->get_filename());
+        const char *fn = db->get_object_name(&key,
+                                             object_id, world->get_filename());
         if (fn) {
-            m_objects.push_back(new Item(fn, key));
+            Object::Type type = db->get_object_type(object_id,
+                                                    world->get_filename());
+            switch(type) {
+                case Object::TypeItem:
+                    m_objects.push_back(new Item(fn, key));
+                    break;
+
+                case Object::TypeCurse:
+                    m_objects.push_back(new Item(fn, key));
+                    m_objects.push_back(new Curse(fn, key));
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }

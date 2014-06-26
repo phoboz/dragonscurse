@@ -6,7 +6,6 @@
 
 class Actor : public Object {
 public:
-    enum AnimDirection { AnimUp, AnimDown };
     enum Action { Still, Move, Fall, Jump, Catapult, Crouch };
     enum Attack { AttackNone, AttackMedium, AttackLow };
     enum Hit { HitNone, HitOne, HitPerish, HitPerished };
