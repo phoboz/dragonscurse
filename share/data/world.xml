@@ -2,13 +2,17 @@
 <world>
     <objects>
         <object id="1"
+                location="castle_02.tmx"
                 type="item"
-                name="large_key.xml"
-                location="castle_02.tmx" />
+                name="large_key.xml" />
         <object id="1"
+                location="wb.tmx"
                 type="curse"
                 name="blue_flame.xml"
-                location="wb.tmx" />
+                player="salamander.xml"
+                destination="castle_02.tmx"
+                start_x="576"
+                start_y="223" />
     </objects>
     <locks>
         <lock id="1" type="large_key.xml" location="castle_01.tmx" />

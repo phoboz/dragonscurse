@@ -127,7 +127,7 @@ Area* World::move(Player *player,
                 if (area->is_locked()) {
 
                     // Check if the player has the key
-                    Item *item = player->check_item(area->get_lock_type());
+                    Item *item = player->check_item(area->get_lock_name());
                     if (item) {
                         if (area->move_unlock(this)) {
                             player->remove_item(item);

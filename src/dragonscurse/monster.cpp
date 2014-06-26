@@ -18,20 +18,17 @@ void Monster::world_initialize(World *world)
 
     if (object_id) {
         WorldDB *db = world->get_db();
+        ObjectInfo info;
         int key;
-        const char *fn = db->get_object_name(&key,
-                                             object_id, world->get_filename());
-        if (fn) {
-            Object::Type type = db->get_object_type(object_id,
-                                                    world->get_filename());
-            switch(type) {
+        if (db->get_object_info(&info,
+                                object_id, world->get_filename())) {
+            switch(info.object_type) {
                 case Object::TypeItem:
-                    m_objects.push_back(new Item(fn, key));
+                    m_objects.push_back(new Item(info.name, key));
                     break;
 
                 case Object::TypeCurse:
-                    m_objects.push_back(new Item(fn, key));
-                    m_objects.push_back(new Curse(fn, key));
+                    m_objects.push_back(new Curse(&info));
                     break;
 
                 default:

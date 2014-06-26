@@ -1,7 +1,6 @@
 #include <list>
 #include <string>
 #include <string.h>
-#include "object.h"
 #include "world_db.h"
 
 static int db_key = 1;
@@ -18,16 +17,20 @@ struct WorldNode {
 struct WorldObject : public WorldNode {
     WorldObject() : WorldNode(TypeObject) { }
     int m_id;
-    Object::Type m_type;
-    std::string m_name;
     std::string m_location;
+    Object::Type m_object_type;
+    std::string m_name;
+    std::string m_player;
+    std::string m_destination;
+    int m_start_x;
+    int m_start_y;
 };
 
 struct WorldLock : public WorldNode {
     WorldLock() : WorldNode(TypeLock) { }
     int m_id;
-    std::string m_type;
     std::string m_location;
+    std::string m_name;
 };
 
 struct WorldLocation {
@@ -43,12 +46,15 @@ bool WorldDB::load_object_attributes(WorldObject *object, TiXmlElement *elmt)
         if (strcmp(attr->Name(), "id") == 0) {
             object->m_id = atoi(attr->Value());
         }
+        else if (strcmp(attr->Name(), "location") == 0) {
+            object->m_location = std::string(attr->Value());
+        }
         else if (strcmp(attr->Name(), "type") == 0) {
             if (strcmp(attr->Value(), "item") == 0) {
-                object->m_type = Object::TypeItem;
+                object->m_object_type = Object::TypeItem;
             }
             else if (strcmp(attr->Value(), "curse") == 0) {
-                object->m_type = Object::TypeCurse;
+                object->m_object_type = Object::TypeCurse;
             }
             else {
                 result = false;
@@ -58,8 +64,17 @@ bool WorldDB::load_object_attributes(WorldObject *object, TiXmlElement *elmt)
         else if (strcmp(attr->Name(), "name") == 0) {
             object->m_name = std::string(attr->Value());
         }
-        else if (strcmp(attr->Name(), "location") == 0) {
-            object->m_location = std::string(attr->Value());
+        else if (strcmp(attr->Name(), "player") == 0) {
+            object->m_player = std::string(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "destination") == 0) {
+            object->m_destination = std::string(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "start_x") == 0) {
+            object->m_start_x = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "start_y") == 0) {
+            object->m_start_y = atoi(attr->Value());
         }
         else {
             result = false;
@@ -81,11 +96,11 @@ bool WorldDB::load_lock_attributes(WorldLock *lock, TiXmlElement *elmt)
         if (strcmp(attr->Name(), "id") == 0) {
             lock->m_id = atoi(attr->Value());
         }
-        else if (strcmp(attr->Name(), "type") == 0) {
-            lock->m_type = std::string(attr->Value());
-        }
         else if (strcmp(attr->Name(), "location") == 0) {
             lock->m_location = std::string(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "type") == 0) {
+            lock->m_name = std::string(attr->Value());
         }
         else {
             result = false;
@@ -178,8 +193,10 @@ WorldDB::WorldDB(const char *name)
     }
 }
 
-Object::Type WorldDB::get_object_type(int id, const char *location_name) const
+bool WorldDB::get_object_info(ObjectInfo *info,
+                              int id, const char *location_name) const
 {
+    bool result = false;
     WorldLocation *location = find_location(location_name);
 
     if (location) {
@@ -189,40 +206,24 @@ Object::Type WorldDB::get_object_type(int id, const char *location_name) const
             if ((*it)->m_type == WorldNode::TypeObject) {
                 WorldObject *object = (WorldObject *) *it;
                 if (object->m_id == id) {
-                    return object->m_type;
+                    info->key = object->m_key;
+                    info->object_type = object->m_object_type;
+                    strcpy(info->name, object->m_name.c_str());
+                    strcpy(info->player, object->m_player.c_str());
+                    strcpy(info->destination, object->m_destination.c_str());
+                    info->start_x = object->m_start_x;
+                    info->start_y = object->m_start_y;
+                    result = true;
                     break;
                 }
             }
         }
     }
 
-    return Object::TypeNone;
+    return result;
 }
 
-const char* WorldDB::get_object_name(int *key,
-                                     int id, const char *location_name) const
-{
-    WorldLocation *location = find_location(location_name);
-
-    if (location) {
-        for (std::list<WorldNode*>::iterator it = location->m_nodes.begin();
-             it != location->m_nodes.end();
-             ++it) {
-            if ((*it)->m_type == WorldNode::TypeObject) {
-                WorldObject *object = (WorldObject *) *it;
-                if (object->m_id == id) {
-                    *key = object->m_key;
-                    return object->m_name.c_str();
-                    break;
-                }
-            }
-        }
-    }
-
-    return 0;
-}
-
-const char* WorldDB::get_lock_type(int *key,
+const char* WorldDB::get_lock_name(int *key,
                                    int id, const char *location_name) const
 {
     WorldLocation *location = find_location(location_name);
@@ -235,7 +236,7 @@ const char* WorldDB::get_lock_type(int *key,
                 WorldLock *lock = (WorldLock *) *it;
                 if (lock->m_id == id) {
                     *key = lock->m_key;
-                    return lock->m_type.c_str();
+                    return lock->m_name.c_str();
                     break;
                 }
             }
