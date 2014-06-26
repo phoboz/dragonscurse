@@ -171,6 +171,7 @@ Area* World::move(Player *player,
                 if (player->check_collision(item)) {
                     player->aquire_item(item);
                     item->aquire(this);
+                    item->set_reused(true);
                     perished.push_back(*it);
                 }
             }
@@ -183,15 +184,18 @@ Area* World::move(Player *player,
         // If monster drop object
         if (perished[i]->get_type() == Object::TypeMonster) {
             Monster *monster = (Monster *) perished[i];
-            Item *item = monster->get_item();
-            if (item) {
-                item->set_x(monster->get_x());
-                item->set_y(monster->get_y());
-                m_objects.push_back(item);
+            Object *released_object = monster->release_object();
+            if (released_object) {
+                released_object->set_x(monster->get_x());
+                released_object->set_y(monster->get_y());
+                m_objects.push_back(released_object);
             }
         }
         m_objects.remove(perished[i]);
-        delete perished[i];
+
+        if (!perished[i]->get_reused()) {
+            delete perished[i];
+        }
     }
 
     return result;

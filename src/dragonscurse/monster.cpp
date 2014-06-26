@@ -4,8 +4,7 @@
 
 Monster::Monster(const char *fn, int x, int y, Direction dir)
     : Actor(Object::TypeMonster, x, y, dir),
-      m_invinsible(false),
-      m_item(0)
+      m_invinsible(false)
 {
     load(fn);
     m_curr_hp = get_attribute("hp");
@@ -22,7 +21,7 @@ void Monster::world_initialize(World *world)
         const char *fn = db->get_item_name(&key,
                                            item_id, world->get_filename());
         if (fn) {
-            m_item = new Item(fn, key);
+            m_objects.push_back(new Item(fn, key));
         }
     }
 }
@@ -45,6 +44,17 @@ bool Monster::set_hit(Object *object)
     }
 
     return result;
+}
+
+Object* Monster::release_object()
+{
+    Object *object = m_objects.back();
+
+    if (object) {
+        m_objects.pop_back();
+    }
+
+    return object;
 }
 
 void Monster::move(Map *map)
