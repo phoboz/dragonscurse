@@ -11,14 +11,27 @@ struct WorldLock;
 
 struct WorldLocation;
 
-struct ObjectInfo {
-    int key;
-    Object::Type object_type;
+struct ItemData {
+    char name[80];
+};
+
+struct CurseData {
     char name[80];
     char player[80];
     char destination[80];
     int start_x;
     int start_y;
+};
+
+union ObjectData {
+    ItemData item;
+    CurseData curse;
+};
+
+struct ObjectInfo {
+    int key;
+    Object::Type object_type;
+    ObjectData data;
 };
 
 class WorldDB {
@@ -28,7 +41,7 @@ public:
     bool get_object_info(ObjectInfo *info,
                          int id, const char *location_name) const;
 
-    const char* get_lock_name(int *key,
+    const char* get_lock_type(int *key,
                               int id, const char *location_name) const;
 
     bool remove(int key);

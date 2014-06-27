@@ -4,13 +4,13 @@
 Curse::Curse(ObjectInfo *info)
     : Object(Object::TypeCurse),
       m_world_key(info->key),
-      m_player(std::string(info->player)),
-      m_destination(std::string(info->destination)),
-      m_start_x(info->start_x),
-      m_start_y(info->start_y),
+      m_player(std::string(info->data.curse.player)),
+      m_destination(std::string(info->data.curse.destination)),
+      m_start_x(info->data.curse.start_x),
+      m_start_y(info->data.curse.start_y),
       m_anim_dir(AnimUp)
 {
-    load(info->name);
+    load(info->data.curse.name);
 }
 
 void Curse::move(Map *map)

@@ -31,13 +31,13 @@ void Area::world_initialize(World *world)
     if (lock_id) {
         WorldDB *db = world->get_db();
         int key;
-        const char *name = db->get_lock_name(&key,
+        const char *name = db->get_lock_type(&key,
                                              lock_id, world->get_filename());
         if (name) {
             m_state = StateLocked;
             m_frame = get_attribute(name);
             m_world_key = key;
-            m_lock_name = std::string(name);
+            m_lock_type = std::string(name);
         }
     }
 }

@@ -24,7 +24,7 @@ void Monster::world_initialize(World *world)
                                 object_id, world->get_filename())) {
             switch(info.object_type) {
                 case Object::TypeItem:
-                    m_objects.push_back(new Item(info.name, key));
+                    m_objects.push_back(new Item(info.data.item.name, key));
                     break;
 
                 case Object::TypeCurse:
