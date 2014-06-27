@@ -111,16 +111,17 @@ bool load_area(const char *ar_name,
 
 void move()
 {
-    Area *area;
-    area = world->move(player, 0, Statusbar::get_height(),
-                       screen_width, screen_height);
+    Area *area = world->move(player, 0, Statusbar::get_height(),
+                             screen_width, screen_height);
+
     if (area) {
         bool load_music = false;
         if (area->get_type() != Area::TypeWarp) {
             load_music = true;
             world->end();
         }
-        load_area(area->get_name().c_str(), load_music, false, 0,
+        load_area(area->get_name(), load_music,
+                  area->get_type() == Area::TypeCurse, area->get_data(),
                   area->get_sx(), area->get_sy());
     }
 }

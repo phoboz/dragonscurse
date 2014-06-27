@@ -7,20 +7,22 @@
 #include "world_db.h"
 
 class Actor;
+class Curse;
 class World;
 
 class Area : public Object {
 public:
-    enum Type { TypeWarp, TypeTravel, TypeUser };
+    enum Type { TypeWarp, TypeTravel, TypeCurse, TypeUser };
     enum State { StateLocked, StateIdle, StateOpening, StateOpen };
 
     Area(const char *name, const char *type, int x, int y, int w, int h);
+    Area(Curse *curse);
 
     virtual void world_initialize(World *world);
 
     bool inside(Actor *actor);
 
-    std::string get_name() const { return m_name; }
+    const char* get_name() const { return m_name.c_str(); }
     Type get_type() const { return m_type; }
     int get_x1() const { return m_x; }
     int get_y1() const { return m_y; }
@@ -29,7 +31,7 @@ public:
     int get_sx() const { return get_attribute("start_x"); }
     int get_sy() const { return get_attribute("start_y"); }
     bool is_locked() const;
-    const char* get_lock_type() const { return m_lock_type.c_str(); }
+    const char* get_data() const { return m_data.c_str(); }
 
     virtual bool get_visible(Map *map, int clip_x, int clip_y,
                              int clip_w, int clip_h) const { return true; }
@@ -43,7 +45,7 @@ private:
     std::string m_name;
     Type m_type;
     int m_w, m_h;
-    std::string m_lock_type;
+    std::string m_data;
     int m_world_key;
     State m_state;
     Timer m_open_timer;

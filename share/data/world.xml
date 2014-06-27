@@ -6,7 +6,7 @@
                 type="item"
                 name="large_key.xml" />
         <object id="1"
-                location="wb.tmx"
+                location="castle_boss.tmx"
                 type="curse"
                 name="blue_flame.xml"
                 player="salamander.xml"

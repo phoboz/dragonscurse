@@ -71,10 +71,10 @@ bool WorldDB::load_object_attributes(WorldObject *object, TiXmlElement *elmt)
                 std::string(attr->Value());
         }
         else if (strcmp(attr->Name(), "start_x") == 0) {
-            object->m_strings[std::string(attr->Name())] = atoi(attr->Value());
+            object->m_integers[std::string(attr->Name())] = atoi(attr->Value());
         }
         else if (strcmp(attr->Name(), "start_y") == 0) {
-            object->m_strings[std::string(attr->Name())] = atoi(attr->Value());
+            object->m_integers[std::string(attr->Name())] = atoi(attr->Value());
         }
         else {
             result = false;

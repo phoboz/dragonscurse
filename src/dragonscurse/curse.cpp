@@ -6,8 +6,8 @@ Curse::Curse(ObjectInfo *info)
       m_world_key(info->key),
       m_player(std::string(info->data.curse.player)),
       m_destination(std::string(info->data.curse.destination)),
-      m_start_x(info->data.curse.start_x),
-      m_start_y(info->data.curse.start_y),
+      m_sx(info->data.curse.start_x),
+      m_sy(info->data.curse.start_y),
       m_anim_dir(AnimUp)
 {
     load(info->data.curse.name);

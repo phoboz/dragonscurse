@@ -1,6 +1,7 @@
 #include <string.h>
 #include "phoboz/ctrl.h"
 #include "actor.h"
+#include "curse.h"
 #include "world.h"
 #include "area.h"
 
@@ -24,6 +25,18 @@ Area::Area(const char *name, const char *type, int x, int y, int w, int h)
     m_frame = get_attribute("open_start");
 }
 
+Area::Area(Curse *curse)
+    : Object(Object::TypeArea, curse->get_x(), curse->get_y()),
+      m_name(curse->get_destination()),
+      m_type(TypeCurse),
+      m_h(curse->get_image_width()), m_w(curse->get_image_height()),
+      m_data(curse->get_player()),
+      m_state(StateIdle)
+{
+    set_attribute("start_x", curse->get_sx());
+    set_attribute("start_y", curse->get_sy());
+}
+
 void Area::world_initialize(World *world)
 {
     int lock_id = get_attribute("lock_id");
@@ -37,7 +50,7 @@ void Area::world_initialize(World *world)
             m_state = StateLocked;
             m_frame = get_attribute(name);
             m_world_key = key;
-            m_lock_type = std::string(name);
+            m_data = std::string(name);
         }
     }
 }

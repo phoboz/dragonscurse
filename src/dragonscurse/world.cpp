@@ -127,7 +127,7 @@ Area* World::move(Player *player,
                 if (area->is_locked()) {
 
                     // Check if the player has the key
-                    Item *item = player->check_item(area->get_lock_type());
+                    Item *item = player->check_item(area->get_data());
                     if (item) {
                         if (area->move_unlock(this)) {
                             player->remove_item(item);
@@ -182,6 +182,9 @@ Area* World::move(Player *player,
                 Curse *curse = (Curse *) object;
 
                 curse->move(m_map);
+                if (player->check_collision(curse)) {
+                    return new Area(curse);
+                }
             }
         }
     }
