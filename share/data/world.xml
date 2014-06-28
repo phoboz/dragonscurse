@@ -13,6 +13,14 @@
                 destination="castle_02.tmx"
                 start_x="576"
                 start_y="223" />
+        <object id="1"
+                location="wb.tmx"
+                type="curse"
+                name="blue_flame.xml"
+                player="salamander.xml"
+                destination="castle_02.tmx"
+                start_x="576"
+                start_y="223" />
     </objects>
     <locks>
         <lock id="1" type="large_key.xml" location="castle_01.tmx" />

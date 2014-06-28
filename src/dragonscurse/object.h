@@ -18,6 +18,7 @@ public:
         TypeBullet,
         TypeItem,
         TypeCurse,
+        TypeMorph,
         TypeArea
     };
 
@@ -54,6 +55,7 @@ public:
     Type get_type() const { return m_type; }
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }
+    Direction get_dir() const { return m_dir; }
     int get_frame() const { return m_frame; }
     const Sprite* get_sprite() const { return m_spr; }
     int get_image_width() const { return m_spr->get_image_width(); }

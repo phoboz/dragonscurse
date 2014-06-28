@@ -7,6 +7,7 @@
 #include "monster.h"
 #include "item.h"
 #include "curse.h"
+#include "morph.h"
 #include "statusbar.h"
 #include "world.h"
 
@@ -96,6 +97,10 @@ Area* World::move(Player *player,
 {
     Area *result = 0;
 
+    if (!player->is_morphing()) {
+        result = player->get_warp();
+    }
+
     player->move(m_map);
     int window_width = clip_w - clip_x;
     int window_height = clip_h - clip_y;
@@ -158,7 +163,7 @@ Area* World::move(Player *player,
                     monster->set_hit(player);
                 }
                 if (monster->get_hit() == Actor::HitPerished) {
-                    perished.push_back(*it);
+                    perished.push_back(monster);
                 }
             }
 
@@ -173,7 +178,7 @@ Area* World::move(Player *player,
                     player->aquire_item(item);
                     item->aquire(this);
                     item->set_reused(true);
-                    perished.push_back(*it);
+                    perished.push_back(item);
                 }
             }
 
@@ -183,7 +188,12 @@ Area* World::move(Player *player,
 
                 curse->move(m_map);
                 if (player->check_collision(curse)) {
-                    return new Area(curse);
+                    player->set_morph(new Morph("human_to_salamander.xml",
+                                                player->get_x(),
+                                                player->get_y(),
+                                                player->get_dir()));
+                    player->set_warp(new Area(curse));
+                    perished.push_back(curse);
                 }
             }
         }

@@ -12,7 +12,7 @@ class World;
 
 class Area : public Object {
 public:
-    enum Type { TypeWarp, TypeTravel, TypeCurse, TypeUser };
+    enum Type { TypeWarp, TypeTravel, TypeCurse, TypeMorph, TypeUser };
     enum State { StateLocked, StateIdle, StateOpening, StateOpen };
 
     Area(const char *name, const char *type, int x, int y, int w, int h);

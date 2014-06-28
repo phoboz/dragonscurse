@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include "phoboz/ctrl.h"
+#include "morph.h"
 #include "item.h"
 #include "player.h"
 
@@ -30,7 +31,42 @@ bool Player::check_collision(Object *object)
                                 object->get_x(), object->get_y());
 }
 
-void Player::move(Map *map)
+bool Player::is_morphing()
+{
+    bool result = false;
+
+    if (m_morph) {
+        if (m_morph->is_done()) {
+            delete m_morph;
+            m_morph = 0;
+        }
+        else {
+            result = true;
+        }
+    }
+
+    return result;
+}
+
+Item* Player::check_item(const char *name)
+{
+    Item *result = 0;
+
+    for (std::list<Item*>::iterator it = m_items.begin();
+         it != m_items.end();
+         ++it) {
+
+        Item *item = *it;
+        if (strcmp(name, item->get_filename()) == 0) {
+            result = item;
+            break;
+        }
+    }
+
+    return result;
+}
+
+void Player::player_move(Map *map)
 {
     Actor::move(map);
 
@@ -220,21 +256,24 @@ void Player::move(Map *map)
     }
 }
 
-Item* Player::check_item(const char *name)
+void Player::move(Map *map)
 {
-    Item *result = 0;
-
-    for (std::list<Item*>::iterator it = m_items.begin();
-         it != m_items.end();
-         ++it) {
-
-        Item *item = *it;
-        if (strcmp(name, item->get_filename()) == 0) {
-            result = item;
-            break;
-        }
+    if (is_morphing()) {
+        m_morph->move(map);
     }
+    else {
+        player_move(map);
+    }
+}
 
-    return result;
+void Player::draw(SDL_Surface *dest, Map *map,
+                  int clip_x, int clip_y, int clip_w, int clip_h)
+{
+    if (is_morphing()) {
+        m_morph->draw(dest, map, clip_x, clip_y, clip_w, clip_h);
+    }
+    else {
+        Actor::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
+    }
 }
 

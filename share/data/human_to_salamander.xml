@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<morph treshold="8" right_start="0" right_end="7" left_start="8" left_end="15">
+    <object image="human_to_salamander.png"
+            width="68" height="65" margin="1" spacing="1"
+            left="12" right="56" top="0" bottom="64" />
+</morph>
+
