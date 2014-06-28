@@ -10,7 +10,8 @@ bool Knight::attack_actor(Actor *actor)
 
     if (m_attack == AttackMedium) {
         if (m_dir == Right) {
-            if (spr->check_collision(m_frame, m_x, m_y,
+            if (m_frame == get_attribute("right_attack") &&
+                spr->check_collision(m_frame, m_x, m_y,
                                      get_attribute("attack_right"),
                                      get_attribute("attack_medium_top"),
                                      spr->get_width(),
@@ -25,7 +26,8 @@ bool Knight::attack_actor(Actor *actor)
             }
         }
         else if (m_dir == Left) {
-            if (spr->check_collision(m_frame, m_x, m_y,
+            if (m_frame == get_attribute("left_attack") &&
+                spr->check_collision(m_frame, m_x, m_y,
                                      0,
                                      get_attribute("attack_medium_top"),
                                      get_attribute("attack_left"),
@@ -42,7 +44,8 @@ bool Knight::attack_actor(Actor *actor)
     }
     else if (m_attack == AttackLow) {
         if (m_dir == Right) {
-            if (spr->check_collision(m_frame, m_x, m_y,
+            if (m_frame == get_attribute("right_attack_low") &&
+                spr->check_collision(m_frame, m_x, m_y,
                                      get_attribute("attack_right"),
                                      get_attribute("attack_low_top"),
                                      spr->get_width(),
@@ -57,7 +60,8 @@ bool Knight::attack_actor(Actor *actor)
             }
         }
         else if (m_dir == Left) {
-            if (spr->check_collision(m_frame, m_x, m_y,
+            if (m_frame == get_attribute("left_attack_low") &&
+                spr->check_collision(m_frame, m_x, m_y,
                                      0,
                                      get_attribute("attack_low_top"),
                                      get_attribute("attack_left"),
