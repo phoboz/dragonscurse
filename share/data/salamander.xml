@@ -28,7 +28,11 @@
                    left_attack="13"
                    left_attack_low="14"
                    left_hit="7"
-                   left_perish="7">
+                   left_perish="7"
+                   weak_left="12"
+                   weak_top="0"
+                   weak_right="56"
+                   weak_bottom="64">
                 <object image="salamander.png"
                         width="68" height="65" margin="1" spacing="1"
                         left="12" right="56" top="0" bottom="64" />

@@ -7,15 +7,13 @@
              attack_idle="40"
              attack_timer="180"
              num_bullets="12"
+             fire_dx="6"
+             fire_dy="4"
              fire_next="4"
              turn_width="400"
              hit_time="34">
     <monster hp="8"
-             perish_time="40"
-             weak_left="3"
-             weak_top="31"
-             weak_right="31"
-             weak_bottom="57">
+             perish_time="40">
         <actor move_speed="4"
                treshold="12"
                weight="2"
@@ -28,7 +26,11 @@
                left_move_start="0" left_move_end="1"
                left_attack="2"
                left_hit="3"
-               left_perish="3">
+               left_perish="3"
+               weak_left="3"
+               weak_top="31"
+               weak_right="31"
+               weak_bottom="57">
             <object image="meka.png"
                     width="128" height="138" margin="1" spacing="1"
                     left="4" right="124" top="8" bottom="136" />

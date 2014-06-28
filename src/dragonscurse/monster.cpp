@@ -19,12 +19,12 @@ void Monster::world_initialize(World *world)
     if (object_id) {
         WorldDB *db = world->get_db();
         ObjectInfo info;
-        int key;
         if (db->get_object_info(&info,
                                 object_id, world->get_filename())) {
             switch(info.object_type) {
                 case Object::TypeItem:
-                    m_objects.push_back(new Item(info.data.item.name, key));
+                    m_objects.push_back(new Item(info.data.item.name,
+                                                 info.key));
                     break;
 
                 case Object::TypeCurse:

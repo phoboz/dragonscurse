@@ -23,7 +23,7 @@
   <object name="castle_03.tmx" type="Area" x="4576" y="288" width="64" height="64">
    <properties>
     <property name="lock_id" value="1"/>
-    <property name="start_x" value="16"/>
+    <property name="start_x" value="32"/>
     <property name="start_y" value="636"/>
     <property name="type" value="regular_door.xml"/>
    </properties>

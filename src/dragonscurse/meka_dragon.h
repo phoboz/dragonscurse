@@ -9,11 +9,16 @@
 class MekaDragon : public Monster {
 public:
     MekaDragon(const char *fn, int x, int y, Direction dir);
+
+    virtual bool attack_actor(Actor *actor);
+
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
 private:
+    void fire();
+
     HorizontalDirection m_horizontal_dir;
     int m_bullet_index;
     std::vector<Bullet*> m_bullets;

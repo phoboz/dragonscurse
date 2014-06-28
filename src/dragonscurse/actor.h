@@ -15,6 +15,7 @@ public:
           m_anim_dir(AnimUp),
           m_action(Still), m_attack(AttackNone), m_hit(HitNone),
           m_invisible(false) { }
+
     virtual bool set_hit(Object *object);
     void reset_hit();
     void set_perish();
@@ -22,6 +23,9 @@ public:
     bool get_invisible() const { return m_invisible; }
     int get_front();
     int get_bottom();
+
+    virtual bool attack_actor(Actor *actor) { return false; }
+
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);

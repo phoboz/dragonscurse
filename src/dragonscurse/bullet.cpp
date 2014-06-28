@@ -42,6 +42,43 @@ bool Bullet::fire(int x, int y, Direction dir, VerticalDirection vert_dir)
     return result;
 }
 
+bool Bullet::fire(int x, int y, int dx, int dy)
+{
+    bool result = false;
+
+    if (!m_moving && m_loaded) {
+        m_x = x;
+        m_y = y;
+        m_vertical_dir = VerticalNone;
+
+        if (dx > 0) {
+            m_dir = Right;
+            m_dx = dx;
+            m_frame = get_attribute("right_move_start");
+        }
+        else if (dx < 0) {
+            m_dir = Left;
+            m_dx = -dx;
+            m_frame = get_attribute("left_move_start");
+        }
+
+        if (dy < 0) {
+            m_vertical_dir = VerticalUp;
+            m_dy = -dy;
+        }
+        else if (dy > 0) {
+            m_vertical_dir = VerticalDown;
+            m_dy = dy;
+        }
+
+        m_moving = true;
+        reload();
+        result = true;
+    }
+
+    return result;
+}
+
 bool Bullet::hit_object(Object *object)
 {
     bool result = false;
@@ -58,6 +95,8 @@ bool Bullet::hit_object(Object *object)
             result = true;
         }
     }
+
+    return result;
 }
 
 void Bullet::move(Map *map)

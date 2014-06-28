@@ -21,6 +21,51 @@ MekaDragon::MekaDragon(const char *fn, int x, int y, Direction dir)
     }
 }
 
+bool MekaDragon::attack_actor(Actor *actor)
+{
+    bool result = false;
+    int num_bullets = m_bullets.size();
+
+    for (int i = 0; i < num_bullets; i++) {
+
+        if (m_bullets[i]->hit_object(actor)) {
+            result = true;
+            break;
+        }
+    }
+
+    return result;
+}
+
+void MekaDragon::fire()
+{
+    if (m_fire_timer.expired(get_attribute("fire_next"))) {
+        if (m_bullet_index < m_bullets.size()) {
+            if (m_dir == Right) {
+                m_bullets[m_bullet_index]->fire(
+                    m_x + get_attribute("attack_right"),
+                    m_y + get_attribute("attack_medium"),
+                    get_attribute("fire_dx"),
+                    get_attribute("fire_dy"));
+            }
+            else if (m_dir == Left) {
+                m_bullets[m_bullet_index]->fire(
+                    m_x + get_attribute("attack_left"),
+                    m_y + get_attribute("attack_medium"),
+                    -get_attribute("fire_dx"),
+                    get_attribute("fire_dy"));
+            }
+            m_bullet_index++;
+        }
+        else {
+            m_bullet_index = 0;
+            m_idle_timer.reset();
+            set_move_dir();
+            reset_attack();
+        }
+    }
+}
+
 void MekaDragon::move(Map *map)
 {
     Monster::move(map);
@@ -60,31 +105,8 @@ void MekaDragon::move(Map *map)
                 set_move_dir();
             }
             else if (m_hit == HitNone && m_attack == AttackMedium) {
-                if (m_idle_timer.check(get_attribute("attack_idle")) &&
-                    m_fire_timer.expired(get_attribute("fire_next"))) {
-                    if (m_bullet_index < m_bullets.size()) {
-                        if (m_dir == Right) {
-                            m_bullets[m_bullet_index]->fire(
-                                           m_x + get_attribute("attack_right"),
-                                           m_y + get_attribute("attack_medium"),
-                                           m_dir,
-                                           VerticalDown);
-                        }
-                        else if (m_dir == Left) {
-                            m_bullets[m_bullet_index]->fire(
-                                           m_x + get_attribute("attack_left"),
-                                           m_y + get_attribute("attack_medium"),
-                                           m_dir,
-                                           VerticalDown);
-                        }
-                        m_bullet_index++;
-                    }
-                    else {
-                        m_bullet_index = 0;
-                        m_idle_timer.reset();
-                        set_move_dir();
-                        reset_attack();
-                    }
+                if (m_idle_timer.check(get_attribute("attack_idle"))){
+                    fire();
                 }
             }
             break;
@@ -96,7 +118,7 @@ void MekaDragon::move(Map *map)
                     face_reference(get_attribute("turn_width"));
                     m_dx = get_attribute("move_speed");
 
-                    //check_ahead(map);
+                    check_ahead(map);
 
                     // Move
                     if (m_dir == Right) {
@@ -116,7 +138,10 @@ void MekaDragon::move(Map *map)
                     face_reference(get_attribute("turn_width"));
                     m_dx = get_attribute("move_speed");
 
-                    //check_behind(map);
+                    if (check_behind(map)) {
+                        // Fire directly if pushed against the wall
+                        fire();
+                    }
 
                     // Move
                     if (m_dir == Right) {

@@ -30,7 +30,11 @@
                    left_attack="13"
                    left_attack_low="14"
                    left_hit="7"
-                   left_perish="7">
+                   left_perish="7"
+                   weak_left="24"
+                   weak_top="7"
+                   weak_right="66"
+                   weak_bottom="62">
                 <object image="human.png"
                         width="91" height="63" margin="1" spacing="1"
                         left="24" right="66" top="7" bottom="62" />

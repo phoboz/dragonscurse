@@ -18,7 +18,6 @@ public:
 
     virtual bool set_hit(Object *object);
     virtual bool check_collision(Object *object);
-    virtual bool attack_actor(Actor *actor) { return false; }
 
     void set_morph(Morph *morph) { m_morph = morph; }
     bool is_morphing();

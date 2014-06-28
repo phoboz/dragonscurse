@@ -2,11 +2,7 @@
 <falling_block>
     <falling freefall_distance="180">
         <monster hp="1"
-                 perish_time="20"
-                 weak_left="0"
-                 weak_top="0"
-                 weak_right="32"
-                 weak_bottom="32">
+                 perish_time="20">
             <actor weight="8"
                    treshold="12"
                    right_still="0"
@@ -16,7 +12,11 @@
                    left_still="0"
                    left_move_start="0" left_move_end="0"
                    left_hit="1"
-                   left_perish="1">
+                   left_perish="1"
+                   weak_left="0"
+                   weak_top="0"
+                   weak_right="32"
+                   weak_bottom="32">
                 <object image="falling_block.png"
                         width="32" height="32" margin="1" spacing="1"
                         left="0" right="32" top="0" bottom="32" />

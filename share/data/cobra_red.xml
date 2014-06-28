@@ -7,11 +7,7 @@
               jump_limit="10"
               hit_time="24">
         <monster hp="1"
-                 perish_time="40"
-                 weak_left="0"
-                 weak_top="0"
-                 weak_right="50"
-                 weak_bottom="50">
+                 perish_time="40">
             <actor move_speed="2"
                    treshold="12"
                    weight="2"
@@ -24,7 +20,11 @@
                    left_move_start="0" left_move_end="1"
                    left_jump="2"
                    left_hit="3"
-                   left_perish="3">
+                   left_perish="3"
+                   weak_left="0"
+                   weak_top="0"
+                   weak_right="50"
+                   weak_bottom="50">
                 <object image="cobra_red.png"
                         width="50" height="50" margin="1" spacing="1"
                         left="8" right="42" top="2" bottom="49" />

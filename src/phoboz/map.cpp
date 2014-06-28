@@ -33,12 +33,20 @@ bool Map::load(Tmx::Map *tmx)
 
 int Map::get_tile_id(int x, int y, int layer_id) const
 {
+    int result = 0;
+
     const Tmx::Layer *layer = m_tmx->GetLayer(layer_id);
     int tw = m_tmx->GetTileWidth();
     int th = m_tmx->GetTileHeight();
     int col = x / tw;
     int row = y / th;
-    return layer->GetTileId(col, row);
+
+    if (col >= 0 && col < m_tmx->GetWidth() &&
+        row >= 0 && row < m_tmx->GetHeight()) {
+        result = layer->GetTileId(col, row);
+    }
+
+    return result;
 }
 
 void Map::set_tile_id(int x, int y, int layer_id, int id)
@@ -50,7 +58,11 @@ void Map::set_tile_id(int x, int y, int layer_id, int id)
     int th = m_tmx->GetTileHeight();
     int col = x / tw;
     int row = y / th;
-    layer->SetTileId(col, row, id);
+
+    if (col >= 0 && col < m_tmx->GetWidth() &&
+        row >= 0 && row < m_tmx->GetHeight()) {
+        layer->SetTileId(col, row, id);
+    }
 }
 
 void Map::set_x(int value, int window_width)

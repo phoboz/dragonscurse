@@ -30,7 +30,11 @@
                    left_attack="8"
                    left_attack_low="8"
                    left_hit="4"
-                   left_perish="4">
+                   left_perish="4"
+                   weak_left="16"
+                   weak_top="28"
+                   weak_right="46"
+                   weak_bottom="59">
                 <object image="mouseman.png"
                         width="60" height="60" margin="1" spacing="1"
                         left="16" right="46" top="28" bottom="59" />
