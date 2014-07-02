@@ -6,6 +6,7 @@
 #include "SDL_mixer.h"
 
 #include "phoboz/sprite.h"
+#include "phoboz/font.h"
 #include "phoboz/ctrl.h"
 #include "phoboz/map.h"
 #include "phoboz/fps_timer.h"
@@ -20,8 +21,9 @@ static int screen_width = 640;
 static int screen_height = 480;
 static Map *map;
 static Player *player;
-WorldDB *db;
+static WorldDB *db;
 static World *world;
+static Font *font;
 
 bool init()
 {
@@ -62,6 +64,12 @@ bool init()
     }
 
     Mix_Volume(-1, MIX_MAX_VOLUME);
+
+    font = new Font("fntdag8x8.png", 8, 8, 1, 1);
+    if (!font->get_loaded()) {
+        fprintf(stderr, "Unable to load font\n");
+        return false;
+    }
 
     return true;
 }
@@ -129,6 +137,8 @@ void move()
 void redraw()
 {
     Statusbar::draw(screen, screen_width, screen_height);
+    font->draw(screen, 0, 0, "Welcome to monster world!",
+               0, 0, screen_width, Statusbar::get_height());
     world->draw(screen, player, 0, Statusbar::get_height(),
                 screen_width, screen_height);
 }

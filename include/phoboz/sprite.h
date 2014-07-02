@@ -12,7 +12,7 @@ public:
         load(fn, w, h, margin, spacing);
     }
     ~Sprite();
-    bool load(const char *fn, int w, int h, int margIn, int spacing);
+    bool load(const char *fn, int w, int h, int margin, int spacing);
     bool get_loaded() const { return m_loaded; }
     int get_width() const { return m_w; }
     int get_height() const { return m_h; }
