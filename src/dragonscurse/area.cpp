@@ -8,17 +8,19 @@
 Area::Area(const char *name, const char *type, int x, int y, int w, int h)
     : Object(Object::TypeArea, x, y),
       m_name(name),
-      m_h(h), m_w(w),
-      m_state(StateIdle)
+      m_h(h), m_w(w)
 {
     if (strcmp(type, "warp") == 0) {
         m_type = TypeWarp;
+        m_state = StateOpen;
     }
     else if (strcmp(type, "travel") == 0) {
         m_type = TypeTravel;
+        m_state = StateOpen;
     }
     else {
         m_type = TypeUser;
+        m_state = StateClosed;
         load(type);
     }
 
@@ -31,7 +33,7 @@ Area::Area(Curse *curse)
       m_type(TypeCurse),
       m_h(curse->get_image_width()), m_w(curse->get_image_height()),
       m_data(curse->get_player()),
-      m_state(StateIdle)
+      m_state(StateOpen)
 {
     set_attribute("start_x", curse->get_sx());
     set_attribute("start_y", curse->get_sy());
@@ -55,18 +57,7 @@ void Area::world_initialize(World *world)
     }
 }
 
-bool Area::is_locked() const
-{
-    bool result = false;
-
-    if (m_state == StateLocked) {
-        result = true;
-    }
-
-    return result;
-}
-
-bool Area::inside(Actor *actor)
+bool Area::is_over(Actor *actor)
 {
     bool result = false;
     int x = actor->get_front();
@@ -75,15 +66,7 @@ bool Area::inside(Actor *actor)
     // Check if inside
     if (x >= m_x && x <= m_x + m_w &&
         y >= m_y && y <= m_y + m_h) {
-        if (m_type == TypeUser) {
-            if (m_state == StateOpen) {
-                result = true;
-                m_state = StateIdle;
-            }
-        }
-        else {
-            result = true;
-        }
+        result = true;
     }
 
     return result;
@@ -92,7 +75,7 @@ bool Area::inside(Actor *actor)
 void Area::move(Map *map)
 {
     if (m_type == TypeUser) {
-        if (m_state == StateIdle) {
+        if (m_state == StateClosed) {
             int input = get_input();
             if (input & PRESS_UP) {
                 if (m_open_timer.expired(get_attribute("open_time"))) {
@@ -108,7 +91,7 @@ void Area::move(Map *map)
             if (m_anim_timer.expired(get_attribute("treshold"))) {
                 if (++m_frame > get_attribute("open_end")) {
                     m_anim_timer.reset();
-                    m_frame = get_attribute("open_start");
+                    m_frame = get_attribute("open_end");
                     m_state = StateOpen;
                 }
             }
@@ -132,7 +115,7 @@ bool Area::move_unlock(World *world)
                     db->remove(m_world_key);
 
                     // Mark as unlocked
-                    m_state = StateIdle;
+                    m_state = StateClosed;
                     m_frame = get_attribute("open_start");
                     result = true;
                 }
