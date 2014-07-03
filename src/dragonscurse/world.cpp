@@ -129,21 +129,24 @@ Area* World::move(Player *player,
             if (object_type == Object::TypeArea) {
                 Area *area = (Area *) object;
 
-                if (area->is_locked()) {
+                if (area->is_over(player)) {
 
-                    // Check if the player has the key
-                    Item *item = player->check_item(area->get_data());
-                    if (item) {
-                        if (area->move_unlock(this)) {
-                            player->remove_item(item);
+                    if (area->is_locked()) {
+
+                        // Check if the player has the key
+                        Item *item = player->check_item(area->get_data());
+                        if (item) {
+                            if (area->move_unlock(this)) {
+                                player->remove_item(item);
+                            }
                         }
                     }
-                }
-                else {
-                    area->move(m_map);
+                    else {
+                        area->move(m_map);
 
-                    if (area->inside(player)) {
-                        result = area;
+                        if (area->is_open()) {
+                            result = area;
+                        }
                     }
                 }
             }

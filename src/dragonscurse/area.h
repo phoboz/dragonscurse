@@ -13,14 +13,14 @@ class World;
 class Area : public Object {
 public:
     enum Type { TypeWarp, TypeTravel, TypeCurse, TypeMorph, TypeUser };
-    enum State { StateLocked, StateIdle, StateOpening, StateOpen };
+    enum State { StateLocked, StateClosed, StateOpening, StateOpen };
 
     Area(const char *name, const char *type, int x, int y, int w, int h);
     Area(Curse *curse);
 
     virtual void world_initialize(World *world);
 
-    bool inside(Actor *actor);
+    bool is_over(Actor *actor);
 
     const char* get_name() const { return m_name.c_str(); }
     Type get_type() const { return m_type; }
@@ -30,7 +30,8 @@ public:
     int get_y2() const { return m_y + m_h; }
     int get_sx() const { return get_attribute("start_x"); }
     int get_sy() const { return get_attribute("start_y"); }
-    bool is_locked() const;
+    bool is_locked() const { return m_state == StateLocked; }
+    bool is_open() const { return m_state == StateOpen; }
     const char* get_data() const { return m_data.c_str(); }
 
     virtual bool get_visible(Map *map, int clip_x, int clip_y,
