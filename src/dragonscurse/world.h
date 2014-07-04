@@ -2,7 +2,6 @@
 #define _World_H
 
 #include <list>
-#include "SDL.h"
 #include "SDL_mixer.h"
 #include "phoboz/map.h"
 #include "object.h"
