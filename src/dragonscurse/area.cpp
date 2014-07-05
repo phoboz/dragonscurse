@@ -15,10 +15,6 @@ Area::Area(const char *name, MediaDB *media,
         m_type = TypeWarp;
         m_state = StateOpen;
     }
-    else if (strcmp(type, "travel") == 0) {
-        m_type = TypeTravel;
-        m_state = StateOpen;
-    }
     else {
         m_type = TypeUser;
         m_state = StateClosed;

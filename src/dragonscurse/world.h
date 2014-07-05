@@ -2,7 +2,6 @@
 #define _World_H
 
 #include <list>
-#include "SDL_mixer.h"
 #include "phoboz/map.h"
 #include "object.h"
 #include "player.h"
@@ -11,13 +10,11 @@
 
 class World {
 public:
-    World(Map *map, MediaDB *media, WorldDB *db, bool load_music = true);
+    World(Map *map, MediaDB *media, WorldDB *db);
 
     WorldDB* get_db() const { return m_db; }
     const char* get_filename() const { return m_map->get_filename().c_str(); }
 
-    bool start();
-    void end();
     Area* move(Player *player,
                int clip_x, int clip_y, int clip_w, int clip_h);
     void draw(SDL_Surface *dest, Player *player,
@@ -27,7 +24,6 @@ private:
     MediaDB *m_media;
     Map *m_map;
     int m_bg_color;
-    Mix_Music *m_music;
     std::list<Object*> m_objects;
     WorldDB *m_db;
 };

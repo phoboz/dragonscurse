@@ -43,5 +43,12 @@
     <sounds>
         <sound filename="sword.wav" />
     </sounds>
+    <musics>
+        <music filename="castle_01.ogg" />
+        <music filename="castle_02.ogg" />
+        <music filename="dragon_boss.ogg" />
+        <music filename="seaside.ogg" />
+        <music filename="village.ogg" />
+    </musics>
 </media>
 

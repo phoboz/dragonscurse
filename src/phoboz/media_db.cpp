@@ -2,7 +2,7 @@
 #include "phoboz/media_db.h"
 
 struct MediaNode {
-    enum Type { TypeSprite, TypeSound };
+    enum Type { TypeSprite, TypeSound, TypeMusic };
 
     MediaNode(Type type) :
         m_key(m_keygen++), m_ref(0), m_type(type), m_loaded(false) { }
@@ -31,6 +31,12 @@ struct SoundNode : public MediaNode {
     SoundNode() : MediaNode(TypeSound) { }
 
     Mix_Chunk *m_sample;
+};
+
+struct MusicNode : public MediaNode {
+    MusicNode() : MediaNode(TypeMusic) { }
+
+    Mix_Music *m_music;
 };
 
 int MediaNode::m_keygen = 1;
@@ -87,6 +93,26 @@ bool MediaDB::load_sound_attributes(SoundNode *sound, TiXmlElement *elmt)
     return result;
 }
 
+bool MediaDB::load_music_attributes(MusicNode *music, TiXmlElement *elmt)
+{
+    bool result = true;
+
+    TiXmlAttribute *attr = elmt->FirstAttribute();
+    while (attr) {
+        if (strcmp(attr->Name(), "filename") == 0) {
+            music->m_filename = std::string(attr->Value());
+        }
+        else {
+            result = false;
+            break;
+        }
+
+        attr = attr->Next();
+    }
+
+    return result;
+}
+
 bool MediaDB::load_nodes(TiXmlNode *node)
 {
     int result = true;
@@ -106,6 +132,13 @@ bool MediaDB::load_nodes(TiXmlNode *node)
                 m_media[sound->m_filename] = sound;
             }
         }
+        else if (strcmp(node->Value(), "music") == 0) {
+            MusicNode *music = new MusicNode;
+            result = load_music_attributes(music, node->ToElement());
+            if (result) {
+                m_media[music->m_filename] = music;
+            }
+        }
     }
 
     for (TiXmlNode *child = node->FirstChild();
@@ -120,6 +153,7 @@ bool MediaDB::load_nodes(TiXmlNode *node)
 }
 
 MediaDB::MediaDB(const char *name)
+    : m_mus_filename("")
 {
     TiXmlDocument doc(name);
     if (doc.LoadFile()) {
@@ -225,6 +259,64 @@ bool MediaDB::play_sound(const char *filename)
         if (load_sound(sound)) {
             if(Mix_PlayChannel(-1, sound->m_sample, 0) != -1) {
                 result = true;
+            }
+        }
+    }
+
+    return result;
+}
+
+bool MediaDB::load_music(MusicNode *music)
+{
+    bool result = false;
+
+    if (music->m_loaded) {
+        result = true;
+    }
+    else {
+        music->m_music = Mix_LoadMUS(music->m_filename.c_str());
+        if (music->m_music) {
+            music->m_loaded = true;
+            result = true;
+        }
+    }
+
+    return result;
+}
+
+void MediaDB::unload_music(const char *filename)
+{
+    MediaNode *media = m_media[std::string(filename)];
+    if (media->m_type == MediaNode::TypeMusic) {
+        MusicNode *music = (MusicNode *) media;
+        if (music->m_loaded) {
+            MusicNode *music = (MusicNode *) media;
+            Mix_FreeMusic(music->m_music);
+        }
+    }
+}
+
+bool MediaDB::play_music(const char *filename)
+{
+    bool result = false;
+
+    if (m_mus_filename == std::string(filename)) {
+        result = true;
+    }
+    else {
+        if (m_mus_filename != std::string("")) {
+            Mix_HaltMusic();
+            unload_music(m_mus_filename.c_str());
+        }
+
+        MediaNode *media = m_media[std::string(filename)];
+        if (media->m_type == MediaNode::TypeMusic) {
+            MusicNode *music = (MusicNode *) media;
+            if (load_music(music)) {
+                if(Mix_PlayMusic(music->m_music, -1) != -1) {
+                    m_mus_filename = music->m_filename;
+                    result = true;
+                }
             }
         }
     }

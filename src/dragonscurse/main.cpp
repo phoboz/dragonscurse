@@ -79,7 +79,7 @@ bool init()
 }
 
 bool load_area(const char *ar_name,
-               bool load_music, bool new_game,
+               bool new_game,
                const char *pl_name,
                int start_x = -1, int start_y = -1)
 {
@@ -91,7 +91,7 @@ bool load_area(const char *ar_name,
         return false;
     }
 
-    world = new World(map, media, db, load_music);
+    world = new World(map, media, db);
 
     const Tmx::PropertySet prop = tmx->GetProperties();
     if (start_x == -1) {
@@ -115,11 +115,6 @@ bool load_area(const char *ar_name,
         player->set_x(start_x);
         player->set_y(start_y);
     }
-
-    if (!world->start()) {
-        fprintf(stderr, "Fatal Error -- Unable to start map\n");
-        return 1;
-    }
 }
 
 void move()
@@ -128,12 +123,7 @@ void move()
                              screen_width, screen_height);
 
     if (area) {
-        bool load_music = false;
-        if (area->get_type() != Area::TypeWarp) {
-            load_music = true;
-            world->end();
-        }
-        load_area(area->get_name(), load_music,
+        load_area(area->get_name(),
                   area->get_type() == Area::TypeCurse, area->get_data(),
                   area->get_sx(), area->get_sy());
     }
@@ -177,7 +167,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    load_area(argv[1], true, true, argv[2], start_x, start_y);
+    load_area(argv[1], true, argv[2], start_x, start_y);
 
     while (!done) {
 

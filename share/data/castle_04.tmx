@@ -24,7 +24,7 @@
    <properties>
     <property name="start_x" value="3008"/>
     <property name="start_y" value="991"/>
-    <property name="type" value="travel"/>
+    <property name="type" value="warp"/>
    </properties>
   </object>
   <object name="unknown.tmx" type="Area" x="2272" y="352" width="64" height="64">

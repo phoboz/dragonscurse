@@ -11,27 +11,14 @@
 #include "statusbar.h"
 #include "world.h"
 
-World::World(Map *map, MediaDB *media, WorldDB *db, bool load_music)
+World::World(Map *map, MediaDB *media, WorldDB *db)
     : m_map(map), m_media(media), m_db(db)
 {
-    std::string music_fn;
-
     // Load attributes
     m_bg_color = m_map->get_numeric_property("bg_color");
 
-    // Load music
-    if (load_music) {
-        music_fn = m_map->get_literal_property("music");
-        if (music_fn.empty()) {
-            m_music = 0;
-        }
-        else {
-            m_music = Mix_LoadMUS(music_fn.c_str());
-        }
-    }
-    else {
-        m_music = 0;
-    }
+    // Play music
+    media->play_music(m_map->get_literal_property("music").c_str());
 
     int num_groups = map->get_num_object_groups();
     for (int object_group = 0; object_group < num_groups; object_group++) {
@@ -62,34 +49,6 @@ World::World(Map *map, MediaDB *media, WorldDB *db, bool load_music)
                           << std::endl;
             }
         }
-    }
-}
-
-bool World::start()
-{
-    bool status;
-
-    if (m_music) {
-
-        // Play music infinite looping
-        if(Mix_PlayMusic(m_music, -1) == -1) {
-            status = false;
-        }
-        else {
-            status = true;
-        }
-    }
-    else {
-        status = true;
-    }
-
-    return status;
-}
-
-void World::end()
-{
-    if (m_music) {
-        Mix_HaltMusic();
     }
 }
 
