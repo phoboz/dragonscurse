@@ -7,9 +7,9 @@
 struct WorldNode {
     enum Type { TypeObject, TypeLock };
 
-    WorldNode(Type type) : m_key(key_gen++), m_type(type) { }
+    WorldNode(Type type) : m_key(m_keygen++), m_type(type) { }
 
-    static int key_gen;
+    static int m_keygen;
 
     int m_key;
     Type m_type;
@@ -32,7 +32,7 @@ struct WorldLocation {
     std::list<WorldNode*> m_nodes;
 };
 
-int WorldNode::key_gen = 1;
+int WorldNode::m_keygen = 1;
 
 bool WorldDB::load_object_attributes(WorldObject *object, TiXmlElement *elmt)
 {

@@ -10,6 +10,7 @@
 #include "phoboz/ctrl.h"
 #include "phoboz/map.h"
 #include "phoboz/fps_timer.h"
+#include "phoboz/media_db.h"
 #include "object.h"
 #include "object_factory.h"
 #include "world_db.h"
@@ -20,6 +21,7 @@ static SDL_Surface *screen;
 static int screen_width = 640;
 static int screen_height = 480;
 static Map *map;
+static MediaDB *media;
 static Player *player;
 static WorldDB *db;
 static World *world;
@@ -64,6 +66,8 @@ bool init()
     }
 
     Mix_Volume(-1, MIX_MAX_VOLUME);
+
+    media = new MediaDB("media.xml");
 
     font = new Font("fntdag8x8.png", 8, 8, 1, 1);
     if (!font->get_loaded()) {
