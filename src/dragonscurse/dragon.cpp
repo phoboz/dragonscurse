@@ -4,11 +4,11 @@
 #include "phoboz/ctrl.h"
 #include "dragon.h"
 
-Dragon::Dragon(const char *fn, int x, int y, Direction dir)
-        : Player(fn, x, y, dir),
+Dragon::Dragon(const char *fn, MediaDB *media, int x, int y, Direction dir)
+        : Player(fn, media, x, y, dir),
           m_attack_ready(true)
 {
-    m_bullet = new Bullet(get_string("bullet"));
+    m_bullet = new Bullet(get_string("bullet"), media);
     if (!m_bullet->get_loaded()) {
         exit(1);
     }

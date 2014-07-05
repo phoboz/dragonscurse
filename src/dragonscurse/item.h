@@ -6,8 +6,8 @@
 
 class Item : public Object {
 public:
-    Item(const char *fn, int world_key);
-    Item(const char *fn, int x, int y);
+    Item(const char *fn, MediaDB *media, int world_key);
+    Item(const char *fn, MediaDB *media, int x, int y);
 
     void aquire(World *world);
 

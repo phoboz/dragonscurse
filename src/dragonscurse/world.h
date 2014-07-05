@@ -11,7 +11,7 @@
 
 class World {
 public:
-    World(Map *map, WorldDB *db, bool load_music = true);
+    World(Map *map, MediaDB *media, WorldDB *db, bool load_music = true);
 
     WorldDB* get_db() const { return m_db; }
     const char* get_filename() const { return m_map->get_filename().c_str(); }
@@ -24,6 +24,7 @@ public:
               int clip_x, int clip_y, int clip_w, int clip_h);
 
 private:
+    MediaDB *m_media;
     Map *m_map;
     int m_bg_color;
     Mix_Music *m_music;

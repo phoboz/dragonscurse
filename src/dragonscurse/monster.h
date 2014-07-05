@@ -9,7 +9,7 @@ class World;
 
 class Monster : public Actor {
 public:
-    Monster(const char *fn, int x, int y, Direction dir);
+    Monster(const char *fn, MediaDB *media, int x, int y, Direction dir);
 
     virtual void world_initialize(World *world);
 

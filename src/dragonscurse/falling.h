@@ -6,7 +6,7 @@
 
 class Falling : public Monster {
 public:
-    Falling(const char *fn, int x, int y, Direction dir);
+    Falling(const char *fn, MediaDB *media, int x, int y, Direction dir);
     virtual void initialize();
     virtual void move(Map *map);
 

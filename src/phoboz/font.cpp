@@ -4,14 +4,15 @@
 
 #include "phoboz/font.h"
 
-Font::Font(const char *fn, int w, int h, int margin, int spacing)
+Font::Font(const char *fn, MediaDB *media)
+    : m_media(media)
 {
-    m_spr = new Sprite(fn, w, h, margin, spacing);
+    m_spr = media->get_sprite(fn);
 }
 
 Font::~Font()
 {
-    delete m_spr;
+    m_media->leave_sprite(m_spr);
 }
 
 void Font::draw(SDL_Surface *dest, int x, int y, const char *msg,

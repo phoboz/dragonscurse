@@ -9,7 +9,7 @@ struct ObjectInfo;
 
 class Curse : public Object {
 public:
-    Curse(ObjectInfo *info);
+    Curse(ObjectInfo *info, MediaDB *media);
 
     const char* get_destination() { return m_destination.c_str(); }
     const char* get_player() { return m_player.c_str(); }

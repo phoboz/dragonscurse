@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 #include "tinyxml.h"
-#include "phoboz/sprite.h"
+#include "phoboz/media_db.h"
 #include "phoboz/map.h"
 
 class World;
@@ -45,7 +45,7 @@ public:
           m_reused(false),
           m_xref(0), m_yref(0) { }
     ~Object();
-    bool load(const char *fn);
+    bool load(const char *fn, MediaDB *media);
     bool get_loaded() const { return m_loaded; }
     virtual void initialize() { }
 
@@ -109,6 +109,7 @@ protected:
     int m_frame;
     Direction m_dir;
     int m_xref, m_yref;
+    MediaDB *m_media;
 
 private:
     bool load_object_attributes(TiXmlElement *elmt);

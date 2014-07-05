@@ -6,8 +6,8 @@
 
 class Human : public Knight {
 public:
-    Human(const char *fn, int x, int y, Direction dir)
-        : Knight(fn, x, y, dir) { }
+    Human(const char *fn, MediaDB *media, int x, int y, Direction dir)
+        : Knight(fn, media, x, y, dir) { }
 };
 
 #endif

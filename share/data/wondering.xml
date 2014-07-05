@@ -26,7 +26,6 @@
                    weak_right="50"
                    weak_bottom="60">
                 <object image="wondering.png"
-                        width="50" height="60" margin="1" spacing="1"
                         left="1" right="59" top="1" bottom="59" />
             </actor>
         </monster>

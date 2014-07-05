@@ -6,10 +6,10 @@
 
 class Bullet : public Object {
 public:
-    Bullet(const char *fn)
+    Bullet(const char *fn, MediaDB *media)
         : Object(Object::TypeBullet),
           m_moving(false), m_loaded(true),
-          m_distance(0) { load(fn); }
+          m_distance(0) { load(fn, media); }
 
     bool fire(int x, int y, Direction dir,
               VerticalDirection vert_dir = VerticalNone);

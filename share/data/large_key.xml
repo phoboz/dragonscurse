@@ -2,7 +2,6 @@
 <item move_speed="14" weight="2">
     <key>
         <object image="large_key.png"
-                width="32" height="32" margin="1" spacing="1"
                 left="0" right="32" top="0" bottom="32" />
     </key>
 </item>

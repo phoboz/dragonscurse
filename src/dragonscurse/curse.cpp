@@ -1,7 +1,7 @@
 #include "world_db.h"
 #include "curse.h"
 
-Curse::Curse(ObjectInfo *info)
+Curse::Curse(ObjectInfo *info, MediaDB *media)
     : Object(Object::TypeCurse),
       m_world_key(info->key),
       m_player(std::string(info->data.curse.player)),
@@ -10,7 +10,7 @@ Curse::Curse(ObjectInfo *info)
       m_sy(info->data.curse.start_y),
       m_anim_dir(AnimUp)
 {
-    load(info->data.curse.name);
+    load(info->data.curse.name, media);
 }
 
 void Curse::move(Map *map)

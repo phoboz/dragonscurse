@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include "meka_dragon.h"
 
-MekaDragon::MekaDragon(const char *fn, int x, int y, Direction dir)
-    : Monster(fn, x, y, dir),
+MekaDragon::MekaDragon(const char *fn, MediaDB *media,
+                       int x, int y, Direction dir)
+    : Monster(fn, media, x, y, dir),
       m_horizontal_dir(HorizontalForward),
       m_bullet_index(0)
 {
@@ -13,7 +14,7 @@ MekaDragon::MekaDragon(const char *fn, int x, int y, Direction dir)
     int num_bullets = get_attribute("num_bullets");
 
     for (int i = 0; i < num_bullets; i++) {
-        Bullet *bullet = new Bullet(bullet_name);
+        Bullet *bullet = new Bullet(bullet_name, media);
         if (!bullet->get_loaded()) {
             exit(1);
         }

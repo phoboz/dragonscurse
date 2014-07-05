@@ -18,7 +18,6 @@
                    weak_right="32"
                    weak_bottom="32">
                 <object image="falling_block.png"
-                        width="32" height="32" margin="1" spacing="1"
                         left="0" right="32" top="0" bottom="32" />
             </actor>
         </monster>

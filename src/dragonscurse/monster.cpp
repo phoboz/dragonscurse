@@ -3,11 +3,11 @@
 #include "curse.h"
 #include "monster.h"
 
-Monster::Monster(const char *fn, int x, int y, Direction dir)
+Monster::Monster(const char *fn, MediaDB *media, int x, int y, Direction dir)
     : Actor(Object::TypeMonster, x, y, dir),
       m_invinsible(false)
 {
-    load(fn);
+    load(fn, media);
     m_curr_hp = get_attribute("hp");
     set_still();
 }
@@ -24,11 +24,12 @@ void Monster::world_initialize(World *world)
             switch(info.object_type) {
                 case Object::TypeItem:
                     m_objects.push_back(new Item(info.data.item.name,
+                                                 m_media,
                                                  info.key));
                     break;
 
                 case Object::TypeCurse:
-                    m_objects.push_back(new Curse(&info));
+                    m_objects.push_back(new Curse(&info, m_media));
                     break;
 
                 default:

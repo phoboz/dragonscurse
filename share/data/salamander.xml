@@ -34,7 +34,6 @@
                    weak_right="56"
                    weak_bottom="64">
                 <object image="salamander.png"
-                        width="68" height="65" margin="1" spacing="1"
                         left="12" right="56" top="0" bottom="64" />
             </actor>
         </player>

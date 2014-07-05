@@ -8,17 +8,20 @@
 class ObjectFactory {
 public:
     static Object* create_object(const char *name,
+                                 MediaDB *media,
                                  const char *type,
                                  int x, int y,
                                  int w, int h,
                                  Object::Direction dir,
                                  const Tmx::PropertySet &prop);
     static Object* create_object(const char *name,
+                                 MediaDB *media,
                                  const char *type,
                                  int x, int y,
                                  int w, int h,
                                  const Tmx::PropertySet &prop);
     static Object* create_object(const char *name,
+                                 MediaDB *media,
                                  const char *type,
                                  int x, int y,
                                  int w = 0, int h = 0,

@@ -36,10 +36,10 @@
                    weak_right="46"
                    weak_bottom="59">
                 <object image="mouseman.png"
-                        width="60" height="60" margin="1" spacing="1"
                         left="16" right="46" top="28" bottom="59" />
             </actor>
         </player>
+        <string strike="sword.wav" />
     </knight>
 </mouseman>
 

@@ -26,7 +26,6 @@
                    weak_right="50"
                    weak_bottom="50">
                 <object image="cobra_red.png"
-                        width="50" height="50" margin="1" spacing="1"
                         left="8" right="42" top="2" bottom="49" />
             </actor>
         </monster>

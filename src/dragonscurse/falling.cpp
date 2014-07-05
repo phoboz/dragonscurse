@@ -1,8 +1,8 @@
 #include <iostream>
 #include "falling.h"
 
-Falling::Falling(const char *fn, int x, int y, Direction dir)
-    : Monster(fn, x, y, dir),
+Falling::Falling(const char *fn, MediaDB *media, int x, int y, Direction dir)
+    : Monster(fn, media, x, y, dir),
       m_initialized(false)
 {
     set_invinsible(true);

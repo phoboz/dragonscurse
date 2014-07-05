@@ -1,19 +1,19 @@
 #include "item.h"
 
-Item::Item(const char *fn, int world_key)
+Item::Item(const char *fn, MediaDB *media, int world_key)
     : Object(TypeItem),
       m_world_key(world_key)
 {
-    load(fn);
+    load(fn, media);
 
     m_dy = -get_attribute("move_speed");
     m_delta_y = m_dy;
 }
 
-Item::Item(const char *fn, int x, int y)
+Item::Item(const char *fn, MediaDB *media, int x, int y)
     : Object(TypeItem, x, y)
 {
-    Item(fn, 0);
+    Item(fn, media, 0);
 }
 
 void Item::aquire(World *world)

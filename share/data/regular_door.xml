@@ -6,7 +6,6 @@
           small_key.xml="3"
           large_key.xml="4">
         <object image="regular_door.png"
-                width="64" height="64" margin="1" spacing="1"
                 left="0" right="64" top="0" bottom="64" />
     </door>
 </area>

@@ -6,7 +6,7 @@
 
 class Morph : public Object {
 public:
-    Morph(const char *fn, int x, int y, Object::Direction dir);
+    Morph(const char *fn, MediaDB *media, int x, int y, Object::Direction dir);
 
     bool is_done() const { return m_done; }
 

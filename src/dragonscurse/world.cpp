@@ -11,8 +11,8 @@
 #include "statusbar.h"
 #include "world.h"
 
-World::World(Map *map, WorldDB *db, bool load_music)
-    : m_map(map), m_db(db)
+World::World(Map *map, MediaDB *media, WorldDB *db, bool load_music)
+    : m_map(map), m_media(media), m_db(db)
 {
     std::string music_fn;
 
@@ -46,6 +46,7 @@ World::World(Map *map, WorldDB *db, bool load_music)
                 prop.GetLiteralProperty(std::string("direction"));
             Object *object = ObjectFactory::create_object(
                                  obj->GetName().c_str(),
+                                 m_media,
                                  obj->GetType().c_str(),
                                  obj->GetX(),
                                  obj->GetY(),
@@ -193,6 +194,7 @@ Area* World::move(Player *player,
                 curse->move(m_map);
                 if (player->check_collision(curse)) {
                     player->set_morph(new Morph("human_to_salamander.xml",
+                                                m_media,
                                                 player->get_x(),
                                                 player->get_y(),
                                                 player->get_dir()));

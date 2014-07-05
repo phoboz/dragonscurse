@@ -15,7 +15,8 @@ public:
     enum Type { TypeWarp, TypeTravel, TypeCurse, TypeMorph, TypeUser };
     enum State { StateLocked, StateClosed, StateOpening, StateOpen };
 
-    Area(const char *name, const char *type, int x, int y, int w, int h);
+    Area(const char *name, MediaDB *media,
+         const char *type, int x, int y, int w, int h);
     Area(Curse *curse);
 
     virtual void world_initialize(World *world);

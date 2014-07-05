@@ -6,31 +6,18 @@ Object::~Object()
 {
     if (m_loaded) {
         m_loaded = false;
-        delete m_spr;
+        m_media->leave_sprite(m_spr);
     }
 }
 
 bool Object::load_object_attributes(TiXmlElement *elmt)
 {
     std::string image;
-    int w, h, margin, spacing;
 
     TiXmlAttribute *attr = elmt->FirstAttribute();
     while (attr) {
         if (strcmp(attr->Name(), "image") == 0) {
             image = std::string(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "width") == 0) {
-            w = atoi(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "height") == 0) {
-            h = atoi(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "margin") == 0) {
-            margin = atoi(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "spacing") == 0) {
-            spacing = atoi(attr->Value());
         }
         else {
             m_attributes[std::string(attr->Name())] = atoi(attr->Value());
@@ -39,8 +26,8 @@ bool Object::load_object_attributes(TiXmlElement *elmt)
         attr = attr->Next();
     }
 
-    m_spr = new Sprite(image.c_str(), w, h, margin, spacing);
-    if (m_spr->get_loaded()) {
+    m_spr = m_media->get_sprite(image.c_str());
+    if (m_spr && m_spr->get_loaded()) {
         m_loaded = true;
     }
 
@@ -92,8 +79,10 @@ bool Object::load_nodes(TiXmlNode *node)
     return result;
 }
 
-bool Object::load(const char *fn)
+bool Object::load(const char *fn, MediaDB *media)
 {
+    m_media = media;
+
     TiXmlDocument doc(fn);
     if (doc.LoadFile()) {
         load_nodes(&doc);

@@ -32,7 +32,6 @@
                weak_right="31"
                weak_bottom="57">
             <object image="meka.png"
-                    width="128" height="138" margin="1" spacing="1"
                     left="4" right="124" top="8" bottom="136" />
         </actor>
     </monster>

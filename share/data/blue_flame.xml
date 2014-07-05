@@ -1,6 +1,5 @@
 <curse start="0" end="2" treshold="14">
     <object image="blue_flame.png"
-            width="32" height="50" margin="1" spacing="1"
             left="0" right="32" top="0" bottom="50" />
 </curse>
 

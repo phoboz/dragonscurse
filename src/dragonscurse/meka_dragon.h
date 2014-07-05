@@ -8,7 +8,7 @@
 
 class MekaDragon : public Monster {
 public:
-    MekaDragon(const char *fn, int x, int y, Direction dir);
+    MekaDragon(const char *fn, MediaDB *media, int x, int y, Direction dir);
 
     virtual bool attack_actor(Actor *actor);
 

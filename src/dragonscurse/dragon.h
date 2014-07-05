@@ -7,7 +7,7 @@
 
 class Dragon : public Player {
 public:
-    Dragon(const char *fn, int x, int y, Direction dir);
+    Dragon(const char *fn, MediaDB *media, int x, int y, Direction dir);
     virtual bool attack_actor(Actor *actor);
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,

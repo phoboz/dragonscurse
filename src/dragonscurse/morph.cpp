@@ -1,10 +1,11 @@
 #include "morph.h"
 
-Morph::Morph(const char *fn, int x, int y, Object::Direction dir)
+Morph::Morph(const char *fn, MediaDB *media,
+             int x, int y, Object::Direction dir)
     : Object(TypeMorph, x, y, dir),
       m_done(false)
 {
-    load(fn);
+    load(fn, media);
 
     if (m_dir == Right) {
         m_frame = get_attribute("right_start");

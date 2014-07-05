@@ -69,7 +69,7 @@ bool init()
 
     media = new MediaDB("media.xml");
 
-    font = new Font("fntdag8x8.png", 8, 8, 1, 1);
+    font = new Font("fntdag8x8.png", media);
     if (!font->get_loaded()) {
         fprintf(stderr, "Unable to load font\n");
         return false;
@@ -91,7 +91,7 @@ bool load_area(const char *ar_name,
         return false;
     }
 
-    world = new World(map, db, load_music);
+    world = new World(map, media, db, load_music);
 
     const Tmx::PropertySet prop = tmx->GetProperties();
     if (start_x == -1) {
@@ -102,7 +102,8 @@ bool load_area(const char *ar_name,
     }
 
     if (new_game) {
-        player = (Player *) ObjectFactory::create_object(pl_name, "Player",
+        player = (Player *) ObjectFactory::create_object(pl_name, media,
+                                                         "Player",
                                                          start_x, start_y,
                                                          Object::Right);
         if (!player->get_loaded()) {

@@ -5,7 +5,8 @@
 #include "world.h"
 #include "area.h"
 
-Area::Area(const char *name, const char *type, int x, int y, int w, int h)
+Area::Area(const char *name, MediaDB *media,
+           const char *type, int x, int y, int w, int h)
     : Object(Object::TypeArea, x, y),
       m_name(name),
       m_h(h), m_w(w)
@@ -21,7 +22,7 @@ Area::Area(const char *name, const char *type, int x, int y, int w, int h)
     else {
         m_type = TypeUser;
         m_state = StateClosed;
-        load(type);
+        load(type, media);
     }
 
     m_frame = get_attribute("open_start");

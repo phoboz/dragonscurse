@@ -6,8 +6,8 @@
 
 class LockFlyer : public Monster {
 public:
-    LockFlyer(const char *fn, int x, int y, Direction dir)
-        : Monster(fn, x, y, dir),
+    LockFlyer(const char *fn, MediaDB *media, int x, int y, Direction dir)
+        : Monster(fn, media, x, y, dir),
           m_vertical_dir(Object::VerticalNone) { }
     virtual void move(Map *map);
 

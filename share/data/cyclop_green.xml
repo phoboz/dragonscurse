@@ -19,7 +19,6 @@
                    weak_right="50"
                    weak_bottom="66">
                 <object image="cyclop_green.png"
-                        width="50" height="66" margin="1" spacing="1"
                         left="1" right="48" top="2" bottom="65" />
             </actor>
         </monster>

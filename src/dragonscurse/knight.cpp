@@ -98,6 +98,7 @@ void Knight::move(Map *map)
                 m_attack_ready = false;
 
                 // Attack
+                m_media->play_sound(get_string("strike"));
                 set_attack();
             }
         }

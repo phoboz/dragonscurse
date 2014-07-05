@@ -22,7 +22,6 @@
                    weak_right="34"
                    weak_bottom="34">
                 <object image="bat_red.png"
-                        width="34" height="34" margin="1" spacing="1"
                         left="1" right="33" top="1" bottom="33" />
             </actor>
         </monster>

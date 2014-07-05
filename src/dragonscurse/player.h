@@ -11,10 +11,10 @@ class Item;
 
 class Player : public Actor {
 public:
-    Player(const char *fn, int x, int y, Direction dir)
+    Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
         : Actor(Object::TypePlayer, x, y, dir),
           m_morph(0), m_area(0),
-          m_jump_ready(true) { load(fn); }
+          m_jump_ready(true) { load(fn, media); }
 
     virtual bool set_hit(Object *object);
     virtual bool check_collision(Object *object);
