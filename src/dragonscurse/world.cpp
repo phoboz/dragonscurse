@@ -96,7 +96,7 @@ Area* World::move(Player *player,
                         // Check if the player has the key
                         Item *item = player->check_item(area->get_data());
                         if (item) {
-                            if (area->move_unlock(this)) {
+                            if (area->unlock(this, item)) {
                                 player->remove_item(item);
                             }
                         }

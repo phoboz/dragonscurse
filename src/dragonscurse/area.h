@@ -7,6 +7,7 @@
 #include "world_db.h"
 
 class Actor;
+class Item;
 class Curse;
 class World;
 
@@ -39,7 +40,7 @@ public:
                              int clip_w, int clip_h) const { return true; }
 
     virtual void move(Map *map);
-    bool move_unlock(World *world);
+    bool unlock(World *world, Item *item);
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 

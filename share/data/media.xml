@@ -11,6 +11,8 @@
                 width="50" height="50" margin="1" spacing="1" />
         <sprite filename="cobra_red.png"
                 width="50" height="50" margin="1" spacing="1" />
+        <sprite filename="coin.png"
+                width="32" height="32" margin="1" spacing="1" />
         <sprite filename="cyclop_green.png"
                 width="50" height="66" margin="1" spacing="1" />
         <sprite filename="cyclop_red.png"

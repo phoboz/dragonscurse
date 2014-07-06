@@ -1,6 +1,7 @@
 #include <string.h>
 #include "phoboz/ctrl.h"
 #include "actor.h"
+#include "item.h"
 #include "curse.h"
 #include "world.h"
 #include "area.h"
@@ -96,29 +97,31 @@ void Area::move(Map *map)
     }
 }
 
-bool Area::move_unlock(World *world)
+bool Area::unlock(World *world, Item *item)
 {
     bool result = false;
 
     if (m_type == TypeUser) {
         if (m_state == StateLocked) {
-            int input = get_input();
-            if (input & PRESS_UP) {
-                if (m_open_timer.expired(get_attribute("open_time"))) {
-                    m_open_timer.reset();
+            if (m_data == std::string(item->get_filename())) {
+                int input = get_input();
+                if (input & PRESS_UP) {
+                    if (m_open_timer.expired(get_attribute("open_time"))) {
+                        m_open_timer.reset();
 
-                    // Unlock in database
-                    WorldDB *db = world->get_db();
-                    db->remove(m_world_key);
+                        // Unlock in database
+                        WorldDB *db = world->get_db();
+                        db->remove(m_world_key);
 
-                    // Mark as unlocked
-                    m_state = StateClosed;
-                    m_frame = get_attribute("open_start");
-                    result = true;
+                        // Mark as unlocked
+                        m_state = StateClosed;
+                        m_frame = get_attribute("open_start");
+                        result = true;
+                    }
                 }
-            }
-            else {
-                m_open_timer.reset();
+                else {
+                    m_open_timer.reset();
+                }
             }
         }
     }
