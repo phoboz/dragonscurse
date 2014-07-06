@@ -38,10 +38,15 @@ void Material::move(Map *map)
 {
     check_ground(map);
 
-    if (m_delta_y > 0) {
+    if (!m_dy) {
+        m_frame = get_attribute("still");
+    }
+    else if (m_delta_y > 0) {
+        m_frame = get_attribute("fall");
         m_y += m_dy;
     }
     else if (m_delta_y < 0) {
+        m_frame = get_attribute("rise");
         m_y -= m_dy;
     }
 }

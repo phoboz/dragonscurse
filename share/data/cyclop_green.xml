@@ -21,6 +21,7 @@
                 <object image="cyclop_green.png"
                         left="1" right="48" top="2" bottom="65" />
             </actor>
+            <string collectable="coin.xml" />
         </monster>
     </walker>
 </cyclop>

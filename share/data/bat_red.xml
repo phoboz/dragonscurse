@@ -24,6 +24,7 @@
                 <object image="bat_red.png"
                         left="1" right="33" top="1" bottom="33" />
             </actor>
+            <string collectable="coin.xml" />
         </monster>
     </lock_flyer>
 </bat>

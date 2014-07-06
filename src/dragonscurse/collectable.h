@@ -4,9 +4,15 @@
 #include "material.h"
 
 class Collectable : public Material {
+public:
+    int get_value() const { return m_value; }
+
 protected:
-    Collectable(const char *fn, MediaDB *media)
-        : Material(TypeCollectable, fn, media) { }
+    int m_value;
+
+    Collectable(const char *fn, MediaDB *media, int value = 0)
+        : Material(TypeCollectable, fn, media),
+          m_value(value) { }
 };
 
 #endif

@@ -158,6 +158,8 @@ Area* World::move(Player *player,
                     // TODO:
                     std::cout << "Picked up collectable: "
                               << collectable->get_filename()
+                              << " of value: "
+                              << collectable->get_value()
                               << std::endl;
                     perished.push_back(collectable);
                 }

@@ -28,6 +28,7 @@
                 <object image="wondering.png"
                         left="1" right="59" top="1" bottom="59" />
             </actor>
+            <string collectable="coin.xml" />
         </monster>
     </dancer>
 </wondering>

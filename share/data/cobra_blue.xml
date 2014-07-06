@@ -28,6 +28,7 @@
                 <object image="cobra_blue.png"
                         left="8" right="42" top="2" bottom="49" />
             </actor>
+            <string collectable="coin.xml" />
         </monster>
     </guardian>
 </cobra>

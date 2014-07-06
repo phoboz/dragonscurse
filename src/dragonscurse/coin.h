@@ -5,8 +5,7 @@
 
 class Coin : public Collectable {
 public:
-    Coin(const char *fn, MediaDB *media)
-        : Collectable(fn, media) { }
+    Coin(const char *fn, MediaDB *media);
 
 private:
 };
