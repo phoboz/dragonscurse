@@ -5,6 +5,7 @@
 #include "object_factory.h"
 #include "player.h"
 #include "monster.h"
+#include "collectable.h"
 #include "item.h"
 #include "curse.h"
 #include "morph.h"
@@ -143,6 +144,22 @@ Area* World::move(Player *player,
                     item->aquire(this);
                     item->set_reused(true);
                     perished.push_back(item);
+                }
+            }
+
+            // Handle collectable objects
+            else if (object_type == Object::TypeCollectable) {
+                Collectable *collectable = (Collectable *) object;
+
+                collectable->move(m_map);
+
+                // Check if player picked up the collectable
+                if (player->check_collision(collectable)) {
+                    // TODO:
+                    std::cout << "Picked up collectable: "
+                              << collectable->get_filename()
+                              << std::endl;
+                    perished.push_back(collectable);
                 }
             }
 

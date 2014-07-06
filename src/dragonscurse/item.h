@@ -1,22 +1,22 @@
 #ifndef _Item_H
 #define _Item_H
 
-#include "object.h"
+#include "material.h"
 #include "world.h"
 
-class Item : public Object {
+class Item : public Material {
 public:
-    Item(const char *fn, MediaDB *media, int world_key);
-    Item(const char *fn, MediaDB *media, int x, int y);
+    Item(const char *fn, MediaDB *media, int world_key)
+        : Material(TypeItem, fn, media),
+          m_world_key(world_key) { }
+    Item(const char *fn, MediaDB *media, int x, int y)
+        : Material(TypeItem, fn, media, x, y),
+          m_world_key(0) { }
 
     void aquire(World *world);
 
-    void move(Map *map);
-
 private:
-    void check_ground(Map *map);
 
-    int m_delta_y;
     int m_world_key;
 };
 

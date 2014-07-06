@@ -23,12 +23,12 @@ public:
     static Object* create_object(const char *name,
                                  MediaDB *media,
                                  const char *type,
-                                 int x, int y,
+                                 int x = 0, int y = 0,
                                  int w = 0, int h = 0,
                                  Object::Direction dir = Object::Right);
 
 private:
-    static bool match_node(TiXmlElement *elmt);
+    static bool match_node_type(TiXmlElement *elmt);
     static bool search_nodes(TiXmlNode *node);
 };
 

@@ -5,7 +5,7 @@
             attack_medium="10"
             attack_low="30"
             attack_time="20">
-        <player player_type="dragon"
+        <player type="dragon"
                 jump_speed="4"
                 jump_limit="20">
             <actor move_speed="2"

@@ -1,6 +1,8 @@
 #include "world.h"
 #include "item.h"
+#include "coin.h"
 #include "curse.h"
+#include "object_factory.h"
 #include "monster.h"
 
 Monster::Monster(const char *fn, MediaDB *media, int x, int y, Direction dir)
@@ -66,6 +68,12 @@ Object* Monster::release_object()
     if (m_objects.size()) {
         object = m_objects.back();
         m_objects.pop_back();
+    }
+    else {
+        const char *col = get_string("collectable");
+        if (col) {
+            object = ObjectFactory::create_object(col, m_media, "Collectable");
+        }
     }
 
     return object;

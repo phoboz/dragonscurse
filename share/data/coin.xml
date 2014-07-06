@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<material  move_speed="14" weight="2">
+    <collectable type="coin">
+        <coin>
+            <object image="coin.png"
+                    left="0" right="32" top="0" bottom="32" />
+        </coin>
+    </collectable>
+</material>
+

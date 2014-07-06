@@ -1,0 +1,2 @@
+#include "coin.h"
+

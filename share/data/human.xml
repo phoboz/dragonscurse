@@ -7,7 +7,7 @@
             attack_low_top="46"
             attack_low_bottom="54"
             attack_time="10">
-        <player player_type="human"
+        <player type="human"
                 jump_speed="6"
                 jump_limit="18">
             <actor move_speed="3"

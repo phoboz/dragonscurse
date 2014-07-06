@@ -17,6 +17,7 @@ public:
         TypeMonster,
         TypeBullet,
         TypeItem,
+        TypeCollectable,
         TypeCurse,
         TypeMorph,
         TypeArea

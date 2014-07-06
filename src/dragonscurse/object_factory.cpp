@@ -5,6 +5,7 @@
 #include <string>
 #include "object_factory.h"
 #include "player.h"
+#include "coin.h"
 #include "knight.h"
 #include "human.h"
 #include "dragon.h"
@@ -19,13 +20,13 @@
 
 static char priv_object_type[80];
 
-bool ObjectFactory::match_node(TiXmlElement *elmt)
+bool ObjectFactory::match_node_type(TiXmlElement *elmt)
 {
     bool result = false;
 
     TiXmlAttribute *attr = elmt->FirstAttribute();
     while (attr) {
-        if (strcmp(attr->Name(), "player_type") == 0) {
+        if (strcmp(attr->Name(), "type") == 0) {
             strcpy(priv_object_type, attr->Value());
             result = true;
         }
@@ -42,7 +43,10 @@ bool ObjectFactory::search_nodes(TiXmlNode *node)
 
     if (node->Type() == TiXmlNode::TINYXML_ELEMENT) {
         if (strcmp(node->Value(), "player") == 0) {
-            result = match_node(node->ToElement());
+            result = match_node_type(node->ToElement());
+        }
+        else if (strcmp(node->Value(), "collectable") == 0) {
+            result = match_node_type(node->ToElement());
         }
     }
 
@@ -84,6 +88,16 @@ Object* ObjectFactory::create_object(const char *name,
         }
         else {
             object = new Player(name, media, x, y, dir);
+        }
+    }
+    else if (strcmp(type, "Collectable") == 0) {
+        TiXmlDocument doc(name);
+        if (doc.LoadFile()) {
+            search_nodes(&doc);
+        }
+
+        if (strcmp(priv_object_type, "coin") == 0) {
+            object = new Coin(name, media);
         }
     }
     else if (strcmp(type, "Walker") == 0) {
