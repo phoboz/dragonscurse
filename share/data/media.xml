@@ -31,6 +31,10 @@
                 width="68" height="65" margin="1" spacing="1" />
         <sprite filename="large_key.png"
                 width="32" height="32" margin="1" spacing="1" />
+        <sprite filename="master_skeleton.png"
+                width="50" height="66" margin="1" spacing="1" />
+        <sprite filename="master_skull.png"
+                width="35" height="35" margin="1" spacing="1" />
         <sprite filename="meka.png"
                 width="128" height="138" margin="1" spacing="1" />
         <sprite filename="mouseman.png"
@@ -39,6 +43,10 @@
                 width="64" height="64" margin="1" spacing="1" />
         <sprite filename="salamander.png"
                 width="68" height="65" margin="1" spacing="1" />
+        <sprite filename="skeleton.png"
+                width="50" height="60" margin="1" spacing="1" />
+        <sprite filename="skull.png"
+                width="32" height="28" margin="1" spacing="1" />
         <sprite filename="wondering.png"
                 width="50" height="60" margin="1" spacing="1" />
     </sprites>
