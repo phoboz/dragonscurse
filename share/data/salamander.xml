@@ -6,7 +6,7 @@
             attack_low="30"
             attack_time="20">
         <player type="dragon"
-                jump_speed="4"
+                jump_speed="5"
                 jump_limit="20">
             <actor move_speed="2"
                    treshold="5"

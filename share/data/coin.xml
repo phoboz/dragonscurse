@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <coin max_value="5">
      <collectable type="coin">
-        <material move_speed="14" weight="2" rise="0" fall="1" still="2">
+        <material move_speed="16" weight="2" rise="0" fall="1" still="2">
             <object image="coin.png"
                     left="0" right="32" top="0" bottom="32" />
         </material>

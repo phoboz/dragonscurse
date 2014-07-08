@@ -145,12 +145,27 @@ void flip()
 
 int main(int argc, char *argv[])
 {
+    static char map_name[32];
+    static char player_name[32];
     SDL_Event event;
     FpsTimer timer;
     int done = 0;
-    char type[32];
     int start_x = -1;
     int start_y = -1;
+
+    if (argc > 1) {
+        strcpy(map_name, argv[1]);
+    }
+    else {
+        strcpy(map_name, "castle_01.tmx");
+    }
+
+    if (argc > 2) {
+        strcpy(player_name, argv[2]);
+    }
+    else {
+        strcpy(player_name, "human.xml");
+    }
 
     if (argc > 4) {
         start_x = atoi(argv[3]);
@@ -167,7 +182,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    load_area(argv[1], true, argv[2], start_x, start_y);
+    load_area(map_name, true, player_name, start_x, start_y);
 
     while (!done) {
 
