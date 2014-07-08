@@ -292,6 +292,7 @@ void MediaDB::unload_music(const char *filename)
         if (music->m_loaded) {
             MusicNode *music = (MusicNode *) media;
             Mix_FreeMusic(music->m_music);
+            music->m_loaded = false;
         }
     }
 }
