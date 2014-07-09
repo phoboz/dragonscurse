@@ -41,6 +41,28 @@
     <property name="type" value="warp"/>
    </properties>
   </object>
+  <object name="village_interiour.tmx" type="Area" x="2080" y="992" width="64" height="64">
+   <properties>
+    <property name="start_x" value="128"/>
+    <property name="start_y" value="927"/>
+    <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
+  <object name="village_interiour.tmx" type="Area" x="2080" y="832" width="64" height="64">
+   <properties>
+    <property name="lock_id" value="1"/>
+    <property name="start_x" value="128"/>
+    <property name="start_y" value="767"/>
+    <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
+  <object name="village_interiour.tmx" type="Area" x="2080" y="448" width="64" height="64">
+   <properties>
+    <property name="start_x" value="128"/>
+    <property name="start_y" value="383"/>
+    <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="174" height="48">
   <data encoding="base64">

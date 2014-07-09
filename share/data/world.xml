@@ -26,6 +26,7 @@
         <lock id="1" type="large_key.xml" location="castle_01.tmx" />
         <lock id="1" type="large_key.xml" location="castle_02.tmx" />
         <lock id="1" type="small_key.xml" location="castle_04.tmx" />
+        <lock id="1" type="small_key.xml" location="village.tmx" />
     </locks>
 </world>
 
