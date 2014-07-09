@@ -69,7 +69,7 @@ bool init()
 
     media = new MediaDB("media.xml");
 
-    font = new Font("fntdag8x8.png", media);
+    font = new Font("fnt16x16.png", media);
     if (!font->get_loaded()) {
         fprintf(stderr, "Unable to load font\n");
         return false;
