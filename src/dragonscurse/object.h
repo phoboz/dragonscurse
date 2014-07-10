@@ -73,6 +73,9 @@ public:
     void set_attribute(const char *name, int value) {
         m_attributes[std::string(name)] = value;
     }
+    void set_string(const char *name, const char *value) {
+        m_strings[std::string(name)] = std::string(value);
+    }
     virtual bool get_visible(Map *map, int clip_x, int clip_y,
                              int clip_w, int clip_h) const;
     virtual bool check_collision(Object *object) {

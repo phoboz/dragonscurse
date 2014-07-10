@@ -139,7 +139,8 @@ Object* ObjectFactory::create_object(const char *name,
              it != pmap.end();
              ++it) {
             std::string attr_name = it->first;
-            if (attr_name != std::string("direction")) {
+            if (attr_name != std::string("direction") &&
+                attr_name != std::string("music")) {
                 object->set_attribute(attr_name.c_str(),
                                       atoi(it->second.c_str()));
             }
@@ -171,6 +172,11 @@ Object* ObjectFactory::create_object(const char *name,
     else if (dirname == std::string("left")) {
         object = create_object(name, media, type, x, y, w, h,
                                Object::Left, prop);
+    }
+
+    std::string musicname = prop.GetLiteralProperty(std::string("music"));
+    if (musicname != std::string("No such property!")) {
+        object->set_string("music", musicname.c_str());
     }
 
     return object;

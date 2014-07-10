@@ -12,14 +12,19 @@
 #include "statusbar.h"
 #include "world.h"
 
-World::World(Map *map, MediaDB *media, WorldDB *db)
+World::World(Map *map, MediaDB *media, WorldDB *db, const char *music)
     : m_map(map), m_media(media), m_db(db)
 {
     // Load attributes
     m_bg_color = m_map->get_numeric_property("bg_color");
 
     // Play music
-    media->play_music(m_map->get_literal_property("music").c_str());
+    if (music) {
+        media->play_music(music);
+    }
+    else {
+        media->play_music(m_map->get_literal_property("music").c_str());
+    }
 
     int num_groups = map->get_num_object_groups();
     for (int object_group = 0; object_group < num_groups; object_group++) {

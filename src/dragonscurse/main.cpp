@@ -87,7 +87,8 @@ bool init()
 bool load_area(const char *ar_name,
                bool new_game,
                const char *pl_name,
-               int start_x = -1, int start_y = -1)
+               int start_x = -1, int start_y = -1,
+               const char *music = 0)
 {
     Tmx::Map *tmx = new Tmx::Map();
     tmx->ParseFile(ar_name);
@@ -97,7 +98,7 @@ bool load_area(const char *ar_name,
         return false;
     }
 
-    world = new World(map, media, db);
+    world = new World(map, media, db, music);
 
     const Tmx::PropertySet prop = tmx->GetProperties();
     if (start_x == -1) {
@@ -131,7 +132,7 @@ void move()
     if (area) {
         load_area(area->get_name(),
                   area->get_type() == Area::TypeCurse, area->get_data(),
-                  area->get_sx(), area->get_sy());
+                  area->get_sx(), area->get_sy(), area->get_music());
     }
 }
 

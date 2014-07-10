@@ -43,6 +43,7 @@
   </object>
   <object name="village_interiour.tmx" type="Area" x="2080" y="992" width="64" height="64">
    <properties>
+    <property name="music" value="treasure.ogg"/>
     <property name="start_x" value="128"/>
     <property name="start_y" value="927"/>
     <property name="type" value="regular_door.xml"/>

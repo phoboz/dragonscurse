@@ -32,6 +32,7 @@ public:
     int get_y2() const { return m_y + m_h; }
     int get_sx() const { return get_attribute("start_x"); }
     int get_sy() const { return get_attribute("start_y"); }
+    const char* get_music() const { return get_string("music"); }
     bool is_locked() const { return m_state == StateLocked; }
     bool is_open() const { return m_state == StateOpen; }
     const char* get_data() const { return m_data.c_str(); }

@@ -10,7 +10,7 @@
 
 class World {
 public:
-    World(Map *map, MediaDB *media, WorldDB *db);
+    World(Map *map, MediaDB *media, WorldDB *db, const char *music = 0);
 
     WorldDB* get_db() const { return m_db; }
     const char* get_filename() const { return m_map->get_filename().c_str(); }
