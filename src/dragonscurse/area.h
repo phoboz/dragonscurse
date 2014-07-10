@@ -19,6 +19,7 @@ public:
     Area(const char *name, MediaDB *media,
          const char *type, int x, int y, int w, int h);
     Area(Curse *curse);
+    Area(const char *destination, int sx, int sy);
 
     virtual void world_initialize(World *world);
 

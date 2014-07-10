@@ -16,6 +16,7 @@
 #include "world_db.h"
 #include "world.h"
 #include "statusbar.h"
+#include "church.h"
 
 static SDL_Surface *screen;
 static int screen_width = 640;
@@ -25,6 +26,8 @@ static MediaDB *media;
 static Player *player;
 static WorldDB *db;
 static World *world;
+static Room *room;
+static enum { WorldMap, WorldRoom } world_type;
 static TTF_Font *font;
 
 bool init()
@@ -90,6 +93,13 @@ bool load_area(const char *ar_name,
                int start_x = -1, int start_y = -1,
                const char *music = 0)
 {
+    if (std::string(ar_name) == std::string("Church")) {
+        room = new Church("church.png", media, start_x, start_y);
+        world_type = WorldRoom;
+        return true;
+    }
+
+    world_type = WorldMap;
     Tmx::Map *tmx = new Tmx::Map();
     tmx->ParseFile(ar_name);
     map = new Map(tmx);
@@ -126,8 +136,15 @@ bool load_area(const char *ar_name,
 
 void move()
 {
-    Area *area = world->move(player, 0, Statusbar::get_height(),
-                             screen_width, screen_height);
+    Area *area;
+
+    if (world_type == WorldRoom) {
+        area = room->move();
+    }
+    else {
+        area = world->move(player, 0, Statusbar::get_height(),
+                           screen_width, screen_height);
+    }
 
     if (area) {
         load_area(area->get_name(),
@@ -156,8 +173,14 @@ void redraw()
 {
     Statusbar::draw(screen, screen_width, screen_height);
     draw_text();
-    world->draw(screen, player, 0, Statusbar::get_height(),
-                screen_width, screen_height);
+    if (world_type == WorldRoom) {
+        room->draw(screen, 0, Statusbar::get_height(),
+                   0, 0, screen_width, screen_height);
+    }
+    else {
+        world->draw(screen, player, 0, Statusbar::get_height(),
+                    screen_width, screen_height);
+    }
 }
 
 void flip()

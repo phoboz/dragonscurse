@@ -64,6 +64,13 @@
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
+  <object name="Church" type="Area" x="3008" y="992" width="64" height="64">
+   <properties>
+    <property name="start_x" value="3008"/>
+    <property name="start_y" value="991"/>
+    <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="174" height="48">
   <data encoding="base64">

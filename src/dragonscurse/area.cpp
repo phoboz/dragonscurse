@@ -15,26 +15,37 @@ Area::Area(const char *name, MediaDB *media,
     if (strcmp(type, "warp") == 0) {
         m_type = TypeWarp;
         m_state = StateOpen;
+        m_frame = 0;
     }
     else {
         m_type = TypeUser;
         m_state = StateClosed;
         load(type, media);
+        m_frame = get_attribute("open_start");
     }
-
-    m_frame = get_attribute("open_start");
 }
 
 Area::Area(Curse *curse)
     : Object(Object::TypeArea, curse->get_x(), curse->get_y()),
       m_name(curse->get_destination()),
       m_type(TypeCurse),
-      m_h(curse->get_image_width()), m_w(curse->get_image_height()),
+      m_w(curse->get_image_width()), m_h(curse->get_image_height()),
       m_data(curse->get_player()),
       m_state(StateOpen)
 {
     set_attribute("start_x", curse->get_sx());
     set_attribute("start_y", curse->get_sy());
+}
+
+Area::Area(const char *destination, int sx, int sy)
+    : Object(Object::TypeArea, 0, 0),
+      m_name(destination),
+      m_type(TypeWarp),
+      m_w(0), m_h(0),
+      m_state(StateOpen)
+{
+    set_attribute("start_x", sx);
+    set_attribute("start_y", sy);
 }
 
 void Area::world_initialize(World *world)
