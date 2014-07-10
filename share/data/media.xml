@@ -23,8 +23,6 @@
                 width="34" height="34" margin="1" spacing="1" />
         <sprite filename="firebreath.png"
                 width="36" height="26" margin="1" spacing="1" />
-        <sprite filename="fnt16x16.png"
-                width="16" height="16" margin="1" spacing="1" />
         <sprite filename="human.png"
                 width="91" height="63" margin="1" spacing="1" />
         <sprite filename="human_to_salamander.png"

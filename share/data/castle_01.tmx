@@ -56,6 +56,13 @@
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
+  <object name="castle_01.tmx" type="Area" x="0" y="192" width="32" height="128">
+   <properties>
+    <property name="start_x" value="32"/>
+    <property name="start_y" value="255"/>
+    <property name="type" value="warp"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Monsters" width="149" height="40">
   <object name="cobra_green.xml" type="Guardian" x="560" y="266" width="38" height="50">

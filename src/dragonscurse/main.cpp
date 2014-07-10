@@ -4,9 +4,9 @@
 
 #include "SDL.h"
 #include "SDL_mixer.h"
+#include "SDL_ttf.h"
 
 #include "phoboz/sprite.h"
-#include "phoboz/font.h"
 #include "phoboz/ctrl.h"
 #include "phoboz/map.h"
 #include "phoboz/fps_timer.h"
@@ -25,7 +25,7 @@ static MediaDB *media;
 static Player *player;
 static WorldDB *db;
 static World *world;
-static Font *font;
+static TTF_Font *font;
 
 bool init()
 {
@@ -48,6 +48,12 @@ bool init()
         return false;
     }
 
+    // Initialize font engine
+    if(TTF_Init() == -1) {
+        fprintf(stderr, "Fatal Error -- Unable to initialize font engine\n");
+        return false;
+    }
+
     // Initialize audio
     int audio_rate = 44100;
     Uint16 audio_format = AUDIO_S16; /* 16-bit stereo */
@@ -56,12 +62,12 @@ bool init()
 
     if(Mix_OpenAudio(audio_rate, audio_format, audio_channels,
                      audio_buffers) < 0) {
-        fprintf(stderr, "Unable to open audio!\n");
+        fprintf(stderr, "Fatal Error -- Unable to open audio!\n");
         return false;
     }
 
     if(Mix_Init(MIX_INIT_MOD) != MIX_INIT_MOD) {
-        fprintf(stderr, "Unable to initialize mixer\n");
+        fprintf(stderr, "Fatal Error -- Unable to initialize mixer\n");
         return false;
     }
 
@@ -69,9 +75,9 @@ bool init()
 
     media = new MediaDB("media.xml");
 
-    font = new Font("fnt16x16.png", media);
-    if (!font->get_loaded()) {
-        fprintf(stderr, "Unable to load font\n");
+    font = TTF_OpenFont("wonderfull.ttf", 12);
+    if (!font) {
+        fprintf(stderr, "Fatal Error -- Unable to load font\n");
         return false;
     }
 
@@ -129,11 +135,26 @@ void move()
     }
 }
 
+void draw_text()
+{
+    SDL_Color color = {255, 255, 255};
+    SDL_Rect rect;
+
+    rect.x = 0;
+    rect.y = 0;
+
+    SDL_Surface *message = TTF_RenderText_Solid(
+        font,
+        "Welcome to monster world!",
+         color);
+    SDL_BlitSurface(message, NULL, screen, &rect);
+    SDL_FreeSurface(message);
+}
+
 void redraw()
 {
     Statusbar::draw(screen, screen_width, screen_height);
-    font->draw(screen, 0, 0, "Welcome to monster world!",
-               0, 0, screen_width, Statusbar::get_height());
+    draw_text();
     world->draw(screen, player, 0, Statusbar::get_height(),
                 screen_width, screen_height);
 }
