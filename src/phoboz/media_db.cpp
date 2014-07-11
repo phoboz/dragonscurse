@@ -1,4 +1,5 @@
 #include "SDL_mixer.h"
+#include "phoboz/text.h"
 #include "phoboz/media_db.h"
 
 struct MediaNode {

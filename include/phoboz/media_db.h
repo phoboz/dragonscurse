@@ -3,9 +3,9 @@
 
 #include <string>
 #include <map>
+#include "SDL_ttf.h"
 #include "tinyxml.h"
 #include "phoboz/sprite.h"
-#include "phoboz/text.h"
 
 // Hidden
 struct MediaNode;

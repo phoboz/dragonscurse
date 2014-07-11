@@ -13,6 +13,12 @@ struct TextLine {
 
 bool Text::m_initialized = false;
 
+Text::Text(const char *fontname, MediaDB *media)
+    : m_curr_line(0)
+{
+    m_font = media->get_font(fontname);
+}
+
 Text::~Text()
 {
     for (int i = 0; i < m_lines.size(); i++) {

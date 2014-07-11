@@ -79,13 +79,7 @@ bool init()
         return false;
     }
 
-    TTF_Font *font = media->get_font("Wonderfull_12");
-    if (!font) {
-        fprintf(stderr, "Fatal Error -- Unable to load font\n");
-        return false;
-    }
-
-    msg = new Text(font);
+    msg = new Text("Wonderfull_12", media);
     if (!msg) {
         fprintf(stderr, "Fatal Error -- Unable to create text box\n");
         return false;

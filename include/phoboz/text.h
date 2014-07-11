@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "SDL_ttf.h"
+#include "phoboz/media_db.h"
 
 // Hidden
 struct TextLine;
@@ -12,6 +13,8 @@ public:
     Text(TTF_Font *font)
         : m_font(font),
           m_curr_line(0) { }
+    Text(const char *fontname, MediaDB *media);
+
     ~Text();
 
     static bool init();
