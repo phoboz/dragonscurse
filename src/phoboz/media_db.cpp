@@ -2,7 +2,7 @@
 #include "phoboz/media_db.h"
 
 struct MediaNode {
-    enum Type { TypeSprite, TypeSound, TypeMusic };
+    enum Type { TypeSprite, TypeFont, TypeSound, TypeMusic };
 
     MediaNode(Type type) :
         m_key(m_keygen++), m_ref(0), m_type(type), m_loaded(false) { }
@@ -25,6 +25,14 @@ struct SpriteNode : public MediaNode {
     int m_spacing;
 
     Sprite *m_sprite;
+};
+
+struct FontNode : public MediaNode {
+    FontNode() : MediaNode(TypeFont) { }
+
+    int m_size;
+    std::string m_name;
+    TTF_Font *m_font;
 };
 
 struct SoundNode : public MediaNode {
@@ -61,6 +69,32 @@ bool MediaDB::load_sprite_attributes(SpriteNode *sprite, TiXmlElement *elmt)
         }
         else if (strcmp(attr->Name(), "spacing") == 0) {
             sprite->m_spacing = atoi(attr->Value());
+        }
+        else {
+            result = false;
+            break;
+        }
+
+        attr = attr->Next();
+    }
+
+    return result;
+}
+
+bool MediaDB::load_font_attributes(FontNode *font, TiXmlElement *elmt)
+{
+    bool result = true;
+
+    TiXmlAttribute *attr = elmt->FirstAttribute();
+    while (attr) {
+        if (strcmp(attr->Name(), "name") == 0) {
+            font->m_name = std::string(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "filename") == 0) {
+            font->m_filename = std::string(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "size") == 0) {
+            font->m_size = atoi(attr->Value());
         }
         else {
             result = false;
@@ -123,6 +157,13 @@ bool MediaDB::load_nodes(TiXmlNode *node)
             result = load_sprite_attributes(sprite, node->ToElement());
             if (result) {
                 m_media[sprite->m_filename] = sprite;
+            }
+        }
+        else if (strcmp(node->Value(), "font") == 0) {
+            FontNode *font = new FontNode;
+            result = load_font_attributes(font, node->ToElement());
+            if (result) {
+                m_media[font->m_name] = font;
             }
         }
         else if (strcmp(node->Value(), "sound") == 0) {
@@ -226,6 +267,40 @@ bool MediaDB::leave_sprite(Sprite *leave)
         delete sprite->m_sprite;
         sprite->m_loaded = false;
         result = true;
+    }
+
+    return result;
+}
+
+bool MediaDB::load_font(FontNode *font)
+{
+    bool result = false;
+
+    if (font->m_loaded) {
+        result = true;
+    }
+    else {
+        font->m_font = Text::load_font(font->m_filename.c_str(), font->m_size);
+        if (font->m_font) {
+            font->m_loaded = true;
+            result = true;
+        }
+    }
+
+    return result;
+}
+
+TTF_Font* MediaDB::get_font(const char *fontname)
+{
+    TTF_Font *result = 0;
+
+    MediaNode *media = m_media[std::string(fontname)];
+    if (media->m_type == MediaNode::TypeFont) {
+        FontNode *font = (FontNode *) media;
+        if (load_font(font)) {
+            ++font->m_ref;
+            result = font->m_font;
+        }
     }
 
     return result;

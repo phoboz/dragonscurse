@@ -11,6 +11,7 @@
 #include "phoboz/map.h"
 #include "phoboz/fps_timer.h"
 #include "phoboz/media_db.h"
+#include "phoboz/text.h"
 #include "object.h"
 #include "object_factory.h"
 #include "world_db.h"
@@ -28,7 +29,7 @@ static WorldDB *db;
 static World *world;
 static Room *room;
 static enum { WorldMap, WorldRoom } world_type;
-static TTF_Font *font;
+static Text *msg;
 
 bool init()
 {
@@ -48,12 +49,6 @@ bool init()
     if (screen == NULL) {
         fprintf(stderr, "Fatal Error -- Unable to set video mode: %s\n",
                 SDL_GetError());
-        return false;
-    }
-
-    // Initialize font engine
-    if(TTF_Init() == -1) {
-        fprintf(stderr, "Fatal Error -- Unable to initialize font engine\n");
         return false;
     }
 
@@ -78,11 +73,26 @@ bool init()
 
     media = new MediaDB("media.xml");
 
-    font = TTF_OpenFont("wonderfull.ttf", 12);
+    // Initialize font engine
+    if(!Text::init()) {
+        fprintf(stderr, "Fatal Error -- Unable to initialize font engine\n");
+        return false;
+    }
+
+    TTF_Font *font = media->get_font("Wonderfull_12");
     if (!font) {
         fprintf(stderr, "Fatal Error -- Unable to load font\n");
         return false;
     }
+
+    msg = new Text(font);
+    if (!msg) {
+        fprintf(stderr, "Fatal Error -- Unable to create text box\n");
+        return false;
+    }
+
+    msg->add_line("Welcome to monster world!");
+    msg->add_line("Dragon's Curse.");
 
     return true;
 }
@@ -153,26 +163,10 @@ void move()
     }
 }
 
-void draw_text()
-{
-    SDL_Color color = {255, 255, 255};
-    SDL_Rect rect;
-
-    rect.x = 0;
-    rect.y = 0;
-
-    SDL_Surface *message = TTF_RenderText_Solid(
-        font,
-        "Welcome to monster world!",
-         color);
-    SDL_BlitSurface(message, NULL, screen, &rect);
-    SDL_FreeSurface(message);
-}
-
 void redraw()
 {
     Statusbar::draw(screen, screen_width, screen_height);
-    draw_text();
+    msg->draw(screen, 4, 4);
     if (world_type == WorldRoom) {
         room->draw(screen, 0, Statusbar::get_height(),
                    0, 0, screen_width, screen_height);
