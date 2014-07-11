@@ -5,8 +5,7 @@
 
 class Church : public Room {
 public:
-    Church(const char *image, MediaDB *media, int sx, int sy)
-        : Room(image, media, sx, sy) { }
+    Church(const char *image, MediaDB *media, int sx, int sy);
 
     virtual Area* move();
 };
