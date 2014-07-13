@@ -21,7 +21,8 @@ public:
     bool set_icon(const char *icon, int icon_index);
     bool add_line(const char *str);
 
-    void draw(SDL_Surface *dest, int x, int y);
+    void draw(SDL_Surface *dest, int x, int y,
+              int clip_x, int clip_y, int clip_w, int clip_h);
 
 private:
     TextLine* new_line(const char *str);

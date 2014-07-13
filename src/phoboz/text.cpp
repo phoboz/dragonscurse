@@ -79,10 +79,12 @@ bool Text::add_line(const char *str)
     return result;
 }
 
-void Text::draw(SDL_Surface *dest, int x, int y)
+void Text::draw(SDL_Surface *dest, int x, int y,
+                int clip_x, int clip_y, int clip_w, int clip_h)
 {
     SDL_Color color = {255, 255, 255};
     SDL_Rect rect;
+    SDL_Rect clip;
 
     if (m_icon_spr) {
         rect.x = x + m_icon_spr->get_width();
@@ -91,18 +93,24 @@ void Text::draw(SDL_Surface *dest, int x, int y)
         rect.x = x;
     }
 
+    clip.x = clip_x;
+    clip.y = clip_y;
+    clip.w = clip_w;
+    clip.h = clip_h;
+
     for (int i = 0; i < m_lines.size(); i++) {
         TextLine *line = m_lines[i];
 
         rect.y = y + line->m_y;
         SDL_Surface *surf =
             TTF_RenderText_Solid(m_font, line->m_text.c_str(), color);
-        SDL_BlitSurface(surf, NULL, dest, &rect);
+        SDL_BlitSurface(surf, &clip, dest, &rect);
         SDL_FreeSurface(surf);
     }
 
     if (m_icon_spr) {
-        m_icon_spr->draw(dest, x, y, m_icon_index, 0, 0, 640, 480);
+        m_icon_spr->draw(dest, x, y, m_icon_index,
+                         clip_x, clip_y, clip_w, clip_h);
     }
 }
 

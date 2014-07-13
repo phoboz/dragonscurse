@@ -30,6 +30,6 @@ void Room::draw(SDL_Surface *dest, int x, int y,
           int clip_x, int clip_y, int clip_w, int clip_h)
 {
     m_spr->draw(dest, x, y, 0, clip_x, clip_y, clip_w, clip_h);
-    m_text->draw(dest, x + m_tx, y + m_ty);
+    m_text->draw(dest, x + m_tx, y + m_ty, clip_x, clip_y, clip_w, clip_h);
 }
 

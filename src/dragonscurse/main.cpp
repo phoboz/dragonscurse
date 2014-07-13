@@ -160,7 +160,7 @@ void move()
 void redraw()
 {
     Statusbar::draw(screen, screen_width, screen_height);
-    msg->draw(screen, 4, 4);
+    msg->draw(screen, 4, 4, 0, 0, screen_width, Statusbar::get_height());
     if (world_type == WorldRoom) {
         room->draw(screen, 0, Statusbar::get_height(),
                    0, 0, screen_width, screen_height);
