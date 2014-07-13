@@ -29,6 +29,8 @@
                 width="91" height="63" margin="1" spacing="1" />
         <sprite filename="human_to_salamander.png"
                 width="68" height="65" margin="1" spacing="1" />
+        <sprite filename="icons.png"
+                width="32" height="32" margin="1" spacing="1" />
         <sprite filename="large_key.png"
                 width="32" height="32" margin="1" spacing="1" />
         <sprite filename="master_skeleton.png"

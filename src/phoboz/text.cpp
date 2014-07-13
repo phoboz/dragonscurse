@@ -13,10 +13,16 @@ struct TextLine {
 
 bool Text::m_initialized = false;
 
-Text::Text(const char *fontname, MediaDB *media)
-    : m_curr_line(0)
+Text::Text(const char *fontname, MediaDB *media,
+           const char *icon, int icon_index)
+    : m_media(media),
+      m_curr_line(0),
+      m_icon_index(icon_index)
 {
     m_font = media->get_font(fontname);
+    if (icon) {
+        set_icon(icon, icon_index);
+    }
 }
 
 Text::~Text()
@@ -55,6 +61,12 @@ TextLine* Text::new_line(const char *str)
     return line;
 }
 
+bool Text::set_icon(const char *icon, int icon_index)
+{
+    m_icon_spr = m_media->get_sprite(icon);
+    m_icon_index = icon_index;
+}
+
 bool Text::add_line(const char *str)
 {
     bool result = false;
@@ -72,17 +84,25 @@ void Text::draw(SDL_Surface *dest, int x, int y)
     SDL_Color color = {255, 255, 255};
     SDL_Rect rect;
 
-    rect.x = x;
+    if (m_icon_spr) {
+        rect.x = x + m_icon_spr->get_width();
+    }
+    else {
+        rect.x = x;
+    }
 
     for (int i = 0; i < m_lines.size(); i++) {
         TextLine *line = m_lines[i];
 
         rect.y = y + line->m_y;
-        SDL_Surface *surf = TTF_RenderText_Solid(m_font,
-                                                 line->m_text.c_str(),
-                                                 color);
+        SDL_Surface *surf =
+            TTF_RenderText_Solid(m_font, line->m_text.c_str(), color);
         SDL_BlitSurface(surf, NULL, dest, &rect);
         SDL_FreeSurface(surf);
+    }
+
+    if (m_icon_spr) {
+        m_icon_spr->draw(dest, x, y, m_icon_index, 0, 0, 640, 480);
     }
 }
 
