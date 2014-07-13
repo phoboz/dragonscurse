@@ -6,17 +6,24 @@
 
 class Menu {
 public:
-    Menu(const char *fontname, MediaDB *media)
-        : m_fontname(fontname),
-          m_media(media) { }
+    enum PointerDirection { DirectionUp, DirectionDown };
+
+    Menu(const char *fontname,
+         const char *pointer, int pointer_index,
+         MediaDB *media);
 
     bool add_option(const char *str, const char *icon = 0, int icon_index = 0);
+
+    void advance_pointer(PointerDirection dir);
 
     void draw(SDL_Surface *dest, int x, int y,
               int clip_x, int clip_y, int clip_w, int clip_h);
 private:
     std::string m_fontname;
     MediaDB *m_media;
+    Sprite *m_pointer_spr;
+    int m_pointer_index;
+    int m_curr_option;
     std::vector<Text*> m_options;
 };
 

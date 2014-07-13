@@ -140,20 +140,27 @@ bool load_area(const char *ar_name,
 
 void move()
 {
-    Area *area;
+    if (world_type == WorldMap) {
+        Area *area = world->move(player, 0, Statusbar::get_height(),
+                                 screen_width, screen_height);
+        if (area) {
+            load_area(area->get_name(),
+                      area->get_type() == Area::TypeCurse, area->get_data(),
+                      area->get_sx(), area->get_sy(), area->get_music());
+        }
+    }
+}
 
+void move_keydown(int key)
+{
     if (world_type == WorldRoom) {
-        area = room->move();
-    }
-    else {
-        area = world->move(player, 0, Statusbar::get_height(),
-                           screen_width, screen_height);
-    }
+        Area *area = room->move(key);
 
-    if (area) {
-        load_area(area->get_name(),
-                  area->get_type() == Area::TypeCurse, area->get_data(),
-                  area->get_sx(), area->get_sy(), area->get_music());
+        if (area) {
+            load_area(area->get_name(),
+                      area->get_type() == Area::TypeCurse, area->get_data(),
+                      area->get_sx(), area->get_sy(), area->get_music());
+        }
     }
 }
 
@@ -222,7 +229,13 @@ int main(int argc, char *argv[])
         if (timer.expired(60)) {
 
             while (SDL_PollEvent(&event) ) {
-                if (event.type == SDL_QUIT) done = 1;
+                if (event.type == SDL_QUIT) {
+                    done = 1;
+                }
+
+                if (event.type == SDL_KEYDOWN) {
+                    move_keydown(event.key.keysym.sym);
+                }
             }
 
             SDL_Rect dest_rect;

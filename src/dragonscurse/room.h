@@ -12,7 +12,7 @@ public:
          int tx, int ty);
     ~Room();
 
-    virtual Area* move() = 0;
+    virtual Area* move(int key) = 0;
     virtual void draw(SDL_Surface *dest, int x, int y,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 

@@ -59,6 +59,8 @@
         <font name="Wonderfull_18" filename="wonderfull.ttf" size="18" />
     </fonts>
     <sounds>
+        <sound filename="advance.wav" />
+        <sound filename="select.wav" />
         <sound filename="sword.wav" />
     </sounds>
     <musics>
