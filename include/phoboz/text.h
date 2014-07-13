@@ -18,8 +18,11 @@ public:
     static bool init();
     static TTF_Font* load_font(const char *fn, int size);
 
-    bool set_icon(const char *icon, int icon_index);
+    void set_icon(const char *icon, int icon_index);
     bool add_line(const char *str);
+    bool add_text(const char *str);
+
+    int get_height() const;
 
     void draw(SDL_Surface *dest, int x, int y,
               int clip_x, int clip_y, int clip_w, int clip_h);
@@ -32,7 +35,6 @@ private:
     TTF_Font *m_font;
     Sprite *m_icon_spr;
     int m_icon_index;
-    int m_curr_line;
     std::vector<TextLine*> m_lines;
 };
 

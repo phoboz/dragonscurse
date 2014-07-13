@@ -5,10 +5,10 @@
 Church::Church(const char *image, MediaDB *media, int sx, int sy)
     : Room(image, "Wonderfull_18", media, sx, sy, 80, 312)
 {
-    m_text->add_line("Welcome to church, save your progress?");
-    m_text->add_line("");
-    m_text->add_line("Yes");
-    m_text->add_line("No");
+    m_text->add_text("Welcome to church\nsave your progress?");
+    m_menu = new Menu("Wonderfull_18", media);
+    m_menu->add_option("Yes");
+    m_menu->add_option("No");
 }
 
 Area* Church::move()
@@ -19,5 +19,12 @@ Area* Church::move()
     }
 
     return 0;
+}
+
+void Church::draw(SDL_Surface *dest, int x, int y,
+                  int clip_x, int clip_y, int clip_w, int clip_h)
+{
+    Room::draw(dest, x, y, clip_x, clip_y, clip_w, clip_h);
+    m_menu->draw(dest, x + 80, y + 360, clip_x, clip_y, clip_w, clip_h);
 }
 

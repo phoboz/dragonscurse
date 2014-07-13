@@ -1,9 +1,11 @@
 #include <string>
+#include <sstream>
 #include "phoboz/text.h"
 
 struct TextLine {
     TextLine(const char *str, int y)
-        : m_y(y) {
+        : m_text(str), 
+          m_y(y) {
         m_text = std::string(str);
     }
 
@@ -16,7 +18,7 @@ bool Text::m_initialized = false;
 Text::Text(const char *fontname, MediaDB *media,
            const char *icon, int icon_index)
     : m_media(media),
-      m_curr_line(0),
+      m_icon_spr(0),
       m_icon_index(icon_index)
 {
     m_font = media->get_font(fontname);
@@ -29,6 +31,10 @@ Text::~Text()
 {
     for (int i = 0; i < m_lines.size(); i++) {
         delete m_lines[i];
+    }
+
+    if (m_icon_spr) {
+        m_media->leave_sprite(m_icon_spr);
     }
 }
 
@@ -55,13 +61,13 @@ TTF_Font* Text::load_font(const char *fn, int size)
 
 TextLine* Text::new_line(const char *str)
 {
-    TextLine *line = new TextLine(str, m_curr_line * TTF_FontLineSkip(m_font));
-    m_curr_line++;
+    TextLine *line = new TextLine(str,
+                                  m_lines.size() * TTF_FontLineSkip(m_font));
 
     return line;
 }
 
-bool Text::set_icon(const char *icon, int icon_index)
+void Text::set_icon(const char *icon, int icon_index)
 {
     m_icon_spr = m_media->get_sprite(icon);
     m_icon_index = icon_index;
@@ -77,6 +83,27 @@ bool Text::add_line(const char *str)
     }
 
     return result;
+}
+
+bool Text::add_text(const char *str)
+{
+    bool result = true;
+    std::istringstream ss(str);
+    std::string line;
+
+    while (std::getline(ss, line)) {
+        if (!add_line(line.c_str())) {
+            result = false;
+            break;
+        }
+    }
+
+    return result;
+}
+
+int Text::get_height() const
+{
+    return m_lines.size() * TTF_FontLineSkip(m_font);
 }
 
 void Text::draw(SDL_Surface *dest, int x, int y,
