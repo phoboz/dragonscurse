@@ -1,14 +1,14 @@
 <?xml version="1.0" ?>
-<regular_door>
+<window_door>
     <area>
         <door open_time="20"
               treshold="6"
               open_start="0" open_end="2"
               small_key.xml="3"
               large_key.xml="4">
-            <object image="regular_door.png"
+            <object image="window_door.png"
                     left="0" right="64" top="0" bottom="64" />
         </door>
     </area>
-</regular_door>
+</window_door>
 

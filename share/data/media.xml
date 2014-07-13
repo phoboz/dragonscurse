@@ -47,6 +47,8 @@
                 width="50" height="60" margin="1" spacing="1" />
         <sprite filename="skull.png"
                 width="32" height="28" margin="1" spacing="1" />
+        <sprite filename="window_door.png"
+                width="64" height="64" margin="1" spacing="1" />
         <sprite filename="wondering.png"
                 width="50" height="60" margin="1" spacing="1" />
     </sprites>
