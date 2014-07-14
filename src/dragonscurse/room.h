@@ -17,12 +17,12 @@ public:
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
 protected:
+    MediaDB *m_media;
     Text *m_text;
     int m_sx;
     int m_sy;
 
 private:
-    MediaDB *m_media;
     Sprite *m_spr;
     bool m_loaded;
     int m_tx;

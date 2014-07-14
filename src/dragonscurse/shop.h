@@ -1,12 +1,12 @@
-#ifndef _Church_H
-#define _Church_H
+#ifndef _Shop_H
+#define _Shop_H
 
 #include "phoboz/menu.h"
 #include "room.h"
 
-class Church : public Room {
+class Shop : public Room {
 public:
-    Church(MediaDB *media, int sx, int sy);
+    Shop(MediaDB *media, int sx, int sy);
 
     virtual Area* move(int key);
     virtual void draw(SDL_Surface *dest, int x, int y,

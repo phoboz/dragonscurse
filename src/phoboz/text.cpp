@@ -114,7 +114,8 @@ void Text::draw(SDL_Surface *dest, int x, int y,
     SDL_Rect clip;
 
     if (m_icon_spr) {
-        rect.x = x + m_icon_spr->get_width();
+        int w = m_icon_spr->get_width();
+        rect.x = x + w + w / 2;
     }
     else {
         rect.x = x;

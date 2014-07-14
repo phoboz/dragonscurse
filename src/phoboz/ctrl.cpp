@@ -7,6 +7,9 @@ int get_input(void)
   int input = 0;
   Uint8 *keys = SDL_GetKeyState(NULL);
 
+  if(keys[SDLK_RETURN])
+    input=SET_BITS(input,PRESS_ENTER);
+
   if(keys[SDLK_ESCAPE])
     input=SET_BITS(input,PRESS_ESC);
 
@@ -37,6 +40,9 @@ int get_input_keydown(int ks)
 
    switch(ks)
    {
+      case SDLK_RETURN:
+	 input=SET_BITS(input,PRESS_ENTER);
+	 break;
       case SDLK_ESCAPE:
 	 input=SET_BITS(input,PRESS_ESC);
 	 break;
@@ -70,6 +76,9 @@ int get_input_keyup(int ks)
 
    switch(ks)
    {
+      case SDLK_RETURN:
+	 input=RESET_BITS(input,PRESS_ENTER);
+	 break;
       case SDLK_ESCAPE:
 	 input=RESET_BITS(input,PRESS_ESC);
 	 break;

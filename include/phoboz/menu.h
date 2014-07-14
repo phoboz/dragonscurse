@@ -12,9 +12,10 @@ public:
          const char *pointer, int pointer_index,
          MediaDB *media);
 
+    void set_spacing(int spacing) { m_spacing = spacing; }
     bool add_option(const char *str, const char *icon = 0, int icon_index = 0);
-
     void advance_pointer(PointerDirection dir);
+    int get_option() const { return m_curr_option; }
 
     void draw(SDL_Surface *dest, int x, int y,
               int clip_x, int clip_y, int clip_w, int clip_h);
@@ -24,6 +25,7 @@ private:
     Sprite *m_pointer_spr;
     int m_pointer_index;
     int m_curr_option;
+    int m_spacing;
     std::vector<Text*> m_options;
 };
 

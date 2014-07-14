@@ -45,6 +45,8 @@
                 width="64" height="64" margin="1" spacing="1" />
         <sprite filename="salamander.png"
                 width="68" height="65" margin="1" spacing="1" />
+        <sprite filename="shop.png"
+                width="640" height="444" margin="0" spacing="0" />
         <sprite filename="skeleton.png"
                 width="50" height="60" margin="1" spacing="1" />
         <sprite filename="skull.png"

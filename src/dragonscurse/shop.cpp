@@ -1,17 +1,21 @@
 #include "phoboz/ctrl.h"
 #include "area.h"
-#include "church.h"
+#include "shop.h"
 
-Church::Church(MediaDB *media, int sx, int sy)
-    : Room("church.png", "Wonderfull_18", media, sx, sy, 80, 312)
+Shop::Shop(MediaDB *media, int sx, int sy)
+    : Room("shop.png", "Wonderfull_18", media, sx, sy, 94, 240)
 {
-    m_text->add_text("Welcome to church, save your progress?");
+    m_text->add_text("Shoping\n please");
     m_menu = new Menu("Wonderfull_18", "icons.png", 0, media);
-    m_menu->add_option("Yes");
-    m_menu->add_option("No");
+    m_menu->set_spacing(80);
+    m_menu->add_option("", "icons.png", 1);
+    m_menu->add_option("Mithrill\nShiled", "icons.png", 3);
+    m_menu->add_option("Mithrill\nArmour", "icons.png", 4);
+    m_menu->add_option("");
+    m_menu->add_option("Exit");
 }
 
-Area* Church::move(int key)
+Area* Shop::move(int key)
 {
     int input = get_input_keydown(key);
     if (input & PRESS_DOWN) {
@@ -24,7 +28,7 @@ Area* Church::move(int key)
     }
     else if (input & PRESS_ENTER) {
         m_media->play_sound("select.wav");
-        if (m_menu->get_option() == 1) {
+        if (m_menu->get_option() == 4) {
             return new Area("village.tmx", m_sx, m_sy);
         }
     }
@@ -35,10 +39,10 @@ Area* Church::move(int key)
     return 0;
 }
 
-void Church::draw(SDL_Surface *dest, int x, int y,
+void Shop::draw(SDL_Surface *dest, int x, int y,
                   int clip_x, int clip_y, int clip_w, int clip_h)
 {
     Room::draw(dest, x, y, clip_x, clip_y, clip_w, clip_h);
-    m_menu->draw(dest, x + 80, y + 340, clip_x, clip_y, clip_w, clip_h);
+    m_menu->draw(dest, x + 302, y + 40, clip_x, clip_y, clip_w, clip_h);
 }
 

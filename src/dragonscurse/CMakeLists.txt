@@ -5,7 +5,7 @@ ADD_EXECUTABLE(dragonscurse
     meka_dragon.cpp
     material.cpp item.cpp coin.cpp curse.cpp morph.cpp
     object_factory.cpp statusbar.cpp main.cpp
-    room.cpp church.cpp
+    room.cpp church.cpp shop.cpp
     )
 TARGET_LINK_LIBRARIES(dragonscurse
     tmx phoboz

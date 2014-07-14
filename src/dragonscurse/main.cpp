@@ -18,6 +18,7 @@
 #include "world.h"
 #include "statusbar.h"
 #include "church.h"
+#include "shop.h"
 
 static SDL_Surface *screen;
 static int screen_width = 640;
@@ -98,7 +99,12 @@ bool load_area(const char *ar_name,
                const char *music = 0)
 {
     if (std::string(ar_name) == std::string("Church")) {
-        room = new Church("church.png", media, start_x, start_y);
+        room = new Church(media, start_x, start_y);
+        world_type = WorldRoom;
+        return true;
+    }
+    else if (std::string(ar_name) == std::string("Shop")) {
+        room = new Shop(media, start_x, start_y);
         world_type = WorldRoom;
         return true;
     }

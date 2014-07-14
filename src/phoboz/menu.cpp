@@ -7,7 +7,8 @@ Menu::Menu(const char *fontname,
     : m_fontname(fontname),
       m_media(media),
       m_pointer_index(pointer_index),
-      m_curr_option(0)
+      m_curr_option(0),
+      m_spacing(0)
 {
     m_pointer_spr = media->get_sprite(pointer);
 }
@@ -32,13 +33,11 @@ void Menu::advance_pointer(PointerDirection dir)
         if (--m_curr_option < 0) {
             m_curr_option = m_options.size() - 1;
         }
-        m_media->play_sound("advance.wav");
     }
     else if (dir == DirectionDown) {
         if (++m_curr_option == m_options.size()) {
             m_curr_option = 0;
         }
-        m_media->play_sound("advance.wav");
     }
 }
 
@@ -49,13 +48,19 @@ void Menu::draw(SDL_Surface *dest, int x, int y,
 
     for (int i = 0; i < m_options.size(); i++) {
         Text *text = m_options[i];
-        text->draw(dest, x + m_pointer_spr->get_width(), y + height,
+        int w = m_pointer_spr->get_width();
+        text->draw(dest, x + w + w / 2, y + height,
                    clip_x, clip_y, clip_w, clip_h);
         if (i == m_curr_option) {
             m_pointer_spr->draw(dest, x, y + height, m_pointer_index,
                                 clip_x, clip_y, clip_w, clip_h);
         }
-        height += text->get_height();
+        if (!m_spacing) {
+            height += text->get_height();
+        }
+        else {
+            height += m_spacing;
+        }
     }
 }
 

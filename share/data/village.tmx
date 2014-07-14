@@ -71,6 +71,13 @@
     <property name="type" value="window_door.xml"/>
    </properties>
   </object>
+  <object name="Shop" type="Area" x="2592" y="832" width="64" height="64">
+   <properties>
+    <property name="start_x" value="2592"/>
+    <property name="start_y" value="831"/>
+    <property name="type" value="window_door.xml"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="174" height="48">
   <data encoding="base64">
