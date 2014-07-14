@@ -62,6 +62,7 @@
     </fonts>
     <sounds>
         <sound filename="advance.wav" />
+        <sound filename="reject.wav" />
         <sound filename="select.wav" />
         <sound filename="sword.wav" />
     </sounds>

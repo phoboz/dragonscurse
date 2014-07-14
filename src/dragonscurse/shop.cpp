@@ -27,9 +27,12 @@ Area* Shop::move(int key)
         m_media->play_sound("advance.wav");
     }
     else if (input & PRESS_ENTER) {
-        m_media->play_sound("select.wav");
         if (m_menu->get_option() == 4) {
+            m_media->play_sound("select.wav");
             return new Area("village.tmx", m_sx, m_sy);
+        }
+        else {
+            m_media->play_sound("reject.wav");
         }
     }
     else if (input & PRESS_ESC) {
