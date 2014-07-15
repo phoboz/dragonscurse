@@ -6,7 +6,7 @@
 
 class Church : public Room {
 public:
-    Church(MediaDB *media, int sx, int sy);
+    Church(MediaDB *media, const char *src, int sx, int sy);
 
     virtual Area* move(int key);
     virtual void draw(SDL_Surface *dest, int x, int y,

@@ -71,7 +71,7 @@
     <property name="type" value="window_door.xml"/>
    </properties>
   </object>
-  <object name="Shop_village" type="Area" x="2592" y="832" width="64" height="64">
+  <object name="Shop_mithras" type="Area" x="2592" y="832" width="64" height="64">
    <properties>
     <property name="start_x" value="2592"/>
     <property name="start_y" value="831"/>

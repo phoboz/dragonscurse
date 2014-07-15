@@ -3,8 +3,10 @@
 #include "area.h"
 #include "shop.h"
 
-Shop::Shop(MediaDB *media, WorldDB *db, int sx, int sy)
-    : Room("shop.png", "Wonderfull_18", media, sx, sy, 94, 240),
+Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
+           const char *src, int sx, int sy)
+    : Room("shop.png", "Wonderfull_18", media, src, sx, sy, 94, 240),
+      m_name(name),
       m_db(db)
 {
     m_text->add_text("Shoping\n please");
@@ -13,7 +15,7 @@ Shop::Shop(MediaDB *media, WorldDB *db, int sx, int sy)
 
     for (int i = 1; i <= 4; i++) {
         ObjectInfo info;
-        if (db->get_object_info(&info, i, "Shop_village")) {
+        if (db->get_object_info(&info, i, m_name.c_str())) {
             if (info.object_type == Object::TypeItem) {
                 Object *object =
                     ObjectFactory::create_object(info.data.item.name,
@@ -50,14 +52,14 @@ Area* Shop::move(int key)
     else if (input & PRESS_ENTER) {
         if (m_menu->get_option() == 4) {
             m_media->play_sound("select.wav");
-            return new Area("village.tmx", m_sx, m_sy);
+            return new Area(m_src.c_str(), m_sx, m_sy);
         }
         else {
             m_media->play_sound("reject.wav");
         }
     }
     else if (input & PRESS_ESC) {
-        return new Area("village.tmx", m_sx, m_sy);
+        return new Area(m_src.c_str(), m_sx, m_sy);
     }
 
     return 0;
