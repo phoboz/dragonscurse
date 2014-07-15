@@ -229,6 +229,21 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+
+    db->aquire_item((Item *) ObjectFactory::create_object(
+                                 "mithril_sword.xml",
+                                 media, "Item"));
+
+    db->aquire_item((Item *) ObjectFactory::create_object(
+                                 "mithril_shield.xml",
+                                 media, "Item"));
+
+    db->aquire_item((Item *) ObjectFactory::create_object(
+                                 "mithril_armour.xml",
+                                 media, "Item"));
+
+    db->list_items();
+
     load_area(map_name, true, player_name, start_x, start_y);
 
     while (!done) {

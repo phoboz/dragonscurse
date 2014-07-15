@@ -48,24 +48,6 @@ bool Player::is_morphing()
     return result;
 }
 
-Item* Player::check_item(const char *name)
-{
-    Item *result = 0;
-
-    for (std::list<Item*>::iterator it = m_items.begin();
-         it != m_items.end();
-         ++it) {
-
-        Item *item = *it;
-        if (strcmp(name, item->get_filename()) == 0) {
-            result = item;
-            break;
-        }
-    }
-
-    return result;
-}
-
 void Player::player_move(Map *map)
 {
     Actor::move(map);

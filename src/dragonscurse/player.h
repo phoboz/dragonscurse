@@ -25,10 +25,6 @@ public:
     void set_warp(Area *area) { m_area = area; }
     Area* get_warp() const { return m_area; }
 
-    void aquire_item(Item *item) { m_items.push_back(item); }
-    Item* check_item(const char *name);
-    void remove_item(Item *item) { m_items.remove(item); }
-
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
@@ -41,7 +37,6 @@ private:
     bool m_jump_ready;
     Timer m_jump_timer;
     Timer m_hit_timer;
-    std::list<Item*> m_items;
 };
 
 #endif

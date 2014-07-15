@@ -5,10 +5,10 @@
 #include <map>
 #include "tinyxml.h"
 #include "object.h"
+#include "status.h"
 
 struct WorldObject;
 struct WorldLock;
-
 struct WorldLocation;
 
 struct ItemData {
@@ -46,6 +46,11 @@ public:
 
     bool remove(int key);
 
+    void aquire_item(Item *item) { m_status.aquire_item(item); }
+    Item* check_item(const char *name) { return m_status.check_item(name); }
+    void remove_item(Item *item) { m_status.remove_item(item); }
+    void list_items() const { m_status.list_items(); }
+
 private:
     bool load_object_attributes(WorldObject *object, TiXmlElement *elmt);
     bool load_lock_attributes(WorldLock *lock, TiXmlElement *elmt);
@@ -55,6 +60,8 @@ private:
     bool load_nodes(TiXmlNode *node);
 
     std::map<std::string, WorldLocation*> m_locations;
+
+    Status m_status;
 };
 
 #endif
