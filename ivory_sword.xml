@@ -2,7 +2,8 @@
 <sword ap="3">
     <item type="sword"
           price="0"
-          req_cp="0"> 
+          req_cp="0"
+          unknown="1"> 
         <material move_speed="14" weight="2" rise="2" fall="2" still="2">
             <object image="icons.png"
                     left="0" right="32" top="0" bottom="32" />

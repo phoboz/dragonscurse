@@ -2,7 +2,8 @@
 <shield dp="12">
     <item type="shield"
           price="32"
-          req_cp="3"> 
+          req_cp="3"
+          unknown="1">
         <material move_speed="14" weight="2" rise="3" fall="3" still="3">
             <object image="icons.png"
                     left="0" right="32" top="0" bottom="32" />

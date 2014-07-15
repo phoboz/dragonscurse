@@ -2,7 +2,8 @@
 <armour dp="12" cp="12">
     <item type="armour"
           price="44"
-          req_cp="3"> 
+          req_cp="3"
+          unknown="1">
         <material move_speed="14" weight="2" rise="4" fall="4" still="4">
             <object image="icons.png"
                     left="0" right="32" top="0" bottom="32" />

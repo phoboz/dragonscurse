@@ -49,7 +49,9 @@ public:
     void aquire_item(Item *item) { m_status.aquire_item(item); }
     Item* check_item(const char *name) { return m_status.check_item(name); }
     void remove_item(Item *item) { m_status.remove_item(item); }
-    void list_items() const { m_status.list_items(); }
+    bool equip_item(const char *name) { m_status.equip_item(name); }
+    int get_cp() const { return m_status.get_cp(); }
+    void show_stat() const { m_status.show(); }
 
 private:
     bool load_object_attributes(WorldObject *object, TiXmlElement *elmt);

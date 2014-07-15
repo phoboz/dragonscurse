@@ -242,7 +242,10 @@ int main(int argc, char *argv[])
                                  "ivory_armour.xml",
                                  media, "Item"));
 
-    db->list_items();
+    db->equip_item("ivory_sword.xml");
+    db->equip_item("ivory_shield.xml");
+    db->equip_item("ivory_armour.xml");
+    db->show_stat();
 
     load_area(map_name, true, player_name, start_x, start_y);
 

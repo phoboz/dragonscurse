@@ -17,6 +17,8 @@ public:
         m_world_key = key;
     }
 
+    ItemType get_item_type() const { return m_item_type; }
+
     void aquire(World *world);
 
 private:

@@ -24,12 +24,19 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
                 if (object && object->get_loaded()) {
                     Item *item = (Item *) object;
                     item->set_world_key(info.key);
-                    std::string fn(item->get_filename());
-                    int lastindex = fn.find_last_of("."); 
-                    std::string rawname = fn.substr(0, lastindex); 
-                    m_menu->add_option(rawname.c_str(),
-                                       item->get_sprite(),
-                                       item->get_attribute("still"));
+
+                    if (item->get_attribute("req_cp") <= db->get_cp()) {
+                        std::string fn(item->get_filename());
+                        int lastindex = fn.find_last_of("."); 
+                        std::string rawname = fn.substr(0, lastindex); 
+                        m_menu->add_option(rawname.c_str(),
+                                           item->get_sprite(),
+                                           item->get_attribute("still"));
+                    }
+                    else {
+                        m_menu->add_option("", item->get_sprite(),
+                                           item->get_attribute("unknown"));
+                    }
                 }
             }
         }
