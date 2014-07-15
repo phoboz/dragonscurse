@@ -51,5 +51,6 @@ dist : cmakeinstall
 
 # 'make clean' clears out the build directory for this platform
 clean:
-	cmake -E remove_directory ${build_dir}
+	cmake -E remove_directory ${build_dir} ; \
+	rm dragonscurse
 

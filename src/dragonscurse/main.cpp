@@ -231,15 +231,15 @@ int main(int argc, char *argv[])
 
 
     db->aquire_item((Item *) ObjectFactory::create_object(
-                                 "mithril_sword.xml",
+                                 "ivory_sword.xml",
                                  media, "Item"));
 
     db->aquire_item((Item *) ObjectFactory::create_object(
-                                 "mithril_shield.xml",
+                                 "ivory_shield.xml",
                                  media, "Item"));
 
     db->aquire_item((Item *) ObjectFactory::create_object(
-                                 "mithril_armour.xml",
+                                 "ivory_armour.xml",
                                  media, "Item"));
 
     db->list_items();
