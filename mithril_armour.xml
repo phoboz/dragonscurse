@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<shield dp="12">
-    <item type="shield"
-          price="32"
+<armour dp="12" cp="12">
+    <item type="armour"
+          price="44"
           req_cp="3"> 
-        <material move_speed="14" weight="2" rise="3" fall="3" still="3">
+        <material move_speed="14" weight="2" rise="4" fall="4" still="4">
             <object image="icons.png"
                     left="0" right="32" top="0" bottom="32" />
         </material>
     </item>
-</shield>
+</armour>
 

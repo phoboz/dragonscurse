@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<sword ap="12">
+    <item type="sword"
+          price="15"
+          req_cp="4"> 
+        <material move_speed="14" weight="2" rise="2" fall="2" still="2">
+            <object image="icons.png"
+                    left="0" right="32" top="0" bottom="32" />
+        </material>
+    </item>
+</sword>
+

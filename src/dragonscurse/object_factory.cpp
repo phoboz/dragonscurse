@@ -16,7 +16,9 @@
 #include "falling.h"
 #include "meka_dragon.h"
 #include "key.h"
+#include "sword.h"
 #include "shield.h"
+#include "armour.h"
 #include "area.h"
 
 static char priv_object_type[80];
@@ -113,8 +115,14 @@ Object* ObjectFactory::create_object(const char *name,
         if (strcmp(priv_object_type, "key") == 0) {
             object = new Key(name, media, x, y);
         }
+        else if (strcmp(priv_object_type, "sword") == 0) {
+            object = new Sword(name, media, x, y);
+        }
         else if (strcmp(priv_object_type, "shield") == 0) {
             object = new Shield(name, media, x, y);
+        }
+        else if (strcmp(priv_object_type, "armour") == 0) {
+            object = new Armour(name, media, x, y);
         }
     }
     else if (strcmp(type, "Walker") == 0) {

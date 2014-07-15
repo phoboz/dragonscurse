@@ -34,7 +34,7 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
             }
         }
         else {
-            m_menu->add_option("");
+            m_menu->add_option("Sold out!");
         }
     }
 

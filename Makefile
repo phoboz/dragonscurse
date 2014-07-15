@@ -30,8 +30,6 @@ all: dist
 # ${build_dir}/Makefile doesn't already exist, in which case we rely on the
 # cmake generated makefiles to regenerate themselves when necessary.
 cmakesetup:
-	@echo ${build_dir}
-	@echo ${dist_dir}
 	@ (if [ ! -e ${build_dir}/Makefile ] ; then \
 	        cmake -E make_directory ${build_dir} ; \
 		cd ${build_dir} ; \
