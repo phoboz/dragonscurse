@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <key>
-    <item>
+    <item type="key">
         <material move_speed="14" weight="2" rise="6" fall="6" still="6">
             <object image="icons.png"
                     left="0" right="32" top="0" bottom="32" />

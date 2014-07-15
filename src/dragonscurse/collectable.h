@@ -10,9 +10,9 @@ public:
 protected:
     int m_value;
 
-    Collectable(const char *fn, MediaDB *media, int value = 0)
-        : Material(TypeCollectable, fn, media),
-          m_value(value) { }
+    Collectable(const char *fn, MediaDB *media, int x, int y)
+        : Material(TypeCollectable, fn, media, x, y),
+          m_value(0) { }
 };
 
 #endif

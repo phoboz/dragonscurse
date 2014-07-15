@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <shield>
-    <item stats="12"
+    <item type="shield"
+          stats="12"
           price="32"
           cp="3"> 
         <material move_speed="14" weight="2" rise="3" fall="3" still="3">

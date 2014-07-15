@@ -16,6 +16,7 @@ Monster::Monster(const char *fn, MediaDB *media, int x, int y, Direction dir)
 
 void Monster::world_initialize(World *world)
 {
+    Item *item = 0;
     int object_id = get_attribute("object_id");
 
     if (object_id) {
@@ -25,9 +26,11 @@ void Monster::world_initialize(World *world)
                                 object_id, world->get_filename())) {
             switch(info.object_type) {
                 case Object::TypeItem:
-                    m_objects.push_back(new Item(info.data.item.name,
-                                                 m_media,
-                                                 info.key));
+                    item = (Item *) ObjectFactory::create_object(
+                                        info.data.item.name,
+                                        m_media, "Item");
+                    item->set_world_key(info.key);
+                    m_objects.push_back(item);
                     break;
 
                 case Object::TypeCurse:

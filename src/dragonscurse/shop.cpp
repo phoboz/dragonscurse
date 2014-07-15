@@ -1,6 +1,7 @@
 #include "phoboz/ctrl.h"
 #include "object_factory.h"
 #include "area.h"
+#include "item.h"
 #include "shop.h"
 
 Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
@@ -21,12 +22,14 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
                     ObjectFactory::create_object(info.data.item.name,
                                                  m_media, "Item");
                 if (object && object->get_loaded()) {
-                    std::string fn(object->get_filename());
+                    Item *item = (Item *) object;
+                    item->set_world_key(info.key);
+                    std::string fn(item->get_filename());
                     int lastindex = fn.find_last_of("."); 
                     std::string rawname = fn.substr(0, lastindex); 
                     m_menu->add_option(rawname.c_str(),
-                                       object->get_sprite(),
-                                       object->get_attribute("still"));
+                                       item->get_sprite(),
+                                       item->get_attribute("still"));
                 }
             }
         }
