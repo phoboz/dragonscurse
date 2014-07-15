@@ -16,14 +16,17 @@ struct TextLine {
 bool Text::m_initialized = false;
 
 Text::Text(const char *fontname, MediaDB *media,
-           const char *icon, int icon_index)
+           const Sprite *icon_spr, int icon_index)
     : m_media(media),
-      m_icon_spr(0),
       m_icon_index(icon_index)
 {
     m_font = media->get_font(fontname);
-    if (icon) {
-        set_icon(icon, icon_index);
+    if (icon_spr) {
+        media->reference_sprite(icon_spr);
+        m_icon_spr = (Sprite *) icon_spr;
+    }
+    else {
+        m_icon_spr = 0;
     }
 }
 
@@ -65,12 +68,6 @@ TextLine* Text::new_line(const char *str)
                                   m_lines.size() * TTF_FontLineSkip(m_font));
 
     return line;
-}
-
-void Text::set_icon(const char *icon, int icon_index)
-{
-    m_icon_spr = m_media->get_sprite(icon);
-    m_icon_index = icon_index;
 }
 
 bool Text::add_line(const char *str)

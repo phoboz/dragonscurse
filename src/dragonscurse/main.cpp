@@ -103,8 +103,8 @@ bool load_area(const char *ar_name,
         world_type = WorldRoom;
         return true;
     }
-    else if (std::string(ar_name) == std::string("Shop")) {
-        room = new Shop(media, start_x, start_y);
+    else if (std::string(ar_name).compare(0, 4, "Shop") == 0) {
+        room = new Shop(media, db, start_x, start_y);
         world_type = WorldRoom;
         return true;
     }

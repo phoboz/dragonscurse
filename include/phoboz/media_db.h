@@ -19,7 +19,8 @@ public:
     MediaDB(const char *name);
 
     Sprite* get_sprite(const char *filename);
-    bool leave_sprite(Sprite *leave);
+    void reference_sprite(const Sprite *spr);
+    bool leave_sprite(Sprite *spr);
     TTF_Font* get_font(const char *fontname);
     bool play_sound(const char *filename);
     bool play_music(const char *filename);
@@ -32,7 +33,7 @@ private:
     bool load_nodes(TiXmlNode *node);
 
     bool load_sprite(SpriteNode *sprite);
-    SpriteNode* find_sprite(Sprite *find);
+    SpriteNode* find_sprite(const Sprite *find);
     bool load_font(FontNode *font);
     bool load_sound(SoundNode *sound);
     bool load_music(MusicNode *music);

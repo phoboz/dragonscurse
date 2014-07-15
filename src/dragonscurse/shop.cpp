@@ -1,17 +1,38 @@
 #include "phoboz/ctrl.h"
+#include "object_factory.h"
 #include "area.h"
 #include "shop.h"
 
-Shop::Shop(MediaDB *media, int sx, int sy)
-    : Room("shop.png", "Wonderfull_18", media, sx, sy, 94, 240)
+Shop::Shop(MediaDB *media, WorldDB *db, int sx, int sy)
+    : Room("shop.png", "Wonderfull_18", media, sx, sy, 94, 240),
+      m_db(db)
 {
     m_text->add_text("Shoping\n please");
     m_menu = new Menu("Wonderfull_18", "icons.png", 0, media);
     m_menu->set_spacing(80);
-    m_menu->add_option("", "icons.png", 1);
-    m_menu->add_option("Mithrill\nShiled", "icons.png", 3);
-    m_menu->add_option("Mithrill\nArmour", "icons.png", 4);
-    m_menu->add_option("");
+
+    for (int i = 1; i <= 4; i++) {
+        ObjectInfo info;
+        if (db->get_object_info(&info, i, "Shop_village")) {
+            if (info.object_type == Object::TypeItem) {
+                Object *object =
+                    ObjectFactory::create_object(info.data.item.name,
+                                                 m_media, "Item");
+                if (object && object->get_loaded()) {
+                    std::string fn(object->get_filename());
+                    int lastindex = fn.find_last_of("."); 
+                    std::string rawname = fn.substr(0, lastindex); 
+                    m_menu->add_option(rawname.c_str(),
+                                       object->get_sprite(),
+                                       object->get_attribute("still"));
+                }
+            }
+        }
+        else {
+            m_menu->add_option("");
+        }
+    }
+
     m_menu->add_option("Exit");
 }
 
