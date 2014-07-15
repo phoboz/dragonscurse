@@ -13,11 +13,11 @@ Menu::Menu(const char *fontname,
     m_pointer_spr = media->get_sprite(pointer);
 }
 
-bool Menu::add_option(const char *str, const char *icon, int icon_index)
+bool Menu::add_option(const char *str, const Sprite *icon_spr, int icon_index)
 {
     bool result = false;
 
-    Text *text = new Text(m_fontname.c_str(), m_media, icon, icon_index);
+    Text *text = new Text(m_fontname.c_str(), m_media, icon_spr, icon_index);
     if (text) {
         text->add_text(str);
         m_options.push_back(text);

@@ -1,8 +1,9 @@
 #include "room.h"
 
-Room::Room(const char *image, const char *font, MediaDB *media, int sx, int sy,
-           int tx, int ty)
+Room::Room(const char *image, const char *font, MediaDB *media, const char *src,
+           int sx, int sy, int tx, int ty)
     : m_media(media),
+      m_src(src),
       m_sx(sx), m_sy(sy),
       m_tx(tx), m_ty(ty)
 {

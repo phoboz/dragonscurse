@@ -1,14 +1,5 @@
 #include "material.h"
 
-Material::Material(Type type, const char *fn, MediaDB *media)
-    : Object(type)
-{
-    load(fn, media);
-
-    m_dy = -get_attribute("move_speed");
-    m_delta_y = m_dy;
-}
-
 Material::Material(Type type, const char *fn, MediaDB *media, int x, int y)
     : Object(type, x, y)
 {

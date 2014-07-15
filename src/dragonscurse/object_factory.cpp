@@ -15,7 +15,8 @@
 #include "dancer.h"
 #include "falling.h"
 #include "meka_dragon.h"
-#include "item.h"
+#include "key.h"
+#include "shield.h"
 #include "area.h"
 
 static char priv_object_type[80];
@@ -46,6 +47,9 @@ bool ObjectFactory::search_nodes(TiXmlNode *node)
             result = match_node_type(node->ToElement());
         }
         else if (strcmp(node->Value(), "collectable") == 0) {
+            result = match_node_type(node->ToElement());
+        }
+        else if (strcmp(node->Value(), "item") == 0) {
             result = match_node_type(node->ToElement());
         }
     }
@@ -97,7 +101,20 @@ Object* ObjectFactory::create_object(const char *name,
         }
 
         if (strcmp(priv_object_type, "coin") == 0) {
-            object = new Coin(name, media);
+            object = new Coin(name, media, x, y);
+        }
+    }
+    else if (strcmp(type, "Item") == 0) {
+        TiXmlDocument doc(name);
+        if (doc.LoadFile()) {
+            search_nodes(&doc);
+        }
+
+        if (strcmp(priv_object_type, "key") == 0) {
+            object = new Key(name, media, x, y);
+        }
+        else if (strcmp(priv_object_type, "shield") == 0) {
+            object = new Shield(name, media, x, y);
         }
     }
     else if (strcmp(type, "Walker") == 0) {
@@ -117,9 +134,6 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "MekaDragon") == 0) {
         object = new MekaDragon(name, media, x, y, dir);
-    }
-    else if (strcmp(type, "Item") == 0) {
-        object = new Item(name, media, x, y);
     }
     else if (strcmp(type, "Area") == 0) {
         std::string tn = prop.GetLiteralProperty(std::string("type"));

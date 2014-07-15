@@ -11,7 +11,7 @@ struct TextLine;
 class Text {
 public:
     Text(const char *fontname, MediaDB *media,
-         const char *icon = 0, int icon_index = 0);
+         const Sprite *icon_spr = 0, int icon_index = 0);
 
     ~Text();
 

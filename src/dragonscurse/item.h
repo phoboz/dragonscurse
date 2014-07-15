@@ -6,18 +6,23 @@
 
 class Item : public Material {
 public:
-    Item(const char *fn, MediaDB *media, int world_key)
-        : Material(TypeItem, fn, media),
-          m_world_key(world_key) { }
-    Item(const char *fn, MediaDB *media, int x, int y)
+    enum ItemType { TypeKey, TypeSword, TypeShield, TypeArmour };
+
+    Item(ItemType type, const char *fn, MediaDB *media, int x, int y)
         : Material(TypeItem, fn, media, x, y),
-          m_world_key(0) { }
+          m_item_type(type),
+          m_world_key(-1) { }
+
+    void set_world_key(int key) {
+        m_world_key = key;
+    }
 
     void aquire(World *world);
 
 private:
 
     int m_world_key;
+    ItemType m_item_type;
 };
 
 #endif

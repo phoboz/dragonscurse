@@ -1,6 +1,7 @@
 #ifndef _Room_H
 #define _Room_H
 
+#include <string>
 #include "phoboz/media_db.h"
 #include "phoboz/text.h"
 
@@ -8,8 +9,8 @@ class Area;
 
 class Room {
 public:
-    Room(const char *image, const char *font, MediaDB *media, int sx, int sy,
-         int tx, int ty);
+    Room(const char *image, const char *font, MediaDB *media,
+         const char *src, int sx, int sy, int tx, int ty);
     ~Room();
 
     virtual Area* move(int key) = 0;
@@ -18,6 +19,7 @@ public:
 
 protected:
     MediaDB *m_media;
+    std::string m_src;
     Text *m_text;
     int m_sx;
     int m_sy;

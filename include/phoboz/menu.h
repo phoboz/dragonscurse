@@ -13,7 +13,8 @@ public:
          MediaDB *media);
 
     void set_spacing(int spacing) { m_spacing = spacing; }
-    bool add_option(const char *str, const char *icon = 0, int icon_index = 0);
+    bool add_option(const char *str,
+                    const Sprite *icon_spr = 0, int icon_index = 0);
     void advance_pointer(PointerDirection dir);
     int get_option() const { return m_curr_option; }
 

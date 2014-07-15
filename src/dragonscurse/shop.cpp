@@ -1,17 +1,43 @@
 #include "phoboz/ctrl.h"
+#include "object_factory.h"
 #include "area.h"
+#include "item.h"
 #include "shop.h"
 
-Shop::Shop(MediaDB *media, int sx, int sy)
-    : Room("shop.png", "Wonderfull_18", media, sx, sy, 94, 240)
+Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
+           const char *src, int sx, int sy)
+    : Room("shop.png", "Wonderfull_18", media, src, sx, sy, 94, 240),
+      m_name(name),
+      m_db(db)
 {
     m_text->add_text("Shoping\n please");
     m_menu = new Menu("Wonderfull_18", "icons.png", 0, media);
     m_menu->set_spacing(80);
-    m_menu->add_option("", "icons.png", 1);
-    m_menu->add_option("Mithrill\nShiled", "icons.png", 3);
-    m_menu->add_option("Mithrill\nArmour", "icons.png", 4);
-    m_menu->add_option("");
+
+    for (int i = 1; i <= 4; i++) {
+        ObjectInfo info;
+        if (db->get_object_info(&info, i, m_name.c_str())) {
+            if (info.object_type == Object::TypeItem) {
+                Object *object =
+                    ObjectFactory::create_object(info.data.item.name,
+                                                 m_media, "Item");
+                if (object && object->get_loaded()) {
+                    Item *item = (Item *) object;
+                    item->set_world_key(info.key);
+                    std::string fn(item->get_filename());
+                    int lastindex = fn.find_last_of("."); 
+                    std::string rawname = fn.substr(0, lastindex); 
+                    m_menu->add_option(rawname.c_str(),
+                                       item->get_sprite(),
+                                       item->get_attribute("still"));
+                }
+            }
+        }
+        else {
+            m_menu->add_option("");
+        }
+    }
+
     m_menu->add_option("Exit");
 }
 
@@ -29,14 +55,14 @@ Area* Shop::move(int key)
     else if (input & PRESS_ENTER) {
         if (m_menu->get_option() == 4) {
             m_media->play_sound("select.wav");
-            return new Area("village.tmx", m_sx, m_sy);
+            return new Area(m_src.c_str(), m_sx, m_sy);
         }
         else {
             m_media->play_sound("reject.wav");
         }
     }
     else if (input & PRESS_ESC) {
-        return new Area("village.tmx", m_sx, m_sy);
+        return new Area(m_src.c_str(), m_sx, m_sy);
     }
 
     return 0;

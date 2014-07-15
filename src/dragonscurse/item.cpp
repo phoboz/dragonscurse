@@ -2,9 +2,10 @@
 
 void Item::aquire(World *world)
 {
-    WorldDB *db = world->get_db();
-
     // Remove item from world database
-    db->remove(m_world_key);
+    if (m_world_key > 0) {
+        WorldDB *db = world->get_db();
+        db->remove(m_world_key);
+    }
 }
 

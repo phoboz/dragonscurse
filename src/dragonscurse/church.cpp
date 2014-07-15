@@ -2,8 +2,8 @@
 #include "area.h"
 #include "church.h"
 
-Church::Church(MediaDB *media, int sx, int sy)
-    : Room("church.png", "Wonderfull_18", media, sx, sy, 80, 312)
+Church::Church(MediaDB *media, const char *src, int sx, int sy)
+    : Room("church.png", "Wonderfull_18", media, src, sx, sy, 80, 312)
 {
     m_text->add_text("Welcome to church, save your progress?");
     m_menu = new Menu("Wonderfull_18", "icons.png", 0, media);
@@ -25,14 +25,14 @@ Area* Church::move(int key)
     else if (input & PRESS_ENTER) {
         if (m_menu->get_option() == 1) {
             m_media->play_sound("select.wav");
-            return new Area("village.tmx", m_sx, m_sy);
+            return new Area(m_src.c_str(), m_sx, m_sy);
         }
         else {
             m_media->play_sound("reject.wav");
         }
     }
     else if (input & PRESS_ESC) {
-        return new Area("village.tmx", m_sx, m_sy);
+        return new Area(m_src.c_str(), m_sx, m_sy);
     }
 
     return 0;

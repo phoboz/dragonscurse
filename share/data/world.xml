@@ -13,6 +13,10 @@
                 destination="castle_02.tmx"
                 start_x="576"
                 start_y="223" />
+        <object id="2"
+                location="Shop_mithras"
+                type="item"
+                name="mithril_shield.xml" />
         <object id="1"
                 location="wb.tmx"
                 type="curse"

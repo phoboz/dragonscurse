@@ -239,7 +239,7 @@ Sprite* MediaDB::get_sprite(const char *filename)
     return result;
 }
 
-SpriteNode* MediaDB::find_sprite(Sprite *find)
+SpriteNode* MediaDB::find_sprite(const Sprite *find)
 {
     SpriteNode *result = 0;
 
@@ -259,11 +259,17 @@ SpriteNode* MediaDB::find_sprite(Sprite *find)
     return result;
 }
 
-bool MediaDB::leave_sprite(Sprite *leave)
+void MediaDB::reference_sprite(const Sprite *spr)
+{
+    SpriteNode *sprite = find_sprite(spr);
+    ++sprite->m_ref;
+}
+
+bool MediaDB::leave_sprite(Sprite *spr)
 {
     bool result = false;
 
-    SpriteNode *sprite = find_sprite(leave);
+    SpriteNode *sprite = find_sprite(spr);
     if (--sprite->m_ref == 0) {
         delete sprite->m_sprite;
         sprite->m_loaded = false;
