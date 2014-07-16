@@ -13,11 +13,13 @@ Menu::Menu(const char *fontname,
     m_pointer_spr = media->get_sprite(pointer);
 }
 
-bool Menu::add_option(const char *str, const Sprite *icon_spr, int icon_index)
+bool Menu::add_option(const char *str, void *data,
+                      const Sprite *icon_spr, int icon_index)
 {
     bool result = false;
 
-    Text *text = new Text(m_fontname.c_str(), m_media, icon_spr, icon_index);
+    Text *text = new Text(m_fontname.c_str(), m_media, data,
+                          icon_spr, icon_index);
     if (text) {
         text->add_text(str);
         m_options.push_back(text);
@@ -27,7 +29,7 @@ bool Menu::add_option(const char *str, const Sprite *icon_spr, int icon_index)
     return result;
 }
 
-void Menu::advance_pointer(PointerDirection dir)
+void* Menu::advance_pointer(PointerDirection dir)
 {
     if (dir == DirectionUp) {
         if (--m_curr_option < 0) {
@@ -39,6 +41,8 @@ void Menu::advance_pointer(PointerDirection dir)
             m_curr_option = 0;
         }
     }
+
+    return m_options[m_curr_option]->get_data();
 }
 
 void Menu::draw(SDL_Surface *dest, int x, int y,

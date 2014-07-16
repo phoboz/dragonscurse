@@ -11,7 +11,6 @@
 #include "phoboz/map.h"
 #include "phoboz/fps_timer.h"
 #include "phoboz/media_db.h"
-#include "phoboz/text.h"
 #include "object.h"
 #include "object_factory.h"
 #include "world_db.h"
@@ -30,7 +29,8 @@ static WorldDB *db;
 static World *world;
 static Room *room;
 static enum { WorldMap, WorldRoom } world_type;
-static Text *msg;
+Status *status;
+Statusbar *statusbar;
 
 bool init()
 {
@@ -79,15 +79,6 @@ bool init()
         fprintf(stderr, "Fatal Error -- Unable to initialize font engine\n");
         return false;
     }
-
-    msg = new Text("Wonderfull_12", media);
-    if (!msg) {
-        fprintf(stderr, "Fatal Error -- Unable to create text box\n");
-        return false;
-    }
-
-    msg->add_line("Welcome to monster world!");
-    msg->add_line("Dragon's Curse.");
 
     return true;
 }
@@ -173,8 +164,7 @@ void move_keydown(int key)
 
 void redraw()
 {
-    Statusbar::draw(screen, screen_width, screen_height);
-    msg->draw(screen, 4, 4, 0, 0, screen_width, Statusbar::get_height());
+    statusbar->draw(screen, screen_width, screen_height);
     if (world_type == WorldRoom) {
         room->draw(screen, 0, Statusbar::get_height(),
                    0, 0, screen_width, screen_height);
@@ -230,22 +220,24 @@ int main(int argc, char *argv[])
     }
 
 
-    db->aquire_item((Item *) ObjectFactory::create_object(
-                                 "ivory_sword.xml",
-                                 media, "Item"));
+    status = db->get_status();
+    statusbar = new Statusbar(status, media);
+    status->aquire_item((Item *) ObjectFactory::create_object(
+                                     "ivory_sword.xml",
+                                     media, "Item"));
 
-    db->aquire_item((Item *) ObjectFactory::create_object(
-                                 "ivory_shield.xml",
-                                 media, "Item"));
+    status->aquire_item((Item *) ObjectFactory::create_object(
+                                     "ivory_shield.xml",
+                                      media, "Item"));
 
-    db->aquire_item((Item *) ObjectFactory::create_object(
-                                 "ivory_armour.xml",
-                                 media, "Item"));
+    status->aquire_item((Item *) ObjectFactory::create_object(
+                                     "ivory_armour.xml",
+                                      media, "Item"));
 
-    db->equip_item("ivory_sword.xml");
-    db->equip_item("ivory_shield.xml");
-    db->equip_item("ivory_armour.xml");
-    db->show_stat();
+    status->equip_item("ivory_sword.xml");
+    status->equip_item("ivory_shield.xml");
+    status->equip_item("ivory_armour.xml");
+    status->show();
 
     load_area(map_name, true, player_name, start_x, start_y);
 

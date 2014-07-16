@@ -3,25 +3,26 @@
 #include "sword.h"
 #include "shield.h"
 #include "armour.h"
+#include "collectable.h"
 #include "status.h"
 
 void Status::update()
 {
-    ap = 0;
-    dp = 0;
-    cp = 0;
+    m_ap = 0;
+    m_dp = 0;
+    m_cp = 0;
 
     if (m_sword) {
-        ap += m_sword->get_attribute("ap");
+        m_ap += m_sword->get_attribute("ap");
     }
 
     if (m_shield) {
-        dp += m_shield->get_attribute("dp");
+        m_dp += m_shield->get_attribute("dp");
     }
 
     if (m_armour) {
-        dp += m_armour->get_attribute("dp");
-        cp += m_armour->get_attribute("cp");
+        m_dp += m_armour->get_attribute("dp");
+        m_cp += m_armour->get_attribute("cp");
     }
 }
 
@@ -70,13 +71,26 @@ bool Status::equip_item(const char *name)
     }
 }
 
+void Status::aquire_collectable(Collectable *collectable)
+{
+    switch (collectable->get_collectable_type()) {
+        case Collectable::TypeGold:
+            m_gold += collectable->get_value();
+            break;
+
+        default:
+            break;
+    }
+}
+
 void Status::show() const
 {
 
-    std::cout << "Stats:" << std::endl;
-    std::cout << "Attack points: " << ap << std::endl;
-    std::cout << "Defence points: " << dp << std::endl;
-    std::cout << "Charm points: " << cp << std::endl;
+    std::cout << "Status:" << std::endl;
+    std::cout << "AP: " << "\t" << m_ap << std::endl;
+    std::cout << "DP: " << "\t" << m_dp << std::endl;
+    std::cout << "DP: " << "\t" << m_cp << std::endl;
+    std::cout << "Gold: " << "\t" << m_gold << std::endl;
     std::cout << std::endl;
 
     std::cout << "Items:" << std::endl;

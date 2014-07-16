@@ -1,3 +1,4 @@
+#include <string.h>
 #include "phoboz/ctrl.h"
 #include "object_factory.h"
 #include "area.h"
@@ -11,6 +12,10 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
       m_db(db)
 {
     m_text->add_text("Shoping\n please");
+    m_price_label = new Text("Wonderfull_18", media);
+    m_price_label->add_line("Price");
+    m_price_text = new Text("Wonderfull_18", media);
+    m_price_text->add_line("000000 Gold");
     m_menu = new Menu("Wonderfull_18", "icons.png", 0, media);
     m_menu->set_spacing(80);
 
@@ -25,16 +30,31 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
                     Item *item = (Item *) object;
                     item->set_world_key(info.key);
 
-                    if (item->get_attribute("req_cp") <= db->get_cp()) {
+                    Status *status = m_db->get_status();
+                    if (item->get_attribute("req_cp") <= status->get_cp()) {
                         std::string fn(item->get_filename());
                         int lastindex = fn.find_last_of("."); 
                         std::string rawname = fn.substr(0, lastindex); 
                         m_menu->add_option(rawname.c_str(),
+                                           item,
                                            item->get_sprite(),
                                            item->get_attribute("still"));
+                        if (i == 1) {
+                            static char str[12];
+                            sprintf(str, "%06d Gold",
+                                    item->get_attribute("price"));
+                            m_price_text->replace(str);
+                            if (status->get_gold() <
+                                item->get_attribute("price")) {
+                                m_price_text->set_color(Text::ColorRed);
+                            }
+                            else {
+                                m_price_text->set_color(Text::ColorWhite);
+                            }
+                        }
                     }
                     else {
-                        m_menu->add_option("", item->get_sprite(),
+                        m_menu->add_option("", 0, item->get_sprite(),
                                            item->get_attribute("unknown"));
                     }
                 }
@@ -50,35 +70,63 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
 
 Area* Shop::move(int key)
 {
+    Area *area = 0;
+    void *data = 0;
+    bool rejected = false;
+
     int input = get_input_keydown(key);
     if (input & PRESS_DOWN) {
-        m_menu->advance_pointer(Menu::DirectionDown);
+        data = m_menu->advance_pointer(Menu::DirectionDown);
         m_media->play_sound("advance.wav");
     }
     else if (input & PRESS_UP) {
-        m_menu->advance_pointer(Menu::DirectionUp);
+        data = m_menu->advance_pointer(Menu::DirectionUp);
         m_media->play_sound("advance.wav");
     }
     else if (input & PRESS_ENTER) {
         if (m_menu->get_option() == 4) {
             m_media->play_sound("select.wav");
-            return new Area(m_src.c_str(), m_sx, m_sy);
+            area = new Area(m_src.c_str(), m_sx, m_sy);
         }
         else {
             m_media->play_sound("reject.wav");
+            rejected = true;
         }
     }
     else if (input & PRESS_ESC) {
-        return new Area(m_src.c_str(), m_sx, m_sy);
+        area = new Area(m_src.c_str(), m_sx, m_sy);
     }
 
-    return 0;
+    if (data) {
+        Item *item = (Item *) data;
+        static char str[12];
+        sprintf(str, "%06d Gold", item->get_attribute("price"));
+        m_price_text->replace(str);
+
+        Status *status = m_db->get_status();
+        if (status->get_gold() < item->get_attribute("price")) {
+            m_price_text->set_color(Text::ColorRed);
+        }
+        else {
+            m_price_text->set_color(Text::ColorWhite);
+        }
+    }
+    else if (!rejected) {
+        static char str[12];
+        sprintf(str, "000000 Gold");
+        m_price_text->replace(str);
+        m_price_text->set_color(Text::ColorWhite);
+    }
+
+    return area;
 }
 
 void Shop::draw(SDL_Surface *dest, int x, int y,
                   int clip_x, int clip_y, int clip_w, int clip_h)
 {
     Room::draw(dest, x, y, clip_x, clip_y, clip_w, clip_h);
+    m_price_label->draw(dest, x + 48, y + 342, clip_x, clip_y, clip_w, clip_h);
+    m_price_text->draw(dest, x + 100, y + 380, clip_x, clip_y, clip_w, clip_h);
     m_menu->draw(dest, x + 302, y + 40, clip_x, clip_y, clip_w, clip_h);
 }
 

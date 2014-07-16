@@ -100,10 +100,11 @@ Area* World::move(Player *player,
                     if (area->is_locked()) {
 
                         // Check if the player has the key
-                        Item *item = m_db->check_item(area->get_data());
+                        Status *status = m_db->get_status();
+                        Item *item = status->check_item(area->get_data());
                         if (item) {
                             if (area->unlock(this, item)) {
-                                m_db->remove_item(item);
+                                status->remove_item(item);
                             }
                         }
                     }
@@ -145,7 +146,8 @@ Area* World::move(Player *player,
 
                 // Check if player picked up item
                 if (player->check_collision(item)) {
-                    m_db->aquire_item(item);
+                    Status *status = m_db->get_status();
+                    status->aquire_item(item);
                     item->aquire(this);
                     item->set_reused(true);
                     perished.push_back(item);
@@ -160,12 +162,8 @@ Area* World::move(Player *player,
 
                 // Check if player picked up the collectable
                 if (player->check_collision(collectable)) {
-                    // TODO:
-                    std::cout << "Picked up collectable: "
-                              << collectable->get_filename()
-                              << " of value: "
-                              << collectable->get_value()
-                              << std::endl;
+                    Status *status = m_db->get_status();
+                    status->aquire_collectable(collectable);
                     perished.push_back(collectable);
                 }
             }

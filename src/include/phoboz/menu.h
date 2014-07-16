@@ -13,9 +13,9 @@ public:
          MediaDB *media);
 
     void set_spacing(int spacing) { m_spacing = spacing; }
-    bool add_option(const char *str,
+    bool add_option(const char *str, void *data = 0,
                     const Sprite *icon_spr = 0, int icon_index = 0);
-    void advance_pointer(PointerDirection dir);
+    void* advance_pointer(PointerDirection dir);
     int get_option() const { return m_curr_option; }
 
     void draw(SDL_Surface *dest, int x, int y,

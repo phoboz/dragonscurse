@@ -18,6 +18,8 @@ public:
 private:
     std::string m_name;
     WorldDB *m_db;
+    Text *m_price_label;
+    Text *m_price_text;
     Menu *m_menu;
 };
 
