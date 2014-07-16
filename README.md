@@ -5,7 +5,7 @@ Dragon's Curse Action/Adventure Platform Game:
 git clone https://github.com/phoboz/dragonscurse.git  
   
 2. Build on Linux:  
-cd dragonscurse
+cd dragonscurse  
 make  
   
 3. a) Play on Linux:  
