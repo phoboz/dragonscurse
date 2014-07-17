@@ -33,7 +33,7 @@ void Statusbar::draw(SDL_Surface *surface, int screen_width, int screen_height)
 
     static char str[6];
     sprintf(str, "%06d", m_status->get_gold());
-    m_gold_text->replace(str);
+    m_gold_text->replace_line(str);
     m_gold_label->draw(surface, screen_width - 120, 0,
                        0, 0, screen_width, screen_height);
     m_gold_text->draw(surface, screen_width - 80, c_height - 20,

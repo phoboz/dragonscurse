@@ -15,7 +15,7 @@ public:
         : m_sword(0),
           m_shield(0),
           m_armour(0),
-          m_gold(0) { update(); }
+          m_gold(34) { update(); }
 
     void aquire_item(Item *item) { m_items.push_back(item); }
     Item* check_item(const char *name);
@@ -24,6 +24,7 @@ public:
     bool equip_item(const char *name);
 
     void aquire_collectable(Collectable *collectable);
+    bool pay_gold(int ammount);
 
     int get_cp() const { return m_cp; }
     int get_gold() const { return m_gold; }

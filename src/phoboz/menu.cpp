@@ -21,9 +21,22 @@ bool Menu::add_option(const char *str, void *data,
     Text *text = new Text(m_fontname.c_str(), m_media, data,
                           icon_spr, icon_index);
     if (text) {
-        text->add_text(str);
+        text->add_line(str);
         m_options.push_back(text);
         result = true;
+    }
+
+    return result;
+}
+
+bool Menu::replace_option(const char *str, void *data,
+                          const Sprite *icon_spr, int icon_index)
+{
+    Text *option = m_options[m_curr_option];
+    bool result = option->replace_line(str);
+    if (result) {
+        m_options[m_curr_option]->set_icon(icon_spr, icon_index);
+        m_options[m_curr_option]->set_data(data);
     }
 
     return result;

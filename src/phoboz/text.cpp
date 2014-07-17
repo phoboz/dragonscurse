@@ -34,18 +34,10 @@ bool Text::m_initialized = false;
 Text::Text(const char *fontname, MediaDB *media, void *data,
            const Sprite *icon_spr, int icon_index)
     : m_media(media),
-      m_data(data),
-      m_icon_index(icon_index)
+      m_data(data)
 {
     m_font = media->get_font(fontname);
-    if (icon_spr) {
-        media->reference_sprite(icon_spr);
-        m_icon_spr = (Sprite *) icon_spr;
-    }
-    else {
-        m_icon_spr = 0;
-    }
-
+    set_icon(icon_spr, icon_index);
     set_color(ColorWhite);
 }
 
@@ -79,6 +71,16 @@ bool Text::init()
 TTF_Font* Text::load_font(const char *fn, int size)
 {
     return TTF_OpenFont("wonderfull.ttf", size);
+}
+
+void Text::set_icon(const Sprite *icon_spr, int icon_index)
+{
+    if (icon_spr) {
+        m_media->reference_sprite(icon_spr);
+    }
+
+    m_icon_spr = (Sprite *) icon_spr;
+    m_icon_index = icon_index;
 }
 
 void Text::set_color(Color color)
@@ -124,7 +126,7 @@ bool Text::add_line(const char *str)
     return result;
 }
 
-bool Text::replace(const char *str, int line_no)
+bool Text::replace_line(const char *str, int line_no)
 {
     return m_lines[line_no]->replace(str);
 }

@@ -19,6 +19,7 @@ public:
 
     ItemType get_item_type() const { return m_item_type; }
 
+    void aquire(WorldDB *db) { db->remove(m_world_key); }
     void aquire(World *world);
 
 private:

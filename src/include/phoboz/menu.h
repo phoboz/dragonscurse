@@ -15,8 +15,11 @@ public:
     void set_spacing(int spacing) { m_spacing = spacing; }
     bool add_option(const char *str, void *data = 0,
                     const Sprite *icon_spr = 0, int icon_index = 0);
+    bool replace_option(const char *str, void *data = 0,
+                        const Sprite *icon_spr = 0, int icon_index = 0);
     void* advance_pointer(PointerDirection dir);
     int get_option() const { return m_curr_option; }
+    void* get_data() const { return m_options[m_curr_option]->get_data(); }
 
     void draw(SDL_Surface *dest, int x, int y,
               int clip_x, int clip_y, int clip_w, int clip_h);

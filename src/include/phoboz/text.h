@@ -20,10 +20,12 @@ public:
     static bool init();
     static TTF_Font* load_font(const char *fn, int size);
 
+    void set_icon(const Sprite *icon_spr, int icon_index);
+    void set_data(void *data) { m_data = data; }
     void set_color(Color color);
 
     bool add_line(const char *str);
-    bool replace(const char *str, int line_no = 0);
+    bool replace_line(const char *str, int line_no = 0);
     bool add_text(const char *str);
 
     int get_height() const;

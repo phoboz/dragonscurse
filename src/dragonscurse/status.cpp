@@ -83,6 +83,18 @@ void Status::aquire_collectable(Collectable *collectable)
     }
 }
 
+bool Status::pay_gold(int ammount)
+{
+    bool result = false;
+
+    if (ammount <= m_gold) {
+        m_gold -= ammount;
+        result = true;
+    }
+
+    return result;
+}
+
 void Status::show() const
 {
 

@@ -43,7 +43,7 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
                             static char str[12];
                             sprintf(str, "%06d Gold",
                                     item->get_attribute("price"));
-                            m_price_text->replace(str);
+                            m_price_text->replace_line(str);
                             if (status->get_gold() <
                                 item->get_attribute("price")) {
                                 m_price_text->set_color(Text::ColorRed);
@@ -89,8 +89,24 @@ Area* Shop::move(int key)
             area = new Area(m_src.c_str(), m_sx, m_sy);
         }
         else {
-            m_media->play_sound("reject.wav");
-            rejected = true;
+            Item *item = (Item *) m_menu->get_data();
+            if (item) {
+                Status *status = m_db->get_status();
+                if (status->pay_gold(item->get_attribute("price"))) {
+                    m_menu->replace_option("Sold out!");
+                    item->aquire(m_db);
+                    status->aquire_item(item);
+                    m_media->play_sound("select.wav");
+                }
+                else {
+                    m_media->play_sound("reject.wav");
+                    rejected = true;
+                }
+            }
+            else {
+                m_media->play_sound("reject.wav");
+                rejected = true;
+            }
         }
     }
     else if (input & PRESS_ESC) {
@@ -101,7 +117,7 @@ Area* Shop::move(int key)
         Item *item = (Item *) data;
         static char str[12];
         sprintf(str, "%06d Gold", item->get_attribute("price"));
-        m_price_text->replace(str);
+        m_price_text->replace_line(str);
 
         Status *status = m_db->get_status();
         if (status->get_gold() < item->get_attribute("price")) {
@@ -114,7 +130,7 @@ Area* Shop::move(int key)
     else if (!rejected) {
         static char str[12];
         sprintf(str, "000000 Gold");
-        m_price_text->replace(str);
+        m_price_text->replace_line(str);
         m_price_text->set_color(Text::ColorWhite);
     }
 
