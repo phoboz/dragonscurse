@@ -92,6 +92,21 @@ bool Object::load(const char *fn, MediaDB *media)
     return m_loaded;
 }
 
+Object::Direction Object::get_reference() const
+{
+    Direction dir;
+
+    // Right of reference
+    if (m_x < m_xref) {
+        dir = Right;
+    }
+    else {
+        dir = Left;
+    }
+
+    return dir;
+}
+
 bool Object::check_collision(int x, int y, Map *map, int id)
 {
     bool result = false;

@@ -28,4 +28,61 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="Monsters" width="268" height="14">
+  <object name="cobra_red.xml" type="Guardian" x="1005" y="299" width="38" height="50">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="cobra_red.xml" type="Guardian" x="1136" y="299" width="38" height="50">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="cobra_red.xml" type="Guardian" x="1270" y="299" width="38" height="50">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="side_crawler_red.xml" type="Crawler" x="1662" y="311" width="38" height="38">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="cobra_red.xml" type="Guardian" x="2187" y="203" width="38" height="50">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="side_crawler_red.xml" type="Crawler" x="2587" y="311" width="38" height="38">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="side_crawler_red.xml" type="Crawler" x="3104" y="311" width="38" height="38">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="side_crawler_red.xml" type="Crawler" x="3249" y="311" width="38" height="38">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="side_crawler_red.xml" type="Crawler" x="3636" y="214" width="38" height="38">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="side_crawler_red.xml" type="Crawler" x="4135" y="214" width="38" height="38">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="side_crawler_red.xml" type="Crawler" x="4529" y="278" width="38" height="38">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

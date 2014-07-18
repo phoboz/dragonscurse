@@ -61,11 +61,13 @@ public:
     const Sprite* get_sprite() const { return m_spr; }
     int get_image_width() const { return m_spr->get_image_width(); }
     int get_image_height() const { return m_spr->get_image_height(); }
+    Direction get_reference() const;
     bool get_reused() { return m_reused; }
 
     void set_x(int value) { m_x = value; }
     void set_y(int value) { m_y = value; }
     void set_reference(int x, int y) { m_xref = x; m_yref = y; }
+
     void set_reused(bool reused) { m_reused = reused; }
 
     const char* get_filename() { return m_fn.c_str(); }

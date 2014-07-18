@@ -10,6 +10,7 @@
 #include "human.h"
 #include "dragon.h"
 #include "walker.h"
+#include "crawler.h"
 #include "guardian.h"
 #include "lock_flyer.h"
 #include "dancer.h"
@@ -127,6 +128,9 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "Walker") == 0) {
         object = new Walker(name, media, x, y, dir);
+    }
+    else if (strcmp(type, "Crawler") == 0) {
+        object = new Crawler(name, media, x, y, dir);
     }
     else if (strcmp(type, "Guardian") == 0) {
         object = new Guardian(name, media, x, y, dir);

@@ -19,11 +19,11 @@ void Dancer::move(Map *map)
             // Check for collision with map
             check_behind(map);
 
-            // Move
-            if (m_dir == Right) {
+            // Right of player
+            if (get_reference() == Right) {
                 m_x -= m_dx;
             }
-            else if (m_dir == Left) {
+            else {
                 m_x += m_dx;
             }
         }
