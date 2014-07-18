@@ -34,7 +34,7 @@
                    weak_right="56"
                    weak_bottom="64">
                 <object image="salamander.png"
-                        left="12" right="56" top="0" bottom="64" />
+                        left="12" right="56" top="7" bottom="64" />
             </actor>
         </player>
         <string bullet="firebreath.xml" />

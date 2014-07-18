@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="174" height="48" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="175" height="48" tilewidth="32" tileheight="32">
  <properties>
   <property name="bg_color" value="65450"/>
   <property name="music" value="village.ogg"/>
@@ -14,27 +14,27 @@
   </properties>
   <image source="village.png" width="512" height="512"/>
  </tileset>
- <layer name="Villlage" width="174" height="48">
+ <layer name="Villlage" width="175" height="48">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
- <objectgroup name="Areas" width="174" height="48">
-  <object name="seaside.tmx" type="Area" x="5536" y="1184" width="32" height="128">
+ <objectgroup name="Areas" width="175" height="48">
+  <object name="seaside.tmx" type="Area" x="5568" y="1184" width="32" height="128">
    <properties>
-    <property name="start_x" value="64"/>
+    <property name="start_x" value="160"/>
     <property name="start_y" value="287"/>
     <property name="type" value="warp"/>
    </properties>
   </object>
-  <object name="village_interiour.tmx" type="Area" x="2592" y="992" width="64" height="64">
+  <object name="village_interiour.tmx" type="Area" x="2624" y="992" width="64" height="64">
    <properties>
     <property name="start_x" value="1024"/>
     <property name="start_y" value="927"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
-  <object name="village_interiour.tmx" type="Area" x="3296" y="1248" width="32" height="128">
+  <object name="village_interiour.tmx" type="Area" x="3328" y="1248" width="32" height="128">
    <properties>
     <property name="start_x" value="2112"/>
     <property name="start_y" value="1247"/>
@@ -64,14 +64,14 @@
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
-  <object name="Church" type="Area" x="3008" y="992" width="64" height="64">
+  <object name="Church" type="Area" x="3040" y="992" width="64" height="64">
    <properties>
     <property name="start_x" value="3008"/>
     <property name="start_y" value="991"/>
     <property name="type" value="window_door.xml"/>
    </properties>
   </object>
-  <object name="Shop_mithras" type="Area" x="2592" y="832" width="64" height="64">
+  <object name="Shop_mithras" type="Area" x="2624" y="832" width="64" height="64">
    <properties>
     <property name="start_x" value="2592"/>
     <property name="start_y" value="831"/>
@@ -79,9 +79,9 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="Front" width="174" height="48">
+ <layer name="Front" width="175" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt0rENACAMA8EMGNh/nFAwQKQUUNxJ37twBAAAAAAAAAAAAAAAAAAAAAAAAAAAAMBMntZtP94CXX4LAAAAAAAAAADATwo2xwJp
+   eJzt0rENACAMA8EMGNh/nFCwQKoIdCd978IRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO/L07rt4S3Q4bsAAAAAAAAAAAD8oADDFwJp
   </data>
  </layer>
 </map>
