@@ -31,9 +31,6 @@ Area* Church::move(int key)
             m_media->play_sound("reject.wav");
         }
     }
-    else if (input & PRESS_ESC) {
-        return new Area(m_src.c_str(), m_sx, m_sy);
-    }
 
     return 0;
 }

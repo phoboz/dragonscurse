@@ -17,6 +17,8 @@ World::World(Map *map, MediaDB *media, WorldDB *db, const char *music)
 {
     // Load attributes
     m_bg_color = m_map->get_numeric_property("bg_color");
+    m_offset_x = m_map->get_numeric_property("offset_x");
+    m_offset_y = m_map->get_numeric_property("offset_y");
 
     // Play music
     if (music) {
@@ -70,16 +72,16 @@ Area* World::move(Player *player,
     player->move(m_map);
     int window_width = clip_w - clip_x;
     int window_height = clip_h - clip_y;
-    int map_x = player->get_x() - window_width / 2;
-    int map_y = player->get_y() - window_height / 2;
+    int map_x = player->get_x() - window_width / 2 + m_offset_x;
+    int map_y = player->get_y() - window_height / 2 + m_offset_y;
     if (map_x < 0) {
         map_x = 0;
     }
     if (map_y < 0) {
         map_y = 0;
     }
-    m_map->set_x(map_x, 640);
-    m_map->set_y(map_y, 480 - Statusbar::get_height());
+    m_map->set_x(map_x, window_width);
+    m_map->set_y(map_y, window_height);
 
     std::vector<Object*> perished;
 

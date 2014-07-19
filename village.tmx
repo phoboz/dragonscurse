@@ -3,6 +3,7 @@
  <properties>
   <property name="bg_color" value="65450"/>
   <property name="music" value="village.ogg"/>
+  <property name="offset_y" value="-64"/>
   <property name="start_x" value="2400"/>
   <property name="start_y" value="824"/>
  </properties>
@@ -66,15 +67,11 @@
   </object>
   <object name="Church" type="Area" x="3040" y="992" width="64" height="64">
    <properties>
-    <property name="start_x" value="3008"/>
-    <property name="start_y" value="991"/>
     <property name="type" value="window_door.xml"/>
    </properties>
   </object>
   <object name="Shop_mithras" type="Area" x="2624" y="832" width="64" height="64">
    <properties>
-    <property name="start_x" value="2592"/>
-    <property name="start_y" value="831"/>
     <property name="type" value="window_door.xml"/>
    </properties>
   </object>

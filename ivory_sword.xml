@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
-<sword ap="3">
-    <item type="sword"
+<arm ap="3">
+    <item type="arm"
           price="0"
           req_cp="0"
           unknown="1"> 
@@ -9,5 +9,5 @@
                     left="0" right="32" top="0" bottom="32" />
         </material>
     </item>
-</sword>
+</arm>
 

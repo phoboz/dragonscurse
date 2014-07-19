@@ -4,7 +4,7 @@
 #include <list>
 
 class Item;
-class Sword;
+class Arm;
 class Shield;
 class Armour;
 class Collectable;
@@ -12,7 +12,7 @@ class Collectable;
 class Status {
 public:
     Status()
-        : m_sword(0),
+        : m_arm(0),
           m_shield(0),
           m_armour(0),
           m_gold(34) { update(); }
@@ -35,7 +35,7 @@ private:
     void update();
 
     std::list<Item*> m_items;
-    Sword *m_sword;
+    Arm *m_arm;
     Shield *m_shield;
     Armour *m_armour;
 

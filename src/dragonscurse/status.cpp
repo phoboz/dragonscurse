@@ -1,6 +1,6 @@
 #include <iostream>
 #include "item.h"
-#include "sword.h"
+#include "arm.h"
 #include "shield.h"
 #include "armour.h"
 #include "collectable.h"
@@ -12,8 +12,8 @@ void Status::update()
     m_dp = 0;
     m_cp = 0;
 
-    if (m_sword) {
-        m_ap += m_sword->get_attribute("ap");
+    if (m_arm) {
+        m_ap += m_arm->get_attribute("ap");
     }
 
     if (m_shield) {
@@ -50,8 +50,8 @@ bool Status::equip_item(const char *name)
     Item *item = check_item(name);
     if (item) {
         switch(item->get_item_type()) {
-            case Item::TypeSword:
-                m_sword = (Sword *) item;
+            case Item::TypeArm:
+                m_arm = (Arm *) item;
                 update();
                 break;
 

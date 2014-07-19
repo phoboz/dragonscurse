@@ -17,7 +17,7 @@
 #include "falling.h"
 #include "meka_dragon.h"
 #include "key.h"
-#include "sword.h"
+#include "arm.h"
 #include "shield.h"
 #include "armour.h"
 #include "area.h"
@@ -116,8 +116,8 @@ Object* ObjectFactory::create_object(const char *name,
         if (strcmp(priv_object_type, "key") == 0) {
             object = new Key(name, media, x, y);
         }
-        else if (strcmp(priv_object_type, "sword") == 0) {
-            object = new Sword(name, media, x, y);
+        else if (strcmp(priv_object_type, "arm") == 0) {
+            object = new Arm(name, media, x, y);
         }
         else if (strcmp(priv_object_type, "shield") == 0) {
             object = new Shield(name, media, x, y);

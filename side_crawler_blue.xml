@@ -15,7 +15,7 @@
                    left_hit="2"
                    left_perish="2"
                    weak_left="2"
-                   weak_top="2"
+                   weak_top="7"
                    weak_right="32"
                    weak_bottom="33">
                 <object image="side_crawler_blue.png"

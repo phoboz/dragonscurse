@@ -109,9 +109,6 @@ Area* Shop::move(int key)
             }
         }
     }
-    else if (input & PRESS_ESC) {
-        area = new Area(m_src.c_str(), m_sx, m_sy);
-    }
 
     if (data) {
         Item *item = (Item *) data;

@@ -6,7 +6,7 @@
 
 class Item : public Material {
 public:
-    enum ItemType { TypeKey, TypeSword, TypeShield, TypeArmour };
+    enum ItemType { TypeKey, TypeArm, TypeShield, TypeArmour };
 
     Item(ItemType type, const char *fn, MediaDB *media, int x, int y)
         : Material(TypeItem, fn, media, x, y),

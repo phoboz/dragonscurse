@@ -90,13 +90,15 @@ bool load_area(const char *ar_name,
                const char *music = 0)
 {
     if (std::string(ar_name) == std::string("Church")) {
-        room = new Church(media, map->get_filename().c_str(), start_x, start_y);
+        room = new Church(media, map->get_filename().c_str(),
+                          player->get_x(), player->get_y());
         world_type = WorldRoom;
         return true;
     }
     else if (std::string(ar_name).compare(0, 4, "Shop") == 0) {
         room = new Shop(ar_name, media, db,
-                        map->get_filename().c_str(), start_x, start_y);
+                        map->get_filename().c_str(),
+                        player->get_x(), player->get_y());
         world_type = WorldRoom;
         return true;
     }

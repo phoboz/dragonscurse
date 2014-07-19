@@ -24,6 +24,8 @@ private:
     MediaDB *m_media;
     Map *m_map;
     int m_bg_color;
+    int m_offset_x;
+    int m_offset_y;
     std::list<Object*> m_objects;
     WorldDB *m_db;
 };
