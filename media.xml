@@ -19,6 +19,8 @@
                 width="50" height="66" margin="1" spacing="1" />
         <sprite filename="cyclop_red.png"
                 width="50" height="66" margin="1" spacing="1" />
+        <sprite filename="ember_red.png"
+                width="28" height="28" margin="1" spacing="1" />
         <sprite filename="falling_block.png"
                 width="32" height="32" margin="1" spacing="1" />
         <sprite filename="fireball.png"
