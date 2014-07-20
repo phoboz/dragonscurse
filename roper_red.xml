@@ -22,7 +22,7 @@
                    weak_top="2"
                    weak_right="46"
                    weak_bottom="34">
-                <object image="rooper_red.png"
+                <object image="roper_red.png"
                         left="4" right="46" top="2" bottom="34" />
             </actor>
             <string bullet="ember_red.xml" />
