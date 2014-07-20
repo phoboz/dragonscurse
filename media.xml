@@ -43,6 +43,8 @@
                 width="60" height="60" margin="1" spacing="1" />
         <sprite filename="regular_door.png"
                 width="64" height="64" margin="1" spacing="1" />
+        <sprite filename="rooper_red.png"
+                width="50" height="34" margin="1" spacing="1" />
         <sprite filename="salamander.png"
                 width="68" height="65" margin="1" spacing="1" />
         <sprite filename="shop.png"
