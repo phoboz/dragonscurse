@@ -99,11 +99,13 @@ public:
 protected:
     const char* get_string(const char *name) const;
 
-    bool check_collision(int x, int y, Map *map, int id);
-    bool check_below(Map *map, int id = 0);
-    bool check_ahead(Map *map, int id = 0);
-    bool check_behind(Map *map, int id = 0);
-    bool check_above(Map *map, int id = 0);
+    bool check_collision(int x, int y, Map *map, int start = 0, int end = 0);
+    bool check_below(Map *map, int start = 0, int end = 0);
+    int check_below(Map *map, int len, int start, int end);
+    bool check_ahead(Map *map, int start = 0, int end = 0);
+    int check_ahead(Map *map, int len, int start, int end);
+    bool check_behind(Map *map, int start = 0, int end = 0);
+    bool check_above(Map *map, int start = 0, int end = 0);
 
     void set_always_visible(bool value) { m_always_visible = value; }
 

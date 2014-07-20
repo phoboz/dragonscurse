@@ -37,6 +37,7 @@ private:
     bool m_jump_ready;
     Timer m_jump_timer;
     Timer m_hit_timer;
+    Timer m_water_timer;
 };
 
 #endif

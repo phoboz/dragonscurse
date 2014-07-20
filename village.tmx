@@ -12,6 +12,8 @@
    <property name="catapult" value="4"/>
    <property name="solid_end" value="14"/>
    <property name="solid_start" value="1"/>
+   <property name="water_end" value="152"/>
+   <property name="water_start" value="135"/>
   </properties>
   <image source="village.png" width="512" height="512"/>
  </tileset>

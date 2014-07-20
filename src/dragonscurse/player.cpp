@@ -50,6 +50,26 @@ bool Player::is_morphing()
 
 void Player::player_move(Map *map)
 {
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+
+    // Check if under water
+    int start = prop.GetNumericProperty("water_start");
+    int end = prop.GetNumericProperty("water_end");
+    if (start && check_ahead(map, 1, start, end) == 0) {
+        if (!m_water_timer.expired(3)) {
+            return;
+        }
+
+        m_water_timer.reset();
+    }
+
+    // Check if on catapult
+    int catid = prop.GetNumericProperty("catapult");
+    if (catid && check_below(map, 1, catid, catid) == 0) {
+        set_catapult_dir();
+    }
+
     Actor::move(map);
 
     // Check ground

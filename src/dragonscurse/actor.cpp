@@ -221,9 +221,6 @@ void Actor::reset_attack()
 
 void Actor::check_ground(Map *map)
 {
-    const Tmx::Tileset *tileset = map->get_tileset(0);
-    const Tmx::PropertySet prop = tileset->GetProperties();
-
     if (m_action != Jump && m_action != Catapult) {
         m_dy = get_attribute("weight");
         check_below(map);
@@ -231,14 +228,7 @@ void Actor::check_ground(Map *map)
             set_fall();
         }
         else if (m_action == Fall) {
-            // TODO: Add a function to check based on dy as argument
-            m_dy = get_attribute("weight");
-            if (check_below(map, prop.GetNumericProperty("catapult"))) {
-                set_catapult_dir();
-            }
-            else {
-                set_still();
-            }
+            set_still();
         }
     }
 }

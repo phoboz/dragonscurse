@@ -12,6 +12,8 @@
    <property name="catapult" value="5"/>
    <property name="solid_end" value="14"/>
    <property name="solid_start" value="1"/>
+   <property name="water_end" value="32"/>
+   <property name="water_start" value="30"/>
   </properties>
   <image source="seaside.png" width="512" height="512"/>
  </tileset>
