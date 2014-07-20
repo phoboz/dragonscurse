@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<roper>
+    <erupter attack_timer="64"
+             attack_distance="24"
+             hit_time="24">
+        <monster hp="1"
+                 perish_time="40">
+            <actor move_speed="2"
+                   treshold="12"
+                   weight="2"
+                   right_still="0"
+                   right_move_start="0" right_move_end="0"
+                   right_attack="1"
+                   right_hit="2"
+                   right_perish="2"
+                   left_still="0"
+                   left_move_start="0" left_move_end="0"
+                   left_attack="1"
+                   left_hit="2"
+                   left_perish="2"
+                   weak_left="4"
+                   weak_top="2"
+                   weak_right="46"
+                   weak_bottom="34">
+                <object image="rooper_red.png"
+                        left="4" right="46" top="2" bottom="34" />
+            </actor>
+            <string bullet="ember_red.xml" />
+            <string collectable="coin.xml" />
+        </monster>
+    </erupter>
+</roper>
+
