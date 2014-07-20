@@ -129,6 +129,11 @@
     <property name="direction" value="right"/>
    </properties>
   </object>
+  <object name="roper_red.xml" type="Erupter" x="5159" y="316" width="50" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="273" height="36">
   <data encoding="base64">
