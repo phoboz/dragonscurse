@@ -6,7 +6,7 @@ ADD_EXECUTABLE(dragonscurse
     material.cpp item.cpp coin.cpp curse.cpp morph.cpp
     object_factory.cpp statusbar.cpp
     room.cpp church.cpp shop.cpp
-    main.cpp
+    main_menu.cpp main.cpp
     )
 
 TARGET_LINK_LIBRARIES(dragonscurse

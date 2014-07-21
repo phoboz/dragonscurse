@@ -18,6 +18,9 @@
 #include "statusbar.h"
 #include "church.h"
 #include "shop.h"
+#include "main_menu.h"
+
+enum State { StateMap, StateRoom, StateMenu };
 
 static SDL_Surface *screen;
 static int screen_width = 640;
@@ -28,9 +31,17 @@ static Player *player;
 static WorldDB *db;
 static World *world;
 static Room *room;
-static enum { WorldMap, WorldRoom } world_type;
+static State state;
+static State old_state;
 Status *status;
 Statusbar *statusbar;
+MainMenu *main_menu;
+
+void set_state(State new_state)
+{
+    old_state = state;
+    state = new_state;
+}
 
 bool init()
 {
@@ -92,18 +103,18 @@ bool load_area(const char *ar_name,
     if (std::string(ar_name) == std::string("Church")) {
         room = new Church(media, map->get_filename().c_str(),
                           player->get_x(), player->get_y());
-        world_type = WorldRoom;
+        set_state(StateRoom);
         return true;
     }
     else if (std::string(ar_name).compare(0, 4, "Shop") == 0) {
         room = new Shop(ar_name, media, db,
                         map->get_filename().c_str(),
                         player->get_x(), player->get_y());
-        world_type = WorldRoom;
+        set_state(StateRoom);
         return true;
     }
 
-    world_type = WorldMap;
+    set_state(StateMap);
     Tmx::Map *tmx = new Tmx::Map();
     tmx->ParseFile(ar_name);
     map = new Map(tmx);
@@ -140,7 +151,7 @@ bool load_area(const char *ar_name,
 
 void move()
 {
-    if (world_type == WorldMap) {
+    if (state == StateMap) {
         Area *area = world->move(player, 0, Statusbar::get_height(),
                                  screen_width, screen_height);
         if (area) {
@@ -153,7 +164,11 @@ void move()
 
 void move_keydown(int key)
 {
-    if (world_type == WorldRoom) {
+    if (state != StateMenu && MainMenu::check_menu(key)) {
+        set_state(StateMenu);
+    }
+
+    if (state == StateRoom) {
         Area *area = room->move(key);
 
         if (area) {
@@ -162,18 +177,28 @@ void move_keydown(int key)
                       area->get_sx(), area->get_sy(), area->get_music());
         }
     }
+    else if (state == StateMenu) {
+        if (main_menu->move(key)) {
+            state = old_state;
+        }
+    }
 }
 
 void redraw()
 {
     statusbar->draw(screen, screen_width, screen_height);
-    if (world_type == WorldRoom) {
+    if (state == StateRoom) {
         room->draw(screen, 0, Statusbar::get_height(),
                    0, 0, screen_width, screen_height);
     }
-    else {
+    else if (state == StateMap) {
         world->draw(screen, player, 0, Statusbar::get_height(),
                     screen_width, screen_height);
+    }
+    else if (state == StateMenu) {
+        main_menu->draw(screen, 0, Statusbar::get_height(),
+                        0, 0,
+                        screen_width, screen_height);
     }
 }
 
@@ -239,7 +264,8 @@ int main(int argc, char *argv[])
     status->equip_item("ivory_sword.xml");
     status->equip_item("ivory_shield.xml");
     status->equip_item("ivory_armour.xml");
-    status->show();
+
+    main_menu = new MainMenu(media, status);
 
     load_area(map_name, true, player_name, start_x, start_y);
 
