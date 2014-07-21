@@ -1,6 +1,7 @@
 #ifndef _Status_H
 #define _Status_H
 
+#include <vector>
 #include <list>
 
 class Item;
@@ -25,7 +26,7 @@ public:
 
     void aquire_collectable(Collectable *collectable);
 
-    int shield_list(char *str_list[], int n);
+    void shield_list(std::vector<Shield*> &list);
 
     bool pay_gold(int ammount);
 

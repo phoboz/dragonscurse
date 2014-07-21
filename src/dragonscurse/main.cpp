@@ -21,7 +21,7 @@
 #include "main_menu.h"
 #include "shield_list.h"
 
-enum State { StateMap, StateRoom, StateMainMenu, StateShieldList };
+enum State { StateMap, StateRoom, StateMainMenu, StateSubMenu };
 
 static SDL_Surface *screen;
 static int screen_width = 640;
@@ -35,7 +35,7 @@ static Room *room = 0;
 Status *status = 0;
 static Statusbar *statusbar = 0;
 static MainMenu *main_menu = 0;
-static ShieldList *shield_list = 0;
+static SubMenu *sub_menu = 0;
 static State state;
 static State world_state;
 
@@ -190,9 +190,9 @@ void move_keydown(int key)
                 break;
 
             case MainMenu::OptionShieldList:
-                shield_list = new ShieldList(media, db->get_status());
+                sub_menu = new ShieldList(media, db->get_status());
                 delete main_menu;
-                set_state(StateShieldList);
+                set_state(StateSubMenu);
                 break;
 
             case MainMenu::OptionQuit:
@@ -203,16 +203,12 @@ void move_keydown(int key)
                 break;
         }
     }
-    else if (state == StateShieldList) {
-        int i = shield_list->move(key);
+    else if (state == StateSubMenu) {
+        int i = sub_menu->move(key);
         if (i == 0) {
             main_menu = new MainMenu(media);
             set_state(StateMainMenu);
-            delete shield_list;
-        }
-        else if (i == -1) {
-            state = world_state;
-            delete shield_list;
+            delete sub_menu;
         }
     }
     else if (MainMenu::check_menu(key)) {
@@ -237,10 +233,10 @@ void redraw()
                         0, 0,
                         screen_width, screen_height);
     }
-    else if (state == StateShieldList) {
-        shield_list->draw(screen, 0, Statusbar::get_height(),
-                        0, 0,
-                        screen_width, screen_height);
+    else if (state == StateSubMenu) {
+        sub_menu->draw(screen, 0, Statusbar::get_height(),
+                       0, 0,
+                       screen_width, screen_height);
     }
 }
 
