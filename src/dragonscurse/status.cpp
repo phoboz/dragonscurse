@@ -71,6 +71,19 @@ bool Status::equip_item(const char *name)
     }
 }
 
+void Status::shield_list(std::vector<Shield*> &list)
+{
+    for (std::list<Item*>::iterator it = m_items.begin();
+         it != m_items.end();
+         ++it) {
+
+        Item *item = *it;
+        if (item->get_item_type() == Item::TypeShield) {
+            list.push_back((Shield *) item);
+        }
+    }
+}
+
 void Status::aquire_collectable(Collectable *collectable)
 {
     switch (collectable->get_collectable_type()) {
