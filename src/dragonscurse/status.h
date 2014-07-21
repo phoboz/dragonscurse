@@ -24,6 +24,9 @@ public:
     bool equip_item(const char *name);
 
     void aquire_collectable(Collectable *collectable);
+
+    int shield_list(char *str_list[], int n);
+
     bool pay_gold(int ammount);
 
     int get_cp() const { return m_cp; }

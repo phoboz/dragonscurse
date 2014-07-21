@@ -71,6 +71,27 @@ bool Status::equip_item(const char *name)
     }
 }
 
+int Status::shield_list(char *str_list[], int n)
+{
+    int count = 0;
+
+    for (std::list<Item*>::iterator it = m_items.begin();
+         it != m_items.end();
+         ++it) {
+
+        if (count >= n) {
+            break;
+        }
+
+        Item *item = *it;
+        if (item->get_item_type() == Item::TypeShield) {
+            strcpy(str_list[count++], item->get_filename());
+        }
+    }
+
+    return count;
+}
+
 void Status::aquire_collectable(Collectable *collectable)
 {
     switch (collectable->get_collectable_type()) {

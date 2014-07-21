@@ -19,27 +19,32 @@
 #include "church.h"
 #include "shop.h"
 #include "main_menu.h"
+#include "shield_list.h"
 
-enum State { StateMap, StateRoom, StateMenu };
+enum State { StateMap, StateRoom, StateMainMenu, StateShieldList };
 
 static SDL_Surface *screen;
 static int screen_width = 640;
 static int screen_height = 480;
-static Map *map;
-static MediaDB *media;
-static Player *player;
-static WorldDB *db;
-static World *world;
-static Room *room;
+static Map *map = 0;
+static MediaDB *media = 0;
+static Player *player = 0;
+static WorldDB *db = 0;
+static World *world = 0;
+static Room *room = 0;
+Status *status = 0;
+static Statusbar *statusbar = 0;
+static MainMenu *main_menu = 0;
+static ShieldList *shield_list = 0;
 static State state;
-static State old_state;
-Status *status;
-Statusbar *statusbar;
-MainMenu *main_menu;
+static State world_state;
 
 void set_state(State new_state)
 {
-    old_state = state;
+    if (state < StateMainMenu) {
+        world_state = state;
+    }
+
     state = new_state;
 }
 
@@ -164,10 +169,6 @@ void move()
 
 void move_keydown(int key)
 {
-    if (state != StateMenu && MainMenu::check_menu(key)) {
-        set_state(StateMenu);
-    }
-
     if (state == StateRoom) {
         Area *area = room->move(key);
 
@@ -177,10 +178,46 @@ void move_keydown(int key)
                       area->get_sx(), area->get_sy(), area->get_music());
         }
     }
-    else if (state == StateMenu) {
-        if (main_menu->move(key)) {
-            state = old_state;
+    else if (state == StateMainMenu) {
+        switch(main_menu->move(key)) {
+            case MainMenu::OptionContinue:
+                delete main_menu;
+                state = world_state;
+                break;
+
+            case MainMenu::OptionStatus:
+                db->get_status()->show();
+                break;
+
+            case MainMenu::OptionShieldList:
+                shield_list = new ShieldList(media, db->get_status());
+                delete main_menu;
+                set_state(StateShieldList);
+                break;
+
+            case MainMenu::OptionQuit:
+                exit(0);
+                break;
+
+            default:
+                break;
         }
+    }
+    else if (state == StateShieldList) {
+        int i = shield_list->move(key);
+        if (i == 0) {
+            main_menu = new MainMenu(media);
+            set_state(StateMainMenu);
+            delete shield_list;
+        }
+        else if (i == -1) {
+            state = world_state;
+            delete shield_list;
+        }
+    }
+    else if (MainMenu::check_menu(key)) {
+        main_menu = new MainMenu(media);
+        set_state(StateMainMenu);
     }
 }
 
@@ -195,8 +232,13 @@ void redraw()
         world->draw(screen, player, 0, Statusbar::get_height(),
                     screen_width, screen_height);
     }
-    else if (state == StateMenu) {
+    else if (state == StateMainMenu) {
         main_menu->draw(screen, 0, Statusbar::get_height(),
+                        0, 0,
+                        screen_width, screen_height);
+    }
+    else if (state == StateShieldList) {
+        shield_list->draw(screen, 0, Statusbar::get_height(),
                         0, 0,
                         screen_width, screen_height);
     }
@@ -264,8 +306,6 @@ int main(int argc, char *argv[])
     status->equip_item("ivory_sword.xml");
     status->equip_item("ivory_shield.xml");
     status->equip_item("ivory_armour.xml");
-
-    main_menu = new MainMenu(media, status);
 
     load_area(map_name, true, player_name, start_x, start_y);
 

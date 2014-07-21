@@ -1,16 +1,30 @@
 #include "phoboz/ctrl.h"
 #include "main_menu.h"
 
-MainMenu::MainMenu(MediaDB *media, Status *status)
-    : m_media(media),
-      m_status(status)
+int MainMenu::s_last_option = 0;
+
+MainMenu::MainMenu(MediaDB *media)
+    : m_media(media)
 {
     m_menu = new Menu("Wonderfull_18", "icons.png", 0, media);
     if (m_menu) {
+        m_menu->add_option("New Game");
         m_menu->add_option("Continue");
         m_menu->add_option("Status");
+        m_menu->add_option("Arm List");
+        m_menu->add_option("Shield List");
+        m_menu->add_option("Armour List");
         m_menu->add_option("Quit");
+        if (s_last_option) {
+            m_menu->set_option(s_last_option);
+        }
     }
+}
+
+MainMenu::~MainMenu()
+{
+    s_last_option = m_menu->get_option();
+    delete m_menu;
 }
 
 bool MainMenu::check_menu(int key)
@@ -25,39 +39,28 @@ bool MainMenu::check_menu(int key)
     return result;
 }
 
-bool MainMenu::move(int key)
+MainMenu::Option MainMenu::move(int key)
 {
-    bool result = false;
-    void *data = 0;
+    Option option = OptionNone;
 
     int input = get_input_keydown(key);
     if (input & PRESS_DOWN) {
-        data = m_menu->advance_pointer(Menu::DirectionDown);
+        m_menu->advance_pointer(Menu::DirectionDown);
         m_media->play_sound("advance.wav");
     }
     else if (input & PRESS_UP) {
-        data = m_menu->advance_pointer(Menu::DirectionUp);
+        m_menu->advance_pointer(Menu::DirectionUp);
         m_media->play_sound("advance.wav");
     }
     else if (input & PRESS_ENTER) {
         m_media->play_sound("select.wav");
-        int option = m_menu->get_option();
-        switch(option) {
-            case 1:
-                m_status->show();
-                break;
-
-            case 2:
-                exit(0);
-                break;
-
-            default:
-                result = true;
-                break;
-        }
+        option = (Option) m_menu->get_option();
+    }
+    else if (input & PRESS_ESC) {
+        option = OptionContinue;
     }
 
-    return result;
+    return option;
 }
 
 void MainMenu::draw(SDL_Surface *dest, int x, int y,
