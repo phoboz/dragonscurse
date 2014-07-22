@@ -42,6 +42,18 @@ bool Menu::replace_option(const char *str, void *data,
     return result;
 }
 
+bool Menu::set_icon(int option, const Sprite *icon_spr, int icon_index)
+{
+    bool result = false;
+
+    if (option < m_options.size()) {
+        m_options[option]->set_icon(icon_spr, icon_index);
+        result = true;
+    }
+
+    return result;
+}
+
 void* Menu::advance_pointer(PointerDirection dir)
 {
     if (dir == DirectionUp) {

@@ -33,6 +33,8 @@
                 width="68" height="65" margin="1" spacing="1" />
         <sprite filename="icons.png"
                 width="32" height="32" margin="1" spacing="1" />
+        <sprite filename="icons_small.png"
+                width="12" height="12" margin="1" spacing="1" />
         <sprite filename="large_key.png"
                 width="32" height="32" margin="1" spacing="1" />
         <sprite filename="master_skeleton.png"

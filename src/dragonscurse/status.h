@@ -23,6 +23,7 @@ public:
     void remove_item(Item *item) { m_items.remove(item); }
 
     bool equip_item(const char *name);
+    bool equip_item(Item *item);
 
     void aquire_collectable(Collectable *collectable);
 
@@ -30,6 +31,9 @@ public:
 
     bool pay_gold(int ammount);
 
+    Arm* get_equiped_arm() const { return m_arm; }
+    Shield* get_equiped_shield() const { return m_shield; }
+    Armour* get_equiped_armour() const { return m_armour; }
     int get_cp() const { return m_cp; }
     int get_gold() const { return m_gold; }
 
