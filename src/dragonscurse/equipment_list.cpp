@@ -1,3 +1,4 @@
+#include <string>
 #include "equipment_list.h"
 
 EquipmentList::EquipmentList(MediaDB *media, Status *status,
@@ -15,12 +16,16 @@ EquipmentList::EquipmentList(MediaDB *media, Status *status,
 
     for (int i = 0; i < list.size(); i++) {
         Item *item = list[i];
+        std::string fn(item->get_filename());
+        int lastindex = fn.find_last_of(".");
+        std::string rawname = fn.substr(0, lastindex);
+
         if (item == eq_item) {
-            m_menu->add_option(item->get_filename(), item, m_spr, m_spr_index);
+            m_menu->add_option(rawname.c_str(), item, m_spr, m_spr_index);
             m_curr_eq = i + 1;
         }
         else {
-            m_menu->add_option(item->get_filename(), item);
+            m_menu->add_option(rawname.c_str(), item);
         }
     }
 }
