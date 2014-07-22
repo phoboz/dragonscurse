@@ -29,7 +29,6 @@ void Dancer::move(Map *map)
         }
     }
 
-#include <iostream>
     switch(m_action) {
         case Still:
             if (m_hit == HitNone) {

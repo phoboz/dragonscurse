@@ -6,7 +6,7 @@ INCLUDE_DIRECTORIES(
     )
 ADD_EXECUTABLE(sprtool pngfuncs.cpp sprtool.cpp)
 TARGET_LINK_LIBRARIES(sprtool
-    tmx phoboz
-    ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${TINYXML_LIBRARIES} ${ZLIB_LIBRARIES}
+    tinyxml tmx phoboz
+    ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${ZLIB_LIBRARIES}
     ${Boost_LIBRARIES} ${PNG_LIBRARY}
     )

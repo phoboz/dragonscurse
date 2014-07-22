@@ -10,9 +10,9 @@ ADD_EXECUTABLE(dragonscurse
     )
 
 TARGET_LINK_LIBRARIES(dragonscurse
-    tmx phoboz
+    tinyxml tmx phoboz
     ${SDL_LIBRARY} ${SDLIMAGE_LIBRARY} ${SDLMIXER_LIBRARY} ${SDLTTF_LIBRARY}
-    ${TINYXML_LIBRARIES} ${ZLIB_LIBRARIES}
+    ${ZLIB_LIBRARIES}
     )
 
 INSTALL(TARGETS dragonscurse RUNTIME DESTINATION .)
