@@ -3,7 +3,9 @@
 
 void Item::aquire(WorldDB *db)
 {
-    db->remove(m_world_key);
+    if (get_attribute("once")) {
+        db->remove(m_world_key);
+    }
 }
 
 void Item::aquire(World *world)

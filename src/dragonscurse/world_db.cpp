@@ -96,12 +96,19 @@ bool WorldDB::load_lock_attributes(WorldLock *lock, TiXmlElement *elmt)
         if (strcmp(attr->Name(), "id") == 0) {
             lock->m_id = atoi(attr->Value());
         }
-        else if (strcmp(attr->Name(), "location") == 0) {
-            lock->m_location = std::string(attr->Value());
-        }
         else if (strcmp(attr->Name(), "type") == 0) {
             lock->m_strings[std::string(attr->Name())] =
                 std::string(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "lock") == 0) {
+            lock->m_strings[std::string(attr->Name())] =
+                std::string(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "once") == 0) {
+            lock->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "location") == 0) {
+            lock->m_location = std::string(attr->Value());
         }
         else {
             result = false;
@@ -247,9 +254,10 @@ bool WorldDB::get_object_info(ObjectInfo *info,
     return result;
 }
 
-const char* WorldDB::get_lock_type(int *key,
-                                   int id, const char *location_name) const
+bool WorldDB::get_lock_info(LockInfo *info,
+                            int id, const char *location_name) const
 {
+    bool result = false;
     WorldLocation *location = find_location(location_name);
 
     if (location) {
@@ -259,15 +267,20 @@ const char* WorldDB::get_lock_type(int *key,
             if ((*it)->m_type == WorldNode::TypeLock) {
                 WorldLock *lock = (WorldLock *) *it;
                 if (lock->m_id == id) {
-                    *key = lock->m_key;
-                    return lock->m_strings[std::string("type")].c_str();
+                    info->key = lock->m_key;
+                    info->type_name =
+                        lock->m_strings[std::string("type")].c_str();
+                    info->lock_name =
+                        lock->m_strings[std::string("lock")].c_str();
+                    info->once = lock->m_integers["once"];
+                    result = true;
                     break;
                 }
             }
         }
     }
 
-    return 0;
+    return result;
 }
 
 bool WorldDB::remove(int key)

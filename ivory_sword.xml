@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <arm ap="3">
     <item type="arm"
+          once="1"
           price="0"
           req_cp="0"
           unknown="1"> 

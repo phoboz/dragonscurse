@@ -50,6 +50,7 @@ private:
     int m_w, m_h;
     std::string m_data;
     int m_world_key;
+    int m_once;
     State m_state;
     Timer m_open_timer;
     Timer m_anim_timer;

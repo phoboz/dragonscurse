@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <armour dp="3" cp="3">
     <item type="armour"
+          once="1"
           price="0"
           req_cp="0"
           unknown="1">

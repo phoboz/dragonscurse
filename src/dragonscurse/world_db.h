@@ -34,6 +34,13 @@ struct ObjectInfo {
     ObjectData data;
 };
 
+struct LockInfo {
+    int key;
+    const char *type_name;
+    const char *lock_name;
+    int once;
+};
+
 class WorldDB {
 public:
     WorldDB(const char *name);
@@ -41,8 +48,8 @@ public:
     bool get_object_info(ObjectInfo *info,
                          int id, const char *location_name) const;
 
-    const char* get_lock_type(int *key,
-                              int id, const char *location_name) const;
+    bool get_lock_info(LockInfo *info,
+                       int id, const char *location_name) const;
 
     bool remove(int key);
 

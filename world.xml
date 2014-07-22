@@ -4,7 +4,7 @@
         <object id="1"
                 location="castle_02.tmx"
                 type="item"
-                name="large_key.xml" />
+                name="castle_key.xml" />
         <object id="1"
                 location="castle_boss.tmx"
                 type="curse"
@@ -43,10 +43,26 @@
                 start_y="223" />
     </objects>
     <locks>
-        <lock id="1" type="large_key.xml" location="castle_01.tmx" />
-        <lock id="1" type="large_key.xml" location="castle_02.tmx" />
-        <lock id="1" type="small_key.xml" location="castle_04.tmx" />
-        <lock id="1" type="small_key.xml" location="village.tmx" />
+        <lock id="1"
+              type="castle_key.xml"
+              lock="red_lock"
+              once="0"
+              location="castle_01.tmx" />
+        <lock id="1"
+              type="castle_key.xml"
+              lock="red_lock"
+              once="0"
+              location="castle_02.tmx" />
+        <lock id="1"
+              type="small_key.xml"
+              lock="green_lock"
+              once="1"
+              location="castle_04.tmx" />
+        <lock id="1"
+              type="small_key.xml"
+              lock="green_lock"
+              once="1"
+              location="village.tmx" />
     </locks>
 </world>
 

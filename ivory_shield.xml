@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <shield dp="3">
     <item type="shield"
+          once="1"
           price="0"
           req_cp="0"
           unknown="1">

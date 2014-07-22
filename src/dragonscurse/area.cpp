@@ -55,14 +55,13 @@ void Area::world_initialize(World *world)
 
     if (lock_id) {
         WorldDB *db = world->get_db();
-        int key;
-        const char *name = db->get_lock_type(&key,
-                                             lock_id, world->get_filename());
-        if (name) {
+        LockInfo info;
+        if (db->get_lock_info(&info, lock_id, world->get_filename())) {
             m_state = StateLocked;
-            m_frame = get_attribute(name);
-            m_world_key = key;
-            m_data = std::string(name);
+            m_frame = get_attribute(info.lock_name);
+            m_world_key = info.key;
+            m_data = std::string(info.type_name);
+            m_once = info.once;
         }
     }
 }
@@ -122,8 +121,10 @@ bool Area::unlock(World *world, Item *item)
                         m_open_timer.reset();
 
                         // Unlock in database
-                        WorldDB *db = world->get_db();
-                        db->remove(m_world_key);
+                        if (m_once) {
+                            WorldDB *db = world->get_db();
+                            db->remove(m_world_key);
+                        }
 
                         // Mark as unlocked
                         m_state = StateClosed;
