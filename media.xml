@@ -5,6 +5,8 @@
                 width="34" height="34" margin="1" spacing="1" />
         <sprite filename="blue_flame.png"
                 width="32" height="50" margin="1" spacing="1" />
+        <sprite filename="chest.png"
+                width="64" height="58" margin="1" spacing="1" />
         <sprite filename="church.png"
                 width="640" height="444" margin="0" spacing="0" />
         <sprite filename="cobra_blue.png"
