@@ -1,18 +1,12 @@
 #ifndef _ShieldList_H
 #define _ShieldList_H
 
-#include "sub_menu.h"
+#include "equipment_list.h"
 
-class ShieldList : public SubMenu {
+class ShieldList : public EquipmentList {
 public:
-    ShieldList(MediaDB *media, Status *status);
-    virtual ~ShieldList();
-
-    virtual int move(int key);
-
-private:
-    Sprite *m_spr;
-    int m_curr_eq;
+    ShieldList(MediaDB *media, Status *status)
+        : EquipmentList(media, status, Item::TypeShield, 1) { }
 };
 
 #endif

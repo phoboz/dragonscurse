@@ -88,14 +88,14 @@ bool Status::equip_item(Item *item)
     return result;
 }
 
-void Status::shield_list(std::vector<Shield*> &list)
+void Status::item_list(std::vector<Item*> &list, Item::ItemType type)
 {
     for (std::list<Item*>::iterator it = m_items.begin();
          it != m_items.end();
          ++it) {
 
         Item *item = *it;
-        if (item->get_item_type() == Item::TypeShield) {
+        if (item->get_item_type() == type) {
             list.push_back((Shield *) item);
         }
     }
@@ -125,6 +125,29 @@ bool Status::pay_gold(int ammount)
     return result;
 }
 
+Item* Status::get_equiped_item(Item::ItemType type) const
+{
+    Item *item = 0;
+
+    switch(type) {
+        case Item::TypeArm:
+            item = (Item *) m_arm;
+            break;
+
+        case Item::TypeShield:
+            item = (Item *) m_shield;
+            break;
+
+        case Item::TypeArmour:
+            item = (Item *) m_armour;
+
+        default:
+            break;
+    }
+
+    return item;
+}
+
 void Status::show() const
 {
 
@@ -141,7 +164,17 @@ void Status::show() const
          ++it) {
 
         Item *item = *it;
-        std::cout << "Item: " << item->get_filename() << std::endl;
+        std::cout << "Item: " << item->get_filename();
+        if (item == get_equiped_item(Item::TypeArm)) {
+            std::cout << " (equiped arm)";
+        }
+        else if (item == get_equiped_item(Item::TypeShield)) {
+            std::cout << " (equiped shield)";
+        }
+        else if (item == get_equiped_item(Item::TypeArmour)) {
+            std::cout << " (equiped armour)";
+        }
+        std::cout << std::endl;
     }
 }
 

@@ -3,8 +3,8 @@
 
 #include <vector>
 #include <list>
+#include "item.h"
 
-class Item;
 class Arm;
 class Shield;
 class Armour;
@@ -27,13 +27,12 @@ public:
 
     void aquire_collectable(Collectable *collectable);
 
-    void shield_list(std::vector<Shield*> &list);
+    void item_list(std::vector<Item*> &list, Item::ItemType type);
 
     bool pay_gold(int ammount);
 
-    Arm* get_equiped_arm() const { return m_arm; }
-    Shield* get_equiped_shield() const { return m_shield; }
-    Armour* get_equiped_armour() const { return m_armour; }
+    Item* get_equiped_item(Item::ItemType type) const;
+
     int get_cp() const { return m_cp; }
     int get_gold() const { return m_gold; }
 

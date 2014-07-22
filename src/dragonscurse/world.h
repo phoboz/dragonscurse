@@ -6,7 +6,8 @@
 #include "object.h"
 #include "player.h"
 #include "area.h"
-#include "world_db.h"
+
+class WorldDB;
 
 class World {
 public:

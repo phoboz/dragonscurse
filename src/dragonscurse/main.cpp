@@ -19,7 +19,9 @@
 #include "church.h"
 #include "shop.h"
 #include "main_menu.h"
+#include "arm_list.h"
 #include "shield_list.h"
+#include "armour_list.h"
 
 enum State { StateMap, StateRoom, StateMainMenu, StateSubMenu };
 
@@ -189,8 +191,20 @@ void move_keydown(int key)
                 db->get_status()->show();
                 break;
 
+            case MainMenu::OptionArmList:
+                sub_menu = new ArmList(media, db->get_status());
+                delete main_menu;
+                set_state(StateSubMenu);
+                break;
+
             case MainMenu::OptionShieldList:
                 sub_menu = new ShieldList(media, db->get_status());
+                delete main_menu;
+                set_state(StateSubMenu);
+                break;
+
+            case MainMenu::OptionArmourList:
+                sub_menu = new ArmourList(media, db->get_status());
                 delete main_menu;
                 set_state(StateSubMenu);
                 break;

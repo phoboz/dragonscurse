@@ -4,6 +4,7 @@
 #include "item.h"
 #include "curse.h"
 #include "world.h"
+#include "world_db.h"
 #include "area.h"
 
 Area::Area(const char *name, MediaDB *media,

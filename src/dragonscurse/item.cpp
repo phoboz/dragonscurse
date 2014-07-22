@@ -1,4 +1,10 @@
+#include "world_db.h"
 #include "item.h"
+
+void Item::aquire(WorldDB *db)
+{
+    db->remove(m_world_key);
+}
 
 void Item::aquire(World *world)
 {

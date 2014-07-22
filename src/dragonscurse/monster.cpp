@@ -3,6 +3,7 @@
 #include "coin.h"
 #include "curse.h"
 #include "object_factory.h"
+#include "world_db.h"
 #include "monster.h"
 
 Monster::Monster(const char *fn, MediaDB *media, int x, int y, Direction dir)

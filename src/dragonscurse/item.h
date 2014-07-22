@@ -4,6 +4,8 @@
 #include "material.h"
 #include "world.h"
 
+class WorldDB;
+
 class Item : public Material {
 public:
     enum ItemType { TypeKey, TypeArm, TypeShield, TypeArmour };
@@ -19,7 +21,7 @@ public:
 
     ItemType get_item_type() const { return m_item_type; }
 
-    void aquire(WorldDB *db) { db->remove(m_world_key); }
+    void aquire(WorldDB *db);
     void aquire(World *world);
 
 private:
