@@ -10,6 +10,7 @@
 #include "curse.h"
 #include "morph.h"
 #include "statusbar.h"
+#include "world_db.h"
 #include "world.h"
 
 World::World(Map *map, MediaDB *media, WorldDB *db, const char *music)

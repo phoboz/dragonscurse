@@ -4,7 +4,6 @@
 #include <string>
 #include "phoboz/timer.h"
 #include "object.h"
-#include "world_db.h"
 
 class Actor;
 class Item;

@@ -3,8 +3,8 @@
 
 #include <vector>
 #include <list>
+#include "item.h"
 
-class Item;
 class Arm;
 class Shield;
 class Armour;
@@ -23,12 +23,15 @@ public:
     void remove_item(Item *item) { m_items.remove(item); }
 
     bool equip_item(const char *name);
+    bool equip_item(Item *item);
 
     void aquire_collectable(Collectable *collectable);
 
-    void shield_list(std::vector<Shield*> &list);
+    void item_list(std::vector<Item*> &list, Item::ItemType type);
 
     bool pay_gold(int ammount);
+
+    Item* get_equiped_item(Item::ItemType type) const;
 
     int get_cp() const { return m_cp; }
     int get_gold() const { return m_gold; }

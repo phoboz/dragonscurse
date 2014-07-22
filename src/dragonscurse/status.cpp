@@ -47,38 +47,55 @@ Item* Status::check_item(const char *name)
 bool Status::equip_item(const char *name)
 {
     bool result = false;
+
     Item *item = check_item(name);
+    if (item) {
+        result = equip_item(item);
+    }
+
+    return result;
+}
+
+bool Status::equip_item(Item *item)
+{
+    bool result = false;
+
     if (item) {
         switch(item->get_item_type()) {
             case Item::TypeArm:
                 m_arm = (Arm *) item;
                 update();
+                result = true;
                 break;
 
             case Item::TypeShield:
                 m_shield = (Shield *) item;
                 update();
+                result = true;
                 break;
 
             case Item::TypeArmour:
                 m_armour = (Armour *) item;
                 update();
+                result = true;
                 break;
 
             default:
                 break;
         }
     }
+
+    return result;
 }
 
-void Status::shield_list(std::vector<Shield*> &list)
+void Status::item_list(std::vector<Item*> &list, Item::ItemType type)
 {
     for (std::list<Item*>::iterator it = m_items.begin();
          it != m_items.end();
          ++it) {
 
         Item *item = *it;
-        if (item->get_item_type() == Item::TypeShield) {
+        if (item->get_item_type() == type) {
             list.push_back((Shield *) item);
         }
     }
@@ -108,13 +125,36 @@ bool Status::pay_gold(int ammount)
     return result;
 }
 
+Item* Status::get_equiped_item(Item::ItemType type) const
+{
+    Item *item = 0;
+
+    switch(type) {
+        case Item::TypeArm:
+            item = (Item *) m_arm;
+            break;
+
+        case Item::TypeShield:
+            item = (Item *) m_shield;
+            break;
+
+        case Item::TypeArmour:
+            item = (Item *) m_armour;
+
+        default:
+            break;
+    }
+
+    return item;
+}
+
 void Status::show() const
 {
 
     std::cout << "Status:" << std::endl;
     std::cout << "AP: " << "\t" << m_ap << std::endl;
     std::cout << "DP: " << "\t" << m_dp << std::endl;
-    std::cout << "DP: " << "\t" << m_cp << std::endl;
+    std::cout << "CP: " << "\t" << m_cp << std::endl;
     std::cout << "Gold: " << "\t" << m_gold << std::endl;
     std::cout << std::endl;
 
@@ -124,7 +164,17 @@ void Status::show() const
          ++it) {
 
         Item *item = *it;
-        std::cout << "Item: " << item->get_filename() << std::endl;
+        std::cout << "Item: " << item->get_filename();
+        if (item == get_equiped_item(Item::TypeArm)) {
+            std::cout << " (equiped arm)";
+        }
+        else if (item == get_equiped_item(Item::TypeShield)) {
+            std::cout << " (equiped shield)";
+        }
+        else if (item == get_equiped_item(Item::TypeArmour)) {
+            std::cout << " (equiped armour)";
+        }
+        std::cout << std::endl;
     }
 }
 

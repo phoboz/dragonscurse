@@ -18,6 +18,10 @@ public:
                     const Sprite *icon_spr = 0, int icon_index = 0);
     bool replace_option(const char *str, void *data = 0,
                         const Sprite *icon_spr = 0, int icon_index = 0);
+    bool set_icon(const Sprite *icon_spr, int icon_index) {
+        return set_icon(m_curr_option, icon_spr, icon_index);
+    }
+    bool set_icon(int option, const Sprite *icon_spr, int icon_index);
     void* advance_pointer(PointerDirection dir);
     int get_option() const { return m_curr_option; }
     void* get_data() const { return m_options[m_curr_option]->get_data(); }

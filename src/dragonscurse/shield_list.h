@@ -1,11 +1,12 @@
 #ifndef _ShieldList_H
 #define _ShieldList_H
 
-#include "sub_menu.h"
+#include "equipment_list.h"
 
-class ShieldList : public SubMenu {
+class ShieldList : public EquipmentList {
 public:
-    ShieldList(MediaDB *media, Status *status);
+    ShieldList(MediaDB *media, Status *status)
+        : EquipmentList(media, status, Item::TypeShield, 1) { }
 };
 
 #endif

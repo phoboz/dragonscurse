@@ -7,13 +7,21 @@ SubMenu::SubMenu(MediaDB *media, Status *status)
       m_menu(0)
 {
     m_menu = new Menu("Wonderfull_12", "icons.png", 0, media);
-    m_menu->add_option("Back");
+    if (m_menu) {
+        m_menu->add_option("Back");
+    }
+}
+
+SubMenu::~SubMenu()
+{
+    delete m_menu;
 }
 
 int SubMenu::move(int key)
 {
-    int result;
+    int result = -1;
     int input = get_input_keydown(key);
+
     if (input & PRESS_DOWN) {
         m_menu->advance_pointer(Menu::DirectionDown);
         m_media->play_sound("advance.wav");
