@@ -9,6 +9,7 @@ class Arm;
 class Shield;
 class Armour;
 class Collectable;
+class Player;
 
 class Status {
 public:
@@ -16,7 +17,8 @@ public:
         : m_arm(0),
           m_shield(0),
           m_armour(0),
-          m_gold(34) { update(); }
+          m_gold(34),
+          m_shape(0) { update(); }
 
     void aquire_item(Item *item) { m_items.push_back(item); }
     Item* check_item(const char *name);
@@ -33,6 +35,8 @@ public:
 
     Item* get_equiped_item(Item::ItemType type) const;
 
+    void aquire_shape(Player *player);
+
     int get_cp() const { return m_cp; }
     int get_gold() const { return m_gold; }
 
@@ -45,6 +49,9 @@ private:
     Arm *m_arm;
     Shield *m_shield;
     Armour *m_armour;
+
+    std::list<Player*> m_shapes;
+    Player *m_shape;
 
     int m_ap;
     int m_dp;

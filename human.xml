@@ -9,7 +9,10 @@
             attack_time="10">
         <player type="human"
                 jump_speed="6"
-                jump_limit="18">
+                jump_limit="18"
+                ap="100"
+                dp="55"
+                cp="56">
             <actor move_speed="3"
                    treshold="6"
                    weight="10"

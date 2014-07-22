@@ -8,9 +8,16 @@
 
 void Status::update()
 {
-    m_ap = 0;
-    m_dp = 0;
-    m_cp = 0;
+    if (m_shape) {
+        m_ap = m_shape->get_attribute("ap");
+        m_dp = m_shape->get_attribute("dp");
+        m_cp = m_shape->get_attribute("cp");
+    }
+    else {
+        m_ap = 0;
+        m_dp = 0;
+        m_cp = 0;
+    }
 
     if (m_arm) {
         m_ap += m_arm->get_attribute("ap");
@@ -146,6 +153,13 @@ Item* Status::get_equiped_item(Item::ItemType type) const
     }
 
     return item;
+}
+
+void Status::aquire_shape(Player *player)
+{
+    m_shapes.push_back(player);
+    m_shape = player;
+    update();
 }
 
 void Status::show() const
