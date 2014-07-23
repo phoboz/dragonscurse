@@ -22,6 +22,7 @@
 #include "shield.h"
 #include "armour.h"
 #include "area.h"
+#include "chest.h"
 
 static char priv_object_type[80];
 
@@ -154,6 +155,9 @@ Object* ObjectFactory::create_object(const char *name,
     else if (strcmp(type, "Area") == 0) {
         std::string tn = prop.GetLiteralProperty(std::string("type"));
         object = new Area(name, media, tn.c_str(), x, y, w, h);
+    }
+    else if (strcmp(type, "Chest") == 0) {
+        object = new Chest(name, media, x, y);
     }
 
     if (object) {

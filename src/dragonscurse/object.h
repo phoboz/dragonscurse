@@ -20,7 +20,8 @@ public:
         TypeCollectable,
         TypeCurse,
         TypeMorph,
-        TypeArea
+        TypeArea,
+        TypeChest
     };
 
     enum Direction { Keep, Right, Left };

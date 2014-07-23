@@ -350,7 +350,7 @@ bool WorldDB::get_lock_info(LockInfo *info,
     return result;
 }
 
-bool WorldDB::get_chest_info(ChestInfo *info, int user,
+bool WorldDB::get_chest_info(ChestInfo *info,
                              int id, const char *location_name) const
 {
     bool result = false;
@@ -375,7 +375,6 @@ bool WorldDB::get_chest_info(ChestInfo *info, int user,
                             goto error;
                         }
                     }
-                    chest->m_user = user;
                     break;
                 }
             }
@@ -402,6 +401,36 @@ bool WorldDB::remove(int key)
              ++jt) {
             if ((*jt)->m_key == key) {
                 found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            location->m_nodes.erase(jt);
+            goto end;
+        }
+    }
+
+end:
+    return found;
+}
+
+bool WorldDB::set_user(int key, int user)
+{
+    bool found = false;
+
+    for (std::map<std::string, WorldLocation*>::iterator it =
+             m_locations.begin();
+         it!=m_locations.end();
+         ++it) {
+        WorldLocation *location = it->second;
+
+        std::list<WorldNode*>::iterator jt = location->m_nodes.begin();
+        for (;
+             jt != location->m_nodes.end();
+             ++jt) {
+            if ((*jt)->m_key == key) {
+                (*jt)->m_user = user;
                 break;
             }
         }

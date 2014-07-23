@@ -60,10 +60,11 @@ public:
     bool get_lock_info(LockInfo *info,
                        int id, const char *location_name) const;
 
-    bool get_chest_info(ChestInfo *info, int user,
+    bool get_chest_info(ChestInfo *info,
                         int id, const char *location_name) const;
 
     bool remove(int key);
+    bool set_user(int key, int user);
     void clear_user();
 
     Status* get_status() { return &m_status; }

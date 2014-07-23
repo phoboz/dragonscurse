@@ -30,4 +30,11 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="Chests" width="20" height="16">
+  <object name="regular_chest.xml" type="Chest" x="384" y="356" width="64" height="58">
+   <properties>
+    <property name="chest_id" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
