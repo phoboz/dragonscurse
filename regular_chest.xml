@@ -1,5 +1,7 @@
 <?xml version="1.0" ?>
-<chest closed="0" open="1">
+<chest treshold="50"
+       closed="0"
+       open="1">
     <object image="regular_chest.png"
             left="0" right="64" top="0" bottom="58" />
 </chest>
