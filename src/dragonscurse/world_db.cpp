@@ -9,13 +9,14 @@
 struct WorldNode {
     enum Type { TypeObject, TypeLock, TypeChest };
 
-    WorldNode(Type type) : m_key(m_keygen++), m_type(type) { }
+    WorldNode(Type type) : m_key(m_keygen++), m_type(type), m_user(0) { }
 
     static int m_keygen;
 
     int m_key;
     Type m_type;
     int m_id;
+    int m_user;
     std::string m_location;
     std::map<std::string, std::string> m_strings;
     std::map<std::string, int> m_integers;
@@ -349,7 +350,7 @@ bool WorldDB::get_lock_info(LockInfo *info,
     return result;
 }
 
-bool WorldDB::get_chest_info(ChestInfo *info,
+bool WorldDB::get_chest_info(ChestInfo *info, int user,
                              int id, const char *location_name) const
 {
     bool result = false;
@@ -364,6 +365,7 @@ bool WorldDB::get_chest_info(ChestInfo *info,
                 if (chest->m_id == id) {
                     info->key = chest->m_key;
                     info->once = chest->m_integers["once"];
+                    info->user = chest->m_user;
                     info->num_objects = chest->m_objects.size();
                     for (int i = 0; i < info->num_objects; i++) {
                         result = load_object_info(&info->objects[i],
@@ -373,6 +375,7 @@ bool WorldDB::get_chest_info(ChestInfo *info,
                             goto error;
                         }
                     }
+                    chest->m_user = user;
                     break;
                 }
             }
@@ -411,5 +414,22 @@ bool WorldDB::remove(int key)
 
 end:
     return found;
+}
+
+void WorldDB::clear_user()
+{
+    for (std::map<std::string, WorldLocation*>::iterator it =
+             m_locations.begin();
+         it!=m_locations.end();
+         ++it) {
+        WorldLocation *location = it->second;
+
+        std::list<WorldNode*>::iterator jt = location->m_nodes.begin();
+        for (;
+             jt != location->m_nodes.end();
+             ++jt) {
+            (*jt)->m_user = 0;
+        }
+    }
 }
 
