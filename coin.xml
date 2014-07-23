@@ -1,8 +1,9 @@
 <?xml version="1.0" ?>
 <coin max_value="5">
      <collectable type="coin">
-        <material move_speed="10"
-                  horizontal_speed="3"
+        <material rise_speed="10"
+                  rise_limit="10"
+                  move_speed="3"
                   chest_speed="3"
                   weight="16"
                   treshold="6"
@@ -10,7 +11,7 @@
                   move_end="1"
                   move_still="2">
             <object image="coin.png"
-                    left="0" right="32" top="0" bottom="32" />
+                    left="1" right="31" top="1" bottom="31" />
         </material>
     </collectable>
 </coin>

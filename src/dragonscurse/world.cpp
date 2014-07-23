@@ -194,10 +194,10 @@ Area* World::move(Player *player,
                 if (chest->is_open(player)) {
                     Object *released_object = chest->release_object();
                     if (released_object) {
-                        released_object->set_reference(player->get_front(),
-                                                       player->get_y());
                         released_object->set_x(chest->get_x());
                         released_object->set_y(chest->get_y());
+                        released_object->set_reference(player->get_front(),
+                                                       player->get_y());
                         m_objects.push_back(released_object);
                     }
                 }
@@ -215,6 +215,8 @@ Area* World::move(Player *player,
             if (released_object) {
                 released_object->set_x(monster->get_x());
                 released_object->set_y(monster->get_y());
+                released_object->set_reference(player->get_front(),
+                                               player->get_y());
                 m_objects.push_back(released_object);
             }
         }

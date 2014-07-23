@@ -21,7 +21,9 @@ private:
 
     bool m_from_chest;
     Action m_action;
+    Timer m_rise_timer;
     Timer m_anim_timer;
+    bool m_ref_done;
 };
 
 #endif

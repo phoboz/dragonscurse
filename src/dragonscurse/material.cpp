@@ -1,10 +1,11 @@
-#include <iostream>
+#include <stdlib.h>
 #include "material.h"
 
 Material::Material(Type type, const char *fn, MediaDB *media, int x, int y)
     : Object(type, x, y),
       m_from_chest(false),
-      m_action(Rise)
+      m_action(Rise),
+      m_ref_done(false)
 {
     load(fn, media);
 
@@ -41,10 +42,17 @@ void Material::move(Map *map)
     const Tmx::Tileset *tileset = map->get_tileset(0);
 
     if (m_action == Rise) {
-        m_dy = get_attribute("move_speed");
-        check_above(map);
-        if (!m_dy) {
+        if (m_rise_timer.expired(get_attribute("rise_limit"))) {
+            m_rise_timer.reset();
+            m_dy = 0;
             m_action = Fall;
+        }
+        else {
+            m_dy = get_attribute("rise_speed");
+            check_above(map);
+            if (!m_dy) {
+                m_action = Fall;
+            }
         }
     }
     else {
@@ -59,10 +67,13 @@ void Material::move(Map *map)
         m_dx = get_attribute("chest_speed");
     }
     else {
-        m_dx = get_attribute("horizontal_speed");
+        m_dx = get_attribute("move_speed");
     }
 
-    face_reference();
+    if (!m_ref_done) {
+        face_reference();
+        m_ref_done = true;
+    }
     check_ahead(map);
     if (!m_dx && !m_dy) {
         m_action = Still;

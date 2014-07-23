@@ -2,8 +2,9 @@
 <key>
     <item type="key"
           once="0">
-        <material move_speed="14"
-                  horizontal_speed="0"
+        <material rise_speed="14"
+                  rise_limit="10"
+                  move_speed="0"
                   chest_speed="3"
                   weight="20"
                   treshold="6"
@@ -11,7 +12,7 @@
                   move_end="6"
                   move_still="6">
             <object image="icons.png"
-                    left="0" right="32" top="0" bottom="32" />
+                    left="1" right="31" top="1" bottom="31" />
         </material>
     </item>
 </key>
