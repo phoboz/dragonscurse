@@ -63,6 +63,8 @@ public:
     int get_image_width() const { return m_spr->get_image_width(); }
     int get_image_height() const { return m_spr->get_image_height(); }
     Direction get_reference() const;
+    int get_front() const;
+    int get_bottom() const;
     bool get_reused() { return m_reused; }
 
     void set_x(int value) { m_x = value; }

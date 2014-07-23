@@ -10,7 +10,7 @@ Chest::Chest(const char *fn, MediaDB *media, int x, int y)
       m_media(media),
       m_state(StateClosed),
       m_db(0),
-      m_world_key(0),
+      m_world_key(-1),
       m_once(0)
 {
     load(fn, media);
@@ -32,6 +32,9 @@ void Chest::world_initialize(World *world)
                                          m_media,
                                          get_x(),
                                          get_y());
+                    if (object->get_type() == Object::TypeItem) {
+                        ((Item *) object)->set_from_chest(true);
+                    }
                     m_objects.push_back(object);
                 }
             }

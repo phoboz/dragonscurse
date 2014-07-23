@@ -107,6 +107,32 @@ Object::Direction Object::get_reference() const
     return dir;
 }
 
+int Object::get_front() const
+{
+    int result;
+
+    switch(m_dir) {
+        case Right:
+            result = m_x + get_attribute("right");
+            break;
+
+        case Left:
+            result = m_x + get_attribute("left");
+            break;
+
+        default:
+            result = 0;
+            break;
+    }
+
+    return result;
+}
+
+int Object::get_bottom() const
+{
+    return m_y + get_attribute("bottom");
+}
+
 bool Object::check_collision(int x, int y, Map *map, int start, int end)
 {
     bool result = false;

@@ -350,32 +350,6 @@ void Actor::set_perish()
     m_hit = HitPerish;
 }
 
-int Actor::get_front()
-{
-    int result;
-
-    switch(m_dir) {
-        case Right:
-            result = m_x + get_attribute("right");
-            break;
-
-        case Left:
-            result = m_x + get_attribute("left");
-            break;
-
-        default:
-            result = 0;
-            break;
-    }
-
-    return result;
-}
-
-int Actor::get_bottom()
-{
-    return m_y + get_attribute("bottom");
-}
-
 void Actor::move(Map *map)
 {
     if (m_invisible_timer.expired(get_attribute("invisible_time"))) {
