@@ -3,7 +3,7 @@
 #include <string.h>
 #include <map>
 #include <string>
-#include "object_factory.h"
+#include "world_db.h"
 #include "player.h"
 #include "coin.h"
 #include "knight.h"
@@ -22,6 +22,9 @@
 #include "shield.h"
 #include "armour.h"
 #include "area.h"
+#include "chest.h"
+#include "curse.h"
+#include "object_factory.h"
 
 static char priv_object_type[80];
 
@@ -155,6 +158,9 @@ Object* ObjectFactory::create_object(const char *name,
         std::string tn = prop.GetLiteralProperty(std::string("type"));
         object = new Area(name, media, tn.c_str(), x, y, w, h);
     }
+    else if (strcmp(type, "Chest") == 0) {
+        object = new Chest(name, media, x, y);
+    }
 
     if (object) {
 #ifdef TODO
@@ -222,5 +228,30 @@ Object* ObjectFactory::create_object(const char *name,
     Tmx::PropertySet prop;
 
     return create_object(name, media, type, x, y, w, h, dir, prop);
+}
+
+Object* ObjectFactory::create_object(ObjectInfo *info,
+                                     MediaDB *media,
+                                     int x, int y,
+                                     int w, int h)
+{
+    Object *object = 0;
+
+    switch(info->object_type) {
+        case Object::TypeItem:
+            object = ObjectFactory::create_object(info->data.item.name,
+                                                  media, "Item");
+            ((Item *) object)->set_world_key(info->key);
+            break;
+
+        case Object::TypeCurse:
+            object = new Curse(info, media);
+            break;
+
+        default:
+            break;
+    }
+
+    return object;
 }
 

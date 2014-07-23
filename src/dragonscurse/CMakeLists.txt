@@ -5,7 +5,7 @@ ADD_EXECUTABLE(dragonscurse
     crawler.cpp erupter.cpp meka_dragon.cpp
     material.cpp item.cpp coin.cpp curse.cpp morph.cpp
     object_factory.cpp statusbar.cpp
-    room.cpp church.cpp shop.cpp
+    room.cpp church.cpp shop.cpp chest.cpp
     main_menu.cpp sub_menu.cpp equipment_list.cpp main.cpp
     )
 

@@ -25,21 +25,10 @@ void Monster::world_initialize(World *world)
         ObjectInfo info;
         if (db->get_object_info(&info,
                                 object_id, world->get_filename())) {
-            switch(info.object_type) {
-                case Object::TypeItem:
-                    item = (Item *) ObjectFactory::create_object(
-                                        info.data.item.name,
-                                        m_media, "Item");
-                    item->set_world_key(info.key);
-                    m_objects.push_back(item);
-                    break;
-
-                case Object::TypeCurse:
-                    m_objects.push_back(new Curse(&info, m_media));
-                    break;
-
-                default:
-                    break;
+            Object *object = ObjectFactory::create_object(&info, m_media,
+                                                          get_x(), get_y());
+            if (object) {
+                m_objects.push_back(object);
             }
         }
     }

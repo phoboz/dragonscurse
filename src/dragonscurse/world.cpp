@@ -8,6 +8,7 @@
 #include "collectable.h"
 #include "item.h"
 #include "curse.h"
+#include "chest.h"
 #include "morph.h"
 #include "statusbar.h"
 #include "world_db.h"
@@ -184,6 +185,19 @@ Area* World::move(Player *player,
                                                 player->get_dir()));
                     player->set_warp(new Area(curse));
                     perished.push_back(curse);
+                }
+            }
+
+            // Handle chest objects
+            else if (object_type == Object::TypeChest) {
+                Chest *chest = (Chest *) object;
+                if (chest->is_open(player)) {
+                    Object *released_object = chest->release_object();
+                    if (released_object) {
+                        released_object->set_x(chest->get_x());
+                        released_object->set_y(chest->get_y());
+                        m_objects.push_back(released_object);
+                    }
                 }
             }
         }
