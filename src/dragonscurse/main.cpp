@@ -41,6 +41,24 @@ static SubMenu *sub_menu = 0;
 static State state;
 static State world_state;
 
+void test_chest(int id, const char *loc)
+{
+    ChestInfo info;
+    if (db->get_chest_info(&info, id, loc)) {
+        printf("Chest %d has %d object(s) (once = %d):\n",
+                info.key, info.num_objects, info.once);
+        for (int i = 0; i < info.num_objects; i++) {
+            printf("\t#%d:\tKey: %d", i, info.objects[i].key);
+            if (info.objects[i].object_type == Object::TypeItem) {
+                printf("\tItem: %s\n", info.objects[i].data.item.name);
+            }
+            else {
+                printf("\tObject of type: %d\n", info.objects[i].object_type);
+            }
+        }
+    }
+}
+
 void set_state(State new_state)
 {
     if (state < StateMainMenu) {
@@ -317,6 +335,9 @@ int main(int argc, char *argv[])
     status->equip_item("ivory_sword.xml");
     status->equip_item("ivory_shield.xml");
     status->equip_item("ivory_armour.xml");
+
+    // TODO: Remove
+    test_chest(1, "seaside_room02.tmx");
 
     load_area(map_name, true, player_name, start_x, start_y);
 

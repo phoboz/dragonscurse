@@ -9,6 +9,7 @@
 
 struct WorldObject;
 struct WorldLock;
+struct WorldChest;
 struct WorldLocation;
 
 struct ItemData {
@@ -41,6 +42,13 @@ struct LockInfo {
     int once;
 };
 
+struct ChestInfo {
+    int key;
+    int once;
+    int num_objects;
+    ObjectInfo objects[10];
+};
+
 class WorldDB {
 public:
     WorldDB(const char *name);
@@ -51,6 +59,9 @@ public:
     bool get_lock_info(LockInfo *info,
                        int id, const char *location_name) const;
 
+    bool get_chest_info(ChestInfo *info,
+                        int id, const char *location_name) const;
+
     bool remove(int key);
 
     Status* get_status() { return &m_status; }
@@ -58,12 +69,16 @@ public:
 private:
     bool load_object_attributes(WorldObject *object, TiXmlElement *elmt);
     bool load_lock_attributes(WorldLock *lock, TiXmlElement *elmt);
+    bool load_chest_attributes(WorldChest *chest, TiXmlElement *elmt);
 
     WorldLocation* find_location(const char *name) const;
     WorldLocation* get_location(const char *name);
     bool load_nodes(TiXmlNode *node);
 
+    bool load_object_info(ObjectInfo *info, WorldObject *object) const;
+
     std::map<std::string, WorldLocation*> m_locations;
+    WorldChest *m_chest;
 
     Status m_status;
 };
