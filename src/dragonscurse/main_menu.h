@@ -9,7 +9,7 @@ public:
         OptionNone = -1,
         OptionNew = 0,
         OptionContinue,
-        OptionStatus,
+        OptionKeyList,
         OptionArmList,
         OptionShieldList,
         OptionArmourList,

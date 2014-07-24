@@ -20,6 +20,7 @@
 #include "shop.h"
 #include "main_menu.h"
 #include "status_screen.h"
+#include "key_list.h"
 #include "arm_list.h"
 #include "shield_list.h"
 #include "armour_list.h"
@@ -193,8 +194,10 @@ void move_keydown(int key)
                 state = world_state;
                 break;
 
-            case MainMenu::OptionStatus:
-                db->get_status()->show();
+            case MainMenu::OptionKeyList:
+                sub_menu = new KeyList(media, db->get_status());
+                delete main_menu;
+                set_state(StateSubMenu);
                 break;
 
             case MainMenu::OptionArmList:
