@@ -1,4 +1,3 @@
-#include <string.h>
 #include "phoboz/ctrl.h"
 #include "object_factory.h"
 #include "area.h"
@@ -32,10 +31,7 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
 
                     Status *status = m_db->get_status();
                     if (item->get_attribute("req_cp") <= status->get_cp()) {
-                        std::string fn(item->get_filename());
-                        int lastindex = fn.find_last_of("."); 
-                        std::string rawname = fn.substr(0, lastindex); 
-                        m_menu->add_option(rawname.c_str(),
+                        m_menu->add_option(item->get_name(),
                                            item,
                                            item->get_sprite(),
                                            item->get_attribute("still"));

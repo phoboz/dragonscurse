@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string.h>
 #include "object.h"
 
@@ -87,6 +86,9 @@ bool Object::load(const char *fn, MediaDB *media)
     if (doc.LoadFile()) {
         load_nodes(&doc);
         m_fn = std::string(fn);
+        int lastindex = m_fn.find_last_of(".");
+        m_name = m_fn.substr(0, lastindex);
+
     }
 
     return m_loaded;

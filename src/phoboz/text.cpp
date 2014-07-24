@@ -7,7 +7,7 @@ struct TextLine {
     TextLine(const char *str, int y)
         : m_y(y) {
         m_len = strlen(str);
-        m_text = new char[m_len];
+        m_text = new char[m_len + 1];
         if (m_text) {
             strcpy(m_text, str);
         }

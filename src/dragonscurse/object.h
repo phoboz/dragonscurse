@@ -74,6 +74,7 @@ public:
     void set_reused(bool reused) { m_reused = reused; }
 
     const char* get_filename() { return m_fn.c_str(); }
+    const char* get_name() { return m_name.c_str(); }
     int  get_attribute(const char *name) const;
     void set_attribute(const char *name, int value) {
         m_attributes[std::string(name)] = value;
@@ -129,6 +130,7 @@ private:
     bool load_nodes(TiXmlNode *node);
 
     std::string m_fn;
+    std::string m_name;
     bool m_loaded;
     Type m_type;
     bool m_always_visible;
