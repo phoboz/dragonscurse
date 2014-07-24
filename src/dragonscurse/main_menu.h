@@ -21,6 +21,8 @@ public:
 
     static bool check_menu(int key);
 
+    int get_width() const { return m_menu->get_width(); }
+
     Option move(int key);
 
     void draw(SDL_Surface *dest, int x, int y,

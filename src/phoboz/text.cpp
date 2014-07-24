@@ -147,6 +147,22 @@ bool Text::add_text(const char *str)
     return result;
 }
 
+int Text::get_width() const
+{
+    int result = 0;
+    int w, h;
+
+    for (int i = 0; i < m_lines.size(); i++) {
+        TextLine *line = m_lines[i];
+        TTF_SizeText(m_font, line->m_text, &w, &h);
+        if (w > result) {
+            result = w;
+        }
+    }
+
+    return result;
+}
+
 int Text::get_height() const
 {
     return m_lines.size() * TTF_FontLineSkip(m_font);

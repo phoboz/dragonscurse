@@ -28,6 +28,7 @@ public:
     bool replace_line(const char *str, int line_no = 0);
     bool add_text(const char *str);
 
+    int get_width() const;
     int get_height() const;
     void* get_data() const { return m_data; }
 

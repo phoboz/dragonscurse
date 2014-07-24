@@ -70,6 +70,21 @@ void* Menu::advance_pointer(PointerDirection dir)
     return m_options[m_curr_option]->get_data();
 }
 
+int Menu::get_width() const
+{
+    int result = 0;
+
+    for (int i = 0; i < m_options.size(); i++) {
+        Text *text = m_options[i];
+        int w = text->get_width();
+        if (w > result) {
+            result = w;
+        }
+    }
+
+    return result;
+}
+
 void Menu::draw(SDL_Surface *dest, int x, int y,
                 int clip_x, int clip_y, int clip_w, int clip_h)
 {
