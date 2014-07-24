@@ -8,40 +8,6 @@ void Bullet::reload()
     m_reload_timer.reset();
 }
 
-bool Bullet::fire(int x, int y, Direction dir, VerticalDirection vert_dir)
-{
-    bool result = false;
-
-    if (!m_moving && m_loaded) {
-        m_x = x;
-        m_y = y;
-        m_dir = dir;
-        m_vertical_dir = vert_dir;
-
-        if (dir == Right) {
-            m_dx = get_attribute("move_speed");
-            m_frame = get_attribute("right_move_start");
-        }
-        else if (dir == Left) {
-            m_dx = get_attribute("move_speed");
-            m_frame = get_attribute("left_move_start");
-        }
-
-        if (vert_dir == VerticalUp) {
-            m_dy = get_attribute("move_speed");
-        }
-        else if (vert_dir == VerticalDown) {
-            m_dy = get_attribute("move_speed");
-        }
-
-        m_moving = true;
-        reload();
-        result = true;
-    }
-
-    return result;
-}
-
 bool Bullet::fire(int x, int y, int dx, int dy)
 {
     bool result = false;
@@ -49,7 +15,6 @@ bool Bullet::fire(int x, int y, int dx, int dy)
     if (!m_moving && m_loaded) {
         m_x = x;
         m_y = y;
-        m_vertical_dir = VerticalNone;
 
         if (dx > 0) {
             m_dir = Right;
@@ -106,12 +71,18 @@ void Bullet::move(Map *map)
     }
 
     if (m_moving) {
-        check_ahead(map);
+        if (m_follow_terrain) {
+            check_ahead(map);
+        }
         if (m_vertical_dir == VerticalDown) {
-            check_below(map);
+            if (m_follow_terrain) {
+                check_below(map);
+            }
         }
         else if (m_vertical_dir == VerticalUp) {
-            check_above(map);
+            if (m_follow_terrain) {
+                check_above(map);
+            }
         }
         if (m_dx || m_dy) {
             if (m_distance < get_attribute("distance")) {

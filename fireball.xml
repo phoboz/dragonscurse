@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
-<bullet move_speed="6"
-        distance="150"
+<bullet distance="150"
         reload_time="2"
         right_still="0"
         right_move_start="0" right_move_end="0"

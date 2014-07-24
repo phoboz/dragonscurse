@@ -52,14 +52,16 @@ void Dragon::move(Map *map)
                 if (m_dir == Right) {
                     if (m_bullet->fire(m_x + get_attribute("attack_right"),
                                        m_y + y,
-                                       m_dir)) {
+                                       get_attribute("bullet_speed"),
+                                       0)) {
                         set_attack();
                     }
                 }
                 else if (m_dir == Left) {
                     if (m_bullet->fire(m_x + get_attribute("attack_left"),
                                        m_y + y,
-                                       m_dir)) {
+                                       -get_attribute("bullet_speed"),
+                                       0)) {
                         set_attack();
                     }
                 }

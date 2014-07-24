@@ -8,11 +8,10 @@ class Bullet : public Object {
 public:
     Bullet(const char *fn, MediaDB *media)
         : Object(Object::TypeBullet),
-          m_moving(false), m_loaded(true),
+          m_follow_terrain(true), m_moving(false), m_loaded(true),
           m_distance(0) { load(fn, media); }
 
-    bool fire(int x, int y, Direction dir,
-              VerticalDirection vert_dir = VerticalNone);
+    bool fire(int x, int y, int speed, Direction dir);
     bool fire(int x, int y, int dx, int dy);
 
     bool hit_object(Object *object);
@@ -23,10 +22,13 @@ public:
         if (m_moving) Object::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
     }
 
+protected:
+    bool m_follow_terrain;
+    VerticalDirection m_vertical_dir;
+
 private:
     void reload();
 
-    VerticalDirection m_vertical_dir;
     bool m_moving;
     bool m_loaded;
     int m_distance;
