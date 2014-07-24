@@ -4,9 +4,9 @@ ADD_EXECUTABLE(dragonscurse
     monster.cpp walker.cpp guardian.cpp lock_flyer.cpp dancer.cpp falling.cpp
     crawler.cpp erupter.cpp meka_dragon.cpp
     material.cpp item.cpp coin.cpp curse.cpp morph.cpp
-    object_factory.cpp statusbar.cpp
+    object_factory.cpp statusbar.cpp status_screen.cpp
     room.cpp church.cpp shop.cpp chest.cpp
-    main_menu.cpp sub_menu.cpp equipment_list.cpp main.cpp
+    main_menu.cpp sub_menu.cpp item_list.cpp equipment_list.cpp main.cpp
     )
 
 TARGET_LINK_LIBRARIES(dragonscurse

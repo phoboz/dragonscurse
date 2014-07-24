@@ -19,6 +19,8 @@
 #include "church.h"
 #include "shop.h"
 #include "main_menu.h"
+#include "status_screen.h"
+#include "key_list.h"
 #include "arm_list.h"
 #include "shield_list.h"
 #include "armour_list.h"
@@ -38,6 +40,7 @@ Status *status = 0;
 static Statusbar *statusbar = 0;
 static MainMenu *main_menu = 0;
 static SubMenu *sub_menu = 0;
+static StatusScreen *status_screen = 0;
 static State state;
 static State world_state;
 
@@ -168,6 +171,9 @@ void move()
                       area->get_sx(), area->get_sy(), area->get_music());
         }
     }
+    else if (state == StateMainMenu || state == StateSubMenu) {
+        status_screen->move();
+    }
 }
 
 void move_keydown(int key)
@@ -188,8 +194,10 @@ void move_keydown(int key)
                 state = world_state;
                 break;
 
-            case MainMenu::OptionStatus:
-                db->get_status()->show();
+            case MainMenu::OptionKeyList:
+                sub_menu = new KeyList(media, db->get_status());
+                delete main_menu;
+                set_state(StateSubMenu);
                 break;
 
             case MainMenu::OptionArmList:
@@ -244,14 +252,18 @@ void redraw()
                     screen_width, screen_height);
     }
     else if (state == StateMainMenu) {
+        status_screen->draw(screen,
+                            0, Statusbar::get_height(),
+                            0, 0, screen_width, screen_height);
         main_menu->draw(screen, 0, Statusbar::get_height(),
-                        0, 0,
-                        screen_width, screen_height);
+                        0, 0, screen_width, screen_height);
     }
     else if (state == StateSubMenu) {
-        sub_menu->draw(screen, 0, Statusbar::get_height(),
-                       0, 0,
-                       screen_width, screen_height);
+        status_screen->draw(screen, 0, Statusbar::get_height(),
+                            0, 0, screen_width, screen_height);
+        sub_menu->draw(screen,
+                       0, Statusbar::get_height(),
+                       0, 0, screen_width, screen_height);
     }
 }
 
@@ -317,6 +329,8 @@ int main(int argc, char *argv[])
     status->equip_item("ivory_sword.xml");
     status->equip_item("ivory_shield.xml");
     status->equip_item("ivory_armour.xml");
+
+    status_screen = new StatusScreen(status, media);
 
     load_area(map_name, true, player_name, start_x, start_y);
 

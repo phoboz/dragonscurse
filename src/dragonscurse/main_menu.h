@@ -9,7 +9,7 @@ public:
         OptionNone = -1,
         OptionNew = 0,
         OptionContinue,
-        OptionStatus,
+        OptionKeyList,
         OptionArmList,
         OptionShieldList,
         OptionArmourList,
@@ -20,6 +20,8 @@ public:
     ~MainMenu();
 
     static bool check_menu(int key);
+
+    int get_width() const { return m_menu->get_width(); }
 
     Option move(int key);
 

@@ -9,6 +9,8 @@ public:
     SubMenu(MediaDB *media, Status *status);
     virtual ~SubMenu();
 
+    int get_width() const { return m_menu->get_width(); }
+
     virtual int move(int key);
 
     void draw(SDL_Surface *dest, int x, int y,

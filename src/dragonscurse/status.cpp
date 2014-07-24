@@ -178,7 +178,7 @@ void Status::show() const
          ++it) {
 
         Item *item = *it;
-        std::cout << "Item: " << item->get_filename();
+        std::cout << "Item: " << item->get_name();
         if (item == get_equiped_item(Item::TypeArm)) {
             std::cout << " (equiped arm)";
         }

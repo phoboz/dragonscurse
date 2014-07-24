@@ -10,7 +10,7 @@ MainMenu::MainMenu(MediaDB *media)
     if (m_menu) {
         m_menu->add_option("New Game");
         m_menu->add_option("Continue");
-        m_menu->add_option("Status");
+        m_menu->add_option("Key List");
         m_menu->add_option("Arm List");
         m_menu->add_option("Shield List");
         m_menu->add_option("Armour List");

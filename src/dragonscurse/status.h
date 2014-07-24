@@ -37,6 +37,8 @@ public:
 
     void aquire_shape(Player *player);
 
+    int get_ap() const { return m_ap; }
+    int get_dp() const { return m_dp; }
     int get_cp() const { return m_cp; }
     int get_gold() const { return m_gold; }
 

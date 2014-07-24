@@ -23,6 +23,7 @@ public:
     }
     bool set_icon(int option, const Sprite *icon_spr, int icon_index);
     void* advance_pointer(PointerDirection dir);
+    int get_width() const;
     int get_option() const { return m_curr_option; }
     void* get_data() const { return m_options[m_curr_option]->get_data(); }
 
