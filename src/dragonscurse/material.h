@@ -2,9 +2,9 @@
 #define _Material_H
 
 #include "phoboz/timer.h"
-#include "object.h"
+#include "body.h"
 
-class Material : public Object {
+class Material : public Body {
 public:
     virtual void move(Map *map);
 

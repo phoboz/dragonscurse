@@ -2,7 +2,7 @@
 #include "material.h"
 
 Material::Material(Type type, const char *fn, MediaDB *media, int x, int y)
-    : Object(type, x, y),
+    : Body(type, x, y),
       m_from_chest(false),
       m_action(Rise),
       m_ref_done(false)
@@ -39,63 +39,30 @@ void Material::animate_move()
 
 void Material::move(Map *map)
 {
-    const Tmx::Tileset *tileset = map->get_tileset(0);
-
-    if (m_action == Rise) {
-        if (m_rise_timer.expired(get_attribute("rise_limit"))) {
-            m_rise_timer.reset();
-            m_dy = 0;
-            m_action = Fall;
+    if (!m_ref_done) {
+        int dx;
+        if (m_from_chest) {
+            dx = get_attribute("chest_speed");
         }
         else {
-            m_dy = get_attribute("rise_speed");
-            check_above(map);
-            if (!m_dy) {
-                m_action = Fall;
-            }
+            dx = get_attribute("move_speed");
         }
-    }
-    else {
-        m_dy = get_attribute("weight");
-        check_below(map);
-        if (m_dy) {
-            m_action = Fall;
+        if (get_reference() == Right) {
+            set_speed(dx, -get_attribute("rise_speed"));
         }
-    }
-
-    if (m_from_chest) {
-        m_dx = get_attribute("chest_speed");
-    }
-    else {
-        m_dx = get_attribute("move_speed");
-    }
-
-    if (!m_ref_done) {
-        face_reference();
+        else {
+            set_speed(-dx, -get_attribute("rise_speed"));
+        }
+        set_accelration(0, get_attribute("weight"));
         m_ref_done = true;
     }
-    check_ahead(map);
-    if (!m_dx && !m_dy) {
-        m_action = Still;
-        m_frame = get_attribute("move_still");
-    }
 
-    if (m_dir == Right) {
-        m_x += m_dx;
-    }
-    else if (m_dir == Left) {
-        m_x -= m_dx;
-    }
-
-    if (m_action == Rise) {
-        m_y -= m_dy;
-    }
-    else if (m_action == Fall) {
-        m_y += m_dy;
-    }
-
-    if (m_action != Still) {
+    Body::move(map);
+    if (is_moving()) {
         animate_move();
+    }
+    else {
+        m_frame = get_attribute("move_still");
     }
 }
 

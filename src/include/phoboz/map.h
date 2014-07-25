@@ -23,6 +23,8 @@ public:
     const std::string& get_filename() { return m_tmx->GetFilename(); }
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }
+    int get_tile_width() const { return m_tmx->GetTileWidth(); }
+    int get_tile_height() const { return m_tmx->GetTileHeight(); }
     int get_num_layers() const { return m_tmx->GetNumLayers(); }
     int get_tileset_index(int index) const { return m_tmx->FindTilesetIndex(index); }
     int get_num_tilesets() const { return m_tmx->GetNumTilesets(); }

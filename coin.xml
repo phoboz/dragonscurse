@@ -1,11 +1,10 @@
 <?xml version="1.0" ?>
 <coin max_value="5">
      <collectable type="coin">
-        <material rise_speed="10"
-                  rise_limit="10"
-                  move_speed="3"
-                  chest_speed="3"
-                  weight="16"
+        <material rise_speed="25"
+                  move_speed="2"
+                  chest_speed="2"
+                  weight="2"
                   treshold="6"
                   move_start="0"
                   move_end="1"
