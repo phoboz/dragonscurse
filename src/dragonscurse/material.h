@@ -16,7 +16,6 @@ protected:
 private:
     enum Action { Rise, Fall, Still };
 
-    void face_reference();
     void animate_move();
 
     bool m_from_chest;

@@ -2,17 +2,21 @@
 #define _GravityBullet_H
 
 #include "phoboz/timer.h"
-#include "bullet.h"
+#include "body.h"
 
-class GravityBullet : public Bullet {
+class GravityBullet : public Body {
 public:
-    GravityBullet(const char *fn, MediaDB *media)
-        : Bullet(fn, media) { m_follow_terrain = false; }
+    GravityBullet(const char *fn, MediaDB *media);
+    bool fire(int x, int y, int dx, int dy);
 
-    virtual void move(Map *map);
+    virtual bool get_moving() const;
+
+    bool hit_object(Object *object);
+
+    void move(Map *map);
 
 private:
-    Timer m_rise_timer;
+    int m_distance;
 };
 
 #endif

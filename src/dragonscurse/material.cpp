@@ -12,21 +12,6 @@ Material::Material(Type type, const char *fn, MediaDB *media, int x, int y)
     m_frame = get_attribute("move_start");
 }
 
-void Material::face_reference()
-{
-    const Sprite *spr = get_sprite();
-    int check_width = spr->get_width();
-
-    if (abs(m_xref - get_front()) >= check_width) {
-        if (m_xref > get_front()) {
-            m_dir = Right;
-        }
-        else if (m_xref < get_front()) {
-            m_dir = Left;
-        }
-    }
-}
-
 void Material::animate_move()
 {
     if (m_anim_timer.expired(get_attribute("treshold"))) {
@@ -58,7 +43,7 @@ void Material::move(Map *map)
     }
 
     Body::move(map);
-    if (is_moving()) {
+    if (get_moving()) {
         animate_move();
     }
     else {

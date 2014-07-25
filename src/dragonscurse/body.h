@@ -1,3 +1,6 @@
+#ifndef _Body_H
+#define _Body_H
+
 #include "object.h"
 
 class Body : public Object {
@@ -17,7 +20,7 @@ public:
     virtual void set_move_dir(Direction dir);
     virtual void set_vertical_dir(VerticalDirection dir);
 
-    bool is_moving() const;
+    virtual bool get_moving() const;
 
     virtual void move(Map *map);
 
@@ -31,4 +34,6 @@ private:
     float m_ax, m_ay;
     float m_vx, m_vy;
 };
+
+#endif
 

@@ -27,7 +27,7 @@ void Body::set_vertical_dir(VerticalDirection dir)
     }
 }
 
-bool Body::is_moving() const
+bool Body::get_moving() const
 {
     bool result = false;
 

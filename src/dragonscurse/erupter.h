@@ -11,6 +11,8 @@ public:
     Erupter(const char *fn, MediaDB *media, int x, int y, Direction dir)
         : Monster(fn, media, x, y, dir) { }
 
+    bool attack_actor(Actor *actor);
+
     virtual void move(Map *map);
 
     virtual void draw(SDL_Surface *dest, Map *map,

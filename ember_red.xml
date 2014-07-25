@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <bullet move_speed="4"
-        distance="500"
+        distance="1000"
         rise_limit="10"
         weight="5"
         reload_time="2"
