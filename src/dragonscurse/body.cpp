@@ -1,15 +1,16 @@
+#include <math.h>
 #include "body.h"
 
 void Body::set_accelration(int ax, int ay)
 {
-    m_ax = ax;
-    m_ay = ay;
+    m_ax = float(ax) * 0.1;
+    m_ay = float(ay) * 0.1;
 }
 
 void Body::set_speed(int vx, int vy)
 {
-    m_vx = vx;
-    m_vy = vy;
+    m_vx = float(vx);
+    m_vy = float(vy);
 }
 
 void Body::set_move_dir(Direction dir)
@@ -26,10 +27,21 @@ void Body::set_vertical_dir(VerticalDirection dir)
     }
 }
 
+bool Body::is_moving() const
+{
+    bool result = false;
+
+    if (fabs(m_vx) >= c_sigma || fabs(m_vy) >= c_sigma) {
+        result = true;
+    }
+
+    return result;
+}
+
 void Body::move(Map *map)
 {
-    int tw = map->get_tile_width();
-    int th = map->get_tile_height();
+    float tw = float(map->get_tile_width());
+    float th = float(map->get_tile_height());
 
     m_vx += m_ax;
     if (m_vx < -tw) {
@@ -47,50 +59,50 @@ void Body::move(Map *map)
         m_vy = th;
     }
 
-    if (m_vx > 0) {
+    if (m_vx > 0.0f) {
         set_move_dir(Right);
-        m_dx = m_vx;
-        if (!check_ahead(map)) {
-            m_x += m_dx;
+        m_dx = int(m_vx);
+        if (m_solid) {
+            if (check_ahead(map)) {
+                m_vx = 0.0f;
+            }
         }
-        else {
-            m_vx = 0;
-        }
+        m_x += m_dx;
     }
-    else if (m_vx < 0) {
+    else if (m_vx < 0.0f) {
         set_move_dir(Left);
-        m_dx = -m_vx;
-        if (!check_ahead(map)) {
-            m_x -= m_dx;
+        m_dx = -int(m_vx);
+        if (m_solid) {
+            if (check_ahead(map)) {
+                m_vx = 0.0f;
+            }
         }
-        else {
-            m_vx = 0;
-        }
+        m_x -= m_dx;
     }
     else {
         set_move_dir(Keep);
         m_dx = 0;
     }
 
-    if (m_vy > 0) {
+    if (m_vy > 0.0f) {
         set_vertical_dir(VerticalDown);
-        m_dy = m_vy;
-        if (!check_below(map)) {
-            m_y += m_dy;
+        m_dy = int(m_vy);
+        if (m_solid) {
+            if (check_below(map)) {
+                m_vy = 0.0f;
+            }
         }
-        else {
-            m_vy = 0;
-        }
+        m_y += m_dy;
     }
-    else if (m_vy < 0) {
+    else if (m_vy < 0.0f) {
         set_vertical_dir(VerticalUp);
-        m_dy = -m_vy;
-        if (!check_above(map)) {
-            m_y -= m_dy;
+        m_dy = -int(m_vy);
+        if (m_solid) {
+            if (check_above(map)) {
+                m_vy = 0.0f;
+            }
         }
-        else {
-            m_vy = 0;
-        }
+        m_y -= m_dy;
     }
     else {
         set_vertical_dir(VerticalNone);

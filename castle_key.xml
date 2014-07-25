@@ -5,7 +5,7 @@
         <material rise_speed="22"
                   move_speed="0"
                   chest_speed="2"
-                  weight="2"
+                  weight="20"
                   treshold="6"
                   move_start="6"
                   move_end="6"
