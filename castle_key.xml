@@ -2,11 +2,10 @@
 <key>
     <item type="key"
           once="0">
-        <material rise_speed="14"
-                  rise_limit="10"
+        <material rise_speed="22"
                   move_speed="0"
-                  chest_speed="3"
-                  weight="20"
+                  chest_speed="2"
+                  weight="2"
                   treshold="6"
                   move_start="6"
                   move_end="6"
