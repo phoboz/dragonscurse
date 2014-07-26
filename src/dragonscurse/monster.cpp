@@ -12,7 +12,7 @@ Monster::Monster(const char *fn, MediaDB *media, int x, int y, Direction dir)
 {
     load(fn, media);
     m_curr_hp = get_attribute("hp");
-    set_still();
+    set_action(Still);
 }
 
 void Monster::world_initialize(World *world)

@@ -79,7 +79,7 @@ void MekaDragon::move(Map *map)
             m_dx = 0;
             reset_hit();
             m_idle_timer.reset();
-            set_still();
+            set_action(Still);
             set_attack();
         }
         else {
@@ -102,18 +102,13 @@ void MekaDragon::move(Map *map)
     switch(m_action)
     {
         case Still:
-           if (m_hit == HitNone && m_attack == AttackNone) {
+           if (m_hit == HitNone) {
                 set_move_dir();
-            }
-            else if (m_hit == HitNone && m_attack == AttackMedium) {
-                if (m_idle_timer.check(get_attribute("attack_idle"))){
-                    fire();
-                }
             }
             break;
 
         case Move:
-           if (m_hit == HitNone && m_attack == AttackNone) {
+           if (m_hit == HitNone) {
                 if (m_horizontal_dir == HorizontalForward) {
 
                     face_reference(get_attribute("turn_width"));
@@ -159,7 +154,6 @@ void MekaDragon::move(Map *map)
                 }
 
                 if (m_attack_timer.expired(get_attribute("attack_timer"))) {
-                    set_still();
                     set_attack();
                 }
             }
@@ -178,6 +172,14 @@ void MekaDragon::move(Map *map)
 
             check_below(map);
             m_y += m_dy;
+            break;
+
+        case MediumAttack:
+            if (m_hit == HitNone) {
+                if (m_idle_timer.check(get_attribute("attack_idle"))){
+                    fire();
+                }
+            }
             break;
 
         default:

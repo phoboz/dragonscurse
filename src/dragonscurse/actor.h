@@ -2,18 +2,17 @@
 #define _Actor_H
 
 #include "phoboz/timer.h"
-#include "object.h"
+#include "body.h"
 
-class Actor : public Object {
+class Actor : public Body {
 public:
-    enum Action { Still, Move, Fall, Jump, Catapult, Crouch };
-    enum Attack { AttackNone, AttackMedium, AttackLow };
+    enum Action { Still, Move, Fall, Jump, Crouch, MediumAttack, LowAttack };
     enum Hit { HitNone, HitOne, HitPerish, HitPerished };
 
     Actor(Type type, int x, int y, Direction dir)
-        : Object(type, x, y, dir),
+        : Body(type, x, y, dir),
           m_anim_dir(AnimUp),
-          m_action(Still), m_attack(AttackNone), m_hit(HitNone),
+          m_action(Still), m_hit(HitNone),
           m_invisible(false) { }
 
     virtual bool set_hit(Object *object);
@@ -29,13 +28,12 @@ public:
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
 protected:
-    bool set_move_dir(Direction dir = Keep);
+    // TODO: Remove
+    void set_move_dir(Direction dir = Keep) { set_dir(dir); set_action(Move); }
+
+    void set_action(Action action);
+    virtual void set_dir(Direction dir = Keep);
     void swap_move_dir();
-    void set_still();
-    void set_fall();
-    void set_jump_dir(Direction dir = Keep);
-    void set_catapult_dir(Direction dir = Keep);
-    void set_crouch();
     void set_attack();
     void reset_attack();
     void check_ground(Map *map);
@@ -45,7 +43,6 @@ protected:
 
     AnimDirection m_anim_dir;
     Action m_action;
-    Attack m_attack;
     Hit m_hit;
     bool m_invisible;
     Timer m_anim_timer;

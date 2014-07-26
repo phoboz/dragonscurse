@@ -3,8 +3,8 @@
 
 void Body::set_accelration(int ax, int ay)
 {
-    m_ax = float(ax) * 0.1;
-    m_ay = float(ay) * 0.1;
+    m_ax = float(ax) * c_g;
+    m_ay = float(ay) * c_g;
 }
 
 void Body::set_speed(int vx, int vy)
@@ -13,7 +13,7 @@ void Body::set_speed(int vx, int vy)
     m_vy = float(vy);
 }
 
-void Body::set_move_dir(Direction dir)
+void Body::set_dir(Direction dir)
 {
     if (dir != Keep) {
         m_dir = dir;
@@ -60,7 +60,7 @@ void Body::move(Map *map)
     }
 
     if (m_vx > 0.0f) {
-        set_move_dir(Right);
+        set_dir(Right);
         m_dx = int(m_vx);
         if (m_solid) {
             if (check_ahead(map)) {
@@ -70,7 +70,7 @@ void Body::move(Map *map)
         m_x += m_dx;
     }
     else if (m_vx < 0.0f) {
-        set_move_dir(Left);
+        set_dir(Left);
         m_dx = -int(m_vx);
         if (m_solid) {
             if (check_ahead(map)) {
@@ -80,7 +80,7 @@ void Body::move(Map *map)
         m_x -= m_dx;
     }
     else {
-        set_move_dir(Keep);
+        set_dir(Keep);
         m_dx = 0;
     }
 

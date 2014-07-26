@@ -47,7 +47,7 @@ void Guardian::move(Map *map)
                     int y = m_yref - get_y();
                     if (x * x + y * y < dist * dist) {
                         m_attack_timer.reset();
-                        set_jump_dir();
+                        set_action(Jump);
                         m_dx = get_attribute("jump_forward");
                         m_dy = get_attribute("jump_speed");
                     }
@@ -74,7 +74,7 @@ void Guardian::move(Map *map)
             if (m_hit == HitNone) {
                 // Check jump height
                 if (m_jump_timer.expired(get_attribute("jump_limit"))) {
-                    set_fall();
+                    set_action(Fall);
                 }
 
                 // Check horizontal direction
@@ -91,13 +91,13 @@ void Guardian::move(Map *map)
                 // Check if hit head
                 if (check_above(map)) {
                     m_jump_timer.reset();
-                    set_fall();
+                    set_action(Fall);
                 }
                 m_y -= m_dy;
             }
             else {
                 m_jump_timer.reset();
-                set_fall();
+                set_action(Fall);
             }
             break;
 

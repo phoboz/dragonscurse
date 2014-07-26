@@ -8,8 +8,8 @@
             attack_low_bottom="54"
             attack_time="10">
         <player type="human"
-                jump_speed="6"
-                jump_limit="18"
+                jump_speed="14"
+                catapult_speed="22"
                 ap="100"
                 dp="55"
                 cp="56">

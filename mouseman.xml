@@ -8,14 +8,14 @@
             attack_low_bottom="52"
             attack_time="12">
         <player type="knight"
-                jump_speed="6"
-                jump_limit="14"
+                jump_speed="12"
+                catapult_speed="20"
                 ap="60"
                 dp="20"
                 cp="40">
             <actor move_speed="3"
                    treshold="5"
-                   weight="7"
+                   weight="8"
                    hit_time="12"
                    invisible_time="42"
                    right_still="0"

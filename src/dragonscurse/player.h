@@ -35,7 +35,6 @@ private:
     Morph *m_morph;
     Area *m_area;
     bool m_jump_ready;
-    Timer m_jump_timer;
     Timer m_hit_timer;
     Timer m_water_timer;
 };

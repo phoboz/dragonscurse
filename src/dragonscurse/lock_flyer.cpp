@@ -63,7 +63,7 @@ void LockFlyer::move(Map *map)
                     m_dy = get_attribute("move_speed");
                     check_below(map);
                     if (!m_dy) {
-                        set_still();
+                        set_action(Still);
                     }
                     else {
                         m_y += m_dy;
@@ -73,7 +73,7 @@ void LockFlyer::move(Map *map)
                     m_dy = get_attribute("move_speed");
                     check_above(map);
                     if (!m_dy) {
-                        set_still();
+                        set_action(Still);
                     }
                     else {
                         m_y -= m_dy;
@@ -84,7 +84,7 @@ void LockFlyer::move(Map *map)
                     face_reference(get_attribute("turn_width"));
                     check_ahead(map);
                     if (!m_dx) {
-                        set_still();
+                        set_action(Still);
                     }
                     else {
                         if (m_dir == Right) {

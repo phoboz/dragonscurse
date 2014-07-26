@@ -20,7 +20,7 @@ void Falling::initialize()
 
 void Falling::fall()
 {
-    set_fall();
+    set_action(Fall);
     m_fall_distance = 0;
     m_dy = get_attribute("weight");
 }

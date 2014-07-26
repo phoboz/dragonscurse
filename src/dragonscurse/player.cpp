@@ -67,19 +67,18 @@ void Player::player_move(Map *map)
     // Check if on catapult
     int catid = prop.GetNumericProperty("catapult");
     if (catid && check_below(map, 1, catid, catid) == 0) {
-        set_catapult_dir();
+        set_vy(int(-get_attribute("catapult_speed")));
+        set_action(Jump);
     }
 
     Actor::move(map);
-
-    // Check ground
-    check_ground(map);
+    set_ay(get_attribute("weight"));
 
     // Handle hit
     if (m_hit == HitOne) {
         if (m_hit_timer.expired(get_attribute("hit_time"))) {
             m_dx = 0;
-            set_still();
+            set_action(Still);
             m_hit = HitNone;
         }
         else {
@@ -105,150 +104,78 @@ void Player::player_move(Map *map)
         int input = get_input();
         switch(m_action) {
             case Still:
-                m_dx = 0;
+                set_vx(0);
+
             case Move:
-                if (m_attack == AttackNone) {
-                    if (input & PRESS_RIGHT) {
-                        set_move_dir(Right);
-                        animate_move();
-                        m_dx = get_attribute("move_speed");
-                    }
-                    else if (input & PRESS_LEFT) {
-                        set_move_dir(Left);
-                        animate_move();
-                        m_dx = get_attribute("move_speed");
-                    }
-                    else if (m_action == Move) {
-                        set_still();
-                        m_dx = 0;
-                    }
+                if (input & PRESS_RIGHT) {
+                    animate_move();
+                    set_action(Move);
+                    set_vx(get_attribute("move_speed"));
+                }
+                else if (input & PRESS_LEFT) {
+                    animate_move();
+                    set_action(Move);
+                    set_vx(-get_attribute("move_speed"));
+                }
+                else if (m_action == Move) {
+                    set_action(Still);
+                    set_vx(0);
+                }
 
-                    // Check for jump
-                    if (input & PRESS_JUMP) {
-                        if (m_jump_ready) {
-                            m_jump_timer.reset();
-                            m_jump_ready = false;
-                            set_jump_dir();
-                        }
-                    }
-                    else {
-                        m_jump_ready = true;
+                Body::move(map);
+                if (get_fall()) {
+                    set_action(Fall);
+                }
 
-                        // Check for crouch
-                        if (input & PRESS_DOWN) {
-                            set_crouch();
-                        }
+                // Check for jump
+                if (input & PRESS_JUMP) {
+                    if (m_jump_ready) {
+                        m_jump_ready = false;
+                        set_action(Jump);
+                        set_vy(-get_attribute("jump_speed"));
                     }
-                    check_ahead(map);
+                }
+                else {
+                    m_jump_ready = true;
 
-                    // Move
-                    if (m_dir == Right) {
-                        m_x += m_dx;
-                    }
-                    else if (m_dir == Left) {
-                        m_x -= m_dx;
+                    // Check for crouch
+                    if (input & PRESS_DOWN) {
+                        set_action(Crouch);
                     }
                 }
                 break;
 
             case Fall:
-                check_ahead(map);
-
-                // Move
-                if (m_dir == Right) {
-                    m_x += m_dx;
+                if (input & PRESS_RIGHT) {
+                    set_vx(get_attribute("move_speed"));
                 }
-                else if (m_dir == Left) {
-                    m_x -= m_dx;
+                else if (input & PRESS_LEFT) {
+                    set_vx(-get_attribute("move_speed"));
+                }
+                else if (m_action == Move) {
+                    set_action(Still);
+                    set_vx(0);
                 }
 
-                check_below(map);
-                m_y += m_dy;
+                Body::move(map);
+                if (!get_fall()) {
+                    set_action(Still);
+                }
                 break;
 
             case Jump:
-                if (input & PRESS_RIGHT) {
-                    set_jump_dir(Right);
-                    m_dx = get_attribute("move_speed");
+                Body::move(map);
+                if (get_fall()) {
+                    set_action(Still);
                 }
-                else if (input & PRESS_LEFT) {
-                    set_jump_dir(Left);
-                    m_dx = get_attribute("move_speed");
-                }
-                else {
-                    m_dx = 0;
-                }
-
-                // Check jump height
-                if (m_jump_timer.expired(get_attribute("jump_limit"))) {
-                    set_fall();
-                }
-                else {
-                    m_dy = get_attribute("jump_speed");
-                }
-
-                // Check horizontal direction
-                check_ahead(map);
-
-                // Move
-                if (m_dir == Right) {
-                    m_x += m_dx;
-                }
-                else if (m_dir == Left) {
-                    m_x -= m_dx;
-                }
-
-                // Check if hit head
-                if (check_above(map)) {
-                    m_jump_timer.reset();
-                    set_fall();
-                }
-                m_y -= m_dy;
-                break;
-
-            case Catapult:
-                if (input & PRESS_RIGHT) {
-                    set_catapult_dir(Right);
-                    m_dx = get_attribute("move_speed");
-                }
-                else if (input & PRESS_LEFT) {
-                    set_catapult_dir(Left);
-                    m_dx = get_attribute("move_speed");
-                }
-                else {
-                    m_dx = 0;
-                }
-
-                // Check jump height
-                if (m_jump_timer.expired(2 * get_attribute("jump_limit"))) {
-                    set_fall();
-                }
-                else {
-                    m_dy = get_attribute("jump_speed");
-                }
-
-                // Check horizontal direction
-                check_ahead(map);
-
-                // Move
-                if (m_dir == Right) {
-                    m_x += m_dx;
-                }
-                else if (m_dir == Left) {
-                    m_x -= m_dx;
-                }
-
-                // Check if hit head
-                if (check_above(map)) {
-                    m_jump_timer.reset();
-                    set_fall();
-                }
-                m_y -= m_dy;
                 break;
 
             case Crouch:
+                set_vx(0);
+                Body::move(map);
+
                 if (!(input & PRESS_DOWN)) {
-                    set_still();
+                    set_action(Still);
                 }
                 break;
 

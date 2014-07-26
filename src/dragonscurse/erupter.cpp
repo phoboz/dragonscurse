@@ -55,7 +55,7 @@ void Erupter::move(Map *map)
         }
     }
 
-    if (m_attack != AttackNone) {
+    if (m_action == MediumAttack) {
         if (m_anim_timer.expired(get_attribute("treshold"))) {
             m_attack_timer.reset();
             reset_attack();
