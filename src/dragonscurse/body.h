@@ -8,12 +8,10 @@ public:
     Body(Type type, int x = 0, int y = 0)
         : Object(type, x, y),
           m_ax(0.0f), m_ay(0.0f), m_vx(0.0f), m_vy(0.0f),
-          m_vert_dir(VerticalNone),
           m_solid(true) { }
     Body(Type type, int x, int y, Direction dir)
         : Object(type, x, y, dir),
           m_ax(0.0f), m_ay(0.0f), m_vx(0.0f), m_vy(0.0f),
-          m_vert_dir(VerticalNone),
           m_solid(true) { }
 
     void set_solid(bool solid) { m_solid = solid; }
@@ -24,15 +22,11 @@ public:
     void set_speed(int vx, int vy);
     void set_accelration(int ax, int ay);
     virtual void set_dir(Direction dir);
-    virtual void set_vertical_dir(VerticalDirection dir);
 
     virtual bool get_moving() const;
     bool get_fall() const { return (m_vy > 0.0f); }
 
     virtual void move(Map *map);
-
-protected:
-    VerticalDirection m_vert_dir;
 
 private:
     static const float c_sigma = 0.01f;

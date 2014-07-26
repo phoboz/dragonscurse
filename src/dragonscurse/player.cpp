@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string.h>
 #include "phoboz/ctrl.h"
 #include "morph.h"
@@ -12,9 +11,21 @@ bool Player::set_hit(Object *object)
     if (!m_invisible) {
         // TODO: Check if player hp is above zero instead
         result = Actor::set_hit(object);
+        if (result) {
 
-        // Make player invisible for a certain time
-        set_invisible(true);
+            // Move backwards and upwards
+            if (m_dir == Right) {
+                set_speed(-get_attribute("move_speed"),
+                          -get_attribute("jump_speed"));
+            }
+            else {
+                set_speed(get_attribute("move_speed"),
+                          -get_attribute("jump_speed"));
+            }
+
+            // Make player invisible for a certain time
+            set_invisible(true);
+        }
     }
 
     return result;
@@ -74,114 +85,97 @@ void Player::player_move(Map *map)
     Actor::move(map);
     set_ay(get_attribute("weight"));
 
-    // Handle hit
-    if (m_hit == HitOne) {
-        if (m_hit_timer.expired(get_attribute("hit_time"))) {
-            m_dx = 0;
-            set_action(Still);
-            m_hit = HitNone;
-        }
-        else {
-            // Move backwards and upwards
-            m_dx = get_attribute("move_speed");
-            m_dy = m_dx;
+    int input = get_input();
+    switch(m_action) {
+        case Still:
+            set_vx(0);
 
-            // Check for collision with map
-            check_behind(map);
-            check_above(map);
-
-            // Move
-            if (m_dir == Right) {
-                m_x -= m_dx;
+        case Move:
+            if (input & PRESS_RIGHT) {
+                animate_move();
+                set_action(Move);
+                set_vx(get_attribute("move_speed"));
             }
-            else if (m_dir == Left) {
-                m_x += m_dx;
+            else if (input & PRESS_LEFT) {
+                animate_move();
+                set_action(Move);
+                set_vx(-get_attribute("move_speed"));
             }
-            m_y -= m_dy;
-        }
-    }
-    else {
-        int input = get_input();
-        switch(m_action) {
-            case Still:
+            else if (m_action == Move) {
+                set_action(Still);
                 set_vx(0);
+            }
 
-            case Move:
-                if (input & PRESS_RIGHT) {
-                    animate_move();
-                    set_action(Move);
-                    set_vx(get_attribute("move_speed"));
-                }
-                else if (input & PRESS_LEFT) {
-                    animate_move();
-                    set_action(Move);
-                    set_vx(-get_attribute("move_speed"));
-                }
-                else if (m_action == Move) {
-                    set_action(Still);
-                    set_vx(0);
-                }
+            Body::move(map);
+            if (get_fall()) {
+                set_action(Fall);
+            }
 
-                Body::move(map);
-                if (get_fall()) {
-                    set_action(Fall);
+            // Check for jump
+            if (input & PRESS_JUMP) {
+                if (m_jump_ready) {
+                    m_jump_ready = false;
+                    set_action(Jump);
+                    set_vy(-get_attribute("jump_speed"));
                 }
+            }
+            else {
+                m_jump_ready = true;
 
-                // Check for jump
-                if (input & PRESS_JUMP) {
-                    if (m_jump_ready) {
-                        m_jump_ready = false;
-                        set_action(Jump);
-                        set_vy(-get_attribute("jump_speed"));
-                    }
+                // Check for crouch
+                if (input & PRESS_DOWN) {
+                    set_action(Crouch);
                 }
-                else {
-                    m_jump_ready = true;
+            }
+            break;
 
-                    // Check for crouch
-                    if (input & PRESS_DOWN) {
-                        set_action(Crouch);
-                    }
-                }
-                break;
-
-            case Fall:
-                if (input & PRESS_RIGHT) {
-                    set_vx(get_attribute("move_speed"));
-                }
-                else if (input & PRESS_LEFT) {
-                    set_vx(-get_attribute("move_speed"));
-                }
-                else if (m_action == Move) {
-                    set_action(Still);
-                    set_vx(0);
-                }
-
-                Body::move(map);
-                if (!get_fall()) {
-                    set_action(Still);
-                }
-                break;
-
-            case Jump:
-                Body::move(map);
-                if (get_fall()) {
-                    set_action(Still);
-                }
-                break;
-
-            case Crouch:
+        case Fall:
+            if (input & PRESS_RIGHT) {
+                set_vx(get_attribute("move_speed"));
+            }
+            else if (input & PRESS_LEFT) {
+                set_vx(-get_attribute("move_speed"));
+            }
+            else if (m_action == Move) {
+                set_action(Still);
                 set_vx(0);
+            }
+
+            Body::move(map);
+            if (!get_fall()) {
+                set_action(Still);
+            }
+            break;
+
+        case Jump:
+            Body::move(map);
+            if (get_fall()) {
+                set_action(Still);
+            }
+            break;
+
+        case Crouch:
+            set_vx(0);
+            Body::move(map);
+
+            if (!(input & PRESS_DOWN)) {
+                set_action(Still);
+            }
+            break;
+
+        case Hit:
+            if (m_hit_timer.expired(get_attribute("hit_time"))) {
+                set_vx(0);
+                m_hit = HitNone;
+                set_action(Still);
+            }
+            else {
                 Body::move(map);
+            }
+            break;
 
-                if (!(input & PRESS_DOWN)) {
-                    set_action(Still);
-                }
-                break;
-
-            default:
-                break;
-        }
+        default:
+            break;
     }
 }
 

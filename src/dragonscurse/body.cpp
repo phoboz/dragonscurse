@@ -20,12 +20,6 @@ void Body::set_dir(Direction dir)
     }
 }
 
-void Body::set_vertical_dir(VerticalDirection dir)
-{
-    if (dir != VerticalNone) {
-        m_vert_dir = dir;
-    }
-}
 
 bool Body::get_moving() const
 {
@@ -85,7 +79,6 @@ void Body::move(Map *map)
     }
 
     if (m_vy > 0.0f) {
-        set_vertical_dir(VerticalDown);
         m_dy = int(m_vy);
         if (m_solid) {
             if (check_below(map)) {
@@ -95,7 +88,6 @@ void Body::move(Map *map)
         m_y += m_dy;
     }
     else if (m_vy < 0.0f) {
-        set_vertical_dir(VerticalUp);
         m_dy = -int(m_vy);
         if (m_solid) {
             if (check_above(map)) {
@@ -105,7 +97,6 @@ void Body::move(Map *map)
         m_y -= m_dy;
     }
     else {
-        set_vertical_dir(VerticalNone);
         m_dy = 0;
     }
 }

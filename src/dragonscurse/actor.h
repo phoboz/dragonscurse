@@ -6,8 +6,18 @@
 
 class Actor : public Body {
 public:
-    enum Action { Still, Move, Fall, Jump, Crouch, MediumAttack, LowAttack };
-    enum Hit { HitNone, HitOne, HitPerish, HitPerished };
+    enum Action {
+        Still,
+        Move,
+        Fall,
+        Jump,
+        Crouch,
+        MediumAttack,
+        LowAttack,
+        Hit
+    };
+
+    enum HitType { HitNone, HitOne, HitPerish, HitPerished };
 
     Actor(Type type, int x, int y, Direction dir)
         : Body(type, x, y, dir),
@@ -18,7 +28,7 @@ public:
     virtual bool set_hit(Object *object);
     void reset_hit();
     void set_perish();
-    Hit get_hit() const { return m_hit; }
+    HitType get_hit() const { return m_hit; }
     bool get_invisible() const { return m_invisible; }
 
     virtual bool attack_actor(Actor *actor) { return false; }
@@ -43,7 +53,7 @@ protected:
 
     AnimDirection m_anim_dir;
     Action m_action;
-    Hit m_hit;
+    HitType m_hit;
     bool m_invisible;
     Timer m_anim_timer;
     Timer m_blink_timer;

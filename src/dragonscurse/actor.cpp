@@ -1,4 +1,3 @@
-#include <iostream>
 #include "actor.h"
 
 void Actor::set_action(Action action)
@@ -77,6 +76,15 @@ void Actor::set_dir(Direction dir)
             }
             else if (set_dir == Left) {
                 m_frame = get_attribute("left_attack_low");
+            }
+            break;
+
+        case Hit:
+            if (set_dir == Right) {
+                m_frame = get_attribute("right_hit");
+            }
+            else if (set_dir == Left) {
+                m_frame = get_attribute("left_hit");
             }
             break;
 
@@ -211,19 +219,7 @@ bool Actor::set_hit(Object *object)
     int result = false;
 
     if (!m_invisible) {
-        switch(m_dir) {
-            case Right:
-                m_frame = get_attribute("right_hit");
-                break;
-
-            case Left:
-                m_frame = get_attribute("left_hit");
-               break;
-
-            default:
-                break;
-        }
-        m_action = Still;
+        set_action(Hit);
         m_hit = HitOne;
         result = true;
     }

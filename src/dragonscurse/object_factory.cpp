@@ -7,7 +7,6 @@
 #include "player.h"
 #include "coin.h"
 #include "knight.h"
-#include "human.h"
 #include "dragon.h"
 #include "walker.h"
 #include "crawler.h"
@@ -90,9 +89,6 @@ Object* ObjectFactory::create_object(const char *name,
 
         if (strcmp(priv_object_type, "knight") == 0) {
             object = new Knight(name, media, x, y, dir);
-        }
-        else if (strcmp(priv_object_type, "human") == 0) {
-            object = new Human(name, media, x, y, dir);
         }
         else if (strcmp(priv_object_type, "dragon") == 0) {
             object = new Dragon(name, media, x, y, dir);
