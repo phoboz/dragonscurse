@@ -23,6 +23,7 @@ public:
 private:
     int m_curr_hp;
     bool m_invinsible;
+    Timer m_hit_timer;
     Timer m_perish_timer;
     std::list<Object*> m_objects;
 };

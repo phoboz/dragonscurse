@@ -2,15 +2,14 @@
 <cobra>
     <guardian attack_timer="64"
               attack_distance="24"
-              jump_speed="3"
-              jump_forward="2"
-              jump_limit="10"
+              jump_speed="8"
+              jump_forward="3"
               hit_time="24">
         <monster hp="2"
                  perish_time="40">
             <actor move_speed="2"
                    treshold="12"
-                   weight="2"
+                   weight="10"
                    right_still="4"
                    right_move_start="4" right_move_end="5"
                    right_jump="6"

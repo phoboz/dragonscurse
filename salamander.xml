@@ -8,11 +8,12 @@
             bullet_speed="6">
         <player type="dragon"
                 jump_speed="16"
-                catapult_speed="23"
+                jump_forward="3"
+                catapult_speed="26"
                 ap="0"
                 dp="0"
                 cp="0">
-            <actor move_speed="3"
+            <actor move_speed="2"
                    treshold="5"
                    weight="14"
                    hit_time="12"

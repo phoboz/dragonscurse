@@ -36,7 +36,6 @@ void Dragon::move(Map *map)
         if (m_attack_timer.expired(get_attribute("attack_time"))) {
             reset_attack();
         }
-        Body::move(map);
     }
     else if (m_hit == HitNone && !get_invisible()) {
         if (input & PRESS_ATTACK) {

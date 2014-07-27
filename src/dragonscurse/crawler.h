@@ -1,7 +1,6 @@
 #ifndef _Crawler_H
 #define _Crawler_H
 
-#include "phoboz/timer.h"
 #include "monster.h"
 
 class Crawler : public Monster {
@@ -15,7 +14,6 @@ public:
 
 private:
     bool m_hit_ground;
-    Timer m_hit_timer;
 };
 
 #endif

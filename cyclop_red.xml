@@ -5,7 +5,7 @@
                  perish_time="40">
             <actor move_speed="2"
                    treshold="10"
-                   weight="5"
+                   weight="10"
                    right_still="2"
                    right_move_start="2" right_move_end="3"
                    right_hit="4"

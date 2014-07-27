@@ -6,7 +6,7 @@ MekaDragon::MekaDragon(const char *fn, MediaDB *media,
                        int x, int y, Direction dir)
     : Monster(fn, media, x, y, dir),
       m_horizontal_dir(HorizontalForward),
-      m_bullet_index(0)
+      m_bullet_index(0), m_attack_now(false)
 {
     set_always_visible(true);
 
@@ -42,20 +42,11 @@ void MekaDragon::fire()
 {
     if (m_fire_timer.expired(get_attribute("fire_next"))) {
         if (m_bullet_index < m_bullets.size()) {
-            if (m_dir == Right) {
-                m_bullets[m_bullet_index]->fire(
-                    m_x + get_attribute("attack_right"),
-                    m_y + get_attribute("attack_medium"),
-                    get_attribute("fire_dx"),
-                    get_attribute("fire_dy"));
-            }
-            else if (m_dir == Left) {
-                m_bullets[m_bullet_index]->fire(
-                    m_x + get_attribute("attack_left"),
-                    m_y + get_attribute("attack_medium"),
-                    -get_attribute("fire_dx"),
-                    get_attribute("fire_dy"));
-            }
+            m_bullets[m_bullet_index]->fire(
+                m_x + get_attribute("attack_left"),
+                m_y + get_attribute("attack_medium"),
+                -get_attribute("fire_dx"),
+                get_attribute("fire_dy"));
             m_bullet_index++;
         }
         else {
@@ -71,107 +62,51 @@ void MekaDragon::move(Map *map)
 {
     Monster::move(map);
 
-    // Check ground
-    check_ground(map);
-
-    if (m_hit == HitOne) {
-        if (m_hit_timer.expired(get_attribute("hit_time"))) {
-            m_dx = 0;
-            reset_hit();
-            m_idle_timer.reset();
-            set_action(Still);
-            set_attack();
-        }
-        else {
-            // Move backwards
-            m_dx = get_attribute("move_speed");
-
-            // Check for collision with map
-            check_behind(map);
-
-            // Right of player
-            if (get_reference() == Right) {
-                m_x -= m_dx;
-            }
-            else {
-                m_x += m_dx;
-            }
-        }
-    }
-
-    switch(m_action)
-    {
+    switch(m_action) {
         case Still:
-           if (m_hit == HitNone) {
-                set_move_dir();
-            }
+            set_move_dir();
             break;
 
         case Move:
-           if (m_hit == HitNone) {
-                if (m_horizontal_dir == HorizontalForward) {
+            if (m_horizontal_dir == HorizontalForward) {
 
-                    face_reference(get_attribute("turn_width"));
-                    m_dx = get_attribute("move_speed");
-
-                    check_ahead(map);
-
-                    // Move
-                    if (m_dir == Right) {
-                        m_x += m_dx;
-                    }
-                    else if (m_dir == Left) {
-                        m_x -= m_dx;
-                    }
-                    animate_move();
-
-                    if (abs(m_xref - m_x) < get_attribute("attack_distance")) {
-                        m_horizontal_dir = HorizontalBackward;
-                    }
+                face_reference(get_attribute("turn_width"));
+                if (get_reference() == Right) {
+                    set_vx(get_attribute("move_speed"));
                 }
-                else if (m_horizontal_dir == HorizontalBackward) {
-
-                    face_reference(get_attribute("turn_width"));
-                    m_dx = get_attribute("move_speed");
-
-                    if (check_behind(map)) {
-                        // Fire directly if pushed against the wall
-                        fire();
-                    }
-
-                    // Move
-                    if (m_dir == Right) {
-                        m_x -= m_dx;
-                    }
-                    else if (m_dir == Left) {
-                        m_x += m_dx;
-                    }
-                    animate_move();
-
-                    if (abs(m_xref - m_x) > get_attribute("retreat_distance")) {
-                        m_horizontal_dir = HorizontalForward;
-                    }
+                else {
+                    set_vx(-get_attribute("move_speed"));
                 }
+                animate_move();
 
-                if (m_attack_timer.expired(get_attribute("attack_timer"))) {
-                    set_attack();
+                if (abs(m_xref - m_x) < get_attribute("attack_distance")) {
+                    m_horizontal_dir = HorizontalBackward;
                 }
             }
-            break;
+            else if (m_horizontal_dir == HorizontalBackward) {
 
-        case Fall:
-            check_ahead(map);
+                face_reference(get_attribute("turn_width"));
+                if (get_reference() == Right) {
+                    set_vx(-get_attribute("move_speed"));
+                }
+                else {
+                    set_vx(get_attribute("move_speed"));
+                }
+                animate_move();
 
-            // Move
-            if (m_dir == Right) {
-                m_x += m_dx;
+                if (abs(m_xref - m_x) > get_attribute("retreat_distance")) {
+                    m_horizontal_dir = HorizontalForward;
+                }
+
+                // TODO: Attack directly if pushed against wall
             }
-            else if (m_dir == Left) {
-                m_x -= m_dx;
-            }
 
-            check_below(map);
-            m_y += m_dy;
+            if (m_attack_now ||
+                m_attack_timer.expired(get_attribute("attack_timer"))) {
+                m_attack_timer.reset();
+                m_attack_now = false;
+                set_attack();
+            }
             break;
 
         case MediumAttack:
@@ -180,6 +115,11 @@ void MekaDragon::move(Map *map)
                     fire();
                 }
             }
+            break;
+
+        case Hit:
+            m_idle_timer.reset();
+            m_attack_now = true;
             break;
 
         default:

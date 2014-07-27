@@ -39,16 +39,25 @@ bool Monster::set_hit(Object *object)
     bool result = false;
 
     if (!m_invinsible && m_hit == HitNone) {
-        Actor::set_hit(object);
+        result = Actor::set_hit(object);
 
-        // Reduce hp
-        // TODO: Get attackers attack power
-        m_curr_hp--;
-        if (m_curr_hp <= 0) {
-            set_perish();
+        if (result) {
+
+            // Move backwards and upwards
+            if (get_reference() == Right) {
+                set_speed(-get_attribute("move_speed"), 0);
+            }
+            else {
+                set_speed(get_attribute("move_speed"), 0);
+            }
+
+            // Reduce hp
+            // TODO: Get attackers attack power
+            m_curr_hp--;
+            if (m_curr_hp <= 0) {
+                set_perish();
+            }
         }
-
-        result = true;
     }
 
     return result;
@@ -74,10 +83,52 @@ Object* Monster::release_object()
 
 void Monster::move(Map *map)
 {
-    if (m_hit == HitPerish) {
-        if (m_perish_timer.expired(get_attribute("perish_time"))) {
-            m_hit = HitPerished;
-        }
+    set_ay(get_attribute("weight"));
+
+    switch(m_action) {
+        case Still:
+            break;
+
+        case Move:
+            Body::move(map);
+            if (get_fall()) {
+                set_action(Fall);
+            }
+            break;
+
+        case Fall:
+            Body::move(map);
+            if (!get_fall()) {
+                set_action(Still);
+                set_vx(0);
+            }
+            break;
+
+        case Jump:
+            Body::move(map);
+            if (get_fall()) {
+                set_action(Still);
+            }
+            break;
+
+        case Hit:
+            if (m_hit == HitPerish) {
+                set_vx(0);
+                if (m_perish_timer.expired(get_attribute("perish_time"))) {
+                    m_hit = HitPerished;
+                }
+            }
+            else if (m_hit_timer.expired(get_attribute("hit_time"))) {
+                m_hit_timer.reset();
+                set_vx(0);
+                m_hit = HitNone;
+                set_action(Still);
+            }
+            Body::move(map);
+            break;
+
+        default:
+            break;
     }
 }
 

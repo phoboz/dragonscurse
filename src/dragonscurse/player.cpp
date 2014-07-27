@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string.h>
 #include "phoboz/ctrl.h"
 #include "morph.h"
@@ -91,54 +92,61 @@ void Player::player_move(Map *map)
             set_vx(0);
 
         case Move:
-            if (input & PRESS_RIGHT) {
-                animate_move();
-                set_action(Move);
-                set_vx(get_attribute("move_speed"));
+            // Check for jump
+            if (input & PRESS_JUMP) {
+                if (m_jump_ready) {
+                    m_jump_ready = false;
+                    set_action(Jump);
+                    if (input & PRESS_RIGHT) {
+                        set_speed(get_attribute("jump_forward"),
+                                  -get_attribute("jump_speed"));
+                    }
+                    else if (input & PRESS_LEFT) {
+                        set_speed(-get_attribute("jump_forward"),
+                                  -get_attribute("jump_speed"));
+                    }
+                    else {
+                        set_vy(-get_attribute("jump_speed"));
+                    }
+                }
             }
-            else if (input & PRESS_LEFT) {
-                animate_move();
-                set_action(Move);
-                set_vx(-get_attribute("move_speed"));
-            }
-            else if (m_action == Move) {
-                set_action(Still);
-                set_vx(0);
+            else {
+                // Restore jump lock
+                m_jump_ready = true;
+
+                // Check for crouch or move
+                if (input & PRESS_DOWN) {
+                    set_action(Crouch);
+                }
+                else if (input & PRESS_RIGHT) {
+                    animate_move();
+                    set_action(Move);
+                    set_vx(get_attribute("move_speed"));
+                }
+                else if (input & PRESS_LEFT) {
+                    animate_move();
+                    set_action(Move);
+                    set_vx(-get_attribute("move_speed"));
+                }
+                else {
+                    set_action(Still);
+                    set_vx(0);
+                }
             }
 
             Body::move(map);
             if (get_fall()) {
                 set_action(Fall);
             }
-
-            // Check for jump
-            if (input & PRESS_JUMP) {
-                if (m_jump_ready) {
-                    m_jump_ready = false;
-                    set_action(Jump);
-                    set_vy(-get_attribute("jump_speed"));
-                }
-            }
-            else {
-                m_jump_ready = true;
-
-                // Check for crouch
-                if (input & PRESS_DOWN) {
-                    set_action(Crouch);
-                }
-            }
             break;
 
         case Fall:
+            // Check for change of direction during fall
             if (input & PRESS_RIGHT) {
-                set_vx(get_attribute("move_speed"));
+                set_vx(get_attribute("jump_forward"));
             }
             else if (input & PRESS_LEFT) {
-                set_vx(-get_attribute("move_speed"));
-            }
-            else if (m_action == Move) {
-                set_action(Still);
-                set_vx(0);
+                set_vx(-get_attribute("jump_forward"));
             }
 
             Body::move(map);
@@ -165,16 +173,16 @@ void Player::player_move(Map *map)
 
         case Hit:
             if (m_hit_timer.expired(get_attribute("hit_time"))) {
+                m_hit_timer.reset();
                 set_vx(0);
                 m_hit = HitNone;
                 set_action(Still);
             }
-            else {
-                Body::move(map);
-            }
+            Body::move(map);
             break;
 
         default:
+            Body::move(map);
             break;
     }
 }

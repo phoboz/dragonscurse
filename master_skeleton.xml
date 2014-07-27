@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <master_skeleton>
     <dancer attack_distance="24"
-            turn_width="140"
-            jump_speed="6"
-            jump_forward="2"
+            turn_width="80"
+            jump_speed="12"
+            jump_forward="3"
             jump_limit="20"
             hit_time="24">
         <monster hp="2"

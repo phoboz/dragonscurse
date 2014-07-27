@@ -48,6 +48,7 @@ protected:
     void reset_attack();
     void check_ground(Map *map);
     void animate_move();
+    virtual Object::Direction get_reference() const;
     void face_reference(int width = 0);
     void set_invisible(bool invisible);
 

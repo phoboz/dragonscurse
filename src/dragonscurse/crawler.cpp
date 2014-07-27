@@ -28,75 +28,23 @@ void Crawler::move(Map *map)
 {
     Monster::move(map);
 
-    // Check ground
-    check_ground(map);
-
-    if (m_hit == HitOne) {
-        if (m_hit_timer.expired(get_attribute("hit_time"))) {
-            m_dx = 0;
-            m_hit_ground = false;
-            reset_hit();
-        }
-        else {
-            // Move backwards
-            m_dx = get_attribute("move_speed");
-
-            // Check for collision with map
-            check_behind(map);
-
-            // Right of player
-            if (get_reference() == Right) {
-                m_x -= m_dx;
-            }
-            else {
-                m_x += m_dx;
-            }
-        }
-    }
-
     switch(m_action) {
         case Still:
-            if (m_hit == HitNone) {
-                set_move_dir();
-            }
+            set_move_dir();
             break;
 
         case Move:
-            m_dx = get_attribute("move_speed");
-
-            check_ahead(map);
-            if (!m_dx) {
-                swap_move_dir();
-                check_ahead(map);
-            }
-
-            // Move
+            check_ground(map);
             if (m_dir == Right) {
-                m_x += m_dx;
+                set_vx(get_attribute("move_speed"));
             }
-            else if (m_dir == Left) {
-                m_x -= m_dx;
+            else {
+                set_vx(-get_attribute("move_speed"));
             }
             animate_move();
             break;
 
-        case Fall:
-            check_ahead(map);
-
-            // Move
-            if (m_dir == Right) {
-                m_x += m_dx;
-            }
-            else if (m_dir == Left) {
-                m_x -= m_dx;
-            }
-
-            check_below(map);
-            m_y += m_dy;
-            break;
-
         default:
-            set_move_dir();
             break;
     }
 }

@@ -22,10 +22,10 @@ private:
     HorizontalDirection m_horizontal_dir;
     int m_bullet_index;
     std::vector<Bullet*> m_bullets;
+    bool m_attack_now;
     Timer m_attack_timer;
     Timer m_idle_timer;
     Timer m_fire_timer;
-    Timer m_hit_timer;
 };
 
 #endif

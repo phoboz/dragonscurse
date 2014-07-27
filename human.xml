@@ -9,7 +9,8 @@
             attack_time="10">
         <player type="knight"
                 jump_speed="15"
-                catapult_speed="22"
+                jump_forward="3"
+                catapult_speed="24"
                 ap="100"
                 dp="55"
                 cp="56">

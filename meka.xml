@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
-<meka_dragon attack_right="80"
-             attack_left="0"
+<meka_dragon attack_left="0"
              attack_medium="20"
              attack_distance="80"
              retreat_distance="280"
@@ -11,17 +10,17 @@
              fire_dy="4"
              fire_next="4"
              turn_width="400"
-             hit_time="34">
+             hit_time="22">
     <monster hp="8"
              perish_time="40">
         <actor move_speed="4"
                treshold="12"
-               weight="2"
-               right_still="4"
-               right_move_start="4" right_move_end="5"
-               right_attack="6"
-               right_hit="7"
-               right_perish="7"
+               weight="20"
+               right_still="0"
+               right_move_start="0" right_move_end="1"
+               right_attack="2"
+               right_hit="3"
+               right_perish="3"
                left_still="0"
                left_move_start="0" left_move_end="1"
                left_attack="2"

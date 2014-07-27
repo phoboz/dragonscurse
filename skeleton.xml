@@ -1,16 +1,15 @@
 <?xml version="1.0" ?>
 <skeleton>
     <dancer attack_distance="24"
-            turn_width="140"
-            jump_speed="6"
-            jump_forward="2"
-            jump_limit="20"
+            turn_width="80"
+            jump_speed="12"
+            jump_forward="3"
             hit_time="24">
         <monster hp="1"
                  perish_time="40">
             <actor move_speed="2"
                    treshold="12"
-                   weight="5"
+                   weight="10"
                    right_still="3"
                    right_move_start="3" right_move_end="4"
                    right_jump="3"

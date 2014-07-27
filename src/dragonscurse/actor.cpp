@@ -71,7 +71,7 @@ void Actor::set_dir(Direction dir)
             break;
 
         case LowAttack:
-            if (set_dir == Right) {
+           if (set_dir == Right) {
                 m_frame = get_attribute("right_attack_low");
             }
             else if (set_dir == Left) {
@@ -180,6 +180,20 @@ void Actor::animate_move()
                 break;
         }
     }
+}
+
+Object::Direction Actor::get_reference() const
+{
+    Direction dir;
+
+    if (m_xref > get_front()) {
+        dir = Right;
+    }
+    else if (m_xref < get_front()) {
+        dir = Left;
+    }
+
+    return dir;
 }
 
 void Actor::face_reference(int width)
