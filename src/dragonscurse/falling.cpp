@@ -1,4 +1,3 @@
-#include <iostream>
 #include "falling.h"
 
 Falling::Falling(const char *fn, MediaDB *media, int x, int y, Direction dir)
@@ -6,6 +5,7 @@ Falling::Falling(const char *fn, MediaDB *media, int x, int y, Direction dir)
       m_initialized(false)
 {
     set_invinsible(true);
+    set_solid(false);
 }
 
 void Falling::initialize()
@@ -22,14 +22,12 @@ void Falling::fall()
 {
     set_action(Fall);
     m_fall_distance = 0;
-    m_dy = get_attribute("weight");
+    set_ay(get_attribute("weight"));
 }
 
 void Falling::move(Map *map)
 {
     int x, dist, tmr;
-
-    Monster::move(map);
 
     switch(m_action) {
         case Still:
@@ -56,17 +54,17 @@ void Falling::move(Map *map)
             break;
 
         case Fall:
+            Body::move(map);
             dist = get_attribute("freefall_distance");
-            if (m_fall_distance < dist) {
-                m_dy = get_attribute("weight");
+            if (m_fall_distance >= dist) {
+                set_solid(true);
             }
-            else {
-                if (check_below(map)) {
+            {
+                if (!get_fall()) {
                     Actor::set_hit(0);
                     set_perish();
                 }
             }
-            m_y += m_dy;
             m_fall_distance += m_dy;
 
             if (m_hit == HitPerish) {
@@ -79,6 +77,7 @@ void Falling::move(Map *map)
             break;
 
         default:
+            Monster::move(map);
             break;
     }
 }

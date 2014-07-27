@@ -2,13 +2,7 @@
 
 void Crawler::check_ground(Map *map)
 {
-    if (!m_hit_ground) {
-        Actor::check_ground(map);
-        if (!m_dy) {
-            m_hit_ground = true;
-        }
-    }
-    else {
+    if (get_hit_ground()) {
         if (m_dir == Right) {
             if (!check_collision(m_x + get_attribute("right"),
                                  m_y + get_attribute("bottom") + 1, map, 0)) {

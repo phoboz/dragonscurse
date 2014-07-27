@@ -13,6 +13,7 @@ public:
 
     virtual void world_initialize(World *world);
 
+    bool get_hit_ground() const { return m_hit_ground; }
     void set_invinsible(bool value) { m_invinsible = value; }
     virtual bool set_hit(Object *object);
 
@@ -23,6 +24,7 @@ public:
 private:
     int m_curr_hp;
     bool m_invinsible;
+    bool m_hit_ground;
     Timer m_hit_timer;
     Timer m_perish_timer;
     std::list<Object*> m_objects;

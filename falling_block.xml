@@ -3,7 +3,7 @@
     <falling freefall_distance="180">
         <monster hp="1"
                  perish_time="20">
-            <actor weight="8"
+            <actor weight="10"
                    treshold="12"
                    right_still="0"
                    right_move_start="0" right_move_end="0"

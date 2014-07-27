@@ -9,6 +9,9 @@ public:
     Walker(const char *fn, MediaDB *media, int x, int y, Direction dir)
         : Monster(fn, media, x, y, dir) { }
     virtual void move(Map *map);
+
+private:
+    bool check_turn(Map *map);
 };
 
 #endif

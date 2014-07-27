@@ -1,3 +1,4 @@
+#include <iostream>
 #include "walker.h"
 
 void Walker::move(Map *map)
@@ -10,6 +11,10 @@ void Walker::move(Map *map)
             break;
 
         case Move:
+            if (check_ahead(map)) {
+                swap_move_dir();
+            }
+
             if (m_dir == Right) {
                 set_vx(get_attribute("move_speed"));
             }

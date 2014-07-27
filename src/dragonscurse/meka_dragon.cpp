@@ -1,4 +1,3 @@
-#include <iostream>
 #include <stdlib.h>
 #include "meka_dragon.h"
 

@@ -8,7 +8,7 @@
 
 Monster::Monster(const char *fn, MediaDB *media, int x, int y, Direction dir)
     : Actor(Object::TypeMonster, x, y, dir),
-      m_invinsible(false)
+      m_invinsible(false), m_hit_ground(false)
 {
     load(fn, media);
     m_curr_hp = get_attribute("hp");
@@ -99,8 +99,9 @@ void Monster::move(Map *map)
         case Fall:
             Body::move(map);
             if (!get_fall()) {
-                set_action(Still);
+                m_hit_ground = true;
                 set_vx(0);
+                set_action(Still);
             }
             break;
 

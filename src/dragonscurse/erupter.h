@@ -22,7 +22,6 @@ private:
     void fire();
 
     Timer m_attack_timer;
-    Timer m_hit_timer;
     std::list<GravityBullet*> m_bullets;
 };
 
