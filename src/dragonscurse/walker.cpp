@@ -1,4 +1,3 @@
-#include <iostream>
 #include "walker.h"
 
 void Walker::move(Map *map)
