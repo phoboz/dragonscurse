@@ -6,7 +6,7 @@ void Walker::move(Map *map)
 
     switch(m_action) {
         case Still:
-            set_move_dir();
+            face_reference();
             break;
 
         case Move:
