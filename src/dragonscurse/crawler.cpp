@@ -24,7 +24,7 @@ void Crawler::move(Map *map)
 
     switch(m_action) {
         case Still:
-            set_move_dir();
+            set_action(Move);
             break;
 
         case Move:
