@@ -13,6 +13,8 @@ bool Player::set_hit(Object *object)
         result = Actor::set_hit(object);
         if (result) {
 
+            set_lock_direction(true);
+
             // Move backwards and upwards
             if (m_dir == Right) {
                 set_speed(-get_attribute("move_speed"),
@@ -174,6 +176,7 @@ void Player::player_move(Map *map)
             if (m_hit_timer.expired(get_attribute("hit_time"))) {
                 m_hit_timer.reset();
                 set_vx(0);
+                set_lock_direction(false);
                 m_hit = HitNone;
                 set_action(Still);
             }

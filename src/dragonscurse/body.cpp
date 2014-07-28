@@ -54,8 +54,10 @@ void Body::move(Map *map)
     }
 
     if (m_vx > 0.0f) {
-        set_dir(Right);
         m_dx = int(m_vx);
+        if (!m_lock_dir) {
+            set_dir(Right);
+        }
         if (m_solid) {
             if (check_ahead(map)) {
                 m_vx = 0.0f;
@@ -64,11 +66,20 @@ void Body::move(Map *map)
         m_x += m_dx;
     }
     else if (m_vx < 0.0f) {
-        set_dir(Left);
         m_dx = -int(m_vx);
-        if (m_solid) {
-            if (check_ahead(map)) {
-                m_vx = 0.0f;
+        if (!m_lock_dir) {
+            set_dir(Left);
+            if (m_solid) {
+                if (check_ahead(map)) {
+                    m_vx = 0.0f;
+                }
+            }
+        }
+        else {
+            if (m_solid) {
+                if (check_behind(map)) {
+                    m_vx = 0.0f;
+                }
             }
         }
         m_x -= m_dx;
