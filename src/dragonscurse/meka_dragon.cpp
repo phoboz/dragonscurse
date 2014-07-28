@@ -8,7 +8,6 @@ MekaDragon::MekaDragon(const char *fn, MediaDB *media,
       m_bullet_index(0), m_attack_now(false)
 {
     set_always_visible(true);
-
     const char* bullet_name = get_string("bullet");
     int num_bullets = get_attribute("num_bullets");
 
@@ -41,17 +40,26 @@ void MekaDragon::fire()
 {
     if (m_fire_timer.expired(get_attribute("fire_next"))) {
         if (m_bullet_index < m_bullets.size()) {
-            m_bullets[m_bullet_index]->fire(
-                m_x + get_attribute("attack_left"),
-                m_y + get_attribute("attack_medium"),
-                -get_attribute("fire_dx"),
-                get_attribute("fire_dy"));
+            if (m_dir == Right) {
+                m_bullets[m_bullet_index]->fire(
+                    m_x + get_attribute("attack_right"),
+                    m_y + get_attribute("attack_medium"),
+                    get_attribute("fire_dx"),
+                    get_attribute("fire_dy"));
+            }
+            else if (m_dir == Left) {
+                m_bullets[m_bullet_index]->fire(
+                    m_x + get_attribute("attack_left"),
+                    m_y + get_attribute("attack_medium"),
+                    -get_attribute("fire_dx"),
+                    get_attribute("fire_dy"));
+            }
             m_bullet_index++;
         }
         else {
             m_bullet_index = 0;
             m_idle_timer.reset();
-            set_move_dir();
+            set_action(Move);
             reset_attack();
         }
     }
@@ -63,13 +71,15 @@ void MekaDragon::move(Map *map)
 
     switch(m_action) {
         case Still:
-            set_move_dir();
+            set_action(Move);
             break;
 
         case Move:
+            set_lock_direction(true);
             if (m_horizontal_dir == HorizontalForward) {
 
-                face_reference(get_attribute("turn_width"));
+                // TODO: Check if meka shall turn around
+                //face_reference(get_attribute("turn_width"));
                 if (get_reference() == Right) {
                     set_vx(get_attribute("move_speed"));
                 }
@@ -93,7 +103,8 @@ void MekaDragon::move(Map *map)
                 }
                 animate_move();
 
-                if (abs(m_xref - m_x) > get_attribute("retreat_distance")) {
+                if (abs(m_xref - m_x) > get_attribute("retreat_distance") ||
+                    check_behind(map)) {
                     m_horizontal_dir = HorizontalForward;
                 }
 

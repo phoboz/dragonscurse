@@ -13,6 +13,11 @@ class World {
 public:
     World(Map *map, MediaDB *media, WorldDB *db, const char *music = 0);
 
+    void set_lock(int x, int y) {
+        m_lock_x = x;
+        m_lock_y = y;
+    }
+
     WorldDB* get_db() const { return m_db; }
     const char* get_filename() const { return m_map->get_filename().c_str(); }
 
@@ -27,6 +32,8 @@ private:
     int m_bg_color;
     int m_offset_x;
     int m_offset_y;
+    int m_lock_x;
+    int m_lock_y;
     std::list<Object*> m_objects;
     WorldDB *m_db;
 };

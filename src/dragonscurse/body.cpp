@@ -3,14 +3,14 @@
 
 void Body::set_accelration(int ax, int ay)
 {
-    m_ax = float(ax) * c_g;
-    m_ay = float(ay) * c_g;
+    set_ax(ax);
+    set_ay(ay);
 }
 
 void Body::set_speed(int vx, int vy)
 {
-    m_vx = float(vx);
-    m_vy = float(vy);
+    set_vx(vx);
+    set_vy(vy);
 }
 
 void Body::set_dir(Direction dir)
@@ -54,21 +54,53 @@ void Body::move(Map *map)
     }
 
     if (m_vx > 0.0f) {
-        set_dir(Right);
         m_dx = int(m_vx);
-        if (m_solid) {
-            if (check_ahead(map)) {
-                m_vx = 0.0f;
+        if (!m_lock_dir) {
+            set_dir(Right);
+            if (m_solid) {
+                if (check_ahead(map)) {
+                    m_vx = 0.0f;
+                }
+            }
+        }
+        else if (m_dir == Right) {
+            if (m_solid) {
+                if (check_ahead(map)) {
+                    m_vx = 0.0f;
+                }
+            }
+        }
+        else if (m_dir == Left) {
+            if (m_solid) {
+                if (check_behind(map)) {
+                    m_vx = 0.0f;
+                }
             }
         }
         m_x += m_dx;
     }
     else if (m_vx < 0.0f) {
-        set_dir(Left);
         m_dx = -int(m_vx);
-        if (m_solid) {
-            if (check_ahead(map)) {
-                m_vx = 0.0f;
+        if (!m_lock_dir) {
+            set_dir(Left);
+            if (m_solid) {
+                if (check_ahead(map)) {
+                    m_vx = 0.0f;
+                }
+            }
+        }
+        else if (m_dir == Right) {
+            if (m_solid) {
+                if (check_behind(map)) {
+                    m_vx = 0.0f;
+                }
+            }
+        }
+        else if (m_dir == Left) {
+            if (m_solid) {
+                if (check_ahead(map)) {
+                    m_vx = 0.0f;
+                }
             }
         }
         m_x -= m_dx;
@@ -85,7 +117,10 @@ void Body::move(Map *map)
                 m_vy = 0.0f;
             }
         }
-        m_y += m_dy;
+        if (m_dy) {
+            m_vert_dir = VerticalDown;
+            m_y += m_dy;
+        }
     }
     else if (m_vy < 0.0f) {
         m_dy = -int(m_vy);
@@ -94,10 +129,17 @@ void Body::move(Map *map)
                 m_vy = 0.0f;
             }
         }
-        m_y -= m_dy;
+        if (m_dy) {
+            m_vert_dir = VerticalUp;
+            m_y -= m_dy;
+        }
     }
     else {
         m_dy = 0;
+    }
+
+    if (!m_dy) {
+        m_vert_dir = VerticalNone;
     }
 }
 

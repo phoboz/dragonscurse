@@ -10,6 +10,7 @@
                 jump_speed="16"
                 jump_forward="3"
                 catapult_speed="26"
+                water_treshold="2"
                 ap="0"
                 dp="0"
                 cp="0">

@@ -43,6 +43,8 @@ bool Monster::set_hit(Object *object)
 
         if (result) {
 
+            set_lock_direction(true);
+
             // Move backwards and upwards
             if (get_reference() == Right) {
                 set_speed(-get_attribute("move_speed"), 0);
@@ -122,6 +124,7 @@ void Monster::move(Map *map)
             else if (m_hit_timer.expired(get_attribute("hit_time"))) {
                 m_hit_timer.reset();
                 set_vx(0);
+                set_lock_direction(false);
                 m_hit = HitNone;
                 set_action(Still);
             }
