@@ -3,14 +3,14 @@
 
 void Body::set_accelration(int ax, int ay)
 {
-    m_ax = float(ax) * c_g;
-    m_ay = float(ay) * c_g;
+    set_ax(ax);
+    set_ay(ay);
 }
 
 void Body::set_speed(int vx, int vy)
 {
-    m_vx = float(vx);
-    m_vy = float(vy);
+    set_vx(vx);
+    set_vy(vy);
 }
 
 void Body::set_dir(Direction dir)
@@ -130,6 +130,16 @@ void Body::move(Map *map)
     }
     else {
         m_dy = 0;
+    }
+
+    if (m_dy < 0) {
+        m_vert_dir = VerticalUp;
+    }
+    else if (m_dy > 0) {
+        m_vert_dir = VerticalDown;
+    }
+    else {
+        m_vert_dir = VerticalNone;
     }
 }
 

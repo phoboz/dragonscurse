@@ -8,11 +8,13 @@ public:
     Body(Type type, int x = 0, int y = 0)
         : Object(type, x, y),
           m_ax(0.0f), m_ay(0.0f), m_vx(0.0f), m_vy(0.0f),
-          m_solid(true), m_lock_dir(false) { }
+          m_solid(true), m_lock_dir(false),
+          m_vert_dir(VerticalNone) { }
     Body(Type type, int x, int y, Direction dir)
         : Object(type, x, y, dir),
           m_ax(0.0f), m_ay(0.0f), m_vx(0.0f), m_vy(0.0f),
-          m_solid(true), m_lock_dir(false) { }
+          m_solid(true), m_lock_dir(false),
+          m_vert_dir(VerticalNone) { }
 
     void set_solid(bool solid) { m_solid = solid; }
     void set_lock_direction(bool lock_dir) { m_lock_dir = lock_dir; }
@@ -25,7 +27,7 @@ public:
     virtual void set_dir(Direction dir);
 
     virtual bool get_moving() const;
-    bool get_fall() const { return (m_vy > 0.0f); }
+    bool get_fall() const { return (m_vert_dir == VerticalDown); }
 
     virtual void move(Map *map);
 
@@ -35,6 +37,7 @@ private:
 
     bool m_solid;
     bool m_lock_dir;
+    VerticalDirection m_vert_dir;
     float m_ax, m_ay;
     float m_vx, m_vy;
 };
