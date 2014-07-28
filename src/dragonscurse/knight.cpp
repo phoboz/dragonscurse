@@ -10,33 +10,23 @@ bool Knight::attack_actor(Actor *actor)
     if (m_action == MediumAttack) {
         if (m_dir == Right) {
             if (m_frame == get_attribute("right_attack") &&
-                spr->check_collision(m_frame, m_x, m_y,
-                                     get_attribute("attack_right"),
-                                     get_attribute("attack_medium_top"),
-                                     spr->get_width(),
-                                     get_attribute("attack_medium_bottom"),
-                                     actor->get_sprite(), actor->get_frame(),
-                                     actor->get_x(), actor->get_y(),
-                                     actor->get_attribute("weak_left"),
-                                     actor->get_attribute("weak_top"),
-                                     actor->get_attribute("weak_right"),
-                                     actor->get_attribute("weak_bottom"))) {
+                actor->check_weak_collision(
+                    this,
+                    get_attribute("attack_right"),
+                    get_attribute("attack_medium_top"),
+                    spr->get_width(),
+                    get_attribute("attack_medium_bottom"))) {
                 result = true;
             }
         }
         else if (m_dir == Left) {
             if (m_frame == get_attribute("left_attack") &&
-                spr->check_collision(m_frame, m_x, m_y,
-                                     0,
-                                     get_attribute("attack_medium_top"),
-                                     get_attribute("attack_left"),
-                                     get_attribute("attack_medium_bottom"),
-                                     actor->get_sprite(), actor->get_frame(),
-                                     actor->get_x(), actor->get_y(),
-                                     actor->get_attribute("weak_left"),
-                                     actor->get_attribute("weak_top"),
-                                     actor->get_attribute("weak_right"),
-                                     actor->get_attribute("weak_bottom"))) {
+                actor->check_weak_collision(
+                    this,
+                    0,
+                    get_attribute("attack_medium_top"),
+                    get_attribute("attack_left"),
+                    get_attribute("attack_medium_bottom"))) {
                 result = true;
             }
         }
@@ -44,33 +34,23 @@ bool Knight::attack_actor(Actor *actor)
     else if (m_action == LowAttack) {
         if (m_dir == Right) {
             if (m_frame == get_attribute("right_attack_low") &&
-                spr->check_collision(m_frame, m_x, m_y,
-                                     get_attribute("attack_right"),
-                                     get_attribute("attack_low_top"),
-                                     spr->get_width(),
-                                     get_attribute("attack_low_bottom"),
-                                     actor->get_sprite(), actor->get_frame(),
-                                     actor->get_x(), actor->get_y(),
-                                     actor->get_attribute("weak_left"),
-                                     actor->get_attribute("weak_top"),
-                                     actor->get_attribute("weak_right"),
-                                     actor->get_attribute("weak_bottom"))) {
+                actor->check_weak_collision(
+                    this,
+                    get_attribute("attack_right"),
+                    get_attribute("attack_low_top"),
+                    spr->get_width(),
+                    get_attribute("attack_low_bottom"))) {
                 result = true;
             }
         }
         else if (m_dir == Left) {
             if (m_frame == get_attribute("left_attack_low") &&
-                spr->check_collision(m_frame, m_x, m_y,
-                                     0,
-                                     get_attribute("attack_low_top"),
-                                     get_attribute("attack_left"),
-                                     get_attribute("attack_low_bottom"),
-                                     actor->get_sprite(), actor->get_frame(),
-                                     actor->get_x(), actor->get_y(),
-                                     actor->get_attribute("weak_left"),
-                                     actor->get_attribute("weak_top"),
-                                     actor->get_attribute("weak_right"),
-                                     actor->get_attribute("weak_bottom"))) {
+                actor->check_weak_collision(
+                    this,
+                    0,
+                    get_attribute("attack_low_top"),
+                    get_attribute("attack_left"),
+                    get_attribute("attack_low_bottom"))) {
                 result = true;
             }
         }

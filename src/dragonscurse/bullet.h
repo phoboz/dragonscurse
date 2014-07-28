@@ -4,17 +4,20 @@
 #include "phoboz/timer.h"
 #include "object.h"
 
+class Actor;
+
 class Bullet : public Object {
 public:
     Bullet(const char *fn, MediaDB *media)
         : Object(Object::TypeBullet),
           m_follow_terrain(true), m_moving(false), m_loaded(true),
-          m_distance(0) { load(fn, media); }
+          m_distance(0), m_hit_one(false) { load(fn, media); }
 
+    void set_hit_one(bool value) { m_hit_one = value; }
     bool fire(int x, int y, int speed, Direction dir);
     bool fire(int x, int y, int dx, int dy);
 
-    bool hit_object(Object *object);
+    bool hit_actor(Actor *actor);
 
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
@@ -29,6 +32,7 @@ protected:
 private:
     void reload();
 
+    bool m_hit_one;
     bool m_moving;
     bool m_loaded;
     int m_distance;

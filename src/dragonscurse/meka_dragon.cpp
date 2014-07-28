@@ -27,7 +27,7 @@ bool MekaDragon::attack_actor(Actor *actor)
 
     for (int i = 0; i < num_bullets; i++) {
 
-        if (m_bullets[i]->hit_object(actor)) {
+        if (m_bullets[i]->hit_actor(actor)) {
             result = true;
             break;
         }
@@ -71,6 +71,7 @@ void MekaDragon::move(Map *map)
 
     switch(m_action) {
         case Still:
+            face_reference(get_attribute("turn_width"));
             set_action(Move);
             break;
 
@@ -78,9 +79,7 @@ void MekaDragon::move(Map *map)
             set_lock_direction(true);
             if (m_horizontal_dir == HorizontalForward) {
 
-                // TODO: Check if meka shall turn around
-                //face_reference(get_attribute("turn_width"));
-                if (get_reference() == Right) {
+                if (m_dir == Right) {
                     set_vx(get_attribute("move_speed"));
                 }
                 else {
@@ -94,8 +93,7 @@ void MekaDragon::move(Map *map)
             }
             else if (m_horizontal_dir == HorizontalBackward) {
 
-                face_reference(get_attribute("turn_width"));
-                if (get_reference() == Right) {
+                if (m_dir == Right) {
                     set_vx(-get_attribute("move_speed"));
                 }
                 else {

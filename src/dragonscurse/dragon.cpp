@@ -11,13 +11,14 @@ Dragon::Dragon(const char *fn, MediaDB *media, int x, int y, Direction dir)
     if (!m_bullet->get_loaded()) {
         exit(1);
     }
+    m_bullet->set_hit_one(true);
 }
 
 bool Dragon::attack_actor(Actor *actor)
 {
     bool result = false;
 
-    if (m_bullet->hit_object(actor)) {
+    if (m_bullet->hit_actor(actor)) {
         result = true;
     }
 

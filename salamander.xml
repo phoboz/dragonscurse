@@ -27,6 +27,10 @@
                    right_attack_low="6"
                    right_hit="7"
                    right_perish="7"
+                   right_weak_x1="12"
+                   right_weak_y1="0"
+                   right_weak_x2="56"
+                   right_weak_y2="64"
                    left_still="8"
                    left_move_start="8" left_move_end="10"
                    left_jump="11"
@@ -35,10 +39,10 @@
                    left_attack_low="14"
                    left_hit="7"
                    left_perish="7"
-                   weak_left="12"
-                   weak_top="0"
-                   weak_right="56"
-                   weak_bottom="64">
+                   left_weak_x1="12"
+                   left_weak_y1="0"
+                   left_weak_x2="56"
+                   left_weak_y2="64">
                 <object image="salamander.png"
                         left="12" right="56" top="7" bottom="64" />
             </actor>

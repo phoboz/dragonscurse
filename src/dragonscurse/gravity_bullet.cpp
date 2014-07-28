@@ -1,4 +1,5 @@
 #include <math.h>
+#include "actor.h"
 #include "gravity_bullet.h"
 
 GravityBullet::GravityBullet(const char *fn, MediaDB *media)
@@ -29,19 +30,12 @@ bool GravityBullet::get_moving() const
     return result;
 }
 
-bool GravityBullet::hit_object(Object *object)
+bool GravityBullet::hit_actor(Actor *actor)
 {
     bool result = false;
 
     if (get_moving()) {
-        const Sprite *spr = get_sprite();
-        if (spr->check_collision(m_frame, m_x, m_y,
-                                 object->get_sprite(), object->get_frame(),
-                                 object->get_x(), object->get_y(),
-                                 object->get_attribute("weak_left"),
-                                 object->get_attribute("weak_top"),
-                                 object->get_attribute("weak_right"),
-                                 object->get_attribute("weak_bottom"))) {
+        if (actor->check_weak_collision(this, m_x, m_y)) {
             result = true;
         }
     }

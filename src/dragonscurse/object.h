@@ -84,7 +84,7 @@ public:
     }
     virtual bool get_visible(Map *map, int clip_x, int clip_y,
                              int clip_w, int clip_h) const;
-    virtual bool check_collision(Object *object) {
+    virtual bool check_collision(Object *object) const {
         return m_spr->check_collision(m_frame, m_x, m_y,
                                       object->m_spr, object->m_frame,
                                       object->m_x, object->m_y);

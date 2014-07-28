@@ -251,6 +251,74 @@ void Actor::set_perish()
     m_hit = HitPerish;
 }
 
+bool Actor::check_weak_collision(Object *object, int x, int y) const
+{
+    bool result = false;
+    const Sprite *spr = object->get_sprite();
+
+    if (m_dir == Right) {
+        result = spr->check_collision(object->get_frame(),
+                                      object->get_x(),
+                                      object->get_y(),
+                                      get_sprite(), m_frame,
+                                      m_x, m_y,
+                                      get_attribute("right_weak_x1"),
+                                      get_attribute("right_weak_y1"),
+                                      get_attribute("right_weak_x2"),
+                                      get_attribute("right_weak_y2"));
+    }
+    else if (m_dir == Left) {
+        result = spr->check_collision(object->get_frame(),
+                                      object->get_x(),
+                                      object->get_y(),
+                                      get_sprite(), m_frame,
+                                      m_x, m_y,
+                                      get_attribute("left_weak_x1"),
+                                      get_attribute("left_weak_y1"),
+                                      get_attribute("left_weak_x2"),
+                                      get_attribute("left_weak_y2"));
+    }
+
+    return result;
+}
+
+bool Actor::check_weak_collision(Object *object,
+                                 int start_x1, int start_y1,
+                                 int end_x1, int end_y1) const
+{
+    bool result = false;
+    const Sprite *spr = object->get_sprite();
+
+    if (m_dir == Right) {
+        result = spr->check_collision(object->get_frame(),
+                                      object->get_x(),
+                                      object->get_y(),
+                                      start_x1, start_y1,
+                                      end_x1, end_y1,
+                                      get_sprite(), m_frame,
+                                      m_x, m_y,
+                                      get_attribute("right_weak_x1"),
+                                      get_attribute("right_weak_y1"),
+                                      get_attribute("right_weak_x2"),
+                                      get_attribute("right_weak_y2"));
+    }
+    else if (m_dir == Left) {
+        result = spr->check_collision(object->get_frame(),
+                                      object->get_x(),
+                                      object->get_y(),
+                                      start_x1, start_y1,
+                                      end_x1, end_y1,
+                                      get_sprite(), m_frame,
+                                      m_x, m_y,
+                                      get_attribute("left_weak_x1"),
+                                      get_attribute("left_weak_y1"),
+                                      get_attribute("left_weak_x2"),
+                                      get_attribute("left_weak_y2"));
+    }
+
+    return result;
+}
+
 void Actor::move(Map *map)
 {
     if (m_invisible_timer.expired(get_attribute("invisible_time"))) {

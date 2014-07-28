@@ -28,6 +28,10 @@
                    right_attack_low="6"
                    right_hit="7"
                    right_perish="7"
+                   right_weak_x1="24"
+                   right_weak_y1="7"
+                   right_weak_x2="66"
+                   right_weak_y2="62"
                    left_still="8"
                    left_move_start="8" left_move_end="10"
                    left_jump="11"
@@ -36,10 +40,10 @@
                    left_attack_low="14"
                    left_hit="7"
                    left_perish="7"
-                   weak_left="24"
-                   weak_top="7"
-                   weak_right="66"
-                   weak_bottom="62">
+                   left_weak_x1="24"
+                   left_weak_y1="7"
+                   left_weak_x2="66"
+                   left_weak_y2="62">
                 <object image="human.png"
                         left="24" right="66" top="7" bottom="62" />
             </actor>

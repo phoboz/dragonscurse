@@ -9,14 +9,18 @@
                    right_move_start="0" right_move_end="0"
                    right_hit="1"
                    right_perish="1"
+                   right_weak_x1="0"
+                   right_weak_y1="0"
+                   right_weak_x2="32"
+                   right_weak_y2="32"
                    left_still="0"
                    left_move_start="0" left_move_end="0"
                    left_hit="1"
                    left_perish="1"
-                   weak_left="0"
-                   weak_top="0"
-                   weak_right="32"
-                   weak_bottom="32">
+                   left_weak_x1="0"
+                   left_weak_y1="0"
+                   left_weak_x2="32"
+                   left_weak_y2="32">
                 <object image="falling_block.png"
                         left="0" right="32" top="0" bottom="32" />
             </actor>

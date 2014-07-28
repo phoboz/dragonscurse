@@ -33,7 +33,7 @@ bool Player::set_hit(Object *object)
     return result;
 }
 
-bool Player::check_collision(Object *object)
+bool Player::check_collision(Object *object) const
 {
     const Sprite *spr = get_sprite();
 

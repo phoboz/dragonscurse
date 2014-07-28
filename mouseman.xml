@@ -28,6 +28,10 @@
                    right_attack_low="3"
                    right_hit="4"
                    right_perish="4"
+                   right_weak_x1="16"
+                   right_weak_y1="28"
+                   right_weak_x2="46"
+                   right_weak_y2="59"
                    left_still="5"
                    left_move_start="5" left_move_end="7"
                    left_jump="7"
@@ -36,10 +40,10 @@
                    left_attack_low="8"
                    left_hit="4"
                    left_perish="4"
-                   weak_left="16"
-                   weak_top="28"
-                   weak_right="46"
-                   weak_bottom="59">
+                   left_weak_x1="16"
+                   left_weak_y1="28"
+                   left_weak_x2="46"
+                   left_weak_y2="59">
                 <object image="mouseman.png"
                         left="16" right="46" top="28" bottom="59" />
             </actor>

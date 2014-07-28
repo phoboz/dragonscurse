@@ -10,14 +10,18 @@
                    right_move_start="3" right_move_end="4"
                    right_hit="2"
                    right_perish="2"
+                   right_weak_x1="2"
+                   right_weak_y1="7"
+                   right_weak_x2="32"
+                   right_weak_y2="33"
                    left_still="0"
                    left_move_start="0" left_move_end="1"
                    left_hit="2"
                    left_perish="2"
-                   weak_left="2"
-                   weak_top="7"
-                   weak_right="32"
-                   weak_bottom="33">
+                   left_weak_x1="2"
+                   left_weak_y1="7"
+                   left_weak_x2="32"
+                   left_weak_y2="33">
                 <object image="side_crawler_red.png"
                         left="2" right="32" top="2" bottom="33" />
             </actor>

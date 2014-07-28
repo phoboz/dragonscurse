@@ -4,6 +4,8 @@
 #include "phoboz/timer.h"
 #include "body.h"
 
+class Actor;
+
 class GravityBullet : public Body {
 public:
     GravityBullet(const char *fn, MediaDB *media);
@@ -11,7 +13,7 @@ public:
 
     virtual bool get_moving() const;
 
-    bool hit_object(Object *object);
+    bool hit_actor(Actor *actor);
 
     void move(Map *map);
 

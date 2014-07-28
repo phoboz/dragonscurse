@@ -1,4 +1,5 @@
 #include <math.h>
+#include "actor.h"
 #include "bullet.h"
 
 void Bullet::reload()
@@ -44,19 +45,17 @@ bool Bullet::fire(int x, int y, int dx, int dy)
     return result;
 }
 
-bool Bullet::hit_object(Object *object)
+bool Bullet::hit_actor(Actor *actor)
 {
     bool result = false;
 
     if (m_moving) {
-        const Sprite *spr = get_sprite();
-        if (spr->check_collision(m_frame, m_x, m_y,
-                                 object->get_sprite(), object->get_frame(),
-                                 object->get_x(), object->get_y(),
-                                 object->get_attribute("weak_left"),
-                                 object->get_attribute("weak_top"),
-                                 object->get_attribute("weak_right"),
-                                 object->get_attribute("weak_bottom"))) {
+        if (actor->check_weak_collision(this, m_x, m_y)) {
+
+            // Remove bullet if it only hits one target
+            if (m_hit_one) {
+                m_moving = false;
+            }
             result = true;
         }
     }
