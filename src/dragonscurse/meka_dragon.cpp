@@ -8,8 +8,6 @@ MekaDragon::MekaDragon(const char *fn, MediaDB *media,
       m_bullet_index(0), m_attack_now(false)
 {
     set_always_visible(true);
-    set_lock_direction(true);
-
     const char* bullet_name = get_string("bullet");
     int num_bullets = get_attribute("num_bullets");
 
@@ -77,6 +75,7 @@ void MekaDragon::move(Map *map)
             break;
 
         case Move:
+            set_lock_direction(true);
             if (m_horizontal_dir == HorizontalForward) {
 
                 // TODO: Check if meka shall turn around
