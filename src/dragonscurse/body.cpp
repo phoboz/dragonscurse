@@ -117,7 +117,10 @@ void Body::move(Map *map)
                 m_vy = 0.0f;
             }
         }
-        m_y += m_dy;
+        if (m_dy) {
+            m_vert_dir = VerticalDown;
+            m_y += m_dy;
+        }
     }
     else if (m_vy < 0.0f) {
         m_dy = -int(m_vy);
@@ -126,19 +129,16 @@ void Body::move(Map *map)
                 m_vy = 0.0f;
             }
         }
-        m_y -= m_dy;
+        if (m_dy) {
+            m_vert_dir = VerticalUp;
+            m_y -= m_dy;
+        }
     }
     else {
         m_dy = 0;
     }
 
-    if (m_dy < 0) {
-        m_vert_dir = VerticalUp;
-    }
-    else if (m_dy > 0) {
-        m_vert_dir = VerticalDown;
-    }
-    else {
+    if (!m_dy) {
         m_vert_dir = VerticalNone;
     }
 }

@@ -70,7 +70,7 @@ void Player::player_move(Map *map)
     int start = prop.GetNumericProperty("water_start");
     int end = prop.GetNumericProperty("water_end");
     if (start && check_ahead(map, 1, start, end) == 0) {
-        if (!m_water_timer.expired(3)) {
+        if (!m_water_timer.expired(get_attribute("water_treshold"))) {
             return;
         }
 
@@ -159,7 +159,7 @@ void Player::player_move(Map *map)
         case Jump:
             Body::move(map);
             if (get_fall()) {
-                set_action(Still);
+                set_action(Fall);
             }
             break;
 

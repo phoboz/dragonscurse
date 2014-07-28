@@ -132,20 +132,6 @@ void Actor::reset_attack()
     }
 }
 
-void Actor::check_ground(Map *map)
-{
-    if (m_action != Jump) {
-        m_dy = get_attribute("weight");
-        check_below(map);
-        if (m_dy) {
-            set_action(Fall);
-        }
-        else if (m_action == Fall) {
-            set_action(Still);
-        }
-    }
-}
-
 void Actor::animate_move()
 {
     if (m_anim_timer.expired(get_attribute("treshold"))) {

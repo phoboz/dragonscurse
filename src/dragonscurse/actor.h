@@ -46,7 +46,6 @@ protected:
     void swap_move_dir();
     void set_attack();
     void reset_attack();
-    void check_ground(Map *map);
     void animate_move();
     virtual Object::Direction get_reference() const;
     void face_reference(int width = 0);
