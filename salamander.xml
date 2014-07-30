@@ -7,8 +7,9 @@
             attack_time="20"
             bullet_speed="6">
         <player type="dragon"
-                jump_speed="16"
+                jump_power="16"
                 jump_forward="3"
+                jump_time="8"
                 catapult_speed="26"
                 water_treshold="2"
                 ap="0"

@@ -4,6 +4,15 @@
 #include "item.h"
 #include "player.h"
 
+Player::Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
+    : Actor(Object::TypePlayer, x, y, dir),
+      m_morph(0), m_area(0),
+      m_jump_ready(true)
+{
+    load(fn, media);
+    set_ay(get_attribute("weight"));
+}
+
 bool Player::set_hit(Object *object)
 {
     bool result = false;
@@ -63,7 +72,7 @@ bool Player::is_morphing()
 
 void Player::player_move(Map *map)
 {
-    set_ay(get_attribute("weight"));
+    Actor::move(map);
 
     const Tmx::Tileset *tileset = map->get_tileset(0);
     const Tmx::PropertySet prop = tileset->GetProperties();
@@ -85,8 +94,6 @@ void Player::player_move(Map *map)
         set_vy(int(-get_attribute("catapult_speed")));
         set_action(Jump);
     }
-
-    Actor::move(map);
 
     int input = get_input();
     switch(m_action) {
@@ -158,8 +165,15 @@ void Player::player_move(Map *map)
             break;
 
         case Jump:
+            if (m_jump_timer.check(get_attribute("jump_time"))) {
+                set_ay(get_attribute("weight"));
+            }
+            else {
+                set_ay(-get_attribute("jump_power"));
+            }
             Body::move(map);
             if (get_fall()) {
+                m_jump_timer.reset();
                 set_action(Fall);
             }
             break;
