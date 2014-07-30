@@ -1,5 +1,61 @@
+#include <list>
 #include <string.h>
 #include "object.h"
+
+#define DEBUG
+#ifdef DEBUG
+#include <iostream>
+#endif
+
+struct CollisionPart {
+    int x1, y1;
+    int x2, y2;
+};
+
+struct CollisionParts {
+    int m_frame;
+    std::list<CollisionPart*> m_parts;
+
+    CollisionParts(TiXmlElement *elmt) {
+        TiXmlAttribute *attr = elmt->FirstAttribute();
+        while (attr) {
+            if (strcmp(attr->Name(), "frame") == 0) {
+                m_frame = atoi(attr->Value());
+            }
+            attr = attr->Next();
+        }
+#ifdef DEBUG
+        std::cout << "new frame: " << m_frame << std::endl;
+#endif
+    }
+
+    void add_parts(TiXmlElement *elmt) {
+        CollisionPart *part = new CollisionPart;
+        TiXmlAttribute *attr = elmt->FirstAttribute();
+        while (attr) {
+            if (strcmp(attr->Name(), "x1") == 0) {
+                part->x1 = atoi(attr->Value());
+            }
+            else if (strcmp(attr->Name(), "y1") == 0) {
+                part->y1 = atoi(attr->Value());
+            }
+            else if (strcmp(attr->Name(), "x2") == 0) {
+                part->x2 = atoi(attr->Value());
+            }
+            else if (strcmp(attr->Name(), "y2") == 0) {
+                part->y2 = atoi(attr->Value());
+            }
+            attr = attr->Next();
+        }
+#ifdef DEBUG
+        std::cout << "collision_part# " << m_frame << " : "
+                  << "(" << part->x1 << ", " << part->y1 << ") : "
+                  << "(" << part->x2 << ", " << part->y2 << ")"
+                  << std::endl;
+#endif
+        m_parts.push_back(part);
+    }
+};
 
 Object::~Object()
 {
@@ -61,6 +117,15 @@ bool Object::load_nodes(TiXmlNode *node)
         }
         else if (strcmp(node->Value(), "string") == 0) {
             load_strings(node->ToElement());
+        }
+        else if (strcmp(node->Value(), "weak_parts") == 0) {
+            m_weak_parts.push_back(new CollisionParts(node->ToElement()));
+        }
+        else if (strcmp(node->Value(), "weak_part") == 0) {
+            if (m_weak_parts.size()) {
+                CollisionParts *parts = m_weak_parts.back();
+                parts->add_parts(node->ToElement());
+             }
         }
         else {
             load_attributes(node->ToElement());

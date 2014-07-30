@@ -49,6 +49,12 @@
             </actor>
         </player>
         <string strike="sword.wav" />
+        <weak_parts frame="-1">
+            <weak_part x1="24" y1="7" x2="66" y2="62" />
+        </weak_parts>
+        <weak_parts frame="1">
+            <weak_part x1="24" y1="7" x2="66" y2="62" />
+        </weak_parts>
     </knight>
 </human>
 

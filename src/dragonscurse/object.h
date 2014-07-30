@@ -2,12 +2,16 @@
 #define _Object_H
 
 #include <string>
+#include <vector>
 #include <map>
 #include "tinyxml.h"
 #include "phoboz/media_db.h"
 #include "phoboz/map.h"
 
 class World;
+
+// Hidden
+struct CollisionParts;
 
 class Object {
 public:
@@ -115,6 +119,7 @@ protected:
 
     std::map<std::string, int> m_attributes;
     std::map<std::string, std::string> m_strings;
+    std::vector<CollisionParts*> m_weak_parts;
 
     int m_x, m_y;
     int m_dx, m_dy;
@@ -136,6 +141,7 @@ private:
     bool m_always_visible;
     bool m_reused;
     Sprite *m_spr;
+
 };
 
 #endif
