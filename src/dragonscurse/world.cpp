@@ -143,12 +143,12 @@ Area* World::move(Player *player,
                 monster->move(m_map);
                 monster->set_reference(player->get_front(), player->get_y());
                 if (player->check_collision(monster) ||
-                    monster->attack_actor(player)) {
+                    monster->attack_object(player)) {
                     if (!monster->get_invisible()) {
                         player->set_hit(monster);
                     }
                 }
-                if (player->attack_actor(monster)) {
+                if (player->attack_object(monster)) {
                     monster->set_hit(player);
                 }
                 if (monster->get_hit() == Actor::HitPerished) {

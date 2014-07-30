@@ -26,7 +26,11 @@
                    left_weak_x2="34"
                    left_weak_y2="34">
                 <object image="bat_red.png"
-                        left="1" right="33" top="1" bottom="33" />
+                        left="1" right="33" top="1" bottom="33">
+                    <weak_parts frame="-1">
+                        <weak_part x1="0" y1="0" x2="34" y2="34" />
+                    </weak_parts>
+                </object>
             </actor>
             <string collectable="coin.xml" />
         </monster>

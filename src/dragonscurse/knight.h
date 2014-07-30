@@ -9,7 +9,7 @@ public:
     Knight(const char *fn, MediaDB *media, int x, int y, Direction dir)
         : Player(fn, media, x, y, dir),
           m_attack_ready(true) { }
-    virtual bool attack_actor(Actor *actor);
+    virtual bool attack_object(Object *object);
     virtual void move(Map *map);
 
 private:

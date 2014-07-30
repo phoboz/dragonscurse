@@ -20,14 +20,14 @@ MekaDragon::MekaDragon(const char *fn, MediaDB *media,
     }
 }
 
-bool MekaDragon::attack_actor(Actor *actor)
+bool MekaDragon::attack_object(Object *object)
 {
     bool result = false;
     int num_bullets = m_bullets.size();
 
     for (int i = 0; i < num_bullets; i++) {
 
-        if (m_bullets[i]->hit_actor(actor)) {
+        if (m_bullets[i]->hit_actor((Actor *) object)) {
             result = true;
             break;
         }

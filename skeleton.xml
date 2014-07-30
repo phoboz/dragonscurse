@@ -30,7 +30,11 @@
                    left_weak_x2="50"
                    left_weak_y2="60">
                 <object image="skeleton.png"
-                        left="1" right="59" top="1" bottom="59" />
+                        left="1" right="59" top="1" bottom="59">
+                    <weak_parts frame="-1">
+                        <weak_part x1="0" y1="0" x2="50" y2="60" />
+                    </weak_parts>
+                </object>
             </actor>
             <string collectable="coin.xml" />
         </monster>

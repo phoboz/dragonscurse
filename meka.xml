@@ -36,7 +36,14 @@
                left_weak_x2="31"
                left_weak_y2="57">
             <object image="meka.png"
-                    left="4" right="124" top="8" bottom="136" />
+                    left="4" right="124" top="8" bottom="136">
+                <weak_parts frame="6">
+                    <weak_part x1="97" y1="31" x2="125" y2="57" />
+                </weak_parts>
+                <weak_parts frame="2">
+                    <weak_part x1="3" y1="31" x2="31" y2="57" />
+                </weak_parts>
+            </object>
         </actor>
     </monster>
     <string bullet="fireball.xml" />

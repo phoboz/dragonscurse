@@ -29,7 +29,11 @@
                    left_weak_x2="46"
                    left_weak_y2="34">
                 <object image="roper_red.png"
-                        left="4" right="46" top="2" bottom="34" />
+                        left="4" right="46" top="2" bottom="34">
+                    <weak_parts frame="-1">
+                        <weak_part x1="4" y1="2" x2="46" y2="34" />
+                    </weak_parts>
+                </object>
             </actor>
             <string bullet="ember_red.xml" />
             <string collectable="coin.xml" />

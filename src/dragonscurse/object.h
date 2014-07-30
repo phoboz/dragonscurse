@@ -93,6 +93,9 @@ public:
                                       object->m_spr, object->m_frame,
                                       object->m_x, object->m_y);
     }
+    virtual bool check_weak_collision(Object *object,
+                                      int start_x1, int start_y1,
+                                      int end_x1, int end_y1) const;
 
     virtual void move(Map *map) = 0;
     virtual void draw(SDL_Surface *dest, Map *map,

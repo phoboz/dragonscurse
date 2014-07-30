@@ -1,8 +1,6 @@
-#include <list>
 #include <string.h>
 #include "object.h"
 
-#define DEBUG
 #ifdef DEBUG
 #include <iostream>
 #endif
@@ -14,7 +12,7 @@ struct CollisionPart {
 
 struct CollisionParts {
     int m_frame;
-    std::list<CollisionPart*> m_parts;
+    std::vector<CollisionPart*> m_parts;
 
     CollisionParts(TiXmlElement *elmt) {
         TiXmlAttribute *attr = elmt->FirstAttribute();
@@ -448,4 +446,61 @@ bool Object::get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_
 
     return result;
 }
+
+bool Object::check_weak_collision(Object *object,
+                                  int start_x1, int start_y1,
+                                  int end_x1, int end_y1) const
+{
+    bool result = false;
+    CollisionParts *parts = 0;
+
+#ifdef DEBUG
+    std::cout << "check collision: " << m_frame << std::endl;
+#endif
+    for (int i = 0; i < m_weak_parts.size(); i++) {
+        if (m_weak_parts[i]->m_frame == m_frame) {
+            parts = m_weak_parts[i];
+            break;
+        }
+        else if (m_weak_parts[i]->m_frame == -1) {
+#ifdef DEBUG
+            std::cout << "found default for: " << m_frame << std::endl;
+#endif
+            parts = m_weak_parts[i];
+        }
+    }
+
+    if (parts) {
+        const Sprite *spr = object->get_sprite();
+        for (int i = 0; i < parts->m_parts.size(); i++) {
+            CollisionPart *part = parts->m_parts[i];
+#ifdef DEBUG
+            std::cout << "check collision# " << m_frame << "(" << i << ") : "
+                      << "(" << part->x1 << ", " << part->y1 << ")->"
+                      << "(" << part->x2 << ", " << part->y2 << ")"
+                      << std::endl;
+#endif
+            result = spr->check_collision(object->get_frame(),
+                                          object->get_x(),
+                                          object->get_y(),
+                                          start_x1, start_y1,
+                                          end_x1, end_y1,
+                                          get_sprite(), m_frame,
+                                          m_x, m_y,
+                                          part->x1,
+                                          part->y1,
+                                          part->x2,
+                                          part->y2);
+            if (result) {
+#ifdef DEBUG
+                std::cout << "hit detected!" << std::endl;
+#endif
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
 

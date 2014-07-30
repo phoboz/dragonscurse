@@ -29,7 +29,11 @@
                    left_weak_x2="50"
                    left_weak_y2="50">
                 <object image="cobra_red.png"
-                        left="8" right="42" top="2" bottom="49" />
+                        left="8" right="42" top="2" bottom="49">
+                    <weak_parts frame="-1">
+                        <weak_part x1="0" y1="0" x2="50" y2="50" />
+                    </weak_parts>
+                </object>
             </actor>
             <string collectable="coin.xml" />
         </monster>

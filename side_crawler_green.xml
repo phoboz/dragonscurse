@@ -23,7 +23,11 @@
                    left_weak_x2="32"
                    left_weak_y2="33">
                 <object image="side_crawler_green.png"
-                        left="2" right="32" top="2" bottom="33" />
+                        left="2" right="32" top="2" bottom="33">
+                    <weak_parts frame="-1">
+                        <weak_part x1="2" y1="7" x2="32" y2="33" />
+                    </weak_parts>
+                </object>
             </actor>
             <string collectable="coin.xml" />
         </monster>

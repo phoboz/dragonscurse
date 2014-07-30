@@ -32,11 +32,8 @@ public:
     bool get_invisible() const { return m_invisible; }
 
     bool check_weak_collision(Object *object, int x, int y) const;
-    bool check_weak_collision(Object *object,
-                              int start_x1, int start_y1,
-                              int end_x1, int end_y1) const;
 
-    virtual bool attack_actor(Actor *actor) { return false; }
+    virtual bool attack_object(Object *object) { return false; }
 
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
