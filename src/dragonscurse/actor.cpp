@@ -22,7 +22,6 @@ void Actor::set_dir(Direction dir)
 
     switch(m_action) {
         case Still:
-        case Fall:
             if (set_dir == Right) {
                 m_frame = get_attribute("right_still");
             }
@@ -49,6 +48,15 @@ void Actor::set_dir(Direction dir)
             }
             else if (set_dir == Left) {
                 m_frame = get_attribute("left_jump");
+            }
+            break;
+
+        case Fall:
+            if (set_dir == Right) {
+                m_frame = get_attribute("right_fall");
+            }
+            else if (set_dir == Left) {
+                m_frame = get_attribute("left_fall");
             }
             break;
 

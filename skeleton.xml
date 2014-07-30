@@ -14,11 +14,13 @@
                    right_still="3"
                    right_move_start="3" right_move_end="4"
                    right_jump="3"
+                   right_fall="3"
                    right_hit="2"
                    right_perish="2"
                    left_still="0"
                    left_move_start="0" left_move_end="1"
                    left_jump="0"
+                   left_fall="0"
                    left_hit="2"
                    left_perish="2">
                 <object image="skeleton.png"
