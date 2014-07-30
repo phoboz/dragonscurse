@@ -21,12 +21,10 @@ void Guardian::move(Map *map)
                     m_attack_timer.reset();
                     set_action(Jump);
                     if (get_reference() == Right) {
-                        set_speed(get_attribute("jump_forward"),
-                                  -get_attribute("jump_speed"));
+                        set_vx(get_attribute("jump_forward"));
                     }
                     else {
-                        set_speed(-get_attribute("jump_forward"),
-                                  -get_attribute("jump_speed"));
+                        set_vx(-get_attribute("jump_forward"));
                     }
                 }
             }

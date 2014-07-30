@@ -19,11 +19,13 @@
                weight="20"
                right_still="4"
                right_move_start="4" right_move_end="5"
+               right_fall="4"
                right_attack="6"
                right_hit="7"
                right_perish="7"
                left_still="0"
                left_move_start="0" left_move_end="1"
+               left_fall="0"
                left_attack="2"
                left_hit="3"
                left_perish="3">

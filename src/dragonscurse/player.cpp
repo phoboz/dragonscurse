@@ -13,6 +13,13 @@ Player::Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
     set_ay(get_attribute("weight"));
 }
 
+void Player::reset_jump()
+{
+    set_ay(get_attribute("weight"));
+    m_jump_timer.reset();
+    set_vx(0);
+}
+
 bool Player::set_hit(Object *object)
 {
     bool result = false;
@@ -22,16 +29,17 @@ bool Player::set_hit(Object *object)
         result = Actor::set_hit(object);
         if (result) {
 
+            reset_jump();
             set_lock_direction(true);
 
             // Move backwards and upwards
             if (m_dir == Right) {
                 set_speed(-get_attribute("move_speed"),
-                          -get_attribute("jump_speed"));
+                          -get_attribute("weight"));
             }
             else {
                 set_speed(get_attribute("move_speed"),
-                          -get_attribute("jump_speed"));
+                          -get_attribute("weight"));
             }
 
             // Make player invisible for a certain time
@@ -98,24 +106,19 @@ void Player::player_move(Map *map)
     int input = get_input();
     switch(m_action) {
         case Still:
-            set_vx(0);
-
         case Move:
+            reset_jump();
+
             // Check for jump
             if (input & PRESS_JUMP) {
                 if (m_jump_ready) {
                     m_jump_ready = false;
                     set_action(Jump);
                     if (input & PRESS_RIGHT) {
-                        set_speed(get_attribute("jump_forward"),
-                                  -get_attribute("jump_speed"));
+                        set_vx(get_attribute("jump_forward"));
                     }
                     else if (input & PRESS_LEFT) {
-                        set_speed(-get_attribute("jump_forward"),
-                                  -get_attribute("jump_speed"));
-                    }
-                    else {
-                        set_vy(-get_attribute("jump_speed"));
+                        set_vx(-get_attribute("jump_forward"));
                     }
                 }
             }
@@ -139,7 +142,6 @@ void Player::player_move(Map *map)
                 }
                 else {
                     set_action(Still);
-                    set_vx(0);
                 }
             }
 
@@ -179,7 +181,7 @@ void Player::player_move(Map *map)
             break;
 
         case Crouch:
-            set_vx(0);
+            reset_jump();
             Body::move(map);
 
             if (!(input & PRESS_DOWN)) {
@@ -199,6 +201,7 @@ void Player::player_move(Map *map)
             break;
 
         default:
+            reset_jump();
             Body::move(map);
             break;
     }

@@ -8,10 +8,10 @@
             attack_low_bottom="52"
             attack_time="12">
         <player type="knight"
-                jump_power="12"
+                jump_power="36"
                 jump_forward="3"
-                jump_time="8"
-                catapult_speed="22"
+                jump_time="4"
+                catapult_speed="12"
                 water_treshold="2"
                 ap="60"
                 dp="20"

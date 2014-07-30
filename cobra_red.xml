@@ -2,8 +2,9 @@
 <cobra>
     <guardian attack_timer="64"
               attack_distance="24"
-              jump_speed="8"
-              jump_forward="3"
+              jump_power="40"
+              jump_forward="2"
+              jump_time="3"
               hit_time="24">
         <monster hp="1"
                  perish_time="40">
@@ -13,13 +14,13 @@
                    right_still="4"
                    right_move_start="4" right_move_end="5"
                    right_jump="6"
-                   right_fall="4"
+                   right_fall="6"
                    right_hit="3"
                    right_perish="3"
                    left_still="0"
                    left_move_start="0" left_move_end="1"
                    left_jump="2"
-                   left_fall="0"
+                   left_fall="2"
                    left_hit="3"
                    left_perish="3">
                 <object image="cobra_red.png"

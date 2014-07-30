@@ -13,6 +13,7 @@ Monster::Monster(const char *fn, MediaDB *media, int x, int y, Direction dir)
     load(fn, media);
     m_curr_hp = get_attribute("hp");
     set_action(Still);
+    set_ay(get_attribute("weight"));
 }
 
 void Monster::world_initialize(World *world)
@@ -34,6 +35,12 @@ void Monster::world_initialize(World *world)
     }
 }
 
+void Monster::reset_jump()
+{
+    set_ay(get_attribute("weight"));
+    m_jump_timer.reset();
+}
+
 bool Monster::set_hit(Object *object)
 {
     bool result = false;
@@ -43,6 +50,7 @@ bool Monster::set_hit(Object *object)
 
         if (result) {
 
+            reset_jump();
             set_lock_direction(true);
 
             // Move backwards and upwards
@@ -85,13 +93,13 @@ Object* Monster::release_object()
 
 void Monster::move(Map *map)
 {
-    set_ay(get_attribute("weight"));
-
     switch(m_action) {
         case Still:
+            reset_jump();
             break;
 
         case Move:
+            reset_jump();
             Body::move(map);
             if (get_fall()) {
                 set_action(Fall);
@@ -108,13 +116,21 @@ void Monster::move(Map *map)
             break;
 
         case Jump:
+            if (m_jump_timer.check(get_attribute("jump_time"))) {
+                set_ay(get_attribute("weight"));
+            }
+            else {
+                set_ay(-get_attribute("jump_power"));
+            }
             Body::move(map);
             if (get_fall()) {
-                set_action(Still);
+                m_jump_timer.reset();
+                set_action(Fall);
             }
             break;
 
         case Hit:
+            reset_jump();
             if (m_hit == HitPerish) {
                 set_vx(0);
                 if (m_perish_timer.expired(get_attribute("perish_time"))) {
@@ -132,6 +148,7 @@ void Monster::move(Map *map)
             break;
 
         default:
+            reset_jump();
             break;
     }
 }

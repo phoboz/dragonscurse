@@ -13,6 +13,7 @@ class Player : public Actor {
 public:
     Player(const char *fn, MediaDB *media, int x, int y, Direction dir);
 
+    void reset_jump();
     virtual bool set_hit(Object *object);
     virtual bool check_collision(Object *object) const;
 
