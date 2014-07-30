@@ -63,6 +63,8 @@ bool Player::is_morphing()
 
 void Player::player_move(Map *map)
 {
+    set_ay(get_attribute("weight"));
+
     const Tmx::Tileset *tileset = map->get_tileset(0);
     const Tmx::PropertySet prop = tileset->GetProperties();
 
@@ -85,7 +87,6 @@ void Player::player_move(Map *map)
     }
 
     Actor::move(map);
-    set_ay(get_attribute("weight"));
 
     int input = get_input();
     switch(m_action) {
