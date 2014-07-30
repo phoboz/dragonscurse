@@ -27,7 +27,7 @@ bool MekaDragon::attack_object(Object *object)
 
     for (int i = 0; i < num_bullets; i++) {
 
-        if (m_bullets[i]->hit_actor((Actor *) object)) {
+        if (m_bullets[i]->hit_object(object)) {
             result = true;
             break;
         }

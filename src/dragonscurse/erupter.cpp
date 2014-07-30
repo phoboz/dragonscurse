@@ -10,7 +10,7 @@ bool Erupter::attack_object(Object *object)
          it != m_bullets.end();
          ++it) {
         GravityBullet *bullet = (*it);
-        if (bullet->hit_actor((Actor *) object)) {
+        if (bullet->hit_object(object)) {
             result = true;
             break;
         }

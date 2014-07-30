@@ -31,8 +31,6 @@ public:
     HitType get_hit() const { return m_hit; }
     bool get_invisible() const { return m_invisible; }
 
-    bool check_weak_collision(Object *object, int x, int y) const;
-
     virtual bool attack_object(Object *object) { return false; }
 
     virtual void move(Map *map);

@@ -18,7 +18,7 @@ bool Dragon::attack_object(Object *object)
 {
     bool result = false;
 
-    if (m_bullet->hit_actor((Actor *) object)) {
+    if (m_bullet->hit_object(object)) {
         result = true;
     }
 

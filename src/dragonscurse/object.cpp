@@ -1,10 +1,6 @@
 #include <string.h>
 #include "object.h"
 
-#ifdef DEBUG
-#include <iostream>
-#endif
-
 struct CollisionPart {
     int x1, y1;
     int x2, y2;
@@ -22,9 +18,6 @@ struct CollisionParts {
             }
             attr = attr->Next();
         }
-#ifdef DEBUG
-        std::cout << "new frame: " << m_frame << std::endl;
-#endif
     }
 
     void add_parts(TiXmlElement *elmt) {
@@ -46,13 +39,6 @@ struct CollisionParts {
             attr = attr->Next();
         }
         m_parts.push_back(part);
-#ifdef DEBUG
-        std::cout << "collision_part# " << m_frame << "("
-                  << m_parts.size() << ") : "
-                  << "(" << part->x1 << ", " << part->y1 << ")->"
-                  << "(" << part->x2 << ", " << part->y2 << ")"
-                  << std::endl;
-#endif
     }
 };
 
@@ -447,25 +433,17 @@ bool Object::get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_
     return result;
 }
 
-bool Object::check_weak_collision(Object *object,
-                                  int start_x1, int start_y1,
-                                  int end_x1, int end_y1) const
+bool Object::check_weak_collision(Object *object) const
 {
     bool result = false;
     CollisionParts *parts = 0;
 
-#ifdef DEBUG
-    std::cout << "check collision: " << m_frame << std::endl;
-#endif
     for (int i = 0; i < m_weak_parts.size(); i++) {
         if (m_weak_parts[i]->m_frame == m_frame) {
             parts = m_weak_parts[i];
             break;
         }
         else if (m_weak_parts[i]->m_frame == -1) {
-#ifdef DEBUG
-            std::cout << "found default for: " << m_frame << std::endl;
-#endif
             parts = m_weak_parts[i];
         }
     }
@@ -474,12 +452,45 @@ bool Object::check_weak_collision(Object *object,
         const Sprite *spr = object->get_sprite();
         for (int i = 0; i < parts->m_parts.size(); i++) {
             CollisionPart *part = parts->m_parts[i];
-#ifdef DEBUG
-            std::cout << "check collision# " << m_frame << "(" << i << ") : "
-                      << "(" << part->x1 << ", " << part->y1 << ")->"
-                      << "(" << part->x2 << ", " << part->y2 << ")"
-                      << std::endl;
-#endif
+            result = spr->check_collision(object->get_frame(),
+                                          object->get_x(),
+                                          object->get_y(),
+                                          get_sprite(), m_frame,
+                                          m_x, m_y,
+                                          part->x1,
+                                          part->y1,
+                                          part->x2,
+                                          part->y2);
+            if (result) {
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
+bool Object::check_weak_collision(Object *object,
+                                  int start_x1, int start_y1,
+                                  int end_x1, int end_y1) const
+{
+    bool result = false;
+    CollisionParts *parts = 0;
+
+    for (int i = 0; i < m_weak_parts.size(); i++) {
+        if (m_weak_parts[i]->m_frame == m_frame) {
+            parts = m_weak_parts[i];
+            break;
+        }
+        else if (m_weak_parts[i]->m_frame == -1) {
+            parts = m_weak_parts[i];
+        }
+    }
+
+    if (parts) {
+        const Sprite *spr = object->get_sprite();
+        for (int i = 0; i < parts->m_parts.size(); i++) {
+            CollisionPart *part = parts->m_parts[i];
             result = spr->check_collision(object->get_frame(),
                                           object->get_x(),
                                           object->get_y(),
@@ -492,9 +503,6 @@ bool Object::check_weak_collision(Object *object,
                                           part->x2,
                                           part->y2);
             if (result) {
-#ifdef DEBUG
-                std::cout << "hit detected!" << std::endl;
-#endif
                 break;
             }
         }
