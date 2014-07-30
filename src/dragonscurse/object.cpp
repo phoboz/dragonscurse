@@ -47,13 +47,14 @@ struct CollisionParts {
             }
             attr = attr->Next();
         }
+        m_parts.push_back(part);
 #ifdef DEBUG
-        std::cout << "collision_part# " << m_frame << " : "
-                  << "(" << part->x1 << ", " << part->y1 << ") : "
+        std::cout << "collision_part# " << m_frame << "("
+                  << m_parts.size() << ") : "
+                  << "(" << part->x1 << ", " << part->y1 << ")->"
                   << "(" << part->x2 << ", " << part->y2 << ")"
                   << std::endl;
 #endif
-        m_parts.push_back(part);
     }
 };
 
