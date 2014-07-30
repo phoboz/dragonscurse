@@ -16,21 +16,17 @@
                    right_jump="3"
                    right_hit="2"
                    right_perish="2"
-                   right_weak_x1="0"
-                   right_weak_y1="0"
-                   right_weak_x2="50"
-                   right_weak_y2="60"
                    left_still="0"
                    left_move_start="0" left_move_end="1"
                    left_jump="0"
                    left_hit="2"
-                   left_perish="2"
-                   left_weak_x1="0"
-                   left_weak_y1="0"
-                   left_weak_x2="50"
-                   left_weak_y2="60">
+                   left_perish="2">
                 <object image="wondering.png"
-                        left="1" right="59" top="1" bottom="59" />
+                        left="1" right="59" top="1" bottom="59">
+                    <weak_parts frame="-1">
+                        <weak_part x1="0" y1="0" x2="50" y2="60" />
+                    </weak_parts>
+                </object>
             </actor>
             <string collectable="coin.xml" />
         </monster>

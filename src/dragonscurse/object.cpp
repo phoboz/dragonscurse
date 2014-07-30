@@ -1,6 +1,47 @@
 #include <string.h>
 #include "object.h"
 
+struct CollisionPart {
+    int x1, y1;
+    int x2, y2;
+};
+
+struct CollisionParts {
+    int m_frame;
+    std::vector<CollisionPart*> m_parts;
+
+    CollisionParts(TiXmlElement *elmt) {
+        TiXmlAttribute *attr = elmt->FirstAttribute();
+        while (attr) {
+            if (strcmp(attr->Name(), "frame") == 0) {
+                m_frame = atoi(attr->Value());
+            }
+            attr = attr->Next();
+        }
+    }
+
+    void add_parts(TiXmlElement *elmt) {
+        CollisionPart *part = new CollisionPart;
+        TiXmlAttribute *attr = elmt->FirstAttribute();
+        while (attr) {
+            if (strcmp(attr->Name(), "x1") == 0) {
+                part->x1 = atoi(attr->Value());
+            }
+            else if (strcmp(attr->Name(), "y1") == 0) {
+                part->y1 = atoi(attr->Value());
+            }
+            else if (strcmp(attr->Name(), "x2") == 0) {
+                part->x2 = atoi(attr->Value());
+            }
+            else if (strcmp(attr->Name(), "y2") == 0) {
+                part->y2 = atoi(attr->Value());
+            }
+            attr = attr->Next();
+        }
+        m_parts.push_back(part);
+    }
+};
+
 Object::~Object()
 {
     if (m_loaded) {
@@ -61,6 +102,15 @@ bool Object::load_nodes(TiXmlNode *node)
         }
         else if (strcmp(node->Value(), "string") == 0) {
             load_strings(node->ToElement());
+        }
+        else if (strcmp(node->Value(), "weak_parts") == 0) {
+            m_weak_parts.push_back(new CollisionParts(node->ToElement()));
+        }
+        else if (strcmp(node->Value(), "weak_part") == 0) {
+            if (m_weak_parts.size()) {
+                CollisionParts *parts = m_weak_parts.back();
+                parts->add_parts(node->ToElement());
+             }
         }
         else {
             load_attributes(node->ToElement());
@@ -382,4 +432,83 @@ bool Object::get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_
 
     return result;
 }
+
+bool Object::check_weak_collision(Object *object) const
+{
+    bool result = false;
+    CollisionParts *parts = 0;
+
+    for (int i = 0; i < m_weak_parts.size(); i++) {
+        if (m_weak_parts[i]->m_frame == m_frame) {
+            parts = m_weak_parts[i];
+            break;
+        }
+        else if (m_weak_parts[i]->m_frame == -1) {
+            parts = m_weak_parts[i];
+        }
+    }
+
+    if (parts) {
+        const Sprite *spr = object->get_sprite();
+        for (int i = 0; i < parts->m_parts.size(); i++) {
+            CollisionPart *part = parts->m_parts[i];
+            result = spr->check_collision(object->get_frame(),
+                                          object->get_x(),
+                                          object->get_y(),
+                                          get_sprite(), m_frame,
+                                          m_x, m_y,
+                                          part->x1,
+                                          part->y1,
+                                          part->x2,
+                                          part->y2);
+            if (result) {
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
+bool Object::check_weak_collision(Object *object,
+                                  int start_x1, int start_y1,
+                                  int end_x1, int end_y1) const
+{
+    bool result = false;
+    CollisionParts *parts = 0;
+
+    for (int i = 0; i < m_weak_parts.size(); i++) {
+        if (m_weak_parts[i]->m_frame == m_frame) {
+            parts = m_weak_parts[i];
+            break;
+        }
+        else if (m_weak_parts[i]->m_frame == -1) {
+            parts = m_weak_parts[i];
+        }
+    }
+
+    if (parts) {
+        const Sprite *spr = object->get_sprite();
+        for (int i = 0; i < parts->m_parts.size(); i++) {
+            CollisionPart *part = parts->m_parts[i];
+            result = spr->check_collision(object->get_frame(),
+                                          object->get_x(),
+                                          object->get_y(),
+                                          start_x1, start_y1,
+                                          end_x1, end_y1,
+                                          get_sprite(), m_frame,
+                                          m_x, m_y,
+                                          part->x1,
+                                          part->y1,
+                                          part->x2,
+                                          part->y2);
+            if (result) {
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
 

@@ -4,8 +4,6 @@
 #include "phoboz/timer.h"
 #include "object.h"
 
-class Actor;
-
 class Bullet : public Object {
 public:
     Bullet(const char *fn, MediaDB *media)
@@ -17,7 +15,7 @@ public:
     bool fire(int x, int y, int speed, Direction dir);
     bool fire(int x, int y, int dx, int dy);
 
-    bool hit_actor(Actor *actor);
+    bool hit_object(Object *object);
 
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,

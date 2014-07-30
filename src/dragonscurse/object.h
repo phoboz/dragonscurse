@@ -2,12 +2,16 @@
 #define _Object_H
 
 #include <string>
+#include <vector>
 #include <map>
 #include "tinyxml.h"
 #include "phoboz/media_db.h"
 #include "phoboz/map.h"
 
 class World;
+
+// Hidden
+struct CollisionParts;
 
 class Object {
 public:
@@ -89,6 +93,10 @@ public:
                                       object->m_spr, object->m_frame,
                                       object->m_x, object->m_y);
     }
+    bool check_weak_collision(Object *object) const;
+    bool check_weak_collision(Object *object,
+                              int start_x1, int start_y1,
+                              int end_x1, int end_y1) const;
 
     virtual void move(Map *map) = 0;
     virtual void draw(SDL_Surface *dest, Map *map,
@@ -115,6 +123,7 @@ protected:
 
     std::map<std::string, int> m_attributes;
     std::map<std::string, std::string> m_strings;
+    std::vector<CollisionParts*> m_weak_parts;
 
     int m_x, m_y;
     int m_dx, m_dy;
@@ -136,6 +145,7 @@ private:
     bool m_always_visible;
     bool m_reused;
     Sprite *m_spr;
+
 };
 
 #endif

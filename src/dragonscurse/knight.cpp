@@ -2,7 +2,7 @@
 #include "phoboz/ctrl.h"
 #include "knight.h"
 
-bool Knight::attack_actor(Actor *actor)
+bool Knight::attack_object(Object *object)
 {
     bool result = false;
     const Sprite *spr = get_sprite();
@@ -10,7 +10,7 @@ bool Knight::attack_actor(Actor *actor)
     if (m_action == MediumAttack) {
         if (m_dir == Right) {
             if (m_frame == get_attribute("right_attack") &&
-                actor->check_weak_collision(
+                object->check_weak_collision(
                     this,
                     get_attribute("attack_right"),
                     get_attribute("attack_medium_top"),
@@ -21,7 +21,7 @@ bool Knight::attack_actor(Actor *actor)
         }
         else if (m_dir == Left) {
             if (m_frame == get_attribute("left_attack") &&
-                actor->check_weak_collision(
+                object->check_weak_collision(
                     this,
                     0,
                     get_attribute("attack_medium_top"),
@@ -34,7 +34,7 @@ bool Knight::attack_actor(Actor *actor)
     else if (m_action == LowAttack) {
         if (m_dir == Right) {
             if (m_frame == get_attribute("right_attack_low") &&
-                actor->check_weak_collision(
+                object->check_weak_collision(
                     this,
                     get_attribute("attack_right"),
                     get_attribute("attack_low_top"),
@@ -45,7 +45,7 @@ bool Knight::attack_actor(Actor *actor)
         }
         else if (m_dir == Left) {
             if (m_frame == get_attribute("left_attack_low") &&
-                actor->check_weak_collision(
+                object->check_weak_collision(
                     this,
                     0,
                     get_attribute("attack_low_top"),

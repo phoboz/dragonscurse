@@ -2,7 +2,7 @@
 #include <vector>
 #include "erupter.h"
 
-bool Erupter::attack_actor(Actor *actor)
+bool Erupter::attack_object(Object *object)
 {
     bool result = false;
 
@@ -10,7 +10,7 @@ bool Erupter::attack_actor(Actor *actor)
          it != m_bullets.end();
          ++it) {
         GravityBullet *bullet = (*it);
-        if (bullet->hit_actor(actor)) {
+        if (bullet->hit_object(object)) {
             result = true;
             break;
         }

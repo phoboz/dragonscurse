@@ -11,7 +11,7 @@ public:
     Erupter(const char *fn, MediaDB *media, int x, int y, Direction dir)
         : Monster(fn, media, x, y, dir) { }
 
-    bool attack_actor(Actor *actor);
+    virtual bool attack_object(Object *object);
 
     virtual void move(Map *map);
 

@@ -15,21 +15,17 @@
                    right_attack="1"
                    right_hit="2"
                    right_perish="2"
-                   right_weak_x1="4"
-                   right_weak_y1="2"
-                   right_weak_x2="46"
-                   right_weak_y2="34"
                    left_still="0"
                    left_move_start="0" left_move_end="0"
                    left_attack="1"
                    left_hit="2"
-                   left_perish="2"
-                   left_weak_x1="4"
-                   left_weak_y1="2"
-                   left_weak_x2="46"
-                   left_weak_y2="34">
+                   left_perish="2">
                 <object image="roper_red.png"
-                        left="4" right="46" top="2" bottom="34" />
+                        left="4" right="46" top="2" bottom="34">
+                    <weak_parts frame="-1">
+                        <weak_part x1="4" y1="2" x2="46" y2="34" />
+                    </weak_parts>
+                </object>
             </actor>
             <string bullet="ember_red.xml" />
             <string collectable="coin.xml" />
