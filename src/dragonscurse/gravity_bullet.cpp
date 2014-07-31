@@ -34,7 +34,12 @@ bool GravityBullet::hit_object(Object *object)
     bool result = false;
 
     if (get_moving()) {
-        if (object->check_weak_collision(this)) {
+        if (object->check_shielded_collision(this)) {
+            // Remove bullet if it hits a shielded area
+            // TODO
+            set_speed(0, 0);
+        }
+        else if (object->check_weak_collision(this)) {
             result = true;
         }
     }

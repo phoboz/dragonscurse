@@ -49,9 +49,13 @@ bool Bullet::hit_object(Object *object)
     bool result = false;
 
     if (m_moving) {
-        if (object->check_weak_collision(this)) {
+        if (object->check_shielded_collision(this)) {
+            // Remove bullet if it hits a shielded area
+            m_moving = false;
+        }
+        else if (object->check_weak_collision(this)) {
 
-            // Remove bullet if it only hits one target
+            // Remove bullet if it only is supposed to hit one target
             if (m_hit_one) {
                 m_moving = false;
             }

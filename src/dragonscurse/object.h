@@ -97,6 +97,7 @@ public:
     bool check_weak_collision(Object *object,
                               int start_x1, int start_y1,
                               int end_x1, int end_y1) const;
+    bool check_shielded_collision(Object *object) const;
 
     virtual void move(Map *map) = 0;
     virtual void draw(SDL_Surface *dest, Map *map,
@@ -124,6 +125,7 @@ protected:
     std::map<std::string, int> m_attributes;
     std::map<std::string, std::string> m_strings;
     std::vector<CollisionParts*> m_weak_parts;
+    std::vector<CollisionParts*> m_shielded_parts;
 
     int m_x, m_y;
     int m_dx, m_dy;
@@ -137,6 +139,7 @@ private:
     void load_strings(TiXmlElement *elmt);
     void load_attributes(TiXmlElement *elmt);
     bool load_nodes(TiXmlNode *node);
+    CollisionParts* find_collision_parts(std::vector<CollisionParts*> v) const;
 
     std::string m_fn;
     std::string m_name;
