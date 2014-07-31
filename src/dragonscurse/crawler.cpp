@@ -24,10 +24,14 @@ void Crawler::move(Map *map)
 
     switch(m_action) {
         case Still:
+            face_reference();
             set_action(Move);
             break;
 
         case Move:
+            if (check_ahead(map)) {
+                swap_move_dir();
+            }
             check_ground(map);
             if (m_dir == Right) {
                 set_vx(get_attribute("move_speed"));
