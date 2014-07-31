@@ -119,6 +119,7 @@ protected:
     int check_ahead(Map *map, int len, int start, int end);
     bool check_behind(Map *map, int start = 0, int end = 0);
     bool check_above(Map *map, int start = 0, int end = 0);
+    int check_above(Map *map, int len, int start = 0, int end = 0);
 
     void set_always_visible(bool value) { m_always_visible = value; }
 

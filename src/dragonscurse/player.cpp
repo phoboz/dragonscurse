@@ -7,17 +7,57 @@
 Player::Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
     : Actor(Object::TypePlayer, x, y, dir),
       m_morph(0), m_area(0),
-      m_jump_ready(true)
+      m_jump_ready(true), m_in_water(false)
 {
     load(fn, media);
     set_ay(get_attribute("weight"));
 }
 
-void Player::reset_jump()
+void Player::set_jump()
 {
-    set_ay(get_attribute("weight"));
-    m_jump_timer.reset();
-    set_vx(0);
+    if (m_in_water) {
+        set_ay(-get_attribute("water_jump_power"));
+    }
+    else {
+        set_ay(-get_attribute("jump_power"));
+    }
+}
+
+void Player::reset_jump(bool reset)
+{
+    if (m_in_water) {
+        set_ay(get_attribute("water_weight"));
+    }
+    else {
+        set_ay(get_attribute("weight"));
+    }
+
+    if (reset) {
+        m_jump_timer.reset();
+        set_vx(0);
+    }
+}
+
+void Player::set_water()
+{
+    m_in_water = true;
+    if (m_action == Jump) {
+        set_ay(-get_attribute("water_jump_power"));
+    }
+    else {
+        set_ay(get_attribute("water_weight"));
+    }
+}
+
+void Player::reset_water()
+{
+    m_in_water = false;
+    if (m_action != Jump) {
+        set_ay(get_attribute("weight"));
+    }
+    else {
+        set_ay(-get_attribute("jump_power"));
+    }
 }
 
 bool Player::set_hit(Object *object)
@@ -88,12 +128,11 @@ void Player::player_move(Map *map)
     // Check if under water
     int start = prop.GetNumericProperty("water_start");
     int end = prop.GetNumericProperty("water_end");
-    if (start && check_ahead(map, 1, start, end) == 0) {
-        if (!m_water_timer.expired(get_attribute("water_treshold"))) {
-            return;
-        }
-
-        m_water_timer.reset();
+    if (start && check_above(map, 1, start, end) == 0) {
+        set_water();
+    }
+    else {
+        reset_water();
     }
 
     // Check if on catapult
@@ -106,9 +145,9 @@ void Player::player_move(Map *map)
     int input = get_input();
     switch(m_action) {
         case Still:
-        case Move:
             reset_jump();
 
+        case Move:
             // Check for jump
             if (input & PRESS_JUMP) {
                 if (m_jump_ready) {
@@ -168,10 +207,10 @@ void Player::player_move(Map *map)
 
         case Jump:
             if (m_jump_timer.check(get_attribute("jump_time"))) {
-                set_ay(get_attribute("weight"));
+                reset_jump(false);
             }
             else {
-                set_ay(-get_attribute("jump_power"));
+                set_jump();
             }
             Body::move(map);
             if (get_fall()) {

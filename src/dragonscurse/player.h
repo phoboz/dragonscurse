@@ -13,7 +13,10 @@ class Player : public Actor {
 public:
     Player(const char *fn, MediaDB *media, int x, int y, Direction dir);
 
-    void reset_jump();
+    void set_jump();
+    void reset_jump(bool reset = true);
+    void set_water();
+    void reset_water();
     virtual bool set_hit(Object *object);
     virtual bool check_collision(Object *object) const;
 
@@ -33,9 +36,9 @@ private:
     Morph *m_morph;
     Area *m_area;
     bool m_jump_ready;
+    bool m_in_water;
     Timer m_jump_timer;
     Timer m_hit_timer;
-    Timer m_water_timer;
 };
 
 #endif

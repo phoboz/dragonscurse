@@ -359,31 +359,35 @@ bool Object::check_behind(Map *map, int start, int end)
 
 bool Object::check_above(Map *map, int start, int end)
 {
+    bool result = false;
+    int min_dy = check_above(map, m_dy, start, end);
+
+    if (min_dy != m_dy) {
+        m_dy = min_dy;
+        result = true;
+    }
+
+    return result;
+}
+
+int Object::check_above(Map *map, int len, int start, int end)
+{
+    int result = len;
     int top = get_attribute("top");
     int left = get_attribute("left");
     int right = get_attribute("right");
-    int min_dy = m_dy;
 
     for (int i = left; i <= right; i++) {
         int dy;
-        for (dy = m_dy; dy > 0; dy--) {
+        for (dy = len; dy > 0; dy--) {
             if (!check_collision(m_x + i, m_y + top - dy,
                                  map, start, end)) {
                 break;
             }
         }
-        if (dy < min_dy) {
-            min_dy = dy;
+        if (dy < result) {
+            result = dy;
         }
-    }
-
-    bool result;
-    if (min_dy != m_dy) {
-        m_dy = min_dy;
-        result = true;
-    }
-    else {
-        result = false;
     }
 
     return result;
