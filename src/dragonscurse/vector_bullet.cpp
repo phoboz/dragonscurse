@@ -1,7 +1,7 @@
 #include <math.h>
-#include "gravity_bullet.h"
+#include "vector_bullet.h"
 
-bool GravityBullet::fire(int x, int y, int dx, int dy)
+bool VectorBullet::fire(int x, int y, int dx, int dy)
 {
     bool result = false;
 
@@ -9,7 +9,6 @@ bool GravityBullet::fire(int x, int y, int dx, int dy)
         set_x(x);
         set_y(y);
         set_speed(dx, dy);
-        set_accelration(0, get_attribute("weight"));
         reload(true);
         result = true;
     }

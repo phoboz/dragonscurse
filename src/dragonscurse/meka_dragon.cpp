@@ -12,7 +12,7 @@ MekaDragon::MekaDragon(const char *fn, MediaDB *media,
     int num_bullets = get_attribute("num_bullets");
 
     for (int i = 0; i < num_bullets; i++) {
-        Bullet *bullet = new Bullet(bullet_name, media);
+        VectorBullet *bullet = new VectorBullet(bullet_name, media);
         if (!bullet->get_loaded()) {
             exit(1);
         }

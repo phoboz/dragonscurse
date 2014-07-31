@@ -2,37 +2,37 @@
 #define _Bullet_H
 
 #include "phoboz/timer.h"
-#include "object.h"
+#include "body.h"
 
-class Bullet : public Object {
+class Bullet : public Body {
 public:
-    Bullet(const char *fn, MediaDB *media)
-        : Object(Object::TypeBullet),
-          m_follow_terrain(true), m_moving(false), m_loaded(true),
-          m_distance(0), m_hit_one(false) { load(fn, media); }
+    bool get_ready() const { return m_ready; }
+    bool get_active() const { return m_active; }
 
+    virtual void set_dir(Direction dir);
     void set_hit_one(bool value) { m_hit_one = value; }
-    bool fire(int x, int y, int speed, Direction dir);
-    bool fire(int x, int y, int dx, int dy);
+    virtual bool fire(int x, int y, int dx, int dy) = 0;
 
     bool hit_object(Object *object);
 
     virtual void move(Map *map);
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h) {
-        if (m_moving) Object::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
+        if (m_active) Object::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
     }
 
 protected:
-    bool m_follow_terrain;
-    VerticalDirection m_vertical_dir;
+    Bullet(const char *fn, MediaDB *media)
+        : Body(Object::TypeBullet),
+          m_active(false), m_ready(true),
+          m_distance(0), m_hit_one(false) { load(fn, media); }
+
+    void reload(bool active);
 
 private:
-    void reload();
-
     bool m_hit_one;
-    bool m_moving;
-    bool m_loaded;
+    bool m_ready;
+    bool m_active;
     int m_distance;
     Timer m_reload_timer;
 };

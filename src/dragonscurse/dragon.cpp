@@ -7,7 +7,8 @@ Dragon::Dragon(const char *fn, MediaDB *media, int x, int y, Direction dir)
         : Player(fn, media, x, y, dir),
           m_attack_ready(true)
 {
-    m_bullet = new Bullet(get_string("bullet"), media);
+    const char *bullet_name = get_string("bullet");
+    m_bullet = new VectorBullet(bullet_name, media);
     if (!m_bullet->get_loaded()) {
         exit(1);
     }

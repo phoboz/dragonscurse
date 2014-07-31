@@ -112,6 +112,15 @@ bool Object::load_nodes(TiXmlNode *node)
                 parts->add_parts(node->ToElement());
              }
         }
+        else if (strcmp(node->Value(), "shielded_parts") == 0) {
+            m_shielded_parts.push_back(new CollisionParts(node->ToElement()));
+        }
+        else if (strcmp(node->Value(), "shielded_part") == 0) {
+            if (m_shielded_parts.size()) {
+                CollisionParts *parts = m_shielded_parts.back();
+                parts->add_parts(node->ToElement());
+             }
+        }
         else {
             load_attributes(node->ToElement());
         }
@@ -433,20 +442,27 @@ bool Object::get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_
     return result;
 }
 
+CollisionParts* Object::find_collision_parts(std::vector<CollisionParts*> v) const
+{
+    CollisionParts *parts = 0;
+
+    for (int i = 0; i < v.size(); i++) {
+        if (v[i]->m_frame == m_frame) {
+            parts = v[i];
+            break;
+        }
+        else if (v[i]->m_frame == -1) {
+            parts = v[i];
+        }
+    }
+
+    return parts;
+}
+
 bool Object::check_weak_collision(Object *object) const
 {
     bool result = false;
-    CollisionParts *parts = 0;
-
-    for (int i = 0; i < m_weak_parts.size(); i++) {
-        if (m_weak_parts[i]->m_frame == m_frame) {
-            parts = m_weak_parts[i];
-            break;
-        }
-        else if (m_weak_parts[i]->m_frame == -1) {
-            parts = m_weak_parts[i];
-        }
-    }
+    CollisionParts *parts = find_collision_parts(m_weak_parts);
 
     if (parts) {
         const Sprite *spr = object->get_sprite();
@@ -475,17 +491,7 @@ bool Object::check_weak_collision(Object *object,
                                   int end_x1, int end_y1) const
 {
     bool result = false;
-    CollisionParts *parts = 0;
-
-    for (int i = 0; i < m_weak_parts.size(); i++) {
-        if (m_weak_parts[i]->m_frame == m_frame) {
-            parts = m_weak_parts[i];
-            break;
-        }
-        else if (m_weak_parts[i]->m_frame == -1) {
-            parts = m_weak_parts[i];
-        }
-    }
+    CollisionParts *parts = find_collision_parts(m_weak_parts);
 
     if (parts) {
         const Sprite *spr = object->get_sprite();
@@ -511,4 +517,30 @@ bool Object::check_weak_collision(Object *object,
     return result;
 }
 
+bool Object::check_shielded_collision(Object *object) const
+{
+    bool result = false;
+    CollisionParts *parts = find_collision_parts(m_shielded_parts);
+
+    if (parts) {
+        const Sprite *spr = object->get_sprite();
+        for (int i = 0; i < parts->m_parts.size(); i++) {
+            CollisionPart *part = parts->m_parts[i];
+            result = spr->check_collision(object->get_frame(),
+                                          object->get_x(),
+                                          object->get_y(),
+                                          get_sprite(), m_frame,
+                                          m_x, m_y,
+                                          part->x1,
+                                          part->y1,
+                                          part->x2,
+                                          part->y2);
+            if (result) {
+                break;
+            }
+        }
+    }
+
+    return result;
+}
 

@@ -3,7 +3,7 @@
 
 #include "phoboz/timer.h"
 #include "player.h"
-#include "bullet.h"
+#include "vector_bullet.h"
 
 class Dragon : public Player {
 public:
@@ -16,7 +16,7 @@ public:
 private:
     bool m_attack_ready;
     Timer m_attack_timer;
-    Bullet *m_bullet;
+    VectorBullet *m_bullet;
 };
 
 #endif

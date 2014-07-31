@@ -4,7 +4,7 @@
 #include <vector>
 #include "phoboz/timer.h"
 #include "monster.h"
-#include "bullet.h"
+#include "vector_bullet.h"
 
 class MekaDragon : public Monster {
 public:
@@ -21,7 +21,7 @@ private:
 
     HorizontalDirection m_horizontal_dir;
     int m_bullet_index;
-    std::vector<Bullet*> m_bullets;
+    std::vector<VectorBullet*> m_bullets;
     bool m_attack_now;
     Timer m_attack_timer;
     Timer m_idle_timer;
