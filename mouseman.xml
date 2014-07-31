@@ -10,10 +10,10 @@
         <player type="knight"
                 jump_power="36"
                 jump_forward="3"
-                jump_time="4"
+                jump_time="3"
                 catapult_speed="12"
-                water_jump_power="19"
-                water_weight="2"
+                water_jump_power="24"
+                water_weight="3"
                 ap="60"
                 dp="20"
                 cp="40">

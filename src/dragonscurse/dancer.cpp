@@ -19,7 +19,7 @@ void Dancer::move(Map *map)
                 int y = m_yref - get_y();
                 if (x * x + y * y < dist * dist) {
                     m_attack_timer.reset();
-                    set_action(Jump);
+                    set_jump(map);
                     if (get_reference() == Right) {
                         set_speed(get_attribute("jump_forward"),
                                   -get_attribute("jump_speed"));

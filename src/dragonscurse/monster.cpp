@@ -35,10 +35,19 @@ void Monster::world_initialize(World *world)
     }
 }
 
-void Monster::reset_jump()
+void Monster::set_jump(Map *map)
+{
+    set_ay(-get_attribute("jump_power"));
+    set_action(Jump);
+}
+
+void Monster::reset_jump(bool reset)
 {
     set_ay(get_attribute("weight"));
-    m_jump_timer.reset();
+
+    if (reset) {
+        m_jump_timer.reset();
+    }
 }
 
 bool Monster::set_hit(Object *object)
@@ -117,10 +126,7 @@ void Monster::move(Map *map)
 
         case Jump:
             if (m_jump_timer.check(get_attribute("jump_time"))) {
-                set_ay(get_attribute("weight"));
-            }
-            else {
-                set_ay(-get_attribute("jump_power"));
+                reset_jump(false);
             }
             Body::move(map);
             if (get_fall()) {

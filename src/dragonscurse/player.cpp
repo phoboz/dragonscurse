@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string.h>
 #include "phoboz/ctrl.h"
 #include "morph.h"
@@ -13,14 +14,24 @@ Player::Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
     set_ay(get_attribute("weight"));
 }
 
-void Player::set_jump()
+void Player::set_jump(Map *map)
 {
-    if (m_in_water) {
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+
+    // Check if under water
+    int start = prop.GetNumericProperty("water_start");
+    int end = prop.GetNumericProperty("water_end");
+    if (start && !check_center(map, start, end) == 0) {
         set_ay(-get_attribute("water_jump_power"));
+        m_in_water = true;
     }
     else {
         set_ay(-get_attribute("jump_power"));
+        m_in_water = false;
     }
+
+    set_action(Jump);
 }
 
 void Player::reset_jump(bool reset)
@@ -35,28 +46,6 @@ void Player::reset_jump(bool reset)
     if (reset) {
         m_jump_timer.reset();
         set_vx(0);
-    }
-}
-
-void Player::set_water()
-{
-    m_in_water = true;
-    if (m_action == Jump) {
-        set_ay(-get_attribute("water_jump_power"));
-    }
-    else {
-        set_ay(get_attribute("water_weight"));
-    }
-}
-
-void Player::reset_water()
-{
-    m_in_water = false;
-    if (m_action != Jump) {
-        set_ay(get_attribute("weight"));
-    }
-    else {
-        set_ay(-get_attribute("jump_power"));
     }
 }
 
@@ -125,21 +114,11 @@ void Player::player_move(Map *map)
     const Tmx::Tileset *tileset = map->get_tileset(0);
     const Tmx::PropertySet prop = tileset->GetProperties();
 
-    // Check if under water
-    int start = prop.GetNumericProperty("water_start");
-    int end = prop.GetNumericProperty("water_end");
-    if (start && check_above(map, 1, start, end) == 0) {
-        set_water();
-    }
-    else {
-        reset_water();
-    }
-
     // Check if on catapult
     int catid = prop.GetNumericProperty("catapult");
     if (catid && check_below(map, 1, catid, catid) == 0) {
+        set_jump(map);
         set_vy(int(-get_attribute("catapult_speed")));
-        set_action(Jump);
     }
 
     int input = get_input();
@@ -152,13 +131,13 @@ void Player::player_move(Map *map)
             if (input & PRESS_JUMP) {
                 if (m_jump_ready) {
                     m_jump_ready = false;
-                    set_action(Jump);
                     if (input & PRESS_RIGHT) {
                         set_vx(get_attribute("jump_forward"));
                     }
                     else if (input & PRESS_LEFT) {
                         set_vx(-get_attribute("jump_forward"));
                     }
+                    set_jump(map);
                 }
             }
             else {
@@ -208,9 +187,6 @@ void Player::player_move(Map *map)
         case Jump:
             if (m_jump_timer.check(get_attribute("jump_time"))) {
                 reset_jump(false);
-            }
-            else {
-                set_jump();
             }
             Body::move(map);
             if (get_fall()) {

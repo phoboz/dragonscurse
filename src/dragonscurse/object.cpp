@@ -219,6 +219,14 @@ bool Object::check_collision(int x, int y, Map *map, int start, int end)
     return result;
 }
 
+bool Object::check_center(Map *map, int start, int end)
+{
+    int x = m_x + get_attribute("right") - get_attribute("left");
+    int y = m_y + get_attribute("bottom") - get_attribute("top");
+
+    return check_collision(x, y, map, start, end);
+}
+
 bool Object::check_below(Map *map, int start, int end)
 {
     bool result = false;

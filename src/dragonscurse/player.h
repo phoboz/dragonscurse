@@ -13,10 +13,8 @@ class Player : public Actor {
 public:
     Player(const char *fn, MediaDB *media, int x, int y, Direction dir);
 
-    void set_jump();
+    void set_jump(Map *map);
     void reset_jump(bool reset = true);
-    void set_water();
-    void reset_water();
     virtual bool set_hit(Object *object);
     virtual bool check_collision(Object *object) const;
 

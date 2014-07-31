@@ -113,6 +113,7 @@ protected:
     const char* get_string(const char *name) const;
 
     bool check_collision(int x, int y, Map *map, int start = 0, int end = 0);
+    bool check_center(Map *map, int start = 0, int end = 0);
     bool check_below(Map *map, int start = 0, int end = 0);
     int check_below(Map *map, int len, int start, int end);
     bool check_ahead(Map *map, int start = 0, int end = 0);

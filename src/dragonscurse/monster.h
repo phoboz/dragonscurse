@@ -15,7 +15,8 @@ public:
 
     bool get_hit_ground() const { return m_hit_ground; }
     void set_invinsible(bool value) { m_invinsible = value; }
-    void reset_jump();
+    void set_jump(Map *map);
+    void reset_jump(bool reset = true);
     virtual bool set_hit(Object *object);
 
     Object* release_object();
