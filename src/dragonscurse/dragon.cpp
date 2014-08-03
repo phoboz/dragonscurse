@@ -26,6 +26,22 @@ bool Dragon::attack_object(Object *object)
     return result;
 }
 
+bool Dragon::check_shielded_collision(Object *object) const
+{
+    bool result = Object::check_shielded_collision(object);
+    if (!result && m_bullet->get_active()) {
+        const Sprite *spr = object->get_sprite();
+        result = spr->check_collision(object->get_frame(),
+                                      object->get_x(), object->get_y(),
+                                      m_bullet->get_sprite(),
+                                      m_bullet->get_frame(),
+                                      m_bullet->get_x(), m_bullet->get_y());
+
+    }
+
+    return result;
+}
+
 void Dragon::move(Map *map)
 {
     int input = get_input();

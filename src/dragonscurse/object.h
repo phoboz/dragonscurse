@@ -97,7 +97,7 @@ public:
     bool check_weak_collision(Object *object,
                               int start_x1, int start_y1,
                               int end_x1, int end_y1) const;
-    bool check_shielded_collision(Object *object) const;
+    virtual bool check_shielded_collision(Object *object) const;
 
     virtual void move(Map *map) = 0;
     virtual void draw(SDL_Surface *dest, Map *map,
