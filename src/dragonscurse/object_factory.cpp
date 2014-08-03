@@ -12,7 +12,7 @@
 #include "crawler.h"
 #include "erupter.h"
 #include "guardian.h"
-#include "lock_flyer.h"
+#include "diver.h"
 #include "dancer.h"
 #include "falling.h"
 #include "meka_dragon.h"
@@ -138,8 +138,8 @@ Object* ObjectFactory::create_object(const char *name,
     else if (strcmp(type, "Guardian") == 0) {
         object = new Guardian(name, media, x, y, dir);
     }
-    else if (strcmp(type, "LockFlyer") == 0) {
-        object = new LockFlyer(name, media, x, y, dir);
+    else if (strcmp(type, "Diver") == 0) {
+        object = new Diver(name, media, x, y, dir);
     }
     else if (strcmp(type, "Dancer") == 0) {
         object = new Dancer(name, media, x, y, dir);

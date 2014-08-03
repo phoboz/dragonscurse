@@ -1,11 +1,12 @@
 <?xml version="1.0" ?>
 <bat>
-    <lock_flyer turn_width="80"
-                attack_timer="24"
-                attack_distance="120"
-                move_speed="4"
-                hit_time="12">
-        <monster hp="2"
+    <diver turn_width="80"
+           attack_distance="120"
+           fly_power="3"
+           dive_time="10"
+           weight="6"
+           hit_time="20">
+        <monster hp="20"
                  perish_time="40">
             <actor move_speed="2"
                    treshold="12"
@@ -28,6 +29,6 @@
             </actor>
             <string collectable="coin.xml" />
         </monster>
-    </lock_flyer>
+    </diver>
 </bat>
 

@@ -23,6 +23,9 @@ public:
 
     virtual void move(Map *map);
 
+protected:
+    void process_hit();
+
 private:
     int m_curr_hp;
     bool m_invinsible;

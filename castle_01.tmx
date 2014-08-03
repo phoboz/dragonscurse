@@ -110,12 +110,12 @@
     <property name="direction" value="left"/>
    </properties>
   </object>
-  <object name="bat_red.xml" type="LockFlyer" x="3695" y="497" width="32" height="32">
+  <object name="bat_red.xml" type="Diver" x="3695" y="497" width="32" height="32">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="bat_red.xml" type="LockFlyer" x="3979" y="497" width="32" height="32">
+  <object name="bat_red.xml" type="Diver" x="3979" y="497" width="32" height="32">
    <properties>
     <property name="direction" value="left"/>
    </properties>

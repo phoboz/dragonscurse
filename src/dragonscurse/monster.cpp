@@ -62,7 +62,7 @@ bool Monster::set_hit(Object *object)
             reset_jump();
             set_lock_direction(true);
 
-            // Move backwards and upwards
+            // Move backwards
             if (get_reference() == Right) {
                 set_speed(-get_attribute("move_speed"), 0);
             }
@@ -80,6 +80,23 @@ bool Monster::set_hit(Object *object)
     }
 
     return result;
+}
+
+void Monster::process_hit()
+{
+    if (m_hit == HitPerish) {
+        set_vx(0);
+        if (m_perish_timer.expired(get_attribute("perish_time"))) {
+            m_hit = HitPerished;
+        }
+    }
+    else if (m_hit_timer.expired(get_attribute("hit_time"))) {
+        m_hit_timer.reset();
+        set_vx(0);
+        set_lock_direction(false);
+        m_hit = HitNone;
+        set_action(Still);
+    }
 }
 
 Object* Monster::release_object()
@@ -137,19 +154,7 @@ void Monster::move(Map *map)
 
         case Hit:
             reset_jump();
-            if (m_hit == HitPerish) {
-                set_vx(0);
-                if (m_perish_timer.expired(get_attribute("perish_time"))) {
-                    m_hit = HitPerished;
-                }
-            }
-            else if (m_hit_timer.expired(get_attribute("hit_time"))) {
-                m_hit_timer.reset();
-                set_vx(0);
-                set_lock_direction(false);
-                m_hit = HitNone;
-                set_action(Still);
-            }
+            process_hit();
             Body::move(map);
             break;
 

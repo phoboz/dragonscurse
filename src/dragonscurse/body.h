@@ -31,6 +31,8 @@ public:
 
     virtual void move(Map *map);
 
+    void log() const;
+
 private:
     static const float c_sigma = 0.01f;
     static const float c_g = 0.1f;
