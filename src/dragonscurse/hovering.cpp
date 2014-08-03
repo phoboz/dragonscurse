@@ -1,15 +1,17 @@
-#include <stdlib.h>
-#include <vector>
-#include "erupter.h"
+#include <iostream>
+#include "hovering.h"
 
-Erupter::Erupter(const char *fn, MediaDB *media, int x, int y, Direction dir)
+Hovering::Hovering(const char *fn, MediaDB *media, int x, int y, Direction dir)
     : Monster(fn, media, x, y, dir)
 {
+    set_ay(0);
+    set_solid(false);
+
     const char* bullet_name = get_string("bullet");
     int num_bullets = get_attribute("num_bullets");
 
     for (int i = 0; i < num_bullets; i++) {
-        GravityBullet *bullet = new GravityBullet(bullet_name, media);
+        SolidBullet *bullet = new SolidBullet(bullet_name, media);
         if (!bullet->get_loaded()) {
             exit(1);
         }
@@ -17,7 +19,7 @@ Erupter::Erupter(const char *fn, MediaDB *media, int x, int y, Direction dir)
     }
 }
 
-bool Erupter::attack_object(Object *object)
+bool Hovering::attack_object(Object *object)
 {
     bool result = false;
     unsigned n = m_bullets.size();
@@ -32,53 +34,60 @@ bool Erupter::attack_object(Object *object)
     return result;
 }
 
-void Erupter::fire()
+void Hovering::fire()
 {
     bool result = false;
 
     unsigned n = m_bullets.size();
     for (int i = 0; i < n; i++) {
         if (!m_bullets[i]->get_active()) {
-            int dx = rand() % (get_attribute("fire_dx") - 1) + 1;
-            int dy = get_attribute("fire_dy");
+            int dx = get_attribute("bullet_speed");
             if (get_reference() == Right) {
-                result = m_bullets[i]->fire(m_x, m_y, dx, -dy);
+                result = m_bullets[i]->fire(m_x, m_y, dx, 0);
             }
             else {
-                result = m_bullets[i]->fire(m_x, m_y, -dx, -dy);
+                result = m_bullets[i]->fire(m_x, m_y, -dx, 0);
             }
+        }
 
-            if (result) {
-                set_attack();
-                break;
-            }
+        if (result) {
+            break;
         }
     }
 }
 
-void Erupter::move(Map *map)
+void Hovering::move(Map *map)
 {
-    Monster::move(map);
-
     switch(m_action) {
         case Still:
-            if (m_attack_timer.check(get_attribute("attack_timer"))) {
-                m_attack_timer.reset();
+            set_action(Move);
+            break;
+
+        case Move:
+            face_reference(get_attribute("turn_width"));
+            animate_move();
+            if (m_dir == Right) {
+                set_vx(get_attribute("move_speed"));
+            }
+            else {
+                set_vx(-get_attribute("move_speed"));
+            }
+
+            if (m_attack_timer.expired(get_attribute("attack_timer"))) {
                 int dist = get_attribute("attack_distance");
                 int x = m_xref - get_front();
                 int y = m_yref - get_y();
                 if (x * x + y * y < dist * dist) {
-                    m_attack_timer.reset();
                     fire();
                 }
             }
+            Body::move(map);
             break;
 
-        case MediumAttack:
-            if (m_anim_timer.expired(get_attribute("treshold"))) {
-                m_attack_timer.reset();
-                reset_attack();
-            }
+        case Hit:
+            set_vy(0);
+            process_hit();
+            Monster::move(map);
             break;
 
         default:
@@ -92,8 +101,8 @@ void Erupter::move(Map *map)
     }
 }
 
-void Erupter::draw(SDL_Surface *dest, Map *map,
-                   int clip_x, int clip_y, int clip_w, int clip_h)
+void Hovering::draw(SDL_Surface *dest, Map *map,
+                    int clip_x, int clip_y, int clip_w, int clip_h)
 {
     Monster::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
 

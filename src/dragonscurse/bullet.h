@@ -22,19 +22,20 @@ public:
     }
 
 protected:
-    Bullet(const char *fn, MediaDB *media)
-        : Body(Object::TypeBullet),
-          m_active(false), m_ready(true),
-          m_distance(0), m_hit_one(false) { load(fn, media); }
+    Bullet(const char *fn, MediaDB *media);
 
     void reload(bool active);
 
 private:
+    void animate_move();
+
     bool m_hit_one;
     bool m_ready;
     bool m_active;
+    bool m_animated;
     int m_distance;
     Timer m_reload_timer;
+    Timer m_anim_timer;
 };
 
 #endif

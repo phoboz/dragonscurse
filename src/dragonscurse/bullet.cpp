@@ -1,16 +1,33 @@
+#include <iostream>
 #include <math.h>
 #include "bullet.h"
 
+Bullet::Bullet(const char *fn, MediaDB *media)
+    : Body(Object::TypeBullet),
+      m_active(false), m_ready(true),
+      m_distance(0), m_hit_one(false)
+{
+    load(fn, media);
+    if (get_attribute("treshold")) {
+        m_animated = true;
+    }
+    else {
+        m_animated = false;
+    }
+}
+
 void Bullet::set_dir(Direction dir)
 {
-    if (dir == Right) {
-        m_frame = get_attribute("right_move_start");
-    }
-    else if (dir == Left) {
-        m_frame = get_attribute("left_move_start");
-    }
+    if (dir != m_dir) {
+        if (dir == Right) {
+            m_frame = get_attribute("right_move_start");
+        }
+        else if (dir == Left) {
+            m_frame = get_attribute("left_move_start");
+        }
 
-    Body::set_dir(dir);
+        m_dir = dir;
+    }
 }
 
 void Bullet::reload(bool active)
@@ -43,6 +60,28 @@ bool Bullet::hit_object(Object *object)
     return result;
 }
 
+void Bullet::animate_move()
+{
+    if (m_anim_timer.expired(get_attribute("treshold"))) {
+        switch(m_dir) {
+            case Right:
+                if (++m_frame > get_attribute("right_move_end")) {
+                    m_frame = get_attribute("right_move_start");
+                }
+                break;
+
+            case Left:
+                if (++m_frame > get_attribute("left_move_end")) {
+                    m_frame = get_attribute("left_move_start");
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+}
+
 void Bullet::move(Map *map)
 {
     if (m_reload_timer.expired(get_attribute("reload_time"))) {
@@ -50,6 +89,10 @@ void Bullet::move(Map *map)
     }
 
     if (m_active) {
+        if (m_animated) {
+            animate_move();
+        }
+
         if (m_distance < get_attribute("distance")) {
             Body::move(map);
             if (get_moving()) {

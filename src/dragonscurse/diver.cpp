@@ -1,4 +1,3 @@
-#include <iostream>
 #include "diver.h"
 
 Diver::Diver(const char *fn, MediaDB *media, int x, int y, Direction dir)
@@ -26,7 +25,7 @@ void Diver::move(Map *map)
                 int y = m_yref - get_y();
                 if (x * x + y * y < dist * dist) {
                     set_ay(get_attribute("weight"));
-                    if (get_reference() == Right) {
+                    if (m_dir == Right) {
                         set_vx(get_attribute("move_speed"));
                     }
                     else {

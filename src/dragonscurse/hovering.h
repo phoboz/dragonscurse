@@ -1,0 +1,28 @@
+#ifndef _Hovering_H
+#define _Hovering_H
+
+#include <vector>
+#include "phoboz/timer.h"
+#include "monster.h"
+#include "solid_bullet.h"
+
+class Hovering : public Monster {
+public:
+    Hovering(const char *fn, MediaDB *media, int x, int y, Direction dir);
+
+    bool attack_object(Object *object);
+
+    virtual void move(Map *map);
+
+    virtual void draw(SDL_Surface *dest, Map *map,
+                      int clip_x, int clip_y, int clip_w, int clip_h);
+
+private:
+    void fire();
+
+    Timer m_attack_timer;
+    std::vector<SolidBullet*> m_bullets;
+};
+
+#endif
+

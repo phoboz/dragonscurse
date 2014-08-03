@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<hovering_smog>
+    <hovering turn_width="180"
+              attack_distance="600"
+              attack_timer="80"
+              num_bullets="3"
+              bullet_speed="3"
+              hit_time="20">
+        <monster hp="2"
+                 perish_time="40">
+            <actor move_speed="4"
+                   treshold="16"
+                   right_still="3"
+                   right_move_start="3" right_move_end="4"
+                   right_fall="3"
+                   right_attack="3"
+                   right_hit="3"
+                   right_perish="2"
+                   left_still="0"
+                   left_move_start="0" left_move_end="1"
+                   left_fall="0"
+                   left_attack="0"
+                   left_hit="0"
+                   left_perish="2">
+                <object image="hovering_smog_red.png"
+                        left="0" right="50" top="0" bottom="34">
+                    <weak_parts frame="-1">
+                        <weak_part x1="0" y1="0" x2="50" y2="34" />
+                    </weak_parts>
+                </object>
+            </actor>
+            <string collectable="coin.xml" />
+        </monster>
+    </hovering>
+    <string bullet="burning.xml" />
+</hovering_smog>
+

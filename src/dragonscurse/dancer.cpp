@@ -12,7 +12,7 @@ void Dancer::move(Map *map)
         case Move:
             face_reference(get_attribute("turn_width"));
             animate_move();
-            if (get_reference() == Right) {
+            if (m_dir == Right) {
                 set_vx(get_attribute("move_speed"));
             }
             else {
