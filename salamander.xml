@@ -10,7 +10,7 @@
                 jump_power="48"
                 jump_forward="3"
                 jump_time="3"
-                catapult_speed="13"
+                catapult_time="6"
                 water_jump_power="26"
                 water_weight="4"
                 ap="0"

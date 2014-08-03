@@ -14,7 +14,7 @@ Player::Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
     set_ay(get_attribute("weight"));
 }
 
-void Player::set_jump(Map *map)
+void Player::set_jump(Map *map, int time)
 {
     const Tmx::Tileset *tileset = map->get_tileset(0);
     const Tmx::PropertySet prop = tileset->GetProperties();
@@ -31,6 +31,7 @@ void Player::set_jump(Map *map)
         m_in_water = false;
     }
 
+    m_jump_time = time;
     set_action(Jump);
 }
 
@@ -117,8 +118,7 @@ void Player::player_move(Map *map)
     // Check if on catapult
     int catid = prop.GetNumericProperty("catapult");
     if (catid && check_below(map, 1, catid, catid) == 0) {
-        set_jump(map);
-        set_vy(-get_attribute("catapult_speed"));
+        set_jump(map, get_attribute("catapult_time"));
     }
 
     int input = get_input();
@@ -137,7 +137,7 @@ void Player::player_move(Map *map)
                     else if (input & PRESS_LEFT) {
                         set_vx(-get_attribute("jump_forward"));
                     }
-                    set_jump(map);
+                    set_jump(map, get_attribute("jump_time"));
                 }
             }
             else {
@@ -185,7 +185,7 @@ void Player::player_move(Map *map)
             break;
 
         case Jump:
-            if (m_jump_timer.check(get_attribute("jump_time"))) {
+            if (m_jump_timer.check(m_jump_time)) {
                 reset_jump(false);
             }
             Body::move(map);
