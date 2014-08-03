@@ -1,5 +1,61 @@
 #include "guardian.h"
 
+Guardian::Guardian(const char *fn, MediaDB *media, int x, int y, Direction dir)
+    : Monster(fn, media, x, y, dir)
+{
+    const char* bullet_name = get_string("bullet");
+    int num_bullets = get_attribute("num_bullets");
+
+    for (int i = 0; i < num_bullets; i++) {
+        VectorBullet *bullet = new VectorBullet(bullet_name, media);
+        if (!bullet->get_loaded()) {
+            exit(1);
+        }
+        m_bullets.push_back(bullet);
+    }
+}
+
+bool Guardian::attack_object(Object *object)
+{
+    bool result = false;
+    unsigned n = m_bullets.size();
+
+    for (int i = 0; i < n; i++) {
+        if (m_bullets[i]->hit_object(object)) {
+            result = true;
+            break;
+        }
+    }
+
+    return result;
+}
+
+void Guardian::fire()
+{
+    bool result = false;
+
+    unsigned n = m_bullets.size();
+    for (int i = 0; i < n; i++) {
+        if (!m_bullets[i]->get_active()) {
+            int dx = get_attribute("bullet_speed");
+            if (get_reference() == Right) {
+                result = m_bullets[i]->fire(m_x + get_attribute("attack_right"),
+                                            m_y + get_attribute("attack_medium"),
+                                            dx, 0);
+            }
+            else {
+                result = m_bullets[i]->fire(m_x + get_attribute("attack_left"),
+                                            m_y + get_attribute("attack_medium"),
+                                            -dx, 0);
+            }
+
+            if (result) {
+                break;
+            }
+        }
+    }
+}
+
 void Guardian::move(Map *map)
 {
     Monster::move(map);
@@ -30,8 +86,30 @@ void Guardian::move(Map *map)
             }
             break;
 
+        case Fall:
+            fire();
+            break;
+
         default:
             break;
+    }
+
+    // Move bullets
+    unsigned n = m_bullets.size();
+    for (unsigned i = 0; i < n; i++) {
+        m_bullets[i]->move(map);
+    }
+}
+
+void Guardian::draw(SDL_Surface *dest, Map *map,
+                    int clip_x, int clip_y, int clip_w, int clip_h)
+{
+    Monster::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
+
+    // Draw bullets
+    unsigned n = m_bullets.size();
+    for (unsigned i = 0; i < n; i++) {
+        m_bullets[i]->draw(dest, map, clip_x, clip_y, clip_w, clip_h);
     }
 }
 

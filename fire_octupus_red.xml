@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<fire_octupus>
+    <guardian attack_timer="64"
+              attack_distance="80"
+              attack_left="2"
+              attack_right="42"
+              attack_medium="18"
+              jump_power="20"
+              jump_forward="0"
+              jump_time="6"
+              num_bullets="1"
+              bullet_speed="3"
+              hit_time="24">
+        <monster hp="6"
+                 perish_time="40">
+            <actor move_speed="2"
+                   treshold="12"
+                   weight="4"
+                   right_still="3"
+                   right_move_start="3" right_move_end="4"
+                   right_jump="3"
+                   right_fall="3"
+                   right_hit="2"
+                   right_perish="2"
+                   left_still="0"
+                   left_move_start="0" left_move_end="1"
+                   left_jump="0"
+                   left_fall="0"
+                   left_hit="2"
+                   left_perish="2">
+                <object image="fire_octupus_red.png"
+                        left="2" right="42" top="2" bottom="46">
+                    <weak_parts frame="-1">
+                        <weak_part x1="2" y1="2" x2="42" y2="46" />
+                    </weak_parts>
+                </object>
+            </actor>
+            <string collectable="coin.xml" />
+        </monster>
+        <string bullet="ember_red.xml" />
+    </guardian>
+</fire_octupus>
+

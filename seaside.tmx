@@ -184,6 +184,31 @@
     <property name="direction" value="left"/>
    </properties>
   </object>
+  <object name="side_crawler_red.xml" type="Crawler" x="629" y="727" width="38" height="38">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="side_crawler_red.xml" type="Crawler" x="1076" y="727" width="38" height="38">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="fire_octupus_red.xml" type="Guardian" x="1257" y="685" width="44" height="48"/>
+  <object name="fire_octupus_red.xml" type="Guardian" x="1353" y="653" width="44" height="48"/>
+  <object name="side_crawler_red.xml" type="Crawler" x="1503" y="727" width="38" height="38">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_octupus_red.xml" type="Guardian" x="1673" y="717" width="44" height="48"/>
+  <object name="fire_octupus_red.xml" type="Guardian" x="1769" y="685" width="44" height="48"/>
+  <object name="fire_octupus_red.xml" type="Guardian" x="1865" y="653" width="44" height="48"/>
+  <object name="side_crawler_red.xml" type="Crawler" x="2006" y="727" width="38" height="38">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="273" height="36">
   <data encoding="base64">
