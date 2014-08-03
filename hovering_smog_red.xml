@@ -6,7 +6,7 @@
               num_bullets="3"
               bullet_speed="3"
               hit_time="20">
-        <monster hp="2"
+        <monster hp="1"
                  perish_time="40">
             <actor move_speed="4"
                    treshold="16"

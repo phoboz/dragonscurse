@@ -61,7 +61,7 @@ void Falling::move(Map *map)
             }
             {
                 if (!get_fall()) {
-                    Actor::set_hit(0);
+                    Actor::set_hit();
                     set_perish();
                 }
             }

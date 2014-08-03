@@ -7,7 +7,7 @@
             jump_forward="7"
             jump_time="4"
             hit_time="24">
-        <monster hp="1"
+        <monster hp="3"
                  perish_time="40">
             <actor move_speed="2"
                    treshold="12"

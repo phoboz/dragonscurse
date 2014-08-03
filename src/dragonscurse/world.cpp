@@ -149,7 +149,7 @@ Area* World::move(Player *player,
                     }
                 }
                 if (player->attack_object(monster)) {
-                    monster->set_hit(player);
+                    monster->set_hit(player, m_db->get_status());
                 }
                 if (monster->get_hit() == Actor::HitPerished) {
                     perished.push_back(monster);

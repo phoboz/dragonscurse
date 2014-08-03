@@ -4,6 +4,8 @@
 #include "phoboz/timer.h"
 #include "body.h"
 
+class Status;
+
 class Actor : public Body {
 public:
     enum Action {
@@ -25,7 +27,7 @@ public:
           m_action(Still), m_hit(HitNone),
           m_invisible(false) { }
 
-    virtual bool set_hit(Object *object);
+    virtual bool set_hit(Object *object = 0, Status *status = 0);
     void reset_hit();
     void set_perish();
     HitType get_hit() const { return m_hit; }

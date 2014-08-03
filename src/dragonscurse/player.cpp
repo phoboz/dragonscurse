@@ -50,7 +50,7 @@ void Player::reset_jump(bool reset)
     }
 }
 
-bool Player::set_hit(Object *object)
+bool Player::set_hit(Object *object, Status *status)
 {
     bool result = false;
 

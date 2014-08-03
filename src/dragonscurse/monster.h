@@ -17,7 +17,7 @@ public:
     void set_invinsible(bool value) { m_invinsible = value; }
     void set_jump(Map *map);
     void reset_jump(bool reset = true);
-    virtual bool set_hit(Object *object);
+    virtual bool set_hit(Object *object, Status *status);
 
     Object* release_object();
 

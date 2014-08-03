@@ -50,7 +50,7 @@ void Monster::reset_jump(bool reset)
     }
 }
 
-bool Monster::set_hit(Object *object)
+bool Monster::set_hit(Object *object, Status *status)
 {
     bool result = false;
 
@@ -71,8 +71,7 @@ bool Monster::set_hit(Object *object)
             }
 
             // Reduce hp
-            // TODO: Get attackers attack power
-            m_curr_hp--;
+            m_curr_hp -= status->get_ap();
             if (m_curr_hp <= 0) {
                 set_perish();
             }
