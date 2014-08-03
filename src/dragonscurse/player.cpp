@@ -118,7 +118,7 @@ void Player::player_move(Map *map)
     int catid = prop.GetNumericProperty("catapult");
     if (catid && check_below(map, 1, catid, catid) == 0) {
         set_jump(map);
-        set_vy(int(-get_attribute("catapult_speed")));
+        set_vy(-get_attribute("catapult_speed"));
     }
 
     int input = get_input();
