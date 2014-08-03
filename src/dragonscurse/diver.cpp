@@ -14,11 +14,11 @@ void Diver::move(Map *map)
 {
     switch(m_action) {
         case Still:
-            face_reference();
             set_action(Move);
             break;
 
         case Move:
+            face_reference(get_attribute("turn_width"));
             animate_move();
             if (!m_flying) {
                 int dist = get_attribute("attack_distance");

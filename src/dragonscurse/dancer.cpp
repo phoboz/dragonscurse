@@ -12,6 +12,12 @@ void Dancer::move(Map *map)
         case Move:
             face_reference(get_attribute("turn_width"));
             animate_move();
+            if (get_reference() == Right) {
+                set_vx(get_attribute("move_speed"));
+            }
+            else {
+                set_vx(-get_attribute("move_speed"));
+            }
 
             if (m_attack_timer.check(get_attribute("attack_timer"))) {
                 int dist = get_attribute("attack_distance");
@@ -28,14 +34,6 @@ void Dancer::move(Map *map)
                         set_speed(-get_attribute("jump_forward"),
                                   -get_attribute("jump_speed"));
                     }
-                }
-            }
-            else {
-                if (m_dir == Right) {
-                    set_vx(get_attribute("move_speed"));
-                }
-                else {
-                    set_vx(-get_attribute("move_speed"));
                 }
             }
             break;
