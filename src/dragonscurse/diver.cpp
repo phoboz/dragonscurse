@@ -57,6 +57,7 @@ void Diver::move(Map *map)
             break;
 
         case Hit:
+        case HitPerish:
             set_ay(0);
             set_vy(0);
             process_hit();

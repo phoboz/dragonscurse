@@ -1,8 +1,9 @@
-#include <iostream>
 #include "hovering.h"
 
-Hovering::Hovering(const char *fn, MediaDB *media, int x, int y, Direction dir)
-    : Monster(fn, media, x, y, dir)
+Hovering::Hovering(const char *fn, MediaDB *media, int x, int y, int w,
+                   Direction dir)
+    : Monster(fn, media, x + w / 2, y, dir),
+      m_x0(x), m_x1(x + w)
 {
     set_ay(0);
     set_solid(false);
@@ -67,10 +68,20 @@ void Hovering::move(Map *map)
             face_reference(get_attribute("turn_width"));
             animate_move();
             if (m_dir == Right) {
-                set_vx(get_attribute("move_speed"));
+                if (m_x < m_x1) {
+                    set_vx(get_attribute("move_speed"));
+                }
+                else {
+                    set_vx(0);
+                }
             }
             else {
-                set_vx(-get_attribute("move_speed"));
+                if (m_x > m_x0) {
+                    set_vx(-get_attribute("move_speed"));
+                }
+                else {
+                    set_vx(0);
+                }
             }
 
             if (m_attack_timer.expired(get_attribute("attack_timer"))) {
@@ -85,6 +96,7 @@ void Hovering::move(Map *map)
             break;
 
         case Hit:
+        case HitPerish:
             set_vy(0);
             process_hit();
             Monster::move(map);

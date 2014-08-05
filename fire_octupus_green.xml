@@ -11,7 +11,7 @@
               num_bullets="1"
               bullet_speed="3"
               hit_time="24">
-        <monster hp="3"
+        <monster hp="6"
                  perish_time="40">
             <actor move_speed="2"
                    treshold="12"
@@ -28,7 +28,7 @@
                    left_fall="0"
                    left_hit="2"
                    left_perish="2">
-                <object image="fire_octupus_red.png"
+                <object image="fire_octupus_green.png"
                         left="2" right="42" top="2" bottom="46">
                     <weak_parts frame="-1">
                         <weak_part x1="2" y1="2" x2="42" y2="46" />

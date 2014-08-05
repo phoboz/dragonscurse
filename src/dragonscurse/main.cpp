@@ -165,6 +165,12 @@ void move()
     if (state == StateMap) {
         Area *area = world->move(player, 0, Statusbar::get_height(),
                                  screen_width, screen_height);
+
+        if (player->get_action() == Actor::HitPerished) {
+            printf("Player perished\n");
+            exit(0);
+        }
+
         if (area) {
             load_area(area->get_name(),
                       area->get_type() == Area::TypeCurse, area->get_data(),

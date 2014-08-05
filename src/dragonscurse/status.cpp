@@ -162,6 +162,18 @@ void Status::aquire_shape(Player *player)
     update();
 }
 
+bool Status::set_hit(int ap)
+{
+    bool result = false;
+
+    m_hp -= ap;
+    if (m_hp <= 0) {
+        result = true;
+    }
+
+    return result;
+}
+
 void Status::show() const
 {
 
@@ -170,6 +182,7 @@ void Status::show() const
     std::cout << "DP: " << "\t" << m_dp << std::endl;
     std::cout << "CP: " << "\t" << m_cp << std::endl;
     std::cout << "Gold: " << "\t" << m_gold << std::endl;
+    std::cout << "HP: " << "\t" << m_hp << std::endl;
     std::cout << std::endl;
 
     std::cout << "Items:" << std::endl;

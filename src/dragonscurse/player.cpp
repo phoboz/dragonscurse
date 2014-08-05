@@ -1,6 +1,6 @@
-#include <iostream>
 #include <string.h>
 #include "phoboz/ctrl.h"
+#include "status.h"
 #include "morph.h"
 #include "item.h"
 #include "player.h"
@@ -72,8 +72,15 @@ bool Player::set_hit(Object *object, Status *status)
                           -get_attribute("weight"));
             }
 
-            // Make player invisible for a certain time
-            set_invisible(true);
+            // TODO: Use monsters actual attack power
+            if (status->set_hit(1)) {
+                // Health exhausted
+                set_perish();
+            }
+            else {
+                // Make player invisible for a certain time
+                set_invisible(true);
+            }
         }
     }
 
@@ -206,13 +213,16 @@ void Player::player_move(Map *map)
 
         case Hit:
             if (m_hit_timer.expired(get_attribute("hit_time"))) {
-                m_hit_timer.reset();
                 set_vx(0);
                 set_lock_direction(false);
-                m_hit = HitNone;
-                set_action(Still);
+                reset_hit();
             }
             Body::move(map);
+            break;
+
+        case HitPerish:
+            set_vx(0);
+            set_action(HitPerished);
             break;
 
         default:

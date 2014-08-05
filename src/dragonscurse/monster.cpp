@@ -54,9 +54,8 @@ bool Monster::set_hit(Object *object, Status *status)
 {
     bool result = false;
 
-    if (!m_invinsible && m_hit == HitNone) {
+    if (!m_invinsible) {
         result = Actor::set_hit(object);
-
         if (result) {
 
             reset_jump();
@@ -83,18 +82,16 @@ bool Monster::set_hit(Object *object, Status *status)
 
 void Monster::process_hit()
 {
-    if (m_hit == HitPerish) {
+    if (m_action == HitPerish) {
         set_vx(0);
         if (m_perish_timer.expired(get_attribute("perish_time"))) {
-            m_hit = HitPerished;
+            set_action(HitPerished);
         }
     }
     else if (m_hit_timer.expired(get_attribute("hit_time"))) {
-        m_hit_timer.reset();
         set_vx(0);
         set_lock_direction(false);
-        m_hit = HitNone;
-        set_action(Still);
+        reset_hit();
     }
 }
 
@@ -152,6 +149,7 @@ void Monster::move(Map *map)
             break;
 
         case Hit:
+        case HitPerish:
             reset_jump();
             process_hit();
             Body::move(map);

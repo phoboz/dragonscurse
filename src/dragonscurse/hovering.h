@@ -8,7 +8,8 @@
 
 class Hovering : public Monster {
 public:
-    Hovering(const char *fn, MediaDB *media, int x, int y, Direction dir);
+    Hovering(const char *fn, MediaDB *media, int x, int y, int w,
+             Direction dir);
 
     bool attack_object(Object *object);
 
@@ -20,6 +21,7 @@ public:
 private:
     void fire();
 
+    int m_x0, m_x1;
     Timer m_attack_timer;
     std::vector<SolidBullet*> m_bullets;
 };

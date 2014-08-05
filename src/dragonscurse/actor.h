@@ -14,23 +14,23 @@ public:
         Fall,
         Jump,
         Crouch,
-        MediumAttack,
-        LowAttack,
-        Hit
+        AttackMedium,
+        AttackLow,
+        Hit,
+        HitPerish,
+        HitPerished
     };
-
-    enum HitType { HitNone, HitOne, HitPerish, HitPerished };
 
     Actor(Type type, int x, int y, Direction dir)
         : Body(type, x, y, dir),
           m_anim_dir(AnimUp),
-          m_action(Still), m_hit(HitNone),
+          m_action(Still),
           m_invisible(false) { }
 
     virtual bool set_hit(Object *object = 0, Status *status = 0);
     void reset_hit();
     void set_perish();
-    HitType get_hit() const { return m_hit; }
+    Action get_action() const { return m_action; }
     bool get_invisible() const { return m_invisible; }
 
     virtual bool attack_object(Object *object) { return false; }
@@ -55,7 +55,6 @@ protected:
 
     AnimDirection m_anim_dir;
     Action m_action;
-    HitType m_hit;
     bool m_invisible;
     Timer m_anim_timer;
     Timer m_blink_timer;

@@ -69,7 +69,7 @@ void Actor::set_dir(Direction dir)
             }
             break;
 
-        case MediumAttack:
+        case AttackMedium:
             if (set_dir == Right) {
                 m_frame = get_attribute("right_attack");
             }
@@ -78,7 +78,7 @@ void Actor::set_dir(Direction dir)
             }
             break;
 
-        case LowAttack:
+        case AttackLow:
            if (set_dir == Right) {
                 m_frame = get_attribute("right_attack_low");
             }
@@ -122,17 +122,17 @@ void Actor::swap_move_dir()
 void Actor::set_attack(void)
 {
     if (m_action == Crouch) {
-        set_action(LowAttack);
+        set_action(AttackLow);
     }
     else {
-        set_action(MediumAttack);
+        set_action(AttackMedium);
     }
     set_vx(0);
 }
 
 void Actor::reset_attack()
 {
-    if (m_action == LowAttack) {
+    if (m_action == AttackLow) {
         set_action(Crouch);
     }
     else {
@@ -226,9 +226,8 @@ bool Actor::set_hit(Object *object, Status *status)
 {
     int result = false;
 
-    if (!m_invisible) {
+    if (!m_invisible && m_action != HitPerish) {
         set_action(Hit);
-        m_hit = HitOne;
         result = true;
     }
 
@@ -238,7 +237,7 @@ bool Actor::set_hit(Object *object, Status *status)
 void Actor::reset_hit()
 {
     set_action(Still);
-    m_hit = HitNone;
+    set_dir(Keep);
 }
 
 void Actor::set_perish()
@@ -256,7 +255,7 @@ void Actor::set_perish()
         default:
             break;
     }
-    m_hit = HitPerish;
+    set_action(HitPerish);
 }
 
 void Actor::move(Map *map)

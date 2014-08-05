@@ -31,48 +31,46 @@ void Falling::move(Map *map)
 
     switch(m_action) {
         case Still:
-            if (m_hit == HitNone) {
-                dist = get_attribute("attack_distance");
-                if (dist) {
-                    x = m_xref - get_front();
-                    if (abs(x) < dist) {
-                        tmr = get_attribute("trigger_time");
-                        if (tmr) {
-                            if (m_trigger_timer.expired(tmr)) {
-                                fall();
-                            }
-                        }
-                        else {
+            dist = get_attribute("attack_distance");
+            if (dist) {
+                x = m_xref - get_front();
+                if (abs(x) < dist) {
+                    tmr = get_attribute("trigger_time");
+                    if (tmr) {
+                        if (m_trigger_timer.expired(tmr)) {
                             fall();
                         }
                     }
+                    else {
+                        fall();
+                    }
                 }
-                else {
-                    fall();
-                }
+            }
+            else {
+                fall();
             }
             break;
 
         case Fall:
-            Body::move(map);
             dist = get_attribute("freefall_distance");
             if (m_fall_distance >= dist) {
                 set_solid(true);
             }
-            {
-                if (!get_fall()) {
-                    Actor::set_hit();
-                    set_perish();
-                }
+
+            Body::move(map);
+            if (!get_fall()) {
+                Actor::set_hit();
+                set_perish();
             }
             m_fall_distance += m_dy;
+            break;
 
-            if (m_hit == HitPerish) {
-                if (get_attribute("stay")) {
-                    map->set_tile_id(get_x() + get_image_width() / 4,
-                                     get_y() + get_image_height() / 4,
-                                     0, 1);
-                }
+        case HitPerish:
+            process_hit();
+            if (get_attribute("stay")) {
+                map->set_tile_id(get_x() + get_image_width() / 4,
+                                 get_y() + get_image_height() / 4,
+                                 0, 1);
             }
             break;
 

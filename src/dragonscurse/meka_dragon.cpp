@@ -117,11 +117,9 @@ void MekaDragon::move(Map *map)
             }
             break;
 
-        case MediumAttack:
-            if (m_hit == HitNone) {
-                if (m_idle_timer.check(get_attribute("attack_idle"))){
-                    fire();
-                }
+        case AttackMedium:
+            if (m_idle_timer.check(get_attribute("attack_idle"))){
+                fire();
             }
             break;
 

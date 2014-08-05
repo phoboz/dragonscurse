@@ -74,7 +74,7 @@ void Erupter::move(Map *map)
             }
             break;
 
-        case MediumAttack:
+        case AttackMedium:
             if (m_anim_timer.expired(get_attribute("treshold"))) {
                 m_attack_timer.reset();
                 reset_attack();

@@ -18,6 +18,7 @@ public:
           m_shield(0),
           m_armour(0),
           m_gold(34),
+          m_hp(200),
           m_shape(0) { update(); }
 
     void aquire_item(Item *item) { m_items.push_back(item); }
@@ -36,6 +37,8 @@ public:
     Item* get_equiped_item(Item::ItemType type) const;
 
     void aquire_shape(Player *player);
+
+    bool set_hit(int ap);
 
     int get_ap() const { return m_ap; }
     int get_dp() const { return m_dp; }
@@ -59,6 +62,7 @@ private:
     int m_dp;
     int m_cp;
     int m_gold;
+    int m_hp;
 };
 
 #endif

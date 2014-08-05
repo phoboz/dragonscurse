@@ -27,6 +27,8 @@
                 width="28" height="28" margin="1" spacing="1" />
         <sprite filename="falling_block.png"
                 width="32" height="32" margin="1" spacing="1" />
+        <sprite filename="fire_octupus_green.png"
+                width="44" height="48" margin="1" spacing="1" />
         <sprite filename="fire_octupus_red.png"
                 width="44" height="48" margin="1" spacing="1" />
         <sprite filename="fireball.png"
