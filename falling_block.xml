@@ -9,12 +9,11 @@
                    right_move_start="0" right_move_end="0"
                    right_fall="0"
                    right_hit="1"
-                   right_perish="1"
                    left_still="0"
                    left_move_start="0" left_move_end="0"
                    left_fall="0"
                    left_hit="1"
-                   left_perish="1">
+                   perish_start="1" perish_end="1">
                 <object image="falling_block.png"
                         left="0" right="32" top="0" bottom="32">
                     <weak_parts frame="-1">

@@ -15,13 +15,12 @@
                    right_fall="3"
                    right_attack="3"
                    right_hit="3"
-                   right_perish="2"
                    left_still="0"
                    left_move_start="0" left_move_end="1"
                    left_fall="0"
                    left_attack="0"
                    left_hit="0"
-                   left_perish="2">
+                   perish_start="2" perish_end="2">
                 <object image="hovering_smog_red.png"
                         left="0" right="50" top="0" bottom="34">
                     <weak_parts frame="-1">

@@ -6,13 +6,13 @@ void Crawler::check_ground(Map *map)
         if (m_dir == Right) {
             if (!check_collision(m_x + get_attribute("right"),
                                  m_y + get_attribute("bottom") + 1, map)) {
-                set_move_dir(Left);
+                set_dir(Left);
             }
         }
         else if (m_dir == Left) {
             if (!check_collision(m_x + get_attribute("left"),
                                  m_y + get_attribute("bottom") + 1, map)) {
-                set_move_dir(Right);
+                set_dir(Right);
             }
         }
     }

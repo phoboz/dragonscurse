@@ -71,11 +71,11 @@ void MekaDragon::move(Map *map)
 
     switch(m_action) {
         case Still:
-            face_reference(get_attribute("turn_width"));
             set_action(Move);
             break;
 
         case Move:
+            face_reference(get_attribute("turn_width"));
             set_lock_direction(true);
             if (m_horizontal_dir == HorizontalForward) {
 
@@ -105,8 +105,6 @@ void MekaDragon::move(Map *map)
                     check_behind(map)) {
                     m_horizontal_dir = HorizontalForward;
                 }
-
-                // TODO: Attack directly if pushed against wall
             }
 
             if (m_attack_now ||

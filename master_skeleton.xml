@@ -17,13 +17,12 @@
                    right_jump="3"
                    right_fall="3"
                    right_hit="2"
-                   right_perish="2"
                    left_still="0"
                    left_move_start="0" left_move_end="1"
                    left_jump="0"
                    left_fall="0"
                    left_hit="2"
-                   left_perish="2">
+                   perish_start="2" perish_end="2">
                 <object image="master_skeleton.png"
                         left="1" right="59" top="1" bottom="59">
                     <weak_parts frame="-1">

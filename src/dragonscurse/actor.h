@@ -29,7 +29,7 @@ public:
 
     virtual bool set_hit(Object *object = 0, Status *status = 0);
     void reset_hit();
-    void set_perish();
+    void set_perish(bool invisible = true);
     Action get_action() const { return m_action; }
     bool get_invisible() const { return m_invisible; }
 
@@ -40,15 +40,13 @@ public:
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
 protected:
-    // TODO: Remove
-    void set_move_dir(Direction dir = Keep) { set_dir(dir); set_action(Move); }
-
     void set_action(Action action);
     virtual void set_dir(Direction dir = Keep);
     void swap_move_dir();
     void set_attack();
     void reset_attack();
     void animate_move();
+    void animate_perish();
     virtual Object::Direction get_reference() const;
     void face_reference(int width = 0);
     void set_invisible(bool invisible);

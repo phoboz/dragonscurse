@@ -107,11 +107,11 @@ void Actor::swap_move_dir()
 {
     switch(m_dir) {
         case Right:
-            set_move_dir(Left);
+            set_dir(Left);
             break;
 
         case Left:
-            set_move_dir(Right);
+            set_dir(Right);
             break;
 
         default:
@@ -176,6 +176,15 @@ void Actor::animate_move()
     }
 }
 
+void Actor::animate_perish()
+{
+    if (m_anim_timer.expired(get_attribute("treshold"))) {
+        if (++m_frame > get_attribute("perish_end")) {
+            m_frame = get_attribute("perish_start");
+        }
+    }
+}
+
 Object::Direction Actor::get_reference() const
 {
     Direction dir;
@@ -203,13 +212,13 @@ void Actor::face_reference(int width)
     }
 
     if (abs(m_xref - get_front()) < check_width) {
-        set_move_dir();
+        set_dir();
     }
     else if (m_xref > get_front()) {
-        set_move_dir(Right);
+        set_dir(Right);
     }
     else if (m_xref < get_front()) {
-        set_move_dir(Left);
+        set_dir(Left);
     }
 }
 
@@ -240,16 +249,16 @@ void Actor::reset_hit()
     set_dir(Keep);
 }
 
-void Actor::set_perish()
+void Actor::set_perish(bool invisible)
 {
-    set_invisible(true);
+    set_invisible(invisible);
     switch(m_dir) {
         case Right:
-            m_frame = get_attribute("right_perish");
+            m_frame = get_attribute("perish_start");
             break;
 
         case Left:
-            m_frame = get_attribute("left_perish");
+            m_frame = get_attribute("perish_end");
             break;
 
         default:

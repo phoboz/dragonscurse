@@ -62,7 +62,7 @@ void Guardian::move(Map *map)
 
     switch(m_action) {
         case Still:
-            face_reference();
+            set_action(Move);
             break;
 
         case Move:

@@ -166,9 +166,12 @@ bool Status::set_hit(int ap)
 {
     bool result = false;
 
-    m_hp -= ap;
-    if (m_hp <= 0) {
-        result = true;
+    int hp = ap - m_dp;
+    if (hp > 0) {
+        m_hp -= ap;
+        if (m_hp <= 0) {
+            result = true;
+        }
     }
 
     return result;

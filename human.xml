@@ -30,7 +30,6 @@
                    right_attack="5"
                    right_attack_low="6"
                    right_hit="7"
-                   right_perish="7"
                    left_still="8"
                    left_move_start="8" left_move_end="10"
                    left_jump="11"
@@ -39,7 +38,7 @@
                    left_attack="13"
                    left_attack_low="14"
                    left_hit="7"
-                   left_perish="7">
+                   perish_start="16" perish_end="17">
                 <object image="human.png"
                         left="32" right="66" top="7" bottom="62">
                     <weak_parts frame="-1">

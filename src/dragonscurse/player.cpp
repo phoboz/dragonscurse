@@ -55,7 +55,6 @@ bool Player::set_hit(Object *object, Status *status)
     bool result = false;
 
     if (!m_invisible) {
-        // TODO: Check if player hp is above zero instead
         result = Actor::set_hit(object);
         if (result) {
 
@@ -74,8 +73,8 @@ bool Player::set_hit(Object *object, Status *status)
 
             // TODO: Use monsters actual attack power
             if (status->set_hit(1)) {
-                // Health exhausted
-                set_perish();
+                set_solid(false);
+                set_perish(false);
             }
             else {
                 // Make player invisible for a certain time
@@ -221,8 +220,13 @@ void Player::player_move(Map *map)
             break;
 
         case HitPerish:
-            set_vx(0);
-            set_action(HitPerished);
+            animate_perish();
+            set_speed(0, -get_attribute("move_speed"));
+            Body::move(map);
+            if (m_y < -get_image_height()) {
+                set_solid(true);
+                set_action(HitPerished);
+            }
             break;
 
         default:
