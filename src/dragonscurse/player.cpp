@@ -8,6 +8,7 @@
 Player::Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
     : Actor(Object::TypePlayer, x, y, dir),
       m_morph(0), m_area(0),
+      m_hit_ground(false),
       m_jump_ready(true), m_in_water(false)
 {
     load(fn, media);
@@ -16,13 +17,22 @@ Player::Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
 
 void Player::set_jump(Map *map, int time)
 {
-    if (m_in_water) {
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+
+    // Check if under water
+    int start = prop.GetNumericProperty("water_start");
+    int end = prop.GetNumericProperty("water_end");
+    if (start && check_center(map, start, end)) {
         set_ay(-get_attribute("water_jump_power"));
+        m_in_water = true;
     }
     else {
         set_ay(-get_attribute("jump_power"));
+        m_in_water = false;
     }
 
+    m_hit_ground = false;
     m_jump_time = time;
     set_action(Jump);
 }
@@ -63,6 +73,7 @@ bool Player::set_hit(Object *object, Status *status)
 
             set_ay(0);
             set_vy(-get_attribute("move_speed"));
+            m_hit_ground = false;
 
             // TODO: Use monsters actual attack power
             if (status->set_hit(1)) {
@@ -114,16 +125,6 @@ void Player::player_move(Map *map)
     const Tmx::Tileset *tileset = map->get_tileset(0);
     const Tmx::PropertySet prop = tileset->GetProperties();
 
-    // Check if under water
-    int start = prop.GetNumericProperty("water_start");
-    int end = prop.GetNumericProperty("water_end");
-    if (start && check_center(map, start, end)) {
-        m_in_water = true;
-    }
-    else {
-        m_in_water = false;
-    }
-
     // Check if on catapult
     int catid = prop.GetNumericProperty("catapult");
     if (catid && check_below(map, 1, catid, catid) == 0) {
@@ -136,10 +137,27 @@ void Player::player_move(Map *map)
             reset_jump();
 
         case Move:
+            // Check for crouch or move
+            if (input & PRESS_DOWN) {
+                set_action(Crouch);
+            }
+            else if (input & PRESS_RIGHT) {
+                animate_move();
+                set_action(Move);
+                set_vx(get_attribute("move_speed"));
+            }
+            else if (input & PRESS_LEFT) {
+                animate_move();
+                set_action(Move);
+                set_vx(-get_attribute("move_speed"));
+            }
+            else {
+                set_action(Still);
+            }
+
             // Check for jump
-            if (!get_invisible() && (input & PRESS_JUMP)) {
-                if (m_jump_ready) {
-                    m_jump_ready = false;
+            if (input & PRESS_JUMP) {
+                if (m_jump_ready && m_hit_ground) {
                     if (input & PRESS_RIGHT) {
                         set_vx(get_attribute("jump_forward"));
                     }
@@ -148,28 +166,11 @@ void Player::player_move(Map *map)
                     }
                     set_jump(map, get_attribute("jump_time"));
                 }
+                m_jump_ready = false;
             }
             else {
                 // Restore jump lock
                 m_jump_ready = true;
-
-                // Check for crouch or move
-                if (input & PRESS_DOWN) {
-                    set_action(Crouch);
-                }
-                else if (input & PRESS_RIGHT) {
-                    animate_move();
-                    set_action(Move);
-                    set_vx(get_attribute("move_speed"));
-                }
-                else if (input & PRESS_LEFT) {
-                    animate_move();
-                    set_action(Move);
-                    set_vx(-get_attribute("move_speed"));
-                }
-                else {
-                    set_action(Still);
-                }
             }
 
             Body::move(map);
@@ -189,6 +190,7 @@ void Player::player_move(Map *map)
 
             Body::move(map);
             if (!get_fall()) {
+                m_hit_ground = true;
                 set_action(Still);
             }
             break;
@@ -207,6 +209,9 @@ void Player::player_move(Map *map)
         case Crouch:
             reset_jump();
             Body::move(map);
+            if (!get_fall()) {
+                m_hit_ground = true;
+            }
 
             if (!(input & PRESS_DOWN)) {
                 set_action(Still);

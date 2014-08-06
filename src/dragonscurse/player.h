@@ -33,6 +33,7 @@ private:
 
     Morph *m_morph;
     Area *m_area;
+    bool m_hit_ground;
     bool m_jump_ready;
     int m_jump_time;
     bool m_in_water;
