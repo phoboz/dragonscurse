@@ -14,6 +14,7 @@
 #include "guardian.h"
 #include "diver.h"
 #include "hovering.h"
+#include "swimmer.h"
 #include "dancer.h"
 #include "falling.h"
 #include "meka_dragon.h"
@@ -144,6 +145,9 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "Hovering") == 0) {
         object = new Hovering(name, media, x, y, w, dir);
+    }
+    else if (strcmp(type, "Swimmer") == 0) {
+        object = new Swimmer(name, media, x, y, dir);
     }
     else if (strcmp(type, "Dancer") == 0) {
         object = new Dancer(name, media, x, y, dir);

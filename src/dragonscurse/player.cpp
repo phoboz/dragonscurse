@@ -16,19 +16,11 @@ Player::Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
 
 void Player::set_jump(Map *map, int time)
 {
-    const Tmx::Tileset *tileset = map->get_tileset(0);
-    const Tmx::PropertySet prop = tileset->GetProperties();
-
-    // Check if under water
-    int start = prop.GetNumericProperty("water_start");
-    int end = prop.GetNumericProperty("water_end");
-    if (start && !check_center(map, start, end) == 0) {
+    if (m_in_water) {
         set_ay(-get_attribute("water_jump_power"));
-        m_in_water = true;
     }
     else {
         set_ay(-get_attribute("jump_power"));
-        m_in_water = false;
     }
 
     m_jump_time = time;
@@ -63,13 +55,14 @@ bool Player::set_hit(Object *object, Status *status)
 
             // Move backwards and upwards
             if (m_dir == Right) {
-                set_speed(-get_attribute("move_speed"),
-                          -get_attribute("weight"));
+                set_vx(-get_attribute("move_speed"));
             }
             else {
-                set_speed(get_attribute("move_speed"),
-                          -get_attribute("weight"));
+                set_vx(get_attribute("move_speed"));
             }
+
+            set_ay(0);
+            set_vy(-get_attribute("move_speed"));
 
             // TODO: Use monsters actual attack power
             if (status->set_hit(1)) {
@@ -121,6 +114,16 @@ void Player::player_move(Map *map)
     const Tmx::Tileset *tileset = map->get_tileset(0);
     const Tmx::PropertySet prop = tileset->GetProperties();
 
+    // Check if under water
+    int start = prop.GetNumericProperty("water_start");
+    int end = prop.GetNumericProperty("water_end");
+    if (start && check_center(map, start, end)) {
+        m_in_water = true;
+    }
+    else {
+        m_in_water = false;
+    }
+
     // Check if on catapult
     int catid = prop.GetNumericProperty("catapult");
     if (catid && check_below(map, 1, catid, catid) == 0) {
@@ -134,7 +137,7 @@ void Player::player_move(Map *map)
 
         case Move:
             // Check for jump
-            if (input & PRESS_JUMP) {
+            if (!get_invisible() && (input & PRESS_JUMP)) {
                 if (m_jump_ready) {
                     m_jump_ready = false;
                     if (input & PRESS_RIGHT) {

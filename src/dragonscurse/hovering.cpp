@@ -57,6 +57,21 @@ void Hovering::fire()
     }
 }
 
+bool Hovering::get_visible(Map *map, int clip_x, int clip_y,
+                           int clip_w, int clip_h) const
+{
+    bool result = false;
+
+    if (m_bullets.size()) {
+        result = true;
+    }
+    else {
+        result = Object::get_visible(map, clip_x, clip_y, clip_w, clip_h);
+    }
+
+    return result;
+}
+
 void Hovering::move(Map *map)
 {
     switch(m_action) {

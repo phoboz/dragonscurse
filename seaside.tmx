@@ -274,6 +274,21 @@
     <property name="direction" value="left"/>
    </properties>
   </object>
+  <object name="giant_fish_red.xml" type="Swimmer" x="3500" y="641" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_red.xml" type="Swimmer" x="3919" y="528" width="50" height="50">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="giant_fish_red.xml" type="Swimmer" x="5257" y="560" width="50" height="50">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="273" height="36">
   <data encoding="base64">

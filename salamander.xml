@@ -19,7 +19,7 @@
             <actor move_speed="3"
                    treshold="5"
                    weight="14"
-                   hit_time="12"
+                   hit_time="16"
                    invisible_time="42"
                    right_still="0"
                    right_move_start="0" right_move_end="2"
