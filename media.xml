@@ -91,6 +91,7 @@
     <musics>
         <music filename="castle_01.ogg" />
         <music filename="castle_02.ogg" />
+        <music filename="desert.ogg" />
         <music filename="dragon_boss.ogg" />
         <music filename="room.ogg" />
         <music filename="seaside.ogg" />
