@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<salamander>
+<lizardman>
     <dragon attack_right="47"
             attack_left="12"
             attack_medium="10"
@@ -38,7 +38,7 @@
                    left_attack_low="14"
                    left_hit="7"
                    perish_start="7" perish_end="7">
-                <object image="salamander.png"
+                <object image="lizardman.png"
                         left="12" right="56" top="7" bottom="63">
                     <weak_parts frame="-1">
                         <weak_part x1="12" y1="7" x2="56" y2="64" />
@@ -48,5 +48,5 @@
         </player>
         <string bullet="firebreath.xml" />
     </dragon>
-</salamander>
+</lizardman>
 

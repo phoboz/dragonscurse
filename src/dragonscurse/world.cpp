@@ -192,7 +192,7 @@ Area* World::move(Player *player,
 
                 curse->move(m_map);
                 if (player->check_collision(curse)) {
-                    player->set_morph(new Morph("human_to_salamander.xml",
+                    player->set_morph(new Morph("human_to_lizardman.xml",
                                                 m_media,
                                                 player->get_x(),
                                                 player->get_y(),

@@ -9,7 +9,7 @@
                 location="castle_boss.tmx"
                 type="curse"
                 name="blue_flame.xml"
-                player="salamander.xml"
+                player="lizardman.xml"
                 destination="castle_02.tmx"
                 start_x="576"
                 start_y="223" />
@@ -37,7 +37,7 @@
                 location="wb.tmx"
                 type="curse"
                 name="blue_flame.xml"
-                player="salamander.xml"
+                player="lizardman.xml"
                 destination="castle_02.tmx"
                 start_x="576"
                 start_y="223" />
