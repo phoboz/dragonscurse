@@ -237,6 +237,15 @@ void Player::player_move(Map *map)
             }
             break;
 
+        case AttackMedium:
+        case AttackLow:
+            reset_jump();
+            Body::move(map);
+            if (!get_fall()) {
+                m_hit_ground = true;
+            }
+            break;
+
         default:
             reset_jump();
             Body::move(map);
