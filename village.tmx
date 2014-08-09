@@ -5,7 +5,7 @@
   <property name="music" value="village.ogg"/>
   <property name="offset_y" value="-64"/>
   <property name="start_x" value="2400"/>
-  <property name="start_y" value="824"/>
+  <property name="start_y" value="823"/>
  </properties>
  <tileset firstgid="1" name="village" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>
@@ -75,6 +75,13 @@
   <object name="Shop_mithras" type="Area" x="2624" y="832" width="64" height="64">
    <properties>
     <property name="type" value="window_door.xml"/>
+   </properties>
+  </object>
+  <object name="desert.tmx" type="Area" x="2560" y="448" width="64" height="64">
+   <properties>
+    <property name="start_x" value="13184"/>
+    <property name="start_y" value="863"/>
+    <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
  </objectgroup>

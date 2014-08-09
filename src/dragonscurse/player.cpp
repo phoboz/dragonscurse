@@ -30,10 +30,10 @@ void Player::check_water(Map *map)
     else {
         if (m_in_water) {
             if (m_action == Jump) {
-                set_vy(-get_attribute("jump_speed"));
+                set_vy(-get_attribute("water_jump_speed"));
             }
             else if (m_action == Catapult) {
-                set_vy(-get_attribute("catapult_speed"));
+                set_vy(-get_attribute("water_catapult_speed"));
             }
         }
         set_ay(get_attribute("weight"));
