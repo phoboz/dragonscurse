@@ -11,7 +11,9 @@ public:
 
     virtual void set_dir(Direction dir);
     void set_hit_one(bool value) { m_hit_one = value; }
+    bool get_hit_one() const { return m_hit_one; }
     virtual bool fire(int x, int y, int dx, int dy) = 0;
+    void reload(bool active);
 
     bool hit_object(Object *object);
 
@@ -23,8 +25,6 @@ public:
 
 protected:
     Bullet(const char *fn, MediaDB *media);
-
-    void reload(bool active);
 
 private:
     void animate_move();

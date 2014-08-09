@@ -149,6 +149,51 @@
     <property name="direction" value="right"/>
    </properties>
   </object>
+  <object name="fire_flower_big.xml" type="Shooter" x="5451" y="860" width="34" height="66">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_flower_small.xml" type="Shooter" x="5070" y="892" width="34" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_flower_big.xml" type="Shooter" x="4996" y="860" width="34" height="66">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_flower_big.xml" type="Shooter" x="3469" y="860" width="34" height="66">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_flower_small.xml" type="Shooter" x="3055" y="892" width="34" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="cobra_green.xml" type="Guardian" x="13646" y="877" width="38" height="50">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="cobra_green.xml" type="Guardian" x="13871" y="877" width="38" height="50">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="cobra_green.xml" type="Guardian" x="14024" y="877" width="38" height="50">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="cobra_green.xml" type="Guardian" x="14157" y="877" width="38" height="50">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Monsters" width="454" height="43"/>
  <layer name="Front" width="454" height="43">

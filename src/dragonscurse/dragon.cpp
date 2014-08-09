@@ -36,7 +36,9 @@ bool Dragon::check_shielded_collision(Object *object) const
                                       m_bullet->get_sprite(),
                                       m_bullet->get_frame(),
                                       m_bullet->get_x(), m_bullet->get_y());
-
+        if (result && m_bullet->get_hit_one()) {
+            m_bullet->reload(false);
+        }
     }
 
     return result;

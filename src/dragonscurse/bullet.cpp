@@ -1,5 +1,5 @@
-#include <iostream>
 #include <math.h>
+#include "actor.h"
 #include "bullet.h"
 
 Bullet::Bullet(const char *fn, MediaDB *media)
@@ -51,7 +51,15 @@ bool Bullet::hit_object(Object *object)
 
             // Remove bullet if it only is supposed to hit one target
             if (m_hit_one) {
-                reload(false);
+                if (object->get_type() == TypeMonster) {
+                    Actor *actor = (Actor *) object;
+                    if (actor->get_action() != Actor::HitPerish) {
+                        reload(false);
+                    }
+                }
+                else {
+                    reload(false);
+                }
             }
             result = true;
         }
