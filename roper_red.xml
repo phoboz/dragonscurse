@@ -3,8 +3,10 @@
     <erupter attack_timer="40"
              attack_distance="300"
              num_bullets="3"
-             fire_dx="5"
+             fire_dx="1"
+             fire_rand_dx="5"
              fire_dy="18"
+             fire_rand_dy="0"
              hit_time="24">
         <monster hp="3"
                  perish_time="40">

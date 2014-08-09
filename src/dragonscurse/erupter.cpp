@@ -39,8 +39,16 @@ void Erupter::fire()
     unsigned n = m_bullets.size();
     for (int i = 0; i < n; i++) {
         if (!m_bullets[i]->get_active()) {
-            int dx = rand() % (get_attribute("fire_dx") - 1) + 1;
+            int dx = get_attribute("fire_dx");
+            int rnd_dx = get_attribute("fire_rand_dx");
+            if (rnd_dx) {
+                dx += rand() % rnd_dx;
+            }
             int dy = get_attribute("fire_dy");
+            int rnd_dy = get_attribute("fire_rand_dy");
+            if (rnd_dy) {
+                dy += rand() % rnd_dy;
+            }
             if (get_reference() == Right) {
                 result = m_bullets[i]->fire(m_x, m_y, dx, -dy);
             }

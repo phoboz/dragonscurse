@@ -8,6 +8,8 @@
 
 class Erupter : public Monster {
 public:
+    Erupter(const char *fn, MediaDB *media, int x, int y, Direction dir);
+
     virtual bool attack_object(Object *object);
 
     virtual bool get_visible(Map *map, int clip_x, int clip_y,
@@ -18,8 +20,7 @@ public:
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
-protected:
-    Erupter(const char *fn, MediaDB *media, int x, int y, Direction dir);
+private:
     virtual void fire();
 
     Timer m_attack_timer;

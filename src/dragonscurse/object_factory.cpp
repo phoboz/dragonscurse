@@ -10,7 +10,7 @@
 #include "dragon.h"
 #include "walker.h"
 #include "crawler.h"
-#include "vulcano.h"
+#include "erupter.h"
 #include "guardian.h"
 #include "shooter.h"
 #include "diver.h"
@@ -135,8 +135,8 @@ Object* ObjectFactory::create_object(const char *name,
     else if (strcmp(type, "Crawler") == 0) {
         object = new Crawler(name, media, x, y, dir);
     }
-    else if (strcmp(type, "Vulcano") == 0) {
-        object = new Vulcano(name, media, x, y, dir);
+    else if (strcmp(type, "Erupter") == 0) {
+        object = new Erupter(name, media, x, y, dir);
     }
     else if (strcmp(type, "Guardian") == 0) {
         object = new Guardian(name, media, x, y, dir);
