@@ -89,6 +89,66 @@
     <property name="direction" value="right"/>
    </properties>
   </object>
+  <object name="fire_flower_big.xml" type="Shooter" x="10499" y="860" width="34" height="66">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="cobra_green.xml" type="Guardian" x="10222" y="877" width="38" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="cobra_green.xml" type="Guardian" x="10152" y="877" width="38" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="cobra_green.xml" type="Guardian" x="9867" y="877" width="38" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_flower_big.xml" type="Shooter" x="9611" y="860" width="34" height="66">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="cobra_green.xml" type="Guardian" x="8780" y="877" width="38" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="cobra_green.xml" type="Guardian" x="8421" y="877" width="38" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_flower_big.xml" type="Shooter" x="8106" y="860" width="34" height="66">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_flower_big.xml" type="Shooter" x="8038" y="860" width="34" height="66">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_flower_big.xml" type="Shooter" x="7334" y="860" width="34" height="66">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_flower_big.xml" type="Shooter" x="6409" y="860" width="34" height="66">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_flower_small.xml" type="Shooter" x="6095" y="892" width="34" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Monsters" width="454" height="43"/>
  <layer name="Front" width="454" height="43">

@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<fire_flower>
+    <shooter attack_timer="120"
+             attack_distance="300"
+             num_bullets="3"
+             attack_left="6"
+             attack_right="28"
+             attack_medium="6"
+             fire_dx="5"
+             fire_dy="0"
+             hit_time="24">
+        <monster hp="6"
+                 perish_time="40">
+            <actor treshold="12"
+                   weight="2"
+                   right_still="4"
+                   right_move_start="4" right_move_end="5"
+                   right_fall="4"
+                   right_attack="6"
+                   right_hit="3"
+                   left_still="0"
+                   left_move_start="0" left_move_end="1"
+                   left_fall="0"
+                   left_attack="2"
+                   left_hit="3"
+                   perish_start="3" perish_end="3">
+                <object image="fire_flower_small.png"
+                        left="2" right="32" top="2" bottom="32">
+                    <weak_parts frame="-1">
+                        <weak_part x1="2" y1="6" x2="32" y2="30" />
+                    </weak_parts>
+                </object>
+            </actor>
+            <string bullet="ember_red.xml" />
+            <string collectable="coin.xml" />
+        </monster>
+    </shooter>
+</fire_flower>
+

@@ -12,6 +12,7 @@
 #include "crawler.h"
 #include "erupter.h"
 #include "guardian.h"
+#include "shooter.h"
 #include "diver.h"
 #include "hovering.h"
 #include "swimmer.h"
@@ -139,6 +140,9 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "Guardian") == 0) {
         object = new Guardian(name, media, x, y, dir);
+    }
+    else if (strcmp(type, "Shooter") == 0) {
+        object = new Shooter(name, media, x, y, dir);
     }
     else if (strcmp(type, "Diver") == 0) {
         object = new Diver(name, media, x, y, dir);
