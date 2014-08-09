@@ -8,10 +8,10 @@
             bullet_speed="6">
         <player type="dragon"
                 jump_speed="17"
-                catapult_speed="26"
+                catapult_speed="32"
                 water_jump_speed="10"
                 water_weight="6"
-                water_catapult_speed="18"
+                water_catapult_speed="16"
                 ap="0"
                 dp="0"
                 cp="0">

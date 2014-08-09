@@ -13,6 +13,7 @@ public:
         Move,
         Fall,
         Jump,
+        Catapult,
         Crouch,
         AttackMedium,
         AttackLow,

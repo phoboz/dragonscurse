@@ -28,8 +28,13 @@ void Player::check_water(Map *map)
         m_in_water = true;
     }
     else {
-        if (m_in_water && m_action == Jump) {
-            set_vy(-get_attribute("jump_speed"));
+        if (m_in_water) {
+            if (m_action == Jump) {
+                set_vy(-get_attribute("jump_speed"));
+            }
+            else if (m_action == Catapult) {
+                set_vy(-get_attribute("catapult_speed"));
+            }
         }
         set_ay(get_attribute("weight"));
         m_in_water = false;
@@ -54,22 +59,25 @@ void Player::set_jump(Map *map, bool catapult)
     if (m_in_water) {
         if (catapult) {
             set_vy(-get_attribute("water_catapult_speed"));
+            set_action(Catapult);
         }
         else {
             set_vy(-get_attribute("water_jump_speed"));
+            set_action(Jump);
         }
     }
     else {
         if (catapult) {
             set_vy(-get_attribute("catapult_speed"));
+            set_action(Catapult);
         }
         else {
             set_vy(-get_attribute("jump_speed"));
+            set_action(Jump);
         }
     }
 
     m_hit_ground = false;
-    set_action(Jump);
 }
 
 bool Player::set_hit(Object *object, Status *status)
@@ -213,6 +221,7 @@ void Player::player_move(Map *map)
             break;
 
         case Jump:
+        case Catapult:
             Body::move(map);
             if (get_fall()) {
                 set_action(Fall);
@@ -238,9 +247,6 @@ void Player::player_move(Map *map)
                 reset_hit();
             }
             Body::move(map);
-            if (!get_fall()) {
-                m_hit_ground = true;
-            }
             break;
 
         case HitPerish:

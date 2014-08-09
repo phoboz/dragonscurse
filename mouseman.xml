@@ -9,10 +9,10 @@
             attack_time="12">
         <player type="knight"
                 jump_speed="13"
-                catapult_speed="20"
+                catapult_speed="26"
                 water_jump_speed="8"
                 water_weight="4"
-                water_catapult_speed="14"
+                water_catapult_speed="12"
                 ap="60"
                 dp="20"
                 cp="40">
