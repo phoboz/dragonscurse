@@ -37,17 +37,8 @@ void Monster::world_initialize(World *world)
 
 void Monster::set_jump(Map *map)
 {
-    set_ay(-get_attribute("jump_power"));
+    set_vy(-get_attribute("jump_speed"));
     set_action(Jump);
-}
-
-void Monster::reset_jump(bool reset)
-{
-    set_ay(get_attribute("weight"));
-
-    if (reset) {
-        m_jump_timer.reset();
-    }
 }
 
 bool Monster::set_hit(Object *object, Status *status)
@@ -58,7 +49,6 @@ bool Monster::set_hit(Object *object, Status *status)
         result = Actor::set_hit(object);
         if (result) {
 
-            reset_jump();
             set_lock_direction(true);
 
             // Move backwards
@@ -117,11 +107,10 @@ void Monster::move(Map *map)
 {
     switch(m_action) {
         case Still:
-            reset_jump();
+            set_vx(0);
             break;
 
         case Move:
-            reset_jump();
             Body::move(map);
             if (get_fall()) {
                 set_action(Fall);
@@ -138,25 +127,19 @@ void Monster::move(Map *map)
             break;
 
         case Jump:
-            if (m_jump_timer.check(get_attribute("jump_time"))) {
-                reset_jump(false);
-            }
             Body::move(map);
             if (get_fall()) {
-                m_jump_timer.reset();
                 set_action(Fall);
             }
             break;
 
         case Hit:
         case HitPerish:
-            reset_jump();
             process_hit();
             Body::move(map);
             break;
 
         default:
-            reset_jump();
             break;
     }
 }

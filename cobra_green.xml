@@ -2,9 +2,8 @@
 <cobra>
     <guardian attack_timer="64"
               attack_distance="24"
-              jump_power="40"
+              jump_speed="8"
               jump_forward="2"
-              jump_time="3"
               hit_time="24">
         <monster hp="10"
                  perish_time="40">

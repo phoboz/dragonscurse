@@ -13,8 +13,7 @@ class Player : public Actor {
 public:
     Player(const char *fn, MediaDB *media, int x, int y, Direction dir);
 
-    void set_jump(Map *map, int time);
-    void reset_jump(bool reset = true);
+    void set_jump(Map *map, bool catapult = false);
     virtual bool set_hit(Object *object, Status *status);
     virtual bool check_collision(Object *object) const;
 
@@ -29,6 +28,8 @@ public:
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
 private:
+    void check_water(Map *map);
+    void check_catapult(Map *map);
     void player_move(Map *map);
 
     Morph *m_morph;
@@ -37,7 +38,6 @@ private:
     bool m_jump_ready;
     int m_jump_time;
     bool m_in_water;
-    Timer m_jump_timer;
     Timer m_hit_timer;
 };
 

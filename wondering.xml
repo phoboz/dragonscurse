@@ -3,9 +3,8 @@
     <dancer attack_timer="12"
             attack_distance="24"
             turn_width="0"
-            jump_power="32"
+            jump_speed="10"
             jump_forward="7"
-            jump_time="4"
             hit_time="24">
         <monster hp="3"
                  perish_time="40">

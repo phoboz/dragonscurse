@@ -15,7 +15,7 @@ Player::Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
     set_ay(get_attribute("weight"));
 }
 
-void Player::set_jump(Map *map, int time)
+void Player::check_water(Map *map)
 {
     const Tmx::Tileset *tileset = map->get_tileset(0);
     const Tmx::PropertySet prop = tileset->GetProperties();
@@ -24,32 +24,52 @@ void Player::set_jump(Map *map, int time)
     int start = prop.GetNumericProperty("water_start");
     int end = prop.GetNumericProperty("water_end");
     if (start && check_center(map, start, end)) {
-        set_ay(-get_attribute("water_jump_power"));
+        set_ay(get_attribute("water_weight"));
         m_in_water = true;
     }
     else {
-        set_ay(-get_attribute("jump_power"));
+        if (m_in_water && m_action == Jump) {
+            set_vy(-get_attribute("jump_speed"));
+        }
+        set_ay(get_attribute("weight"));
         m_in_water = false;
     }
 
-    m_hit_ground = false;
-    m_jump_time = time;
-    set_action(Jump);
 }
 
-void Player::reset_jump(bool reset)
+void Player::check_catapult(Map *map)
+{
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+
+    // Check if on catapult
+    int catid = prop.GetNumericProperty("catapult");
+    if (catid && check_below(map, 1, catid, catid) == 0) {
+        set_jump(map, true);
+    }
+}
+
+void Player::set_jump(Map *map, bool catapult)
 {
     if (m_in_water) {
-        set_ay(get_attribute("water_weight"));
+        if (catapult) {
+            set_vy(-get_attribute("water_catapult_speed"));
+        }
+        else {
+            set_vy(-get_attribute("water_jump_speed"));
+        }
     }
     else {
-        set_ay(get_attribute("weight"));
+        if (catapult) {
+            set_vy(-get_attribute("catapult_speed"));
+        }
+        else {
+            set_vy(-get_attribute("jump_speed"));
+        }
     }
 
-    if (reset) {
-        m_jump_timer.reset();
-        set_vx(0);
-    }
+    m_hit_ground = false;
+    set_action(Jump);
 }
 
 bool Player::set_hit(Object *object, Status *status)
@@ -60,7 +80,6 @@ bool Player::set_hit(Object *object, Status *status)
         result = Actor::set_hit(object);
         if (result) {
 
-            reset_jump();
             set_lock_direction(true);
 
             // Move backwards and upwards
@@ -71,8 +90,12 @@ bool Player::set_hit(Object *object, Status *status)
                 set_vx(get_attribute("move_speed"));
             }
 
-            set_ay(0);
-            set_vy(-get_attribute("move_speed"));
+            if (m_in_water) {
+                set_vy(-get_attribute("water_jump_speed"));
+            }
+            else {
+                set_vy(-get_attribute("jump_speed"));
+            }
             m_hit_ground = false;
 
             // TODO: Use monsters actual attack power
@@ -122,19 +145,13 @@ void Player::player_move(Map *map)
 {
     Actor::move(map);
 
-    const Tmx::Tileset *tileset = map->get_tileset(0);
-    const Tmx::PropertySet prop = tileset->GetProperties();
-
-    // Check if on catapult
-    int catid = prop.GetNumericProperty("catapult");
-    if (catid && check_below(map, 1, catid, catid) == 0) {
-        set_jump(map, get_attribute("catapult_time"));
-    }
+    check_water(map);
+    check_catapult(map);
 
     int input = get_input();
     switch(m_action) {
         case Still:
-            reset_jump();
+            set_vx(0);
 
         case Move:
             // Check for crouch or move
@@ -159,12 +176,12 @@ void Player::player_move(Map *map)
             if (input & PRESS_JUMP) {
                 if (m_jump_ready && m_hit_ground) {
                     if (input & PRESS_RIGHT) {
-                        set_vx(get_attribute("jump_forward"));
+                        set_vx(get_attribute("move_speed"));
                     }
                     else if (input & PRESS_LEFT) {
-                        set_vx(-get_attribute("jump_forward"));
+                        set_vx(-get_attribute("move_speed"));
                     }
-                    set_jump(map, get_attribute("jump_time"));
+                    set_jump(map, false);
                 }
                 m_jump_ready = false;
             }
@@ -182,10 +199,10 @@ void Player::player_move(Map *map)
         case Fall:
             // Check for change of direction during fall
             if (input & PRESS_RIGHT) {
-                set_vx(get_attribute("jump_forward"));
+                set_vx(get_attribute("move_speed"));
             }
             else if (input & PRESS_LEFT) {
-                set_vx(-get_attribute("jump_forward"));
+                set_vx(-get_attribute("move_speed"));
             }
 
             Body::move(map);
@@ -196,18 +213,14 @@ void Player::player_move(Map *map)
             break;
 
         case Jump:
-            if (m_jump_timer.check(m_jump_time)) {
-                reset_jump(false);
-            }
             Body::move(map);
             if (get_fall()) {
-                m_jump_timer.reset();
                 set_action(Fall);
             }
             break;
 
         case Crouch:
-            reset_jump();
+            set_vx(0);
             Body::move(map);
             if (!get_fall()) {
                 m_hit_ground = true;
@@ -225,6 +238,9 @@ void Player::player_move(Map *map)
                 reset_hit();
             }
             Body::move(map);
+            if (!get_fall()) {
+                m_hit_ground = true;
+            }
             break;
 
         case HitPerish:
@@ -239,7 +255,6 @@ void Player::player_move(Map *map)
 
         case AttackMedium:
         case AttackLow:
-            reset_jump();
             Body::move(map);
             if (!get_fall()) {
                 m_hit_ground = true;
@@ -247,7 +262,6 @@ void Player::player_move(Map *map)
             break;
 
         default:
-            reset_jump();
             Body::move(map);
             break;
     }

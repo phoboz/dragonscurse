@@ -16,7 +16,6 @@ public:
     bool get_hit_ground() const { return m_hit_ground; }
     void set_invinsible(bool value) { m_invinsible = value; }
     void set_jump(Map *map);
-    void reset_jump(bool reset = true);
     virtual bool set_hit(Object *object, Status *status);
 
     Object* release_object();
@@ -30,7 +29,6 @@ private:
     int m_curr_hp;
     bool m_invinsible;
     bool m_hit_ground;
-    Timer m_jump_timer;
     Timer m_hit_timer;
     Timer m_perish_timer;
     std::list<Object*> m_objects;
