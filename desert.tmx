@@ -194,6 +194,11 @@
     <property name="direction" value="left"/>
    </properties>
   </object>
+  <object name="fire_antlion_red.xml" type="Erupter" x="9089" y="993" width="64" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Monsters" width="454" height="43"/>
  <layer name="Front" width="454" height="43">

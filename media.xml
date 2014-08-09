@@ -27,6 +27,8 @@
                 width="28" height="28" margin="1" spacing="1" />
         <sprite filename="falling_block.png"
                 width="32" height="32" margin="1" spacing="1" />
+        <sprite filename="fire_antlion_red.png"
+                width="64" height="32" margin="1" spacing="1" />
         <sprite filename="fire_flower_big.png"
                 width="34" height="66" margin="1" spacing="1" />
         <sprite filename="fire_flower_small.png"

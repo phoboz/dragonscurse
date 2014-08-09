@@ -21,7 +21,7 @@ void Body::set_dir(Direction dir)
 }
 
 
-bool Body::get_moving() const
+bool Body::get_moving()
 {
     bool result = false;
 

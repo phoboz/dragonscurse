@@ -8,6 +8,7 @@ class Bullet : public Body {
 public:
     bool get_ready() const { return m_ready; }
     bool get_active() const { return m_active; }
+    bool get_moving();
 
     virtual void set_dir(Direction dir);
     void set_hit_one(bool value) { m_hit_one = value; }
@@ -29,11 +30,13 @@ protected:
 private:
     void animate_move();
 
+    static const int c_move_treshold = 10;
     bool m_hit_one;
     bool m_ready;
     bool m_active;
     bool m_animated;
     int m_distance;
+    Timer m_move_timer;
     Timer m_reload_timer;
     Timer m_anim_timer;
 };

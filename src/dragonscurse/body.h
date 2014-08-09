@@ -26,7 +26,7 @@ public:
     void set_accelration(int ax, int ay);
     virtual void set_dir(Direction dir);
 
-    virtual bool get_moving() const;
+    virtual bool get_moving();
     bool get_fall() const { return (m_vert_dir == VerticalDown); }
 
     virtual void move(Map *map);

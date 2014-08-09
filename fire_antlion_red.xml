@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
-<roper>
-    <erupter attack_timer="40"
-             attack_distance="300"
-             attack_medium="12"
+<fire_antlion>
+    <erupter attack_timer="120"
+             attack_distance="600"
+             attack_medium="20"
              num_bullets="3"
-             fire_dx="1"
-             fire_rand_dx="5"
-             fire_dy="18"
-             fire_rand_dy="0"
+             fire_dx="0"
+             fire_rand_dx="0"
+             fire_dy="8"
+             fire_rand_dy="16"
              hit_time="24">
         <monster hp="3"
                  perish_time="40">
@@ -25,10 +25,10 @@
                    left_attack="1"
                    left_hit="2"
                    perish_start="2" perish_end="2">
-                <object image="roper_red.png"
-                        left="4" right="46" top="2" bottom="34">
+                <object image="fire_antlion_red.png"
+                        left="4" right="60" top="2" bottom="30">
                     <weak_parts frame="-1">
-                        <weak_part x1="4" y1="12" x2="46" y2="34" />
+                        <weak_part x1="4" y1="2" x2="60" y2="30" />
                     </weak_parts>
                 </object>
             </actor>
@@ -36,5 +36,5 @@
             <string collectable="coin.xml" />
         </monster>
     </erupter>
-</roper>
+</fire_antlion>
 

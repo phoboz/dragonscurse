@@ -16,6 +16,23 @@ Bullet::Bullet(const char *fn, MediaDB *media)
     }
 }
 
+bool Bullet::get_moving()
+{
+    bool result = true;
+
+    if (!Body::get_moving()) {
+        if (m_move_timer.check(c_move_treshold)) {
+            m_move_timer.reset();
+            result = false;
+        }
+    }
+    else {
+        m_move_timer.reset();
+    }
+
+    return result;
+}
+
 void Bullet::set_dir(Direction dir)
 {
     if (dir != m_dir) {
