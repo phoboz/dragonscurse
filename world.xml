@@ -59,6 +59,11 @@
               once="1"
               location="castle_04.tmx" />
         <lock id="1"
+              type="pyramid_key.xml"
+              lock="red_lock"
+              once="0"
+              location="desert.tmx" />
+        <lock id="1"
               type="small_key.xml"
               lock="green_lock"
               once="1"
@@ -67,6 +72,9 @@
     <chests>
         <chest id="1" once="1" location="seaside_room02.tmx">
             <treasure id="1" type="item" name="small_key.xml" />
+        </chest>
+        <chest id="1" once="1" location="desert.tmx">
+            <treasure id="1" type="item" name="pyramid_key.xml" />
         </chest>
     </chests>
 </world>
