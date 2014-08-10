@@ -271,6 +271,81 @@
     <property name="direction" value="right"/>
    </properties>
   </object>
+  <object name="side_crawler_green.xml" type="Crawler" x="8684" y="1304" width="38" height="38">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_red.xml" type="Swimmer" x="8095" y="1224" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_red.xml" type="Swimmer" x="7489" y="1135" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="side_crawler_green.xml" type="Crawler" x="7449" y="1304" width="38" height="38">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="side_crawler_green.xml" type="Crawler" x="7289" y="1304" width="38" height="38">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_green.xml" type="Swimmer" x="6416" y="1124" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_green.xml" type="Swimmer" x="6084" y="1166" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_green.xml" type="Swimmer" x="5746" y="1124" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_green.xml" type="Swimmer" x="5574" y="1166" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_green.xml" type="Swimmer" x="5207" y="1124" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_green.xml" type="Swimmer" x="4866" y="1166" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_green.xml" type="Swimmer" x="4526" y="1290" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_green.xml" type="Swimmer" x="4009" y="1124" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_green.xml" type="Swimmer" x="3735" y="1219" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_fish_green.xml" type="Swimmer" x="3012" y="1124" width="50" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="454" height="43">
   <data encoding="base64">

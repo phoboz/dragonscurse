@@ -45,6 +45,8 @@
                 width="34" height="34" margin="1" spacing="1" />
         <sprite filename="firebreath.png"
                 width="36" height="26" margin="1" spacing="1" />
+        <sprite filename="giant_fish_green.png"
+                width="50" height="50" margin="1" spacing="1" />
         <sprite filename="giant_fish_red.png"
                 width="50" height="50" margin="1" spacing="1" />
         <sprite filename="hovering_smog_red.png"
