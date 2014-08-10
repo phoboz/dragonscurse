@@ -241,6 +241,36 @@
     <property name="direction" value="down"/>
    </properties>
   </object>
+  <object name="faerie_zombie_red.xml" type="Walker" x="1505" y="941" width="34" height="48">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="faerie_zombie_red.xml" type="Walker" x="1249" y="941" width="34" height="48">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="faerie_zombie_red.xml" type="Walker" x="1152" y="941" width="34" height="48">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="faerie_zombie_red.xml" type="Walker" x="1058" y="941" width="34" height="48">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="faerie_zombie_red.xml" type="Walker" x="1533" y="589" width="34" height="48">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="faerie_zombie_red.xml" type="Walker" x="1406" y="589" width="34" height="48">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="454" height="43">
   <data encoding="base64">
