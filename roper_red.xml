@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <roper>
-    <erupter attack_timer="40"
+    <erupter attack_timer="60"
              attack_distance="300"
              attack_medium="12"
              num_bullets="3"

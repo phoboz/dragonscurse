@@ -88,10 +88,8 @@ void Erupter::move(Map *map)
         case Still:
             if (m_attack_timer.check(get_attribute("attack_timer"))) {
                 m_attack_timer.reset();
-                int dist = get_attribute("attack_distance");
-                int x = m_xref - get_front();
-                int y = m_yref - get_y();
-                if (x * x + y * y < dist * dist) {
+                int dist = m_xref - get_front();
+                if (abs(dist) < get_attribute("attack_distance")) {
                     m_attack_timer.reset();
                     fire();
                 }
