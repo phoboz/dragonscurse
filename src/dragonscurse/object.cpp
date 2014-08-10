@@ -147,6 +147,7 @@ bool Object::load(const char *fn, MediaDB *media)
         m_fn = std::string(fn);
         int lastindex = m_fn.find_last_of(".");
         m_name = m_fn.substr(0, lastindex);
+        set_dir(m_dir);
 
     }
 

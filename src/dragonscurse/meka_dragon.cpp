@@ -130,7 +130,7 @@ void MekaDragon::move(Map *map)
             }
             break;
 
-        case AttackMedium:
+        case Attack:
             if (m_idle_timer.check(get_attribute("attack_idle"))){
                 fire();
             }

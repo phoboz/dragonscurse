@@ -28,7 +28,7 @@ public:
         TypeChest
     };
 
-    enum Direction { Keep, Right, Left };
+    enum Direction { None, Keep, Right, Left, Up, Down };
 
     enum VerticalDirection { VerticalNone, VerticalUp, VerticalDown };
 
@@ -42,7 +42,7 @@ public:
 
     Object(Type type, int x = 0, int y = 0)
         : m_x(x), m_y(y), m_dx(0), m_dy(0), m_frame(0),
-          m_dir(Right), m_loaded(false), m_type(type), m_always_visible(false),
+          m_dir(None), m_loaded(false), m_type(type), m_always_visible(false),
           m_reused(false),
           m_xref(0), m_yref(0) { }
     Object(Type type, int x, int y, Direction dir)
@@ -71,6 +71,7 @@ public:
     int get_bottom() const;
     bool get_reused() { return m_reused; }
 
+    virtual void set_dir(Direction dir) { }
     void set_x(int value) { m_x = value; }
     void set_y(int value) { m_y = value; }
     void set_reference(int x, int y) { m_xref = x; m_yref = y; }

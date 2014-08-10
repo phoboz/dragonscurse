@@ -7,7 +7,7 @@ bool Knight::attack_object(Object *object)
     bool result = false;
     const Sprite *spr = get_sprite();
 
-    if (m_action == AttackMedium) {
+    if (m_action == Attack) {
         if (m_dir == Right) {
             if (m_frame == get_attribute("right_attack") &&
                 object->check_weak_collision(
@@ -66,7 +66,7 @@ void Knight::move(Map *map)
     Player::move(map);
 
     // Handle attack
-    if (m_action == AttackMedium || m_action == AttackLow) {
+    if (m_action == Attack || m_action == AttackLow) {
         if (m_attack_timer.expired(get_attribute("attack_time"))) {
             reset_attack();
         }

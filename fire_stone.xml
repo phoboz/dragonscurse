@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<fire_stone>
+    <shooter attack_timer="120"
+             attack_distance="200"
+             num_bullets="3"
+             attack_left="6"
+             attack_right="28"
+             attack_medium="6"
+             bullet_speed="5"
+             hit_time="24">
+        <monster hp="6"
+                 perish_time="40">
+            <actor treshold="12"
+                   weight="0"
+                   right_still="0"
+                   right_move_start="0" right_move_end="1"
+                   right_fall="0"
+                   right_attack="1"
+                   right_hit="0"
+                   left_still="3"
+                   left_move_start="3" left_move_end="3"
+                   left_fall="3"
+                   left_attack="4"
+                   left_hit="3"
+                   up_still="6"
+                   up_move_start="6" up_move_end="6"
+                   up_fall="6"
+                   up_attack="7"
+                   up_hit="6"
+                   down_still="9"
+                   down_move_start="9" down_move_end="9"
+                   down_fall="9"
+                   down_attack="10"
+                   down_hit="9"
+                   perish_start="0" perish_end="0">
+                <object image="fire_stone.png"
+                        left="0" right="32" top="0" bottom="32">
+                </object>
+            </actor>
+            <string bullet="ember_red.xml" />
+        </monster>
+    </shooter>
+</fire_stone>
+

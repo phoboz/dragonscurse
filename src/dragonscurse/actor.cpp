@@ -28,6 +28,12 @@ void Actor::set_dir(Direction dir)
             else if (set_dir == Left) {
                 m_frame = get_attribute("left_still");
             }
+            else if (set_dir == Up) {
+                m_frame = get_attribute("up_still");
+            }
+            else if (set_dir == Down) {
+                m_frame = get_attribute("down_still");
+            }
             break;
 
         case Move:
@@ -38,6 +44,12 @@ void Actor::set_dir(Direction dir)
                 }
                 else if (set_dir == Left) {
                     m_frame = get_attribute("left_move_start");
+                }
+                else if (set_dir == Up) {
+                    m_frame = get_attribute("up_move_start");
+                }
+                else if (set_dir == Down) {
+                    m_frame = get_attribute("down_move_start");
                 }
             }
             break;
@@ -69,12 +81,18 @@ void Actor::set_dir(Direction dir)
             }
             break;
 
-        case AttackMedium:
+        case Attack:
             if (set_dir == Right) {
                 m_frame = get_attribute("right_attack");
             }
             else if (set_dir == Left) {
                 m_frame = get_attribute("left_attack");
+            }
+            else if (set_dir == Up) {
+                m_frame = get_attribute("up_attack");
+            }
+            else if (set_dir == Down) {
+                m_frame = get_attribute("down_attack");
             }
             break;
 
@@ -125,7 +143,7 @@ void Actor::set_attack(void)
         set_action(AttackLow);
     }
     else {
-        set_action(AttackMedium);
+        set_action(Attack);
     }
     set_vx(0);
 }
@@ -146,12 +164,14 @@ void Actor::animate_move()
         switch(m_dir) {
             case Right:
                 if (m_anim_dir == AnimUp) {
-                    if (++m_frame == get_attribute("right_move_end")) {
+                    if (++m_frame >= get_attribute("right_move_end")) {
+                        m_frame = get_attribute("right_move_end");
                         m_anim_dir = AnimDown;
                     }
                 }
                 else if (m_anim_dir == AnimDown) {
-                    if (--m_frame == get_attribute("right_move_start")) {
+                    if (--m_frame <= get_attribute("right_move_start")) {
+                        m_frame = get_attribute("right_move_start");
                         m_anim_dir = AnimUp;
                     }
                 }
@@ -159,12 +179,44 @@ void Actor::animate_move()
 
             case Left:
                 if (m_anim_dir == AnimUp) {
-                    if (++m_frame == get_attribute("left_move_end")) {
+                    if (++m_frame >= get_attribute("left_move_end")) {
+                        m_frame = get_attribute("left_move_end");
                         m_anim_dir = AnimDown;
                     }
                 }
                 else if (m_anim_dir == AnimDown) {
-                    if (--m_frame == get_attribute("left_move_start")) {
+                    if (--m_frame <= get_attribute("left_move_start")) {
+                        m_frame = get_attribute("left_move_start");
+                        m_anim_dir = AnimUp;
+                    }
+                }
+                break;
+
+            case Up:
+                if (m_anim_dir == AnimUp) {
+                    if (++m_frame >= get_attribute("up_move_end")) {
+                        m_frame = get_attribute("up_move_end");
+                        m_anim_dir = AnimDown;
+                    }
+                }
+                else if (m_anim_dir == AnimDown) {
+                    if (--m_frame <= get_attribute("up_move_start")) {
+                        m_frame = get_attribute("up_move_start");
+                        m_anim_dir = AnimUp;
+                    }
+                }
+                break;
+
+            case Down:
+                if (m_anim_dir == AnimUp) {
+                    if (++m_frame >= get_attribute("down_move_end")) {
+                        m_frame = get_attribute("down_move_end");
+                        m_anim_dir = AnimDown;
+                    }
+                }
+                else if (m_anim_dir == AnimDown) {
+                    if (--m_frame <= get_attribute("down_move_start")) {
+                        m_frame = get_attribute("down_move_start");
                         m_anim_dir = AnimUp;
                     }
                 }

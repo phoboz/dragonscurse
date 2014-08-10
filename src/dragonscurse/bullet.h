@@ -30,7 +30,7 @@ protected:
 private:
     void animate_move();
 
-    static const int c_move_treshold = 10;
+    static const int c_move_treshold = 2;
     bool m_hit_one;
     bool m_ready;
     bool m_active;

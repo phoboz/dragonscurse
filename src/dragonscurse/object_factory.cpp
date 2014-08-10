@@ -217,6 +217,14 @@ Object* ObjectFactory::create_object(const char *name,
         object = create_object(name, media, type, x, y, w, h,
                                Object::Left, prop);
     }
+    else if (dirname == std::string("up")) {
+        object = create_object(name, media, type, x, y, w, h,
+                               Object::Up, prop);
+    }
+    else if (dirname == std::string("down")) {
+        object = create_object(name, media, type, x, y, w, h,
+                               Object::Down, prop);
+    }
 
     std::string musicname = prop.GetLiteralProperty(std::string("music"));
     if (musicname != std::string("No such property!")) {

@@ -6,8 +6,8 @@
              attack_left="6"
              attack_right="28"
              attack_medium="6"
-             fire_dx="5"
-             fire_dy="0"
+             bullet_speed="5"
+             face_reference="1"
              hit_time="24">
         <monster hp="6"
                  perish_time="40">

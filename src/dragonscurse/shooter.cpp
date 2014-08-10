@@ -1,8 +1,16 @@
+#include <stdlib.h>
 #include "shooter.h"
 
 Shooter::Shooter(const char *fn, MediaDB *media, int x, int y, Direction dir)
     : Monster(fn, media, x, y, dir)
 {
+    if (get_attribute("face_reference")) {
+        m_face_reference = true;
+    }
+    else {
+        m_face_reference = false;
+    }
+
     const char* bullet_name = get_string("bullet");
     int num_bullets = get_attribute("num_bullets");
 
@@ -30,6 +38,32 @@ bool Shooter::attack_object(Object *object)
     return result;
 }
 
+bool Shooter::check_range() const
+{
+    bool result = false;
+
+    switch(get_dir()) {
+        case Right:
+        case Left:
+            if (abs(m_y - m_yref) < get_attribute("attack_distance")) {
+                result = true;
+            }
+            break;
+
+        case Up:
+        case Down:
+            if (abs(m_x - m_xref) < get_attribute("attack_distance")) {
+                result = true;
+            }
+            break;
+
+        default:
+            break;
+    }
+
+    return result;
+}
+
 void Shooter::fire()
 {
     bool result = false;
@@ -37,17 +71,37 @@ void Shooter::fire()
     unsigned n = m_bullets.size();
     for (int i = 0; i < n; i++) {
         if (!m_bullets[i]->get_active()) {
-            if (get_reference() == Right) {
-                result = m_bullets[i]->fire(m_x + get_attribute("attack_right"),
-                                            m_y + get_attribute("attack_medium"),
-                                            get_attribute("fire_dx"),
-                                            get_attribute("fire_dy"));
-            }
-            else {
-                result = m_bullets[i]->fire(m_x + get_attribute("attack_left"),
-                                            m_y + get_attribute("attack_medium"),
-                                            -get_attribute("fire_dx"),
-                                            get_attribute("fire_dy"));
+            switch(get_dir()) {
+                case Right: 
+                    result = m_bullets[i]->fire(
+                        m_x + get_attribute("attack_right"),
+                        m_y + get_attribute("attack_medium"),
+                        get_attribute("bullet_speed"), 0);
+                    break;
+
+                case Left:
+                    result = m_bullets[i]->fire(
+                        m_x + get_attribute("attack_left"),
+                        m_y + get_attribute("attack_medium"),
+                        -get_attribute("bullet_speed"), 0);
+                    break;
+
+                case Down:
+                    result = m_bullets[i]->fire(
+                        m_x + get_attribute("attack_left"),
+                        m_y + get_attribute("attack_medium"),
+                        0, get_attribute("bullet_speed"));
+                    break;
+
+                case Up:
+                    result = m_bullets[i]->fire(
+                        m_x + get_attribute("attack_left"),
+                        m_y + get_attribute("attack_medium"),
+                        0, get_attribute("bullet_speed"));
+                    break;
+
+                default:
+                    break;
             }
 
             if (result) {
@@ -82,21 +136,25 @@ void Shooter::move(Map *map)
             break;
 
         case Move:
-            face_reference();
+            if (m_face_reference) {
+                face_reference();
+            }
+
             animate_move();
 
             if (m_attack_timer.check(get_attribute("attack_timer"))) {
                 int dist = get_attribute("attack_distance");
                 int x = m_xref - get_front();
                 int y = m_yref - get_y();
-                if (x * x + y * y < dist * dist) {
+                //if (x * x + y * y < dist * dist) {
+                if (check_range()) {
                     fire();
-                    set_action(AttackMedium);
+                    set_action(Attack);
                 }
             }
             break;
 
-        case AttackMedium:
+        case Attack:
             if (m_anim_timer.expired(get_attribute("treshold"))) {
                 m_attack_timer.reset();
                 reset_attack();

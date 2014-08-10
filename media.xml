@@ -37,6 +37,8 @@
                 width="44" height="48" margin="1" spacing="1" />
         <sprite filename="fire_octupus_red.png"
                 width="44" height="48" margin="1" spacing="1" />
+        <sprite filename="fire_stone.png"
+                width="32" height="32" margin="1" spacing="1" />
         <sprite filename="fireball.png"
                 width="34" height="34" margin="1" spacing="1" />
         <sprite filename="firebreath.png"

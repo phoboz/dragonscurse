@@ -20,8 +20,10 @@ public:
     virtual void draw(SDL_Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 private:
+    bool check_range() const;
     void fire();
 
+    bool m_face_reference;
     std::vector<VectorBullet*> m_bullets;
     Timer m_attack_timer;
 };

@@ -262,7 +262,7 @@ void Player::player_move(Map *map)
             }
             break;
 
-        case AttackMedium:
+        case Attack:
         case AttackLow:
             Body::move(map);
             if (!get_fall()) {

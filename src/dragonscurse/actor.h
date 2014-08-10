@@ -15,7 +15,7 @@ public:
         Jump,
         Catapult,
         Crouch,
-        AttackMedium,
+        Attack,
         AttackLow,
         Hit,
         HitPerish,
@@ -26,7 +26,7 @@ public:
         : Body(type, x, y, dir),
           m_anim_dir(AnimUp),
           m_action(Still),
-          m_invisible(false) { set_dir(dir); }
+          m_invisible(false) { }
 
     virtual bool set_hit(Object *object = 0, Status *status = 0);
     void reset_hit();
