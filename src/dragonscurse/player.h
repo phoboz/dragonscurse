@@ -29,7 +29,6 @@ public:
 
 private:
     void check_water(Map *map);
-    void check_catapult(Map *map);
     void player_move(Map *map);
 
     Morph *m_morph;

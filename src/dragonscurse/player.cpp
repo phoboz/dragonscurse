@@ -42,18 +42,6 @@ void Player::check_water(Map *map)
 
 }
 
-void Player::check_catapult(Map *map)
-{
-    const Tmx::Tileset *tileset = map->get_tileset(0);
-    const Tmx::PropertySet prop = tileset->GetProperties();
-
-    // Check if on catapult
-    int catid = prop.GetNumericProperty("catapult");
-    if (catid && check_below(map, 1, catid, catid) == 0) {
-        set_jump(map, true);
-    }
-}
-
 void Player::set_jump(Map *map, bool catapult)
 {
     if (m_in_water) {
@@ -154,9 +142,24 @@ void Player::player_move(Map *map)
     Actor::move(map);
 
     check_water(map);
-    check_catapult(map);
 
     int input = get_input();
+
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+
+    // Check if on catapult
+    int catid = prop.GetNumericProperty("catapult");
+    if (catid && check_below(map, 1, catid, catid) == 0) {
+        if (input & PRESS_RIGHT) {
+            set_vx(get_attribute("move_speed"));
+        }
+        else if (input & PRESS_LEFT) {
+            set_vx(-get_attribute("move_speed"));
+        }
+        set_jump(map, true);
+    }
+
     switch(m_action) {
         case Still:
             set_vx(0);
