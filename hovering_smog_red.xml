@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <hovering_smog>
     <hovering turn_width="240"
-              attack_distance="600"
+              attack_distance="200"
               attack_timer="120"
               num_bullets="3"
               bullet_speed="3"

@@ -38,32 +38,6 @@ bool Shooter::attack_object(Object *object)
     return result;
 }
 
-bool Shooter::check_range() const
-{
-    bool result = false;
-
-    switch(get_dir()) {
-        case Right:
-        case Left:
-            if (abs(m_y - m_yref) < get_attribute("attack_distance")) {
-                result = true;
-            }
-            break;
-
-        case Up:
-        case Down:
-            if (abs(m_x - m_xref) < get_attribute("attack_distance")) {
-                result = true;
-            }
-            break;
-
-        default:
-            break;
-    }
-
-    return result;
-}
-
 void Shooter::fire()
 {
     bool result = false;
@@ -143,11 +117,8 @@ void Shooter::move(Map *map)
             animate_move();
 
             if (m_attack_timer.check(get_attribute("attack_timer"))) {
-                int dist = get_attribute("attack_distance");
-                int x = m_xref - get_front();
-                int y = m_yref - get_y();
-                //if (x * x + y * y < dist * dist) {
-                if (check_range()) {
+                int dist = m_xref - m_x;
+                if (abs(dist) < get_attribute("attack_distance")) {
                     fire();
                     set_action(Attack);
                 }

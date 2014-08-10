@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "guardian.h"
 
 Guardian::Guardian(const char *fn, MediaDB *media, int x, int y, Direction dir)
@@ -85,10 +86,8 @@ void Guardian::move(Map *map)
             animate_move();
 
             if (m_attack_timer.check(get_attribute("attack_timer"))) {
-                int dist = get_attribute("attack_distance");
-                int x = m_xref - get_front();
-                int y = m_yref - get_y();
-                if (x * x + y * y < dist * dist) {
+                int dist = m_xref - get_front();
+                if (abs(dist) < get_attribute("attack_distance")) {
                     m_attack_timer.reset();
                     set_jump(map);
                     if (get_reference() == Right) {
