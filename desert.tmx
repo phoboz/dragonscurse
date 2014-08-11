@@ -57,6 +57,11 @@
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
+  <object name="unknown.tmx" type="Area" x="192" y="1024" width="64" height="64">
+   <properties>
+    <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Chests" width="454" height="43">
   <object name="regular_chest.xml" type="Chest" x="1536" y="420" width="64" height="58">
@@ -344,6 +349,16 @@
   <object name="giant_fish_green.xml" type="Swimmer" x="3012" y="1124" width="50" height="50">
    <properties>
     <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="goblin_red.xml" type="Crawler" x="134" y="1023" width="50" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="goblin_red.xml" type="Crawler" x="1635" y="763" width="50" height="64">
+   <properties>
+    <property name="direction" value="left"/>
    </properties>
   </object>
  </objectgroup>

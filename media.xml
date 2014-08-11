@@ -49,6 +49,8 @@
                 width="50" height="50" margin="1" spacing="1" />
         <sprite filename="giant_fish_red.png"
                 width="50" height="50" margin="1" spacing="1" />
+        <sprite filename="goblin_red.png"
+                width="50" height="64" margin="1" spacing="1" />
         <sprite filename="hovering_smog_red.png"
                 width="50" height="34" margin="1" spacing="1" />
         <sprite filename="human.png"
@@ -87,6 +89,8 @@
                 width="50" height="60" margin="1" spacing="1" />
         <sprite filename="skull.png"
                 width="32" height="28" margin="1" spacing="1" />
+        <sprite filename="spear.png"
+                width="30" height="14" margin="1" spacing="1" />
         <sprite filename="window_door.png"
                 width="64" height="64" margin="1" spacing="1" />
         <sprite filename="wondering.png"

@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cyclop>
-    <walker hit_time="24">
+    <crawler hit_time="24">
         <monster hp="6"
                  perish_time="40">
             <actor move_speed="2"
@@ -24,6 +24,6 @@
             </actor>
             <string collectable="coin.xml" />
         </monster>
-    </walker>
+    </crawler>
 </cyclop>
 

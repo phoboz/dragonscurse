@@ -39,7 +39,7 @@ void Guardian::fire()
     for (int i = 0; i < n; i++) {
         if (!m_bullets[i]->get_active()) {
             int dx = get_attribute("bullet_speed");
-            if (get_reference() == Right) {
+            if (get_dir() == Right) {
                 result = m_bullets[i]->fire(m_x + get_attribute("attack_right"),
                                             m_y + get_attribute("attack_medium"),
                                             dx, 0);

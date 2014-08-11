@@ -2,7 +2,6 @@
 <bullet move_speed="4"
         treshold="6"
         distance="1000"
-        rise_limit="10"
         weight="5"
         reload_time="2"
         right_still="0"
