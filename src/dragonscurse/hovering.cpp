@@ -88,6 +88,7 @@ void Hovering::move(Map *map)
                     set_vx(get_attribute("move_speed"));
                 }
                 else {
+                    swap_move_dir();
                     set_vx(0);
                 }
             }
@@ -96,6 +97,7 @@ void Hovering::move(Map *map)
                     set_vx(-get_attribute("move_speed"));
                 }
                 else {
+                    swap_move_dir();
                     set_vx(0);
                 }
             }
