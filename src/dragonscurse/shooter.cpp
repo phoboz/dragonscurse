@@ -116,7 +116,7 @@ void Shooter::move(Map *map)
 
             animate_move();
 
-            if (m_attack_timer.check(get_attribute("attack_timer"))) {
+            if (m_attack_timer.expired(get_attribute("attack_timer"))) {
                 int dist = m_xref - m_x;
                 if (abs(dist) < get_attribute("attack_distance")) {
                     fire();
@@ -126,8 +126,7 @@ void Shooter::move(Map *map)
             break;
 
         case Attack:
-            if (m_anim_timer.expired(get_attribute("treshold"))) {
-                m_attack_timer.reset();
+            if (animate_attack()) {
                 reset_attack();
             }
             break;

@@ -86,7 +86,7 @@ void Erupter::move(Map *map)
 
     switch(m_action) {
         case Still:
-            if (m_attack_timer.check(get_attribute("attack_timer"))) {
+            if (m_attack_timer.expired(get_attribute("attack_timer"))) {
                 m_attack_timer.reset();
                 int dist = m_xref - get_front();
                 if (abs(dist) < get_attribute("attack_distance")) {
@@ -97,8 +97,7 @@ void Erupter::move(Map *map)
             break;
 
         case Attack:
-            if (m_anim_timer.expired(get_attribute("treshold"))) {
-                m_attack_timer.reset();
+            if (animate_attack()) {
                 reset_attack();
             }
             break;

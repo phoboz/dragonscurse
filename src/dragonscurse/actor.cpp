@@ -37,18 +37,31 @@ void Actor::set_dir(Direction dir)
             break;
 
         case Move:
-            if (set_dir != m_dir) {
-                m_anim_dir = AnimUp;
-                if (set_dir == Right) {
+            if (set_dir == Right) {
+                if (m_frame < get_attribute("right_move_start") ||
+                    m_frame > get_attribute("right_move_end")) {
+                    m_anim_dir = AnimUp;
                     m_frame = get_attribute("right_move_start");
                 }
-                else if (set_dir == Left) {
+            }
+            else if (set_dir == Left) {
+                if (m_frame < get_attribute("left_move_start") ||
+                    m_frame > get_attribute("left_move_end")) {
+                    m_anim_dir = AnimUp;
                     m_frame = get_attribute("left_move_start");
                 }
-                else if (set_dir == Up) {
+            }
+            else if (set_dir == Up) {
+                if (m_frame < get_attribute("up_move_start") ||
+                    m_frame > get_attribute("up_move_end")) {
+                    m_anim_dir = AnimUp;
                     m_frame = get_attribute("up_move_start");
                 }
-                else if (set_dir == Down) {
+            }
+            else if (set_dir == Down) {
+                if (m_frame < get_attribute("down_move_start") ||
+                    m_frame > get_attribute("down_move_end")) {
+                    m_anim_dir = AnimUp;
                     m_frame = get_attribute("down_move_start");
                 }
             }
@@ -83,25 +96,55 @@ void Actor::set_dir(Direction dir)
 
         case Attack:
             if (set_dir == Right) {
-                m_frame = get_attribute("right_attack");
+                if (m_frame < get_attribute("right_attack_start") ||
+                    m_frame > get_attribute("right_attack_end")) {
+                    m_frame = get_attribute("right_attack_start");
+                }
             }
             else if (set_dir == Left) {
-                m_frame = get_attribute("left_attack");
+                if (m_frame < get_attribute("left_attack_start") ||
+                    m_frame > get_attribute("left_attack_end")) {
+                    m_frame = get_attribute("left_attack_start");
+                }
             }
             else if (set_dir == Up) {
-                m_frame = get_attribute("up_attack");
+                if (m_frame < get_attribute("up_attack_start") ||
+                    m_frame > get_attribute("up_attack_end")) {
+                    m_frame = get_attribute("up_attack_start");
+                }
             }
             else if (set_dir == Down) {
-                m_frame = get_attribute("down_attack");
+                if (m_frame < get_attribute("down_attack_start") ||
+                    m_frame > get_attribute("down_attack_end")) {
+                    m_frame = get_attribute("down_attack_start");
+                }
             }
             break;
 
         case AttackLow:
            if (set_dir == Right) {
-                m_frame = get_attribute("right_attack_low");
+                if (m_frame < get_attribute("right_attack_low_start") ||
+                    m_frame > get_attribute("right_attack_low_end")) {
+                    m_frame = get_attribute("right_attack_low_start");
+                }
             }
             else if (set_dir == Left) {
-                m_frame = get_attribute("left_attack_low");
+                if (m_frame < get_attribute("left_attack_low_start") ||
+                    m_frame > get_attribute("left_attack_low_end")) {
+                    m_frame = get_attribute("left_attack_low_start");
+                }
+            }
+            else if (set_dir == Up) {
+                if (m_frame < get_attribute("up_attack_low_start") ||
+                    m_frame > get_attribute("up_attack_low_end")) {
+                    m_frame = get_attribute("up_attack_low_start");
+                }
+            }
+            else if (set_dir == Down) {
+                if (m_frame < get_attribute("down_attack_low_start") ||
+                    m_frame > get_attribute("down_attack_low_end")) {
+                    m_frame = get_attribute("down_attack_low_start");
+                }
             }
             break;
 
@@ -226,6 +269,80 @@ void Actor::animate_move()
                 break;
         }
     }
+}
+
+bool Actor::animate_attack()
+{
+    bool result = false;
+
+    if (m_anim_timer.expired(get_attribute("attack_treshold"))) {
+        switch(m_dir) {
+            case Right:
+                if (m_action == Attack) {
+                    if (++m_frame > get_attribute("right_attack_end")) {
+                        m_frame = get_attribute("right_attack_end");
+                        result = true;
+                    }
+                }
+                else if (m_action == AttackLow) {
+                    if (++m_frame > get_attribute("right_attack_low_end")) {
+                        m_frame = get_attribute("right_attack_low_end");
+                        result = true;
+                    }
+                }
+                break;
+
+            case Left:
+                if (m_action == Attack) {
+                    if (++m_frame > get_attribute("left_attack_end")) {
+                        m_frame = get_attribute("left_attack_end");
+                        result = true;
+                    }
+                }
+                else if (m_action == AttackLow) {
+                    if (++m_frame > get_attribute("left_attack_low_end")) {
+                        m_frame = get_attribute("left_attack_low_end");
+                        result = true;
+                    }
+                }
+                break;
+
+            case Up:
+                if (m_action == Attack) {
+                    if (++m_frame > get_attribute("up_attack_end")) {
+                        m_frame = get_attribute("up_attack_end");
+                        result = true;
+                    }
+                }
+                else if (m_action == AttackLow) {
+                    if (++m_frame > get_attribute("up_attack_low_end")) {
+                        m_frame = get_attribute("up_attack_low_end");
+                        result = true;
+                    }
+                }
+                break;
+
+            case Down:
+                if (m_action == Attack) {
+                    if (++m_frame > get_attribute("down_attack_end")) {
+                        m_frame = get_attribute("down_attack_end");
+                        result = true;
+                    }
+                }
+                else if (m_action == AttackLow) {
+                    if (++m_frame > get_attribute("down_attack_low_end")) {
+                        m_frame = get_attribute("down_attack_low_end");
+                        result = true;
+                    }
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    return result;
 }
 
 void Actor::animate_perish()

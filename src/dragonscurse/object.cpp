@@ -121,6 +121,15 @@ bool Object::load_nodes(TiXmlNode *node)
                 parts->add_parts(node->ToElement());
              }
         }
+        else if (strcmp(node->Value(), "attack_parts") == 0) {
+            m_attack_parts.push_back(new CollisionParts(node->ToElement()));
+        }
+        else if (strcmp(node->Value(), "attack_part") == 0) {
+            if (m_attack_parts.size()) {
+                CollisionParts *parts = m_attack_parts.back();
+                parts->add_parts(node->ToElement());
+             }
+        }
         else {
             load_attributes(node->ToElement());
         }
@@ -472,7 +481,7 @@ CollisionParts* Object::find_collision_parts(std::vector<CollisionParts*> v) con
     return parts;
 }
 
-bool Object::check_weak_collision(Object *object) const
+bool Object::check_weak_collision(const Object *object) const
 {
     bool result = false;
     CollisionParts *parts = find_collision_parts(m_weak_parts);
@@ -499,7 +508,7 @@ bool Object::check_weak_collision(Object *object) const
     return result;
 }
 
-bool Object::check_weak_collision(Object *object,
+bool Object::check_weak_collision(const Object *object,
                                   int start_x1, int start_y1,
                                   int end_x1, int end_y1) const
 {
@@ -530,7 +539,7 @@ bool Object::check_weak_collision(Object *object,
     return result;
 }
 
-bool Object::check_shielded_collision(Object *object) const
+bool Object::check_shielded_collision(const Object *object) const
 {
     bool result = false;
     CollisionParts *parts = find_collision_parts(m_shielded_parts);
@@ -548,6 +557,29 @@ bool Object::check_shielded_collision(Object *object) const
                                           part->y1,
                                           part->x2,
                                           part->y2);
+            if (result) {
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
+bool Object::check_attack_collision(const Object *object) const
+{
+    bool result = false;
+    CollisionParts *parts = find_collision_parts(m_attack_parts);
+
+    if (parts) {
+        for (int i = 0; i < parts->m_parts.size(); i++) {
+            CollisionPart *part = parts->m_parts[i];
+            result = object->check_weak_collision(this,
+                                                  part->x1,
+                                                  part->y1,
+                                                  part->x2,
+                                                  part->y2);
+
             if (result) {
                 break;
             }

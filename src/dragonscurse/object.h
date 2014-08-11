@@ -94,11 +94,12 @@ public:
                                       object->m_spr, object->m_frame,
                                       object->m_x, object->m_y);
     }
-    bool check_weak_collision(Object *object) const;
-    bool check_weak_collision(Object *object,
+    bool check_weak_collision(const Object *object) const;
+    bool check_weak_collision(const Object *object,
                               int start_x1, int start_y1,
                               int end_x1, int end_y1) const;
-    virtual bool check_shielded_collision(Object *object) const;
+    virtual bool check_shielded_collision(const Object *object) const;
+    bool check_attack_collision(const Object *object) const;
 
     virtual void move(Map *map) = 0;
     virtual void draw(SDL_Surface *dest, Map *map,
@@ -129,6 +130,7 @@ protected:
     std::map<std::string, std::string> m_strings;
     std::vector<CollisionParts*> m_weak_parts;
     std::vector<CollisionParts*> m_shielded_parts;
+    std::vector<CollisionParts*> m_attack_parts;
 
     int m_x, m_y;
     int m_dx, m_dy;

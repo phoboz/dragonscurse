@@ -11,7 +11,7 @@ public:
 
     virtual bool attack_object(Object *object);
 
-    virtual bool check_shielded_collision(Object *object) const;
+    virtual bool check_shielded_collision(const Object *object) const;
 
     virtual void move(Map *map);
 
@@ -20,7 +20,6 @@ public:
 
 private:
     bool m_attack_ready;
-    Timer m_attack_timer;
     VectorBullet *m_bullet;
 };
 

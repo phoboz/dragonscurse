@@ -1,12 +1,6 @@
 <?xml version="1.0" ?>
 <mouseman>
-    <knight attack_right="46"
-            attack_left="14"
-            attack_medium_top="46"
-            attack_medium_bottom="52"
-            attack_low_top="46"
-            attack_low_bottom="52"
-            attack_time="12">
+    <knight attack_treshold="12">
         <player type="knight"
                 jump_speed="13"
                 catapult_speed="26"
@@ -26,16 +20,16 @@
                    right_jump="2"
                    right_fall="2"
                    right_crouch="0"
-                   right_attack="3"
-                   right_attack_low="3"
+                   right_attack_start="3" right_attack_end="3"
+                   right_attack_low_start="3" right_attack_low_end="3"
                    right_hit="4"
                    left_still="5"
                    left_move_start="5" left_move_end="7"
                    left_jump="7"
                    left_fall="7"
                    left_crouch="5"
-                   left_attack="8"
-                   left_attack_low="8"
+                   left_attack_start="8" left_attack_end="8"
+                   left_attack_low_start="8" left_attack_low_end="8"
                    left_hit="4"
                    perish_start="4" perish_end="4">
                 <object image="mouseman.png"
@@ -43,6 +37,12 @@
                     <weak_parts frame="-1">
                         <weak_part x1="16" y1="28" x2="46" y2="59" />
                     </weak_parts>
+                    <attack_parts frame="3">
+                        <attack_part x1="46" y1="46" x2="60" y2="52" />
+                    </attack_parts>
+                    <attack_parts frame="8">
+                        <attack_part x1="0" y1="46" x2="14" y2="52" />
+                    </attack_parts>
                 </object>
             </actor>
         </player>

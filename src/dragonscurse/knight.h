@@ -14,7 +14,6 @@ public:
 
 private:
     bool m_attack_ready;
-    Timer m_attack_timer;
 };
 
 #endif

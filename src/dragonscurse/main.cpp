@@ -27,6 +27,7 @@
 
 enum State { StateMap, StateRoom, StateMainMenu, StateSubMenu };
 
+static const int c_offset_y = 24;
 static SDL_Surface *screen;
 static int screen_width = 640;
 static int screen_height = 480;
@@ -140,7 +141,7 @@ bool load_area(const char *ar_name,
         start_x = prop.GetNumericProperty("start_x");
     }
     if (start_y == -1) {
-        start_y = prop.GetNumericProperty("start_y");
+        start_y = prop.GetNumericProperty("start_y") - c_offset_y;
     }
 
     if (new_game) {
@@ -174,7 +175,8 @@ void move()
         if (area) {
             load_area(area->get_name(),
                       area->get_type() == Area::TypeCurse, area->get_data(),
-                      area->get_sx(), area->get_sy(), area->get_music());
+                      area->get_sx(), area->get_sy() - c_offset_y,
+                      area->get_music());
         }
     }
     else if (state == StateMainMenu || state == StateSubMenu) {

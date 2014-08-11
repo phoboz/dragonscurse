@@ -5,55 +5,9 @@
 bool Knight::attack_object(Object *object)
 {
     bool result = false;
-    const Sprite *spr = get_sprite();
 
-    if (m_action == Attack) {
-        if (m_dir == Right) {
-            if (m_frame == get_attribute("right_attack") &&
-                object->check_weak_collision(
-                    this,
-                    get_attribute("attack_right"),
-                    get_attribute("attack_medium_top"),
-                    spr->get_width(),
-                    get_attribute("attack_medium_bottom"))) {
-                result = true;
-            }
-        }
-        else if (m_dir == Left) {
-            if (m_frame == get_attribute("left_attack") &&
-                object->check_weak_collision(
-                    this,
-                    0,
-                    get_attribute("attack_medium_top"),
-                    get_attribute("attack_left"),
-                    get_attribute("attack_medium_bottom"))) {
-                result = true;
-            }
-        }
-    }
-    else if (m_action == AttackLow) {
-        if (m_dir == Right) {
-            if (m_frame == get_attribute("right_attack_low") &&
-                object->check_weak_collision(
-                    this,
-                    get_attribute("attack_right"),
-                    get_attribute("attack_low_top"),
-                    spr->get_width(),
-                    get_attribute("attack_low_bottom"))) {
-                result = true;
-            }
-        }
-        else if (m_dir == Left) {
-            if (m_frame == get_attribute("left_attack_low") &&
-                object->check_weak_collision(
-                    this,
-                    0,
-                    get_attribute("attack_low_top"),
-                    get_attribute("attack_left"),
-                    get_attribute("attack_low_bottom"))) {
-                result = true;
-            }
-        }
+    if (m_action == Attack || m_action == AttackLow) {
+        result = check_attack_collision(object);
     }
 
     return result;
@@ -67,7 +21,7 @@ void Knight::move(Map *map)
 
     // Handle attack
     if (m_action == Attack || m_action == AttackLow) {
-        if (m_attack_timer.expired(get_attribute("attack_time"))) {
+        if (animate_attack()) {
             reset_attack();
         }
     }

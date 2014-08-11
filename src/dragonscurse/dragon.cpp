@@ -26,7 +26,7 @@ bool Dragon::attack_object(Object *object)
     return result;
 }
 
-bool Dragon::check_shielded_collision(Object *object) const
+bool Dragon::check_shielded_collision(const Object *object) const
 {
     bool result = Object::check_shielded_collision(object);
     if (!result && m_bullet->get_active()) {
@@ -52,7 +52,7 @@ void Dragon::move(Map *map)
 
     // Handle attack
     if (m_action == Attack || m_action == AttackLow) {
-        if (m_attack_timer.expired(get_attribute("attack_time"))) {
+        if (animate_attack()) {
             reset_attack();
         }
     }

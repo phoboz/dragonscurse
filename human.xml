@@ -1,12 +1,6 @@
 <?xml version="1.0" ?>
 <human>
-    <knight attack_right="64"
-            attack_left="24"
-            attack_medium_top="33"
-            attack_medium_bottom="43"
-            attack_low_top="46"
-            attack_low_bottom="54"
-            attack_time="10">
+    <knight attack_treshold="12">
         <player type="knight"
                 jump_speed="14"
                 catapult_speed="30"
@@ -26,16 +20,16 @@
                    right_jump="3"
                    right_fall="3"
                    right_crouch="4"
-                   right_attack="5"
-                   right_attack_low="6"
+                   right_attack_start="5" right_attack_end="5"
+                   right_attack_low_start="6" right_attack_low_end="6"
                    right_hit="7"
                    left_still="8"
                    left_move_start="8" left_move_end="10"
                    left_jump="11"
                    left_fall="11"
                    left_crouch="12"
-                   left_attack="13"
-                   left_attack_low="14"
+                   left_attack_start="13" left_attack_end="13"
+                   left_attack_low_start="14" left_attack_low_end="14"
                    left_hit="7"
                    perish_start="16" perish_end="17">
                 <object image="human.png"
@@ -55,6 +49,18 @@
                     <shielded_parts frame="12">
                         <shielded_part x1="16" y1="41" x2="29" y2="62" />
                     </shielded_parts>
+                    <attack_parts frame="5">
+                        <attack_part x1="64" y1="33" x2="91" y2="43" />
+                    </attack_parts>
+                    <attack_parts frame="6">
+                        <attack_part x1="64" y1="46" x2="91" y2="54" />
+                    </attack_parts>
+                    <attack_parts frame="13">
+                        <attack_part x1="0" y1="33" x2="24" y2="43" />
+                    </attack_parts>
+                    <attack_parts frame="14">
+                        <attack_part x1="0" y1="46" x2="24" y2="54" />
+                    </attack_parts>
                 </object>
             </actor>
         </player>

@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<lionman>
+    <knight attack_right="64"
+            attack_left="24"
+            attack_medium_top="33"
+            attack_medium_bottom="43"
+            attack_low_top="46"
+            attack_low_bottom="54">
+        <player type="knight"
+                jump_speed="14"
+                catapult_speed="30"
+                water_jump_speed="10"
+                water_weight="5"
+                water_catapult_speed="17"
+                attack_treshold="6"
+                ap="100"
+                dp="55"
+                cp="56">
+            <actor move_speed="3"
+                   treshold="6"
+                   weight="12"
+                   hit_time="16"
+                   invisible_time="64"
+                   right_still="0"
+                   right_move_start="0" right_move_end="2"
+                   right_jump="7"
+                   right_fall="7"
+                   right_crouch="0"
+                   right_attack_start="3" right_attack_end="6"
+                   right_attack_low_start="3" right_attack_low_end="6"
+                   right_hit="16"
+                   left_still="8"
+                   left_move_start="8" left_move_end="10"
+                   left_jump="15"
+                   left_fall="15"
+                   left_crouch="8"
+                   left_attack_start="11" left_attack_end="14"
+                   left_attack_low_start="11" left_attack_low_end="14"
+                   left_hit="16"
+                   perish_start="16" perish_end="16">
+                <object image="lionman.png"
+                        left="22" right="64" top="28" bottom="83">
+                    <weak_parts frame="-1">
+                        <weak_part x1="22" y1="28" x2="64" y2="84" />
+                    </weak_parts>
+                    <shielded_parts frame="0">
+                        <shielded_part x1="48" y1="45" x2="62" y2="66" />
+                    </shielded_parts>
+                    <shielded_parts frame="8">
+                        <shielded_part x1="23" y1="48" x2="38" y2="66" />
+                    </shielded_parts>
+                    <attack_parts frame="3">
+                        <attack_part x1="14" y1="4" x2="30" y2="30" />
+                    </attack_parts>
+                    <attack_parts frame="4">
+                        <attack_part x1="52" y1="14" x2="74" y2="36" />
+                    </attack_parts>
+                    <attack_parts frame="5">
+                        <attack_part x1="56" y1="56" x2="84" y2="66" />
+                    </attack_parts>
+                    <attack_parts frame="6">
+                        <attack_part x1="54" y1="65" x2="77" y2="84" />
+                    </attack_parts>
+                    <attack_parts frame="11">
+                        <attack_part x1="34" y1="4" x2="48" y2="25" />
+                    </attack_parts>
+                    <attack_parts frame="12">
+                        <attack_part x1="9" y1="14" x2="32" y2="36" />
+                    </attack_parts>
+                    <attack_parts frame="13">
+                        <attack_part x1="0" y1="56" x2="24" y2="66" />
+                    </attack_parts>
+                    <attack_parts frame="14">
+                        <attack_part x1="5" y1="66" x2="26" y2="84" />
+                    </attack_parts>
+                </object>
+            </actor>
+        </player>
+        <string strike="sword.wav" />
+    </knight>
+</lionman>
+
