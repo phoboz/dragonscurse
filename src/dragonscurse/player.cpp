@@ -264,6 +264,9 @@ void Player::player_move(Map *map)
 
         case Attack:
         case AttackLow:
+            if (animate_attack()) {
+                reset_attack();
+            }
             Body::move(map);
             if (!get_fall()) {
                 m_hit_ground = true;

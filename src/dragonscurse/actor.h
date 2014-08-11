@@ -57,6 +57,8 @@ protected:
     Action m_action;
     bool m_invisible;
     Timer m_anim_timer;
+    Timer m_attack_anim_timer;
+    Timer m_perish_timer;
     Timer m_blink_timer;
     Timer m_invisible_timer;
 };

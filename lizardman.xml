@@ -4,7 +4,7 @@
             attack_left="12"
             attack_medium="10"
             attack_low="30"
-            attack_treshold="6"
+            attack_treshold="20"
             bullet_speed="6">
         <player type="dragon"
                 jump_speed="17"
@@ -12,7 +12,6 @@
                 water_jump_speed="10"
                 water_weight="6"
                 water_catapult_speed="18"
-                attack_treshold="20"
                 ap="0"
                 dp="0"
                 cp="0">

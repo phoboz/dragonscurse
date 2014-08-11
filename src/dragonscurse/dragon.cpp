@@ -50,13 +50,7 @@ void Dragon::move(Map *map)
 
     Player::move(map);
 
-    // Handle attack
-    if (m_action == Attack || m_action == AttackLow) {
-        if (animate_attack()) {
-            reset_attack();
-        }
-    }
-    else if (!get_invisible()) {
+    if (!get_invisible()) {
         if (input & PRESS_ATTACK) {
             if (m_attack_ready) {
                 m_attack_ready = false;

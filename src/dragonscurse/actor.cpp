@@ -275,7 +275,7 @@ bool Actor::animate_attack()
 {
     bool result = false;
 
-    if (m_anim_timer.expired(get_attribute("attack_treshold"))) {
+    if (m_attack_anim_timer.expired(get_attribute("attack_treshold"))) {
         switch(m_dir) {
             case Right:
                 if (m_action == Attack) {
@@ -347,7 +347,7 @@ bool Actor::animate_attack()
 
 void Actor::animate_perish()
 {
-    if (m_anim_timer.expired(get_attribute("treshold"))) {
+    if (m_perish_timer.expired(get_attribute("treshold"))) {
         if (++m_frame > get_attribute("perish_end")) {
             m_frame = get_attribute("perish_start");
         }
