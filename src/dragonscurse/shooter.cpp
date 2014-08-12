@@ -38,7 +38,7 @@ bool Shooter::attack_object(Object *object)
     return result;
 }
 
-void Shooter::fire()
+bool Shooter::fire()
 {
     bool result = false;
 
@@ -71,7 +71,7 @@ void Shooter::fire()
                     result = m_bullets[i]->fire(
                         m_x + get_attribute("attack_left"),
                         m_y + get_attribute("attack_medium"),
-                        0, get_attribute("bullet_speed"));
+                        0, -get_attribute("bullet_speed"));
                     break;
 
                 default:
@@ -83,6 +83,8 @@ void Shooter::fire()
             }
         }
     }
+
+    return result;
 }
 
 bool Shooter::get_visible(Map *map, int clip_x, int clip_y,
@@ -119,8 +121,9 @@ void Shooter::move(Map *map)
             if (m_attack_timer.expired(get_attribute("attack_timer"))) {
                 int dist = m_xref - m_x;
                 if (abs(dist) < get_attribute("attack_distance")) {
-                    fire();
-                    set_action(Attack);
+                    if (fire()) {
+                        set_action(Attack);
+                    }
                 }
             }
             break;

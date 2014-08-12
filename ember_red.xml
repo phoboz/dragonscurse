@@ -7,7 +7,11 @@
         right_still="0"
         right_move_start="0" right_move_end="1"
         left_still="0"
-        left_move_start="0" left_move_end="1" />
+        left_move_start="0" left_move_end="1"
+        up_still="0"
+        up_move_start="0" up_move_end="1"
+        down_still="0"
+        down_move_start="0" down_move_end="1" />
     <object image="ember_red.png"
             left="2" right="26" top="2" bottom="26" />
 </bullet>

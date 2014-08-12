@@ -42,6 +42,12 @@ void Bullet::set_dir(Direction dir)
         else if (dir == Left) {
             m_frame = get_attribute("left_move_start");
         }
+        else if (dir == Up) {
+            m_frame = get_attribute("up_move_start");
+        }
+        else if (dir == Down) {
+            m_frame = get_attribute("down_move_start");
+        }
 
         m_dir = dir;
     }
@@ -98,6 +104,18 @@ void Bullet::animate_move()
             case Left:
                 if (++m_frame > get_attribute("left_move_end")) {
                     m_frame = get_attribute("left_move_start");
+                }
+                break;
+
+            case Up:
+                if (++m_frame > get_attribute("up_move_end")) {
+                    m_frame = get_attribute("up_move_start");
+                }
+                break;
+
+            case Down:
+                if (++m_frame > get_attribute("down_move_end")) {
+                    m_frame = get_attribute("down_move_start");
                 }
                 break;
 

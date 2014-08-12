@@ -49,6 +49,10 @@
                 width="50" height="50" margin="1" spacing="1" />
         <sprite filename="giant_fish_red.png"
                 width="50" height="50" margin="1" spacing="1" />
+        <sprite filename="giant_toad_green.png"
+                width="50" height="64" margin="1" spacing="1" />
+        <sprite filename="giant_toad_red.png"
+                width="50" height="64" margin="1" spacing="1" />
         <sprite filename="goblin_red.png"
                 width="50" height="64" margin="1" spacing="1" />
         <sprite filename="hovering_smog_red.png"
