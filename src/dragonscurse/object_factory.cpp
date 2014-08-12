@@ -15,6 +15,7 @@
 #include "shooter.h"
 #include "diver.h"
 #include "hovering.h"
+#include "float.h"
 #include "swimmer.h"
 #include "dancer.h"
 #include "falling.h"
@@ -149,6 +150,9 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "Hovering") == 0) {
         object = new Hovering(name, media, x, y, w, dir);
+    }
+    else if (strcmp(type, "Floater") == 0) {
+        object = new Floater(name, media, x, y, dir);
     }
     else if (strcmp(type, "Swimmer") == 0) {
         object = new Swimmer(name, media, x, y, dir);

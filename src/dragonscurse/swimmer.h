@@ -2,18 +2,14 @@
 #define _Swimmer_H
 
 #include "phoboz/timer.h"
-#include "monster.h"
+#include "floater.h"
 
-class Swimmer : public Monster {
+class Swimmer : public Floater {
 public:
     Swimmer(const char *fn, MediaDB *media, int x, int y, Direction dir)
-        : Monster(fn, media, x, y, dir) { }
+        : Floater(fn, media, x, y, dir) { }
 
-    virtual void move(Map *map);
-
-private:
-    Timer m_attack_timer;
-    int m_lock_x, m_lock_y;
+    virtual void world_initialize(World *world);
 };
 
 #endif

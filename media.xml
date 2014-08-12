@@ -95,6 +95,8 @@
                 width="32" height="28" margin="1" spacing="1" />
         <sprite filename="spear.png"
                 width="30" height="14" margin="1" spacing="1" />
+        <sprite filename="will_owisp_red.png"
+                width="34" height="34" margin="1" spacing="1" />
         <sprite filename="window_door.png"
                 width="64" height="64" margin="1" spacing="1" />
         <sprite filename="wondering.png"
