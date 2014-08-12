@@ -23,6 +23,7 @@ private:
     void check_ground(Map *map);
     void fire();
 
+    int m_jump_counter;
     std::vector<VectorBullet*> m_bullets;
     Timer m_attack_timer;
 };

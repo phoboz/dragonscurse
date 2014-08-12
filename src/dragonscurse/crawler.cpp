@@ -2,7 +2,8 @@
 #include "crawler.h"
 
 Crawler::Crawler(const char *fn, MediaDB *media, int x, int y, Direction dir)
-    : Monster(fn, media, x, y, dir)
+    : Monster(fn, media, x, y, dir),
+      m_jump_counter(0)
 {
     const char* bullet_name = get_string("bullet");
     int num_bullets = get_attribute("num_bullets");
@@ -98,6 +99,12 @@ void Crawler::move(Map *map)
         case Still:
             face_reference();
             set_action(Move);
+            if (get_hit_ground()) {
+                if (m_jump_counter > 0 &&
+                    m_jump_counter <= get_attribute("num_jumps")) {
+                    set_attack();
+                }
+            }
             break;
 
         case Move:
@@ -118,10 +125,20 @@ void Crawler::move(Map *map)
                 int dist = m_xref - get_front();
                 if (abs(dist) < get_attribute("attack_distance")) {
                     m_attack_timer.reset();
-                    fire();
+                    set_attack();
                 }
             }
+            break;
 
+        case Attack:
+            if (++m_jump_counter <= get_attribute("num_jumps")) {
+                set_jump(map);
+            }
+            else {
+                fire();
+                m_jump_counter = 0;
+                reset_attack();
+            }
             break;
 
         default:

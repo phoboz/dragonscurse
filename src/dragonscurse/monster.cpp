@@ -38,6 +38,7 @@ void Monster::world_initialize(World *world)
 void Monster::set_jump(Map *map)
 {
     set_vy(-get_attribute("jump_speed"));
+    m_hit_ground = false;
     set_action(Jump);
 }
 
