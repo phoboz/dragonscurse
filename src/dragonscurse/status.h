@@ -17,7 +17,7 @@ public:
         : m_arm(0),
           m_shield(0),
           m_armour(0),
-          m_gold(34),
+          m_gold(0),
           m_hp(1),
           m_shape(0) { update(); }
 
