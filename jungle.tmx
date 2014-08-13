@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="600" height="45" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="jungle" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <image source="jungle.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="600" height="45">
+  <data encoding="base64" compression="zlib">
+   eJzt3Tlv1EAAhmFzpOcOVJBwiSYcAVFxI6hDBH0kaDgE/79iRniUmdnxrnezSST8PNIngXEk0r0aO5uz3dFcD/s0cgAAU7DRuHYz7G61OwNfr68AAEqtvnoR9irsSdhu2JuwtwNfr68AAEpDffWo+9dX2/1ud+0zLH0FAFCq+yo+G7wVttVv0RmWvgIAKNV9Fc+udvo97A776nGnrwAAxhjbV6+79jNCfQUAUBrqq/h+e3pGmN7Bap1h6SsAgFLeV/W7V/n5VTrD0lcAAPPlfRXPrl527eeDQ+9g6SsAgNLYvtrOlr+Dpa8AAEpDfbXVle9fpTOs+nMa9BUAQCn1Vf3uVev5oL4CAFgs9VX6nTg73fD7V+k5Yf45DfoKAKCU91X8nTitvsrfvap/jlBfAQCU6vOr2FRb1Xar5T9HqK8AAEqxr1rvXg09H3R+BQAwX+yr+nMZFvWV8ysAgGGpr+p323f6f4tzfgUAMF7sp6cr7l7Y/U5fAQDkYl89O+L0FQDAIX0FALBesa/GtNF+2N7Ie/UVADBlY/oqttVm2I3uaI0FADAFeV+1zqjitXdh78Oehz1o3DP2jAsAYApSX+Udtde4Fs+vPoR97P/c6rBFZ1wAAFMQ+yq1Ub6DrmyruM9hX6p7Dqp7h8649k/qGwIAOGWxr+q2uhB2sd+lsMv99a9h3xr358vPuPL+2jypbwgA4JSlvsqbqrW8s/L76+v1GVc+AIApiH01r6vGLnXWvDMuAIApiH2V2uhsv6tL7Fr/9VcG/p5fAwCYgthX6Vlf6qtzxzQAgCnI329PfXX+mAYAMAWtvlpmAACUYl/9DvuzwvQVAMCs2Fe/wn6sMH0FADBLXwEArNcyfbVRTV8BAMxatq9+hn3vp68AAGYt21f5vfoKAGCWvgIAWC99BQCwXvoKAGC9VvnMdp/fDgAw7Mxp/wcAAP4zfwF5KNlL
+  </data>
+ </layer>
+</map>
