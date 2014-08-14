@@ -224,6 +224,47 @@ void Climber::leave_climb(Map *map)
     Player::set_jump(map);
 }
 
+bool Climber::check_climb(Map *map, int len)
+{
+    bool result = false;
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+    int block_id = prop.GetNumericProperty("climb");
+
+    switch(m_climb_dir) {
+        case ClimbRight:
+            if (m_dir == Right) {
+                result = check_collision(m_x + get_attribute("right") + 1,
+                                         m_y + get_attribute("bottom") + len,
+                                         map, block_id, block_id);
+            }
+            else if (m_dir == Left) {
+                result = check_collision(m_x + get_attribute("right") + 1,
+                                         m_y + get_attribute("top") + len,
+                                         map, block_id, block_id);
+            }
+            break;
+
+        case ClimbLeft:
+            if (m_dir == Right) {
+                result = check_collision(m_x + get_attribute("left") - 1,
+                                         m_y + get_attribute("bottom") + len,
+                                         map, block_id, block_id);
+            }
+            else if (m_dir == Left) {
+                result = check_collision(m_x + get_attribute("left") - 1,
+                                         m_y + get_attribute("top") + len,
+                                         map, block_id, block_id);
+            }
+            break;
+
+        default:
+            break;
+    }
+
+    return result;
+}
+
 void Climber::move_climb(Map *map, int input)
 {
     if (!m_leave_ready && m_leave_timer.expired(c_leave_time)) {
@@ -242,16 +283,28 @@ void Climber::move_climb(Map *map, int input)
                 animate_climb();
                 set_action(Move);
                 set_dir(Right);
-                set_vy(get_attribute("move_speed"));
+                int speed = get_attribute("move_speed");
+                if (check_climb(map, speed)) {
+                    set_vy(get_attribute("move_speed"));
+                }
+                else {
+                    set_vy(0);
+                }
             }
             else if (input & PRESS_UP) {
                 animate_climb();
                 set_action(Move);
                 set_dir(Left);
-                set_vy(-get_attribute("move_speed"));
+                int speed = get_attribute("move_speed");
+                if (check_climb(map, speed)) {
+                    set_vy(-speed);
+                }
+                else {
+                    set_vy(0);
+                }
             }
             else {
-                set_dir(Left);
+                set_dir();
                 set_action(Still);
                 set_vy(0);
             }

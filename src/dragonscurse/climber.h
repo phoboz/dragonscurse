@@ -26,6 +26,8 @@ private:
 
     void leave_climb(Map *map);
 
+    bool check_climb(Map *map, int len);
+
     void move_climb(Map *map, int input);
 
     static const int c_leave_time = 32;

@@ -1,6 +1,14 @@
 <?xml version="1.0" ?>
 <mouseman>
-    <knight attack_treshold="12">
+    <climber attack_treshold="12"
+             left_up_left="32"
+             left_up_right="58"
+             left_up_top="18"
+             left_up_bottom="42"
+             left_down_left="32"
+             left_down_right="58"
+             left_down_top="18"
+             left_down_bottom="42">
         <player type="climber"
                 jump_speed="10"
                 catapult_speed="19"
@@ -63,6 +71,6 @@
             </actor>
         </player>
         <string strike="sword.wav" />
-    </knight>
+    </climber>
 </mouseman>
 
