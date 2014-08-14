@@ -50,7 +50,7 @@ void Dragon::move(Map *map)
 
     Player::move(map);
 
-    if (!get_invisible()) {
+    if (m_action != Hit && m_action != HitPerish) {
         if (input & PRESS_ATTACK) {
             if (m_attack_ready) {
                 m_attack_ready = false;

@@ -2,17 +2,17 @@
 <mouseman>
     <knight attack_treshold="12">
         <player type="climber"
-                jump_speed="13"
-                catapult_speed="26"
-                water_jump_speed="8"
-                water_weight="4"
-                water_catapult_speed="16"
+                jump_speed="10"
+                catapult_speed="19"
+                water_jump_speed="7"
+                water_weight="3"
+                water_catapult_speed="14"
                 ap="60"
                 dp="20"
                 cp="40">
             <actor move_speed="4"
                    treshold="5"
-                   weight="10"
+                   weight="6"
                    hit_time="16"
                    invisible_time="42"
                    right_still="0"

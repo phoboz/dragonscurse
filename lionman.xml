@@ -2,17 +2,17 @@
 <lionman>
     <knight attack_treshold="3">
         <player type="knight"
-                jump_speed="14"
-                catapult_speed="30"
-                water_jump_speed="10"
-                water_weight="5"
-                water_catapult_speed="17"
+                jump_speed="12"
+                catapult_speed="20"
+                water_jump_speed="7"
+                water_weight="3"
+                water_catapult_speed="14"
                 ap="90"
                 dp="50"
                 cp="50">
             <actor move_speed="4"
                    treshold="6"
-                   weight="12"
+                   weight="7"
                    hit_time="16"
                    invisible_time="64"
                    right_still="0"
