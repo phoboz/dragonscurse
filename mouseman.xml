@@ -22,16 +22,16 @@
                    right_crouch="0"
                    right_attack_start="3" right_attack_end="3"
                    right_attack_low_start="3" right_attack_low_end="3"
-                   right_hit="4"
-                   left_still="5"
-                   left_move_start="5" left_move_end="7"
-                   left_jump="7"
-                   left_fall="7"
-                   left_crouch="5"
-                   left_attack_start="8" left_attack_end="8"
-                   left_attack_low_start="8" left_attack_low_end="8"
-                   left_hit="4"
-                   perish_start="4" perish_end="4">
+                   right_hit="32"
+                   left_still="4"
+                   left_move_start="4" left_move_end="6"
+                   left_jump="6"
+                   left_fall="6"
+                   left_crouch="4"
+                   left_attack_start="7" left_attack_end="7"
+                   left_attack_low_start="7" left_attack_low_end="7"
+                   left_hit="32"
+                   perish_start="32" perish_end="32">
                 <object image="mouseman.png"
                         left="16" right="46" top="28" bottom="59">
                     <weak_parts frame="-1">
