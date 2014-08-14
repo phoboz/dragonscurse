@@ -15,7 +15,6 @@ public:
 
     void set_jump(Map *map, bool catapult = false);
     virtual bool set_hit(Object *object, Status *status);
-    virtual bool check_collision(Object *object) const;
 
     void set_morph(Morph *morph) { m_morph = morph; }
     bool is_morphing();

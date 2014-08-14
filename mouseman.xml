@@ -51,7 +51,7 @@
                 <object image="mouseman.png"
                         left="16" right="46" top="28" bottom="59">
                     <weak_parts frame="-1">
-                        <weak_part x1="16" y1="28" x2="46" y2="59" />
+                        <weak_part x1="18" y1="31" x2="40" y2="58" />
                     </weak_parts>
                     <attack_parts frame="3">
                         <attack_part x1="46" y1="46" x2="60" y2="52" />

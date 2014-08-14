@@ -109,17 +109,6 @@ bool Player::set_hit(Object *object, Status *status)
     return result;
 }
 
-bool Player::check_collision(Object *object) const
-{
-    const Sprite *spr = get_sprite();
-
-    return spr->check_collision(m_frame, m_x, m_y,
-                                get_attribute("left"), get_attribute("top"),
-                                get_attribute("right"), get_attribute("bottom"),
-                                object->get_sprite(), object->get_frame(),
-                                object->get_x(), object->get_y());
-}
-
 bool Player::is_morphing()
 {
     bool result = false;
