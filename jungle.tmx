@@ -8,6 +8,7 @@
  <tileset firstgid="1" name="jungle" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>
    <property name="catapult" value="5"/>
+   <property name="climb" value="4"/>
    <property name="solid_end" value="14"/>
    <property name="solid_start" value="1"/>
    <property name="water_end" value="152"/>

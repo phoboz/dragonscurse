@@ -16,6 +16,9 @@ public:
           m_solid(true), m_lock_dir(false),
           m_vert_dir(VerticalNone) { }
 
+    int get_vx() const { return int(m_vx); }
+    int get_vy() const { return int(m_vx); }
+
     void set_solid(bool solid) { m_solid = solid; }
     void set_lock_direction(bool lock_dir) { m_lock_dir = lock_dir; }
     void set_vx(int value) { m_vx = float(value); }

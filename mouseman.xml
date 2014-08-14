@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <mouseman>
     <knight attack_treshold="12">
-        <player type="knight"
+        <player type="climber"
                 jump_speed="13"
                 catapult_speed="26"
                 water_jump_speed="8"
@@ -31,6 +31,22 @@
                    left_attack_start="7" left_attack_end="7"
                    left_attack_low_start="7" left_attack_low_end="7"
                    left_hit="32"
+                   down_right_move_start="0" down_right_move_end="2"
+                   down_right_attack_start="3" down_right_attack_end="3"
+                   down_left_move_start="4" down_left_move_end="6"
+                   down_left_attack_start="7" down_left_attack_end="7"
+                   right_up_move_start="16" right_up_move_end="18"
+                   right_up_attack_start="19" right_up_attack_end="19"
+                   right_down_move_start="20" right_down_move_end="22"
+                   right_down_attack_start="23" right_down_attack_end="23"
+                   left_up_move_start="24" left_up_move_end="26"
+                   left_up_attack_start="27" left_up_attack_end="27"
+                   left_down_move_start="28" left_down_move_end="30"
+                   left_down_attack_start="31" left_down_attack_end="31"
+                   up_right_move_start="8" up_right_move_end="10"
+                   up_right_attack_start="11" up_right_attack_end="11"
+                   up_left_move_start="12" up_left_move_end="14"
+                   up_left_attack_start="15" up_left_attack_end="15"
                    perish_start="32" perish_end="32">
                 <object image="mouseman.png"
                         left="16" right="46" top="28" bottom="59">
