@@ -204,15 +204,41 @@ void Climber::animate_climb()
     }
 }
 
-void Climber::move_climb(Map *map)
+void Climber::leave_climb(Map *map)
 {
-    int input = get_input();
+    switch (m_climb_dir) {
+        case ClimbRight:
+            set_vx(-get_attribute("move_speed"));
+            break;
 
-    set_ay(0);
+        case ClimbLeft:
+            set_vx(get_attribute("move_speed"));
+            break;
+
+        default:
+            break;
+    }
+
+    m_climb_dir = ClimbNone;
+    set_vy(0);
+    Player::set_jump(map);
+}
+
+void Climber::move_climb(Map *map, int input)
+{
+    if (!m_leave_ready && m_leave_timer.expired(c_leave_time)) {
+        m_leave_ready = true;
+    }
+
     switch (m_climb_dir) {
         case ClimbRight:
         case ClimbLeft:
-            if (input & PRESS_DOWN) {
+            if (input & PRESS_JUMP) {
+                if (m_leave_ready) {
+                    leave_climb(map);
+                }
+            }
+            else if (input & PRESS_DOWN) {
                 animate_climb();
                 set_action(Move);
                 set_dir(Right);
@@ -225,6 +251,7 @@ void Climber::move_climb(Map *map)
                 set_vy(-get_attribute("move_speed"));
             }
             else {
+                set_dir(Left);
                 set_action(Still);
                 set_vy(0);
             }
@@ -239,18 +266,28 @@ void Climber::move_climb(Map *map)
 
 void Climber::move(Map *map)
 {
-    const Tmx::Tileset *tileset = map->get_tileset(0);
-    const Tmx::PropertySet prop = tileset->GetProperties();
+    int input = get_input();
 
-    // Check if on climb block
-    int block_id = prop.GetNumericProperty("climb");
-    if (block_id) {
-        if (check_ahead(map, 1, block_id, block_id) == 0) {
-            if (m_dir == Right) {
-                m_climb_dir = ClimbRight;
+    if (m_action == Jump || m_action == Fall) {
+        const Tmx::Tileset *tileset = map->get_tileset(0);
+        const Tmx::PropertySet prop = tileset->GetProperties();
+
+        // Check if on climb block
+        int block_id = prop.GetNumericProperty("climb");
+        if (block_id) {
+            if (m_dir == Right && (input & PRESS_RIGHT)) {
+                if (check_ahead(map, 1, block_id, block_id) == 0) {
+                    set_ay(0);
+                    m_leave_ready = false;
+                    m_climb_dir = ClimbRight;
+                }
             }
-            else if (m_dir == Left) {
-                m_climb_dir = ClimbLeft;
+            else if (m_dir == Left && (input & PRESS_LEFT)) {
+                if (check_ahead(map, 1, block_id, block_id) == 0) {
+                    set_ay(0);
+                    m_leave_ready = false;
+                    m_climb_dir = ClimbLeft;
+                }
             }
         }
     }
@@ -259,7 +296,7 @@ void Climber::move(Map *map)
         Knight::move(map);
     }
     else {
-        move_climb(map);
+        move_climb(map, input);
     }
 }
 

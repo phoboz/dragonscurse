@@ -95,7 +95,7 @@ Object* ObjectFactory::create_object(const char *name,
         if (strcmp(priv_object_type, "knight") == 0) {
             object = new Knight(name, media, x, y, dir);
         }
-        if (strcmp(priv_object_type, "climber") == 0) {
+        else if (strcmp(priv_object_type, "climber") == 0) {
             object = new Climber(name, media, x, y, dir);
         }
         else if (strcmp(priv_object_type, "dragon") == 0) {

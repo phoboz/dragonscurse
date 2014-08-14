@@ -10,7 +10,7 @@
                 ap="60"
                 dp="20"
                 cp="40">
-            <actor move_speed="3"
+            <actor move_speed="4"
                    treshold="5"
                    weight="10"
                    hit_time="16"

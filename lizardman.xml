@@ -15,7 +15,7 @@
                 ap="0"
                 dp="0"
                 cp="0">
-            <actor move_speed="3"
+            <actor move_speed="4"
                    treshold="5"
                    weight="14"
                    hit_time="16"

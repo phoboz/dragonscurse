@@ -9,7 +9,8 @@ public:
 
     Climber(const char *fn, MediaDB *media, int x, int y, Direction dir)
         : Knight(fn, media, x, y, dir),
-          m_climb_dir(ClimbNone) { }
+          m_climb_dir(ClimbNone),
+          m_leave_ready(false) { }
 
     virtual void set_dir(Direction dir = Keep);
 
@@ -23,9 +24,15 @@ private:
     void animate_climb_left();
     void animate_climb();
 
-    void move_climb(Map *map);
+    void leave_climb(Map *map);
+
+    void move_climb(Map *map, int input);
+
+    static const int c_leave_time = 32;
 
     ClimbDir m_climb_dir;
+    Timer m_leave_timer;
+    bool m_leave_ready;
 };
 
 #endif
