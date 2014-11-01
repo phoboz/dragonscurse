@@ -344,7 +344,7 @@ int main(int argc, char *argv[])
 
     while (!done) {
 
-        if (timer.expired(60)) {
+        if (timer.expired(30)) {
 
             while (SDL_PollEvent(&event) ) {
                 if (event.type == SDL_QUIT) {

@@ -3,13 +3,13 @@
     <diver turn_width="80"
            attack_distance="120"
            fly_power="3"
-           dive_time="10"
+           dive_time="12"
            weight="6"
            hit_time="20">
         <monster hp="10"
-                 perish_time="40">
-            <actor move_speed="2"
-                   treshold="12"
+                 perish_time="20">
+            <actor move_speed="4"
+                   treshold="8"
                    right_still="3"
                    right_move_start="3" right_move_end="4"
                    right_fall="3"

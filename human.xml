@@ -1,18 +1,18 @@
 <?xml version="1.0" ?>
 <human>
-    <knight attack_treshold="12">
+    <knight attack_treshold="6">
         <player type="knight"
-                jump_speed="11"
-                catapult_speed="20"
-                water_jump_speed="7"
-                water_weight="3"
-                water_catapult_speed="13"
+                jump_speed="14"
+                catapult_speed="30"
+                water_jump_speed="10"
+                water_weight="5"
+                water_catapult_speed="17"
                 ap="100"
                 dp="55"
                 cp="56">
-            <actor move_speed="4"
-                   treshold="6"
-                   weight="7"
+            <actor move_speed="6"
+                   treshold="4"
+                   weight="12"
                    hit_time="16"
                    invisible_time="64"
                    right_still="0"

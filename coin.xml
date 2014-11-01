@@ -2,10 +2,10 @@
 <coin max_value="5">
      <collectable type="coin">
         <material rise_speed="25"
-                  move_speed="2"
-                  chest_speed="2"
+                  move_speed="3"
+                  chest_speed="4"
                   weight="20"
-                  treshold="6"
+                  treshold="5"
                   move_start="0"
                   move_end="1"
                   move_still="2">
