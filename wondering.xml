@@ -8,8 +8,8 @@
             hit_time="12">
         <monster hp="3"
                  perish_time="20">
-            <actor move_speed="5"
-                   treshold="8"
+            <actor move_speed="4"
+                   treshold="6"
                    weight="10"
                    right_still="3"
                    right_move_start="3" right_move_end="4"
