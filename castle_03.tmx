@@ -121,161 +121,161 @@
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="100"/>
+    <property name="trigger_time" value="50"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3967" y="281" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="200"/>
+    <property name="trigger_time" value="100"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3935" y="281" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="300"/>
+    <property name="trigger_time" value="150"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3903" y="281" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="400"/>
+    <property name="trigger_time" value="200"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3869" y="281" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="500"/>
+    <property name="trigger_time" value="250"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3869" y="226" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1000"/>
+    <property name="trigger_time" value="500"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3935" y="226" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="800"/>
+    <property name="trigger_time" value="400"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="4031" y="226" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="500"/>
+    <property name="trigger_time" value="250"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3999" y="226" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="600"/>
+    <property name="trigger_time" value="300"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3903" y="226" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="900"/>
+    <property name="trigger_time" value="450"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3967" y="226" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="700"/>
+    <property name="trigger_time" value="350"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3999" y="166" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1100"/>
+    <property name="trigger_time" value="550"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3935" y="166" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1300"/>
+    <property name="trigger_time" value="650"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="4031" y="166" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1000"/>
+    <property name="trigger_time" value="500"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3967" y="166" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1200"/>
+    <property name="trigger_time" value="600"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3999" y="109" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1400"/>
+    <property name="trigger_time" value="700"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3935" y="109" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1600"/>
+    <property name="trigger_time" value="800"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="4031" y="109" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1300"/>
+    <property name="trigger_time" value="650"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3967" y="109" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1500"/>
+    <property name="trigger_time" value="750"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="4031" y="52" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1600"/>
+    <property name="trigger_time" value="800"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3999" y="52" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1700"/>
+    <property name="trigger_time" value="850"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="4031" y="-7" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1700"/>
+    <property name="trigger_time" value="850"/>
    </properties>
   </object>
   <object name="falling_block.xml" type="Falling" x="3999" y="-7" width="32" height="32">
    <properties>
     <property name="attack_distance" value="300"/>
     <property name="stay" value="1"/>
-    <property name="trigger_time" value="1800"/>
+    <property name="trigger_time" value="900"/>
    </properties>
   </object>
   <object name="cyclop_green.xml" type="Walker" x="977" y="633" width="50" height="66">
