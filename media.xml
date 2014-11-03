@@ -112,6 +112,7 @@
     </fonts>
     <sounds>
         <sound filename="advance.wav" />
+        <sound filename="firebreath.wav" />
         <sound filename="jump.wav" />
         <sound filename="reject.wav" />
         <sound filename="select.wav" />

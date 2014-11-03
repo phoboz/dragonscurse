@@ -67,6 +67,7 @@ void Dragon::move(Map *map)
                                        m_y + y,
                                        get_attribute("bullet_speed"),
                                        0)) {
+                        m_media->play_sound(get_string("fire"));
                         set_attack();
                     }
                 }
@@ -75,6 +76,7 @@ void Dragon::move(Map *map)
                                        m_y + y,
                                        -get_attribute("bullet_speed"),
                                        0)) {
+                        m_media->play_sound(get_string("fire"));
                         set_attack();
                     }
                 }
