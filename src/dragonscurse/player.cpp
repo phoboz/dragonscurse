@@ -44,6 +44,8 @@ void Player::check_water(Map *map)
 
 void Player::set_jump(Map *map, bool catapult)
 {
+    m_media->play_sound("jump.wav");
+
     if (m_in_water) {
         if (catapult) {
             set_vy(-get_attribute("water_catapult_speed"));
