@@ -5,7 +5,7 @@
             turn_width="0"
             jump_speed="10"
             jump_forward="7"
-            hit_time="24">
+            hit_time="12">
         <monster hp="3"
                  perish_time="20">
             <actor move_speed="5"
