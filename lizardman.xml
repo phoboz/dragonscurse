@@ -17,7 +17,7 @@
                 cp="0">
             <actor move_speed="6"
                    treshold="3"
-                   weight="14"
+                   weight="15"
                    hit_time="16"
                    invisible_time="42"
                    right_still="0"

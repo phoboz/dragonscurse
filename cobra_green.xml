@@ -4,7 +4,7 @@
               attack_distance="24"
               jump_speed="8"
               jump_forward="3"
-              hit_time="24">
+              hit_time="12">
         <monster hp="10"
                  perish_time="20">
             <actor move_speed="4"
