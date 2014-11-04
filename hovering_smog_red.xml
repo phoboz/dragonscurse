@@ -1,15 +1,15 @@
 <?xml version="1.0" ?>
 <hovering_smog>
     <hovering turn_width="450"
-              attack_distance="200"
-              attack_timer="200"
+              attack_distance="120"
+              attack_timer="100"
               num_bullets="3"
-              bullet_speed="3"
-              hit_time="20">
+              bullet_speed="5"
+              hit_time="10">
         <monster hp="1"
-                 perish_time="40">
-            <actor move_speed="4"
-                   treshold="16"
+                 perish_time="20">
+            <actor move_speed="8"
+                   treshold="8"
                    right_still="3"
                    right_move_start="3" right_move_end="4"
                    right_fall="3"

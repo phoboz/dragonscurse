@@ -2,7 +2,7 @@
 <human>
     <knight attack_treshold="6">
         <player type="knight"
-                jump_speed="15"
+                jump_speed="16"
                 catapult_speed="30"
                 water_jump_speed="10"
                 water_weight="5"
@@ -12,9 +12,9 @@
                 cp="56">
             <actor move_speed="6"
                    treshold="4"
-                   weight="15"
-                   hit_time="16"
-                   invisible_time="64"
+                   weight="16"
+                   hit_time="10"
+                   invisible_time="32"
                    right_still="0"
                    right_move_start="0" right_move_end="2"
                    right_jump="3"

@@ -8,12 +8,12 @@
               jump_speed="10"
               jump_forward="0"
               num_bullets="1"
-              bullet_speed="3"
-              hit_time="24">
+              bullet_speed="6"
+              hit_time="12">
         <monster hp="3"
-                 perish_time="40">
-            <actor move_speed="2"
-                   treshold="12"
+                 perish_time="20">
+            <actor move_speed="4"
+                   treshold="6"
                    weight="4"
                    right_still="3"
                    right_move_start="3" right_move_end="4"

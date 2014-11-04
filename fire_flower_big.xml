@@ -1,18 +1,18 @@
 <?xml version="1.0" ?>
 <fire_flower>
-    <shooter attack_timer="120"
+    <shooter attack_timer="80"
              attack_distance="300"
              num_bullets="3"
              attack_left="6"
              attack_right="28"
              attack_medium="6"
              attack_treshold="6"
-             bullet_speed="5"
+             bullet_speed="6"
              face_reference="1"
-             hit_time="24">
+             hit_time="12">
         <monster hp="6"
-                 perish_time="40">
-            <actor treshold="12"
+                 perish_time="20">
+            <actor treshold="6"
                    weight="2"
                    right_still="4"
                    right_move_start="4" right_move_end="5"
