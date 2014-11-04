@@ -7,7 +7,7 @@
             attack_treshold="8"
             bullet_speed="8">
         <player type="dragon"
-                jump_speed="15"
+                jump_speed="16"
                 catapult_speed="32"
                 water_jump_speed="10"
                 water_weight="6"
@@ -17,7 +17,7 @@
                 cp="0">
             <actor move_speed="6"
                    treshold="3"
-                   weight="15"
+                   weight="16"
                    hit_time="16"
                    invisible_time="42"
                    right_still="0"
