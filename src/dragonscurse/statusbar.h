@@ -1,9 +1,11 @@
 #ifndef _Statusbar_H
 #define _Statusbar_H
 
+#include <vector>
 #include "phoboz/sprite.h"
 #include "phoboz/text.h"
 #include "status.h"
+#include "heart.h"
 
 class Statusbar {
 public:
@@ -17,8 +19,7 @@ private:
     static int c_height;
     Status *m_status;
     MediaDB *m_media;
-    bool m_loaded;
-    Sprite *m_heart_spr;
+    std::vector<Heart*> m_hearts;
     Text *m_gold_label;
     Text *m_gold_text;
 };
