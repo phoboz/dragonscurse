@@ -1,6 +1,7 @@
 #ifndef _Statusbar_H
 #define _Statusbar_H
 
+#include "phoboz/sprite.h"
 #include "phoboz/text.h"
 #include "status.h"
 
@@ -15,6 +16,9 @@ public:
 private:
     static int c_height;
     Status *m_status;
+    MediaDB *m_media;
+    bool m_loaded;
+    Sprite *m_heart_spr;
     Text *m_gold_label;
     Text *m_gold_text;
 };
