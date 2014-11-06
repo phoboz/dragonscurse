@@ -1,7 +1,6 @@
 #ifndef _Statusbar_H
 #define _Statusbar_H
 
-#include <vector>
 #include "phoboz/sprite.h"
 #include "phoboz/text.h"
 #include "status.h"
@@ -10,16 +9,19 @@
 class Statusbar {
 public:
     Statusbar(Status *status, MediaDB *media);
+    ~Statusbar();
 
     static int get_height() { return c_height; }
 
     void draw(SDL_Surface *surface, int screen_width, int screen_height);
 
 private:
+    static const int c_max_hearts = 8;
+
     static int c_height;
     Status *m_status;
     MediaDB *m_media;
-    std::vector<Heart*> m_hearts;
+    Heart *m_hearts[c_max_hearts];
     Text *m_gold_label;
     Text *m_gold_text;
 };
