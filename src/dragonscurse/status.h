@@ -18,7 +18,8 @@ public:
           m_shield(0),
           m_armour(0),
           m_gold(0),
-          m_hp(1),
+          m_hp(45),
+          m_max_hp(100),
           m_shape(0) { update(); }
 
     void aquire_item(Item *item) { m_items.push_back(item); }
@@ -44,6 +45,8 @@ public:
     int get_dp() const { return m_dp; }
     int get_cp() const { return m_cp; }
     int get_gold() const { return m_gold; }
+    int get_hp() const { return m_hp; }
+    int get_max_hp() const { return m_max_hp; }
 
     void show() const;
 
@@ -63,6 +66,7 @@ private:
     int m_cp;
     int m_gold;
     int m_hp;
+    int m_max_hp;
 };
 
 #endif
