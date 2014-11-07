@@ -97,7 +97,7 @@ bool Player::set_hit(Object *object, Status *status)
             m_hit_ground = false;
 
             // TODO: Use monsters actual attack power
-            if (status->set_hit(1)) {
+            if (status->set_hit(25)) {
                 set_solid(false);
                 set_perish(false);
             }

@@ -14,13 +14,14 @@ class Player;
 class Status {
 public:
     Status()
-        : m_arm(0),
+        : m_shape(0),
+          m_hearts(0),
+          m_arm(0),
           m_shield(0),
           m_armour(0),
           m_gold(0),
-          m_hp(45),
-          m_max_hp(100),
-          m_shape(0) { update(); }
+          m_hp(0),
+          m_max_hp(0) { update(); }
 
     void aquire_item(Item *item) { m_items.push_back(item); }
     Item* check_item(const char *name);
@@ -39,18 +40,22 @@ public:
 
     void aquire_shape(Player *player);
 
+    void add_hearts(int num_hearts);
     bool set_hit(int ap);
 
+    static int get_max_hearts() { return c_max_hearts; }
+    int get_hearts() const { return m_hearts; }
     int get_ap() const { return m_ap; }
     int get_dp() const { return m_dp; }
     int get_cp() const { return m_cp; }
     int get_gold() const { return m_gold; }
     int get_hp() const { return m_hp; }
-    int get_max_hp() const { return m_max_hp; }
 
     void show() const;
 
 private:
+    static const int c_max_hearts = 8;
+
     void update();
 
     std::list<Item*> m_items;
@@ -60,6 +65,8 @@ private:
 
     std::list<Player*> m_shapes;
     Player *m_shape;
+
+    int m_hearts;
 
     int m_ap;
     int m_dp;
