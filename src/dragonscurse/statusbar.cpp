@@ -8,7 +8,9 @@ int Statusbar::c_height = 40;
 Statusbar::Statusbar(Status *status, MediaDB *media)
     : m_status(status), m_media(media)
 {
-    for (int i = 0; i < c_max_hearts; i++) {
+    int max_hearts = status->get_max_hearts();
+    m_hearts = new Heart*[max_hearts];
+    for (int i = 0; i < max_hearts; i++) {
         m_hearts[i] = new Heart(media);
     }
 
@@ -21,7 +23,7 @@ Statusbar::Statusbar(Status *status, MediaDB *media)
 
 Statusbar::~Statusbar()
 {
-    for (int i = 0; i < c_max_hearts; i++) {
+    for (int i = 0; i < m_status->get_max_hearts(); i++) {
         delete m_hearts[i];
     }
 }
@@ -42,23 +44,19 @@ void Statusbar::draw(SDL_Surface *surface, int screen_width, int screen_height)
     dest_rect.h = 2;
     SDL_FillRect(surface, &dest_rect, 0x33333333);
 
-    float hp_per_heart = m_status->get_max_hp() / c_max_hearts;
-    int num_hearts = m_status->get_max_hp() / hp_per_heart;
-    int full_hearts = m_status->get_hp() / hp_per_heart;
-    float hp_left = m_status->get_hp() - full_hearts * hp_per_heart;
-    float q_left = hp_left / hp_per_heart;
-    int percentage_left = q_left * 100;
+    int w = m_hearts[0]->get_width();
+    int num_full = m_status->get_hp() / Heart::get_hp_per_heart();
+    int partial = m_status->get_hp() % Heart::get_hp_per_heart();
 
-    for (int i = 0; i < num_hearts; i++) {
-        int w = m_hearts[i]->get_width();
-        if (i < full_hearts) {
-            m_hearts[i]->set_content_percent(100);
+    for (int i = 0; i < m_status->get_hearts(); i++) {
+        if (i < num_full) {
+            m_hearts[i]->set_full();
         }
-        else if (i == full_hearts && percentage_left) {
-            m_hearts[i]->set_content_percent(percentage_left);
+        else if (i == num_full && partial > 0) {
+            m_hearts[i]->set_hp(partial);
         }
         else {
-            m_hearts[i]->set_content_percent(0);
+            m_hearts[i]->set_empty();
         }
         m_hearts[i]->draw(surface, 4 + i * (w + 4), 4,
                           0, 0, screen_width, screen_height);

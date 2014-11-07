@@ -4,6 +4,7 @@
 #include "shield.h"
 #include "armour.h"
 #include "collectable.h"
+#include "heart.h"
 #include "status.h"
 
 void Status::update()
@@ -162,13 +163,23 @@ void Status::aquire_shape(Player *player)
     update();
 }
 
+void Status::add_hearts(int num_hearts)
+{
+    int i = num_hearts + 1;
+    while (--i && m_hearts < c_max_hearts) {
+        m_hearts++;
+        m_max_hp += Heart::get_hp_per_heart();
+        m_hp += Heart::get_hp_per_heart();
+    }
+}
+
 bool Status::set_hit(int ap)
 {
     bool result = false;
 
     int hp = ap - m_dp;
     if (hp > 0) {
-        m_hp -= ap;
+        m_hp -= hp;
         if (m_hp <= 0) {
             result = true;
         }

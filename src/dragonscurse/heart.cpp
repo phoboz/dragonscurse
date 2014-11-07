@@ -1,7 +1,7 @@
 #include "heart.h"
 
 Heart::Heart(MediaDB *media)
-    : m_media(media), m_loaded(false), m_percent(100)
+    : m_media(media), m_loaded(false), m_hp(c_hp_per_heart)
 {
     m_spr = media->get_sprite("heart_outline.png");
     if (m_spr) {
@@ -17,8 +17,8 @@ void Heart::draw(SDL_Surface *surface, int x, int y,
 {
     SDL_Rect dest_rect;
     int w = m_spr->get_width();
-    int q = w * m_percent;
-    q /= 100;
+    int q = w * m_hp;
+    q /= c_hp_per_heart;
 
     // Draw red part
     dest_rect.x = x;
