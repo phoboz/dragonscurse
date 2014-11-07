@@ -6,7 +6,7 @@
   <property name="lock_y" value="0"/>
   <property name="music" value="dragon_boss.ogg"/>
   <property name="start_x" value="352"/>
-  <property name="start_y" value="346"/>
+  <property name="start_y" value="282"/>
  </properties>
  <tileset firstgid="1" name="castle" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>
@@ -18,11 +18,11 @@
  </tileset>
  <layer name="Room" width="40" height="14">
   <data encoding="base64" compression="zlib">
-   eJxjYWBgCBikmAWKg4A4cBDSMPf5A7HfIKRh7vMFYp9BSI+G32j4jYbfaPiNht/gCC9s4cc2yDEA+ySYAw==
+   eJxjYBgFlAAWIA4YpJgFioOAOHAQ0jD3+QOx3yCkYe7zBWKfQUiPht9o+I2GH/7wYxvkeBRQBgBAHGnf
   </data>
  </layer>
  <objectgroup name="Monsters" width="40" height="14">
-  <object name="meka.xml" type="MekaDragon" x="480" y="276" width="128" height="138">
+  <object name="meka.xml" type="MekaDragon" x="480" y="212" width="128" height="138">
    <properties>
     <property name="direction" value="left"/>
     <property name="object_id" value="1"/>
@@ -31,7 +31,7 @@
  </objectgroup>
  <layer name="Chains" width="40" height="14">
   <data encoding="base64" compression="zlib">
-   eJxjYEAAJySMDpwIsNH1UEM9I5oaRySMDhwJsNH1UEP9qPuo6z5kNxLrPlxilKiHAXLdhw0QYx8p8iAwFN2HSy817CNVPTXdRwswVN2HDQx2942CoQkAQacU6w==
+   eJztlVsKACAIBOtodf9DRUQgS2KPjQoaEMRWnL+cuxd/WsAA/aIoJBo97jDy6BdEIcHocYeR/35cP+nY66fNVvKVWb8WPfdG3jMv+mm7jHujeabfDjS/1vy1v+ZTSAJSFCs=
   </data>
  </layer>
 </map>

@@ -2,6 +2,7 @@
 <faerie_zombie>
     <walker>
         <monster hp="6"
+                 ap="32"
                  hit_time="24"
                  perish_time="40">
             <actor move_speed="2"

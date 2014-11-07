@@ -10,6 +10,7 @@
              bullet_speed="5"
              hit_time="24">
         <monster hp="6"
+                 ap="38"
                  perish_time="40">
             <actor treshold="12"
                    weight="0"

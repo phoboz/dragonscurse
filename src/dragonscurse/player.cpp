@@ -3,6 +3,7 @@
 #include "status.h"
 #include "morph.h"
 #include "item.h"
+#include "monster.h"
 #include "player.h"
 
 Player::Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
@@ -96,8 +97,8 @@ bool Player::set_hit(Object *object, Status *status)
             }
             m_hit_ground = false;
 
-            // TODO: Use monsters actual attack power
-            if (status->set_hit(25)) {
+            Monster *monster = (Monster *) object;
+            if (status->set_hit(monster->get_attribute("ap"))) {
                 set_solid(false);
                 set_perish(false);
             }

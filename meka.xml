@@ -13,6 +13,7 @@
              turn_width="100"
              hit_time="12">
     <monster hp="824"
+             ap="76"
              perish_time="20">
         <actor move_speed="8"
                treshold="6"

@@ -44,7 +44,7 @@
   <object name="castle_boss.tmx" type="Area" x="576" y="832" width="64" height="64">
    <properties>
     <property name="start_x" value="352"/>
-    <property name="start_y" value="346"/>
+    <property name="start_y" value="282"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>

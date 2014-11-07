@@ -7,6 +7,7 @@
            weight="6"
            hit_time="20">
         <monster hp="10"
+                 ap="68"
                  perish_time="20">
             <actor move_speed="4"
                    treshold="8"

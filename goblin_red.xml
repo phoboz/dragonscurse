@@ -10,6 +10,7 @@
              attack_timer="200"
              num_jumps="2">
         <monster hp="12"
+                 ap="64"
                  jump_speed="10"
                  perish_time="40">
             <actor move_speed="2"

@@ -2,6 +2,7 @@
 <falling_block>
     <falling freefall_distance="180">
         <monster hp="1"
+                 ap="16"
                  perish_time="10">
             <actor weight="10"
                    treshold="12"

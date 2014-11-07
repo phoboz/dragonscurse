@@ -11,6 +11,7 @@
              attack_treshold="6"
              hit_time="12">
         <monster hp="3"
+                 ap="28"
                  perish_time="20">
             <actor move_speed="2"
                    treshold="12"
