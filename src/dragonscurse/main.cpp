@@ -18,6 +18,7 @@
 #include "statusbar.h"
 #include "church.h"
 #include "shop.h"
+#include "hospital.h"
 #include "main_menu.h"
 #include "status_screen.h"
 #include "key_list.h"
@@ -121,6 +122,13 @@ bool load_area(const char *ar_name,
         room = new Shop(ar_name, media, db,
                         map->get_filename(),
                         player->get_x(), player->get_y());
+        set_state(StateRoom);
+        return true;
+    }
+    else if (std::string(ar_name) == std::string("Hospital")) {
+        room = new Hospital(media, db,
+                            map->get_filename(),
+                            player->get_x(), player->get_y());
         set_state(StateRoom);
         return true;
     }

@@ -232,7 +232,7 @@ MediaDB::MediaDB(const char *name)
       m_sprite_prefix("./sprites/"),
       m_map_prefix("./maps/"),
       m_font_prefix("./fonts/"),
-      m_sound_prefix("./sounds/"),
+      m_sound_prefix("./sound/"),
       m_music_prefix("./music/")
 {
     TiXmlDocument doc(name);

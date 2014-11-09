@@ -37,10 +37,12 @@ public:
     bool pay_gold(int ammount);
 
     Item* get_equiped_item(Item::ItemType type) const;
+    int get_cure_price() const { return 10 * m_hearts; }
 
     void aquire_shape(Player *player);
 
     void add_hearts(int num_hearts);
+    void cure() { m_hp = m_max_hp; }
     bool set_hit(int ap);
 
     static int get_max_hearts() { return c_max_hearts; }

@@ -84,6 +84,11 @@
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
+  <object name="Hospital" type="Area" x="1376" y="992" width="64" height="64">
+   <properties>
+    <property name="type" value="window_door.xml"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="175" height="48">
   <data encoding="base64" compression="zlib">
