@@ -153,7 +153,6 @@ private:
     bool m_always_visible;
     bool m_reused;
     Sprite *m_spr;
-
 };
 
 #endif

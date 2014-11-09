@@ -1,14 +1,31 @@
-#include <iostream>
+#include <string.h>
 #include "phoboz/map.h"
 
-bool Map::load(Tmx::Map *tmx)
+Map::Map(Tmx::Map *tmx, const char *prefix)
+    : m_loaded(false),
+      m_x(0), m_y(0)
+{
+    std::string pathname = tmx->GetFilename();
+    m_filename = pathname.substr(strlen(prefix));
+    load(tmx, prefix);
+}
+
+Map::~Map()
+{
+    // TODO: Free resource
+    m_loaded = false;
+}
+
+bool Map::load(Tmx::Map *tmx, const char *prefix)
 {
     bool result = true;
 
     // Load tile sprites for each tileset
     for (int i = 0; i < tmx->GetNumTilesets(); i++) {
         const Tmx::Tileset *tileset = tmx->GetTileset(i);
-        Sprite *tiles = new Sprite(tileset->GetImage()->GetSource().c_str(),
+        std::string pathname = std::string(prefix) +
+                               tileset->GetImage()->GetSource();
+        Sprite *tiles = new Sprite(pathname.c_str(),
                                    tileset->GetTileWidth(),
                                    tileset->GetTileHeight(),
                                    tileset->GetMargin(), tileset->GetSpacing());

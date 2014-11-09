@@ -20,7 +20,7 @@ public:
 
     WorldDB* get_db() const { return m_db; }
     Map* get_map() const { return m_map; }
-    const char* get_filename() const { return m_map->get_filename().c_str(); }
+    const char* get_filename() const { return m_map->get_filename(); }
 
     Area* move(Player *player,
                int clip_x, int clip_y, int clip_w, int clip_h);

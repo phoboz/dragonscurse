@@ -43,7 +43,7 @@ Item* Status::check_item(const char *name)
          ++it) {
 
         Item *item = *it;
-        if (strcmp(name, item->get_filename()) == 0) {
+        if (item && strcmp(name, item->get_filename()) == 0) {
             result = item;
             break;
         }

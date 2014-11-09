@@ -3,7 +3,7 @@
 #include "phoboz/media_db.h"
 
 struct MediaNode {
-    enum Type { TypeSprite, TypeFont, TypeSound, TypeMusic };
+    enum Type { TypeSprite, TypeMap, TypeFont, TypeSound, TypeMusic };
 
     MediaNode(Type type) :
         m_key(m_keygen++), m_ref(0), m_type(type), m_loaded(false) { }
@@ -26,6 +26,12 @@ struct SpriteNode : public MediaNode {
     int m_spacing;
 
     Sprite *m_sprite;
+};
+
+struct MapNode : public MediaNode {
+    MapNode() : MediaNode(TypeMap) { }
+
+    Map *m_map;
 };
 
 struct FontNode : public MediaNode {
@@ -70,6 +76,26 @@ bool MediaDB::load_sprite_attributes(SpriteNode *sprite, TiXmlElement *elmt)
         }
         else if (strcmp(attr->Name(), "spacing") == 0) {
             sprite->m_spacing = atoi(attr->Value());
+        }
+        else {
+            result = false;
+            break;
+        }
+
+        attr = attr->Next();
+    }
+
+    return result;
+}
+
+bool MediaDB::load_map_attributes(MapNode *map, TiXmlElement *elmt)
+{
+    bool result = true;
+
+    TiXmlAttribute *attr = elmt->FirstAttribute();
+    while (attr) {
+        if (strcmp(attr->Name(), "filename") == 0) {
+            map->m_filename = std::string(attr->Value());
         }
         else {
             result = false;
@@ -160,6 +186,13 @@ bool MediaDB::load_nodes(TiXmlNode *node)
                 m_media[sprite->m_filename] = sprite;
             }
         }
+        else if (strcmp(node->Value(), "map") == 0) {
+            MapNode *map = new MapNode;
+            result = load_map_attributes(map, node->ToElement());
+            if (result) {
+                m_media[map->m_filename] = map;
+            }
+        }
         else if (strcmp(node->Value(), "font") == 0) {
             FontNode *font = new FontNode;
             result = load_font_attributes(font, node->ToElement());
@@ -195,7 +228,12 @@ bool MediaDB::load_nodes(TiXmlNode *node)
 }
 
 MediaDB::MediaDB(const char *name)
-    : m_mus_filename("")
+    : m_mus_filename(""),
+      m_sprite_prefix("./sprites/"),
+      m_map_prefix("./maps/"),
+      m_font_prefix("./fonts/"),
+      m_sound_prefix("./sounds/"),
+      m_music_prefix("./music/")
 {
     TiXmlDocument doc(name);
     if (doc.LoadFile()) {
@@ -211,7 +249,8 @@ bool MediaDB::load_sprite(SpriteNode *sprite)
         result = true;
     }
     else {
-        sprite->m_sprite = new Sprite(sprite->m_filename.c_str(),
+        std::string pathname = m_sprite_prefix + sprite->m_filename;
+        sprite->m_sprite = new Sprite(pathname.c_str(),
                                       sprite->m_width, sprite->m_height,
                                       sprite->m_margin, sprite->m_spacing);
         if (sprite->m_sprite && sprite->m_sprite->get_loaded()) {
@@ -279,6 +318,43 @@ bool MediaDB::leave_sprite(Sprite *spr)
     return result;
 }
 
+bool MediaDB::load_map(MapNode *map)
+{
+    bool result = false;
+
+    if (map->m_loaded) {
+        result = true;
+    }
+    else {
+        std::string pathname = m_map_prefix + map->m_filename;
+        Tmx::Map *tmx = new Tmx::Map();
+        tmx->ParseFile(pathname.c_str());
+        map->m_map = new Map(tmx, m_map_prefix.c_str());
+        if (map->m_map && map->m_map->get_loaded()) {
+            map->m_loaded = true;
+            result = true;
+        }
+    }
+
+    return result;
+}
+
+Map* MediaDB::get_map(const char *filename)
+{
+    Map *result = 0;
+
+    MediaNode *media = m_media[std::string(filename)];
+    if (media->m_type == MediaNode::TypeMap) {
+        MapNode *map = (MapNode *) media;
+        if (load_map(map)) {
+            ++map->m_ref;
+            result = map->m_map;
+        }
+    }
+
+    return result;
+}
+
 bool MediaDB::load_font(FontNode *font)
 {
     bool result = false;
@@ -287,7 +363,8 @@ bool MediaDB::load_font(FontNode *font)
         result = true;
     }
     else {
-        font->m_font = Text::load_font(font->m_filename.c_str(), font->m_size);
+        std::string pathname = m_font_prefix + font->m_filename;
+        font->m_font = Text::load_font(pathname.c_str(), font->m_size);
         if (font->m_font) {
             font->m_loaded = true;
             result = true;
@@ -321,7 +398,8 @@ bool MediaDB::load_sound(SoundNode *sound)
         result = true;
     }
     else {
-        sound->m_sample = Mix_LoadWAV(sound->m_filename.c_str());
+        std::string pathname = m_sound_prefix + sound->m_filename;
+        sound->m_sample = Mix_LoadWAV(pathname.c_str());
         if (sound->m_sample) {
             sound->m_loaded = true;
             result = true;
@@ -356,7 +434,8 @@ bool MediaDB::load_music(MusicNode *music)
         result = true;
     }
     else {
-        music->m_music = Mix_LoadMUS(music->m_filename.c_str());
+        std::string pathname = m_music_prefix + music->m_filename;
+        music->m_music = Mix_LoadMUS(pathname.c_str());
         if (music->m_music) {
             music->m_loaded = true;
             result = true;

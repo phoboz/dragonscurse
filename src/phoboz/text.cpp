@@ -70,7 +70,7 @@ bool Text::init()
 
 TTF_Font* Text::load_font(const char *fn, int size)
 {
-    return TTF_OpenFont("wonderfull.ttf", size);
+    return TTF_OpenFont(fn, size);
 }
 
 void Text::set_icon(const Sprite *icon_spr, int icon_index)

@@ -12,15 +12,15 @@
 
 class Map {
 public:
-    Map(Tmx::Map *tmx) : m_loaded(false), m_x(0), m_y(0) { load(tmx); }
-    ~Map() { }
-    bool load(Tmx::Map *tmx);
+    Map(Tmx::Map *tmx, const char *prefix);
+    ~Map();
+    bool load(Tmx::Map *tmx, const char *prefix);
     bool get_loaded() const { return m_loaded; }
     int get_tile_id(int x, int y, int layer_id) const;
     void set_tile_id(int x, int y, int layer_id, int id);
     void set_x(int value, int window_width);
     void set_y(int value, int window_height);
-    const std::string& get_filename() { return m_tmx->GetFilename(); }
+    const char* get_filename() const { return m_filename.c_str(); }
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }
     int get_tile_width() const { return m_tmx->GetTileWidth(); }
@@ -44,6 +44,7 @@ private:
     int m_x, m_y;
     Tmx::Map *m_tmx;
     std::vector<const Sprite*> m_tiles;
+    std::string m_filename;
 };
 
 #endif

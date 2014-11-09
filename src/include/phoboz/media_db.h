@@ -6,10 +6,12 @@
 #include "SDL_ttf.h"
 #include "tinyxml.h"
 #include "phoboz/sprite.h"
+#include "phoboz/map.h"
 
 // Hidden
 struct MediaNode;
 struct SpriteNode;
+struct MapNode;
 struct FontNode;
 struct SoundNode;
 struct MusicNode;
@@ -19,6 +21,7 @@ public:
     MediaDB(const char *name);
 
     Sprite* get_sprite(const char *filename);
+    Map* get_map(const char *filename);
     void reference_sprite(const Sprite *spr);
     bool leave_sprite(Sprite *spr);
     TTF_Font* get_font(const char *fontname);
@@ -27,17 +30,25 @@ public:
 
 private:
     bool load_sprite_attributes(SpriteNode *sprite, TiXmlElement *elmt);
+    bool load_map_attributes(MapNode *map, TiXmlElement *elmt);
     bool load_font_attributes(FontNode *font, TiXmlElement *elmt);
     bool load_sound_attributes(SoundNode *sound, TiXmlElement *elmt);
     bool load_music_attributes(MusicNode *music, TiXmlElement *elmt);
     bool load_nodes(TiXmlNode *node);
 
     bool load_sprite(SpriteNode *sprite);
+    bool load_map(MapNode *map);
     SpriteNode* find_sprite(const Sprite *find);
     bool load_font(FontNode *font);
     bool load_sound(SoundNode *sound);
     bool load_music(MusicNode *music);
     void unload_music(const char *filename);
+
+    std::string m_sprite_prefix;
+    std::string m_map_prefix;
+    std::string m_font_prefix;
+    std::string m_sound_prefix;
+    std::string m_music_prefix;
 
     std::map<std::string, MediaNode*> m_media;
     std::string m_mus_filename;

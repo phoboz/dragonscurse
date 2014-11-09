@@ -112,36 +112,34 @@ bool load_area(const char *ar_name,
                const char *music = 0)
 {
     if (std::string(ar_name) == std::string("Church")) {
-        room = new Church(media, map->get_filename().c_str(),
+        room = new Church(media, map->get_filename(),
                           player->get_x(), player->get_y());
         set_state(StateRoom);
         return true;
     }
     else if (std::string(ar_name).compare(0, 4, "Shop") == 0) {
         room = new Shop(ar_name, media, db,
-                        map->get_filename().c_str(),
+                        map->get_filename(),
                         player->get_x(), player->get_y());
         set_state(StateRoom);
         return true;
     }
 
     set_state(StateMap);
-    Tmx::Map *tmx = new Tmx::Map();
-    tmx->ParseFile(ar_name);
-    map = new Map(tmx);
-    if (!map->get_loaded()) {
+
+    map = media->get_map(ar_name);
+    if (!map) {
         fprintf(stderr, "Fatal Error -- Unable to load map %s\n", ar_name);
         return false;
     }
 
     world = new World(map, media, db, music);
 
-    const Tmx::PropertySet prop = tmx->GetProperties();
     if (start_x == -1) {
-        start_x = prop.GetNumericProperty("start_x");
+        start_x = map->get_numeric_property("start_x");
     }
     if (start_y == -1) {
-        start_y = prop.GetNumericProperty("start_y") - c_offset_y;
+        start_y = map->get_numeric_property("start_y") - c_offset_y;
     }
 
     if (new_game) {
@@ -312,6 +310,9 @@ int main(int argc, char *argv[])
     if (!init()) {
         return 1;
     }
+
+    // TODO: workaround for linker
+    delete new Tmx::Map();
 
     db = new WorldDB("world.xml");
     if (!db) {

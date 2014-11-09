@@ -1,5 +1,8 @@
+#include <iostream>
 #include <string.h>
 #include "object.h"
+
+static const char c_prefix[] = "./";
 
 struct CollisionPart {
     int x1, y1;
@@ -150,7 +153,8 @@ bool Object::load(const char *fn, MediaDB *media)
 {
     m_media = media;
 
-    TiXmlDocument doc(fn);
+    std::string pathname = std::string(c_prefix) + std::string(fn);
+    TiXmlDocument doc(pathname.c_str());
     if (doc.LoadFile()) {
         load_nodes(&doc);
         m_fn = std::string(fn);

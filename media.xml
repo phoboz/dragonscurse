@@ -108,6 +108,23 @@
         <sprite filename="wondering.png"
                 width="50" height="60" margin="1" spacing="1" />
     </sprites>
+    <maps>
+        <map filename="castle_01.tmx" />
+        <map filename="castle_02.tmx" />
+        <map filename="castle_03.tmx" />
+        <map filename="castle_04.tmx" />
+        <map filename="castle_boss.tmx" />
+        <map filename="desert.tmx" />
+        <map filename="desert_sphinx.tmx" />
+        <map filename="jungle.tmx" />
+        <map filename="pyramid.tmx" />
+        <map filename="seaside.tmx" />
+        <map filename="seaside_room01.tmx" />
+        <map filename="seaside_room02.tmx" />
+        <map filename="village.tmx" />
+        <map filename="village_interiour.tmx" />
+        <map filename="wb.tmx" />
+    </maps>
     <fonts>
         <font name="Wonderfull_12" filename="wonderfull.ttf" size="12" />
         <font name="Wonderfull_18" filename="wonderfull.ttf" size="18" />
