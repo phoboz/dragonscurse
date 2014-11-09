@@ -1,5 +1,5 @@
 Dragon's Curse Action/Adventure Platform Game:
-![Screenshot01](screenshot01.png)
+![Screenshot01](/sprites/screenshot01.png)
 
 1. Download:  
 git clone https://github.com/phoboz/dragonscurse.git  
