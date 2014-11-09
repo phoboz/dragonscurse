@@ -270,13 +270,13 @@ Collectable *z;
 
     switch(info->object_type) {
         case Object::TypeItem:
-            object = ObjectFactory::create_object(info->data.item.name,
+            object = ObjectFactory::create_object(info->data.material.name,
                                                   media, "Item");
             ((Item *) object)->set_world_key(info->key);
             break;
 
         case Object::TypeCollectable:
-            object = ObjectFactory::create_object(info->data.item.name,
+            object = ObjectFactory::create_object(info->data.material.name,
                                                   media, "Collectable");
             ((Collectable *) object)->set_world_key(info->key);
             break;

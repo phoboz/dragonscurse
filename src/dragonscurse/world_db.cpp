@@ -276,13 +276,13 @@ bool WorldDB::load_object_info(ObjectInfo *info, WorldObject *object) const
 
     switch(object->m_object_type) {
         case Object::TypeItem:
-            strcpy(info->data.item.name,
+            strcpy(info->data.material.name,
                    object->m_strings[std::string("name")].c_str());
             result = true;
             break;
 
         case Object::TypeCollectable:
-            strcpy(info->data.item.name,
+            strcpy(info->data.material.name,
                    object->m_strings[std::string("name")].c_str());
             result = true;
             break;

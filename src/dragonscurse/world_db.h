@@ -12,7 +12,7 @@ struct WorldLock;
 struct WorldChest;
 struct WorldLocation;
 
-struct ItemData {
+struct MaterialData {
     char name[80];
 };
 
@@ -25,7 +25,7 @@ struct CurseData {
 };
 
 union ObjectData {
-    ItemData item;
+    MaterialData material;
     CurseData curse;
 };
 
