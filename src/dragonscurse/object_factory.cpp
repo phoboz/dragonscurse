@@ -1,8 +1,8 @@
 #include <iostream>
-#include <stdlib.h>
-#include <string.h>
 #include <map>
 #include <string>
+#include <stdlib.h>
+#include <string.h>
 #include "world_db.h"
 #include "player.h"
 #include "coin.h"
@@ -87,7 +87,8 @@ Object* ObjectFactory::create_object(const char *name,
     Object *object = 0;
 
     if (strcmp(type, "Player") == 0) {
-        TiXmlDocument doc(name);
+        std::string pathname = Object::get_prefix() + std::string(name);
+        TiXmlDocument doc(pathname.c_str());
         if (doc.LoadFile()) {
             search_nodes(&doc);
         }
@@ -106,7 +107,8 @@ Object* ObjectFactory::create_object(const char *name,
         }
     }
     else if (strcmp(type, "Collectable") == 0) {
-        TiXmlDocument doc(name);
+        std::string pathname = Object::get_prefix() + std::string(name);
+        TiXmlDocument doc(pathname.c_str());
         if (doc.LoadFile()) {
             search_nodes(&doc);
         }
@@ -116,7 +118,8 @@ Object* ObjectFactory::create_object(const char *name,
         }
     }
     else if (strcmp(type, "Item") == 0) {
-        TiXmlDocument doc(name);
+        std::string pathname = Object::get_prefix() + std::string(name);
+        TiXmlDocument doc(pathname.c_str());
         if (doc.LoadFile()) {
             search_nodes(&doc);
         }

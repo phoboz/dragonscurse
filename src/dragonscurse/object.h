@@ -40,16 +40,12 @@ public:
 
     enum AnimDirection { AnimUp, AnimDown };
 
-    Object(Type type, int x = 0, int y = 0)
-        : m_x(x), m_y(y), m_dx(0), m_dy(0), m_frame(0),
-          m_dir(None), m_loaded(false), m_type(type), m_always_visible(false),
-          m_reused(false),
-          m_xref(0), m_yref(0) { }
-    Object(Type type, int x, int y, Direction dir)
+    Object(Type type, int x = 0, int y = 0, Direction dir = None)
         : m_x(x), m_y(y), m_dx(0), m_dy(0), m_frame(0),
           m_dir(dir), m_loaded(false), m_type(type), m_always_visible(false),
           m_reused(false),
           m_xref(0), m_yref(0) { }
+
     ~Object();
     bool load(const char *fn, MediaDB *media);
     bool get_loaded() const { return m_loaded; }
@@ -78,8 +74,10 @@ public:
 
     void set_reused(bool reused) { m_reused = reused; }
 
-    const char* get_filename() { return m_fn.c_str(); }
-    const char* get_name() { return m_name.c_str(); }
+    static std::string get_prefix() { return std::string("./objects/"); }
+
+    const char* get_filename() const { return m_fn.c_str(); }
+    const char* get_name() const { return m_name.c_str(); }
     int  get_attribute(const char *name) const;
     void set_attribute(const char *name, int value) {
         m_attributes[std::string(name)] = value;
