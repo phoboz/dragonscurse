@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "world.h"
 #include "world_db.h"
 #include "object_factory.h"
@@ -33,6 +32,9 @@ void Chest::world_initialize(World *world)
                                          get_x(),
                                          get_y());
                     if (object->get_type() == Object::TypeItem) {
+                        ((Item *) object)->set_from_chest(true);
+                    }
+                    else if (object->get_type() == Object::TypeCollectable) {
                         ((Item *) object)->set_from_chest(true);
                     }
                     m_objects.push_back(object);

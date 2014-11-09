@@ -2,6 +2,7 @@
 #define _Material_H
 
 #include "phoboz/timer.h"
+#include "world.h"
 #include "body.h"
 
 class Material : public Body {
@@ -9,6 +10,12 @@ public:
     virtual void move(Map *map);
 
     void set_from_chest(bool value) { m_from_chest = value; }
+    void set_world_key(int key) {
+        m_world_key = key;
+    }
+
+    void aquire(WorldDB *db);
+    void aquire(World *world);
 
 protected:
     Material(Type type, const char *fn, MediaDB *media, int x, int y);
@@ -18,6 +25,7 @@ private:
 
     void animate_move();
 
+    int m_world_key;
     bool m_from_chest;
     Action m_action;
     Timer m_rise_timer;

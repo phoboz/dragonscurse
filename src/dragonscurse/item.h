@@ -12,21 +12,11 @@ public:
 
     Item(ItemType type, const char *fn, MediaDB *media, int x, int y)
         : Material(TypeItem, fn, media, x, y),
-          m_item_type(type),
-          m_world_key(-1) { }
-
-    void set_world_key(int key) {
-        m_world_key = key;
-    }
+          m_item_type(type) { }
 
     ItemType get_item_type() const { return m_item_type; }
 
-    void aquire(WorldDB *db);
-    void aquire(World *world);
-
 private:
-
-    int m_world_key;
     ItemType m_item_type;
 };
 

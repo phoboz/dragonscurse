@@ -59,6 +59,9 @@ bool WorldDB::load_object_attributes(WorldObject *object, TiXmlElement *elmt)
             if (strcmp(attr->Value(), "item") == 0) {
                 object->m_object_type = Object::TypeItem;
             }
+            else if (strcmp(attr->Value(), "collectable") == 0) {
+                object->m_object_type = Object::TypeCollectable;
+            }
             else if (strcmp(attr->Value(), "curse") == 0) {
                 object->m_object_type = Object::TypeCurse;
             }
@@ -273,6 +276,12 @@ bool WorldDB::load_object_info(ObjectInfo *info, WorldObject *object) const
 
     switch(object->m_object_type) {
         case Object::TypeItem:
+            strcpy(info->data.item.name,
+                   object->m_strings[std::string("name")].c_str());
+            result = true;
+            break;
+
+        case Object::TypeCollectable:
             strcpy(info->data.item.name,
                    object->m_strings[std::string("name")].c_str());
             result = true;

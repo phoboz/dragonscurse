@@ -182,6 +182,7 @@ Area* World::move(Player *player,
                 if (player->check_collision(collectable)) {
                     Status *status = m_db->get_status();
                     status->aquire_collectable(collectable);
+                    collectable->aquire(this);
                     perished.push_back(collectable);
                 }
             }

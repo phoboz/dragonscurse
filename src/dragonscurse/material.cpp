@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "world_db.h"
 #include "material.h"
 
 Material::Material(Type type, const char *fn, MediaDB *media, int x, int y)
@@ -10,6 +11,20 @@ Material::Material(Type type, const char *fn, MediaDB *media, int x, int y)
     load(fn, media);
 
     m_frame = get_attribute("move_start");
+}
+
+void Material::aquire(WorldDB *db)
+{
+    if (get_attribute("once")) {
+        db->remove(m_world_key);
+    }
+}
+
+void Material::aquire(World *world)
+{
+    // Remove item from world database
+    WorldDB *db = world->get_db();
+    aquire(db);
 }
 
 void Material::animate_move()

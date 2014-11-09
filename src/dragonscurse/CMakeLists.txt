@@ -5,7 +5,7 @@ ADD_EXECUTABLE(dragonscurse
     monster.cpp walker.cpp guardian.cpp diver.cpp dancer.cpp falling.cpp
     crawler.cpp erupter.cpp hovering.cpp meka_dragon.cpp floater.cpp swimmer.cpp
     shooter.cpp
-    area.cpp material.cpp item.cpp coin.cpp curse.cpp morph.cpp
+    area.cpp material.cpp coin.cpp curse.cpp morph.cpp
     object_factory.cpp heart.cpp statusbar.cpp status_screen.cpp
     room.cpp church.cpp shop.cpp hospital.cpp chest.cpp
     main_menu.cpp sub_menu.cpp item_list.cpp equipment_list.cpp main.cpp

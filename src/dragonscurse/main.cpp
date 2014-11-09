@@ -331,7 +331,7 @@ int main(int argc, char *argv[])
 
     status = db->get_status();
     statusbar = new Statusbar(status, media);
-    status->add_hearts(2);
+    status->add_hearts(1);
     status->aquire_item((Item *) ObjectFactory::create_object(
                                      "ivory_sword.xml",
                                      media, "Item"));

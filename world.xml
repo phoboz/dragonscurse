@@ -70,6 +70,9 @@
               location="village.tmx" />
     </locks>
     <chests>
+        <chest id="1" once="1" location="village_interiour.tmx">
+            <treasure id="1" type="collectable" name="heart_container.xml" />
+        </chest>
         <chest id="1" once="1" location="seaside_room02.tmx">
             <treasure id="1" type="item" name="small_key.xml" />
         </chest>

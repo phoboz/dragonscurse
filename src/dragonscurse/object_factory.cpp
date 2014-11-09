@@ -1,4 +1,3 @@
-#include <iostream>
 #include <map>
 #include <string>
 #include <stdlib.h>
@@ -6,6 +5,7 @@
 #include "world_db.h"
 #include "player.h"
 #include "coin.h"
+#include "heart_container.h"
 #include "knight.h"
 #include "dragon.h"
 #include "climber.h"
@@ -115,6 +115,9 @@ Object* ObjectFactory::create_object(const char *name,
 
         if (strcmp(priv_object_type, "coin") == 0) {
             object = new Coin(name, media, x, y);
+        }
+        else if (strcmp(priv_object_type, "heart_container") == 0) {
+            object = new HeartContainer(name, media, x, y);
         }
     }
     else if (strcmp(type, "Item") == 0) {
@@ -263,12 +266,19 @@ Object* ObjectFactory::create_object(ObjectInfo *info,
                                      int w, int h)
 {
     Object *object = 0;
+Collectable *z;
 
     switch(info->object_type) {
         case Object::TypeItem:
             object = ObjectFactory::create_object(info->data.item.name,
                                                   media, "Item");
             ((Item *) object)->set_world_key(info->key);
+            break;
+
+        case Object::TypeCollectable:
+            object = ObjectFactory::create_object(info->data.item.name,
+                                                  media, "Collectable");
+            ((Collectable *) object)->set_world_key(info->key);
             break;
 
         case Object::TypeCurse:

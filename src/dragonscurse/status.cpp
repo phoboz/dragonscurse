@@ -116,6 +116,10 @@ void Status::aquire_collectable(Collectable *collectable)
             m_gold += collectable->get_value();
             break;
 
+        case Collectable::TypeHeartContainer:
+            add_hearts(1/*collectable->get_value()*/);
+            break;
+
         default:
             break;
     }
