@@ -54,6 +54,8 @@ class WorldDB {
 public:
     WorldDB(const char *name);
 
+    const char* get_prefix() const { return m_prefix.c_str(); }
+
     bool get_object_info(ObjectInfo *info,
                          int id, const char *location_name) const;
 
@@ -70,6 +72,7 @@ public:
     Status* get_status() { return &m_status; }
 
 private:
+    bool load_block_attributes(std::string &prefix, TiXmlElement *elmt);
     bool load_object_attributes(WorldObject *object, TiXmlElement *elmt);
     bool load_lock_attributes(WorldLock *lock, TiXmlElement *elmt);
     bool load_chest_attributes(WorldChest *chest, TiXmlElement *elmt);
@@ -80,6 +83,7 @@ private:
 
     bool load_object_info(ObjectInfo *info, WorldObject *object) const;
 
+    std::string m_prefix;
     std::map<std::string, WorldLocation*> m_locations;
     WorldChest *m_chest;
 
