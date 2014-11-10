@@ -43,6 +43,26 @@ struct WorldLocation {
 
 int WorldNode::m_keygen = 1;
 
+bool WorldDB::load_block_attributes(std::string &prefix, TiXmlElement *elmt)
+{
+    bool result = true;
+
+    TiXmlAttribute *attr = elmt->FirstAttribute();
+    while (attr) {
+        if (strcmp(attr->Name(), "prefix") == 0) {
+            prefix = std::string(attr->Value());
+        }
+        else {
+            result = false;
+            break;
+        }
+
+        attr = attr->Next();
+    }
+
+    return result;
+}
+
 bool WorldDB::load_object_attributes(WorldObject *object, TiXmlElement *elmt)
 {
     bool result = true;
@@ -192,7 +212,10 @@ bool WorldDB::load_nodes(TiXmlNode *node)
     int result = true;
 
     if (node->Type() == TiXmlNode::TINYXML_ELEMENT) {
-        if (strcmp(node->Value(), "object") == 0) {
+        if (strcmp(node->Value(), "world") == 0) {
+            result = load_block_attributes(m_prefix, node->ToElement());
+        }
+        else if (strcmp(node->Value(), "object") == 0) {
             WorldObject *object = new WorldObject;
             result = load_object_attributes(object, node->ToElement());
             if (result) {
@@ -259,7 +282,8 @@ error:
 }
 
 WorldDB::WorldDB(const char *name)
-    : m_chest(0)
+    : m_prefix(""),
+      m_chest(0)
 {
     TiXmlDocument doc(name);
     if (doc.LoadFile()) {

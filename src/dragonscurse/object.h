@@ -40,6 +40,11 @@ public:
 
     enum AnimDirection { AnimUp, AnimDown };
 
+    static void set_prefix(const char* prefix) {
+        m_prefix = std::string(prefix);
+    }
+    static const char* get_prefix() { return m_prefix.c_str(); }
+
     Object(Type type, int x = 0, int y = 0, Direction dir = None)
         : m_x(x), m_y(y), m_dx(0), m_dy(0), m_frame(0),
           m_dir(dir), m_loaded(false), m_type(type), m_always_visible(false),
@@ -73,8 +78,6 @@ public:
     void set_reference(int x, int y) { m_xref = x; m_yref = y; }
 
     void set_reused(bool reused) { m_reused = reused; }
-
-    static std::string get_prefix() { return std::string("./objects/"); }
 
     const char* get_filename() const { return m_fn.c_str(); }
     const char* get_name() const { return m_name.c_str(); }
@@ -144,6 +147,7 @@ private:
     bool load_nodes(TiXmlNode *node);
     CollisionParts* find_collision_parts(std::vector<CollisionParts*> v) const;
 
+    static std::string m_prefix;
     std::string m_fn;
     std::string m_name;
     bool m_loaded;

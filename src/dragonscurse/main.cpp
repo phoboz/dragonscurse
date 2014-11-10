@@ -328,6 +328,8 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    // Set object prefix from world database
+    Object::set_prefix(db->get_prefix());
 
     status = db->get_status();
     statusbar = new Statusbar(status, media);

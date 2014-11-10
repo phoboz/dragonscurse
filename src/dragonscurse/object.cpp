@@ -43,6 +43,8 @@ struct CollisionParts {
     }
 };
 
+std::string Object::m_prefix("");
+
 Object::~Object()
 {
     if (m_loaded) {
@@ -151,7 +153,7 @@ bool Object::load(const char *fn, MediaDB *media)
 {
     m_media = media;
 
-    std::string pathname = get_prefix() + std::string(fn);
+    std::string pathname = m_prefix + std::string(fn);
     TiXmlDocument doc(pathname.c_str());
     if (doc.LoadFile()) {
         load_nodes(&doc);
