@@ -29,6 +29,7 @@ public:
     bool play_music(const char *filename);
 
 private:
+    bool load_block_attributes(std::string &prefix, TiXmlElement *elmt);
     bool load_sprite_attributes(SpriteNode *sprite, TiXmlElement *elmt);
     bool load_map_attributes(MapNode *map, TiXmlElement *elmt);
     bool load_font_attributes(FontNode *font, TiXmlElement *elmt);

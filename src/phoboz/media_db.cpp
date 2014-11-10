@@ -56,6 +56,26 @@ struct MusicNode : public MediaNode {
 
 int MediaNode::m_keygen = 1;
 
+bool MediaDB::load_block_attributes(std::string &prefix, TiXmlElement *elmt)
+{
+    bool result = true;
+
+    TiXmlAttribute *attr = elmt->FirstAttribute();
+    while (attr) {
+        if (strcmp(attr->Name(), "prefix") == 0) {
+            prefix = std::string(attr->Value());
+        }
+        else {
+            result = false;
+            break;
+        }
+
+        attr = attr->Next();
+    }
+
+    return result;
+}
+
 bool MediaDB::load_sprite_attributes(SpriteNode *sprite, TiXmlElement *elmt)
 {
     bool result = true;
@@ -179,12 +199,18 @@ bool MediaDB::load_nodes(TiXmlNode *node)
     int result = true;
 
     if (node->Type() == TiXmlNode::TINYXML_ELEMENT) {
-        if (strcmp(node->Value(), "sprite") == 0) {
+        if (strcmp(node->Value(), "sprites") == 0) {
+            result = load_block_attributes(m_sprite_prefix, node->ToElement());
+        }
+        else if (strcmp(node->Value(), "sprite") == 0) {
             SpriteNode *sprite = new SpriteNode;
             result = load_sprite_attributes(sprite, node->ToElement());
             if (result) {
                 m_media[sprite->m_filename] = sprite;
             }
+        }
+        else if (strcmp(node->Value(), "maps") == 0) {
+            result = load_block_attributes(m_map_prefix, node->ToElement());
         }
         else if (strcmp(node->Value(), "map") == 0) {
             MapNode *map = new MapNode;
@@ -193,6 +219,9 @@ bool MediaDB::load_nodes(TiXmlNode *node)
                 m_media[map->m_filename] = map;
             }
         }
+        else if (strcmp(node->Value(), "fonts") == 0) {
+            result = load_block_attributes(m_font_prefix, node->ToElement());
+        }
         else if (strcmp(node->Value(), "font") == 0) {
             FontNode *font = new FontNode;
             result = load_font_attributes(font, node->ToElement());
@@ -200,12 +229,18 @@ bool MediaDB::load_nodes(TiXmlNode *node)
                 m_media[font->m_name] = font;
             }
         }
+        else if (strcmp(node->Value(), "sounds") == 0) {
+            result = load_block_attributes(m_sound_prefix, node->ToElement());
+        }
         else if (strcmp(node->Value(), "sound") == 0) {
             SoundNode *sound = new SoundNode;
             result = load_sound_attributes(sound, node->ToElement());
             if (result) {
                 m_media[sound->m_filename] = sound;
             }
+        }
+        else if (strcmp(node->Value(), "musics") == 0) {
+            result = load_block_attributes(m_music_prefix, node->ToElement());
         }
         else if (strcmp(node->Value(), "music") == 0) {
             MusicNode *music = new MusicNode;
@@ -229,11 +264,11 @@ bool MediaDB::load_nodes(TiXmlNode *node)
 
 MediaDB::MediaDB(const char *name)
     : m_mus_filename(""),
-      m_sprite_prefix("./sprites/"),
-      m_map_prefix("./maps/"),
-      m_font_prefix("./fonts/"),
-      m_sound_prefix("./sound/"),
-      m_music_prefix("./music/")
+      m_sprite_prefix(""),
+      m_map_prefix(""),
+      m_font_prefix(""),
+      m_sound_prefix(""),
+      m_music_prefix("")
 {
     TiXmlDocument doc(name);
     if (doc.LoadFile()) {

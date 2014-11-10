@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <media>
-    <sprites>
+    <sprites prefix="./sprites/">
         <sprite filename="bat_red.png"
                 width="34" height="34" margin="1" spacing="1" />
         <sprite filename="blue_flame.png"
@@ -110,7 +110,7 @@
         <sprite filename="wondering.png"
                 width="50" height="60" margin="1" spacing="1" />
     </sprites>
-    <maps>
+    <maps prefix="./maps/">
         <map filename="castle_01.tmx" />
         <map filename="castle_02.tmx" />
         <map filename="castle_03.tmx" />
@@ -127,11 +127,11 @@
         <map filename="village_interiour.tmx" />
         <map filename="wb.tmx" />
     </maps>
-    <fonts>
+    <fonts prefix="./fonts/">
         <font name="Wonderfull_12" filename="wonderfull.ttf" size="12" />
         <font name="Wonderfull_18" filename="wonderfull.ttf" size="18" />
     </fonts>
-    <sounds>
+    <sounds prefix="./sound/">
         <sound filename="advance.wav" />
         <sound filename="firebreath.wav" />
         <sound filename="jump.wav" />
@@ -139,7 +139,7 @@
         <sound filename="select.wav" />
         <sound filename="sword.wav" />
     </sounds>
-    <musics>
+    <musics prefix="./music/">
         <music filename="castle_01.ogg" />
         <music filename="castle_02.ogg" />
         <music filename="desert.ogg" />
