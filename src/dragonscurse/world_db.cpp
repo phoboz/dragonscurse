@@ -1,9 +1,6 @@
-#include <vector>
-#include <list>
-#include <string>
-#include <map>
 #include <string.h>
 #include "item.h"
+#include "store_restore.h"
 #include "world_db.h"
 
 struct WorldNode {
@@ -288,6 +285,7 @@ WorldDB::WorldDB(const char *name)
     TiXmlDocument doc(name);
     if (doc.LoadFile()) {
         load_nodes(&doc);
+        m_status = new Status;
     }
 }
 
@@ -439,6 +437,7 @@ bool WorldDB::remove(int key)
         }
 
         if (found) {
+            m_removed_locations.push_back(key);
             location->m_nodes.erase(jt);
             goto end;
         }
@@ -493,5 +492,46 @@ void WorldDB::clear_user()
             (*jt)->m_user = 0;
         }
     }
+}
+
+bool WorldDB::store(const char *fn) const
+{
+    std::ofstream f;
+    f.open(fn, std::ios::out | std::ios::binary);
+
+    bool result = m_status->write(f);
+    if (result) {
+        int len = m_removed_locations.size();
+        StoreRestore::write_integer(f, len);
+        for (int i = 0; i < len; i++) {
+           StoreRestore::write_integer(f, m_removed_locations[i]);
+        }
+    }
+
+    f.close();
+
+    return result;
+}
+
+bool WorldDB::restore(const char *fn, MediaDB *media)
+{
+    bool result = false;
+
+    std::ifstream f;
+    f.open(fn, std::ios::in | std::ios::binary);
+
+    delete m_status;
+    m_status = new Status;
+    if (m_status && m_status->read(f, media)) {
+        int num_removed_locations = StoreRestore::read_integer(f);
+        for (int i = 0; i < num_removed_locations; i++) {
+            remove(StoreRestore::read_integer(f));
+        }
+        result = true;
+    }
+
+    f.close();
+
+    return result;
 }
 

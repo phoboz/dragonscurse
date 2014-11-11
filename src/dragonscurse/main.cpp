@@ -203,6 +203,12 @@ void move_keydown(int key)
     }
     else if (state == StateMainMenu) {
         switch(main_menu->move(key)) {
+            case MainMenu::OptionLoad:
+                delete main_menu;
+                state = world_state;
+                db->restore("autosave.sav", media);
+                break;
+
             case MainMenu::OptionContinue:
                 delete main_menu;
                 state = world_state;
@@ -233,6 +239,7 @@ void move_keydown(int key)
                 break;
 
             case MainMenu::OptionQuit:
+                db->store("autosave.sav");
                 exit(0);
                 break;
 

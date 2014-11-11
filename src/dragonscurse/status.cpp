@@ -1,10 +1,13 @@
 #include <iostream>
+#include <string.h>
 #include "item.h"
 #include "arm.h"
 #include "shield.h"
 #include "armour.h"
 #include "collectable.h"
 #include "heart.h"
+#include "store_restore.h"
+#include "object_factory.h"
 #include "status.h"
 
 void Status::update()
@@ -221,5 +224,83 @@ void Status::show() const
         }
         std::cout << std::endl;
     }
+}
+
+bool Status::write(std::ofstream &f)
+{
+    bool result = true;
+
+    StoreRestore::write_integer(f, m_hearts);
+    StoreRestore::write_integer(f, m_gold);
+
+    StoreRestore::write_integer(f, m_items.size());
+    for (std::list<Item*>::iterator it = m_items.begin();
+         it != m_items.end();
+         ++it) {
+
+        Item *item = *it;
+        if (item) {
+            bool is_equiped = false;
+
+            if (item == m_arm || item == m_shield || item == m_armour) {
+                is_equiped = true;
+            }
+            StoreRestore::write_varchar(f, item->get_filename());
+            StoreRestore::write_boolean(f, is_equiped);
+        }
+    }
+
+    StoreRestore::write_integer(f, m_shapes.size());
+    for (std::list<Player*>::iterator it = m_shapes.begin();
+         it != m_shapes.end();
+         ++it) {
+
+        Player *player = *it;
+        if (player) {
+            bool has_shape = false;
+
+            if (player == m_shape) {
+                has_shape = true;
+            }
+            StoreRestore::write_varchar(f, player->get_filename());
+            StoreRestore::write_boolean(f, has_shape);
+        }
+    }
+
+    return result;
+}
+
+bool Status::read(std::ifstream &f, MediaDB *media)
+{
+    bool result = true;
+
+    add_hearts(StoreRestore::read_integer(f));
+
+    m_gold = StoreRestore::read_integer(f);
+
+    int num_items = StoreRestore::read_integer(f);
+    for (int i = 0; i < num_items; i++) {
+        char *name = StoreRestore::read_varchar(f);
+        aquire_item((Item *) ObjectFactory::create_object(name, media, "Item"));
+        if (StoreRestore::read_boolean(f)) {
+            equip_item(name);
+        }
+        delete name;
+    }
+
+    int num_shapes = StoreRestore::read_integer(f);
+    for (int i = 0; i < num_shapes; i++) {
+        char *name = StoreRestore::read_varchar(f);
+        aquire_shape((Player *) ObjectFactory::create_object(name, media,
+                                                             "Player"));
+        if (StoreRestore::read_boolean(f)) {
+            // TODO: Assume shape
+        }
+        delete name;
+    }
+
+    show();
+
+    return result;
 }
 
