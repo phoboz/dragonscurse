@@ -1,8 +1,10 @@
 #ifndef _WorldDB_H
 #define _WorldDB_H
 
+#include <vector>
 #include <string>
 #include <map>
+#include "phoboz/media_db.h"
 #include "tinyxml.h"
 #include "object.h"
 #include "status.h"
@@ -69,7 +71,9 @@ public:
     bool set_user(int key, int user);
     void clear_user();
 
-    Status* get_status() { return &m_status; }
+    Status* get_status() { return m_status; }
+    bool store(const char *fn) const;
+    bool restore(const char *fn, MediaDB *media);
 
 private:
     bool load_block_attributes(std::string &prefix, TiXmlElement *elmt);
@@ -87,7 +91,8 @@ private:
     std::map<std::string, WorldLocation*> m_locations;
     WorldChest *m_chest;
 
-    Status m_status;
+    Status *m_status;
+    std::vector<int> m_removed_locations;
 };
 
 #endif

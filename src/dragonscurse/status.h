@@ -1,8 +1,10 @@
 #ifndef _Status_H
 #define _Status_H
 
+#include <fstream>
 #include <vector>
 #include <list>
+#include "phoboz/media_db.h"
 #include "item.h"
 
 class Arm;
@@ -54,6 +56,8 @@ public:
     int get_hp() const { return m_hp; }
 
     void show() const;
+    bool write(std::ofstream &f);
+    bool read(std::ifstream &f, MediaDB *media);
 
 private:
     static const int c_max_hearts = 8;
