@@ -40,14 +40,17 @@ struct WorldLocation {
 
 int WorldNode::m_keygen = 1;
 
-bool WorldDB::load_block_attributes(std::string &prefix, TiXmlElement *elmt)
+bool WorldDB::load_world_attributes(TiXmlElement *elmt)
 {
     bool result = true;
 
     TiXmlAttribute *attr = elmt->FirstAttribute();
     while (attr) {
-        if (strcmp(attr->Name(), "prefix") == 0) {
-            prefix = std::string(attr->Value());
+        if (strcmp(attr->Name(), "object_prefix") == 0) {
+            m_object_prefix = std::string(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "save_prefix") == 0) {
+            m_save_prefix = std::string(attr->Value());
         }
         else {
             result = false;
@@ -210,7 +213,7 @@ bool WorldDB::load_nodes(TiXmlNode *node)
 
     if (node->Type() == TiXmlNode::TINYXML_ELEMENT) {
         if (strcmp(node->Value(), "world") == 0) {
-            result = load_block_attributes(m_prefix, node->ToElement());
+            result = load_world_attributes(node->ToElement());
         }
         else if (strcmp(node->Value(), "object") == 0) {
             WorldObject *object = new WorldObject;
@@ -279,7 +282,8 @@ error:
 }
 
 WorldDB::WorldDB(const char *name)
-    : m_prefix(""),
+    : m_object_prefix(""),
+      m_save_prefix(""),
       m_chest(0)
 {
     TiXmlDocument doc(name);
@@ -497,7 +501,8 @@ void WorldDB::clear_user()
 bool WorldDB::store(const char *fn) const
 {
     std::ofstream f;
-    f.open(fn, std::ios::out | std::ios::binary);
+    std::string pathname = m_save_prefix + fn;
+    f.open(pathname.c_str(), std::ios::out | std::ios::binary);
 
     bool result = m_status->write(f);
     if (result) {
@@ -518,7 +523,8 @@ bool WorldDB::restore(const char *fn, MediaDB *media)
     bool result = false;
 
     std::ifstream f;
-    f.open(fn, std::ios::in | std::ios::binary);
+    std::string pathname = m_save_prefix + fn;
+    f.open(pathname.c_str(), std::ios::in | std::ios::binary);
 
     delete m_status;
     m_status = new Status;

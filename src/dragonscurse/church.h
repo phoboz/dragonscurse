@@ -2,11 +2,12 @@
 #define _Church_H
 
 #include "phoboz/menu.h"
+#include "world_db.h"
 #include "room.h"
 
 class Church : public Room {
 public:
-    Church(MediaDB *media, const char *src, int sx, int sy);
+    Church(MediaDB *media, WorldDB *db, const char *src, int sx, int sy);
 
     virtual Area* move(int key);
     virtual void draw(SDL_Surface *dest, int x, int y,
@@ -14,6 +15,7 @@ public:
 
 private:
     Menu *m_menu;
+    WorldDB *m_db;
 };
 
 #endif

@@ -21,6 +21,7 @@
 #include "hospital.h"
 #include "main_menu.h"
 #include "status_screen.h"
+#include "save_list.h"
 #include "key_list.h"
 #include "arm_list.h"
 #include "shield_list.h"
@@ -113,7 +114,7 @@ bool load_area(const char *ar_name,
                const char *music = 0)
 {
     if (std::string(ar_name) == std::string("Church")) {
-        room = new Church(media, map->get_filename(),
+        room = new Church(media, db, map->get_filename(),
                           player->get_x(), player->get_y());
         set_state(StateRoom);
         return true;
@@ -204,9 +205,9 @@ void move_keydown(int key)
     else if (state == StateMainMenu) {
         switch(main_menu->move(key)) {
             case MainMenu::OptionLoad:
+                sub_menu = new SaveList(media, db);
                 delete main_menu;
-                state = world_state;
-                db->restore("autosave.sav", media);
+                set_state(StateSubMenu);
                 break;
 
             case MainMenu::OptionContinue:
@@ -239,7 +240,6 @@ void move_keydown(int key)
                 break;
 
             case MainMenu::OptionQuit:
-                db->store("autosave.sav");
                 exit(0);
                 break;
 
@@ -336,7 +336,7 @@ int main(int argc, char *argv[])
     }
 
     // Set object prefix from world database
-    Object::set_prefix(db->get_prefix());
+    Object::set_prefix(db->get_object_prefix());
 
     status = db->get_status();
     statusbar = new Statusbar(status, media);

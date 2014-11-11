@@ -56,7 +56,8 @@ class WorldDB {
 public:
     WorldDB(const char *name);
 
-    const char* get_prefix() const { return m_prefix.c_str(); }
+    const char* get_object_prefix() const { return m_object_prefix.c_str(); }
+    const char* get_save_prefix() const { return m_save_prefix.c_str(); }
 
     bool get_object_info(ObjectInfo *info,
                          int id, const char *location_name) const;
@@ -76,7 +77,7 @@ public:
     bool restore(const char *fn, MediaDB *media);
 
 private:
-    bool load_block_attributes(std::string &prefix, TiXmlElement *elmt);
+    bool load_world_attributes(TiXmlElement *elmt);
     bool load_object_attributes(WorldObject *object, TiXmlElement *elmt);
     bool load_lock_attributes(WorldLock *lock, TiXmlElement *elmt);
     bool load_chest_attributes(WorldChest *chest, TiXmlElement *elmt);
@@ -87,7 +88,8 @@ private:
 
     bool load_object_info(ObjectInfo *info, WorldObject *object) const;
 
-    std::string m_prefix;
+    std::string m_object_prefix;
+    std::string m_save_prefix;
     std::map<std::string, WorldLocation*> m_locations;
     WorldChest *m_chest;
 

@@ -390,6 +390,40 @@ Map* MediaDB::get_map(const char *filename)
     return result;
 }
 
+MapNode* MediaDB::find_map(const Map *find)
+{
+    MapNode *result = 0;
+
+    for (std::map<std::string, MediaNode*>::const_iterator it = m_media.begin();
+         it != m_media.end();
+         ++it) {
+        MediaNode *media = it->second;
+        if (media->m_type == MediaNode::TypeMap) {
+            MapNode *map = (MapNode *) media;
+            if (find == map->m_map) {
+                result = map;
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
+bool MediaDB::leave_map(Map *map)
+{
+    bool result = false;
+
+    MapNode *node = find_map(map);
+    if (--node->m_ref == 0) {
+        delete node->m_map;
+        node->m_loaded = false;
+        result = true;
+    }
+
+    return result;
+}
+
 bool MediaDB::load_font(FontNode *font)
 {
     bool result = false;

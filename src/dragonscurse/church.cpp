@@ -1,9 +1,11 @@
+#include <time.h>
 #include "phoboz/ctrl.h"
 #include "area.h"
 #include "church.h"
 
-Church::Church(MediaDB *media, const char *src, int sx, int sy)
-    : Room("church.png", "Wonderfull_18", media, src, sx, sy, 80, 312)
+Church::Church(MediaDB *media, WorldDB *db, const char *src, int sx, int sy)
+    : Room("church.png", "Wonderfull_18", media, src, sx, sy, 80, 312),
+      m_db(db)
 {
     m_text->add_text("Welcome to church, save your progress?");
     m_menu = new Menu("Wonderfull_18", "icons.png", 0, media);
@@ -23,12 +25,21 @@ Area* Church::move(int key)
         m_media->play_sound("advance.wav");
     }
     else if (input & PRESS_ENTER) {
-        if (m_menu->get_option() == 1) {
-            m_media->play_sound("select.wav");
-            return new Area(m_src.c_str(), m_sx, m_sy);
+        if (m_menu->get_option() == 0) {
+            time_t now = time(0);
+            tm* localtm = localtime(&now);
+            std::string filename = asctime(localtm) + std::string(".sav");
+            if (m_db->store(filename.c_str())) {
+                m_media->play_sound("select.wav");
+                return new Area(m_src.c_str(), m_sx, m_sy);
+            }
+            else {
+                m_media->play_sound("reject.wav");
+            }
         }
         else {
             m_media->play_sound("reject.wav");
+            return new Area(m_src.c_str(), m_sx, m_sy);
         }
     }
 

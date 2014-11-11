@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<world prefix="./objects/">
+<world object_prefix="./objects/" save_prefix="./save/">
     <objects>
         <object id="1"
                 location="castle_02.tmx"
