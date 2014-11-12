@@ -1,7 +1,8 @@
 #include "item_list.h"
 
 ItemList::ItemList(MediaDB *media, Status *status, Item::ItemType item_type)
-    : SubMenu(media, status)
+    : SubMenu(TypeItem, media),
+      m_status(status)
 {
     std::vector<Item*> list;
 

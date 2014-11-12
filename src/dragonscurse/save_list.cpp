@@ -2,9 +2,8 @@
 #include <dirent.h>
 #include "save_list.h"
 
-SaveList::SaveList(MediaDB *media, WorldDB *db)
-    : SubMenu(media, db->get_status()),
-      m_db(db)
+SaveList::SaveList(MediaDB *media)
+    : SubMenu(TypeSave, media)
 {
     DIR *dpdf;
     struct dirent *epdf;
@@ -21,15 +20,9 @@ SaveList::SaveList(MediaDB *media, WorldDB *db)
     }
 }
 
-int SaveList::move(int key)
+const char* SaveList::get_string() const
 {
-    int result = SubMenu::move(key);
-    if (result > 0) {
-        std::string *s = (std::string *) m_menu->get_data();
-        m_db->restore(s->c_str(), m_media);
-        delete s;
-    }
-
-    return result;
+    std::string *s = (std::string *) m_menu->get_data();
+    return s->c_str();
 }
 

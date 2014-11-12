@@ -2,14 +2,16 @@
 #define _SubMenu_H
 
 #include "phoboz/menu.h"
-#include "status.h"
 
 class SubMenu {
 public:
-    SubMenu(MediaDB *media, Status *status);
+    enum Type { TypeEquipment, TypeItem, TypeSave };
+
+    SubMenu(Type type, MediaDB *media);
     virtual ~SubMenu();
 
     int get_width() const { return m_menu->get_width(); }
+    Type get_type() const { return m_type; }
 
     virtual int move(int key);
 
@@ -18,8 +20,8 @@ public:
 
 protected:
     MediaDB *m_media;
-    Status *m_status;
     Menu *m_menu;
+    Type m_type;
 };
 
 #endif

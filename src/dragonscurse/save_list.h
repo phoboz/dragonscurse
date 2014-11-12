@@ -6,12 +6,12 @@
 
 class SaveList : public SubMenu {
 public:
-    SaveList(MediaDB *media, WorldDB *db);
+    SaveList(MediaDB *media);
 
-    virtual int move(int key);
+    const char* get_string() const;
 
 private:
-    WorldDB *m_db;
+    WorldDB **m_db;
 };
 
 #endif
