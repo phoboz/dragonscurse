@@ -69,7 +69,7 @@ private:
     Shield *m_shield;
     Armour *m_armour;
 
-    std::list<Player*> m_shapes;
+    std::vector<Player*> m_shapes;
     Player *m_shape;
 
     int m_hearts;

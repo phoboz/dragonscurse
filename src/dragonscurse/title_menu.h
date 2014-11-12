@@ -1,24 +1,19 @@
-#ifndef _MainMenu_H
-#define _MainMenu_H
+#ifndef _TitleMenu_H
+#define _TitleMenu_H
 
 #include "phoboz/menu.h"
 
-class MainMenu {
+class TitleMenu {
 public:
     enum Option {
         OptionNone = -1,
-        OptionContinue = 0,
-        OptionKeyList,
-        OptionArmList,
-        OptionShieldList,
-        OptionArmourList,
-        OptionExit
+        OptionNew = 0,
+        OptionLoad,
+        OptionQuit
     };
 
-    MainMenu(MediaDB *media);
-    ~MainMenu();
-
-    static bool check_menu(int key);
+    TitleMenu(MediaDB *media);
+    ~TitleMenu();
 
     int get_width() const { return m_menu->get_width(); }
 

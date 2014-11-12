@@ -19,6 +19,7 @@
 #include "church.h"
 #include "shop.h"
 #include "hospital.h"
+#include "title_menu.h"
 #include "main_menu.h"
 #include "status_screen.h"
 #include "save_list.h"
@@ -27,7 +28,7 @@
 #include "shield_list.h"
 #include "armour_list.h"
 
-enum State { StateMap, StateRoom, StateMainMenu, StateSubMenu };
+enum State { StateMap, StateRoom, StateTitleMenu, StateMainMenu, StateSubMenu };
 
 static const int c_offset_y = 24;
 static SDL_Surface *screen;
@@ -41,11 +42,16 @@ static World *world = 0;
 static Room *room = 0;
 Status *status = 0;
 static Statusbar *statusbar = 0;
+static TitleMenu *title_menu = 0;
 static MainMenu *main_menu = 0;
 static SubMenu *sub_menu = 0;
 static StatusScreen *status_screen = 0;
 static State state;
 static State world_state;
+static char map_name[32];
+static char player_name[32];
+static int start_x = -1;
+static int start_y = -1;
 
 void set_state(State new_state)
 {
@@ -110,7 +116,7 @@ bool init()
 bool load_area(const char *ar_name,
                bool new_game,
                const char *pl_name,
-               int start_x = -1, int start_y = -1,
+               int sx = -1, int sy = -1,
                const char *music = 0)
 {
     if (std::string(ar_name) == std::string("Church")) {
@@ -144,17 +150,17 @@ bool load_area(const char *ar_name,
 
     world = new World(map, media, db, music);
 
-    if (start_x == -1) {
-        start_x = map->get_numeric_property("start_x");
+    if (sx == -1) {
+        sx = map->get_numeric_property("start_x");
     }
-    if (start_y == -1) {
-        start_y = map->get_numeric_property("start_y") - c_offset_y;
+    if (sy == -1) {
+        sy = map->get_numeric_property("start_y") - c_offset_y;
     }
 
     if (new_game) {
         player = (Player *) ObjectFactory::create_object(pl_name, media,
                                                          "Player",
-                                                         start_x, start_y,
+                                                         sx, sy,
                                                          Object::Right);
         if (!player->get_loaded()) {
             fprintf(stderr, "Fatal Error -- Unable to player %s\n", pl_name);
@@ -163,9 +169,44 @@ bool load_area(const char *ar_name,
         status->aquire_shape(player);
     }
     else {
-        player->set_x(start_x);
-        player->set_y(start_y);
+        player->set_x(sx);
+        player->set_y(sy);
     }
+}
+
+void new_game(char *map_name, char *player_name, int sx, int sy)
+{
+    db = new WorldDB("world.xml");
+    if (!db) {
+        fprintf(stderr, "Fatal Error -- Unable to load locks database\n");
+        exit(1);
+    }
+
+    // Set object prefix from world database
+    Object::set_prefix(db->get_object_prefix());
+
+    status = db->get_status();
+    statusbar = new Statusbar(status, media);
+    status->add_hearts(1);
+    status->aquire_item((Item *) ObjectFactory::create_object(
+                                     "ivory_sword.xml",
+                                     media, "Item"));
+
+    status->aquire_item((Item *) ObjectFactory::create_object(
+                                     "ivory_shield.xml",
+                                      media, "Item"));
+
+    status->aquire_item((Item *) ObjectFactory::create_object(
+                                     "ivory_armour.xml",
+                                      media, "Item"));
+
+    status->equip_item("ivory_sword.xml");
+    status->equip_item("ivory_shield.xml");
+    status->equip_item("ivory_armour.xml");
+
+    status_screen = new StatusScreen(status, media);
+
+    load_area(map_name, true, player_name, sx, sy);
 }
 
 void move()
@@ -186,7 +227,9 @@ void move()
                       area->get_music());
         }
     }
-    else if (state == StateMainMenu || state == StateSubMenu) {
+    else if (state == StateMainMenu ||
+             (state == StateSubMenu &&
+              sub_menu->get_type() != SubMenu::TypeSave)) {
         status_screen->move();
     }
 }
@@ -202,14 +245,30 @@ void move_keydown(int key)
                       area->get_sx(), area->get_sy(), area->get_music());
         }
     }
-    else if (state == StateMainMenu) {
-        switch(main_menu->move(key)) {
-            case MainMenu::OptionLoad:
-                sub_menu = new SaveList(media, db);
-                delete main_menu;
+    else if (state == StateTitleMenu) {
+        switch(title_menu->move(key)) {
+            case TitleMenu::OptionNew:
+                new_game(map_name, player_name, start_x, start_y);
+                delete title_menu;
+                set_state(StateMap);
+                break;
+
+            case TitleMenu::OptionLoad:
+                sub_menu = new SaveList(media);
+                delete title_menu;
                 set_state(StateSubMenu);
                 break;
 
+            case TitleMenu::OptionQuit:
+                exit(0);
+                break;
+
+            default:
+                break;
+        }
+    }
+    else if (state == StateMainMenu) {
+        switch(main_menu->move(key)) {
             case MainMenu::OptionContinue:
                 delete main_menu;
                 state = world_state;
@@ -239,8 +298,10 @@ void move_keydown(int key)
                 set_state(StateSubMenu);
                 break;
 
-            case MainMenu::OptionQuit:
-                exit(0);
+            case MainMenu::OptionExit:
+                title_menu = new TitleMenu(media);
+                delete main_menu;
+                set_state(StateTitleMenu);
                 break;
 
             default:
@@ -250,9 +311,26 @@ void move_keydown(int key)
     else if (state == StateSubMenu) {
         int i = sub_menu->move(key);
         if (i == 0) {
-            main_menu = new MainMenu(media);
-            set_state(StateMainMenu);
-            delete sub_menu;
+            if (sub_menu->get_type() == SubMenu::TypeSave) {
+                title_menu = new TitleMenu(media);
+                set_state(StateTitleMenu);
+                delete sub_menu;
+            }
+            else {
+                main_menu = new MainMenu(media);
+                set_state(StateMainMenu);
+                delete sub_menu;
+            }
+        }
+        else if (i > 0) {
+            db = new WorldDB("world.xml");
+            Object::set_prefix(db->get_object_prefix());
+            SaveList *menu = (SaveList *) sub_menu;
+            db->restore(menu->get_string(), media);
+            status = db->get_status();
+            statusbar = new Statusbar(status, media);
+            status_screen = new StatusScreen(status, media);
+            load_area("village.tmx", true, "lizardman.xml");
         }
     }
     else if (MainMenu::check_menu(key)) {
@@ -263,16 +341,22 @@ void move_keydown(int key)
 
 void redraw()
 {
-    statusbar->draw(screen, screen_width, screen_height);
     if (state == StateRoom) {
+        statusbar->draw(screen, screen_width, screen_height);
         room->draw(screen, 0, Statusbar::get_height(),
                    0, 0, screen_width, screen_height);
     }
     else if (state == StateMap) {
+        statusbar->draw(screen, screen_width, screen_height);
         world->draw(screen, player, 0, Statusbar::get_height(),
                     screen_width, screen_height);
     }
+    else if (state == StateTitleMenu) {
+        title_menu->draw(screen, 320 - title_menu->get_width(), 360,
+                         0, 0, screen_width, screen_height);
+    }
     else if (state == StateMainMenu) {
+        statusbar->draw(screen, screen_width, screen_height);
         status_screen->draw(screen,
                             0, Statusbar::get_height(),
                             0, 0, screen_width, screen_height);
@@ -280,8 +364,13 @@ void redraw()
                         0, 0, screen_width, screen_height);
     }
     else if (state == StateSubMenu) {
-        status_screen->draw(screen, 0, Statusbar::get_height(),
-                            0, 0, screen_width, screen_height);
+        if (sub_menu->get_type() != SubMenu::TypeSave) {
+            statusbar->draw(screen, screen_width, screen_height);
+        }
+        if (sub_menu->get_type() != SubMenu::TypeSave) {
+            status_screen->draw(screen, 0, Statusbar::get_height(),
+                                0, 0, screen_width, screen_height);
+        }
         sub_menu->draw(screen,
                        0, Statusbar::get_height(),
                        0, 0, screen_width, screen_height);
@@ -295,13 +384,9 @@ void flip()
 
 int main(int argc, char *argv[])
 {
-    static char map_name[32];
-    static char player_name[32];
     SDL_Event event;
     FpsTimer timer;
     int done = 0;
-    int start_x = -1;
-    int start_y = -1;
 
     if (argc > 1) {
         strcpy(map_name, argv[1]);
@@ -329,37 +414,8 @@ int main(int argc, char *argv[])
     // TODO: workaround for linker
     delete new Tmx::Map();
 
-    db = new WorldDB("world.xml");
-    if (!db) {
-        fprintf(stderr, "Fatal Error -- Unable to load locks database\n");
-        return 1;
-    }
-
-    // Set object prefix from world database
-    Object::set_prefix(db->get_object_prefix());
-
-    status = db->get_status();
-    statusbar = new Statusbar(status, media);
-    status->add_hearts(1);
-    status->aquire_item((Item *) ObjectFactory::create_object(
-                                     "ivory_sword.xml",
-                                     media, "Item"));
-
-    status->aquire_item((Item *) ObjectFactory::create_object(
-                                     "ivory_shield.xml",
-                                      media, "Item"));
-
-    status->aquire_item((Item *) ObjectFactory::create_object(
-                                     "ivory_armour.xml",
-                                      media, "Item"));
-
-    status->equip_item("ivory_sword.xml");
-    status->equip_item("ivory_shield.xml");
-    status->equip_item("ivory_armour.xml");
-
-    status_screen = new StatusScreen(status, media);
-
-    load_area(map_name, true, player_name, start_x, start_y);
+    title_menu = new TitleMenu(media);
+    set_state(StateTitleMenu);
 
     while (!done) {
 

@@ -165,7 +165,20 @@ Item* Status::get_equiped_item(Item::ItemType type) const
 
 void Status::aquire_shape(Player *player)
 {
-    m_shapes.push_back(player);
+    bool found = false;
+    int num_shapes = m_shapes.size();
+
+    for (int i = 0; i < num_shapes; i++) {
+        if (m_shapes[i]->get_filename() == player->get_filename()) {
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        m_shapes.push_back(player);
+    }
+
     m_shape = player;
     update();
 }
@@ -250,12 +263,11 @@ bool Status::write(std::ofstream &f)
         }
     }
 
-    StoreRestore::write_integer(f, m_shapes.size());
-    for (std::list<Player*>::iterator it = m_shapes.begin();
-         it != m_shapes.end();
-         ++it) {
+    int num_shapes = m_shapes.size();
+    StoreRestore::write_integer(f, num_shapes);
+    for (int i = 0; i < num_shapes; i++) {
 
-        Player *player = *it;
+        Player *player = m_shapes[i];
         if (player) {
             bool has_shape = false;
 
@@ -291,10 +303,11 @@ bool Status::read(std::ifstream &f, MediaDB *media)
     int num_shapes = StoreRestore::read_integer(f);
     for (int i = 0; i < num_shapes; i++) {
         char *name = StoreRestore::read_varchar(f);
-        aquire_shape((Player *) ObjectFactory::create_object(name, media,
-                                                             "Player"));
+        Player *shape = (Player *) ObjectFactory::create_object(name, media,
+                                                                "Player");
+        m_shapes.push_back(shape);
         if (StoreRestore::read_boolean(f)) {
-            // TODO: Assume shape
+            m_shape = shape;
         }
         delete name;
     }

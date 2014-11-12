@@ -2,7 +2,8 @@
 
 EquipmentList::EquipmentList(MediaDB *media, Status *status,
                              Item::ItemType item_type, int spr_index)
-    : SubMenu(media, status),
+    : SubMenu(TypeEquipment, media),
+      m_status(status),
       m_spr_index(spr_index),
       m_curr_eq(0)
 {

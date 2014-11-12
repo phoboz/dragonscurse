@@ -1,9 +1,9 @@
 #include "phoboz/ctrl.h"
 #include "sub_menu.h"
 
-SubMenu::SubMenu(MediaDB *media, Status *status)
-    : m_media(media),
-      m_status(status),
+SubMenu::SubMenu(Type type, MediaDB *media)
+    : m_type(type),
+      m_media(media),
       m_menu(0)
 {
     m_menu = new Menu("Wonderfull_12", "icons.png", 0, media);
