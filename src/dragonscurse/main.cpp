@@ -310,27 +310,29 @@ void move_keydown(int key)
     }
     else if (state == StateSubMenu) {
         int i = sub_menu->move(key);
-        if (i == 0) {
-            if (sub_menu->get_type() == SubMenu::TypeSave) {
+        if (sub_menu->get_type() == SubMenu::TypeSave) {
+            if (i == 0) {
                 title_menu = new TitleMenu(media);
                 set_state(StateTitleMenu);
                 delete sub_menu;
             }
-            else {
+            else if (i > 0) {
+                db = new WorldDB("world.xml");
+                Object::set_prefix(db->get_object_prefix());
+                SaveList *menu = (SaveList *) sub_menu;
+                db->restore(menu->get_string(), media);
+                status = db->get_status();
+                statusbar = new Statusbar(status, media);
+                status_screen = new StatusScreen(status, media);
+                load_area("village.tmx", true, "lizardman.xml");
+            }
+        }
+        else {
+            if (i == 0) {
                 main_menu = new MainMenu(media);
                 set_state(StateMainMenu);
                 delete sub_menu;
             }
-        }
-        else if (i > 0) {
-            db = new WorldDB("world.xml");
-            Object::set_prefix(db->get_object_prefix());
-            SaveList *menu = (SaveList *) sub_menu;
-            db->restore(menu->get_string(), media);
-            status = db->get_status();
-            statusbar = new Statusbar(status, media);
-            status_screen = new StatusScreen(status, media);
-            load_area("village.tmx", true, "lizardman.xml");
         }
     }
     else if (MainMenu::check_menu(key)) {
