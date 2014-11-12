@@ -103,6 +103,8 @@
                 width="34" height="34" margin="1" spacing="1" />
         <sprite filename="spear.png"
                 width="30" height="14" margin="1" spacing="1" />
+        <sprite filename="title.png"
+                width="640" height="480" margin="0" spacing="0" />
         <sprite filename="will_owisp_red.png"
                 width="34" height="34" margin="1" spacing="1" />
         <sprite filename="window_door.png"

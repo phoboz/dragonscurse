@@ -41,6 +41,7 @@ static WorldDB *db = 0;
 static World *world = 0;
 static Room *room = 0;
 Status *status = 0;
+static Sprite *title_bg = 0;
 static Statusbar *statusbar = 0;
 static TitleMenu *title_menu = 0;
 static MainMenu *main_menu = 0;
@@ -103,6 +104,7 @@ bool init()
     Mix_Volume(-1, MIX_MAX_VOLUME);
 
     media = new MediaDB("media.xml");
+    title_bg = media->get_sprite("title.png");
 
     // Initialize font engine
     if(!Text::init()) {
@@ -209,6 +211,29 @@ void new_game(char *map_name, char *player_name, int sx, int sy)
     load_area(map_name, true, player_name, sx, sy);
 }
 
+void load_game(const char *fn)
+{
+    db = new WorldDB("world.xml");
+    Object::set_prefix(db->get_object_prefix());
+
+    db->restore(fn, media);
+    status = db->get_status();
+    statusbar = new Statusbar(status, media);
+    status_screen = new StatusScreen(status, media);
+
+    map = media->get_map("village.tmx");
+    world = new World(map, media, db, 0);
+
+    int sx = map->get_numeric_property("start_x");
+    int sy = map->get_numeric_property("start_y") - c_offset_y;
+
+    player = status->get_shape();
+    player->set_x(sx);
+    player->set_y(sy);
+
+    set_state(StateMap);
+}
+
 void move()
 {
     if (state == StateMap) {
@@ -217,7 +242,9 @@ void move()
 
         if (player->get_action() == Actor::HitPerished) {
             printf("Player perished\n");
-            exit(0);
+            media->leave_map(map);
+            title_menu = new TitleMenu(media);
+            set_state(StateTitleMenu);
         }
 
         if (area) {
@@ -317,14 +344,8 @@ void move_keydown(int key)
                 delete sub_menu;
             }
             else if (i > 0) {
-                db = new WorldDB("world.xml");
-                Object::set_prefix(db->get_object_prefix());
                 SaveList *menu = (SaveList *) sub_menu;
-                db->restore(menu->get_string(), media);
-                status = db->get_status();
-                statusbar = new Statusbar(status, media);
-                status_screen = new StatusScreen(status, media);
-                load_area("village.tmx", true, "lizardman.xml");
+                load_game(menu->get_string());
             }
         }
         else {
@@ -354,7 +375,9 @@ void redraw()
                     screen_width, screen_height);
     }
     else if (state == StateTitleMenu) {
-        title_menu->draw(screen, 320 - title_menu->get_width(), 360,
+        title_bg->draw(screen, 0, 0, 0, 0, 0, screen_width, screen_height);
+        title_menu->draw(screen, screen_width / 2 - title_menu->get_width(),
+                         2 * screen_height / 3,
                          0, 0, screen_width, screen_height);
     }
     else if (state == StateMainMenu) {
@@ -366,10 +389,11 @@ void redraw()
                         0, 0, screen_width, screen_height);
     }
     else if (state == StateSubMenu) {
-        if (sub_menu->get_type() != SubMenu::TypeSave) {
-            statusbar->draw(screen, screen_width, screen_height);
+        if (sub_menu->get_type() == SubMenu::TypeSave) {
+            title_bg->draw(screen, 0, 0, 0, 0, 0, screen_width, screen_height);
         }
-        if (sub_menu->get_type() != SubMenu::TypeSave) {
+        else {
+            statusbar->draw(screen, screen_width, screen_height);
             status_screen->draw(screen, 0, Statusbar::get_height(),
                                 0, 0, screen_width, screen_height);
         }

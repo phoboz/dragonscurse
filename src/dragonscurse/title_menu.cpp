@@ -15,6 +15,8 @@ TitleMenu::TitleMenu(MediaDB *media)
             m_menu->set_option(s_last_option);
         }
     }
+
+    media->play_music("seaside.ogg");
 }
 
 TitleMenu::~TitleMenu()

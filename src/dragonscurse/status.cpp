@@ -237,6 +237,18 @@ void Status::show() const
         }
         std::cout << std::endl;
     }
+    std::cout << std::endl;
+
+    std::cout << "Shapes:" << std::endl;
+    int num_shapes = m_shapes.size();
+    for (int i = 0; i < num_shapes; i++) {
+        Player *shape = m_shapes[i];
+        std::cout << "Shape: " << shape->get_name();
+        if (shape == m_shape) {
+            std::cout << " (current shape)";
+        }
+        std::cout << std::endl;
+    }
 }
 
 bool Status::write(std::ofstream &f)

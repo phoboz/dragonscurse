@@ -54,6 +54,7 @@ public:
     int get_cp() const { return m_cp; }
     int get_gold() const { return m_gold; }
     int get_hp() const { return m_hp; }
+    Player* get_shape() const { return m_shape; }
 
     void show() const;
     bool write(std::ofstream &f);
