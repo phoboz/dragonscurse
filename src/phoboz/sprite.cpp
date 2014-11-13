@@ -1,6 +1,5 @@
 #include <iostream>
 #include <stdlib.h>
-#include "SDL_image.h"
 #include "phoboz/sprite.h"
 
 Sprite::~Sprite()
@@ -13,23 +12,17 @@ Sprite::~Sprite()
 
 bool Sprite::load(const char *fn, int w, int h, int margin, int spacing)
 {
-    SDL_Surface* tmp = IMG_Load(fn);
-    if (tmp) {
-      m_img = new Surface(SDL_DisplayFormatAlpha(tmp));
-      SDL_FreeSurface(tmp);
-      if (!m_img) {
-          m_loaded = false;
-          return m_loaded;
-      }
-      m_w = w;
-      m_h = h;
-      m_margin = margin;
-      m_spacing = spacing;
-      m_stride = (m_img->get_width() - margin) / (w + spacing);
-      m_loaded = true;
+    m_img = new Surface(fn);
+    if (m_img && m_img->get_initialized()) {
+        m_w = w;
+        m_h = h;
+        m_margin = margin;
+        m_spacing = spacing;
+        m_stride = (m_img->get_width() - margin) / (w + spacing);
+        m_loaded = true;
     }
     else {
-      m_loaded = false;
+        m_loaded = false;
     }
 
     return m_loaded;

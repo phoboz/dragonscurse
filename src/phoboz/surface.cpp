@@ -1,4 +1,28 @@
+#include "SDL_image.h"
 #include "phoboz/surface.h"
+
+Surface::~Surface()
+{
+    if (m_initialized) {
+        SDL_FreeSurface(m_s);
+    }
+}
+
+bool Surface::load(const char *fn)
+{
+    m_initialized = false;
+
+    SDL_Surface* tmp = IMG_Load(fn);
+    if (tmp) {
+        m_s = SDL_DisplayFormatAlpha(tmp);
+        SDL_FreeSurface(tmp);
+        if (m_s) {
+            m_initialized = true;
+        }
+    }
+
+    return m_initialized;
+}
 
 void Surface::get_pixel(Color *c, int x, int y)
 {
