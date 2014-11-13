@@ -38,7 +38,7 @@ struct WorldLocation {
     std::list<WorldNode*> m_nodes;
 };
 
-int WorldNode::m_keygen = 1;
+int WorldNode::m_keygen;
 
 bool WorldDB::load_world_attributes(TiXmlElement *elmt)
 {
@@ -286,6 +286,8 @@ WorldDB::WorldDB(const char *name)
       m_save_prefix(""),
       m_chest(0)
 {
+    WorldNode::m_keygen = 1;
+
     TiXmlDocument doc(name);
     if (doc.LoadFile()) {
         load_nodes(&doc);
