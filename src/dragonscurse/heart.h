@@ -16,7 +16,7 @@ public:
     int get_hp() const { return m_hp; }
     int get_width() const { return m_spr->get_width(); }
 
-    void draw(SDL_Surface *surface, int x, int y,
+    void draw(Surface *surface, int x, int y,
               int clip_x, int clip_y, int clip_w, int clip_h);
 
 private:

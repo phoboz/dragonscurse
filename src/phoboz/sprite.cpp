@@ -2,13 +2,12 @@
 #include <stdlib.h>
 #include "SDL_image.h"
 #include "phoboz/sprite.h"
-#include "pixel.h"
 
 Sprite::~Sprite()
 {
     if (m_loaded) {
         m_loaded = false;
-        SDL_FreeSurface(m_img);
+        delete m_img;
     }
 }
 
@@ -16,7 +15,7 @@ bool Sprite::load(const char *fn, int w, int h, int margin, int spacing)
 {
     SDL_Surface* tmp = IMG_Load(fn);
     if (tmp) {
-      m_img = SDL_DisplayFormatAlpha(tmp);
+      m_img = new Surface(SDL_DisplayFormatAlpha(tmp));
       SDL_FreeSurface(tmp);
       if (!m_img) {
           m_loaded = false;
@@ -26,7 +25,7 @@ bool Sprite::load(const char *fn, int w, int h, int margin, int spacing)
       m_h = h;
       m_margin = margin;
       m_spacing = spacing;
-      m_stride = (m_img->w - margin) / (w + spacing);
+      m_stride = (m_img->get_width() - margin) / (w + spacing);
       m_loaded = true;
     }
     else {
@@ -36,13 +35,12 @@ bool Sprite::load(const char *fn, int w, int h, int margin, int spacing)
     return m_loaded;
 }
 
-void Sprite::draw(SDL_Surface *dest,
+void Sprite::draw(Surface *dest,
                   int x, int y, int index,
 		  int clip_x, int clip_y, int clip_w, int clip_h) const
 {
     int tx, ty;
     int bx, by, bw, bh;
-    SDL_Rect dest_rect, src_rect;
 
     // Check if loaded
     if (!m_loaded) {
@@ -100,17 +98,10 @@ void Sprite::draw(SDL_Surface *dest,
         }
     }
 
-    // Calculate rects for SDL blitter
-    dest_rect.x = tx;
-    dest_rect.y = ty;
-
-    src_rect.x = sx + bx;
-    src_rect.y = sy + by;
-    src_rect.w = bw;
-    src_rect.h = bh;
-
     // Draw sprite
-    SDL_BlitSurface(m_img, &src_rect, dest, &dest_rect);
+    Rect dest_rect(tx, ty, 0, 0);
+    Rect src_rect(sx + bx, sy + by, bw, bh);
+    m_img->draw(&src_rect, dest, &dest_rect);
 }
 
 bool Sprite::check_collision(int index1, int x1, int y1,
@@ -204,9 +195,9 @@ bool Sprite::check_collision(int index1, int x1, int y1,
     Color c1, c2;
     for (j = 0; j < over_height; j++) {
         for (i = 0; i < over_width; i++) {
-	    get_pixel(&c1, cx1 + i, cy1 + j, m_img);
-	    get_pixel(&c2, cx2 + i, cy2 + j, spr2->m_img);
-            if ((c1.a > 0) && (c2.a > 0)) {
+	    m_img->get_pixel(&c1, cx1 + i, cy1 + j);
+	    spr2->m_img->get_pixel(&c2, cx2 + i, cy2 + j);
+            if ((c1.get_a() > 0) && (c2.get_a() > 0)) {
                 return true;
             }
         }

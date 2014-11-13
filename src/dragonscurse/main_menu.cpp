@@ -62,7 +62,7 @@ MainMenu::Option MainMenu::move(int key)
     return option;
 }
 
-void MainMenu::draw(SDL_Surface *dest, int x, int y,
+void MainMenu::draw(Surface *dest, int x, int y,
                     int clip_x, int clip_y, int clip_w, int clip_h)
 {
     m_menu->draw(dest, x, y, clip_x, clip_y, clip_w, clip_h);

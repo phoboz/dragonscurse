@@ -85,7 +85,7 @@ int Menu::get_width() const
     return result;
 }
 
-void Menu::draw(SDL_Surface *dest, int x, int y,
+void Menu::draw(Surface *dest, int x, int y,
                 int clip_x, int clip_y, int clip_w, int clip_h)
 {
     int height = 0;

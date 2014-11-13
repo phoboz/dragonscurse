@@ -39,7 +39,7 @@ struct FontNode : public MediaNode {
 
     int m_size;
     std::string m_name;
-    TTF_Font *m_font;
+    Font *m_font;
 };
 
 struct SoundNode : public MediaNode {
@@ -443,9 +443,9 @@ bool MediaDB::load_font(FontNode *font)
     return result;
 }
 
-TTF_Font* MediaDB::get_font(const char *fontname)
+Font* MediaDB::get_font(const char *fontname)
 {
-    TTF_Font *result = 0;
+    Font *result = 0;
 
     MediaNode *media = m_media[std::string(fontname)];
     if (media->m_type == MediaNode::TypeFont) {

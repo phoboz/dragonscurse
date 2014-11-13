@@ -19,7 +19,7 @@ public:
     bool hit_object(Object *object);
 
     virtual void move(Map *map);
-    virtual void draw(SDL_Surface *dest, Map *map,
+    virtual void draw(Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h) {
         if (m_active) Object::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
     }

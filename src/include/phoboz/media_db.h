@@ -6,6 +6,7 @@
 #include "SDL_ttf.h"
 #include "tinyxml.h"
 #include "phoboz/sprite.h"
+#include "phoboz/font.h"
 #include "phoboz/map.h"
 
 // Hidden
@@ -25,7 +26,7 @@ public:
     bool leave_sprite(Sprite *spr);
     Map* get_map(const char *filename);
     bool leave_map(Map *map);
-    TTF_Font* get_font(const char *fontname);
+    Font* get_font(const char *fontname);
     bool play_sound(const char *filename);
     bool play_music(const char *filename);
 

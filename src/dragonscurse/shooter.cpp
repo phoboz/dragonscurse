@@ -145,7 +145,7 @@ void Shooter::move(Map *map)
     }
 }
 
-void Shooter::draw(SDL_Surface *dest, Map *map,
+void Shooter::draw(Surface *dest, Map *map,
                    int clip_x, int clip_y, int clip_w, int clip_h)
 {
     Monster::draw(dest, map, clip_x, clip_y, clip_w, clip_h);

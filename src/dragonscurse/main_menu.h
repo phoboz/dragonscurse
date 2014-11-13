@@ -24,7 +24,7 @@ public:
 
     Option move(int key);
 
-    void draw(SDL_Surface *dest, int x, int y,
+    void draw(Surface *dest, int x, int y,
               int clip_x, int clip_y, int clip_w, int clip_h);
 
 private:

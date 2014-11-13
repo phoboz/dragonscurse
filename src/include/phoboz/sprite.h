@@ -1,7 +1,7 @@
 #ifndef _Sprite_H
 #define _Sprite_H
 
-#include "SDL.h"
+#include "phoboz/surface.h"
 
 class Sprite {
 public:
@@ -16,10 +16,10 @@ public:
     bool get_loaded() const { return m_loaded; }
     int get_width() const { return m_w; }
     int get_height() const { return m_h; }
-    int get_image_width() const { return m_img->w; }
-    int get_image_height() const { return m_img->h; }
-    SDL_Surface* get_image() const { return m_img; }
-    void draw(SDL_Surface *dest,
+    int get_image_width() const { return m_img->get_width(); }
+    int get_image_height() const { return m_img->get_height(); }
+    Surface* get_image() const { return m_img; }
+    void draw(Surface *dest,
               int x, int y, int index,
               int clip_x, int clip_y, int clip_w, int clip_h) const;
     bool check_collision(int index1, int x1, int y1,
@@ -56,7 +56,7 @@ private:
     int m_margin, m_spacing;
     int m_stride;
     int m_nvsprites, m_nhsprites;
-    SDL_Surface *m_img;
+    Surface *m_img;
 };
 
 #endif

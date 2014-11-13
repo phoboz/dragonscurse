@@ -12,7 +12,7 @@ Heart::Heart(MediaDB *media)
     }
 }
 
-void Heart::draw(SDL_Surface *surface, int x, int y,
+void Heart::draw(Surface *surface, int x, int y,
                  int clip_x, int clip_y, int clip_w, int clip_h)
 {
     SDL_Rect dest_rect;
@@ -21,19 +21,16 @@ void Heart::draw(SDL_Surface *surface, int x, int y,
     q /= c_hp_per_heart;
 
     // Draw red part
-    dest_rect.x = x;
-    dest_rect.y = y;
-    dest_rect.w = q;
-    dest_rect.h = w;
-    SDL_FillRect(surface, &dest_rect, 0x00ff0000);
+    Rect red_rect(x, y, q, w);
+    Color red_col(255, 0, 0, 255);
+    surface->fill_rect(&red_rect, &red_col);
 
     // Draw black part
-    dest_rect.x = x + q;
-    dest_rect.y = y;
-    dest_rect.w = w - q;
-    dest_rect.h = w;
-    SDL_FillRect(surface, &dest_rect, 0x00000000);
+    Rect black_rect(x + q, y, w - q, w);
+    Color black_col(0, 0, 0, 255);
+    surface->fill_rect(&black_rect, &black_col);
 
+    // Overlay hollow hear outline
     m_spr->draw(surface, x, y, 0,
                 clip_x, clip_y, clip_w, clip_h);
 }

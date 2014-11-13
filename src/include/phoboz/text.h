@@ -2,7 +2,6 @@
 #define _Text_H
 
 #include <vector>
-#include "SDL_ttf.h"
 #include "phoboz/media_db.h"
 
 // Hidden
@@ -18,7 +17,7 @@ public:
     ~Text();
 
     static bool init();
-    static TTF_Font* load_font(const char *fn, int size);
+    static Font* load_font(const char *fn, int size);
 
     void set_icon(const Sprite *icon_spr, int icon_index);
     void set_data(void *data) { m_data = data; }
@@ -32,7 +31,7 @@ public:
     int get_height() const;
     void* get_data() const { return m_data; }
 
-    void draw(SDL_Surface *dest, int x, int y,
+    void draw(Surface *dest, int x, int y,
               int clip_x, int clip_y, int clip_w, int clip_h);
 
 private:
@@ -41,7 +40,7 @@ private:
     static bool m_initialized;
     MediaDB *m_media;
     void *m_data;
-    TTF_Font *m_font;
+    Font *m_font;
     SDL_Color m_color;
     Sprite *m_icon_spr;
     int m_icon_index;

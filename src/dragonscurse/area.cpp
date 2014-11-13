@@ -142,7 +142,7 @@ bool Area::unlock(World *world, Item *item)
     return result;
 }
 
-void Area::draw(SDL_Surface *dest, Map *map,
+void Area::draw(Surface *dest, Map *map,
                 int clip_x, int clip_y, int clip_w, int clip_h)
 {
     if (m_type == TypeUser) {

@@ -35,7 +35,7 @@ void StatusScreen::move()
     m_cp_text->replace_line(str);
 }
 
-void StatusScreen::draw(SDL_Surface *dest, int x, int y,
+void StatusScreen::draw(Surface *dest, int x, int y,
                         int clip_x, int clip_y, int clip_w, int clip_h)
 {
     int tx = clip_w - c_pts_dx;

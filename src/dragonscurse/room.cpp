@@ -27,7 +27,7 @@ Room::~Room()
     }
 }
 
-void Room::draw(SDL_Surface *dest, int x, int y,
+void Room::draw(Surface *dest, int x, int y,
                 int clip_x, int clip_y, int clip_w, int clip_h)
 {
     m_spr->draw(dest, x, y, 0, clip_x, clip_y, clip_w, clip_h);
