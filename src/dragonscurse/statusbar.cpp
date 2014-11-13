@@ -1,6 +1,5 @@
 #include <string.h>
 #include <string>
-#include "SDL.h"
 #include "statusbar.h"
 
 int Statusbar::c_height = 40;
@@ -28,21 +27,15 @@ Statusbar::~Statusbar()
     }
 }
 
-void Statusbar::draw(SDL_Surface *surface, int screen_width, int screen_height)
+void Statusbar::draw(Surface *surface, int screen_width, int screen_height)
 {
-    SDL_Rect dest_rect;
+    Rect top_rect(0, 0, screen_width, c_height - 2);
+    Color top_color(0x54, 0x54, 0x54, 0xff);
+    surface->fill_rect(&top_rect, &top_color);
 
-    dest_rect.x = 0;
-    dest_rect.y = 0;
-    dest_rect.w = screen_width;
-    dest_rect.h = c_height - 2;
-    SDL_FillRect(surface, &dest_rect, 0x54545454);
-
-    dest_rect.x = 0;
-    dest_rect.y = c_height - 2;
-    dest_rect.w = screen_width;
-    dest_rect.h = 2;
-    SDL_FillRect(surface, &dest_rect, 0x33333333);
+    Rect bottom_rect(0, c_height - 2, screen_width, 2);
+    Color bottom_color(0x33, 0x33, 0x33, 0xff);
+    surface->fill_rect(&bottom_rect, &bottom_color);
 
     int w = m_hearts[0]->get_width();
     int num_full = m_status->get_hp() / Heart::get_hp_per_heart();

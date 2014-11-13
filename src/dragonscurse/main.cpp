@@ -31,7 +31,7 @@
 enum State { StateMap, StateRoom, StateTitleMenu, StateMainMenu, StateSubMenu };
 
 static const int c_offset_y = 24;
-static SDL_Surface *screen;
+static Surface *screen;
 static int screen_width = 640;
 static int screen_height = 480;
 static Map *map = 0;
@@ -76,13 +76,14 @@ bool init()
     atexit(SDL_Quit);
 
     // Initialize screen, setup gfx mode
-    screen = SDL_SetVideoMode(screen_width, screen_height, 32,
-                              SDL_HWSURFACE|SDL_DOUBLEBUF);
-    if (screen == NULL) {
+    SDL_Surface *s = SDL_SetVideoMode(screen_width, screen_height, 32,
+                                      SDL_HWSURFACE|SDL_DOUBLEBUF);
+    if (s == NULL) {
         fprintf(stderr, "Fatal Error -- Unable to set video mode: %s\n",
                 SDL_GetError());
         return false;
     }
+    screen = new Surface(s);
 
     // Initialize audio
     int audio_rate = 44100;
@@ -405,7 +406,7 @@ void redraw()
 
 void flip()
 {
-    SDL_Flip(screen);
+    screen->flip();
 }
 
 int main(int argc, char *argv[])
@@ -457,12 +458,12 @@ int main(int argc, char *argv[])
                 }
             }
 
-            SDL_Rect dest_rect;
-            dest_rect.x = 0;
-            dest_rect.y = Statusbar::get_height();
-            dest_rect.w = screen_width;
-            dest_rect.h = screen_height;
-            SDL_FillRect(screen, &dest_rect, 0x00000000);
+            Rect dest_rect(0,
+                           Statusbar::get_height(),
+                           screen_width,
+                           screen_height);
+            Color dest_color(0, 0, 0, 0);
+            screen->fill_rect(&dest_rect, &dest_color);
 
             move();
             redraw();

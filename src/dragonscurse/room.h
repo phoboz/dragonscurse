@@ -14,7 +14,7 @@ public:
     ~Room();
 
     virtual Area* move(int key) = 0;
-    virtual void draw(SDL_Surface *dest, int x, int y,
+    virtual void draw(Surface *dest, int x, int y,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
 protected:

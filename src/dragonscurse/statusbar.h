@@ -13,7 +13,7 @@ public:
 
     static int get_height() { return c_height; }
 
-    void draw(SDL_Surface *surface, int screen_width, int screen_height);
+    void draw(Surface *surface, int screen_width, int screen_height);
 
 private:
     static int c_height;

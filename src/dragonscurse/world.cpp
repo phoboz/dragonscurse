@@ -245,17 +245,13 @@ Area* World::move(Player *player,
     return result;
 }
 
-void World::draw(SDL_Surface *dest, Player *player,
+void World::draw(Surface *dest, Player *player,
                  int clip_x, int clip_y, int clip_w, int clip_h)
 {
     // Draw background
-    SDL_Rect rect;
-    rect.x = clip_x;
-    rect.y = clip_y;
-    rect.w = clip_w;
-    rect.h = clip_h;
-
-    SDL_FillRect(dest, &rect, m_bg_color);
+    Rect rect(clip_x, clip_y, clip_w, clip_h);
+    Color col(m_bg_color);
+    dest->fill_rect(&rect, &col);
 
     int num_layers = m_map->get_num_layers();
 

@@ -27,7 +27,7 @@ public:
     int get_option() const { return m_curr_option; }
     void* get_data() const { return m_options[m_curr_option]->get_data(); }
 
-    void draw(SDL_Surface *dest, int x, int y,
+    void draw(Surface *dest, int x, int y,
               int clip_x, int clip_y, int clip_w, int clip_h);
 private:
     std::string m_fontname;

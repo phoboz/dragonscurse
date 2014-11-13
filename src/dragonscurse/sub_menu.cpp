@@ -38,7 +38,7 @@ int SubMenu::move(int key)
     return result;
 }
 
-void SubMenu::draw(SDL_Surface *dest, int x, int y,
+void SubMenu::draw(Surface *dest, int x, int y,
                    int clip_x, int clip_y, int clip_w, int clip_h)
 {
     m_menu->draw(dest, x, y, clip_x, clip_y, clip_w, clip_h);

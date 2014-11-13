@@ -41,7 +41,7 @@ public:
 
     virtual void move(Map *map);
     bool unlock(World *world, Item *item);
-    virtual void draw(SDL_Surface *dest, Map *map,
+    virtual void draw(Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
 private:

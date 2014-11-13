@@ -122,7 +122,7 @@ std::string Map::get_literal_property(const std::string &name) const
     return prop.GetLiteralProperty(name);
 }
 
-void Map::draw_layer(SDL_Surface *dest, int x, int y, int w, int h, int layer_id) const
+void Map::draw_layer(Surface *dest, int x, int y, int w, int h, int layer_id) const
 {
     const Tmx::Layer *layer = m_tmx->GetLayer(layer_id);
     int tw = m_tmx->GetTileWidth();

@@ -281,7 +281,7 @@ void Player::move(Map *map)
     }
 }
 
-void Player::draw(SDL_Surface *dest, Map *map,
+void Player::draw(Surface *dest, Map *map,
                   int clip_x, int clip_y, int clip_w, int clip_h)
 {
     if (is_morphing()) {

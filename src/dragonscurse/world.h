@@ -24,7 +24,7 @@ public:
 
     Area* move(Player *player,
                int clip_x, int clip_y, int clip_w, int clip_h);
-    void draw(SDL_Surface *dest, Player *player,
+    void draw(Surface *dest, Player *player,
               int clip_x, int clip_y, int clip_w, int clip_h);
 
 private:

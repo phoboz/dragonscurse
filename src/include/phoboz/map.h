@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <string>
-#include "SDL.h"
 #include "Tmx/Tmx.h"
 #include "Tmx/TmxLayer.h"
 #include "Tmx/TmxTileset.h"
@@ -37,7 +36,7 @@ public:
     }
     int get_numeric_property(const std::string &name) const;
     std::string get_literal_property(const std::string &name) const;
-    void draw_layer(SDL_Surface *dest, int x, int y, int w, int h, int layer_id) const;
+    void draw_layer(Surface *dest, int x, int y, int w, int h, int layer_id) const;
 
 private:
     bool m_loaded;

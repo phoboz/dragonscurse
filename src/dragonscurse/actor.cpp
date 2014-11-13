@@ -443,7 +443,7 @@ void Actor::move(Map *map)
     }
 }
 
-void Actor::draw(SDL_Surface *dest, Map *map,
+void Actor::draw(Surface *dest, Map *map,
                  int clip_x, int clip_y, int clip_w, int clip_h) {
     if (m_invisible) {
         if (m_blink_timer.expired(2)) {

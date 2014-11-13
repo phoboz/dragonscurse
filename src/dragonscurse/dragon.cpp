@@ -91,7 +91,7 @@ void Dragon::move(Map *map)
     m_bullet->move(map);
 }
 
-void Dragon::draw(SDL_Surface *dest, Map *map,
+void Dragon::draw(Surface *dest, Map *map,
                   int clip_x, int clip_y, int clip_w, int clip_h)
 {
     Player::draw(dest, map, clip_x, clip_y, clip_w, clip_h);

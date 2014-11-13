@@ -1,6 +1,7 @@
 #include <string.h>
 #include <string>
 #include <sstream>
+#include "SDL_ttf.h"
 #include "phoboz/text.h"
 
 struct TextLine {
@@ -68,9 +69,9 @@ bool Text::init()
     return result;
 }
 
-TTF_Font* Text::load_font(const char *fn, int size)
+Font* Text::load_font(const char *fn, int size)
 {
-    return TTF_OpenFont(fn, size);
+    return new Font(TTF_OpenFont(fn, size));
 }
 
 void Text::set_icon(const Sprite *icon_spr, int icon_index)
@@ -108,8 +109,8 @@ void Text::set_color(Color color)
 
 TextLine* Text::new_line(const char *str)
 {
-    TextLine *line = new TextLine(str,
-                                  m_lines.size() * TTF_FontLineSkip(m_font));
+    TTF_Font *f = m_font->get_ttf();
+    TextLine *line = new TextLine(str, m_lines.size() * TTF_FontLineSkip(f));
 
     return line;
 }
@@ -154,7 +155,7 @@ int Text::get_width() const
 
     for (int i = 0; i < m_lines.size(); i++) {
         TextLine *line = m_lines[i];
-        TTF_SizeText(m_font, line->m_text, &w, &h);
+        TTF_SizeText(m_font->get_ttf(), line->m_text, &w, &h);
         if (w > result) {
             result = w;
         }
@@ -165,36 +166,33 @@ int Text::get_width() const
 
 int Text::get_height() const
 {
-    return m_lines.size() * TTF_FontLineSkip(m_font);
+    return m_lines.size() * TTF_FontLineSkip(m_font->get_ttf());
 }
 
-void Text::draw(SDL_Surface *dest, int x, int y,
+void Text::draw(Surface *dest, int x, int y,
                 int clip_x, int clip_y, int clip_w, int clip_h)
 {
-    SDL_Rect rect;
-    SDL_Rect clip;
+    int rect_x;
 
     if (m_icon_spr) {
         int w = m_icon_spr->get_width();
-        rect.x = x + w + w / 2;
+        rect_x = x + w + w / 2;
     }
     else {
-        rect.x = x;
+        rect_x = x;
     }
 
-    clip.x = clip_x;
-    clip.y = clip_y;
-    clip.w = clip_w;
-    clip.h = clip_h;
+    Rect clip(clip_x, clip_y, clip_w, clip_h);
 
     for (int i = 0; i < m_lines.size(); i++) {
         TextLine *line = m_lines[i];
 
-        rect.y = y + line->m_y;
-        SDL_Surface *surf =
-            TTF_RenderText_Solid(m_font, line->m_text, m_color);
-        SDL_BlitSurface(surf, &clip, dest, &rect);
-        SDL_FreeSurface(surf);
+        Rect rect(rect_x, y + line->m_y, 0, 0);
+        Surface *s =
+            new Surface(TTF_RenderText_Solid(m_font->get_ttf(),
+                        line->m_text, m_color));
+        s->draw(&clip, dest, &rect);
+        delete s;
     }
 
     if (m_icon_spr) {

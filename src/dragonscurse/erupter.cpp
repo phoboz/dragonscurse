@@ -113,7 +113,7 @@ void Erupter::move(Map *map)
     }
 }
 
-void Erupter::draw(SDL_Surface *dest, Map *map,
+void Erupter::draw(Surface *dest, Map *map,
                    int clip_x, int clip_y, int clip_w, int clip_h)
 {
     Monster::draw(dest, map, clip_x, clip_y, clip_w, clip_h);

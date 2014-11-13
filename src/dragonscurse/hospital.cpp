@@ -90,7 +90,7 @@ Area* Hospital::move(int key)
     return area;
 }
 
-void Hospital::draw(SDL_Surface *dest, int x, int y,
+void Hospital::draw(Surface *dest, int x, int y,
                 int clip_x, int clip_y, int clip_w, int clip_h)
 {
     Room::draw(dest, x, y, clip_x, clip_y, clip_w, clip_h);
