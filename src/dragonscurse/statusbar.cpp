@@ -30,11 +30,11 @@ Statusbar::~Statusbar()
 void Statusbar::draw(Surface *surface, int screen_width, int screen_height)
 {
     Rect top_rect(0, 0, screen_width, c_height - 2);
-    Color top_color(0x54, 0x54, 0x54, 0xff);
+    Color top_color(Color::Grey);
     surface->fill_rect(&top_rect, &top_color);
 
     Rect bottom_rect(0, c_height - 2, screen_width, 2);
-    Color bottom_color(0x33, 0x33, 0x33, 0xff);
+    Color bottom_color(Color::DarkGrey);
     surface->fill_rect(&bottom_rect, &bottom_color);
 
     int w = m_hearts[0]->get_width();

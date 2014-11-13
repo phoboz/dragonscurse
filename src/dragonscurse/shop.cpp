@@ -37,16 +37,17 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
                                            item->get_attribute("still"));
                         if (i == 1) {
                             static char str[12];
+                            Color color;
                             sprintf(str, "%06d Gold",
                                     item->get_attribute("price"));
-                            m_price_text->replace_line(str);
                             if (status->get_gold() <
                                 item->get_attribute("price")) {
-                                m_price_text->set_color(Text::ColorRed);
+                                color.set_named(Color::Red);
                             }
                             else {
-                                m_price_text->set_color(Text::ColorWhite);
+                                color.set_named(Color::White);
                             }
+                            m_price_text->replace_line(str, color);
                         }
                     }
                     else {
@@ -109,22 +110,22 @@ Area* Shop::move(int key)
     if (data) {
         Item *item = (Item *) data;
         static char str[12];
+        Color color;
         sprintf(str, "%06d Gold", item->get_attribute("price"));
-        m_price_text->replace_line(str);
-
         Status *status = m_db->get_status();
         if (status->get_gold() < item->get_attribute("price")) {
-            m_price_text->set_color(Text::ColorRed);
+            color.set_named(Color::Red);
         }
         else {
-            m_price_text->set_color(Text::ColorWhite);
+            color.set_named(Color::White);
         }
+        m_price_text->replace_line(str, color);
     }
     else if (!rejected) {
         static char str[12];
+        Color color(Color::White);
         sprintf(str, "000000 Gold");
-        m_price_text->replace_line(str);
-        m_price_text->set_color(Text::ColorWhite);
+        m_price_text->replace_line(str, color);
     }
 
     return area;

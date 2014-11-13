@@ -19,14 +19,15 @@ Hospital::Hospital(MediaDB *media, WorldDB *db, const char *src, int sx, int sy)
     m_menu->add_option("Cure", (void *) 1, m_spr, 12);
     Status *status = m_db->get_status();
     static char str[12];
+    Color color;
     sprintf(str, "%06d Gold", status->get_cure_price());
-    m_price_text->replace_line(str);
     if (status->get_gold() < status->get_cure_price()) {
-        m_price_text->set_color(Text::ColorRed);
+        color.set_named(Color::Red);
     }
     else {
-        m_price_text->set_color(Text::ColorWhite);
+        color.set_named(Color::White);
     }
+    m_price_text->replace_line(str, color);
 
     m_menu->add_option("Exit", (void *) 0, 0, 0);
 }
@@ -67,24 +68,28 @@ Area* Hospital::move(int key)
     if (data) {
         Status *status = m_db->get_status();
         static char str[12];
+        Color color;
         sprintf(str, "%06d Gold", status->get_cure_price());
-        m_price_text->replace_line(str);
-
         if (status->get_gold() < status->get_cure_price()) {
-            m_price_text->set_color(Text::ColorRed);
+            color.set_named(Color::Red);
         }
         else {
-            m_price_text->set_color(Text::ColorWhite);
+            color.set_named(Color::White);
         }
+        m_price_text->replace_line(str, color);
     }
     else if (!rejected) {
         Status *status = m_db->get_status();
+        static char str[12];
+        Color color;
+        sprintf(str, "%06d Gold", status->get_cure_price());
         if (status->get_gold() < status->get_cure_price()) {
-            m_price_text->set_color(Text::ColorRed);
+            color.set_named(Color::Red);
         }
         else {
-            m_price_text->set_color(Text::ColorWhite);
+            color.set_named(Color::White);
         }
+        m_price_text->replace_line(str, color);
     }
 
     return area;

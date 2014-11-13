@@ -6,6 +6,8 @@
 class Color
 {
 public:
+    enum Name { Black, DarkGrey, Grey, White, Red };
+
     Color()
         : m_r(0),
           m_g(0),
@@ -19,6 +21,7 @@ public:
           m_a(a) { }
 
     Color(int rgba) { set_argb(rgba); }
+    Color(Name name) { set_named(name); }
 
     void set_r(unsigned char value) { m_r = value; }
     void set_g(unsigned char value) { m_g = value; }
@@ -26,6 +29,7 @@ public:
     void set_a(unsigned char value) { m_a = value; }
 
     void set_argb(int value);
+    void set_named(Name name);
 
     unsigned char get_r() const { return m_r; }
     unsigned char get_g() const { return m_g; }

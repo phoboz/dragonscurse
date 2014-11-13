@@ -22,12 +22,12 @@ void Heart::draw(Surface *surface, int x, int y,
 
     // Draw red part
     Rect red_rect(x, y, q, w);
-    Color red_col(255, 0, 0, 255);
+    Color red_col(Color::Red);
     surface->fill_rect(&red_rect, &red_col);
 
     // Draw black part
     Rect black_rect(x + q, y, w - q, w);
-    Color black_col(0, 0, 0, 255);
+    Color black_col(Color::Black);
     surface->fill_rect(&black_rect, &black_col);
 
     // Overlay hollow hear outline
