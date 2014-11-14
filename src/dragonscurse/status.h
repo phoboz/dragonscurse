@@ -49,6 +49,7 @@ public:
     void add_potions(int num);
     void cure() { m_hp = m_max_hp; }
     bool set_hit(int ap);
+    bool use_potion();
 
     static int get_max_hearts() { return c_max_hearts; }
     int get_hearts() const { return m_hearts; }

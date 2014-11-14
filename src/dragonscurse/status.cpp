@@ -216,6 +216,19 @@ bool Status::set_hit(int ap)
     return result;
 }
 
+bool Status::use_potion()
+{
+    bool result = false;
+
+    if (m_potions > 0) {
+        m_potions--;
+        cure();
+        result = true;
+    }
+
+    return result;
+}
+
 void Status::show() const
 {
 

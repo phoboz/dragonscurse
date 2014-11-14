@@ -191,6 +191,7 @@ void new_game(char *map_name, char *player_name, int sx, int sy)
     status = db->get_status();
     statusbar = new Statusbar(status, media);
     status->add_hearts(1);
+    status->add_potions(1);
     status->aquire_item((Item *) ObjectFactory::create_object(
                                      "ivory_sword.xml",
                                      media, "Item"));

@@ -98,7 +98,9 @@ bool Player::set_hit(Object *object, Status *status)
             m_hit_ground = false;
 
             Monster *monster = (Monster *) object;
-            if (status->set_hit(monster->get_attribute("ap"))) {
+            if (status->set_hit(monster->get_attribute("ap")) &&
+                !status->use_potion()) {
+                set_invisible(true);
                 set_solid(false);
                 set_perish(false);
             }
@@ -250,6 +252,7 @@ void Player::player_move(Map *map)
             Body::move(map);
             if (m_y < -get_image_height()) {
                 set_solid(true);
+                set_invisible(false);
                 set_action(HitPerished);
             }
             break;
