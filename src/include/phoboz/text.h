@@ -14,9 +14,6 @@ public:
 
     ~Text();
 
-    static bool init();
-    static Font* load_font(const char *fn, int size);
-
     void set_icon(const Sprite *icon_spr, int icon_index);
     void set_data(void *data) { m_data = data; }
 
