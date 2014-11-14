@@ -1,5 +1,5 @@
 #include "SDL_mixer.h"
-#include "phoboz/text.h"
+#include "phoboz/font.h"
 #include "phoboz/media_db.h"
 
 struct MediaNode {
@@ -433,7 +433,7 @@ bool MediaDB::load_font(FontNode *font)
     }
     else {
         std::string pathname = m_font_prefix + font->m_filename;
-        font->m_font = Text::load_font(pathname.c_str(), font->m_size);
+        font->m_font = new Font(pathname.c_str(), font->m_size);
         if (font->m_font) {
             font->m_loaded = true;
             result = true;

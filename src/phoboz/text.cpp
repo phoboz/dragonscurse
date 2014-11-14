@@ -1,7 +1,6 @@
 #include <string.h>
 #include <string>
 #include <sstream>
-#include "SDL_ttf.h"
 #include "phoboz/text.h"
 
 struct TextLine {
@@ -23,11 +22,9 @@ struct TextLine {
 
     bool set_text(const char *str, Color *color) {
         bool result = false;
-
-        m_surface = new Surface(TTF_RenderText_Solid(m_font->get_ttf(),
-                                str, *color));
+        m_surface = m_font->get_surface(str, color);
         if (m_surface) {
-            TTF_SizeText(m_font->get_ttf(), str, &m_w, &m_h);
+            m_font->get_dimensions(&m_w, &m_h, str);
             result = true;
         }
 
@@ -64,27 +61,6 @@ Text::~Text()
     }
 }
 
-bool Text::init()
-{
-    bool result = false;
-
-    if (m_initialized) {
-        result = true;
-    }
-    else {
-        if(TTF_Init() != -1) {
-            result = true;
-        }
-    }
-
-    return result;
-}
-
-Font* Text::load_font(const char *fn, int size)
-{
-    return new Font(TTF_OpenFont(fn, size));
-}
-
 void Text::set_icon(const Sprite *icon_spr, int icon_index)
 {
     if (icon_spr) {
@@ -97,8 +73,8 @@ void Text::set_icon(const Sprite *icon_spr, int icon_index)
 
 TextLine* Text::new_line(const char *str)
 {
-    TTF_Font *f = m_font->get_ttf();
-    TextLine *line = new TextLine(str, m_lines.size() * TTF_FontLineSkip(f),
+    TextLine *line = new TextLine(str,
+                                  m_lines.size() * m_font->get_line_skip(),
                                   m_font, m_color);
 
     return line;
@@ -159,7 +135,7 @@ int Text::get_width() const
 
 int Text::get_height() const
 {
-    return m_lines.size() * TTF_FontLineSkip(m_font->get_ttf());
+    return m_lines.size() * m_font->get_line_skip();
 }
 
 void Text::draw(Surface *dest, int x, int y,

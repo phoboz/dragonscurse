@@ -108,7 +108,7 @@ bool init()
     title_bg = media->get_sprite("title.png");
 
     // Initialize font engine
-    if(!Text::init()) {
+    if(!Font::init()) {
         fprintf(stderr, "Fatal Error -- Unable to initialize font engine\n");
         return false;
     }
