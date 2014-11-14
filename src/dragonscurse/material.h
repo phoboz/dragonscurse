@@ -14,6 +14,8 @@ public:
         m_world_key = key;
     }
 
+    bool get_reachable() const { return m_reachable; }
+
     void aquire(WorldDB *db);
     void aquire(World *world);
 
@@ -27,10 +29,10 @@ private:
 
     int m_world_key;
     bool m_from_chest;
-    Action m_action;
     Timer m_rise_timer;
     Timer m_anim_timer;
     bool m_ref_done;
+    bool m_reachable;
 };
 
 #endif

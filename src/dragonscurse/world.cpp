@@ -163,7 +163,8 @@ Area* World::move(Player *player,
                 item->move(m_map);
 
                 // Check if player picked up item
-                if (player->check_collision(item)) {
+                if (item->get_reachable() &&
+                    player->check_collision(item)) {
                     Status *status = m_db->get_status();
                     status->aquire_item(item);
                     item->aquire(this);
@@ -179,7 +180,8 @@ Area* World::move(Player *player,
                 collectable->move(m_map);
 
                 // Check if player picked up the collectable
-                if (player->check_collision(collectable)) {
+                if (collectable->get_reachable() &&
+                    player->check_collision(collectable)) {
                     Status *status = m_db->get_status();
                     status->aquire_collectable(collectable);
                     collectable->aquire(this);

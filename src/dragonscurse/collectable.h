@@ -6,7 +6,12 @@
 
 class Collectable : public Material {
 public:
-    enum CollectableType { TypeGold, TypeHeartContainer };
+    enum CollectableType {
+        TypeGold,
+        TypeHeartContainer,
+        TypePotion,
+        TypeStone
+    };
 
     CollectableType get_collectable_type() const { return m_collectable_type; }
     int get_value() const { return m_value; }

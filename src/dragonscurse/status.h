@@ -19,6 +19,7 @@ public:
         : m_shape(0),
           m_hearts(0),
           m_potions(0),
+          m_stones(0),
           m_arm(0),
           m_shield(0),
           m_armour(0),
@@ -47,8 +48,12 @@ public:
 
     void add_hearts(int num);
     void add_potions(int num);
+    void add_stones(int num) { m_stones += num; }
+
     void cure() { m_hp = m_max_hp; }
+
     bool set_hit(int ap);
+
     bool use_potion();
 
     static int get_max_hearts() { return c_max_hearts; }
@@ -80,6 +85,7 @@ private:
 
     int m_hearts;
     int m_potions;
+    int m_stones;
 
     int m_ap;
     int m_dp;

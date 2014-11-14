@@ -5,8 +5,8 @@
 Material::Material(Type type, const char *fn, MediaDB *media, int x, int y)
     : Body(type, x, y),
       m_from_chest(false),
-      m_action(Rise),
-      m_ref_done(false)
+      m_ref_done(false),
+      m_reachable(false)
 {
     load(fn, media);
 
@@ -63,6 +63,10 @@ void Material::move(Map *map)
     }
     else {
         m_frame = get_attribute("move_still");
+    }
+
+    if (get_fall()) {
+        m_reachable = true;
     }
 }
 

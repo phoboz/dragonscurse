@@ -15,7 +15,7 @@ void Status::update()
     if (m_shape) {
         m_ap = m_shape->get_attribute("ap");
         m_dp = m_shape->get_attribute("dp");
-        m_cp = m_shape->get_attribute("cp");
+        m_cp = m_shape->get_attribute("cp") + m_stones;
     }
     else {
         m_ap = 0;
@@ -123,9 +123,19 @@ void Status::aquire_collectable(Collectable *collectable)
             add_hearts(collectable->get_value());
             break;
 
+        case Collectable::TypePotion:
+            add_potions(collectable->get_value());
+            break;
+
+        case Collectable::TypeStone:
+            add_stones(collectable->get_value());
+            break;
+
         default:
             break;
     }
+
+    update();
 }
 
 bool Status::pay_gold(int ammount)
@@ -278,6 +288,7 @@ bool Status::write(std::ofstream &f)
 
     StoreRestore::write_integer(f, m_hearts);
     StoreRestore::write_integer(f, m_potions);
+    StoreRestore::write_integer(f, m_stones);
     StoreRestore::write_integer(f, m_gold);
 
     StoreRestore::write_integer(f, m_items.size());
@@ -322,6 +333,7 @@ bool Status::read(std::ifstream &f, MediaDB *media)
 
     add_hearts(StoreRestore::read_integer(f));
     add_potions(StoreRestore::read_integer(f));
+    add_stones(StoreRestore::read_integer(f));
     m_gold = StoreRestore::read_integer(f);
 
     int num_items = StoreRestore::read_integer(f);

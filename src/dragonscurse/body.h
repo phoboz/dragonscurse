@@ -5,12 +5,7 @@
 
 class Body : public Object {
 public:
-    Body(Type type, int x = 0, int y = 0)
-        : Object(type, x, y),
-          m_ax(0.0f), m_ay(0.0f), m_vx(0.0f), m_vy(0.0f),
-          m_solid(true), m_lock_dir(false),
-          m_vert_dir(VerticalNone) { }
-    Body(Type type, int x, int y, Direction dir)
+    Body(Type type, int x = 0, int y = 0, Direction dir = None)
         : Object(type, x, y, dir),
           m_ax(0.0f), m_ay(0.0f), m_vx(0.0f), m_vy(0.0f),
           m_solid(true), m_lock_dir(false),

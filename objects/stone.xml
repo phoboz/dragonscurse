@@ -1,17 +1,17 @@
 <?xml version="1.0" ?>
-<heart_container max_value="1">
-     <collectable type="heart_container">
+<stone max_value="1">
+     <collectable type="stone">
         <material rise_speed="22"
                   move_speed="0"
                   chest_speed="4"
                   weight="20"
                   treshold="6"
-                  move_start="13"
-                  move_end="13"
-                  move_still="13">
+                  move_start="5"
+                  move_end="5"
+                  move_still="5">
             <object image="icons.png"
                     left="1" right="31" top="1" bottom="31" />
         </material>
     </collectable>
-</heart_container>
+</stone>
 

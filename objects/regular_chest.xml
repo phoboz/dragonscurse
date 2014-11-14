@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<chest treshold="50"
+<chest treshold="20"
        closed="0"
        open="1">
     <object image="regular_chest.png"
