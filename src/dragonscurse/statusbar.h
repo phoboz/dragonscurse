@@ -20,6 +20,8 @@ private:
     Status *m_status;
     MediaDB *m_media;
     Heart **m_hearts;
+    Sprite *m_potion_sprite;
+    Text *m_potions_text;
     Text *m_gold_label;
     Text *m_gold_text;
 };

@@ -120,7 +120,7 @@ void Status::aquire_collectable(Collectable *collectable)
             break;
 
         case Collectable::TypeHeartContainer:
-            add_hearts(1/*collectable->get_value()*/);
+            add_hearts(collectable->get_value());
             break;
 
         default:
@@ -183,13 +183,21 @@ void Status::aquire_shape(Player *player)
     update();
 }
 
-void Status::add_hearts(int num_hearts)
+void Status::add_hearts(int num)
 {
-    int i = num_hearts + 1;
+    int i = num + 1;
     while (--i && m_hearts < c_max_hearts) {
         m_hearts++;
         m_max_hp += Heart::get_hp_per_heart();
         m_hp += Heart::get_hp_per_heart();
+    }
+}
+
+void Status::add_potions(int num)
+{
+    int i = num + 1;
+    while (--i && m_potions < c_max_potions) {
+        m_potions++;
     }
 }
 
@@ -256,6 +264,7 @@ bool Status::write(std::ofstream &f)
     bool result = true;
 
     StoreRestore::write_integer(f, m_hearts);
+    StoreRestore::write_integer(f, m_potions);
     StoreRestore::write_integer(f, m_gold);
 
     StoreRestore::write_integer(f, m_items.size());
@@ -299,7 +308,7 @@ bool Status::read(std::ifstream &f, MediaDB *media)
     bool result = true;
 
     add_hearts(StoreRestore::read_integer(f));
-
+    add_potions(StoreRestore::read_integer(f));
     m_gold = StoreRestore::read_integer(f);
 
     int num_items = StoreRestore::read_integer(f);

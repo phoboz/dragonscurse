@@ -18,6 +18,7 @@ public:
     Status()
         : m_shape(0),
           m_hearts(0),
+          m_potions(0),
           m_arm(0),
           m_shield(0),
           m_armour(0),
@@ -39,11 +40,13 @@ public:
     bool pay_gold(int ammount);
 
     Item* get_equiped_item(Item::ItemType type) const;
+    int get_potions() const { return m_potions; }
     int get_cure_price() const { return 10 * m_hearts; }
 
     void aquire_shape(Player *player);
 
-    void add_hearts(int num_hearts);
+    void add_hearts(int num);
+    void add_potions(int num);
     void cure() { m_hp = m_max_hp; }
     bool set_hit(int ap);
 
@@ -62,6 +65,7 @@ public:
 
 private:
     static const int c_max_hearts = 8;
+    static const int c_max_potions = 3;
 
     void update();
 
@@ -74,6 +78,7 @@ private:
     Player *m_shape;
 
     int m_hearts;
+    int m_potions;
 
     int m_ap;
     int m_dp;
