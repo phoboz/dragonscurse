@@ -1,27 +1,69 @@
 #include "SDL_image.h"
 #include "phoboz/surface.h"
 
+bool Surface::m_initialized = false;
+
+bool Surface::init()
+{
+    bool result = false;
+
+    if (m_initialized) {
+        result = true;
+    }
+    else {
+        if (SDL_Init(SDL_INIT_EVERYTHING) >= 0) {
+            atexit(SDL_Quit);
+            m_initialized = true;
+            result = true;
+        }
+    }
+
+    return result;
+}
+
 Surface::~Surface()
 {
-    if (m_initialized) {
+    if (m_loaded) {
         SDL_FreeSurface(m_s);
+        m_loaded = false;
     }
 }
 
 bool Surface::load(const char *fn)
 {
-    m_initialized = false;
+    m_loaded = false;
 
-    SDL_Surface* tmp = IMG_Load(fn);
-    if (tmp) {
-        m_s = SDL_DisplayFormatAlpha(tmp);
-        SDL_FreeSurface(tmp);
-        if (m_s) {
-            m_initialized = true;
+    if (init()) {
+        SDL_Surface* tmp = IMG_Load(fn);
+        if (tmp) {
+            m_s = SDL_DisplayFormatAlpha(tmp);
+            SDL_FreeSurface(tmp);
+            if (m_s) {
+                m_loaded = true;
+            }
         }
     }
 
-    return m_initialized;
+    return m_loaded;
+}
+
+bool Surface::set_screen(int w, int h, bool fullscreen)
+{
+    m_loaded = false;
+
+    if (init()) {
+        int flags = SDL_HWSURFACE | SDL_DOUBLEBUF;
+        if (fullscreen) {
+            flags |= SDL_FULLSCREEN;
+        }
+
+        m_s = SDL_SetVideoMode(w, h, 32, flags);
+        if (m_s) {
+            m_loaded = true;
+        }
+    }
+
+    return m_loaded;
 }
 
 void Surface::get_pixel(Color *c, int x, int y)

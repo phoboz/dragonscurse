@@ -1,5 +1,5 @@
-#include "SDL_mixer.h"
-#include "phoboz/font.h"
+#include "phoboz/sample.h"
+#include "phoboz/music.h"
 #include "phoboz/media_db.h"
 
 struct MediaNode {
@@ -45,13 +45,13 @@ struct FontNode : public MediaNode {
 struct SoundNode : public MediaNode {
     SoundNode() : MediaNode(TypeSound) { }
 
-    Mix_Chunk *m_sample;
+    Sample *m_sample;
 };
 
 struct MusicNode : public MediaNode {
     MusicNode() : MediaNode(TypeMusic) { }
 
-    Mix_Music *m_music;
+    Music *m_music;
 };
 
 int MediaNode::m_keygen = 1;
@@ -468,8 +468,8 @@ bool MediaDB::load_sound(SoundNode *sound)
     }
     else {
         std::string pathname = m_sound_prefix + sound->m_filename;
-        sound->m_sample = Mix_LoadWAV(pathname.c_str());
-        if (sound->m_sample) {
+        sound->m_sample = new Sample(pathname.c_str());
+        if (sound->m_sample && sound->m_sample->get_loaded()) {
             sound->m_loaded = true;
             result = true;
         }
@@ -486,7 +486,7 @@ bool MediaDB::play_sound(const char *filename)
     if (media->m_type == MediaNode::TypeSound) {
         SoundNode *sound = (SoundNode *) media;
         if (load_sound(sound)) {
-            if(Mix_PlayChannel(-1, sound->m_sample, 0) != -1) {
+            if(sound->m_sample->play()) {
                 result = true;
             }
         }
@@ -504,8 +504,8 @@ bool MediaDB::load_music(MusicNode *music)
     }
     else {
         std::string pathname = m_music_prefix + music->m_filename;
-        music->m_music = Mix_LoadMUS(pathname.c_str());
-        if (music->m_music) {
+        music->m_music = new Music(pathname.c_str());
+        if (music->m_music && music->m_music->get_loaded()) {
             music->m_loaded = true;
             result = true;
         }
@@ -521,7 +521,7 @@ void MediaDB::unload_music(const char *filename)
         MusicNode *music = (MusicNode *) media;
         if (music->m_loaded) {
             MusicNode *music = (MusicNode *) media;
-            Mix_FreeMusic(music->m_music);
+            delete music->m_music;
             music->m_loaded = false;
         }
     }
@@ -544,7 +544,7 @@ bool MediaDB::play_music(const char *filename)
         if (media->m_type == MediaNode::TypeMusic) {
             MusicNode *music = (MusicNode *) media;
             if (load_music(music)) {
-                if(Mix_PlayMusic(music->m_music, -1) != -1) {
+                if(music->m_music->play()) {
                     m_mus_filename = music->m_filename;
                     result = true;
                 }

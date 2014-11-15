@@ -8,15 +8,18 @@ class Surface {
 public:
     Surface(SDL_Surface *s)
         : m_s(s),
-          m_initialized(true) { }
+          m_loaded(true) { }
 
     Surface(const char *fn) { load(fn); }
+    Surface(int w, int h, bool fullscreen) { set_screen(w, h, fullscreen); }
 
     ~Surface();
 
+    static bool init();
     bool load(const char *fn);
+    bool set_screen(int w, int h, bool fullscreen);
 
-    bool get_initialized() const { return m_initialized; }
+    bool get_loaded() const { return m_loaded; }
     int get_width() const { return m_s->w; }
     int get_height() const { return m_s->h; }
     SDL_PixelFormat* get_format() const { return m_s->format; }
@@ -27,7 +30,8 @@ public:
     void flip() { SDL_Flip(m_s); }
 
 private:
-    bool m_initialized;
+    static bool m_initialized;
+    bool m_loaded;
     SDL_Surface *m_s;
 };
 

@@ -11,6 +11,7 @@ bool Font::init()
     }
     else {
         if(TTF_Init() != -1) {
+            m_initialized = true;
             result = true;
         }
     }

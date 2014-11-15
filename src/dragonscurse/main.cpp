@@ -6,8 +6,9 @@
 #include "SDL_mixer.h"
 #include "SDL_ttf.h"
 
-#include "phoboz/sprite.h"
 #include "phoboz/ctrl.h"
+#include "phoboz/sprite.h"
+#include "phoboz/sound.h"
 #include "phoboz/map.h"
 #include "phoboz/fps_timer.h"
 #include "phoboz/media_db.h"
@@ -61,59 +62,6 @@ void set_state(State new_state)
     }
 
     state = new_state;
-}
-
-bool init()
-{
-    // Initlaize SDL with video and sound if possible
-    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        fprintf(stderr, "Fatal Error -- Unable to initialize SDL: %s\n",
-                SDL_GetError());
-        return false;
-    }
-
-    // Install exit function
-    atexit(SDL_Quit);
-
-    // Initialize screen, setup gfx mode
-    SDL_Surface *s = SDL_SetVideoMode(screen_width, screen_height, 32,
-                                      SDL_HWSURFACE|SDL_DOUBLEBUF);
-    if (s == NULL) {
-        fprintf(stderr, "Fatal Error -- Unable to set video mode: %s\n",
-                SDL_GetError());
-        return false;
-    }
-    screen = new Surface(s);
-
-    // Initialize audio
-    int audio_rate = 44100;
-    Uint16 audio_format = AUDIO_S16; /* 16-bit stereo */
-    int audio_channels = 1;
-    int audio_buffers = 4096;
-
-    if(Mix_OpenAudio(audio_rate, audio_format, audio_channels,
-                     audio_buffers) < 0) {
-        fprintf(stderr, "Fatal Error -- Unable to open audio!\n");
-        return false;
-    }
-
-    if(Mix_Init(MIX_INIT_MOD) != MIX_INIT_MOD) {
-        fprintf(stderr, "Fatal Error -- Unable to initialize mixer\n");
-        return false;
-    }
-
-    Mix_Volume(-1, MIX_MAX_VOLUME);
-
-    media = new MediaDB("media.xml");
-    title_bg = media->get_sprite("title.png");
-
-    // Initialize font engine
-    if(!Font::init()) {
-        fprintf(stderr, "Fatal Error -- Unable to initialize font engine\n");
-        return false;
-    }
-
-    return true;
 }
 
 bool load_area(const char *ar_name,
@@ -435,9 +383,14 @@ int main(int argc, char *argv[])
         start_y = atoi(argv[4]);
     }
 
-    if (!init()) {
+    screen = new Surface(screen_width, screen_height, false);
+    if (!screen || !screen->get_loaded()) {
+        fprintf(stderr, "Fatal Error -- Unable to set video mode!\n");
         return 1;
     }
+
+    media = new MediaDB("media.xml");
+    title_bg = media->get_sprite("title.png");
 
     // TODO: workaround for linker
     delete new Tmx::Map();

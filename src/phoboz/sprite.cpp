@@ -5,15 +5,15 @@
 Sprite::~Sprite()
 {
     if (m_loaded) {
-        m_loaded = false;
         delete m_img;
+        m_loaded = false;
     }
 }
 
 bool Sprite::load(const char *fn, int w, int h, int margin, int spacing)
 {
     m_img = new Surface(fn);
-    if (m_img && m_img->get_initialized()) {
+    if (m_img && m_img->get_loaded()) {
         m_w = w;
         m_h = h;
         m_margin = margin;
