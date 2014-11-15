@@ -5,6 +5,10 @@
                 location="castle_02.tmx"
                 type="item"
                 name="castle_key.xml" />
+        <object id="2"
+                location="castle_02.tmx"
+                type="collectable"
+                name="heart_big.xml" />
         <object id="1"
                 location="castle_boss.tmx"
                 type="curse"

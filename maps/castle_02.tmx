@@ -39,6 +39,7 @@
   <object name="cyclop_green.xml" type="Walker" x="2385" y="217" width="50" height="66">
    <properties>
     <property name="direction" value="left"/>
+    <property name="object_id" value="2"/>
    </properties>
   </object>
   <object name="cyclop_red.xml" type="Walker" x="1874" y="217" width="50" height="66">
