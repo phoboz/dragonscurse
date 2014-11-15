@@ -49,7 +49,7 @@ struct ChestInfo {
     int once;
     int user;
     int num_objects;
-    ObjectInfo objects[10];
+    ObjectInfo objects[16];
 };
 
 class WorldDB {
