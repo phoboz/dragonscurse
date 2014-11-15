@@ -50,7 +50,7 @@ public:
     void add_potions(int num);
     void add_stones(int num) { m_stones += num; }
 
-    void cure() { m_hp = m_max_hp; }
+    void cure(int value = 0);
 
     bool set_hit(int ap);
 

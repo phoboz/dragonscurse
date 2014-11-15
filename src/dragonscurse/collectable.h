@@ -9,6 +9,7 @@ public:
     enum CollectableType {
         TypeGold,
         TypeHeartContainer,
+        TypeHeartRefill,
         TypePotion,
         TypeStone
     };

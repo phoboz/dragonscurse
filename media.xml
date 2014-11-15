@@ -55,8 +55,12 @@
                 width="50" height="64" margin="1" spacing="1" />
         <sprite filename="goblin_red.png"
                 width="50" height="64" margin="1" spacing="1" />
+        <sprite filename="heart_big.png"
+                width="32" height="32" margin="0" spacing="0" />
         <sprite filename="heart_outline.png"
                 width="32" height="32" margin="0" spacing="0" />
+        <sprite filename="heart_small.png"
+                width="16" height="16" margin="0" spacing="0" />
         <sprite filename="hospital.png"
                 width="640" height="444" margin="0" spacing="0" />
         <sprite filename="hovering_smog_red.png"

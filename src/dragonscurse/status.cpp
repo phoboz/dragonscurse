@@ -123,6 +123,10 @@ void Status::aquire_collectable(Collectable *collectable)
             add_hearts(collectable->get_value());
             break;
 
+        case Collectable::TypeHeartRefill:
+            cure(collectable->get_value());
+            break;
+
         case Collectable::TypePotion:
             add_potions(collectable->get_value());
             break;
@@ -208,6 +212,19 @@ void Status::add_potions(int num)
     int i = num + 1;
     while (--i && m_potions < c_max_potions) {
         m_potions++;
+    }
+}
+
+void Status::cure(int value)
+{
+    if (value <= 0) {
+        m_hp = m_max_hp;
+    }
+    else {
+        m_hp += value;
+        if (m_hp > m_max_hp) {
+            m_hp = m_max_hp;
+        }
     }
 }
 

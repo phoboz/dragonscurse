@@ -1,3 +1,4 @@
+#include <iostream>
 #include <map>
 #include <string>
 #include <stdlib.h>
@@ -6,6 +7,7 @@
 #include "player.h"
 #include "coin.h"
 #include "heart_container.h"
+#include "heart_refill.h"
 #include "potion.h"
 #include "stone.h"
 #include "knight.h"
@@ -120,6 +122,9 @@ Object* ObjectFactory::create_object(const char *name,
         }
         else if (strcmp(priv_object_type, "heart_container") == 0) {
             object = new HeartContainer(name, media, x, y);
+        }
+        else if (strcmp(priv_object_type, "heart_refill") == 0) {
+            object = new HeartRefill(name, media, x, y);
         }
         else if (strcmp(priv_object_type, "potion") == 0) {
             object = new Potion(name, media, x, y);
