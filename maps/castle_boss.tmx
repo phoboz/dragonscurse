@@ -16,17 +16,9 @@
   </properties>
   <image source="castle.png" width="512" height="512"/>
  </tileset>
- <tileset firstgid="226" name="castle" tilewidth="32" tileheight="32" spacing="1" margin="1">
-  <properties>
-   <property name="catapult" value="4"/>
-   <property name="solid_end" value="14"/>
-   <property name="solid_start" value="1"/>
-  </properties>
-  <image source="../../../tmp/dragonscurse/castle.png" width="512" height="512"/>
- </tileset>
  <layer name="Room" width="40" height="14">
   <data encoding="base64" compression="zlib">
-   eJx7ysDAYMg4OPFTBgg2BrKNGAcfDXOfAZCtzzj4aJj79IBsXcbBR4PcxgLE/kDsNwhpFij2BWKfQUjD3DfQ4TQafiM3/EbLP8rKv8Eefs8HOQYAlACoTQ==
+   eJxjYWBgCBikmAWKg4A4cBDSMPf5A7HfIKRh7vMFYp9BSI+G32j4jYbfaPiNht/gCC9s4cc2yDEA+ySYAw==
   </data>
  </layer>
  <objectgroup name="Monsters" width="40" height="14">
@@ -39,7 +31,7 @@
  </objectgroup>
  <layer name="Chains" width="40" height="14">
   <data encoding="base64" compression="zlib">
-   eJzdklsKgDAMBM1V9P53FMHSMuzWtNYfFwoxzWPSuG1VR9RDtT5lM2dFPDH2qIdqfcpmzvUdg/G03/DFna/6hYlx8V/wkUPx9Vhn+Eq+41P7Yl/H1945vlIrEDvCF8hTO1QzKD5Vp8dX8sjHHa3iYw/K+TL7c/16s6/k4zs7PvqyfO5+hK9Vhk+96xd87r98qpXlcz1UbNb/VC/Ll6k1ozfz/lknwjsLqQ==
+   eJztjkEKACAIBP1a/f9RHRNRE1zEwAFBaheH6LLZSPZjlx1UnrPYaH/eLjuo/Pjh/Lhj1M96y+Q9In5WL5OP0t3P6qLvVftV0t1Po7vf8CcHCnsU4A==
   </data>
  </layer>
 </map>
