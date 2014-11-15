@@ -1,8 +1,11 @@
-Dragon's Curse Action/Adventure Platform Game:
+Dragon's Curse Action/Adventure Platform Game:   
 ![Screenshot01](/sprites/screenshot01.png)
-
+   
+Video of Game running natively on Linux for Tegra:   
+http://youtu.be/cssXbu-QunE   
+   
 1. Download:  
-git clone https://github.com/phoboz/dragonscurse.git  
+git clone https://github.com/phoboz/dragonscurse   
   
 2. Build on Linux:  
 cd dragonscurse  
