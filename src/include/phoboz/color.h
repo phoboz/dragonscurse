@@ -6,7 +6,7 @@
 class Color
 {
 public:
-    enum Name { Black, DarkGrey, Grey, White, Red };
+    enum Name { Black, DarkGrey, Grey, White, BrightGreen, Red };
 
     Color()
         : m_r(0),

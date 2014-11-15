@@ -41,6 +41,10 @@ void StatusScreen::draw(Surface *dest, int x, int y,
     int tx = clip_w - c_pts_dx;
     int ty = y;
 
+    Color color(Color::BrightGreen);
+    Rect rect(clip_x, clip_y, clip_w, clip_h);
+    dest->fill_rect(&rect, &color);
+
     m_ap_label->draw(dest, tx, y, clip_x, clip_y, clip_w, clip_h);
     m_ap_text->draw(dest, tx + m_ap_label->get_width(), y,
                     clip_x, clip_y, clip_w, clip_h);

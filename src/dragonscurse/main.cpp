@@ -422,13 +422,6 @@ int main(int argc, char *argv[])
                 }
             }
 
-            Rect dest_rect(0,
-                           Statusbar::get_height(),
-                           screen_width,
-                           screen_height);
-            Color dest_color(0, 0, 0, 0);
-            screen->fill_rect(&dest_rect, &dest_color);
-
             move();
             redraw();
             flip();
