@@ -10,6 +10,7 @@ TitleMenu::TitleMenu(MediaDB *media)
     if (m_menu) {
         m_menu->add_option("New Game");
         m_menu->add_option("Load Game");
+        m_menu->add_option("Fullscreen/Window mode");
         m_menu->add_option("Quit");
         if (s_last_option) {
             m_menu->set_option(s_last_option);

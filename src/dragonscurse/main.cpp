@@ -32,6 +32,7 @@
 enum State { StateMap, StateRoom, StateTitleMenu, StateMainMenu, StateSubMenu };
 
 static const int c_offset_y = 24;
+static bool fullscreen = false;
 static Surface *screen;
 static int screen_width = 640;
 static int screen_height = 480;
@@ -223,6 +224,8 @@ void move_keydown(int key)
         }
     }
     else if (state == StateTitleMenu) {
+        Surface *old_screen = 0;
+
         switch(title_menu->move(key)) {
             case TitleMenu::OptionNew:
                 new_game(map_name, player_name, start_x, start_y);
@@ -234,6 +237,13 @@ void move_keydown(int key)
                 sub_menu = new SaveList(media);
                 delete title_menu;
                 set_state(StateSubMenu);
+                break;
+
+            case TitleMenu::OptionFullscreen:
+                fullscreen = !fullscreen;
+                old_screen = screen;
+                screen = new Surface(screen_width, screen_height, fullscreen);
+                delete old_screen;
                 break;
 
             case TitleMenu::OptionQuit:
@@ -326,7 +336,7 @@ void redraw()
     }
     else if (state == StateTitleMenu) {
         title_bg->draw(screen, 0, 0, 0, 0, 0, screen_width, screen_height);
-        title_menu->draw(screen, screen_width / 2 - title_menu->get_width(),
+        title_menu->draw(screen, screen_width / 2 - title_menu->get_width() / 2,
                          2 * screen_height / 3,
                          0, 0, screen_width, screen_height);
     }
@@ -383,7 +393,7 @@ int main(int argc, char *argv[])
         start_y = atoi(argv[4]);
     }
 
-    screen = new Surface(screen_width, screen_height, false);
+    screen = new Surface(screen_width, screen_height, fullscreen);
     if (!screen || !screen->get_loaded()) {
         fprintf(stderr, "Fatal Error -- Unable to set video mode!\n");
         return 1;

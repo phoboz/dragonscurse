@@ -9,6 +9,7 @@ public:
         OptionNone = -1,
         OptionNew = 0,
         OptionLoad,
+        OptionFullscreen,
         OptionQuit
     };
 
