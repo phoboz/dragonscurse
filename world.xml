@@ -16,7 +16,7 @@
                 player="lizardman.xml"
                 destination="castle_02.tmx"
                 start_x="576"
-                start_y="223" />
+                start_y="224" />
         <object id="1"
                 location="Shop_mithras"
                 type="item"
@@ -44,7 +44,7 @@
                 player="lizardman.xml"
                 destination="castle_02.tmx"
                 start_x="576"
-                start_y="223" />
+                start_y="224" />
     </objects>
     <locks>
         <lock id="1"

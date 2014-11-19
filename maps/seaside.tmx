@@ -26,7 +26,7 @@
   <object name="village.tmx" type="Area" x="128" y="192" width="32" height="128">
    <properties>
     <property name="start_x" value="5504"/>
-    <property name="start_y" value="1247"/>
+    <property name="start_y" value="1248"/>
     <property name="type" value="warp"/>
    </properties>
   </object>
@@ -47,28 +47,28 @@
   <object name="village.tmx" type="Area" x="256" y="288" width="64" height="64">
    <properties>
     <property name="start_x" value="2400"/>
-    <property name="start_y" value="824"/>
+    <property name="start_y" value="832"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
   <object name="seaside.tmx" type="Area" x="5568" y="704" width="64" height="64">
    <properties>
     <property name="start_x" value="5344"/>
-    <property name="start_y" value="223"/>
+    <property name="start_y" value="224"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
   <object name="seaside.tmx" type="Area" x="5344" y="224" width="64" height="64">
    <properties>
     <property name="start_x" value="5568"/>
-    <property name="start_y" value="703"/>
+    <property name="start_y" value="704"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
   <object name="seaside_room01.tmx" type="Area" x="8608" y="352" width="64" height="64">
    <properties>
     <property name="start_x" value="448"/>
-    <property name="start_y" value="351"/>
+    <property name="start_y" value="352"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>

@@ -74,7 +74,7 @@ public:
 
     virtual void set_dir(Direction dir) { }
     void set_x(int value) { m_x = value; }
-    void set_y(int value) { m_y = value; }
+    void set_y(int value) { m_y = value - get_attribute("handle_y"); }
     void set_reference(int x, int y) { m_xref = x; m_yref = y; }
 
     void set_reused(bool reused) { m_reused = reused; }

@@ -4,7 +4,7 @@
   <property name="bg_color" value="0"/>
   <property name="music" value="castle_01.ogg"/>
   <property name="start_x" value="32"/>
-  <property name="start_y" value="255"/>
+  <property name="start_y" value="256"/>
  </properties>
  <tileset firstgid="1" name="castle" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>
@@ -23,7 +23,7 @@
   <object name="castle_01.tmx" type="Area" x="2016" y="288" width="32" height="128">
    <properties>
     <property name="start_x" value="32"/>
-    <property name="start_y" value="255"/>
+    <property name="start_y" value="256"/>
     <property name="type" value="warp"/>
    </properties>
   </object>
@@ -37,14 +37,14 @@
   <object name="castle_01.tmx" type="Area" x="4640" y="128" width="32" height="128">
    <properties>
     <property name="start_x" value="32"/>
-    <property name="start_y" value="255"/>
+    <property name="start_y" value="256"/>
     <property name="type" value="warp"/>
    </properties>
   </object>
   <object name="castle_boss.tmx" type="Area" x="576" y="832" width="64" height="64">
    <properties>
     <property name="start_x" value="352"/>
-    <property name="start_y" value="351"/>
+    <property name="start_y" value="352"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
@@ -52,7 +52,7 @@
    <properties>
     <property name="lock_id" value="1"/>
     <property name="start_x" value="16"/>
-    <property name="start_y" value="636"/>
+    <property name="start_y" value="640"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>

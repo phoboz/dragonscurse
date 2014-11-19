@@ -151,6 +151,7 @@ bool Object::load_nodes(TiXmlNode *node)
 
 bool Object::load(const char *fn, MediaDB *media)
 {
+    bool was_loaded = m_loaded;
     m_media = media;
 
     std::string pathname = m_prefix + std::string(fn);
@@ -161,7 +162,9 @@ bool Object::load(const char *fn, MediaDB *media)
         int lastindex = m_fn.find_last_of(".");
         m_name = m_fn.substr(0, lastindex);
         set_dir(m_dir);
-
+        if (!was_loaded) {
+            m_y -= get_attribute("handle_y");
+        }
     }
 
     return m_loaded;

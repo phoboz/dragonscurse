@@ -5,7 +5,7 @@
   <property name="music" value="dungeon.ogg"/>
   <property name="offset_y" value="-64"/>
   <property name="start_x" value="10688"/>
-  <property name="start_y" value="223"/>
+  <property name="start_y" value="224"/>
  </properties>
  <tileset firstgid="1" name="desert" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>

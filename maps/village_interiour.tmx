@@ -25,14 +25,14 @@
   <object name="village.tmx" type="Area" x="1024" y="928" width="64" height="64">
    <properties>
     <property name="start_x" value="2592"/>
-    <property name="start_y" value="991"/>
+    <property name="start_y" value="992"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
   <object name="village.tmx" type="Area" x="2144" y="1184" width="32" height="128">
    <properties>
     <property name="start_x" value="3328"/>
-    <property name="start_y" value="1311"/>
+    <property name="start_y" value="1312"/>
     <property name="type" value="warp"/>
    </properties>
   </object>
@@ -46,21 +46,21 @@
   <object name="village.tmx" type="Area" x="128" y="768" width="64" height="64">
    <properties>
     <property name="start_x" value="2080"/>
-    <property name="start_y" value="831"/>
+    <property name="start_y" value="832"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
   <object name="village.tmx" type="Area" x="128" y="384" width="64" height="64">
    <properties>
     <property name="start_x" value="2080"/>
-    <property name="start_y" value="447"/>
+    <property name="start_y" value="448"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
   <object name="village.tmx" type="Area" x="96" y="1184" width="64" height="64">
    <properties>
     <property name="start_x" value="2080"/>
-    <property name="start_y" value="991"/>
+    <property name="start_y" value="992"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>

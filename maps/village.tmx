@@ -5,7 +5,7 @@
   <property name="music" value="village.ogg"/>
   <property name="offset_y" value="-64"/>
   <property name="start_x" value="2400"/>
-  <property name="start_y" value="823"/>
+  <property name="start_y" value="832"/>
  </properties>
  <tileset firstgid="1" name="village" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>
@@ -26,21 +26,21 @@
   <object name="seaside.tmx" type="Area" x="5568" y="1184" width="32" height="128">
    <properties>
     <property name="start_x" value="160"/>
-    <property name="start_y" value="287"/>
+    <property name="start_y" value="288"/>
     <property name="type" value="warp"/>
    </properties>
   </object>
   <object name="village_interiour.tmx" type="Area" x="2624" y="992" width="64" height="64">
    <properties>
     <property name="start_x" value="1024"/>
-    <property name="start_y" value="927"/>
+    <property name="start_y" value="928"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
   <object name="village_interiour.tmx" type="Area" x="3328" y="1248" width="32" height="128">
    <properties>
     <property name="start_x" value="2112"/>
-    <property name="start_y" value="1247"/>
+    <property name="start_y" value="1248"/>
     <property name="type" value="warp"/>
    </properties>
   </object>
@@ -48,7 +48,7 @@
    <properties>
     <property name="music" value="treasure.ogg"/>
     <property name="start_x" value="128"/>
-    <property name="start_y" value="927"/>
+    <property name="start_y" value="928"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
@@ -56,14 +56,14 @@
    <properties>
     <property name="lock_id" value="1"/>
     <property name="start_x" value="128"/>
-    <property name="start_y" value="767"/>
+    <property name="start_y" value="768"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
   <object name="village_interiour.tmx" type="Area" x="2080" y="448" width="64" height="64">
    <properties>
     <property name="start_x" value="128"/>
-    <property name="start_y" value="383"/>
+    <property name="start_y" value="384"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
@@ -80,7 +80,7 @@
   <object name="desert.tmx" type="Area" x="2560" y="448" width="64" height="64">
    <properties>
     <property name="start_x" value="13184"/>
-    <property name="start_y" value="863"/>
+    <property name="start_y" value="928"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>

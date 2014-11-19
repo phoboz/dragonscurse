@@ -31,7 +31,6 @@
 
 enum State { StateMap, StateRoom, StateTitleMenu, StateMainMenu, StateSubMenu };
 
-static const int c_offset_y = 24;
 static bool fullscreen = false;
 static Surface *screen;
 static int screen_width = 640;
@@ -106,7 +105,7 @@ bool load_area(const char *ar_name,
         sx = map->get_numeric_property("start_x");
     }
     if (sy == -1) {
-        sy = map->get_numeric_property("start_y") - c_offset_y;
+        sy = map->get_numeric_property("start_y");
     }
 
     if (new_game) {
@@ -176,7 +175,7 @@ void load_game(const char *fn)
     world = new World(map, media, db, 0);
 
     int sx = map->get_numeric_property("start_x");
-    int sy = map->get_numeric_property("start_y") - c_offset_y;
+    int sy = map->get_numeric_property("start_y");
 
     player = status->get_shape();
     player->set_x(sx);
@@ -201,7 +200,7 @@ void move()
         if (area) {
             load_area(area->get_name(),
                       area->get_type() == Area::TypeCurse, area->get_data(),
-                      area->get_sx(), area->get_sy() - c_offset_y,
+                      area->get_sx(), area->get_sy(),
                       area->get_music());
         }
     }

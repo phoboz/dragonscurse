@@ -25,14 +25,14 @@
   <object name="seaside.tmx" type="Area" x="448" y="352" width="64" height="64">
    <properties>
     <property name="start_x" value="8608"/>
-    <property name="start_y" value="351"/>
+    <property name="start_y" value="352"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
   <object name="seaside_room02.tmx" type="Area" x="224" y="352" width="64" height="64">
    <properties>
     <property name="start_x" value="192"/>
-    <property name="start_y" value="351"/>
+    <property name="start_y" value="352"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>

@@ -35,7 +35,7 @@
   <object name="desert.tmx" type="Area" x="192" y="352" width="64" height="64">
    <properties>
     <property name="start_x" value="192"/>
-    <property name="start_y" value="1087"/>
+    <property name="start_y" value="1088"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>

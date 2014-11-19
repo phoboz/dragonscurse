@@ -4,7 +4,7 @@
   <property name="bg_color" value="13369344"/>
   <property name="music" value="castle_02.ogg"/>
   <property name="start_x" value="576"/>
-  <property name="start_y" value="223"/>
+  <property name="start_y" value="224"/>
  </properties>
  <tileset firstgid="1" name="castle" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>
@@ -24,7 +24,7 @@
    <properties>
     <property name="lock_id" value="1"/>
     <property name="start_x" value="32"/>
-    <property name="start_y" value="636"/>
+    <property name="start_y" value="640"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
