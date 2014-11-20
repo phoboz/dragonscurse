@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="15" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="lock_x" value="320"/>
+  <property name="lock_y" value="0"/>
+  <property name="music" value="dragon_boss.ogg"/>
+  <property name="start_x" value="352"/>
+  <property name="start_y" value="352"/>
+ </properties>
+ <tileset firstgid="1" name="dragon_room" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <properties>
+   <property name="solid_end" value="14"/>
+   <property name="solid_start" value="1"/>
+  </properties>
+  <image source="dragon_room.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Room" width="40" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFlAAmIBYYpJgJiiUHKSbVfeJALEGhnaSYAXMfseGtBsTqSHxBIBbCox6bPLoZxMQvue5TAGJFPOqxyQ+k+0SAWBSIxQap+5SBWAWIVQfYfcI47DcCYmMgNsEiL8xAP/cN1fQ3Ut03mPFgBwCydyKh
+  </data>
+ </layer>
+</map>

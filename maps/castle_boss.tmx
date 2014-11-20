@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="40" height="14" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="40" height="15" tilewidth="32" tileheight="32">
  <properties>
   <property name="bg_color" value="0"/>
   <property name="lock_x" value="320"/>
   <property name="lock_y" value="0"/>
   <property name="music" value="dragon_boss.ogg"/>
   <property name="start_x" value="352"/>
-  <property name="start_y" value="351"/>
+  <property name="start_y" value="352"/>
  </properties>
  <tileset firstgid="1" name="castle" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>
@@ -16,12 +16,12 @@
   </properties>
   <image source="castle.png" width="512" height="512"/>
  </tileset>
- <layer name="Room" width="40" height="14">
+ <layer name="Room" width="40" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYWBgCBikmAWKg4A4cBDSMPf5A7HfIKRh7vMFYp9BSI+G32j4jYbfaPiNht/gCC9s4cc2yDEA+ySYAw==
+   eJxjYBgFlAAWIA4YpJgFioOAOHAQ0jD3+QOx3yCkYe7zBWKfQUiPht9o+I2G32j40TL82AY5HuwAAJ5AgPE=
   </data>
  </layer>
- <objectgroup name="Monsters" width="40" height="14">
+ <objectgroup name="Monsters" width="40" height="15">
   <object name="meka.xml" type="MekaDragon" x="480" y="276" width="128" height="138">
    <properties>
     <property name="direction" value="left"/>
@@ -29,9 +29,9 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="Chains" width="40" height="14">
+ <layer name="Chains" width="40" height="15">
   <data encoding="base64" compression="zlib">
-   eJztjkEKACAIBP1a/f9RHRNRE1zEwAFBaheH6LLZSPZjlx1UnrPYaH/eLjuo/Pjh/Lhj1M96y+Q9In5WL5OP0t3P6qLvVftV0t1Po7vf8CcHCnsU4A==
+   eJztjsEJADAIA7tau/9Q/QYxIhjEhweC1ITeOYuCB+Pdot12VHnkwni3aLcdVX79dH7omPVjb5V8RMaP9Sr5LNP9WFf9X7dfJ9P9PKb7LZwPUnQU4A==
   </data>
  </layer>
 </map>
