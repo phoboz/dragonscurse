@@ -32,7 +32,7 @@
                    left_attack_low_start="11" left_attack_low_end="14"
                    left_hit="16"
                    perish_start="16" perish_end="16">
-                <object image="lionman.png" handle_y="20"
+                <object image="lionman.png" handle_y="-20"
                         left="22" right="64" top="28" bottom="83">
                     <weak_parts frame="-1">
                         <weak_part x1="22" y1="28" x2="64" y2="84" />

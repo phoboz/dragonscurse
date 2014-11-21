@@ -4,6 +4,7 @@
 class Timer {
 public:
     Timer() : m_counter(0) { }
+    void set(int value) { m_counter = value; }
     void reset() { m_counter = 0; }
     bool check(int treshold);
     bool expired(int treshold);

@@ -163,7 +163,7 @@ bool Object::load(const char *fn, MediaDB *media)
         m_name = m_fn.substr(0, lastindex);
         set_dir(m_dir);
         if (!was_loaded) {
-            m_y -= get_attribute("handle_y");
+            m_y += get_attribute("handle_y");
         }
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <fire_flower>
     <shooter attack_timer="60"
-             attack_distance="320"
+             attack_distance="600"
              num_bullets="3"
              attack_left="6"
              attack_right="28"
