@@ -19,4 +19,12 @@
    eJxjYBgFlAAmIBYYpJgJiiUHKSbVfeJALEGhnaSYAXMfseGtBsTqSHxBIBbCox6bPLoZxMQvue5TAGJFPOqxyQ+k+0SAWBSIxQap+5SBWAWIVQfYfcI47DcCYmMgNsEiL8xAP/cN1fQ3Ut03mPFgBwCydyKh
   </data>
  </layer>
+ <objectgroup name="Monsters" width="40" height="15">
+  <object name="mummy_dragon.xml" type="MummyDragon" x="640" y="276" width="128" height="138">
+   <properties>
+    <property name="direction" value="left"/>
+    <property name="object_id" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

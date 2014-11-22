@@ -25,6 +25,7 @@
 #include "dancer.h"
 #include "falling.h"
 #include "meka_dragon.h"
+#include "mummy_dragon.h"
 #include "key.h"
 #include "arm.h"
 #include "shield.h"
@@ -188,6 +189,9 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "MekaDragon") == 0) {
         object = new MekaDragon(name, media, x, y, dir);
+    }
+    else if (strcmp(type, "MummyDragon") == 0) {
+        object = new MummyDragon(name, media, x, y, dir);
     }
     else if (strcmp(type, "Area") == 0) {
         std::string tn = prop.GetLiteralProperty(std::string("type"));

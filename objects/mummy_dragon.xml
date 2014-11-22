@@ -2,22 +2,22 @@
 <mummy_dragon attack_right="80"
              attack_left="0"
              attack_medium="20"
-             attack_distance="80"
-             retreat_distance="280"
-             attack_idle="40"
+             attack_idle="20"
              attack_timer="120"
              num_bullets="12"
              fire_dx="12"
              fire_dy="8"
              fire_next="2"
-             turn_width="100"
-             hit_time="12">
-    <monster hp="824"
-             ap="76"
+             turn_left="-320"
+             turn_right="200"
+             rise_after_hit="24"
+             hit_time="18">
+    <monster hp="60"
+             ap="48"
              perish_time="20">
         <actor move_speed="8"
                treshold="6"
-               weight="20"
+               weight="0"
                right_still="4"
                right_move_start="4" right_move_end="5"
                right_fall="4"
@@ -31,15 +31,21 @@
                perish_start="3" perish_end="3">
             <object image="mummy_dragon.png"
                     left="2" right="130" top="2" bottom="132">
-                <weak_parts frame="6">
+                <weak_parts frame="4">
                     <weak_part x1="97" y1="31" x2="125" y2="57" />
                 </weak_parts>
-                <weak_parts frame="2">
+                <weak_parts frame="5">
+                    <weak_part x1="97" y1="31" x2="125" y2="57" />
+                </weak_parts>
+                <weak_parts frame="0">
+                    <weak_part x1="3" y1="31" x2="31" y2="57" />
+                </weak_parts>
+                <weak_parts frame="1">
                     <weak_part x1="3" y1="31" x2="31" y2="57" />
                 </weak_parts>
             </object>
         </actor>
     </monster>
-    <string bullet="fireball.xml" />
+    <string bullet="slime.xml" />
 </mummy_dragon>
 

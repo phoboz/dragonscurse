@@ -191,7 +191,6 @@ void move()
                                  screen_width, screen_height);
 
         if (player->get_action() == Actor::HitPerished) {
-            printf("Player perished\n");
             media->leave_map(map);
             title_menu = new TitleMenu(media);
             set_state(StateTitleMenu);
