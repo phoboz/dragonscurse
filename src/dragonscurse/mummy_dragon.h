@@ -22,12 +22,16 @@ private:
     void fire();
 
     int m_left, m_right;
-    bool m_was_hit;
+    int m_top, m_bottom;
+    bool m_is_flying;
+    int m_fly_time;
+    int m_fly_speed;
     int m_bullet_index;
     std::vector<VectorBullet*> m_bullets;
     Timer m_attack_timer;
-    Timer m_idle_timer;
     Timer m_fire_timer;
+    Timer m_turn_counter;
+    Timer m_fly_timer;
 };
 
 #endif
