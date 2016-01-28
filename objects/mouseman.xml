@@ -1,14 +1,12 @@
 <?xml version="1.0" ?>
 <mouseman>
     <climber attack_treshold="12"
-             left_up_left="32"
-             left_up_right="58"
-             left_up_top="18"
-             left_up_bottom="42"
-             left_down_left="32"
-             left_down_right="58"
-             left_down_top="18"
-             left_down_bottom="42">
+             right_up_right="46"
+             right_up_top="16"
+             right_up_bottom="32"
+             left_down_left="16"
+             left_down_top="16"
+             left_down_bottom="32">
         <player type="climber"
                 jump_speed="10"
                 catapult_speed="19"

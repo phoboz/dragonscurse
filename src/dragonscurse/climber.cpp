@@ -206,6 +206,7 @@ void Climber::animate_climb()
 
 void Climber::leave_climb(Map *map)
 {
+#if 0
     switch (m_climb_dir) {
         case ClimbRight:
             set_vx(-get_attribute("move_speed"));
@@ -218,6 +219,7 @@ void Climber::leave_climb(Map *map)
         default:
             break;
     }
+#endif
 
     m_climb_dir = ClimbNone;
     set_vy(0);
@@ -234,26 +236,37 @@ bool Climber::check_climb(Map *map, int len)
     switch(m_climb_dir) {
         case ClimbRight:
             if (m_dir == Right) {
-                result = check_collision(m_x + get_attribute("right") + 1,
-                                         m_y + get_attribute("bottom") + len,
+                result = check_collision(m_x + get_attribute("right_up_right") +
+                                             1,
+                                         m_y +
+                                             get_attribute("right_up_bottom") +
+                                             len,
                                          map, block_id, block_id);
             }
             else if (m_dir == Left) {
-                result = check_collision(m_x + get_attribute("right") + 1,
-                                         m_y + get_attribute("top") + len,
+                result = check_collision(m_x + get_attribute("right_up_right") +
+                                             1,
+                                         m_y +
+                                             get_attribute("right_up_top") +
+                                             len,
                                          map, block_id, block_id);
             }
             break;
 
         case ClimbLeft:
             if (m_dir == Right) {
-                result = check_collision(m_x + get_attribute("left") - 1,
-                                         m_y + get_attribute("bottom") + len,
+                result = check_collision(m_x + get_attribute("left_down_left") -
+                                             1,
+                                         m_y +
+                                             get_attribute("left_down_bottom") +
+                                             len,
                                          map, block_id, block_id);
             }
             else if (m_dir == Left) {
-                result = check_collision(m_x + get_attribute("left") - 1,
-                                         m_y + get_attribute("top") + len,
+                result = check_collision(m_x + get_attribute("left_down_left") -
+                                             1,
+                                         m_y + get_attribute("left_down_top") +
+                                             len,
                                          map, block_id, block_id);
             }
             break;
@@ -285,7 +298,7 @@ void Climber::move_climb(Map *map, int input)
                 set_dir(Right);
                 int speed = get_attribute("move_speed");
                 if (check_climb(map, speed)) {
-                    set_vy(get_attribute("move_speed"));
+                    set_vy(speed);
                 }
                 else {
                     set_vy(0);
