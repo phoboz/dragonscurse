@@ -226,9 +226,12 @@ void Climber::leave_climb(Map *map)
     Player::set_jump(map);
 }
 
-int Climber::check_ahead(Map *map, int len, int start, int end)
+int Climber::check_climb(Map *map, int len)
 {
-    int result;
+    int result = 0;
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+    int block_id = prop.GetNumericProperty("climb");
 
     if (m_climb_dir == ClimbRight) {
         int right = get_attribute("right") + 1;
@@ -238,7 +241,7 @@ int Climber::check_ahead(Map *map, int len, int start, int end)
             int dy;
             for (dy = len; dy > 0; dy--) {
                 if (check_collision(m_x + right, m_y  + bottom + dy,
-                                    map, start, end)) {
+                                    map, block_id, block_id)) {
                     break;
                 }
             }
@@ -249,7 +252,7 @@ int Climber::check_ahead(Map *map, int len, int start, int end)
             int dy;
             for (dy = len; dy > 0; dy--) {
                 if (check_collision(m_x + right, m_y  + top - dy,
-                                    map, start, end)) {
+                                    map, block_id, block_id)) {
                     break;
                 }
             }
@@ -264,7 +267,7 @@ int Climber::check_ahead(Map *map, int len, int start, int end)
             int dy;
             for (dy = len; dy > 0; dy--) {
                 if (check_collision(m_x + left, m_y  + bottom + dy,
-                                    map, start, end)) {
+                                    map, block_id, block_id)) {
                     break;
                 }
             }
@@ -275,15 +278,12 @@ int Climber::check_ahead(Map *map, int len, int start, int end)
             int dy;
             for (dy = len; dy > 0; dy--) {
                 if (check_collision(m_x + left, m_y  + top - dy,
-                                    map, start, end)) {
+                                    map, block_id, block_id)) {
                     break;
                 }
             }
             result = dy;
         }
-    }
-    else {
-        result = Object::check_ahead(map, len, start, end);
     }
 
     return result;
@@ -291,10 +291,6 @@ int Climber::check_ahead(Map *map, int len, int start, int end)
 
 void Climber::move_climb(Map *map, int input)
 {
-    const Tmx::Tileset *tileset = map->get_tileset(0);
-    const Tmx::PropertySet prop = tileset->GetProperties();
-    int block_id = prop.GetNumericProperty("climb");
-
     if (!m_leave_ready && m_leave_timer.expired(c_leave_time)) {
         m_leave_ready = true;
     }
@@ -311,15 +307,13 @@ void Climber::move_climb(Map *map, int input)
                 animate_climb();
                 set_action(Move);
                 set_dir(Right);
-                set_vy(check_ahead(map, get_attribute("move_speed"),
-                                   block_id, block_id));
+                set_vy(check_climb(map, get_attribute("move_speed")));
             }
             else if (input & PRESS_UP) {
                 animate_climb();
                 set_action(Move);
                 set_dir(Left);
-                set_vy(-check_ahead(map, get_attribute("move_speed"),
-                                    block_id, block_id));
+                set_vy(-check_climb(map, get_attribute("move_speed")));
             }
             else {
                 set_dir();

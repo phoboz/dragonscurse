@@ -26,7 +26,7 @@ private:
 
     void leave_climb(Map *map);
 
-    virtual int check_ahead(Map *map, int len, int start, int end);
+    int check_climb(Map *map, int len);
 
     void move_climb(Map *map, int input);
 
