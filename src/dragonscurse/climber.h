@@ -5,14 +5,14 @@
 
 class Climber : public Knight {
 public:
-    enum ClimbDir { ClimbNone, ClimbUp, ClimbDown, ClimbLeft, ClimbRight };
+    enum ClimbDir { ClimbNone, ClimbAbove, ClimbBelow, ClimbLeft, ClimbRight };
 
     Climber(const char *fn, MediaDB *media, int x, int y, Direction dir)
         : Knight(fn, media, x, y, dir),
           m_climb_dir(ClimbNone),
           m_leave_ready(false) { }
 
-    virtual void set_dir(Direction dir = Keep);
+    virtual void set_dir(Direction dir);
 
     virtual void move(Map *map);
 
@@ -24,6 +24,11 @@ private:
     void animate_climb_left();
     void animate_climb();
 
+    bool animate_attack_right();
+    bool animate_attack_left();
+    virtual bool animate_attack();
+
+    void enter_climb(ClimbDir dir);
     void leave_climb(Map *map);
 
     int check_climb(Map *map, int len);

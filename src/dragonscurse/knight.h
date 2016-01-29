@@ -12,6 +12,9 @@ public:
     virtual bool attack_object(Object *object);
     virtual void move(Map *map);
 
+protected:
+    bool check_attack(int input);
+
 private:
     bool m_attack_ready;
 };

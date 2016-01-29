@@ -47,7 +47,7 @@ protected:
     void set_attack();
     void reset_attack();
     void animate_move();
-    bool animate_attack();
+    virtual bool animate_attack();
     void animate_perish();
     virtual Object::Direction get_reference() const;
     void face_reference(int width = 0);

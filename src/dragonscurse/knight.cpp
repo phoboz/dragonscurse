@@ -13,11 +13,9 @@ bool Knight::attack_object(Object *object)
     return result;
 }
 
-void Knight::move(Map *map)
+bool Knight::check_attack(int input)
 {
-    int input = get_input();
-
-    Player::move(map);
+    int result = false;
 
     if (m_action != Hit && m_action != HitPerish) {
         if (input & PRESS_ATTACK) {
@@ -27,11 +25,22 @@ void Knight::move(Map *map)
                 // Attack
                 m_media->play_sound(get_string("strike"));
                 set_attack();
+                result = true;
             }
         }
         else {
             m_attack_ready = true;
         }
     }
+
+    return result;
+}
+
+void Knight::move(Map *map)
+{
+    int input = get_input();
+
+    Player::move(map);
+    check_attack(input);
 }
 
