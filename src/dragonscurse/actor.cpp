@@ -188,7 +188,6 @@ void Actor::set_attack(void)
     else {
         set_action(Attack);
     }
-    set_vx(0);
 }
 
 void Actor::reset_attack()

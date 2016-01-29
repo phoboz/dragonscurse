@@ -4,7 +4,7 @@
             attack_left="12"
             attack_medium="10"
             attack_low="30"
-            attack_treshold="8"
+            attack_treshold="6"
             bullet_speed="8">
         <player type="dragon"
                 jump_speed="16"
@@ -38,7 +38,7 @@
                    left_hit="7"
                    perish_start="7" perish_end="7">
                 <object image="lizardman.png" handle_y="-1"
-                        left="12" right="56" top="7" bottom="63">
+                        left="12" right="56" top="7" bottom="64">
                     <weak_parts frame="-1">
                         <weak_part x1="12" y1="7" x2="56" y2="64" />
                     </weak_parts>

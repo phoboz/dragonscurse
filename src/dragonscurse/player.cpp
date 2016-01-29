@@ -71,6 +71,15 @@ void Player::set_jump(Map *map, bool catapult)
     m_hit_ground = false;
 }
 
+void Player::set_attack()
+{
+    if (m_action == Move) {
+        set_vx(0);
+    }
+
+    Actor::set_attack();
+}
+
 bool Player::set_hit(Object *object, Status *status)
 {
     bool result = false;

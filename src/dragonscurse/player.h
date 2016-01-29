@@ -26,6 +26,9 @@ public:
     virtual void draw(Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
+protected:
+    virtual void set_attack();
+
 private:
     void check_water(Map *map);
     void player_move(Map *map);

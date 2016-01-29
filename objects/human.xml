@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <human>
-    <knight attack_treshold="6">
+    <knight attack_treshold="5">
         <player type="knight"
                 jump_speed="16"
                 catapult_speed="30"

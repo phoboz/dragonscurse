@@ -26,6 +26,7 @@ public:
 
     virtual bool get_moving();
     bool get_fall() const { return (m_vert_dir == VerticalDown); }
+    bool get_eql() { return (m_vert_dir == VerticalNone); }
 
     virtual void move(Map *map);
 

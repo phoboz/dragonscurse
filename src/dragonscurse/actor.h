@@ -44,7 +44,7 @@ protected:
     void set_action(Action action);
     virtual void set_dir(Direction dir = Keep);
     void swap_move_dir();
-    void set_attack();
+    virtual void set_attack();
     void reset_attack();
     void animate_move();
     virtual bool animate_attack();
