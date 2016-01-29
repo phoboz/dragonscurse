@@ -226,53 +226,64 @@ void Climber::leave_climb(Map *map)
     Player::set_jump(map);
 }
 
-bool Climber::check_climb(Map *map, int len)
+int Climber::check_ahead(Map *map, int len, int start, int end)
 {
-    bool result = false;
-    const Tmx::Tileset *tileset = map->get_tileset(0);
-    const Tmx::PropertySet prop = tileset->GetProperties();
-    int block_id = prop.GetNumericProperty("climb");
+    int result;
 
-    switch(m_climb_dir) {
-        case ClimbRight:
-            if (m_dir == Right) {
-                result = check_collision(m_x + get_attribute("right_up_right") +
-                                             1,
-                                         m_y +
-                                             get_attribute("right_up_bottom") +
-                                             len,
-                                         map, block_id, block_id);
-            }
-            else if (m_dir == Left) {
-                result = check_collision(m_x + get_attribute("right_up_right") +
-                                             1,
-                                         m_y +
-                                             get_attribute("right_up_top") +
-                                             len,
-                                         map, block_id, block_id);
-            }
-            break;
+    if (m_climb_dir == ClimbRight) {
+        int right = get_attribute("right") + 1;
 
-        case ClimbLeft:
-            if (m_dir == Right) {
-                result = check_collision(m_x + get_attribute("left_down_left") -
-                                             1,
-                                         m_y +
-                                             get_attribute("left_down_bottom") +
-                                             len,
-                                         map, block_id, block_id);
+        if (m_dir == Right) {
+            int bottom = get_attribute("bottom");
+            int dy;
+            for (dy = len; dy > 0; dy--) {
+                if (check_collision(m_x + right, m_y  + bottom + dy,
+                                    map, start, end)) {
+                    break;
+                }
             }
-            else if (m_dir == Left) {
-                result = check_collision(m_x + get_attribute("left_down_left") -
-                                             1,
-                                         m_y + get_attribute("left_down_top") +
-                                             len,
-                                         map, block_id, block_id);
+            result = dy;
+        }
+        else if (m_dir == Left) {
+            int top = get_attribute("top");
+            int dy;
+            for (dy = len; dy > 0; dy--) {
+                if (check_collision(m_x + right, m_y  + top - dy,
+                                    map, start, end)) {
+                    break;
+                }
             }
-            break;
+            result = dy;
+        }
+    }
+    else if (m_climb_dir == ClimbLeft) {
+        int left = get_attribute("left") - 1;
 
-        default:
-            break;
+        if (m_dir == Right) {
+            int bottom = get_attribute("bottom");
+            int dy;
+            for (dy = len; dy > 0; dy--) {
+                if (check_collision(m_x + left, m_y  + bottom + dy,
+                                    map, start, end)) {
+                    break;
+                }
+            }
+            result = dy;
+        }
+        else if (m_dir == Left) {
+            int top = get_attribute("top");
+            int dy;
+            for (dy = len; dy > 0; dy--) {
+                if (check_collision(m_x + left, m_y  + top - dy,
+                                    map, start, end)) {
+                    break;
+                }
+            }
+            result = dy;
+        }
+    }
+    else {
+        result = Object::check_ahead(map, len, start, end);
     }
 
     return result;
@@ -280,6 +291,10 @@ bool Climber::check_climb(Map *map, int len)
 
 void Climber::move_climb(Map *map, int input)
 {
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+    int block_id = prop.GetNumericProperty("climb");
+
     if (!m_leave_ready && m_leave_timer.expired(c_leave_time)) {
         m_leave_ready = true;
     }
@@ -296,25 +311,15 @@ void Climber::move_climb(Map *map, int input)
                 animate_climb();
                 set_action(Move);
                 set_dir(Right);
-                int speed = get_attribute("move_speed");
-                if (check_climb(map, speed)) {
-                    set_vy(speed);
-                }
-                else {
-                    set_vy(0);
-                }
+                set_vy(check_ahead(map, get_attribute("move_speed"),
+                                   block_id, block_id));
             }
             else if (input & PRESS_UP) {
                 animate_climb();
                 set_action(Move);
                 set_dir(Left);
-                int speed = get_attribute("move_speed");
-                if (check_climb(map, speed)) {
-                    set_vy(-speed);
-                }
-                else {
-                    set_vy(0);
-                }
+                set_vy(-check_ahead(map, get_attribute("move_speed"),
+                                    block_id, block_id));
             }
             else {
                 set_dir();
@@ -334,7 +339,7 @@ void Climber::move(Map *map)
 {
     int input = get_input();
 
-    if (m_action == Jump || m_action == Fall) {
+    if (m_climb_dir == ClimbNone && (m_action == Jump || m_action == Fall)) {
         const Tmx::Tileset *tileset = map->get_tileset(0);
         const Tmx::PropertySet prop = tileset->GetProperties();
 
@@ -343,6 +348,7 @@ void Climber::move(Map *map)
         if (block_id) {
             if (m_dir == Right && (input & PRESS_RIGHT)) {
                 if (check_ahead(map, 1, block_id, block_id) == 0) {
+                    set_vx(0);
                     set_ay(0);
                     m_leave_ready = false;
                     m_climb_dir = ClimbRight;
@@ -350,6 +356,7 @@ void Climber::move(Map *map)
             }
             else if (m_dir == Left && (input & PRESS_LEFT)) {
                 if (check_ahead(map, 1, block_id, block_id) == 0) {
+                    set_vx(0);
                     set_ay(0);
                     m_leave_ready = false;
                     m_climb_dir = ClimbLeft;

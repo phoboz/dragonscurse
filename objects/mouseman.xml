@@ -2,10 +2,10 @@
 <mouseman>
     <climber attack_treshold="12"
              right_up_right="46"
-             right_up_top="16"
+             right_up_top="28"
              right_up_bottom="32"
              left_down_left="16"
-             left_down_top="16"
+             left_down_top="28"
              left_down_bottom="32">
         <player type="climber"
                 jump_speed="10"
