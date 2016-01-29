@@ -8,7 +8,7 @@
              left_down_top="28"
              left_down_bottom="32">
         <player type="climber"
-                jump_speed="10"
+                jump_speed="14"
                 catapult_speed="19"
                 water_jump_speed="7"
                 water_weight="3"
@@ -16,9 +16,9 @@
                 ap="60"
                 dp="20"
                 cp="40">
-            <actor move_speed="4"
+            <actor move_speed="5"
                    treshold="5"
-                   weight="6"
+                   weight="12"
                    hit_time="16"
                    invisible_time="42"
                    right_still="0"
