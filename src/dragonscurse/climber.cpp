@@ -2,6 +2,42 @@
 #include "phoboz/ctrl.h"
 #include "climber.h"
 
+void Climber::set_climb_below(Direction set_dir)
+{
+    switch(m_action) {
+        case Attack:
+            if (set_dir == Right) {
+                if (m_frame < get_attribute("below_right_attack_start") ||
+                    m_frame > get_attribute("below_right_attack_end")) {
+                    m_frame = get_attribute("below_right_attack_start");
+                }
+            }
+            else if (set_dir == Left) {
+                if (m_frame < get_attribute("below_left_attack_start") ||
+                    m_frame > get_attribute("below_left_attack_end")) {
+                    m_frame = get_attribute("below_left_attack_start");
+                }
+            }
+            break;
+
+        default:
+            if (set_dir == Right) {
+                if (m_frame < get_attribute("below_right_move_start") ||
+                    m_frame > get_attribute("below_right_move_end")) {
+                    m_anim_dir = AnimUp;
+                    m_frame = get_attribute("below_right_move_start");
+                }
+            }
+            else if (set_dir == Left) {
+                if (m_frame < get_attribute("below_left_move_start") ||
+                    m_frame > get_attribute("below_left_move_end")) {
+                    m_anim_dir = AnimUp;
+                    m_frame = get_attribute("below_left_move_start");
+                }
+            }
+            break;
+    }
+}
 void Climber::set_climb_right(Direction set_dir)
 {
     switch(m_action) {
@@ -84,6 +120,10 @@ void Climber::set_dir(Direction dir)
     else {
         Body::set_dir(dir);
         switch(m_climb_dir) {
+            case ClimbBelow:
+                set_climb_below(dir);
+                break;
+
             case ClimbRight:
                 set_climb_right(dir);
                 break;
@@ -95,6 +135,46 @@ void Climber::set_dir(Direction dir)
             default:
                 break;
 
+        }
+    }
+}
+
+void Climber::animate_climb_below()
+{
+    if (m_anim_timer.expired(get_attribute("treshold"))) {
+        switch(m_dir) {
+            case Right:
+                if (m_anim_dir == AnimUp) {
+                    if (++m_frame >= get_attribute("below_right_move_end")) {
+                        m_frame = get_attribute("below_right_move_end");
+                        m_anim_dir = AnimDown;
+                    }
+                }
+                else if (m_anim_dir == AnimDown) {
+                    if (--m_frame <= get_attribute("below_right_move_start")) {
+                        m_frame = get_attribute("below_right_move_start");
+                        m_anim_dir = AnimUp;
+                    }
+                }
+                break;
+
+            case Left:
+                if (m_anim_dir == AnimUp) {
+                    if (++m_frame >= get_attribute("below_left_move_end")) {
+                        m_frame = get_attribute("below_left_move_end");
+                        m_anim_dir = AnimDown;
+                    }
+                }
+                else if (m_anim_dir == AnimDown) {
+                    if (--m_frame <= get_attribute("below_left_move_start")) {
+                        m_frame = get_attribute("below_left_move_start");
+                        m_anim_dir = AnimUp;
+                    }
+                }
+                break;
+
+            default:
+                break;
         }
     }
 }
@@ -182,6 +262,10 @@ void Climber::animate_climb_left()
 void Climber::animate_climb()
 {
     switch(m_climb_dir) {
+        case ClimbBelow:
+            animate_climb_below();
+            break;
+
         case ClimbRight:
             animate_climb_right();
             break;
@@ -194,6 +278,34 @@ void Climber::animate_climb()
             break;
 
     }
+}
+
+bool Climber::animate_attack_below()
+{
+    bool result = false;
+
+    if (m_anim_timer.expired(get_attribute("attack_treshold"))) {
+        switch(m_dir) {
+            case Right:
+                if (++m_frame >= get_attribute("below_right_attack_end")) {
+                    m_frame = get_attribute("below_right_attack_end");
+                    result = true;
+                }
+                break;
+
+            case Left:
+                if (++m_frame >= get_attribute("below_left_attack_end")) {
+                    m_frame = get_attribute("below_left_attack_end");
+                    result = true;
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    return result;
 }
 
 bool Climber::animate_attack_right()
@@ -257,6 +369,10 @@ bool Climber::animate_attack()
     bool result;
 
     switch(m_climb_dir) {
+        case ClimbBelow:
+            result = animate_attack_below();
+            break;
+
         case ClimbRight:
             result = animate_attack_right();
             break;
@@ -311,14 +427,40 @@ int Climber::check_climb(Map *map, int len)
     const Tmx::PropertySet prop = tileset->GetProperties();
     int block_id = prop.GetNumericProperty("climb");
 
-    if (m_climb_dir == ClimbRight) {
+    if (m_climb_dir == ClimbBelow) {
+        int top = get_attribute("top") - 1;
+
+        if (m_dir == Right) {
+            int right = get_attribute("right");
+            int dx;
+            for (dx = len; dx > 0; dx--) {
+                if (check_collision(m_x + right + dx, m_y + top,
+                                    map, block_id, block_id)) {
+                    break;
+                }
+            }
+            result = dx;
+        }
+        else if (m_dir == Left) {
+            int left = get_attribute("left");
+            int dx;
+            for (dx = len; dx > 0; dx--) {
+                if (check_collision(m_x + left - dx, m_y + top,
+                                    map, block_id, block_id)) {
+                    break;
+                }
+            }
+            result = dx;
+        }
+    }
+    else if (m_climb_dir == ClimbRight) {
         int right = get_attribute("right") + 1;
 
         if (m_dir == Right) {
             int bottom = get_attribute("bottom");
             int dy;
             for (dy = len; dy > 0; dy--) {
-                if (check_collision(m_x + right, m_y  + bottom + dy,
+                if (check_collision(m_x + right, m_y + bottom + dy,
                                     map, block_id, block_id)) {
                     break;
                 }
@@ -329,7 +471,7 @@ int Climber::check_climb(Map *map, int len)
             int top = get_attribute("top");
             int dy;
             for (dy = len; dy > 0; dy--) {
-                if (check_collision(m_x + right, m_y  + top - dy,
+                if (check_collision(m_x + right, m_y + top - dy,
                                     map, block_id, block_id)) {
                     break;
                 }
@@ -344,7 +486,7 @@ int Climber::check_climb(Map *map, int len)
             int bottom = get_attribute("bottom");
             int dy;
             for (dy = len; dy > 0; dy--) {
-                if (check_collision(m_x + left, m_y  + bottom + dy,
+                if (check_collision(m_x + left, m_y + bottom + dy,
                                     map, block_id, block_id)) {
                     break;
                 }
@@ -355,7 +497,7 @@ int Climber::check_climb(Map *map, int len)
             int top = get_attribute("top");
             int dy;
             for (dy = len; dy > 0; dy--) {
-                if (check_collision(m_x + left, m_y  + top - dy,
+                if (check_collision(m_x + left, m_y + top - dy,
                                     map, block_id, block_id)) {
                     break;
                 }
@@ -373,15 +515,33 @@ void Climber::move_climb(Map *map, int input)
         m_leave_ready = true;
     }
 
-    switch (m_climb_dir) {
-        case ClimbRight:
-        case ClimbLeft:
-            if (input & PRESS_JUMP) {
-                if (m_leave_ready) {
-                    leave_climb(map);
-                }
+    if (input & PRESS_JUMP) {
+        if (m_leave_ready) {
+            leave_climb(map);
+        }
+    }
+    else {
+        if (m_climb_dir == ClimbAbove || m_climb_dir == ClimbBelow) {
+            if (input & PRESS_RIGHT) {
+                animate_climb();
+                set_action(Move);
+                set_dir(Right);
+                set_vx(check_climb(map, get_attribute("move_speed")));
             }
-            else if (input & PRESS_DOWN) {
+            else if (input & PRESS_LEFT) {
+                animate_climb();
+                set_action(Move);
+                set_dir(Left);
+                set_vx(-check_climb(map, get_attribute("move_speed")));
+            }
+            else {
+                set_dir(Keep);
+                set_action(Still);
+                set_vx(0);
+            }
+        }
+        else if (m_climb_dir == ClimbRight || m_climb_dir == ClimbLeft) {
+            if (input & PRESS_DOWN) {
                 animate_climb();
                 set_action(Move);
                 set_dir(Right);
@@ -398,10 +558,7 @@ void Climber::move_climb(Map *map, int input)
                 set_action(Still);
                 set_vy(0);
             }
-            break;
-
-        default:
-            break;
+        }
     }
 
     Body::move(map);
@@ -426,6 +583,11 @@ void Climber::move(Map *map)
             else if (m_dir == Left && (input & PRESS_LEFT)) {
                 if (check_ahead(map, 1, block_id, block_id) == 0) {
                     enter_climb(ClimbLeft);
+                }
+            }
+            else if (input & PRESS_UP) {
+                if (check_above(map, 1, block_id, block_id) == 0) {
+                    enter_climb(ClimbBelow);
                 }
             }
         }

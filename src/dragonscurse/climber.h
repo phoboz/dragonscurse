@@ -17,13 +17,16 @@ public:
     virtual void move(Map *map);
 
 private:
+    void set_climb_below(Direction set_dir);
     void set_climb_right(Direction set_dir);
     void set_climb_left(Direction set_dir);
 
+    void animate_climb_below();
     void animate_climb_right();
     void animate_climb_left();
     void animate_climb();
 
+    bool animate_attack_below();
     bool animate_attack_right();
     bool animate_attack_left();
     virtual bool animate_attack();
