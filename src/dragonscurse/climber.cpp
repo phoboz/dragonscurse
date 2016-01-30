@@ -653,6 +653,35 @@ int Climber::check_climb(Map *map, int len)
     return result;
 }
 
+bool Climber::climb_turn_right(Map *map)
+{
+    bool result = false;
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+    int block_id = prop.GetNumericProperty("climb");
+
+    if (check_climb(map, 1) == 0) {
+        if (check_collision(m_x + get_attribute("right") + 1,
+                            m_y + get_attribute("bottom"),
+                            map, block_id, block_id)) {
+            enter_climb(ClimbAbove);
+            m_x += 32;
+            m_y -= 32;
+            result = true;
+        }
+        else if (check_collision(m_x + get_attribute("right") + 1,
+                                 m_y + get_attribute("top"),
+                                 map, block_id, block_id)) {
+            enter_climb(ClimbBelow);
+            m_x += 32;
+            m_y += 5;
+            result = true;
+        }
+    }
+
+    return result;
+}
+
 void Climber::move_climb(Map *map, int input)
 {
     if (!m_leave_ready && m_leave_timer.expired(c_leave_time)) {
@@ -665,45 +694,97 @@ void Climber::move_climb(Map *map, int input)
         }
     }
     else {
-        if (m_climb_dir == ClimbAbove || m_climb_dir == ClimbBelow) {
-            if (input & PRESS_RIGHT) {
-                animate_climb();
-                set_action(Move);
-                set_dir(Right);
-                set_vx(check_climb(map, get_attribute("move_speed")));
-            }
-            else if (input & PRESS_LEFT) {
-                animate_climb();
-                set_action(Move);
-                set_dir(Left);
-                set_vx(-check_climb(map, get_attribute("move_speed")));
-            }
-            else {
-                animate_climb();
-                set_dir(Keep);
-                set_action(Still);
-                set_vx(0);
-            }
-        }
-        else if (m_climb_dir == ClimbRight || m_climb_dir == ClimbLeft) {
-            if (input & PRESS_DOWN) {
-                animate_climb();
-                set_action(Move);
-                set_dir(Right);
-                set_vy(check_climb(map, get_attribute("move_speed")));
-            }
-            else if (input & PRESS_UP) {
-                animate_climb();
-                set_action(Move);
-                set_dir(Left);
-                set_vy(-check_climb(map, get_attribute("move_speed")));
-            }
-            else {
-                animate_climb();
-                set_dir(Keep);
-                set_action(Still);
-                set_vy(0);
-            }
+        switch(m_climb_dir) {
+            case ClimbAbove:
+                if (input & PRESS_RIGHT) {
+                    animate_climb();
+                    set_action(Move);
+                    set_dir(Right);
+                    set_vx(check_climb(map, get_attribute("move_speed")));
+                }
+                else if (input & PRESS_LEFT) {
+                    animate_climb();
+                    set_action(Move);
+                    set_dir(Left);
+                    set_vx(-check_climb(map, get_attribute("move_speed")));
+                }
+                else {
+                    animate_climb();
+                    set_dir(Keep);
+                    set_action(Still);
+                    set_vx(0);
+                }
+                break;
+
+            case ClimbBelow:
+                if (input & PRESS_RIGHT) {
+                    animate_climb();
+                    set_action(Move);
+                    set_dir(Right);
+                    set_vx(check_climb(map, get_attribute("move_speed")));
+                }
+                else if (input & PRESS_LEFT) {
+                    animate_climb();
+                    set_action(Move);
+                    set_dir(Left);
+                    set_vx(-check_climb(map, get_attribute("move_speed")));
+                }
+                else {
+                    animate_climb();
+                    set_dir(Keep);
+                    set_action(Still);
+                    set_vx(0);
+                }
+                break;
+
+            case ClimbRight:
+                if (input & PRESS_DOWN) {
+                    animate_climb();
+                    set_action(Move);
+                    set_dir(Right);
+                    set_vy(check_climb(map, get_attribute("move_speed")));
+                }
+                else if (input & PRESS_UP) {
+                    animate_climb();
+                    set_action(Move);
+                    set_dir(Left);
+                    set_vy(-check_climb(map, get_attribute("move_speed")));
+                }
+                else if (input & PRESS_RIGHT) {
+                    if (m_leave_ready) {
+                        if (climb_turn_right(map)) {
+                            set_vy(0);
+                        }
+                    }
+                }
+                else {
+                    animate_climb();
+                    set_dir(Keep);
+                    set_action(Still);
+                    set_vy(0);
+                }
+                break;
+
+            case ClimbLeft:
+                if (input & PRESS_DOWN) {
+                    animate_climb();
+                    set_action(Move);
+                    set_dir(Right);
+                    set_vy(check_climb(map, get_attribute("move_speed")));
+                }
+                else if (input & PRESS_UP) {
+                    animate_climb();
+                    set_action(Move);
+                    set_dir(Left);
+                    set_vy(-check_climb(map, get_attribute("move_speed")));
+                }
+                else {
+                    animate_climb();
+                    set_dir(Keep);
+                    set_action(Still);
+                    set_vy(0);
+                }
+                break;
         }
     }
 
@@ -724,21 +805,25 @@ void Climber::move(Map *map)
             if (input & PRESS_DOWN) {
                 if (check_below(map, 1, block_id, block_id) == 0) {
                     enter_climb(ClimbAbove);
+std::cout << "climb above" << std::endl;
                 }
             }
             else if (input & PRESS_UP) {
                 if (check_above(map, 1, block_id, block_id) == 0) {
                     enter_climb(ClimbBelow);
+std::cout << "climb below" << std::endl;
                 }
             }
             else if (m_dir == Right && (input & PRESS_RIGHT)) {
                 if (check_ahead(map, 1, block_id, block_id) == 0) {
                     enter_climb(ClimbRight);
+std::cout << "climb right" << std::endl;
                 }
             }
             else if (m_dir == Left && (input & PRESS_LEFT)) {
                 if (check_ahead(map, 1, block_id, block_id) == 0) {
                     enter_climb(ClimbLeft);
+std::cout << "climb left" << std::endl;
                 }
             }
         }
