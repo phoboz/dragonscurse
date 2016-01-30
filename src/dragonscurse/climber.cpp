@@ -546,10 +546,10 @@ int Climber::check_climb(Map *map, int len)
     int block_id = prop.GetNumericProperty("climb");
 
     if (m_climb_dir == ClimbAbove) {
-        int bottom = get_attribute("bottom") + 1;
+        int bottom = get_attribute("climb_above_bottom") + 1;
 
         if (m_dir == Right) {
-            int right = get_attribute("right");
+            int right = get_attribute("climb_above_right");
             int dx;
             for (dx = len; dx > 0; dx--) {
                 if (check_collision(m_x + right + dx, m_y + bottom,
@@ -560,7 +560,7 @@ int Climber::check_climb(Map *map, int len)
             result = dx;
         }
         else if (m_dir == Left) {
-            int left = get_attribute("left");
+            int left = get_attribute("climb_above_left");
             int dx;
             for (dx = len; dx > 0; dx--) {
                 if (check_collision(m_x + left - dx, m_y + bottom,
@@ -572,10 +572,10 @@ int Climber::check_climb(Map *map, int len)
         }
     }
     else if (m_climb_dir == ClimbBelow) {
-        int top = get_attribute("top") - 1;
+        int top = get_attribute("climb_below_top") - 1;
 
         if (m_dir == Right) {
-            int right = get_attribute("right");
+            int right = get_attribute("climb_below_right");
             int dx;
             for (dx = len; dx > 0; dx--) {
                 if (check_collision(m_x + right + dx, m_y + top,
@@ -586,7 +586,7 @@ int Climber::check_climb(Map *map, int len)
             result = dx;
         }
         else if (m_dir == Left) {
-            int left = get_attribute("left");
+            int left = get_attribute("climb_below_left");
             int dx;
             for (dx = len; dx > 0; dx--) {
                 if (check_collision(m_x + left - dx, m_y + top,
@@ -598,10 +598,10 @@ int Climber::check_climb(Map *map, int len)
         }
     }
     else if (m_climb_dir == ClimbRight) {
-        int right = get_attribute("right") + 1;
+        int right = get_attribute("climb_right_right") + 1;
 
         if (m_dir == Right) {
-            int bottom = get_attribute("bottom");
+            int bottom = get_attribute("climb_right_bottom");
             int dy;
             for (dy = len; dy > 0; dy--) {
                 if (check_collision(m_x + right, m_y + bottom + dy,
@@ -612,7 +612,7 @@ int Climber::check_climb(Map *map, int len)
             result = dy;
         }
         else if (m_dir == Left) {
-            int top = get_attribute("top");
+            int top = get_attribute("climb_right_top");
             int dy;
             for (dy = len; dy > 0; dy--) {
                 if (check_collision(m_x + right, m_y + top - dy,
@@ -624,10 +624,10 @@ int Climber::check_climb(Map *map, int len)
         }
     }
     else if (m_climb_dir == ClimbLeft) {
-        int left = get_attribute("left") - 1;
+        int left = get_attribute("climb_left_left") - 1;
 
         if (m_dir == Right) {
-            int bottom = get_attribute("bottom");
+            int bottom = get_attribute("climb_left_bottom");
             int dy;
             for (dy = len; dy > 0; dy--) {
                 if (check_collision(m_x + left, m_y + bottom + dy,
@@ -638,7 +638,7 @@ int Climber::check_climb(Map *map, int len)
             result = dy;
         }
         else if (m_dir == Left) {
-            int top = get_attribute("top");
+            int top = get_attribute("climb_left_top");
             int dy;
             for (dy = len; dy > 0; dy--) {
                 if (check_collision(m_x + left, m_y + top - dy,

@@ -1,12 +1,18 @@
 <?xml version="1.0" ?>
 <mouseman>
     <climber attack_treshold="6"
-             right_up_right="46"
-             right_up_top="28"
-             right_up_bottom="32"
-             left_down_left="16"
-             left_down_top="28"
-             left_down_bottom="32">
+             climb_above_bottom="59"
+             climb_above_right="34"
+             climb_above_left="24"
+             climb_below_top="28"
+             climb_below_right="34"
+             climb_below_left="24"
+             climb_right_right="46"
+             climb_right_top="28"
+             climb_right_bottom="32"
+             climb_left_left="16"
+             climb_left_top="28"
+             climb_left_bottom="32">
         <player type="climber"
                 jump_speed="14"
                 catapult_speed="19"
