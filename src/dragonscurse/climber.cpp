@@ -507,9 +507,33 @@ bool Climber::animate_attack()
     return result;
 }
 
-void Climber::enter_climb(ClimbDir dir)
+void Climber::enter_climb(Map *map, ClimbDir dir, int x, int y)
 {
-    set_vx(0);
+    int block_x = x / map->get_tile_width();
+    int block_y = y / map->get_tile_height();
+
+    switch(dir) {
+        case ClimbAbove:
+            m_y = block_y * map->get_tile_height() + 4;
+            break;
+
+        case ClimbBelow:
+            m_y = block_y * map->get_tile_height() + 4;
+            break;
+
+        case ClimbRight:
+            m_x = block_x * map->get_tile_width() + 17;
+            break;
+
+        case ClimbLeft:
+            m_x = block_x * map->get_tile_width() + 16;
+            break;
+
+        default:
+            break;
+    }
+
+    set_speed(0, 0);
     set_ay(0);
     m_leave_ready = false;
     m_climb_dir = dir;
@@ -653,29 +677,29 @@ int Climber::check_climb(Map *map, int len)
     return result;
 }
 
-bool Climber::climb_turn_right(Map *map)
+bool Climber::climb_right_turn_right(Map *map)
 {
+    int x, y;
     bool result = false;
     const Tmx::Tileset *tileset = map->get_tileset(0);
     const Tmx::PropertySet prop = tileset->GetProperties();
     int block_id = prop.GetNumericProperty("climb");
 
     if (check_climb(map, 1) == 0) {
-        if (check_collision(m_x + get_attribute("right") + 1,
-                            m_y + get_attribute("bottom"),
-                            map, block_id, block_id)) {
-            enter_climb(ClimbAbove);
-            m_x += 32;
-            m_y -= 32;
+        x = m_x + get_attribute("right") + 1;
+        y = m_y + get_attribute("bottom");
+        if (check_collision(x, y, map, block_id, block_id)) {
+            enter_climb(map, ClimbAbove, x, y - map->get_tile_width() * 2);
+            m_x += map->get_tile_width();
             result = true;
         }
-        else if (check_collision(m_x + get_attribute("right") + 1,
-                                 m_y + get_attribute("top"),
-                                 map, block_id, block_id)) {
-            enter_climb(ClimbBelow);
-            m_x += 32;
-            m_y += 5;
-            result = true;
+        else {
+            y = m_y + get_attribute("top");
+            if (check_collision(x, y, map, block_id, block_id)) {
+                enter_climb(map, ClimbBelow, x, y);
+                m_x += map->get_tile_width();
+                result = true;
+            }
         }
     }
 
@@ -750,13 +774,15 @@ void Climber::move_climb(Map *map, int input)
                     set_dir(Left);
                     set_vy(-check_climb(map, get_attribute("move_speed")));
                 }
+#if 1
                 else if (input & PRESS_RIGHT) {
                     if (m_leave_ready) {
-                        if (climb_turn_right(map)) {
+                        if (climb_right_turn_right(map)) {
                             set_vy(0);
                         }
                     }
                 }
+#endif
                 else {
                     animate_climb();
                     set_dir(Keep);
@@ -804,26 +830,22 @@ void Climber::move(Map *map)
         if (block_id) {
             if (input & PRESS_DOWN) {
                 if (check_below(map, 1, block_id, block_id) == 0) {
-                    enter_climb(ClimbAbove);
-std::cout << "climb above" << std::endl;
+                    enter_climb(map, ClimbAbove, m_x, m_y + 1);
                 }
             }
             else if (input & PRESS_UP) {
                 if (check_above(map, 1, block_id, block_id) == 0) {
-                    enter_climb(ClimbBelow);
-std::cout << "climb below" << std::endl;
+                    enter_climb(map, ClimbBelow, m_x, m_y - 1);
                 }
             }
             else if (m_dir == Right && (input & PRESS_RIGHT)) {
                 if (check_ahead(map, 1, block_id, block_id) == 0) {
-                    enter_climb(ClimbRight);
-std::cout << "climb right" << std::endl;
+                    enter_climb(map, ClimbRight, m_x + 1, m_y);
                 }
             }
             else if (m_dir == Left && (input & PRESS_LEFT)) {
                 if (check_ahead(map, 1, block_id, block_id) == 0) {
-                    enter_climb(ClimbLeft);
-std::cout << "climb left" << std::endl;
+                    enter_climb(map, ClimbLeft, m_x - 1, m_y);
                 }
             }
         }

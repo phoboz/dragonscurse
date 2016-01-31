@@ -34,11 +34,11 @@ private:
     bool animate_attack_left();
     virtual bool animate_attack();
 
-    void enter_climb(ClimbDir dir);
+    void enter_climb(Map *map, ClimbDir dir, int x, int y);
     void leave_climb(Map *map);
 
-    int check_climb(Map *map, int len);
-    bool climb_turn_right(Map *map);
+    int check_climb(Map *map, int len = 1);
+    bool climb_right_turn_right(Map *map);
 
     void move_climb(Map *map, int input);
 
