@@ -514,7 +514,7 @@ void Climber::enter_climb(Map *map, ClimbDir dir, int x, int y)
 
     switch(dir) {
         case ClimbAbove:
-            m_y = block_y * map->get_tile_height() + 4;
+            m_y = block_y * map->get_tile_height() - get_attribute("bottom") - 1;
             break;
 
         case ClimbBelow:
@@ -522,11 +522,11 @@ void Climber::enter_climb(Map *map, ClimbDir dir, int x, int y)
             break;
 
         case ClimbRight:
-            m_x = block_x * map->get_tile_width() + 17;
+            m_x = block_x * map->get_tile_width() - get_attribute("right") - 1;
             break;
 
         case ClimbLeft:
-            m_x = block_x * map->get_tile_width() + 16;
+            m_x = block_x * map->get_tile_width() + get_attribute("left");
             break;
 
         default:
@@ -570,7 +570,7 @@ int Climber::check_climb(Map *map, int len)
     int block_id = prop.GetNumericProperty("climb");
 
     if (m_climb_dir == ClimbAbove) {
-        int bottom = get_attribute("climb_above_bottom") + 1;
+        int bottom = get_attribute("bottom") + 1;
 
         if (m_dir == Right) {
             int right = get_attribute("climb_above_right");
@@ -596,7 +596,7 @@ int Climber::check_climb(Map *map, int len)
         }
     }
     else if (m_climb_dir == ClimbBelow) {
-        int top = get_attribute("climb_below_top") - 1;
+        int top = get_attribute("top") - 1;
 
         if (m_dir == Right) {
             int right = get_attribute("climb_below_right");
@@ -622,7 +622,7 @@ int Climber::check_climb(Map *map, int len)
         }
     }
     else if (m_climb_dir == ClimbRight) {
-        int right = get_attribute("climb_right_right") + 1;
+        int right = get_attribute("right") + 1;
 
         if (m_dir == Right) {
             int bottom = get_attribute("climb_right_bottom");
@@ -648,7 +648,7 @@ int Climber::check_climb(Map *map, int len)
         }
     }
     else if (m_climb_dir == ClimbLeft) {
-        int left = get_attribute("climb_left_left") - 1;
+        int left = get_attribute("left") - 1;
 
         if (m_dir == Right) {
             int bottom = get_attribute("climb_left_bottom");
@@ -689,7 +689,7 @@ bool Climber::climb_right_turn_right(Map *map)
         x = m_x + get_attribute("right") + 1;
         y = m_y + get_attribute("bottom");
         if (check_collision(x, y, map, block_id, block_id)) {
-            enter_climb(map, ClimbAbove, x, y - map->get_tile_width() * 2);
+            enter_climb(map, ClimbAbove, x, y);
             m_x += map->get_tile_width();
             result = true;
         }
@@ -774,7 +774,6 @@ void Climber::move_climb(Map *map, int input)
                     set_dir(Left);
                     set_vy(-check_climb(map, get_attribute("move_speed")));
                 }
-#if 1
                 else if (input & PRESS_RIGHT) {
                     if (m_leave_ready) {
                         if (climb_right_turn_right(map)) {
@@ -782,7 +781,6 @@ void Climber::move_climb(Map *map, int input)
                         }
                     }
                 }
-#endif
                 else {
                     animate_climb();
                     set_dir(Keep);
@@ -829,23 +827,35 @@ void Climber::move(Map *map)
         int block_id = prop.GetNumericProperty("climb");
         if (block_id) {
             if (input & PRESS_DOWN) {
-                if (check_below(map, 1, block_id, block_id) == 0) {
-                    enter_climb(map, ClimbAbove, m_x, m_y + 1);
+                if (check_collision(m_x + get_attribute("climb_above_left"),
+                                    m_y + get_attribute("bottom") + 1,
+                                    map, block_id, block_id)) {
+                    enter_climb(map, ClimbAbove,
+                                m_x, m_y + get_attribute("bottom") + 1);
                 }
             }
             else if (input & PRESS_UP) {
-                if (check_above(map, 1, block_id, block_id) == 0) {
-                    enter_climb(map, ClimbBelow, m_x, m_y - 1);
+                if (check_collision(m_x + get_attribute("climb_below_left"),
+                                    m_y + get_attribute("top") - 1,
+                                    map, block_id, block_id)) {
+                    enter_climb(map, ClimbBelow,
+                                m_x, m_y + get_attribute("top") - 1);
                 }
             }
             else if (m_dir == Right && (input & PRESS_RIGHT)) {
-                if (check_ahead(map, 1, block_id, block_id) == 0) {
-                    enter_climb(map, ClimbRight, m_x + 1, m_y);
+                if (check_collision(m_x + get_attribute("right") + 1,
+                                    m_y + get_attribute("climb_right_top"),
+                                    map, block_id, block_id)) {
+                    enter_climb(map, ClimbRight,
+                                m_x + get_attribute("right") + 1, m_y);
                 }
             }
             else if (m_dir == Left && (input & PRESS_LEFT)) {
-                if (check_ahead(map, 1, block_id, block_id) == 0) {
-                    enter_climb(map, ClimbLeft, m_x - 1, m_y);
+                if (check_collision(m_x + get_attribute("left") - 1,
+                                    m_y + get_attribute("climb_left_top"),
+                                    map, block_id, block_id)) {
+                    enter_climb(map, ClimbLeft,
+                                m_x + get_attribute("left") - 1, m_y);
                 }
             }
         }

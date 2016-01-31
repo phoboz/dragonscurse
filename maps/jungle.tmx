@@ -4,6 +4,7 @@
   <property name="bg_color" value="65450"/>
   <property name="music" value="jungle.ogg"/>
   <property name="offset_y" value="-96"/>
+  <property name="start_x" value="64"/>
  </properties>
  <tileset firstgid="1" name="jungle" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>
