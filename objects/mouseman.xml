@@ -66,7 +66,7 @@
                     <attack_parts frame="3">
                         <attack_part x1="46" y1="46" x2="60" y2="52" />
                     </attack_parts>
-                    <attack_parts frame="8">
+                    <attack_parts frame="7">
                         <attack_part x1="0" y1="46" x2="14" y2="52" />
                     </attack_parts>
                 </object>
