@@ -37,8 +37,11 @@ private:
     void enter_climb(Map *map, ClimbDir dir, int x, int y);
     void leave_climb(Map *map);
 
-    int check_climb(Map *map, int len = 1);
+    int check_climb(Map *map, int len = 1, Direction dir = Keep);
+    bool climb_above_turn_down(Map *map);
+    bool climb_below_turn_up(Map *map);
     bool climb_right_turn_right(Map *map);
+    bool climb_left_turn_left(Map *map);
 
     void move_climb(Map *map, int input);
 
