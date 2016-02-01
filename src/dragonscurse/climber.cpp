@@ -726,7 +726,7 @@ bool Climber::climb_below_turn_up(Map *map)
         int y = m_y + get_attribute("top") - 1;
         if (check_collision(x, y, map, block_id, block_id)) {
             enter_climb(map, ClimbRight, x, y);
-            m_y -= map->get_tile_height();
+            m_y -= map->get_tile_height() / 2;
             result = true;
         }
     }
@@ -735,7 +735,7 @@ bool Climber::climb_below_turn_up(Map *map)
         int y = m_y + get_attribute("top") - 1;
         if (check_collision(x, y, map, block_id, block_id)) {
             enter_climb(map, ClimbLeft, x, y);
-            m_y -= map->get_tile_height();
+            m_y -= map->get_tile_height() / 2;
             result = true;
         }
     }
@@ -755,7 +755,7 @@ bool Climber::climb_right_turn_right(Map *map)
         int y = m_y + get_attribute("bottom");
         if (check_collision(x, y, map, block_id, block_id)) {
             enter_climb(map, ClimbAbove, x, y);
-            m_x += map->get_tile_width();
+            m_x += map->get_tile_width() / 2;
             result = true;
         }
     }
@@ -764,7 +764,7 @@ bool Climber::climb_right_turn_right(Map *map)
         int y = m_y + get_attribute("top");
             if (check_collision(x, y, map, block_id, block_id)) {
                 enter_climb(map, ClimbBelow, x, y);
-                m_x += map->get_tile_width();
+                m_x += map->get_tile_width() / 2;
                 result = true;
             }
     }
@@ -784,7 +784,7 @@ bool Climber::climb_left_turn_left(Map *map)
         int y = m_y + get_attribute("bottom");
         if (check_collision(x, y, map, block_id, block_id)) {
             enter_climb(map, ClimbAbove, x, y);
-            m_x -= map->get_tile_width();
+            m_x -= map->get_tile_width() / 2;
             result = true;
         }
     }
@@ -793,7 +793,7 @@ bool Climber::climb_left_turn_left(Map *map)
         int y = m_y + get_attribute("top");
             if (check_collision(x, y, map, block_id, block_id)) {
                 enter_climb(map, ClimbBelow, x, y);
-                m_x -= map->get_tile_width();
+                m_x -= map->get_tile_width() / 2;
                 result = true;
             }
     }
@@ -927,50 +927,52 @@ void Climber::move(Map *map)
 {
     int input = get_input();
 
-    if (m_climb_dir == ClimbNone && (m_action == Jump || m_action == Fall)) {
-        const Tmx::Tileset *tileset = map->get_tileset(0);
-        const Tmx::PropertySet prop = tileset->GetProperties();
+    if (m_climb_dir == ClimbNone) {
+        Knight::move(map);
 
-        // Check if on climb block
-        int block_id = prop.GetNumericProperty("climb");
-        if (block_id) {
-            if (input & PRESS_DOWN) {
-                if (check_collision(m_x + get_attribute("climb_above_center"),
-                                    m_y + get_attribute("bottom") + 1,
-                                    map, block_id, block_id)) {
-                    enter_climb(map, ClimbAbove,
-                                m_x, m_y + get_attribute("bottom") + 1);
+        if (m_action == Jump || m_action == Fall) {
+            const Tmx::Tileset *tileset = map->get_tileset(0);
+            const Tmx::PropertySet prop = tileset->GetProperties();
+
+            // Check if on climb block
+            int block_id = prop.GetNumericProperty("climb");
+            if (block_id) {
+                if (input & PRESS_DOWN) {
+                    if (check_collision(m_x +
+                                            get_attribute("climb_above_center"),
+                                        m_y + get_attribute("bottom") + 1,
+                                        map, block_id, block_id)) {
+                        enter_climb(map, ClimbAbove,
+                                    m_x, m_y + get_attribute("bottom") + 1);
+                    }
                 }
-            }
-            else if (input & PRESS_UP) {
-                if (check_collision(m_x + get_attribute("climb_below_center"),
-                                    m_y + get_attribute("top") - 1,
-                                    map, block_id, block_id)) {
-                    enter_climb(map, ClimbBelow,
-                                m_x, m_y + get_attribute("top") - 1);
+                else if (input & PRESS_UP) {
+                    if (check_collision(m_x +
+                                            get_attribute("climb_below_center"),
+                                        m_y + get_attribute("top") - 1,
+                                        map, block_id, block_id)) {
+                        enter_climb(map, ClimbBelow,
+                                    m_x, m_y + get_attribute("top") - 1);
+                    }
                 }
-            }
-            else if (m_dir == Right && (input & PRESS_RIGHT)) {
-                if (check_collision(m_x + get_attribute("right") + 1,
-                                    m_y + get_attribute("climb_right_top"),
-                                    map, block_id, block_id)) {
-                    enter_climb(map, ClimbRight,
-                                m_x + get_attribute("right") + 1, m_y);
+                else if (m_dir == Right && (input & PRESS_RIGHT)) {
+                    if (check_collision(m_x + get_attribute("right") + 1,
+                                        m_y + get_attribute("climb_right_top"),
+                                        map, block_id, block_id)) {
+                        enter_climb(map, ClimbRight,
+                                    m_x + get_attribute("right") + 1, m_y);
+                    }
                 }
-            }
-            else if (m_dir == Left && (input & PRESS_LEFT)) {
-                if (check_collision(m_x + get_attribute("left") - 1,
-                                    m_y + get_attribute("climb_left_top"),
-                                    map, block_id, block_id)) {
-                    enter_climb(map, ClimbLeft,
-                                m_x + get_attribute("left") - 1, m_y);
+                else if (m_dir == Left && (input & PRESS_LEFT)) {
+                    if (check_collision(m_x + get_attribute("left") - 1,
+                                        m_y + get_attribute("climb_left_top"),
+                                        map, block_id, block_id)) {
+                        enter_climb(map, ClimbLeft,
+                                    m_x + get_attribute("left") - 1, m_y);
+                    }
                 }
             }
         }
-    }
-
-    if (m_climb_dir == ClimbNone) {
-        Knight::move(map);
     }
     else {
         if (m_action == Attack) {
