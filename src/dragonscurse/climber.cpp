@@ -577,7 +577,7 @@ int Climber::check_climb(Map *map, int len)
         int bottom = get_attribute("bottom") + 1;
 
         if (m_dir == Right) {
-            int right = get_attribute("climb_above_right");
+            int right = get_attribute("right");
             int dx;
             for (dx = len; dx > 0; dx--) {
                 if (check_collision(m_x + right + dx, m_y + bottom,
@@ -588,7 +588,7 @@ int Climber::check_climb(Map *map, int len)
             result = dx;
         }
         else if (m_dir == Left) {
-            int left = get_attribute("climb_above_left");
+            int left = get_attribute("left");
             int dx;
             for (dx = len; dx > 0; dx--) {
                 if (check_collision(m_x + left - dx, m_y + bottom,
@@ -603,7 +603,7 @@ int Climber::check_climb(Map *map, int len)
         int top = get_attribute("top") - 1;
 
         if (m_dir == Right) {
-            int right = get_attribute("climb_below_right");
+            int right = get_attribute("right");
             int dx;
             for (dx = len; dx > 0; dx--) {
                 if (check_collision(m_x + right + dx, m_y + top,
@@ -614,7 +614,7 @@ int Climber::check_climb(Map *map, int len)
             result = dx;
         }
         else if (m_dir == Left) {
-            int left = get_attribute("climb_below_left");
+            int left = get_attribute("left");
             int dx;
             for (dx = len; dx > 0; dx--) {
                 if (check_collision(m_x + left - dx, m_y + top,
@@ -831,7 +831,7 @@ void Climber::move(Map *map)
         int block_id = prop.GetNumericProperty("climb");
         if (block_id) {
             if (input & PRESS_DOWN) {
-                if (check_collision(m_x + get_attribute("climb_above_left"),
+                if (check_collision(m_x + get_attribute("climb_above_center"),
                                     m_y + get_attribute("bottom") + 1,
                                     map, block_id, block_id)) {
                     enter_climb(map, ClimbAbove,
@@ -839,7 +839,7 @@ void Climber::move(Map *map)
                 }
             }
             else if (input & PRESS_UP) {
-                if (check_collision(m_x + get_attribute("climb_below_left"),
+                if (check_collision(m_x + get_attribute("climb_below_center"),
                                     m_y + get_attribute("top") - 1,
                                     map, block_id, block_id)) {
                     enter_climb(map, ClimbBelow,
