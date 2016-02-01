@@ -772,6 +772,37 @@ bool Climber::climb_right_turn_right(Map *map)
     return result;
 }
 
+bool Climber::climb_right_turn_left(Map *map)
+{
+    bool result = false;
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+    int block_id = prop.GetNumericProperty("climb");
+
+    /* TODO: Check if climber is blocked by a solid block at given direction */
+    if (1/*check_climb(map, 1, Left) == 0*/) {
+        int x = m_x + get_attribute("left");
+        int y = m_y + get_attribute("top") - 1;
+        if (check_collision(x, y, map, block_id, block_id)) {
+            enter_climb(map, ClimbBelow, x, y);
+            m_x -= map->get_tile_width() / 2;
+            result = true;
+        }
+    }
+    /* TODO: See above */
+    else if (1/*check_climb(map, 1, Right) == 0*/) {
+        int x = m_x + get_attribute("left");
+        int y = m_y + get_attribute("bottom") + 1;
+            if (check_collision(x, y, map, block_id, block_id)) {
+                enter_climb(map, ClimbBelow, x, y);
+                m_x -= map->get_tile_width() / 2;
+                result = true;
+            }
+    }
+
+    return result;
+}
+
 bool Climber::climb_left_turn_left(Map *map)
 {
     bool result = false;
@@ -882,6 +913,11 @@ void Climber::move_climb(Map *map, int input)
                 else if (input & PRESS_RIGHT) {
                     if (m_leave_ready) {
                         climb_right_turn_right(map);
+                    }
+                }
+                else if (input & PRESS_LEFT) {
+                    if (m_leave_ready) {
+                        climb_right_turn_left(map);
                     }
                 }
                 else {
