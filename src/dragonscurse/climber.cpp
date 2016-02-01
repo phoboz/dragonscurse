@@ -514,19 +514,23 @@ void Climber::enter_climb(Map *map, ClimbDir dir, int x, int y)
 
     switch(dir) {
         case ClimbAbove:
-            m_y = block_y * map->get_tile_height() - get_attribute("bottom") - 1;
+            m_y = block_y * map->get_tile_height() +
+                      get_attribute("climb_block_above");
             break;
 
         case ClimbBelow:
-            m_y = block_y * map->get_tile_height() + 4;
+            m_y = block_y * map->get_tile_height() +
+                      get_attribute("climb_block_below");
             break;
 
         case ClimbRight:
-            m_x = block_x * map->get_tile_width() - get_attribute("right") - 1;
+            m_x = block_x * map->get_tile_width() +
+                      get_attribute("climb_block_right");
             break;
 
         case ClimbLeft:
-            m_x = block_x * map->get_tile_width() + get_attribute("left");
+            m_x = block_x * map->get_tile_width() +
+                get_attribute("climb_block_left");
             break;
 
         default:

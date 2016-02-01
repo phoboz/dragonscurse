@@ -1,6 +1,10 @@
 <?xml version="1.0" ?>
 <mouseman>
     <climber attack_treshold="6"
+             climb_block_above="-60"
+             climb_block_below="4"
+             climb_block_right="-47"
+             climb_block_left="16"
              climb_above_right="34"
              climb_above_left="24"
              climb_below_right="34"
