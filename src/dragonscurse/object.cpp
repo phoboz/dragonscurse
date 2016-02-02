@@ -296,37 +296,57 @@ bool Object::check_ahead(Map *map, int start, int end)
 int Object::check_ahead(Map *map, int len, int start, int end)
 {
     int result = len;
-    int top = get_attribute("top");
-    int bottom = get_attribute("bottom");
 
     if (m_dir == Right) {
-        int right = get_attribute("right");
-        for (int i = top; i <= bottom; i++) {
-            int dx;
-            for (dx = len; dx > 0; dx--) {
-                if (!check_collision(m_x + right + dx, m_y + i,
-                                     map, start, end)) {
-                    break;
-                }
-            }
-            if (dx < result) {
-                result = dx;
-            }
-        }
+        result = check_right(map, len, start, end);
     }
     else if (m_dir == Left) {
-        int left = get_attribute("left");
-        for (int i = top; i <= bottom; i++) {
-            int dx;
-            for (dx = len; dx > 0; dx--) {
-                if (!check_collision(m_x + left - dx, m_y + i,
-                                     map, start, end)) {
-                    break;
-                }
+        result = check_left(map, len, start, end);
+    }
+
+    return result;
+}
+
+int Object::check_right(Map *map, int len, int start, int end)
+{
+    int result = len;
+    int top = get_attribute("top");
+    int bottom = get_attribute("bottom");
+    int right = get_attribute("right");
+
+    for (int i = top; i <= bottom; i++) {
+        int dx;
+        for (dx = len; dx > 0; dx--) {
+            if (!check_collision(m_x + right + dx, m_y + i,
+                                 map, start, end)) {
+                break;
             }
-            if (dx < result) {
-                result = dx;
+        }
+        if (dx < result) {
+            result = dx;
+        }
+    }
+
+    return result;
+}
+
+int Object::check_left(Map *map, int len, int start, int end)
+{
+    int result = len;
+    int top = get_attribute("top");
+    int bottom = get_attribute("bottom");
+    int left = get_attribute("left");
+
+    for (int i = top; i <= bottom; i++) {
+        int dx;
+        for (dx = len; dx > 0; dx--) {
+            if (!check_collision(m_x + left - dx, m_y + i,
+                                 map, start, end)) {
+                break;
             }
+        }
+        if (dx < result) {
+            result = dx;
         }
     }
 

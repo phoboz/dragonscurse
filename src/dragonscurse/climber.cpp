@@ -685,6 +685,33 @@ int Climber::check_climb(Map *map, int len, Direction dir)
     return result;
 }
 
+bool Climber::climb_above_turn_up(Map *map)
+{
+    bool result = false;
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+    int block_id = prop.GetNumericProperty("climb");
+
+    if (!check_left(map)) {
+        int x = m_x + get_attribute("left") - 1;
+        int y = m_y + get_attribute("bottom");
+        if (check_collision(x, y, map, block_id, block_id)) {
+            enter_climb(map, ClimbLeft, x, y);
+            result = true;
+        }
+    }
+    else if (!check_right(map)) {
+        int x = m_x + get_attribute("right") + 1;
+        int y = m_y + get_attribute("bottom");
+        if (check_collision(x, y, map, block_id, block_id)) {
+            enter_climb(map, ClimbRight, x, y);
+            result = true;
+        }
+    }
+
+    return result;
+}
+
 bool Climber::climb_above_turn_down(Map *map)
 {
     bool result = false;
@@ -743,6 +770,33 @@ bool Climber::climb_below_turn_up(Map *map)
     return result;
 }
 
+bool Climber::climb_below_turn_down(Map *map)
+{
+    bool result = false;
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+    int block_id = prop.GetNumericProperty("climb");
+
+    if (!check_left(map)) {
+        int x = m_x + get_attribute("left") - 1;
+        int y = m_y + get_attribute("bottom");
+        if (check_collision(x, y, map, block_id, block_id)) {
+            enter_climb(map, ClimbLeft, x, y);
+            result = true;
+        }
+    }
+    else if (!check_right(map)) {
+        int x = m_x + get_attribute("right") + 1;
+        int y = m_y + get_attribute("bottom");
+        if (check_collision(x, y, map, block_id, block_id)) {
+            enter_climb(map, ClimbRight, x, y);
+            result = true;
+        }
+    }
+
+    return result;
+}
+
 bool Climber::climb_right_turn_right(Map *map)
 {
     bool result = false;
@@ -779,23 +833,19 @@ bool Climber::climb_right_turn_left(Map *map)
     const Tmx::PropertySet prop = tileset->GetProperties();
     int block_id = prop.GetNumericProperty("climb");
 
-    /* TODO: Check if climber is blocked by a solid block at given direction */
-    if (1/*check_climb(map, 1, Left) == 0*/) {
+    if (!check_above(map)) {
         int x = m_x + get_attribute("left");
         int y = m_y + get_attribute("top") - 1;
         if (check_collision(x, y, map, block_id, block_id)) {
             enter_climb(map, ClimbBelow, x, y);
-            m_x -= map->get_tile_width() / 2;
             result = true;
         }
     }
-    /* TODO: See above */
-    else if (1/*check_climb(map, 1, Right) == 0*/) {
+    else if (!check_below(map)) {
         int x = m_x + get_attribute("left");
         int y = m_y + get_attribute("bottom") + 1;
             if (check_collision(x, y, map, block_id, block_id)) {
                 enter_climb(map, ClimbBelow, x, y);
-                m_x -= map->get_tile_width() / 2;
                 result = true;
             }
     }
@@ -858,6 +908,11 @@ void Climber::move_climb(Map *map, int input)
                     set_dir(Left);
                     set_vx(-check_climb(map, get_attribute("move_speed")));
                 }
+                else if (input & PRESS_UP) {
+                    if (m_leave_ready) {
+                        climb_above_turn_up(map);
+                    }
+                }
                 else if (input & PRESS_DOWN) {
                     if (m_leave_ready) {
                         climb_above_turn_down(map);
@@ -887,6 +942,11 @@ void Climber::move_climb(Map *map, int input)
                 else if (input & PRESS_UP) {
                     if (m_leave_ready) {
                         climb_below_turn_up(map);
+                    }
+                }
+                else if (input & PRESS_DOWN) {
+                    if (m_leave_ready) {
+                        climb_below_turn_down(map);
                     }
                 }
                 else {
