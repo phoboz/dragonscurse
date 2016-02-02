@@ -2,8 +2,8 @@
 <mouseman>
     <climber attack_treshold="6"
              climb_block_above="-60"
-             climb_block_below="4"
-             climb_block_right="-47"
+             climb_block_below="3"
+             climb_block_right="-45"
              climb_block_left="16"
              climb_above_center="30"
              climb_below_center="30"
@@ -59,7 +59,7 @@
                    below_left_attack_start="15" below_left_attack_end="15"
                    perish_start="32" perish_end="32">
                 <object image="mouseman.png"
-                        left="16" right="46" top="28" bottom="59">
+                        left="16" right="44" top="29" bottom="59">
                     <weak_parts frame="-1">
                         <weak_part x1="18" y1="31" x2="40" y2="58" />
                     </weak_parts>
