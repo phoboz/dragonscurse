@@ -90,6 +90,13 @@
     <property name="type" value="window_door.xml"/>
    </properties>
   </object>
+  <object name="jungle.tmx" type="Area" x="0" y="928" width="32" height="128">
+   <properties>
+    <property name="start_x" value="18336"/>
+    <property name="start_y" value="960"/>
+    <property name="type" value="warp"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="175" height="48">
   <data encoding="base64" compression="zlib">

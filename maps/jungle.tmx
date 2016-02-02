@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="600" height="45" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="576" height="45" tilewidth="32" tileheight="32">
  <properties>
   <property name="bg_color" value="65450"/>
   <property name="music" value="jungle.ogg"/>
@@ -18,9 +18,18 @@
   </properties>
   <image source="jungle.png" width="512" height="512"/>
  </tileset>
- <layer name="Tile Layer 1" width="600" height="45">
+ <layer name="Jungle" width="576" height="45">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
+ <objectgroup name="Areas" width="576" height="45">
+  <object name="village.tmx" type="Area" x="18400" y="896" width="32" height="128">
+   <properties>
+    <property name="start_x" value="32"/>
+    <property name="start_y" value="992"/>
+    <property name="type" value="warp"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
