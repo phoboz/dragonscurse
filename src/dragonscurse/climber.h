@@ -44,6 +44,7 @@ private:
     bool climb_below_turn_down(Map *map);
     bool climb_right_turn_right(Map *map);
     bool climb_right_turn_left(Map *map);
+    bool climb_left_turn_right(Map *map);
     bool climb_left_turn_left(Map *map);
 
     void move_climb(Map *map, int input);
