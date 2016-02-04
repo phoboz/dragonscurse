@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="158" height="74" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="bg_color" value="0"/>
+  <property name="music" value="dungeon.ogg"/>
+  <property name="start_x" value="2720"/>
+  <property name="start_y" value="32"/>
+ </properties>
+ <tileset firstgid="1" name="jungle" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <properties>
+   <property name="catapult" value="5"/>
+   <property name="climb" value="4"/>
+   <property name="solid_end" value="14"/>
+   <property name="solid_start" value="1"/>
+   <property name="water_end" value="152"/>
+   <property name="water_start" value="135"/>
+  </properties>
+  <image source="jungle.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Tower" width="158" height="74">
+  <data encoding="base64" compression="zlib">
+   eJzt2UsKgzAUQNE46Cr7c/+rqA4KUpoQywsx9gwOSAYa7KUxZEopTYS4VOo9T85lbeq+uBbojmhrU4/FrUB3RCutre8edUe07Tr7Oa47Wtn2lRvXHdFyfemOlnRHD7qjB93Rw793lw4wh5HUnm/VqOkuSu/3tu0tHWAeo6k536r1TOXuIp7hvO0cas639sp1F2FOujuD1utg63WcMbX4PT+7O+o86cf/Hb27a/Hdfwm877d9C2MqfffPmfG9+4ra/cIv92dMrdbW3HX0swAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP7ZC7ywgCo=
+  </data>
+ </layer>
+</map>
