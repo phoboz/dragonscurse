@@ -633,7 +633,7 @@ int Climber::check_climb(Map *map, int len, Direction dir)
         int right = get_attribute("right") + 1;
 
         if (dir == Right) {
-            int bottom = get_attribute("climb_right_bottom");
+            int bottom = get_attribute("bottom");
             int dy;
             for (dy = len; dy > 0; dy--) {
                 if (check_collision(m_x + right, m_y + bottom + dy,
@@ -644,7 +644,7 @@ int Climber::check_climb(Map *map, int len, Direction dir)
             result = dy;
         }
         else if (dir == Left) {
-            int top = get_attribute("climb_right_top");
+            int top = get_attribute("top");
             int dy;
             for (dy = len; dy > 0; dy--) {
                 if (check_collision(m_x + right, m_y + top - dy,
@@ -659,7 +659,7 @@ int Climber::check_climb(Map *map, int len, Direction dir)
         int left = get_attribute("left") - 1;
 
         if (dir == Right) {
-            int bottom = get_attribute("climb_left_bottom");
+            int bottom = get_attribute("bottom");
             int dy;
             for (dy = len; dy > 0; dy--) {
                 if (check_collision(m_x + left, m_y + bottom + dy,
@@ -670,7 +670,7 @@ int Climber::check_climb(Map *map, int len, Direction dir)
             result = dy;
         }
         else if (dir == Left) {
-            int top = get_attribute("climb_left_top");
+            int top = get_attribute("top");
             int dy;
             for (dy = len; dy > 0; dy--) {
                 if (check_collision(m_x + left, m_y + top - dy,
@@ -1067,7 +1067,7 @@ void Climber::move(Map *map)
             if (block_id) {
                 if (input & PRESS_DOWN) {
                     if (check_collision(m_x +
-                                            get_attribute("climb_above_center"),
+                                            get_attribute("climb_center_x"),
                                         m_y + get_attribute("bottom") + 1,
                                         map, block_id, block_id)) {
                         enter_climb(map, ClimbAbove,
@@ -1076,7 +1076,7 @@ void Climber::move(Map *map)
                 }
                 else if (input & PRESS_UP) {
                     if (check_collision(m_x +
-                                            get_attribute("climb_below_center"),
+                                            get_attribute("climb_center_x"),
                                         m_y + get_attribute("top") - 1,
                                         map, block_id, block_id)) {
                         enter_climb(map, ClimbBelow,
@@ -1085,7 +1085,7 @@ void Climber::move(Map *map)
                 }
                 else if (m_dir == Right && (input & PRESS_RIGHT)) {
                     if (check_collision(m_x + get_attribute("right") + 1,
-                                        m_y + get_attribute("climb_right_top"),
+                                        m_y + get_attribute("climb_center_y"),
                                         map, block_id, block_id)) {
                         enter_climb(map, ClimbRight,
                                     m_x + get_attribute("right") + 1, m_y);
@@ -1093,7 +1093,7 @@ void Climber::move(Map *map)
                 }
                 else if (m_dir == Left && (input & PRESS_LEFT)) {
                     if (check_collision(m_x + get_attribute("left") - 1,
-                                        m_y + get_attribute("climb_left_top"),
+                                        m_y + get_attribute("climb_center_y"),
                                         map, block_id, block_id)) {
                         enter_climb(map, ClimbLeft,
                                     m_x + get_attribute("left") - 1, m_y);

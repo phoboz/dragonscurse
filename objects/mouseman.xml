@@ -1,16 +1,12 @@
 <?xml version="1.0" ?>
 <mouseman>
     <climber attack_treshold="6"
-             climb_block_above="-60"
-             climb_block_below="3"
+             climb_center_x="30"
+             climb_center_y="30"
+             climb_block_above="-45"
+             climb_block_below="18"
              climb_block_right="-45"
-             climb_block_left="16"
-             climb_above_center="30"
-             climb_below_center="30"
-             climb_right_top="28"
-             climb_right_bottom="32"
-             climb_left_top="28"
-             climb_left_bottom="32">
+             climb_block_left="16">
         <player type="climber"
                 jump_speed="14"
                 catapult_speed="19"
@@ -59,15 +55,15 @@
                    below_left_attack_start="15" below_left_attack_end="15"
                    perish_start="32" perish_end="32">
                 <object image="mouseman.png"
-                        left="16" right="44" top="29" bottom="59">
+                        left="16" right="44" top="14" bottom="44">
                     <weak_parts frame="-1">
-                        <weak_part x1="18" y1="31" x2="40" y2="58" />
+                        <weak_part x1="18" y1="17" x2="40" y2="44" />
                     </weak_parts>
                     <attack_parts frame="3">
-                        <attack_part x1="46" y1="46" x2="60" y2="52" />
+                        <attack_part x1="46" y1="32" x2="60" y2="38" />
                     </attack_parts>
                     <attack_parts frame="7">
-                        <attack_part x1="0" y1="46" x2="14" y2="52" />
+                        <attack_part x1="0" y1="32" x2="14" y2="38" />
                     </attack_parts>
                 </object>
             </actor>
