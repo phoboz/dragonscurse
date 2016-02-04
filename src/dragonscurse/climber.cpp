@@ -546,20 +546,12 @@ void Climber::enter_climb(Map *map, ClimbDir dir, int x, int y)
 
 void Climber::leave_climb(Map *map)
 {
-#if 0
-    switch (m_climb_dir) {
-        case ClimbRight:
-            set_vx(-get_attribute("move_speed"));
-            break;
-
-        case ClimbLeft:
-            set_vx(get_attribute("move_speed"));
-            break;
-
-        default:
-            break;
+    if (m_climb_dir == ClimbRight) {
+        set_vx(-get_attribute("move_speed"));
     }
-#endif
+    else if (m_climb_dir == ClimbLeft) {
+        set_vx(get_attribute("move_speed"));
+    }
 
     m_climb_dir = ClimbNone;
     set_vy(0);
@@ -722,7 +714,8 @@ bool Climber::climb_above_turn_down(Map *map)
     if (check_climb(map, 1, Left) == 0) {
         int x = m_x + get_attribute("left");
         int y = m_y + get_attribute("bottom") + 1;
-        if (check_collision(x, y, map, block_id, block_id)) {
+        if (check_collision(x, y, map, block_id, block_id) &&
+            !check_collision(x - map->get_tile_width(), y, map)) {
             enter_climb(map, ClimbRight, x, y);
             m_y += map->get_tile_height();
             result = true;
@@ -731,7 +724,8 @@ bool Climber::climb_above_turn_down(Map *map)
     else if (check_climb(map, 1, Right) == 0) {
         int x = m_x + get_attribute("right");
         int y = m_y + get_attribute("bottom") + 1;
-        if (check_collision(x, y, map, block_id, block_id)) {
+        if (check_collision(x, y, map, block_id, block_id) &&
+            !check_collision(x + map->get_tile_width(), y, map)) {
             enter_climb(map, ClimbLeft, x, y);
             m_y += map->get_tile_height();
             result = true;
@@ -751,7 +745,8 @@ bool Climber::climb_below_turn_up(Map *map)
     if (check_climb(map, 1, Left) == 0) {
         int x = m_x + get_attribute("left");
         int y = m_y + get_attribute("top") - 1;
-        if (check_collision(x, y, map, block_id, block_id)) {
+        if (check_collision(x, y, map, block_id, block_id) &&
+            !check_collision(x - map->get_tile_width(), y, map)) {
             enter_climb(map, ClimbRight, x, y);
             m_y -= map->get_tile_height() / 2;
             result = true;
@@ -760,7 +755,8 @@ bool Climber::climb_below_turn_up(Map *map)
     else if (check_climb(map, 1, Right) == 0) {
         int x = m_x + get_attribute("right");
         int y = m_y + get_attribute("top") - 1;
-        if (check_collision(x, y, map, block_id, block_id)) {
+        if (check_collision(x, y, map, block_id, block_id) &&
+            !check_collision(x + map->get_tile_width(), y, map)) {
             enter_climb(map, ClimbLeft, x, y);
             m_y -= map->get_tile_height() / 2;
             result = true;
@@ -807,7 +803,8 @@ bool Climber::climb_right_turn_right(Map *map)
     if (check_climb(map, 1, Left) == 0) {
         int x = m_x + get_attribute("right") + 1;
         int y = m_y + get_attribute("bottom");
-        if (check_collision(x, y, map, block_id, block_id)) {
+        if (check_collision(x, y, map, block_id, block_id) &&
+            !check_collision(x, y - map->get_tile_height(), map)) {
             enter_climb(map, ClimbAbove, x, y);
             m_x += map->get_tile_width() / 2;
             result = true;
@@ -816,11 +813,12 @@ bool Climber::climb_right_turn_right(Map *map)
     else if (check_climb(map, 1, Right) == 0) {
         int x = m_x + get_attribute("right") + 1;
         int y = m_y + get_attribute("top");
-            if (check_collision(x, y, map, block_id, block_id)) {
-                enter_climb(map, ClimbBelow, x, y);
-                m_x += map->get_tile_width() / 2;
-                result = true;
-            }
+        if (check_collision(x, y, map, block_id, block_id) &&
+            !check_collision(x, y + map->get_tile_height(), map)) {
+            enter_climb(map, ClimbBelow, x, y);
+            m_x += map->get_tile_width() / 2;
+            result = true;
+        }
     }
 
     return result;
@@ -892,7 +890,8 @@ bool Climber::climb_left_turn_left(Map *map)
     if (check_climb(map, 1, Left) == 0) {
         int x = m_x + get_attribute("left") - 1;
         int y = m_y + get_attribute("bottom");
-        if (check_collision(x, y, map, block_id, block_id)) {
+        if (check_collision(x, y, map, block_id, block_id) &&
+            !check_collision(x, y - map->get_tile_height(), map)) {
             enter_climb(map, ClimbAbove, x, y);
             m_x -= map->get_tile_width() / 2;
             result = true;
@@ -901,7 +900,8 @@ bool Climber::climb_left_turn_left(Map *map)
     else if (check_climb(map, 1, Right) == 0) {
         int x = m_x + get_attribute("left") - 1;
         int y = m_y + get_attribute("top");
-            if (check_collision(x, y, map, block_id, block_id)) {
+            if (check_collision(x, y, map, block_id, block_id) &&
+            !check_collision(x, y + map->get_tile_height(), map)) {
                 enter_climb(map, ClimbBelow, x, y);
                 m_x -= map->get_tile_width() / 2;
                 result = true;
