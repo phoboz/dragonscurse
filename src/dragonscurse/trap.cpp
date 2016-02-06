@@ -10,8 +10,15 @@ void Trap::move(Map *map)
 {
     Monster::move(map);
 
-    if (m_action == Still) {
-        set_invinsible(false);
+    switch(m_action) {
+        case Move:
+            animate_move();
+            break;
+
+        case Still:
+            set_action(Move);
+            set_invinsible(false);
+            break;
     }
 }
 
