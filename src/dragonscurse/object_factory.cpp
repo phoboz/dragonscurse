@@ -24,6 +24,7 @@
 #include "swimmer.h"
 #include "dancer.h"
 #include "falling.h"
+#include "trap.h"
 #include "meka_dragon.h"
 #include "mummy_dragon.h"
 #include "key.h"
@@ -186,6 +187,9 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "Falling") == 0) {
         object = new Falling(name, media, x, y, dir);
+    }
+    else if (strcmp(type, "Trap") == 0) {
+        object = new Trap(name, media, x, y, dir);
     }
     else if (strcmp(type, "MekaDragon") == 0) {
         object = new MekaDragon(name, media, x, y, dir);

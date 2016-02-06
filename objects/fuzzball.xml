@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<fuzzball>
+    <trap>
+        <monster hp="128"
+                 ap="38"
+                 hit_time="12"
+                 perish_time="20">
+            <actor treshold="12"
+                   weight="0"
+                   right_still="0"
+                   right_move_start="0" right_move_end="0"
+                   right_fall="0"
+                   right_attack_start="0" right_attack_end="0"
+                   right_hit="1"
+                   left_still="0"
+                   left_move_start="0" left_move_end="0"
+                   left_fall="0"
+                   left_attack_start="0" left_attack_end="0"
+                   left_hit="1"
+                   perish_start="2" perish_end="2">
+                <object image="fuzzball.png"
+                        left="0" right="32" top="0" bottom="32">
+                <weak_parts frame="-1">
+                    <weak_part x1="0" y1="0" x2="32" y2="32" />
+                </weak_parts>
+                </object>
+            </actor>
+        </monster>
+    </trap>
+</fuzzball>
+

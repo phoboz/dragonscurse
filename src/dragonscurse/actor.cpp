@@ -437,8 +437,10 @@ void Actor::set_perish(bool invisible)
 
 void Actor::move(Map *map)
 {
-    if (m_invisible_timer.expired(get_attribute("invisible_time"))) {
-        set_invisible(false);
+    if (m_invisible) {
+        if (m_invisible_timer.expired(get_attribute("invisible_time"))) {
+            set_invisible(false);
+        }
     }
 }
 
