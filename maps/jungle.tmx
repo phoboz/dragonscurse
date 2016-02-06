@@ -31,5 +31,12 @@
     <property name="type" value="warp"/>
    </properties>
   </object>
+  <object name="jungle_tower.tmx" type="Area" x="224" y="512" width="64" height="64">
+   <properties>
+    <property name="start_x" value="2976"/>
+    <property name="start_y" value="1952"/>
+    <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
