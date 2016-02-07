@@ -40,19 +40,19 @@
   </object>
  </objectgroup>
  <objectgroup name="Monsters" width="576" height="45">
-  <object name="fuzzball.xml" type="Trap" x="17424" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="17040" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="16688" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="16560" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="16304" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="16176" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="16048" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="14992" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="14480" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="14128" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="14000" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="13744" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="13552" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Trap" x="13512" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="17424" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="17040" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="16688" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="16560" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="16304" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="16176" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="16048" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="14992" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="14480" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="14128" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="14000" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="13744" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="13552" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="13512" y="992" width="32" height="32"/>
  </objectgroup>
 </map>

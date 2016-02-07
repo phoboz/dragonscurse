@@ -415,6 +415,7 @@ void Actor::reset_hit()
 {
     set_action(Still);
     set_dir(Keep);
+    m_damaged = false;
 }
 
 void Actor::set_perish(bool invisible)

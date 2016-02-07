@@ -26,12 +26,15 @@ public:
         : Body(type, x, y, dir),
           m_anim_dir(AnimUp),
           m_action(Still),
+          m_damaged(false),
           m_invisible(false) { }
 
     virtual bool set_hit(Object *object = 0, Status *status = 0);
+    void set_damaged() { m_damaged = true; }
     void reset_hit();
     void set_perish(bool invisible = true);
     Action get_action() const { return m_action; }
+    bool get_damaged() const { return m_damaged; }
     bool get_invisible() const { return m_invisible; }
 
     virtual bool attack_object(Object *object) { return false; }
@@ -55,6 +58,7 @@ protected:
 
     AnimDirection m_anim_dir;
     Action m_action;
+    bool m_damaged;
     bool m_invisible;
     Timer m_anim_timer;
     Timer m_attack_anim_timer;

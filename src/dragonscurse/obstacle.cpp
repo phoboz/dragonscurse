@@ -1,12 +1,6 @@
-#include "trap.h"
+#include "obstacle.h"
 
-bool Trap::set_hit(Object *object, Status *status)
-{
-    Monster::set_hit(object, status);
-    set_invinsible(true);
-}
-
-void Trap::move(Map *map)
+void Obstacle::move(Map *map)
 {
     Monster::move(map);
 

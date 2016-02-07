@@ -60,9 +60,13 @@ bool Monster::set_hit(Object *object, Status *status)
             }
 
             // Reduce hp
-            m_curr_hp -= status->get_ap();
-            if (m_curr_hp <= 0) {
-                set_perish();
+            if (!get_damaged()) {
+                m_curr_hp -= status->get_ap();
+                if (m_curr_hp <= 0) {
+                    set_perish();
+                }
+
+                set_damaged();
             }
         }
     }
