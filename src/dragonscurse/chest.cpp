@@ -28,9 +28,7 @@ void Chest::world_initialize(World *world)
                 for (int i = 0; i < info.num_objects; i++) {
                     Object *object = ObjectFactory::create_object(
                                          &info.objects[i],
-                                         m_media,
-                                         get_x(),
-                                         get_y());
+                                         m_media);
                     if (object->get_type() == Object::TypeItem) {
                         ((Item *) object)->set_from_chest(true);
                     }

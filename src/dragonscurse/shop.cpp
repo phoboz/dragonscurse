@@ -23,8 +23,8 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
         if (db->get_object_info(&info, i, m_name.c_str())) {
             if (info.object_type == Object::TypeItem) {
                 Object *object =
-                    ObjectFactory::create_object(info.data.material.name,
-                                                 m_media, "Item");
+                    ObjectFactory::create_item(info.data.material.name,
+                                               m_media);
                 if (object && object->get_loaded()) {
                     Item *item = (Item *) object;
                     item->set_world_key(info.key);

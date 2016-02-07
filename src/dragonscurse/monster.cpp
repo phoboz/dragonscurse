@@ -26,8 +26,7 @@ void Monster::world_initialize(World *world)
         ObjectInfo info;
         if (db->get_object_info(&info,
                                 object_id, world->get_filename())) {
-            Object *object = ObjectFactory::create_object(&info, m_media,
-                                                          get_x(), get_y());
+            Object *object = ObjectFactory::create_object(&info, m_media);
             if (object) {
                 m_objects.push_back(object);
             }
@@ -97,7 +96,7 @@ Object* Monster::release_object()
     else {
         const char *col = get_string("collectable");
         if (col) {
-            object = ObjectFactory::create_object(col, m_media, "Collectable");
+            object = ObjectFactory::create_collectable(col, m_media);
         }
     }
 

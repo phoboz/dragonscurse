@@ -109,10 +109,8 @@ bool load_area(const char *ar_name,
     }
 
     if (new_game) {
-        player = (Player *) ObjectFactory::create_object(pl_name, media,
-                                                         "Player",
-                                                         sx, sy,
-                                                         Object::Right);
+        player = (Player *) ObjectFactory::create_player(pl_name, media,
+                                                         sx, sy);
         if (!player->get_loaded()) {
             fprintf(stderr, "Fatal Error -- Unable to player %s\n", pl_name);
             return false;
@@ -140,17 +138,14 @@ void new_game(char *map_name, char *player_name, int sx, int sy)
     statusbar = new Statusbar(status, media);
     status->add_hearts(1);
     status->add_potions(1);
-    status->aquire_item((Item *) ObjectFactory::create_object(
-                                     "ivory_sword.xml",
-                                     media, "Item"));
+    status->aquire_item((Item *) ObjectFactory::create_item(
+                                     "ivory_sword.xml", media));
 
-    status->aquire_item((Item *) ObjectFactory::create_object(
-                                     "ivory_shield.xml",
-                                      media, "Item"));
+    status->aquire_item((Item *) ObjectFactory::create_item(
+                                     "ivory_shield.xml", media));
 
-    status->aquire_item((Item *) ObjectFactory::create_object(
-                                     "ivory_armour.xml",
-                                      media, "Item"));
+    status->aquire_item((Item *) ObjectFactory::create_item(
+                                     "ivory_armour.xml", media));
 
     status->equip_item("ivory_sword.xml");
     status->equip_item("ivory_shield.xml");

@@ -39,19 +39,8 @@ World::World(Map *map, MediaDB *media, WorldDB *db, const char *music)
         int num_objects = group->GetNumObjects();
 
         for (int i = 0; i < num_objects; i++) {
-            const Tmx::Object *obj = group->GetObject(i);
-            const Tmx::PropertySet prop = obj->GetProperties();
-            std::string dirname =
-                prop.GetLiteralProperty(std::string("direction"));
-            Object *object = ObjectFactory::create_object(
-                                 obj->GetName().c_str(),
-                                 m_media,
-                                 obj->GetType().c_str(),
-                                 obj->GetX(),
-                                 obj->GetY(),
-                                 obj->GetWidth(),
-                                 obj->GetHeight(),
-                                 prop);
+            Object *object = ObjectFactory::create_object(0, m_media, 0, 0, 0,
+                                                          group->GetObject(i));
             if (object) {
                 object->world_initialize(this);
                 m_objects.push_back(object);

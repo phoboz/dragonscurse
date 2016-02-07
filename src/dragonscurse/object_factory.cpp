@@ -82,15 +82,47 @@ bool ObjectFactory::search_nodes(TiXmlNode *node)
     return result;
 }
 
+Object::Direction ObjectFactory::get_dir(const Tmx::Object *obj)
+{
+    Object::Direction dir = Object::Right;
+
+    const Tmx::PropertySet prop = obj->GetProperties();
+    std::string dirname = prop.GetLiteralProperty(std::string("direction"));
+
+    if (dirname == std::string("right")) {
+        dir = Object::Right;
+    }
+    else if (dirname == std::string("left")) {
+        dir = Object::Left;
+    }
+    else if (dirname == std::string("up")) {
+        dir = Object::Up;
+    }
+    else if (dirname == std::string("down")) {
+        dir = Object::Down;
+    }
+
+    return dir;
+}
+
 Object* ObjectFactory::create_object(const char *name,
                                      MediaDB *media,
                                      const char *type,
                                      int x, int y,
-                                     int w, int h,
-                                     Object::Direction dir,
-                                     const Tmx::PropertySet &prop)
+                                     const Tmx::Object *obj)
 {
     Object *object = 0;
+    Object::Direction dir = Object::Right;
+
+    if (!type && obj) {
+        type = obj->GetType().c_str();
+        if (!name) {
+            name = obj->GetName().c_str();
+        }
+        x = obj->GetX();
+        y = obj->GetY();
+        dir = get_dir(obj);
+    }
 
     if (strcmp(type, "Player") == 0) {
         std::string pathname = Object::get_prefix() + std::string(name);
@@ -174,7 +206,9 @@ Object* ObjectFactory::create_object(const char *name,
         object = new Diver(name, media, x, y, dir);
     }
     else if (strcmp(type, "Hovering") == 0) {
-        object = new Hovering(name, media, x, y, w, dir);
+        if (obj) {
+            object = new Hovering(name, media, x, y, obj->GetWidth(), dir);
+        }
     }
     else if (strcmp(type, "Floater") == 0) {
         object = new Floater(name, media, x, y, dir);
@@ -198,8 +232,20 @@ Object* ObjectFactory::create_object(const char *name,
         object = new MummyDragon(name, media, x, y, dir);
     }
     else if (strcmp(type, "Area") == 0) {
-        std::string tn = prop.GetLiteralProperty(std::string("type"));
-        object = new Area(name, media, tn.c_str(), x, y, w, h);
+        if (obj) {
+            const Tmx::PropertySet prop = obj->GetProperties();
+            std::string tn = prop.GetLiteralProperty(std::string("type"));
+            object = new Area(name, media, tn.c_str(),
+                              x, y, obj->GetWidth(), obj->GetHeight());
+
+            if (object) {
+                std::string musicname =
+                    prop.GetLiteralProperty(std::string("music"));
+                if (musicname != std::string("No such property!")) {
+                    object->set_string("music", musicname.c_str());
+                }
+            }
+        }
     }
     else if (strcmp(type, "Chest") == 0) {
         object = new Chest(name, media, x, y);
@@ -213,92 +259,45 @@ Object* ObjectFactory::create_object(const char *name,
             object = 0;
         }
 #endif
-        std::map<std::string, std::string> pmap = prop.GetList();
-        for (std::map<std::string, std::string>::const_iterator it = pmap.begin();
-             it != pmap.end();
-             ++it) {
-            std::string attr_name = it->first;
-            if (attr_name != std::string("direction") &&
-                attr_name != std::string("music")) {
-                object->set_attribute(attr_name.c_str(),
-                                      atoi(it->second.c_str()));
+
+        // Initialize all attributes in tmx mapfile
+        if (obj) {
+            const Tmx::PropertySet prop = obj->GetProperties();
+            std::map<std::string, std::string> pmap = prop.GetList();
+            for (std::map<std::string, std::string>::const_iterator it =
+                     pmap.begin();
+                 it != pmap.end();
+                 ++it) {
+                std::string attr_name = it->first;
+                if (attr_name != std::string("direction") &&
+                    attr_name != std::string("music")) {
+                    object->set_attribute(attr_name.c_str(),
+                                          atoi(it->second.c_str()));
+                }
             }
         }
+
         object->initialize();
     }
 
     return object;
 }
 
-Object* ObjectFactory::create_object(const char *name,
-                                     MediaDB *media,
-                                     const char *type,
-                                     int x, int y,
-                                     int w, int h,
-                                     const Tmx::PropertySet &prop)
-{
-    Object *object;
-    std::string dirname = prop.GetLiteralProperty(std::string("direction"));
-
-    if (dirname == std::string("No such property!")) {
-        object = create_object(name, media, type, x, y, w, h,
-                               Object::Right, prop);
-    }
-    else if (dirname == std::string("right")) {
-        object = create_object(name, media, type, x, y, w, h,
-                               Object::Right, prop);
-    }
-    else if (dirname == std::string("left")) {
-        object = create_object(name, media, type, x, y, w, h,
-                               Object::Left, prop);
-    }
-    else if (dirname == std::string("up")) {
-        object = create_object(name, media, type, x, y, w, h,
-                               Object::Up, prop);
-    }
-    else if (dirname == std::string("down")) {
-        object = create_object(name, media, type, x, y, w, h,
-                               Object::Down, prop);
-    }
-
-    std::string musicname = prop.GetLiteralProperty(std::string("music"));
-    if (musicname != std::string("No such property!")) {
-        object->set_string("music", musicname.c_str());
-    }
-
-    return object;
-}
-
-Object* ObjectFactory::create_object(const char *name,
-                                     MediaDB *media,
-                                     const char *type,
-                                     int x, int y,
-                                     int w, int h,
-                                     Object::Direction dir)
-{
-    Tmx::PropertySet prop;
-
-    return create_object(name, media, type, x, y, w, h, dir, prop);
-}
-
-Object* ObjectFactory::create_object(ObjectInfo *info,
-                                     MediaDB *media,
-                                     int x, int y,
-                                     int w, int h)
+Object* ObjectFactory::create_object(ObjectInfo *info, MediaDB *media)
 {
     Object *object = 0;
-Collectable *z;
 
     switch(info->object_type) {
         case Object::TypeItem:
             object = ObjectFactory::create_object(info->data.material.name,
-                                                  media, "Item");
+                                                  media, "Item", 0, 0, 0);
             ((Item *) object)->set_world_key(info->key);
             break;
 
         case Object::TypeCollectable:
             object = ObjectFactory::create_object(info->data.material.name,
-                                                  media, "Collectable");
+                                                  media, "Collectable", 0, 0,
+                                                  0);
             ((Collectable *) object)->set_world_key(info->key);
             break;
 

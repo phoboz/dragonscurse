@@ -356,7 +356,7 @@ bool Status::read(std::ifstream &f, MediaDB *media)
     int num_items = StoreRestore::read_integer(f);
     for (int i = 0; i < num_items; i++) {
         char *name = StoreRestore::read_varchar(f);
-        aquire_item((Item *) ObjectFactory::create_object(name, media, "Item"));
+        aquire_item((Item *) ObjectFactory::create_item(name, media));
         if (StoreRestore::read_boolean(f)) {
             equip_item(name);
         }
@@ -366,8 +366,7 @@ bool Status::read(std::ifstream &f, MediaDB *media)
     int num_shapes = StoreRestore::read_integer(f);
     for (int i = 0; i < num_shapes; i++) {
         char *name = StoreRestore::read_varchar(f);
-        Player *shape = (Player *) ObjectFactory::create_object(name, media,
-                                                                "Player");
+        Player *shape = (Player *) ObjectFactory::create_player(name, media);
         m_shapes.push_back(shape);
         if (StoreRestore::read_boolean(f)) {
             m_shape = shape;
