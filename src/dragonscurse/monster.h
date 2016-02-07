@@ -23,12 +23,17 @@ public:
     virtual void move(Map *map);
 
 protected:
+    void set_recursive_hit(bool recursive_hit) {
+        m_recursive_hit = recursive_hit;
+    }
+
     void process_hit();
 
 private:
     int m_curr_hp;
     bool m_invinsible;
     bool m_hit_ground;
+    bool m_recursive_hit;
     Timer m_hit_timer;
     Timer m_perish_timer;
     std::list<Object*> m_objects;

@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
 <spark>
     <roller>
-        <monster hp="3"
+        <monster hp="128"
                  ap="24"
                  hit_time="12"
                  perish_time="20">
-            <actor move_speed="4"
+            <actor move_speed="2"
                    treshold="6"
                    weight="0"
                    right_still="0"

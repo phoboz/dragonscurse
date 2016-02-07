@@ -23,6 +23,7 @@
 #include "float.h"
 #include "swimmer.h"
 #include "dancer.h"
+#include "roller.h"
 #include "falling.h"
 #include "obstacle.h"
 #include "meka_dragon.h"
@@ -218,6 +219,9 @@ Object* ObjectFactory::create_object(const char *name,
     }
     else if (strcmp(type, "Dancer") == 0) {
         object = new Dancer(name, media, x, y, dir);
+    }
+    else if (strcmp(type, "Roller") == 0) {
+        object = new Roller(name, media, x, y, obj->GetPolyline());
     }
     else if (strcmp(type, "Falling") == 0) {
         object = new Falling(name, media, x, y, dir);

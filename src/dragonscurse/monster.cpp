@@ -8,7 +8,8 @@
 
 Monster::Monster(const char *fn, MediaDB *media, int x, int y, Direction dir)
     : Actor(Object::TypeMonster, x, y, dir),
-      m_invinsible(false), m_hit_ground(false)
+      m_invinsible(false), m_hit_ground(false),
+      m_recursive_hit(true)
 {
     load(fn, media);
     m_curr_hp = get_attribute("hp");
@@ -51,12 +52,14 @@ bool Monster::set_hit(Object *object, Status *status)
 
             set_lock_direction(true);
 
-            // Move backwards
-            if (get_reference() == Right) {
-                set_speed(-get_attribute("move_speed"), 0);
-            }
-            else {
-                set_speed(get_attribute("move_speed"), 0);
+            // Move backwards if recursive hit
+            if(m_recursive_hit) {
+                if (get_reference() == Right) {
+                    set_speed(-get_attribute("move_speed"), 0);
+                }
+                else {
+                    set_speed(get_attribute("move_speed"), 0);
+                }
             }
 
             // Reduce hp

@@ -6,7 +6,7 @@
 class Obstacle : public Monster {
 public:
     Obstacle(const char *fn, MediaDB *media, int x, int y, Direction dir)
-        : Monster(fn, media, x, y, dir) { }
+        : Monster(fn, media, x, y, dir) { set_recursive_hit(false); }
     virtual void move(Map *map);
 };
 
