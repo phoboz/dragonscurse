@@ -54,5 +54,10 @@
   <object name="fuzzball.xml" type="Obstacle" x="13744" y="992" width="32" height="32"/>
   <object name="fuzzball.xml" type="Obstacle" x="13552" y="992" width="32" height="32"/>
   <object name="fuzzball.xml" type="Obstacle" x="13512" y="992" width="32" height="32"/>
+  <object name="hovering_smog_red.xml" type="Hovering" x="13728" y="736" width="1664" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

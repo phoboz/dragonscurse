@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<spark>
+    <roller>
+        <monster hp="3"
+                 ap="24"
+                 hit_time="12"
+                 perish_time="20">
+            <actor move_speed="4"
+                   treshold="6"
+                   weight="0"
+                   right_still="0"
+                   right_move_start="0" right_move_end="1"
+                   right_fall="0"
+                   right_hit="2"
+                   left_still="0"
+                   left_move_start="0" left_move_end="1"
+                   left_fall="0"
+                   left_hit="2"
+                   perish_start="2" perish_end="2">
+                <object image="spark_red.png"
+                        left="0" right="32" top="0" bottom="32">
+                    <weak_parts frame="-1">
+                        <weak_part x1="0" y1="0" x2="32" y2="32" />
+                    </weak_parts>
+                </object>
+            </actor>
+            <string collectable="coin.xml" />
+        </monster>
+    </roller>
+</spark>
+
