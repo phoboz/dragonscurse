@@ -40,6 +40,7 @@ void Diver::move(Map *map)
             }
             Body::move(map);
             if (get_fall()) {
+                m_dive_timer.reset();
                 set_action(Fall);
             }
             break;

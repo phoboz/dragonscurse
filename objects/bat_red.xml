@@ -1,15 +1,12 @@
 <?xml version="1.0" ?>
 <bat>
     <diver turn_width="80"
-           attack_distance="120"
-           fly_power="3"
-           dive_time="12"
-           weight="6"
+           weight="7"
            hit_time="20">
         <monster hp="10"
                  ap="68"
                  perish_time="20">
-            <actor move_speed="4"
+            <actor move_speed="3"
                    treshold="8"
                    right_still="3"
                    right_move_start="3" right_move_end="4"

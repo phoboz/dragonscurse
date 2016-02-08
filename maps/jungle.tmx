@@ -112,9 +112,62 @@
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="bat_red.xml" type="Diver" x="9651" y="830" width="32" height="32">
+  <object name="bat_red.xml" type="Diver" x="9651" y="832" width="32" height="32">
+   <properties>
+    <property name="attack_distance" value="170"/>
+    <property name="direction" value="right"/>
+    <property name="dive_time" value="11"/>
+    <property name="fly_power" value="3"/>
+   </properties>
+  </object>
+  <object name="bat_red.xml" type="Diver" x="9456" y="864" width="32" height="32">
+   <properties>
+    <property name="attack_distance" value="170"/>
+    <property name="direction" value="right"/>
+    <property name="dive_time" value="11"/>
+    <property name="fly_power" value="3"/>
+   </properties>
+  </object>
+  <object name="bat_red.xml" type="Diver" x="9227" y="896" width="32" height="32">
+   <properties>
+    <property name="attack_distance" value="170"/>
+    <property name="direction" value="right"/>
+    <property name="dive_time" value="9"/>
+    <property name="fly_power" value="3"/>
+   </properties>
+  </object>
+  <object name="bat_red.xml" type="Diver" x="9131" y="864" width="32" height="32">
+   <properties>
+    <property name="attack_distance" value="170"/>
+    <property name="direction" value="right"/>
+    <property name="dive_time" value="11"/>
+    <property name="fly_power" value="3"/>
+   </properties>
+  </object>
+  <object name="skeleton.xml" type="Dancer" x="8944" y="928" width="48" height="64">
    <properties>
     <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="bat_red.xml" type="Diver" x="8561" y="864" width="32" height="32">
+   <properties>
+    <property name="attack_distance" value="170"/>
+    <property name="direction" value="right"/>
+    <property name="dive_time" value="11"/>
+    <property name="fly_power" value="3"/>
+   </properties>
+  </object>
+  <object name="skeleton.xml" type="Dancer" x="8384" y="928" width="48" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="bat_red.xml" type="Diver" x="8272" y="848" width="32" height="32">
+   <properties>
+    <property name="attack_distance" value="170"/>
+    <property name="direction" value="right"/>
+    <property name="dive_time" value="11"/>
+    <property name="fly_power" value="3"/>
    </properties>
   </object>
  </objectgroup>

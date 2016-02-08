@@ -112,12 +112,18 @@
   </object>
   <object name="bat_red.xml" type="Diver" x="3695" y="497" width="32" height="32">
    <properties>
+    <property name="attack_distance" value="120"/>
     <property name="direction" value="right"/>
+    <property name="dive_time" value="9"/>
+    <property name="fly_power" value="3"/>
    </properties>
   </object>
   <object name="bat_red.xml" type="Diver" x="3979" y="497" width="32" height="32">
    <properties>
+    <property name="attack_distance" value="120"/>
     <property name="direction" value="left"/>
+    <property name="dive_time" value="9"/>
+    <property name="fly_power" value="3"/>
    </properties>
   </object>
   <object name="wondering.xml" type="Dancer" x="4143" y="895" width="50" height="60">
