@@ -3,7 +3,7 @@
  <properties>
   <property name="bg_color" value="65450"/>
   <property name="music" value="jungle.ogg"/>
-  <property name="offset_y" value="-96"/>
+  <property name="offset_y" value="-128"/>
   <property name="start_x" value="12672"/>
   <property name="start_y" value="928"/>
  </properties>
@@ -72,6 +72,50 @@
   </object>
   <object name="spark_red.xml" type="Roller" x="12802" y="767">
    <polyline points="0,0 191,0 191,65 127,65"/>
+  </object>
+  <object name="giant_toad_green.xml" type="Guardian" x="12224" y="928" width="50" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_toad_green.xml" type="Guardian" x="12096" y="928" width="50" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fuzzball.xml" type="Obstacle" x="11984" y="960" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="11824" y="960" width="32" height="32"/>
+  <object name="giant_toad_green.xml" type="Guardian" x="11504" y="928" width="50" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fuzzball.xml" type="Obstacle" x="11424" y="960" width="32" height="32"/>
+  <object name="giant_toad_green.xml" type="Guardian" x="11264" y="928" width="50" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="giant_toad_green.xml" type="Guardian" x="11184" y="928" width="50" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="skeleton.xml" type="Dancer" x="10800" y="928" width="48" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fuzzball.xml" type="Obstacle" x="10608" y="960" width="32" height="32"/>
+  <object name="skeleton.xml" type="Dancer" x="9904" y="928" width="48" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="bat_red.xml" type="Diver" x="9651" y="830" width="32" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
   </object>
  </objectgroup>
 </map>
