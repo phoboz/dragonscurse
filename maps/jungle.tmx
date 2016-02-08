@@ -54,13 +54,24 @@
   <object name="fuzzball.xml" type="Obstacle" x="13744" y="992" width="32" height="32"/>
   <object name="fuzzball.xml" type="Obstacle" x="13552" y="992" width="32" height="32"/>
   <object name="fuzzball.xml" type="Obstacle" x="13512" y="992" width="32" height="32"/>
-  <object name="hovering_smog_red.xml" type="Hovering" x="13728" y="736" width="1664" height="34">
+  <object name="hovering_smog_red.xml" type="Hovering" x="13248" y="736" width="2240" height="34">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
   <object name="spark_red.xml" type="Roller" x="13120" y="768">
    <polyline points="-1,-1 -64,-1 -64,68 -30,68"/>
+  </object>
+  <object name="hovering_smog_red.xml" type="Hovering" x="15552" y="736" width="2752" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="spark_red.xml" type="Roller" x="12802" y="991">
+   <polyline points="0,0 223,0 223,-31"/>
+  </object>
+  <object name="spark_red.xml" type="Roller" x="12802" y="767">
+   <polyline points="0,0 191,0 191,65 127,65"/>
   </object>
  </objectgroup>
 </map>

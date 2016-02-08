@@ -2,11 +2,11 @@
 <spark>
     <roller>
         <monster hp="128"
-                 ap="24"
+                 ap="42"
                  hit_time="12"
                  perish_time="20">
             <actor move_speed="2"
-                   treshold="6"
+                   treshold="3"
                    weight="0"
                    right_still="0"
                    right_move_start="0" right_move_end="1"

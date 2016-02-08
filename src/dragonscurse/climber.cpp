@@ -544,7 +544,7 @@ void Climber::enter_climb(Map *map, ClimbDir dir, int x, int y)
     set_dir(Left);
 }
 
-void Climber::leave_climb(Map *map)
+void Climber::leave_climb()
 {
     if (m_climb_dir == ClimbRight) {
         set_vx(-get_attribute("move_speed"));
@@ -555,7 +555,6 @@ void Climber::leave_climb(Map *map)
 
     m_climb_dir = ClimbNone;
     set_vy(0);
-    Player::set_jump(map);
 }
 
 int Climber::check_climb(Map *map, int len, Direction dir)
@@ -919,7 +918,8 @@ void Climber::move_climb(Map *map, int input)
 
     if (input & PRESS_JUMP) {
         if (m_leave_ready) {
-            leave_climb(map);
+            leave_climb();
+            Player::set_jump(map);
         }
     }
     else {
@@ -1051,6 +1051,14 @@ void Climber::move_climb(Map *map, int input)
     }
 
     Body::move(map);
+}
+
+bool Climber::set_hit(Object *object, Status *status)
+{
+    leave_climb();
+    bool result = Player::set_hit(object, status);
+
+    return result;
 }
 
 void Climber::move(Map *map)

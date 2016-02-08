@@ -3,15 +3,17 @@
 
 bool Roller::set_hit(Object *object, Status *status)
 {
-    set_speed(0, 0);
-    Monster::set_hit(object, status);
+    if (!m_was_hit) {
+        m_was_hit = true;
+        get_speed(&m_old_dx, &m_old_dy);
+        set_speed(0, 0);
+    }
+
+    return Monster::set_hit(object, status);
 }
 
-void Roller::update_speed()
+void Roller::next_point()
 {
-    int x0 = m_polyline->GetPoint(m_curr_point).x + m_x0;
-    int y0 = m_polyline->GetPoint(m_curr_point).y + m_y0;
-
     if (!m_reverse) {
         if (++m_curr_point == m_polyline->GetNumPoints() - 1) {
             m_reverse = true;
@@ -22,6 +24,14 @@ void Roller::update_speed()
             m_reverse = false;
         }
     }
+}
+
+void Roller::update_speed()
+{
+    int x0 = m_polyline->GetPoint(m_curr_point).x + m_x0;
+    int y0 = m_polyline->GetPoint(m_curr_point).y + m_y0;
+
+    next_point();
 
     int x1 = m_polyline->GetPoint(m_curr_point).x + m_x0;
     int y1 = m_polyline->GetPoint(m_curr_point).y + m_y0;
@@ -38,8 +48,6 @@ void Roller::update_speed()
 
     m_tx = x1;
     m_ty = y1;
-
-    set_action(Move);
 }
 
 void Roller::move(Map *map)
@@ -50,7 +58,15 @@ void Roller::move(Map *map)
 
     switch(m_action) {
        case Still:
-           update_speed();
+           if (m_was_hit) {
+               set_speed(m_old_dx, m_old_dy);
+               m_was_hit = false;
+               set_action(Move);
+           }
+           else {
+               update_speed();
+               set_action(Move);
+           }
            break;
 
        case Move:

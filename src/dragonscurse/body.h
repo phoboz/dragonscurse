@@ -13,6 +13,7 @@ public:
 
     int get_vx() const { return int(m_vx); }
     int get_vy() const { return int(m_vx); }
+    void get_speed(int *vx, int *vy) { *vx = m_vx; *vy = m_vy; }
 
     void set_solid(bool solid) { m_solid = solid; }
     void set_lock_direction(bool lock_dir) { m_lock_dir = lock_dir; }
