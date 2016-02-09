@@ -30,10 +30,7 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
                     item->set_world_key(info.key);
 
                     Status *status = m_db->get_status();
-                    if (item->get_attribute("req_cp") <= status->get_cp() &&
-                        (item->get_string("req_shape") == 0 ||
-                         strcmp(item->get_string("req_shape"),
-                         status->get_shape()->get_filename()) == 0)) {
+                    if (item->get_attribute("req_cp") <= status->get_cp()) {
                         m_menu->add_option(item->get_name(),
                                            item,
                                            item->get_sprite(),
