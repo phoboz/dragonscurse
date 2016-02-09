@@ -33,6 +33,7 @@
   </object>
   <object name="jungle_tower.tmx" type="Area" x="224" y="512" width="64" height="64">
    <properties>
+    <property name="lock_id" value="1"/>
     <property name="start_x" value="2976"/>
     <property name="start_y" value="1952"/>
     <property name="type" value="regular_door.xml"/>
@@ -168,6 +169,119 @@
     <property name="direction" value="right"/>
     <property name="dive_time" value="11"/>
     <property name="fly_power" value="3"/>
+   </properties>
+  </object>
+  <object name="roper_green.xml" type="Erupter" x="7904" y="960" width="50" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="roper_green.xml" type="Erupter" x="7400" y="960" width="50" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="skeleton.xml" type="Dancer" x="7344" y="928" width="48" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="spark_red.xml" type="Roller" x="6464" y="832">
+   <polyline points="0,0 0,128 32,128 32,32"/>
+  </object>
+  <object name="spark_red.xml" type="Roller" x="6336" y="800">
+   <polyline points="0,0 0,160 64,160 64,32"/>
+  </object>
+  <object name="spark_red.xml" type="Roller" x="6240" y="896">
+   <polyline points="0,0 0,64 32,64 32,-96"/>
+  </object>
+  <object name="skeleton.xml" type="Dancer" x="5872" y="928" width="48" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="spark_green.xml" type="Roller" x="5440" y="832">
+   <polyline points="0,0 0,128 32,128 32,32"/>
+  </object>
+  <object name="spark_green.xml" type="Roller" x="5312" y="800">
+   <polyline points="0,0 0,160 64,160 64,32"/>
+  </object>
+  <object name="spark_green.xml" type="Roller" x="5216" y="896">
+   <polyline points="0,0 0,64 32,64 32,-96"/>
+  </object>
+  <object name="skeleton.xml" type="Dancer" x="5088" y="928" width="48" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="skeleton.xml" type="Dancer" x="4848" y="928" width="48" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="roper_green.xml" type="Erupter" x="3688" y="960" width="50" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="spark_green.xml" type="Roller" x="3392" y="832">
+   <polyline points="0,0 0,128 32,128 32,32"/>
+  </object>
+  <object name="spark_green.xml" type="Roller" x="3264" y="800">
+   <polyline points="0,0 0,160 64,160 64,32"/>
+  </object>
+  <object name="spark_green.xml" type="Roller" x="3168" y="896">
+   <polyline points="0,0 0,64 32,64 32,-96"/>
+  </object>
+  <object name="spark_green.xml" type="Roller" x="2976" y="864">
+   <polyline points="0,0 0,96 128,96 128,32"/>
+  </object>
+  <object name="spark_green.xml" type="Roller" x="2752" y="800">
+   <polyline points="0,0 0,160 64,160 64,32"/>
+  </object>
+  <object name="spark_green.xml" type="Roller" x="2464" y="864">
+   <polyline points="0,0 0,96 128,96 128,32"/>
+  </object>
+  <object name="roper_green.xml" type="Erupter" x="2544" y="960" width="50" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="spark_green.xml" type="Roller" x="2304" y="960">
+   <polyline points="0,0 0,-160 64,-160 64,0"/>
+  </object>
+  <object name="spark_green.xml" type="Roller" x="2176" y="960">
+   <polyline points="0,0 0,-192 64,-192 64,0"/>
+  </object>
+  <object name="skeleton.xml" type="Dancer" x="1936" y="928" width="48" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="roper_green.xml" type="Erupter" x="1760" y="960" width="50" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="skeleton.xml" type="Dancer" x="1056" y="928" width="48" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="skeleton.xml" type="Dancer" x="592" y="928" width="48" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="will_owisp_red.xml" type="Floater" x="48" y="736" width="34" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+    <property name="object_id" value="1"/>
+   </properties>
+  </object>
+  <object name="cyclop_red.xml" type="Walker" x="416" y="1309" width="50" height="66">
+   <properties>
+    <property name="direction" value="left"/>
    </properties>
   </object>
  </objectgroup>

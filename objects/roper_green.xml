@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<roper>
+    <erupter attack_timer="60"
+             attack_distance="300"
+             attack_medium="12"
+             num_bullets="3"
+             fire_dx="1"
+             fire_rand_dx="5"
+             fire_dy="18"
+             fire_rand_dy="0"
+             attack_treshold="6"
+             hit_time="12">
+        <monster hp="5"
+                 ap="32"
+                 perish_time="20">
+            <actor move_speed="2"
+                   treshold="12"
+                   weight="2"
+                   right_still="0"
+                   right_move_start="0" right_move_end="0"
+                   right_fall="0"
+                   right_attack_start="1" right_attack_end="1"
+                   right_hit="2"
+                   left_still="0"
+                   left_move_start="0" left_move_end="0"
+                   left_fall="0"
+                   left_attack_start="1" left_attack_end="1"
+                   left_hit="2"
+                   perish_start="2" perish_end="2">
+                <object image="roper_green.png"
+                        left="4" right="46" top="2" bottom="34">
+                    <weak_parts frame="-1">
+                        <weak_part x1="4" y1="12" x2="46" y2="34" />
+                    </weak_parts>
+                </object>
+            </actor>
+            <string bullet="ember_red.xml" />
+            <string collectable="coin.xml" />
+        </monster>
+    </erupter>
+</roper>
+

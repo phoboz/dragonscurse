@@ -45,6 +45,10 @@
                 destination="castle_02.tmx"
                 start_x="576"
                 start_y="224" />
+        <object id="1"
+                location="jungle.tmx"
+                type="item"
+                name="jungle_tower_key.xml" />
     </objects>
     <locks>
         <lock id="1"
@@ -63,15 +67,20 @@
               once="1"
               location="castle_04.tmx" />
         <lock id="1"
+              type="small_key.xml"
+              lock="green_lock"
+              once="1"
+              location="village.tmx" />
+        <lock id="1"
               type="pyramid_key.xml"
               lock="red_lock"
               once="0"
               location="desert.tmx" />
         <lock id="1"
-              type="small_key.xml"
-              lock="green_lock"
-              once="1"
-              location="village.tmx" />
+              type="jungle_tower_key.xml"
+              lock="red_lock"
+              once="0"
+              location="jungle.tmx" />
     </locks>
     <chests>
         <chest id="1" once="1" location="village_interiour.tmx">

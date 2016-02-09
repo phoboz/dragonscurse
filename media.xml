@@ -89,6 +89,10 @@
                 width="64" height="64" margin="1" spacing="1" />
         <sprite filename="roper_red.png"
                 width="50" height="34" margin="1" spacing="1" />
+        <sprite filename="roper_green.png"
+                width="50" height="34" margin="1" spacing="1" />
+        <sprite filename="roper_blue.png"
+                width="50" height="34" margin="1" spacing="1" />
         <sprite filename="lionman.png"
                 width="84" height="84" margin="1" spacing="1" />
         <sprite filename="lizardman.png"

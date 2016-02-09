@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<key>
+    <item type="key"
+          once="0">
+        <material rise_speed="22"
+                  move_speed="0"
+                  chest_speed="2"
+                  weight="20"
+                  treshold="6"
+                  move_start="6"
+                  move_end="6"
+                  move_still="6">
+            <object image="icons.png"
+                    left="1" right="31" top="1" bottom="31" />
+        </material>
+    </item>
+</key>
+
