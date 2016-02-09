@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<armour dp="24" cp="0">
+<armour dp="24">
     <item type="armour"
           once="1"
           price="180"

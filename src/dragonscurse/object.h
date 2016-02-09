@@ -87,6 +87,7 @@ public:
     void set_attribute(const char *name, int value) {
         m_attributes[std::string(name)] = value;
     }
+    const char* get_string(const char *name) const;
     void set_string(const char *name, const char *value) {
         m_strings[std::string(name)] = std::string(value);
     }
@@ -115,8 +116,6 @@ public:
     }
 
 protected:
-    const char* get_string(const char *name) const;
-
     bool check_collision(int x, int y, Map *map, int start = 0, int end = 0);
     bool check_center(Map *map, int start = 0, int end = 0);
     bool check_below(Map *map, int start = 0, int end = 0);
