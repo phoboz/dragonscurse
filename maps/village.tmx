@@ -97,6 +97,11 @@
     <property name="type" value="warp"/>
    </properties>
   </object>
+  <object name="Shop_mouse" type="Area" x="320" y="992" width="64" height="64">
+   <properties>
+    <property name="type" value="window_door.xml"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="175" height="48">
   <data encoding="base64" compression="zlib">

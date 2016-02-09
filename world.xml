@@ -53,6 +53,14 @@
                 location="Shop_tower"
                 type="item"
                 name="crystal_armour.xml" />
+        <object id="2"
+                location="Shop_mouse"
+                type="item"
+                name="knight_shield.xml" />
+        <object id="3"
+                location="Shop_mouse"
+                type="item"
+                name="prince_armour.xml" />
         <object id="1"
                 location="wb.tmx"
                 type="curse"
