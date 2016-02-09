@@ -67,6 +67,18 @@
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
+  <object name="pyramid_room.tmx" type="Area" x="2016" y="992" width="64" height="64">
+   <properties>
+    <property name="start_x" value="96"/>
+    <property name="start_y" value="351"/>
+    <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
+  <object name="Hospital" type="Area" x="1408" y="640" width="64" height="64">
+   <properties>
+    <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Chests" width="454" height="45">
   <object name="regular_chest.xml" type="Chest" x="1536" y="484" width="64" height="58">

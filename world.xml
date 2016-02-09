@@ -4,7 +4,7 @@
         <object id="1"
                 location="castle_02.tmx"
                 type="item"
-                name="castle_key.xml" />
+                name="escape_key.xml" />
         <object id="2"
                 location="castle_02.tmx"
                 type="collectable"
@@ -38,6 +38,10 @@
                 type="item"
                 name="goblin_mail.xml" />
         <object id="1"
+                location="Shop_pyramid"
+                type="item"
+                name="dancing_shield.xml" />
+        <object id="1"
                 location="wb.tmx"
                 type="curse"
                 name="blue_flame.xml"
@@ -52,22 +56,22 @@
     </objects>
     <locks>
         <lock id="1"
-              type="castle_key.xml"
+              type="escape_key.xml"
               lock="red_lock"
               once="0"
               location="castle_01.tmx" />
         <lock id="1"
-              type="castle_key.xml"
+              type="escape_key.xml"
               lock="red_lock"
               once="0"
               location="castle_02.tmx" />
         <lock id="1"
-              type="small_key.xml"
+              type="castle_key.xml"
               lock="green_lock"
               once="1"
               location="castle_04.tmx" />
         <lock id="1"
-              type="small_key.xml"
+              type="tower_key.xml"
               lock="green_lock"
               once="1"
               location="village.tmx" />
@@ -87,7 +91,7 @@
             <treasure id="1" type="collectable" name="heart_container.xml" />
         </chest>
         <chest id="1" once="1" location="seaside_room02.tmx">
-            <treasure id="1" type="item" name="small_key.xml" />
+            <treasure id="1" type="item" name="tower_key.xml" />
         </chest>
         <chest id="1" once="1" location="desert_sphinx.tmx">
             <treasure id="1" type="collectable" name="heart_container.xml" />
@@ -107,6 +111,20 @@
         </chest>
         <chest id="1" once="0" location="desert.tmx">
             <treasure id="1" type="item" name="pyramid_key.xml" />
+        </chest>
+        <chest id="1" once="0" location="pyramid_room.tmx">
+            <treasure id="1" type="collectable" name="heart_big.xml" />
+            <treasure id="1" type="collectable" name="stone.xml" />
+            <treasure id="1" type="collectable" name="stone.xml" />
+            <treasure id="1" type="collectable" name="stone.xml" />
+            <treasure id="1" type="collectable" name="stone.xml" />
+            <treasure id="1" type="collectable" name="coin.xml" />
+            <treasure id="1" type="collectable" name="coin.xml" />
+            <treasure id="1" type="collectable" name="coin.xml" />
+            <treasure id="1" type="collectable" name="coin.xml" />
+            <treasure id="1" type="collectable" name="coin.xml" />
+            <treasure id="1" type="collectable" name="coin.xml" />
+            <treasure id="1" type="collectable" name="coin.xml" />
         </chest>
     </chests>
 </world>

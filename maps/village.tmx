@@ -87,7 +87,7 @@
   </object>
   <object name="Hospital" type="Area" x="1376" y="992" width="64" height="64">
    <properties>
-    <property name="type" value="window_door.xml"/>
+    <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
   <object name="jungle.tmx" type="Area" x="0" y="928" width="32" height="128">
