@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<armour dp="75" cp="75">
+    <item type="armour"
+          once="1"
+          price="3210"
+          req_cp="151"
+          unknown="1">
+        <material move_speed="14" weight="2" rise="4" fall="4" still="4">
+            <object image="icons.png"
+                    left="0" right="32" top="0" bottom="32" />
+        </material>
+        <string req_shape="mouseman.xml" />
+    </item>
+</armour>
+

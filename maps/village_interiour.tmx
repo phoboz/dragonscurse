@@ -65,6 +65,11 @@
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
+  <object name="Shop_tower" type="Area" x="128" y="96" width="64" height="64">
+   <properties>
+    <property name="type" value="window_door.xml"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Chests" width="68" height="44">
   <object name="regular_chest.xml" type="Chest" x="800" y="1252" width="64" height="58">
