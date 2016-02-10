@@ -97,6 +97,8 @@
                 width="84" height="84" margin="1" spacing="1" />
         <sprite filename="lizardman.png"
                 width="68" height="65" margin="1" spacing="1" />
+        <sprite filename="lizardman_to_mouseman.png"
+                width="68" height="65" margin="1" spacing="1" />
         <sprite filename="potion.png"
                 width="32" height="32" margin="0" spacing="0" />
         <sprite filename="shop.png"

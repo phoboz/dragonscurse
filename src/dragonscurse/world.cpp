@@ -184,7 +184,10 @@ Area* World::move(Player *player,
 
                 curse->move(m_map);
                 if (player->check_collision(curse)) {
-                    player->set_morph(new Morph("human_to_lizardman.xml",
+                    std::string morph = std::string(player->get_name()) +
+                                        std::string("_to_") +
+                                        std::string(curse->get_player());
+                    player->set_morph(new Morph(morph.c_str(),
                                                 m_media,
                                                 player->get_x(),
                                                 player->get_y(),
