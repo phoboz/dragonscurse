@@ -6,7 +6,7 @@
   <property name="start_x" value="192"/>
   <property name="start_y" value="351"/>
  </properties>
- <tileset firstgid="1" name="seaside" tilewidth="32" tileheight="32" spacing="1" margin="1">
+ <tileset firstgid="1" name="room" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>
    <property name="catapult" value="5"/>
    <property name="solid_end" value="14"/>
@@ -14,7 +14,7 @@
    <property name="water_end" value="38"/>
    <property name="water_start" value="30"/>
   </properties>
-  <image source="seaside.png" width="512" height="512"/>
+  <image source="room.png" width="512" height="512"/>
  </tileset>
  <layer name="Back" width="20" height="16">
   <data encoding="base64" compression="zlib">
