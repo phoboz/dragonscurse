@@ -18,7 +18,7 @@
  </tileset>
  <layer name="Back" width="20" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYBiZgAeIecmkFQbAPD8g9iGSj888mLoAIPaFsvHxCZnnD1VHLB6s5pEbv6SaxwjFhNIFNnOQzWMk0n2DJT0PVgAAxvUYlg==
+   eJxjYBiZgAeIecmkFQbAPD8g9iGSj888mLoAIPaFsvHxCZnnD1WHDdsCsR0Q2wOxAxXMw4apZR658UuqeYxQTChdYDMH2TxGIt03WNLzYAUALxUYXA==
   </data>
  </layer>
  <objectgroup name="Areas" width="20" height="16">
