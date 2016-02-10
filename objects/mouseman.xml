@@ -22,7 +22,7 @@
                    hit_time="16"
                    invisible_time="42"
                    right_still="0"
-                   right_move_start="0" right_move_end="2"
+                   right_move_start="1" right_move_end="2"
                    right_jump="2"
                    right_fall="2"
                    right_crouch="0"
@@ -30,28 +30,36 @@
                    right_attack_low_start="3" right_attack_low_end="3"
                    right_hit="32"
                    left_still="4"
-                   left_move_start="4" left_move_end="6"
+                   left_move_start="5" left_move_end="6"
                    left_jump="6"
                    left_fall="6"
                    left_crouch="4"
                    left_attack_start="7" left_attack_end="7"
                    left_attack_low_start="7" left_attack_low_end="7"
                    left_hit="32"
-                   above_right_move_start="0" above_right_move_end="2"
+                   above_right_still="0"
+                   above_right_move_start="1" above_right_move_end="2"
                    above_right_attack_start="3" above_right_attack_end="3"
-                   above_left_move_start="4" above_left_move_end="6"
+                   above_left_still="4"
+                   above_left_move_start="5" above_left_move_end="6"
                    above_left_attack_start="7" above_left_attack_end="7"
-                   right_up_move_start="16" right_up_move_end="18"
+                   right_up_still="16"
+                   right_up_move_start="17" right_up_move_end="18"
                    right_up_attack_start="19" right_up_attack_end="19"
-                   right_down_move_start="20" right_down_move_end="22"
+                   right_down_still="20"
+                   right_down_move_start="21" right_down_move_end="22"
                    right_down_attack_start="23" right_down_attack_end="23"
-                   left_up_move_start="24" left_up_move_end="26"
+                   left_up_still="24"
+                   left_up_move_start="25" left_up_move_end="26"
                    left_up_attack_start="27" left_up_attack_end="27"
-                   left_down_move_start="28" left_down_move_end="30"
+                   left_down_still="28"
+                   left_down_move_start="29" left_down_move_end="30"
                    left_down_attack_start="31" left_down_attack_end="31"
-                   below_right_move_start="8" below_right_move_end="10"
+                   below_right_still="8"
+                   below_right_move_start="9" below_right_move_end="10"
                    below_right_attack_start="11" below_right_attack_end="11"
-                   below_left_move_start="12" below_left_move_end="14"
+                   below_left_still="12"
+                   below_left_move_start="13" below_left_move_end="14"
                    below_left_attack_start="15" below_left_attack_end="15"
                    perish_start="32" perish_end="32">
                 <object image="mouseman.png"
@@ -59,11 +67,35 @@
                     <weak_parts frame="-1">
                         <weak_part x1="18" y1="17" x2="40" y2="44" />
                     </weak_parts>
+                    <shielded_parts frame="0">
+                        <shielded_part x1="30" y1="38" x2="48" y2="44" />
+                    </shielded_parts>
+                    <shielded_parts frame="4">
+                        <shielded_part x1="14" y1="30" x2="26" y2="41" />
+                    </shielded_parts>
                     <attack_parts frame="3">
                         <attack_part x1="46" y1="32" x2="60" y2="38" />
                     </attack_parts>
                     <attack_parts frame="7">
                         <attack_part x1="0" y1="32" x2="14" y2="38" />
+                    </attack_parts>
+                    <attack_parts frame="11">
+                        <attack_part x1="47" y1="22" x2="58" y2="29" />
+                    </attack_parts>
+                    <attack_parts frame="15">
+                        <attack_part x1="1" y1="22" x2="13" y2="29" />
+                    </attack_parts>
+                    <attack_parts frame="19">
+                        <attack_part x1="31" y1="1" x2="38" y2="13" />
+                    </attack_parts>
+                    <attack_parts frame="23">
+                        <attack_part x1="31" y1="47" x2="38" y2="59" />
+                    </attack_parts>
+                    <attack_parts frame="27">
+                        <attack_part x1="24" y1="47" x2="31" y2="59" />
+                    </attack_parts>
+                    <attack_parts frame="31">
+                        <attack_part x1="24" y1="1" x2="31" y2="14" />
                     </attack_parts>
                 </object>
             </actor>

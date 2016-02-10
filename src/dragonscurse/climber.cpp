@@ -1,10 +1,18 @@
-#include <iostream>
 #include "phoboz/ctrl.h"
 #include "climber.h"
 
 void Climber::set_climb_above(Direction set_dir)
 {
     switch(m_action) {
+        case Still:
+            if (set_dir == Right) {
+                m_frame = get_attribute("above_right_still");
+            }
+            else if (set_dir == Left) {
+                m_frame = get_attribute("above_left_still");
+            }
+            break;
+
         case Attack:
             if (set_dir == Right) {
                 if (m_frame < get_attribute("above_right_attack_start") ||
@@ -42,6 +50,15 @@ void Climber::set_climb_above(Direction set_dir)
 void Climber::set_climb_below(Direction set_dir)
 {
     switch(m_action) {
+        case Still:
+            if (set_dir == Right) {
+                m_frame = get_attribute("below_right_still");
+            }
+            else if (set_dir == Left) {
+                m_frame = get_attribute("below_left_still");
+            }
+            break;
+
         case Attack:
             if (set_dir == Right) {
                 if (m_frame < get_attribute("below_right_attack_start") ||
@@ -79,6 +96,15 @@ void Climber::set_climb_below(Direction set_dir)
 void Climber::set_climb_right(Direction set_dir)
 {
     switch(m_action) {
+        case Still:
+            if (set_dir == Right) {
+                m_frame = get_attribute("right_down_still");
+            }
+            else if (set_dir == Left) {
+                m_frame = get_attribute("right_up_still");
+            }
+            break;
+
         case Attack:
             if (set_dir == Right) {
                 if (m_frame < get_attribute("right_down_attack_start") ||
@@ -116,6 +142,15 @@ void Climber::set_climb_right(Direction set_dir)
 void Climber::set_climb_left(Direction set_dir)
 {
     switch(m_action) {
+        case Still:
+            if (set_dir == Right) {
+                m_frame = get_attribute("left_up_still");
+            }
+            else if (set_dir == Left) {
+                m_frame = get_attribute("left_down_still");
+            }
+            break;
+
         case Attack:
             if (set_dir == Right) {
                 if (m_frame < get_attribute("left_up_attack_start") ||
@@ -157,6 +192,7 @@ void Climber::set_dir(Direction dir)
     }
     else {
         Body::set_dir(dir);
+        dir = m_dir;
         switch(m_climb_dir) {
             case ClimbAbove:
                 set_climb_above(dir);
@@ -948,9 +984,8 @@ void Climber::move_climb(Map *map, int input)
                     }
                 }
                 else {
-                    animate_climb();
-                    set_dir(Keep);
                     set_action(Still);
+                    set_dir(Keep);
                     set_vx(0);
                 }
                 break;
@@ -979,9 +1014,8 @@ void Climber::move_climb(Map *map, int input)
                     }
                 }
                 else {
-                    animate_climb();
-                    set_dir(Keep);
                     set_action(Still);
+                    set_dir(Keep);
                     set_vx(0);
                 }
                 break;
@@ -1010,9 +1044,8 @@ void Climber::move_climb(Map *map, int input)
                     }
                 }
                 else {
-                    animate_climb();
-                    set_dir(Keep);
                     set_action(Still);
+                    set_dir(Keep);
                     set_vy(0);
                 }
                 break;
@@ -1041,9 +1074,8 @@ void Climber::move_climb(Map *map, int input)
                     }
                 }
                 else {
-                    animate_climb();
-                    set_dir(Keep);
                     set_action(Still);
+                    set_dir(Keep);
                     set_vy(0);
                 }
                 break;
