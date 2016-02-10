@@ -208,6 +208,9 @@ void Player::player_move(Map *map)
             if (get_fall()) {
                 set_action(Fall);
             }
+            else {
+                m_hit_ground = true;
+            }
             break;
 
         case Fall:
