@@ -163,6 +163,7 @@ void load_game(const char *fn)
 
     db->restore(fn, media);
     status = db->get_status();
+    status->update();
     statusbar = new Statusbar(status, media);
     status_screen = new StatusScreen(status, media);
 

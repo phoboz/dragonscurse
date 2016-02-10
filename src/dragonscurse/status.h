@@ -65,6 +65,7 @@ public:
     int get_hp() const { return m_hp; }
     Player* get_shape() const { return m_shape; }
 
+    void update();
     void show() const;
     bool write(std::ofstream &f);
     bool read(std::ifstream &f, MediaDB *media);
@@ -72,8 +73,6 @@ public:
 private:
     static const int c_max_hearts = 8;
     static const int c_max_potions = 3;
-
-    void update();
 
     std::list<Item*> m_items;
     Arm *m_arm;
