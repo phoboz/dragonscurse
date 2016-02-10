@@ -253,6 +253,9 @@ void Player::player_move(Map *map)
                 reset_hit();
             }
             Body::move(map);
+            if (!get_fall()) {
+                m_hit_ground = true;
+            }
             break;
 
         case HitPerish:
