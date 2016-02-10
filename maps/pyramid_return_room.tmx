@@ -3,8 +3,8 @@
  <properties>
   <property name="bg_color" value="0"/>
   <property name="music" value="treasure.ogg"/>
-  <property name="start_x" value="96"/>
-  <property name="start_y" value="351"/>
+  <property name="start_x" value="160"/>
+  <property name="start_y" value="256"/>
  </properties>
  <tileset firstgid="1" name="room" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>
@@ -18,34 +18,22 @@
  </tileset>
  <layer name="Back" width="20" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFIMBNIsYGGJEwSI0fEPsQgbGZh81OfyD2JQLjMg/dPQEUmkese4areeSkF+T04U+mWdxQM3C5j1SziE1/lOaPwQgABiodMA==
+   eJxjYBiZgAeIecmkFQbAPD8g9iGSj888mLoAIPaFsvHxCZnnD1VHLB6s5pEbv6SaxwjFhNIFNnOQzWMk0n2DJT0PVgAAxvUYlg==
   </data>
  </layer>
  <objectgroup name="Areas" width="20" height="16">
-  <object name="desert.tmx" type="Area" x="96" y="352" width="64" height="64">
+  <object name="pyramid_room.tmx" type="Area" x="160" y="256" width="64" height="64">
    <properties>
-    <property name="start_x" value="2016"/>
-    <property name="start_y" value="992"/>
-    <property name="type" value="regular_door.xml"/>
-   </properties>
-  </object>
-  <object name="Shop_pyramid" type="Area" x="256" y="256" width="64" height="64">
-   <properties>
-    <property name="type" value="window_door.xml"/>
-   </properties>
-  </object>
-  <object name="pyramid_return_room.tmx" type="Area" x="352" y="256" width="64" height="64">
-   <properties>
-    <property name="start_x" value="160"/>
+    <property name="start_x" value="352"/>
     <property name="start_y" value="256"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup name="Chests" width="20" height="16">
-  <object name="regular_chest.xml" type="Chest" x="480" y="260" width="64" height="58">
+  <object name="village.tmx" type="Area" x="384" y="288" width="64" height="64">
    <properties>
-    <property name="chest_id" value="1"/>
+    <property name="start_x" value="2400"/>
+    <property name="start_y" value="832"/>
+    <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
  </objectgroup>
