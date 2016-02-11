@@ -15,6 +15,7 @@ public:
 
     void set_jump(Map *map, bool catapult = false);
     virtual bool set_hit(Object *object, Status *status);
+    bool break_rock(Map *map);
 
     void set_morph(Morph *morph) { m_morph = morph; }
     bool is_morphing();
@@ -28,7 +29,6 @@ public:
 
 protected:
     virtual void set_attack();
-    void break_rock(Map *map);
 
 private:
     void check_water(Map *map);
