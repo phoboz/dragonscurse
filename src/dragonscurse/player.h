@@ -28,6 +28,7 @@ public:
 
 protected:
     virtual void set_attack();
+    void break_rock(Map *map);
 
 private:
     void check_water(Map *map);

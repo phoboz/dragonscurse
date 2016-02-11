@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string.h>
 #include "object.h"
 
@@ -211,7 +210,7 @@ int Object::get_bottom() const
     return m_y + get_attribute("bottom");
 }
 
-bool Object::check_collision(int x, int y, Map *map, int start, int end)
+bool Object::check_collision(int x, int y, Map *map, int start, int end) const
 {
     bool result = false;
     const Tmx::Tileset *tileset = map->get_tileset(0);
@@ -612,6 +611,34 @@ bool Object::check_attack_collision(const Object *object) const
             }
         }
     }
+
+    return result;
+}
+
+bool Object::check_attack_collision(int *x, int *y, Map *map,
+                                    int start, int end) const
+{
+    bool result = false;
+    CollisionParts *parts = find_collision_parts(m_attack_parts);
+
+    if (parts) {
+        for (int i = 0; i < parts->m_parts.size(); i++) {
+            CollisionPart *part = parts->m_parts[i];
+            for (int yi = part->y1; yi < part->y2; yi++) {
+                for (int xi = part->x1; xi < part->x2; xi++) {
+                    result = check_collision(xi + m_x, yi + m_y,
+                                             map, start, end);
+                    if (result) {
+                        *x = xi + m_x;
+                        *y = yi + m_y;
+                        goto check_attack_end;
+                    }
+                }
+            }
+
+        }
+    }
+check_attack_end:
 
     return result;
 }

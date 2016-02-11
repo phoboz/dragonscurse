@@ -104,6 +104,8 @@ public:
                               int end_x1, int end_y1) const;
     virtual bool check_shielded_collision(const Object *object) const;
     bool check_attack_collision(const Object *object) const;
+    bool check_attack_collision(int *x, int *y, Map *map,
+                                int start, int end) const;
 
     virtual void move(Map *map) = 0;
     virtual void draw(Surface *dest, Map *map,
@@ -116,7 +118,8 @@ public:
     }
 
 protected:
-    bool check_collision(int x, int y, Map *map, int start = 0, int end = 0);
+    bool check_collision(int x, int y, Map *map,
+                         int start = 0, int end = 0) const;
     bool check_center(Map *map, int start = 0, int end = 0);
     bool check_below(Map *map, int start = 0, int end = 0);
     int check_below(Map *map, int len, int start, int end);

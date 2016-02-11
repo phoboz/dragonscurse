@@ -123,6 +123,18 @@ bool Player::set_hit(Object *object, Status *status)
     return result;
 }
 
+void Player::break_rock(Map *map)
+{
+    int x, y;
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+    int rockid = prop.GetNumericProperty("rock");
+
+    if (check_attack_collision(&x, &y, map, rockid, rockid)) {
+        map->set_tile_id(x, y, 0, prop.GetNumericProperty("rock_replace"));
+    }
+}
+
 bool Player::is_morphing()
 {
     bool result = false;
