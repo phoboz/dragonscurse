@@ -62,7 +62,7 @@ void Material::move(Map *map)
         animate_move();
     }
     else {
-        m_frame = get_attribute("move_still");
+        m_frame = get_attribute("still");
     }
 
     if (get_fall()) {

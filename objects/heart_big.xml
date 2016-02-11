@@ -8,7 +8,7 @@
                   treshold="6"
                   move_start="0"
                   move_end="0"
-                  move_still="0">
+                  still="0">
             <object image="heart_big.png"
                     left="1" right="31" top="1" bottom="31" />
         </material>

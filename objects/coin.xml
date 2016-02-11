@@ -8,7 +8,7 @@
                   treshold="5"
                   move_start="0"
                   move_end="1"
-                  move_still="2">
+                  still="2">
             <object image="coin.png"
                     left="1" right="31" top="1" bottom="31" />
         </material>

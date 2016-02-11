@@ -142,6 +142,8 @@
         <map filename="desertlake_room.tmx" />
         <map filename="desert_sphinx.tmx" />
         <map filename="jungle.tmx" />
+        <map filename="jungle_room.tmx" />
+        <map filename="jungle_return_room.tmx" />
         <map filename="jungle_tower.tmx" />
         <map filename="mummy_dragon.tmx" />
         <map filename="pyramid.tmx" />

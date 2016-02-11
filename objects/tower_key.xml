@@ -9,7 +9,7 @@
                   treshold="6"
                   move_start="6"
                   move_end="6"
-                  move_still="6">
+                  still="6">
             <object image="icons.png"
                     left="1" right="31" top="1" bottom="31" />
         </material>

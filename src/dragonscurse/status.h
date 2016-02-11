@@ -27,6 +27,7 @@ public:
           m_hp(0),
           m_max_hp(0) { update(); }
 
+    void aquire(Material *material);
     void aquire_item(Item *item) { m_items.push_back(item); }
     Item* check_item(const char *name);
     void remove_item(Item *item) { m_items.remove(item); }

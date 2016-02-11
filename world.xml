@@ -70,6 +70,10 @@
                 type="item"
                 name="prince_armour.xml" />
         <object id="1"
+                location="Shop_potion"
+                type="collectable"
+                name="potion.xml" />
+        <object id="1"
                 location="wb.tmx"
                 type="curse"
                 name="blue_flame.xml"
@@ -122,6 +126,9 @@
             <treasure id="1" type="item" name="tower_key.xml" />
         </chest>
         <chest id="1" once="1" location="desert_sphinx.tmx">
+            <treasure id="1" type="collectable" name="heart_container.xml" />
+        </chest>
+        <chest id="1" once="1" location="jungle_room.tmx">
             <treasure id="1" type="collectable" name="heart_container.xml" />
         </chest>
         <chest id="1" once="0" location="desertlake_room.tmx">

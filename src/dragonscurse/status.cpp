@@ -112,6 +112,22 @@ void Status::item_list(std::vector<Item*> &list, Item::ItemType type)
     }
 }
 
+void Status::aquire(Material *material)
+{
+    switch(material->get_type()) {
+        case Object::TypeItem:
+            aquire_item((Item *) material);
+            break;
+
+        case Object::TypeCollectable:
+            aquire_collectable((Collectable *) material);
+            break;
+
+        default:
+            break;
+    }
+}
+
 void Status::aquire_collectable(Collectable *collectable)
 {
     switch (collectable->get_collectable_type()) {

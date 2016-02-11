@@ -39,6 +39,13 @@
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
+  <object name="jungle_room.tmx" type="Area" x="384" y="1120" width="64" height="64">
+   <properties>
+    <property name="start_x" value="96"/>
+    <property name="start_y" value="351"/>
+    <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Monsters" width="576" height="45">
   <object name="fuzzball.xml" type="Obstacle" x="17424" y="992" width="32" height="32"/>

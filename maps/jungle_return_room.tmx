@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="16" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="bg_color" value="0"/>
+  <property name="music" value="treasure.ogg"/>
+  <property name="start_x" value="160"/>
+  <property name="start_y" value="256"/>
+ </properties>
+ <tileset firstgid="1" name="room" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <properties>
+   <property name="catapult" value="5"/>
+   <property name="solid_end" value="14"/>
+   <property name="solid_start" value="1"/>
+   <property name="water_end" value="38"/>
+   <property name="water_start" value="30"/>
+  </properties>
+  <image source="room.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Back" width="20" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBiZgAeIecmkFQbAPD8g9iGSj888mLoAIPaFsvHxCZnnD1WHDdsCsR0Q2wOxAxXMw4apZR658UuqeYxQTChdYDMH2TxGIt03WNLzYAUALxUYXA==
+  </data>
+ </layer>
+ <objectgroup name="Areas" width="20" height="16">
+  <object name="jungle_room.tmx" type="Area" x="160" y="256" width="64" height="64">
+   <properties>
+    <property name="start_x" value="352"/>
+    <property name="start_y" value="256"/>
+    <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
+  <object name="village.tmx" type="Area" x="384" y="288" width="64" height="64">
+   <properties>
+    <property name="start_x" value="2400"/>
+    <property name="start_y" value="832"/>
+    <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

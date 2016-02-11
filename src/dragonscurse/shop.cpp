@@ -2,6 +2,7 @@
 #include "object_factory.h"
 #include "area.h"
 #include "item.h"
+#include "collectable.h"
 #include "shop.h"
 
 Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
@@ -21,27 +22,27 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
     for (int i = 1; i <= 4; i++) {
         ObjectInfo info;
         if (db->get_object_info(&info, i, m_name.c_str())) {
-            if (info.object_type == Object::TypeItem) {
+            if (info.object_type == Object::TypeItem ||
+                info.object_type == Object::TypeCollectable) {
                 Object *object =
-                    ObjectFactory::create_item(info.data.material.name,
-                                               m_media);
+                    ObjectFactory::create_object(&info, m_media);
                 if (object && object->get_loaded()) {
-                    Item *item = (Item *) object;
-                    item->set_world_key(info.key);
+                    Material *material = (Material *) object;
+                    material->set_world_key(info.key);
 
                     Status *status = m_db->get_status();
-                    if (item->get_attribute("req_cp") <= status->get_cp()) {
-                        m_menu->add_option(item->get_name(),
-                                           item,
-                                           item->get_sprite(),
-                                           item->get_attribute("still"));
+                    if (material->get_attribute("req_cp") <= status->get_cp()) {
+                        m_menu->add_option(material->get_name(),
+                                           material,
+                                           material->get_sprite(),
+                                           material->get_attribute("still"));
                         if (i == 1) {
                             static char str[12];
                             Color color;
                             sprintf(str, "%06d Gold",
-                                    item->get_attribute("price"));
+                                    material->get_attribute("price"));
                             if (status->get_gold() <
-                                item->get_attribute("price")) {
+                                material->get_attribute("price")) {
                                 color.set_named(Color::Red);
                             }
                             else {
@@ -51,8 +52,8 @@ Shop::Shop(const char *name, MediaDB *media, WorldDB *db,
                         }
                     }
                     else {
-                        m_menu->add_option("", 0, item->get_sprite(),
-                                           item->get_attribute("unknown"));
+                        m_menu->add_option("", 0, material->get_sprite(),
+                                           material->get_attribute("unknown"));
                     }
                 }
             }
@@ -86,13 +87,13 @@ Area* Shop::move(int key)
             area = new Area(m_src.c_str(), m_sx, m_sy);
         }
         else {
-            Item *item = (Item *) m_menu->get_data();
-            if (item) {
+            Material *material = (Material *) m_menu->get_data();
+            if (material) {
                 Status *status = m_db->get_status();
-                if (status->pay_gold(item->get_attribute("price"))) {
+                if (status->pay_gold(material->get_attribute("price"))) {
                     m_menu->replace_option("Sold out!");
-                    item->aquire(m_db);
-                    status->aquire_item(item);
+                    material->aquire(m_db);
+                    status->aquire(material);
                     m_media->play_sound("select.wav");
                 }
                 else {
@@ -108,12 +109,12 @@ Area* Shop::move(int key)
     }
 
     if (data) {
-        Item *item = (Item *) data;
+        Material *material = (Material *) data;
         static char str[12];
         Color color;
-        sprintf(str, "%06d Gold", item->get_attribute("price"));
+        sprintf(str, "%06d Gold", material->get_attribute("price"));
         Status *status = m_db->get_status();
-        if (status->get_gold() < item->get_attribute("price")) {
+        if (status->get_gold() < material->get_attribute("price")) {
             color.set_named(Color::Red);
         }
         else {

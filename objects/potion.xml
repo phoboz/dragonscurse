@@ -8,7 +8,9 @@
                   treshold="6"
                   move_start="14"
                   move_end="14"
-                  move_still="14">
+                  still="14"
+                  price="291"
+                  once="1">
             <object image="icons.png"
                     left="1" right="31" top="1" bottom="31" />
         </material>
