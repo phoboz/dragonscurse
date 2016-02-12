@@ -88,6 +88,11 @@ Area* World::move(Player *player,
         m_map->set_y(map_y, window_height);
     }
 
+    // Handle player world altering abilities
+    if (m_db->get_status()->get_break_rock()) {
+        player->check_break_rock(m_map);
+    }
+
     std::vector<Object*> perished;
 
     for (std::list<Object*>::iterator it = m_objects.begin();

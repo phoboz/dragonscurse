@@ -11,7 +11,9 @@ public:
         TypeHeartContainer,
         TypeHeartRefill,
         TypePotion,
-        TypeStone
+        TypeStone,
+        TypeBreakRock,
+        TypeCreateRock
     };
 
     CollectableType get_collectable_type() const { return m_collectable_type; }

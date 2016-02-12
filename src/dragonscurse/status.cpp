@@ -151,6 +151,14 @@ void Status::aquire_collectable(Collectable *collectable)
             add_stones(collectable->get_value());
             break;
 
+        case Collectable::TypeBreakRock:
+            add_break_rock();
+            break;
+
+        case Collectable::TypeCreateRock:
+            add_create_rock();
+            break;
+
         default:
             break;
     }

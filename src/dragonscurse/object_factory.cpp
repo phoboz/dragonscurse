@@ -10,6 +10,8 @@
 #include "heart_refill.h"
 #include "potion.h"
 #include "stone.h"
+#include "break_rock.h"
+#include "create_rock.h"
 #include "knight.h"
 #include "dragon.h"
 #include "climber.h"
@@ -166,6 +168,12 @@ Object* ObjectFactory::create_object(const char *name,
         }
         else if (strcmp(priv_object_type, "stone") == 0) {
             object = new Stone(name, media, x, y);
+        }
+        else if (strcmp(priv_object_type, "break_rock") == 0) {
+            object = new BreakRock(name, media, x, y);
+        }
+        else if (strcmp(priv_object_type, "create_rock") == 0) {
+            object = new CreateRock(name, media, x, y);
         }
     }
     else if (strcmp(type, "Item") == 0) {

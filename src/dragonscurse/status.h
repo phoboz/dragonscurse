@@ -20,6 +20,8 @@ public:
           m_hearts(0),
           m_potions(0),
           m_stones(0),
+          m_break_rock(false),
+          m_create_rock(false),
           m_arm(0),
           m_shield(0),
           m_armour(0),
@@ -50,6 +52,8 @@ public:
     void add_hearts(int num);
     void add_potions(int num);
     void add_stones(int num) { m_stones += num; }
+    void add_break_rock() { m_break_rock = true; }
+    void add_create_rock() { m_create_rock = true; }
 
     void cure(int value = 0);
 
@@ -59,6 +63,8 @@ public:
 
     static int get_max_hearts() { return c_max_hearts; }
     int get_hearts() const { return m_hearts; }
+    bool get_break_rock() const { return m_break_rock; }
+    bool get_create_rock() const { return m_create_rock; }
     int get_ap() const { return m_ap; }
     int get_dp() const { return m_dp; }
     int get_cp() const { return m_cp; }
@@ -86,6 +92,8 @@ private:
     int m_hearts;
     int m_potions;
     int m_stones;
+    bool m_break_rock;
+    bool m_create_rock;
 
     int m_ap;
     int m_dp;
