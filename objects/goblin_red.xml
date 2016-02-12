@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cyclop>
-    <crawler hit_time="24"
+    <crawler hit_time="12"
              num_bullets="1"
              bullet_speed="16"
              attack_left="0"
@@ -12,7 +12,7 @@
         <monster hp="12"
                  ap="64"
                  jump_speed="10"
-                 perish_time="40">
+                 perish_time="20">
             <actor move_speed="2"
                    treshold="10"
                    weight="10"
@@ -34,6 +34,9 @@
                     <weak_parts frame="-1">
                         <weak_part x1="2" y1="2" x2="48" y2="64" />
                     </weak_parts>
+                    <attack_parts frame="-1">
+                        <attack_part x1="2" y1="2" x2="48" y2="64" />
+                    </attack_parts>
                 </object>
             </actor>
             <string collectable="coin.xml" />

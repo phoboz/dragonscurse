@@ -5,6 +5,7 @@
            attack_timer="40"
            hit_time="20">
         <monster hp="12"
+                 ap="32"
                  perish_time="40">
             <actor move_speed="2"
                    treshold="12"
@@ -22,6 +23,9 @@
                     <weak_parts frame="-1">
                         <weak_part x1="2" y1="2" x2="32" y2="32" />
                     </weak_parts>
+                    <attack_parts frame="-1">
+                        <attack_part x1="2" y1="2" x2="32" y2="32" />
+                    </attack_parts>
                 </object>
             </actor>
             <string collectable="coin.xml" />

@@ -24,10 +24,13 @@
                    left_hit="2"
                    perish_start="2" perish_end="2">
                 <object image="wondering.png"
-                        left="1" right="59" top="1" bottom="59">
+                        left="1" right="49" top="1" bottom="59">
                     <weak_parts frame="-1">
-                        <weak_part x1="0" y1="0" x2="50" y2="60" />
+                        <weak_part x1="1" y1="1" x2="49" y2="59" />
                     </weak_parts>
+                    <attack_parts frame="-1">
+                        <attack_part x1="1" y1="1" x2="49" y2="59" />
+                    </attack_parts>
                 </object>
             </actor>
             <string collectable="coin.xml" />

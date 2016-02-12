@@ -23,6 +23,9 @@
                     <weak_parts frame="-1">
                         <weak_part x1="1" y1="1" x2="42" y2="42" />
                     </weak_parts>
+                    <attack_parts frame="-1">
+                        <attack_part x1="1" y1="1" x2="42" y2="42" />
+                    </attack_parts>
                 </object>
             </actor>
             <string collectable="coin.xml" />

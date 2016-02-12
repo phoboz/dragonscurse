@@ -47,6 +47,9 @@
                 <weak_parts frame="1">
                     <weak_part x1="3" y1="31" x2="31" y2="57" />
                 </weak_parts>
+                <attack_parts frame="-1">
+                    <attack_part x1="0" y1="0" x2="132" y2="134" />
+                </attack_parts>
             </object>
         </actor>
     </monster>

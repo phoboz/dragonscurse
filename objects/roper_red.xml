@@ -32,6 +32,9 @@
                     <weak_parts frame="-1">
                         <weak_part x1="4" y1="12" x2="46" y2="34" />
                     </weak_parts>
+                    <attack_parts frame="-1">
+                        <attack_part x1="4" y1="2" x2="46" y2="34" />
+                    </attack_parts>
                 </object>
             </actor>
             <string bullet="ember_red.xml" />
