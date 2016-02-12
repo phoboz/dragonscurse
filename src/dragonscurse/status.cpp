@@ -290,6 +290,9 @@ void Status::show() const
     std::cout << "Gold: " << "\t" << m_gold << std::endl;
     std::cout << "HP: " << "\t" << m_hp << std::endl;
     std::cout << std::endl;
+    std::cout << "Break rock: " << "\t" << m_break_rock << std::endl;
+    std::cout << "Create rock: " << "\t" << m_create_rock << std::endl;
+    std::cout << std::endl;
 
     std::cout << "Items:" << std::endl;
     for (std::list<Item*>::const_iterator it = m_items.begin();
@@ -327,10 +330,12 @@ bool Status::write(std::ofstream &f)
 {
     bool result = true;
 
+    StoreRestore::write_integer(f, m_gold);
     StoreRestore::write_integer(f, m_hearts);
     StoreRestore::write_integer(f, m_potions);
     StoreRestore::write_integer(f, m_stones);
-    StoreRestore::write_integer(f, m_gold);
+    StoreRestore::write_boolean(f, m_break_rock);
+    StoreRestore::write_boolean(f, m_create_rock);
 
     StoreRestore::write_integer(f, m_items.size());
     for (std::list<Item*>::iterator it = m_items.begin();
@@ -372,10 +377,19 @@ bool Status::read(std::ifstream &f, MediaDB *media)
 {
     bool result = true;
 
+    m_gold = StoreRestore::read_integer(f);
+
     add_hearts(StoreRestore::read_integer(f));
     add_potions(StoreRestore::read_integer(f));
     add_stones(StoreRestore::read_integer(f));
-    m_gold = StoreRestore::read_integer(f);
+
+    if (StoreRestore::read_boolean(f)) {
+        add_break_rock();
+    }
+
+    if (StoreRestore::read_boolean(f)) {
+        add_create_rock();
+    }
 
     int num_items = StoreRestore::read_integer(f);
     for (int i = 0; i < num_items; i++) {
