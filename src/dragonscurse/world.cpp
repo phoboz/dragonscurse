@@ -93,6 +93,10 @@ Area* World::move(Player *player,
         player->check_break_rock(m_map);
     }
 
+    if (m_db->get_status()->get_create_rock()) {
+        player->check_create_rock(m_map);
+    }
+
     std::vector<Object*> perished;
 
     for (std::list<Object*>::iterator it = m_objects.begin();

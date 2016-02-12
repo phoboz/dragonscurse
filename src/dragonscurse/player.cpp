@@ -128,13 +128,34 @@ bool Player::check_break_rock(Map *map)
     int x, y;
     bool result = false;
 
-    if (m_action == Attack || m_action == AttackLow) {
+    if (m_create_rock_timer.check(c_rock_timeout)) {
         const Tmx::Tileset *tileset = map->get_tileset(0);
         const Tmx::PropertySet prop = tileset->GetProperties();
         int rockid = prop.GetNumericProperty("rock");
 
-        if (check_attack_collision(&x, &y, map, rockid, rockid)) {
+        if (rockid && check_attack_collision(&x, &y, map, rockid, rockid)) {
             map->set_tile_id(x, y, 0, prop.GetNumericProperty("rock_broken"));
+            m_break_rock_timer.reset();
+            result = true;
+        }
+    }
+
+    return result;
+}
+
+bool Player::check_create_rock(Map *map)
+{
+    int x, y;
+    bool result = false;
+
+    if (m_break_rock_timer.check(c_rock_timeout)) {
+        const Tmx::Tileset *tileset = map->get_tileset(0);
+        const Tmx::PropertySet prop = tileset->GetProperties();
+        int rockid = prop.GetNumericProperty("create_rock");
+
+        if (rockid && check_attack_collision(&x, &y, map, rockid, rockid)) {
+            map->set_tile_id(x, y, 0, prop.GetNumericProperty("rock"));
+            m_create_rock_timer.reset();
             result = true;
         }
     }

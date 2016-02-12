@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
-<thunder_saber max_value="1">
-     <collectable type="break_rock">
+<magical_saber max_value="1">
+     <collectable type="create_rock">
         <material rise_speed="22"
                   move_speed="0"
                   chest_speed="4"
@@ -13,5 +13,5 @@
                     left="1" right="31" top="1" bottom="31" />
         </material>
     </collectable>
-</thunder_saber>
+</magical_saber>
 
