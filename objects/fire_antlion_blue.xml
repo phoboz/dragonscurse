@@ -10,8 +10,8 @@
              fire_rand_dy="16"
              attack_treshold="6"
              hit_time="24">
-        <monster hp="3"
-                 ap="38"
+        <monster hp="9"
+                 ap="52"
                  perish_time="40">
             <actor move_speed="2"
                    treshold="12"
@@ -27,7 +27,7 @@
                    left_attack_start="1" left_attack_end="1"
                    left_hit="2"
                    perish_start="2" perish_end="2">
-                <object image="fire_antlion_red.png"
+                <object image="fire_antlion_blue.png"
                         left="4" right="60" top="2" bottom="30">
                     <weak_parts frame="-1">
                         <weak_part x1="4" y1="2" x2="60" y2="30" />

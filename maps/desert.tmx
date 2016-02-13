@@ -378,6 +378,26 @@
     <property name="direction" value="left"/>
    </properties>
   </object>
+  <object name="fire_antlion_red.xml" type="Erupter" x="8576" y="1056" width="64" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_antlion_red.xml" type="Erupter" x="7552" y="1056" width="64" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_antlion_green.xml" type="Erupter" x="7040" y="1056" width="64" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_antlion_blue.xml" type="Erupter" x="4480" y="1056" width="64" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Front" width="454" height="45">
   <data encoding="base64">
