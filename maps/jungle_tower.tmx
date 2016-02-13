@@ -4,7 +4,7 @@
   <property name="bg_color" value="0"/>
   <property name="music" value="dungeon.ogg"/>
   <property name="start_x" value="2976"/>
-  <property name="start_y" value="2144"/>
+  <property name="start_y" value="1952"/>
  </properties>
  <tileset firstgid="1" name="jungle" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <properties>
@@ -22,4 +22,86 @@
    eJztnG2OpDAMRDM/9pT7xf1PsdNClrIQIIBNVUxZelKLbpoiPHXiiTRfpZQv4cKPTtA5GbBC58jEx63f3/zcQf7NWKFzZOLj1p9vfu0g/2as0DkysTfnmpfyb8YKnSMT9fy7PC7//scKnSMTtWdbx+XfjBU6Rya2PJN/a6zQOTIh//qxQufIhPzrxwqdIxPyrx8rdI5MvN2/cvKzZz6fmd59sx56/PMCPW53XLpyTlZ69s16+Vv2/fO4RoZ9PCt0DgZ69s3OsuWfB1ORf5mInh+j5/cRsULnYCDiuS79Y82JwgqdgwH9/sk/Fv8i+oPo/mZErNA5GNjrD6aN4xH9x5lryb88RM+P0fP7iFihc2Si1z90Tgas0DkyIf/6sULn8HruLDw5/448f1uh3fHyz6u/HGX/bfT9Oyu0O17+Xd3fmpw+c7X/jbo++/6dFdodb//Qc1prfkPnOFofyD9f/9B5LFPrNToTyzhZocckYlxZqPOxIP9i/UOv66P33yL6I/nn55/H2v3onJ7vXPp3pj+6ev0z9yr/fP1jQX//e59/LPT6h87JgBU6RybkXz9W6Bz2fLIw0vyLnL+t0O7Z82HpDyP6y9o/dD4vsvmH2j+7e/7d/pc1/9H3ZfUPPadEzE/oHJ54rWOt0O61/EPn8bqn1uuReYt/WajvLwvZ/UOvqyPW55/XmfurTP55rY+R75/pP5jy99xX6/4y+JcF/f1vPP+y0OsfOicDVugcmZB//Vh5jbt43/x7l1L8/MvS30X0h7V/6HwsePvHvH8Wef27/e8T9x95/tUxj/IP/ZvOhNYna2pPSonxD722ZWDpHzoPA0/5J9b+iZlo/9DrWhaW/qk/m6n7s1L8/fNYux6dw/7+mf6DLfvV93vGZDk+pfj5J9bzi9Yn+5Ti459oe3Z0/M1YoXNkwjybivw7wsrGR/gw0vzL5J/6M//+ruUfOp/B5h/z/hnz+Xv93dK/1vdEXf9MPib/0HNCJmr/WGBZh1q1/EPmygJyHEf3T4zL6P6h18Vv4jPud/u+2qMM/nmsfY/Oyf5+7xhtjfuZ67f824PVP+HPU2ua2r8r56H9E/4s/UPnYcMKnSMr8m8fK3QOr2fNyNZenPe8OyJW6Bxe/jHuH3724qay9s8jq/zjof6t8e7VPfrdpX93/9fNVOQfE0/2mk/3qD1z+ohYoXNE+IfOo/s8xgqdI+K5ZEb+8VE/F3TP8URPI/+42FvTTxvH0ftvd8niX4ZCz4koVCrVvfoH1XqBng==
   </data>
  </layer>
+ <objectgroup name="Monsters" width="160" height="76">
+  <object name="will_owisp_green.xml" type="Floater" x="3168" y="2144" width="34" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="cyclop_red.xml" type="Walker" x="3168" y="2300" width="50" height="66">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="will_owisp_green.xml" type="Floater" x="2592" y="2328" width="34" height="34">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="will_owisp_green.xml" type="Floater" x="2240" y="2320" width="34" height="34">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="cyclop_red.xml" type="Walker" x="2284" y="2140" width="50" height="66">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="will_owisp_green.xml" type="Floater" x="1984" y="1956" width="34" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="will_owisp_green.xml" type="Floater" x="1353" y="1952" width="34" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="will_owisp_green.xml" type="Floater" x="832" y="1968" width="34" height="34">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_stone.xml" type="Shooter" x="320" y="1983" width="32" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_stone.xml" type="Shooter" x="64" y="1952" width="32" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_stone.xml" type="Shooter" x="320" y="1984" width="32" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_stone.xml" type="Shooter" x="64" y="1792" width="32" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="fire_stone.xml" type="Shooter" x="480" y="1824" width="32" height="32">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="will_owisp_blue.xml" type="Floater" x="2080" y="1792" width="34" height="34">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="fire_stone.xml" type="Shooter" x="2528" y="1824" width="32" height="32">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+  <object name="fire_stone.xml" type="Shooter" x="2720" y="1792" width="32" height="32">
+   <properties>
+    <property name="direction" value="left"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

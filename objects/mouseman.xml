@@ -73,6 +73,24 @@
                     <shielded_parts frame="4">
                         <shielded_part x1="14" y1="30" x2="26" y2="41" />
                     </shielded_parts>
+                    <shielded_parts frame="8">
+                        <shielded_part x1="38" y1="18" x2="50" y2="31" />
+                    </shielded_parts>
+                    <shielded_parts frame="12">
+                        <shielded_part x1="14" y1="18" x2="25" y2="30" />
+                    </shielded_parts>
+                    <shielded_parts frame="16">
+                        <shielded_part x1="29" y1="12" x2="43" y2="23" />
+                    </shielded_parts>
+                    <shielded_parts frame="20">
+                        <shielded_part x1="30" y1="37" x2="42" y2="46" />
+                    </shielded_parts>
+                    <shielded_parts frame="24">
+                        <shielded_part x1="21" y1="38" x2="33" y2="49" />
+                    </shielded_parts>
+                    <shielded_parts frame="28">
+                        <shielded_part x1="21" y1="15" x2="33" y2="24" />
+                    </shielded_parts>
                     <attack_parts frame="3">
                         <attack_part x1="46" y1="32" x2="60" y2="38" />
                     </attack_parts>

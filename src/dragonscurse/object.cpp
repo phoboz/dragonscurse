@@ -210,6 +210,12 @@ int Object::get_bottom() const
     return m_y + get_attribute("bottom");
 }
 
+int Object::get_medium_y() const
+{
+    return m_y + (get_attribute("bottom") - get_attribute("top")) / 2 +
+           get_attribute("top");
+}
+
 bool Object::check_collision(int x, int y, Map *map, int start, int end) const
 {
     bool result = false;

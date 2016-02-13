@@ -70,6 +70,7 @@ public:
     virtual Direction get_reference() const;
     int get_front() const;
     int get_bottom() const;
+    int get_medium_y() const;
     bool get_reused() { return m_reused; }
     int get_left() const { return m_x + get_attribute("left"); }
     int get_right() const { return m_x + get_attribute("right"); }
@@ -80,6 +81,7 @@ public:
     void set_reference(int x, int y) { m_xref = x; m_yref = y; }
 
     void set_reused(bool reused) { m_reused = reused; }
+    void set_always_visible(bool value) { m_always_visible = value; }
 
     const char* get_filename() const { return m_fn.c_str(); }
     const char* get_name() const { return m_name.c_str(); }
@@ -130,8 +132,6 @@ protected:
     bool check_behind(Map *map, int start = 0, int end = 0);
     bool check_above(Map *map, int start = 0, int end = 0);
     int check_above(Map *map, int len, int start = 0, int end = 0);
-
-    void set_always_visible(bool value) { m_always_visible = value; }
 
     std::map<std::string, int> m_attributes;
     std::map<std::string, std::string> m_strings;

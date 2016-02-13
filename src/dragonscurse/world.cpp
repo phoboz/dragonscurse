@@ -139,7 +139,8 @@ Area* World::move(Player *player,
                 Monster *monster = (Monster *) object;
 
                 monster->move(m_map);
-                monster->set_reference(player->get_front(), player->get_y());
+                monster->set_reference(player->get_front(),
+                                       player->get_medium_y());
                 if (monster->check_attack_collision(player) ||
                     monster->attack_object(player)) {
                     if (!monster->get_invisible()) {

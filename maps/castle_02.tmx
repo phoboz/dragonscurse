@@ -30,29 +30,29 @@
   </object>
  </objectgroup>
  <objectgroup name="Monsters" width="149" height="21">
-  <object name="cyclop_green.xml" type="Walker" x="4143" y="285" width="50" height="60">
+  <object name="cyclop_green.xml" type="Walker" x="4143" y="284" width="50" height="66">
    <properties>
     <property name="direction" value="left"/>
     <property name="object_id" value="1"/>
    </properties>
   </object>
-  <object name="cyclop_green.xml" type="Walker" x="2385" y="217" width="50" height="66">
+  <object name="cyclop_green.xml" type="Walker" x="2385" y="220" width="50" height="66">
    <properties>
     <property name="direction" value="left"/>
     <property name="object_id" value="2"/>
    </properties>
   </object>
-  <object name="cyclop_red.xml" type="Walker" x="1874" y="217" width="50" height="66">
+  <object name="cyclop_red.xml" type="Walker" x="1874" y="220" width="50" height="66">
    <properties>
     <property name="direction" value="left"/>
    </properties>
   </object>
-  <object name="cyclop_red.xml" type="Walker" x="1360" y="217" width="50" height="66">
+  <object name="cyclop_red.xml" type="Walker" x="1360" y="220" width="50" height="66">
    <properties>
     <property name="direction" value="left"/>
    </properties>
   </object>
-  <object name="cyclop_red.xml" type="Walker" x="849" y="217" width="50" height="66">
+  <object name="cyclop_red.xml" type="Walker" x="849" y="220" width="50" height="66">
    <properties>
     <property name="direction" value="left"/>
    </properties>

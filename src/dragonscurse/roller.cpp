@@ -1,6 +1,20 @@
 #include <math.h>
 #include "roller.h"
 
+Roller::Roller(const char *fn, MediaDB *media, int x, int y,
+               const Tmx::Polyline *polyline)
+    : Monster(fn, media, x, y, Right),
+      m_polyline(polyline),
+      m_curr_point(0),
+      m_reverse(false),
+      m_was_hit(false),
+      m_x0(x), m_y0(y)
+{
+    set_solid(false);
+    set_recursive_hit(false);
+    set_always_visible(true);
+}
+
 bool Roller::set_hit(Object *object, Status *status)
 {
     if (!m_was_hit) {

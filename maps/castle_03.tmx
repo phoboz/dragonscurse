@@ -278,7 +278,7 @@
     <property name="trigger_time" value="900"/>
    </properties>
   </object>
-  <object name="cyclop_green.xml" type="Walker" x="977" y="633" width="50" height="66">
+  <object name="cyclop_green.xml" type="Walker" x="977" y="636" width="50" height="66">
    <properties>
     <property name="direction" value="left"/>
    </properties>

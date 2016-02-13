@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<will_owisp>
+    <diver turn_width="40"
+           attack_distance="500"
+           attack_timer="40"
+           hit_time="20">
+        <monster hp="64"
+                 ap="42"
+                 perish_time="40">
+            <actor move_speed="2"
+                   treshold="12"
+                   right_still="3"
+                   right_move_start="3" right_move_end="4"
+                   right_fall="3"
+                   right_hit="2"
+                   left_still="0"
+                   left_move_start="0" left_move_end="1"
+                   left_fall="0"
+                   left_hit="2"
+                   perish_start="2" perish_end="2">
+                <object image="will_owisp_green.png"
+                        left="2" right="32" top="2" bottom="32">
+                    <weak_parts frame="-1">
+                        <weak_part x1="2" y1="2" x2="32" y2="32" />
+                    </weak_parts>
+                    <attack_parts frame="-1">
+                        <attack_part x1="2" y1="2" x2="32" y2="32" />
+                    </attack_parts>
+                </object>
+            </actor>
+            <string collectable="coin.xml" />
+        </monster>
+    </diver>
+</will_owisp>
+

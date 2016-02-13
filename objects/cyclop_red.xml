@@ -17,7 +17,7 @@
                    left_hit="4"
                    perish_start="5" perish_end="5">
                 <object image="cyclop_red.png"
-                        left="1" right="48" top="2" bottom="65">
+                        left="1" right="48" top="2" bottom="63">
                     <weak_parts frame="-1">
                         <weak_part x1="0" y1="0" x2="50" y2="66" />
                     </weak_parts>

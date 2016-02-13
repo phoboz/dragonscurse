@@ -5,7 +5,7 @@
              num_bullets="3"
              attack_left="6"
              attack_right="28"
-             attack_medium="6"
+             attack_medium="5"
              attack_treshold="6"
              bullet_speed="5"
              hit_time="24">
