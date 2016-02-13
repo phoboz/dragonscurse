@@ -12,7 +12,6 @@ Roller::Roller(const char *fn, MediaDB *media, int x, int y,
 {
     set_solid(false);
     set_recursive_hit(false);
-    set_always_visible(true);
 }
 
 bool Roller::set_hit(Object *object, Status *status)

@@ -138,6 +138,7 @@ Area* World::move(Player *player,
             else if (object_type == Object::TypeMonster) {
                 Monster *monster = (Monster *) object;
 
+                monster->set_always_visible(true);
                 monster->move(m_map);
                 monster->set_reference(player->get_front(),
                                        player->get_medium_y());
