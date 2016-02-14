@@ -280,9 +280,11 @@
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="will_owisp_red.xml" type="Floater" x="48" y="736" width="34" height="34">
+  <object name="will_owisp_red.xml" type="Waver" x="162" y="928" width="34" height="34">
    <properties>
+    <property name="amplitude" value="3"/>
     <property name="direction" value="right"/>
+    <property name="frequency" value="5"/>
     <property name="object_id" value="1"/>
    </properties>
   </object>

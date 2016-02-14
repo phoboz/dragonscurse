@@ -23,9 +23,11 @@
   </data>
  </layer>
  <objectgroup name="Monsters" width="160" height="76">
-  <object name="will_owisp_green.xml" type="Floater" x="3168" y="2144" width="34" height="34">
+  <object name="will_owisp_green.xml" type="Waver" x="3168" y="2144" width="34" height="34">
    <properties>
+    <property name="amplitude" value="3"/>
     <property name="direction" value="right"/>
+    <property name="frequency" value="5"/>
    </properties>
   </object>
   <object name="cyclop_red.xml" type="Walker" x="3168" y="2300" width="50" height="66">
@@ -33,14 +35,18 @@
     <property name="direction" value="left"/>
    </properties>
   </object>
-  <object name="will_owisp_green.xml" type="Floater" x="2592" y="2328" width="34" height="34">
+  <object name="will_owisp_green.xml" type="Waver" x="2592" y="2304" width="34" height="34">
    <properties>
+    <property name="amplitude" value="3"/>
     <property name="direction" value="left"/>
+    <property name="frequency" value="5"/>
    </properties>
   </object>
-  <object name="will_owisp_green.xml" type="Floater" x="2240" y="2320" width="34" height="34">
+  <object name="will_owisp_green.xml" type="Waver" x="2240" y="2304" width="34" height="34">
    <properties>
+    <property name="amplitude" value="3"/>
     <property name="direction" value="left"/>
+    <property name="frequency" value="5"/>
    </properties>
   </object>
   <object name="cyclop_red.xml" type="Walker" x="2284" y="2140" width="50" height="66">
@@ -48,19 +54,25 @@
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="will_owisp_green.xml" type="Floater" x="1984" y="1956" width="34" height="34">
+  <object name="will_owisp_green.xml" type="Waver" x="1984" y="1952" width="34" height="34">
    <properties>
+    <property name="amplitude" value="3"/>
     <property name="direction" value="right"/>
+    <property name="frequency" value="5"/>
    </properties>
   </object>
-  <object name="will_owisp_green.xml" type="Floater" x="1353" y="1952" width="34" height="34">
+  <object name="will_owisp_green.xml" type="Waver" x="1353" y="1952" width="34" height="34">
    <properties>
+    <property name="amplitude" value="3"/>
     <property name="direction" value="right"/>
+    <property name="frequency" value="5"/>
    </properties>
   </object>
-  <object name="will_owisp_green.xml" type="Floater" x="832" y="1968" width="34" height="34">
+  <object name="will_owisp_green.xml" type="Waver" x="832" y="1952" width="34" height="34">
    <properties>
+    <property name="amplitude" value="3"/>
     <property name="direction" value="right"/>
+    <property name="frequency" value="5"/>
    </properties>
   </object>
   <object name="fire_stone.xml" type="Shooter" x="320" y="1983" width="32" height="32">
@@ -88,9 +100,11 @@
     <property name="direction" value="left"/>
    </properties>
   </object>
-  <object name="will_owisp_blue.xml" type="Floater" x="2080" y="1792" width="34" height="34">
+  <object name="will_owisp_blue.xml" type="Waver" x="2080" y="1792" width="34" height="34">
    <properties>
+    <property name="amplitude" value="3"/>
     <property name="direction" value="left"/>
+    <property name="frequency" value="5"/>
    </properties>
   </object>
   <object name="fire_stone.xml" type="Shooter" x="2528" y="1824" width="32" height="32">

@@ -7,7 +7,7 @@
         <monster hp="64"
                  ap="42"
                  perish_time="40">
-            <actor move_speed="2"
+            <actor move_speed="3"
                    treshold="12"
                    right_still="3"
                    right_move_start="3" right_move_end="4"

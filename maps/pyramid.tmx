@@ -219,24 +219,32 @@
     <property name="direction" value="left"/>
    </properties>
   </object>
-  <object name="will_owisp_red.xml" type="Floater" x="2134" y="72" width="34" height="34">
+  <object name="will_owisp_red.xml" type="Waver" x="2128" y="64" width="34" height="34">
    <properties>
+    <property name="amplitude" value="6"/>
     <property name="direction" value="right"/>
+    <property name="frequency" value="2"/>
    </properties>
   </object>
-  <object name="will_owisp_red.xml" type="Floater" x="1664" y="92" width="34" height="34">
+  <object name="will_owisp_red.xml" type="Waver" x="1664" y="64" width="34" height="34">
    <properties>
+    <property name="amplitude" value="6"/>
     <property name="direction" value="right"/>
+    <property name="frequency" value="2"/>
    </properties>
   </object>
-  <object name="will_owisp_red.xml" type="Floater" x="700" y="116" width="34" height="34">
+  <object name="will_owisp_red.xml" type="Waver" x="704" y="64" width="34" height="34">
    <properties>
+    <property name="amplitude" value="6"/>
     <property name="direction" value="right"/>
+    <property name="frequency" value="2"/>
    </properties>
   </object>
-  <object name="will_owisp_red.xml" type="Floater" x="571" y="149" width="34" height="34">
+  <object name="will_owisp_red.xml" type="Waver" x="560" y="144" width="34" height="34">
    <properties>
+    <property name="amplitude" value="3"/>
     <property name="direction" value="right"/>
+    <property name="frequency" value="3"/>
    </properties>
   </object>
  </objectgroup>
