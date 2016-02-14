@@ -1157,6 +1157,7 @@ void Climber::move(Map *map)
                 set_dir(m_dir);
             }
         }
+        Actor::move(map);
     }
 }
 
