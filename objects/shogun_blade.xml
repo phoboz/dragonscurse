@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<arm ap="35">
+    <item type="arm"
+          once="1"
+          price="225"
+          req_cp="91"
+          unknown="1">
+        <material move_speed="14" weight="2" rise="2" fall="2" still="2">
+            <object image="icons.png"
+                    left="0" right="32" top="0" bottom="32" />
+        </material>
+    </item>
+</arm>
+

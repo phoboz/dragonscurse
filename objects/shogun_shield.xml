@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<shield dp="35">
+    <item type="shield"
+          once="1"
+          price="460"
+          req_cp="91"
+          unknown="1">
+        <material move_speed="14" weight="2" rise="3" fall="3" still="3">
+            <object image="icons.png"
+                    left="0" right="32" top="0" bottom="32" />
+        </material>
+    </item>
+</shield>
+
