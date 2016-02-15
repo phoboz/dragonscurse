@@ -199,8 +199,9 @@ bool WorldDB::load_event_attributes(WorldEvent *event, TiXmlElement *elmt)
         else if (strcmp(attr->Name(), "location") == 0) {
             event->m_location = std::string(attr->Value());
         }
-        else if (strcmp(attr->Name(), "icon") == 0) {
-            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        else if (strcmp(attr->Name(), "event") == 0) {
+            event->m_strings[std::string(attr->Name())] =
+                std::string(attr->Value());
         }
         else if (strcmp(attr->Name(), "type") == 0) {
             if (strcmp(attr->Value(), "area") == 0) {
@@ -518,7 +519,8 @@ bool WorldDB::get_event_info(EventInfo *info,
                     info->key = event->m_key;
                     info->location_x = event->m_integers["location_x"];
                     info->location_y = event->m_integers["location_y"];
-                    info->icon = event->m_integers["icon"];
+                    info->event =
+                        event->m_strings[std::string("event")].c_str();
                     info->event_type = event->m_event_type;
                     switch (event->m_event_type) {
                         case Object::TypeArea:

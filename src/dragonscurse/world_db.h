@@ -73,7 +73,7 @@ struct EventInfo {
     enum Object::Type event_type;
     int location_x;
     int location_y;
-    int icon;
+    const char *event;
     EventData data;
 };
 

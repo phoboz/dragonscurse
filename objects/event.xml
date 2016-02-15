@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<event>
+    <material rise_speed="30"
+              move_speed="0"
+              chest_speed="4"
+              weight="24"
+              treshold="5"
+              move_start="1"
+              move_end="1"
+              still="1">
+        <object image="icons.png"
+                left="0" right="32" top="0" bottom="32" />
+    </material>
+</event>
+

@@ -178,7 +178,7 @@
         <event location_x="30"
                location_y="28"
                location="village_interiour.tmx"
-               icon="1"
+               event="event.xml"
                type="area"
                x="1120"
                y="928"
@@ -186,7 +186,7 @@
                height="64"
                name="village_transform_room.tmx"
                start_x="288"
-               start_y="192"
+               start_y="128"
                area_type="regular_door.xml" />
     </events>
 </world>

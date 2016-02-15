@@ -9,6 +9,7 @@
 #include "item.h"
 #include "curse.h"
 #include "chest.h"
+#include "event.h"
 #include "morph.h"
 #include "statusbar.h"
 #include "world_db.h"
@@ -92,12 +93,13 @@ Area* World::move(Player *player,
     if (m_db->get_status()->get_break_rock()) {
         int rock_x, rock_y;
         if (player->check_break_rock(&rock_x, &rock_y, m_map)) {
-            rock_x /= m_map->get_tile_width();
-            rock_y /= m_map->get_tile_height();
+            int tile_x = rock_x / m_map->get_tile_width();
+            int tile_y = rock_y / m_map->get_tile_height();
             EventInfo info;
-            if (m_db->get_event_info(&info, rock_x, rock_y, get_filename())) {
-                // TODO: Create a pickup event before enabeling area
-                m_objects.push_back(new Area(&info.data.area, m_media));
+            if (m_db->get_event_info(&info, tile_x, tile_y, get_filename())) {
+                m_objects.push_back(new Event(tile_x * m_map->get_tile_width(),
+                                              tile_y * m_map->get_tile_height(),
+                                              &info, m_media));
             }
         }
     }
@@ -195,6 +197,20 @@ Area* World::move(Player *player,
                     status->aquire_collectable(collectable);
                     collectable->aquire(this);
                     perished.push_back(collectable);
+                }
+            }
+
+            // Handle event objects
+            if (object_type == Object::TypeEvent) {
+                Event *event = (Event *) object;
+
+                event->move(m_map);
+
+                // Check if player activated the event
+                if (event->get_reachable() &&
+                    player->check_collision(event)) {
+                    m_objects.push_back(event->get_event_object());
+                    perished.push_back(event);
                 }
             }
 

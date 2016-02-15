@@ -25,7 +25,8 @@ public:
         TypeCurse,
         TypeMorph,
         TypeArea,
-        TypeChest
+        TypeChest,
+        TypeEvent
     };
 
     enum Direction { None, Keep, Right, Left, Up, Down };
