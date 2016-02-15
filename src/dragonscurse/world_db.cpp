@@ -4,7 +4,7 @@
 #include "world_db.h"
 
 struct WorldNode {
-    enum Type { TypeObject, TypeLock, TypeChest };
+    enum Type { TypeObject, TypeLock, TypeChest, TypeEvent };
 
     WorldNode(Type type) : m_key(m_keygen++), m_type(type), m_user(0) { }
 
@@ -32,6 +32,11 @@ struct WorldChest : public WorldNode {
     WorldChest() : WorldNode(TypeChest) { }
 
     std::vector<WorldObject*> m_objects;
+};
+
+struct WorldEvent : public WorldNode {
+    WorldEvent() : WorldNode(TypeEvent) { }
+    Object::Type m_event_type;
 };
 
 struct WorldLocation {
@@ -179,6 +184,66 @@ bool WorldDB::load_chest_attributes(WorldChest *chest, TiXmlElement *elmt)
     return result;
 }
 
+bool WorldDB::load_event_attributes(WorldEvent *event, TiXmlElement *elmt)
+{
+    bool result = true;
+
+    TiXmlAttribute *attr = elmt->FirstAttribute();
+    while (attr) {
+        if (strcmp(attr->Name(), "location_x") == 0) {
+            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "location_y") == 0) {
+            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "location") == 0) {
+            event->m_location = std::string(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "icon") == 0) {
+            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "type") == 0) {
+            if (strcmp(attr->Value(), "area") == 0) {
+                event->m_event_type = Object::TypeArea;
+            }
+        }
+        else if (strcmp(attr->Name(), "x") == 0) {
+            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "y") == 0) {
+            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "width") == 0) {
+            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "height") == 0) {
+            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "name") == 0) {
+            event->m_strings[std::string(attr->Name())] =
+                std::string(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "start_x") == 0) {
+            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "start_y") == 0) {
+            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "area_type") == 0) {
+            event->m_strings[std::string(attr->Name())] =
+                std::string(attr->Value());
+        }
+        else {
+            result = false;
+            break;
+        }
+
+        attr = attr->Next();
+    }
+
+    return result;
+}
+
 WorldLocation* WorldDB::find_location(const char *name) const
 {
     WorldLocation *location;
@@ -238,6 +303,19 @@ bool WorldDB::load_nodes(TiXmlNode *node)
                     get_location(lock->m_location.c_str());
                 if (location) {
                     location->m_nodes.push_back(lock);
+                }
+            }
+        }
+        else if (strcmp(node->Value(), "event") == 0) {
+            WorldEvent *event = new WorldEvent;
+            result = load_event_attributes(event, node->ToElement());
+            if (result) {
+
+                // Check if location exists, otherwise allocate new and insert
+                WorldLocation *location =
+                    get_location(event->m_location.c_str());
+                if (location) {
+                    location->m_nodes.push_back(event);
                 }
             }
         }
@@ -419,6 +497,57 @@ bool WorldDB::get_chest_info(ChestInfo *info,
     }
 
 error:
+    return result;
+}
+
+bool WorldDB::get_event_info(EventInfo *info,
+                             int x, int y, const char *location_name) const
+{
+    bool result = false;
+    WorldLocation *location = find_location(location_name);
+
+    if (location) {
+        for (std::list<WorldNode*>::iterator it = location->m_nodes.begin();
+             it != location->m_nodes.end();
+             ++it) {
+            if ((*it)->m_type == WorldNode::TypeEvent) {
+                WorldEvent *event = (WorldEvent *) *it;
+                //if (event->m_id == id) {
+                if (event->m_integers["location_x"] == x &&
+                    event->m_integers["location_y"] == y) {
+                    info->key = event->m_key;
+                    info->location_x = event->m_integers["location_x"];
+                    info->location_y = event->m_integers["location_y"];
+                    info->icon = event->m_integers["icon"];
+                    info->event_type = event->m_event_type;
+                    switch (event->m_event_type) {
+                        case Object::TypeArea:
+                            info->data.area.x = event->m_integers["x"];
+                            info->data.area.y = event->m_integers["y"];
+                            info->data.area.width = event->m_integers["width"];
+                            info->data.area.height =
+                                event->m_integers["height"];
+                            info->data.area.name =
+                                event->m_strings[std::string("name")].c_str();
+                            info->data.area.start_x =
+                                event->m_integers["start_x"];
+                            info->data.area.start_y =
+                                event->m_integers["start_y"];
+                            info->data.area.area_type =
+                                event->m_strings[
+                                    std::string("area_type")].c_str();
+                            break;
+
+                        default:
+                            break;
+                    }
+                    result = true;
+                    break;
+                }
+            }
+        }
+    }
+
     return result;
 }
 

@@ -12,6 +12,7 @@
 struct WorldObject;
 struct WorldLock;
 struct WorldChest;
+struct WorldEvent;
 struct WorldLocation;
 
 struct MaterialData {
@@ -52,6 +53,30 @@ struct ChestInfo {
     ObjectInfo objects[16];
 };
 
+struct EventArea {
+    int x;
+    int y;
+    int width;
+    int height;
+    const char *name;
+    int start_x;
+    int start_y;
+    const char *area_type;
+};
+
+union EventData {
+    EventArea area;
+};
+
+struct EventInfo {
+    int key;
+    enum Object::Type event_type;
+    int location_x;
+    int location_y;
+    int icon;
+    EventData data;
+};
+
 class WorldDB {
 public:
     WorldDB(const char *name);
@@ -68,6 +93,9 @@ public:
     bool get_chest_info(ChestInfo *info,
                         int id, const char *location_name) const;
 
+    bool get_event_info(EventInfo *info,
+                        int x, int y, const char *location_name) const;
+
     bool remove(int key);
     bool set_user(int key, int user);
     void clear_user();
@@ -81,6 +109,7 @@ private:
     bool load_object_attributes(WorldObject *object, TiXmlElement *elmt);
     bool load_lock_attributes(WorldLock *lock, TiXmlElement *elmt);
     bool load_chest_attributes(WorldChest *chest, TiXmlElement *elmt);
+    bool load_event_attributes(WorldEvent *chest, TiXmlElement *elmt);
 
     WorldLocation* find_location(const char *name) const;
     WorldLocation* get_location(const char *name);

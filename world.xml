@@ -174,5 +174,20 @@
             <treasure id="1" type="collectable" name="coin.xml" />
         </chest>
     </chests>
+    <events>
+        <event location_x="30"
+               location_y="28"
+               location="village_interiour.tmx"
+               icon="1"
+               type="area"
+               x="1120"
+               y="928"
+               width="64"
+               height="64"
+               name="village_transform_room.tmx"
+               start_x="288"
+               start_y="192"
+               area_type="regular_door.xml" />
+    </events>
 </world>
 

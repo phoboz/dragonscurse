@@ -9,6 +9,7 @@ class Actor;
 class Item;
 class Curse;
 class World;
+struct EventArea;
 
 class Area : public Object {
 public:
@@ -19,6 +20,7 @@ public:
          const char *type, int x, int y, int w, int h);
     Area(Curse *curse);
     Area(const char *destination, int sx, int sy);
+    Area(EventArea *area, MediaDB *media);
 
     virtual void world_initialize(World *world);
 

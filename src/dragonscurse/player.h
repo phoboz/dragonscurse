@@ -15,7 +15,7 @@ public:
 
     void set_jump(Map *map, bool catapult = false);
     virtual bool set_hit(Object *object, Status *status);
-    bool check_break_rock(Map *map);
+    bool check_break_rock(int *x, int *y, Map *map);
     bool check_create_rock(Map *map);
 
     void set_morph(Morph *morph) { m_morph = morph; }

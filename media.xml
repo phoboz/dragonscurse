@@ -173,6 +173,7 @@
         <map filename="sky_castle01.tmx" />
         <map filename="village.tmx" />
         <map filename="village_interiour.tmx" />
+        <map filename="village_transform_room.tmx" />
         <map filename="wb.tmx" />
     </maps>
     <fonts prefix="./fonts/">

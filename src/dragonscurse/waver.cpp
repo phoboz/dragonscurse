@@ -1,4 +1,3 @@
-#include <iostream>
 #include "waver.h"
 #include <math.h>
 

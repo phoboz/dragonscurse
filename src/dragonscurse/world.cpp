@@ -90,7 +90,16 @@ Area* World::move(Player *player,
 
     // Handle player world altering abilities
     if (m_db->get_status()->get_break_rock()) {
-        player->check_break_rock(m_map);
+        int rock_x, rock_y;
+        if (player->check_break_rock(&rock_x, &rock_y, m_map)) {
+            rock_x /= m_map->get_tile_width();
+            rock_y /= m_map->get_tile_height();
+            EventInfo info;
+            if (m_db->get_event_info(&info, rock_x, rock_y, get_filename())) {
+                // TODO: Create a pickup event before enabeling area
+                m_objects.push_back(new Area(&info.data.area, m_media));
+            }
+        }
     }
 
     if (m_db->get_status()->get_create_rock()) {

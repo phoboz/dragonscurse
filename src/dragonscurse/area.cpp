@@ -11,7 +11,7 @@ Area::Area(const char *name, MediaDB *media,
            const char *type, int x, int y, int w, int h)
     : Object(Object::TypeArea, x, y),
       m_name(name),
-      m_h(h), m_w(w)
+      m_w(w), m_h(h)
 {
     if (strcmp(type, "warp") == 0) {
         m_type = TypeWarp;
@@ -47,6 +47,20 @@ Area::Area(const char *destination, int sx, int sy)
 {
     set_attribute("start_x", sx);
     set_attribute("start_y", sy);
+}
+
+Area::Area(EventArea *area, MediaDB *media)
+    : Object(Object::TypeArea, area->x, area->y),
+      m_type(TypeUser),
+      m_state(StateClosed),
+      m_name(area->name),
+      m_w(area->width), m_h(area->height)
+{
+    set_attribute("start_x", area->start_x);
+    set_attribute("start_y", area->start_y);
+
+    load(area->area_type, media);
+    m_frame = get_attribute("open_start");
 }
 
 void Area::world_initialize(World *world)
