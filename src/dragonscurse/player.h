@@ -15,8 +15,8 @@ public:
 
     void set_jump(Map *map, bool catapult = false);
     virtual bool set_hit(Object *object, Status *status);
-    bool check_break_rock(int *x, int *y, Map *map);
-    bool check_create_rock(Map *map);
+    virtual bool check_break_rock(int *x, int *y, Map *map) { return false; }
+    virtual bool check_create_rock(Map *map) { return false; }
 
     void set_morph(Morph *morph) { m_morph = morph; }
     bool is_morphing();
@@ -35,16 +35,12 @@ private:
     void check_water(Map *map);
     void player_move(Map *map);
 
-    static const int c_rock_timeout = 10;
-
     Morph *m_morph;
     Area *m_area;
     bool m_hit_ground;
     bool m_jump_ready;
     bool m_in_water;
     Timer m_hit_timer;
-    Timer m_break_rock_timer;
-    Timer m_create_rock_timer;
 };
 
 #endif
