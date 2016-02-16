@@ -95,11 +95,12 @@ Area* World::move(Player *player,
         if (player->check_break_rock(&rock_x, &rock_y, m_map)) {
             int tile_x = rock_x / m_map->get_tile_width();
             int tile_y = rock_y / m_map->get_tile_height();
-            EventInfo info;
-            if (m_db->get_event_info(&info, tile_x, tile_y, get_filename())) {
-                m_objects.push_back(new Event(tile_x * m_map->get_tile_width(),
-                                              tile_y * m_map->get_tile_height(),
-                                              &info, m_media));
+            ObjectInfo info;
+            if (m_db->get_object_info(&info, tile_x, tile_y, get_filename())) {
+                Object *object = ObjectFactory::create_object(&info, m_media);
+                object->set_x(tile_x * m_map->get_tile_width());
+                object->set_y(tile_y * m_map->get_tile_height());
+                m_objects.push_back(object);
             }
         }
     }

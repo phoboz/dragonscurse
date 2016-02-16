@@ -59,7 +59,7 @@ Area::Area(EventArea *area, MediaDB *media)
     set_attribute("start_x", area->start_x);
     set_attribute("start_y", area->start_y);
 
-    load(area->area_type, media);
+    load(area->type, media);
     m_frame = get_attribute("open_start");
 }
 

@@ -1,10 +1,9 @@
-#include <string.h>
 #include "item.h"
 #include "store_restore.h"
 #include "world_db.h"
 
 struct WorldNode {
-    enum Type { TypeObject, TypeLock, TypeChest, TypeEvent };
+    enum Type { TypeObject, TypeLock, TypeChest };
 
     WorldNode(Type type) : m_key(m_keygen++), m_type(type), m_user(0) { }
 
@@ -32,11 +31,6 @@ struct WorldChest : public WorldNode {
     WorldChest() : WorldNode(TypeChest) { }
 
     std::vector<WorldObject*> m_objects;
-};
-
-struct WorldEvent : public WorldNode {
-    WorldEvent() : WorldNode(TypeEvent) { }
-    Object::Type m_event_type;
 };
 
 struct WorldLocation {
@@ -77,6 +71,12 @@ bool WorldDB::load_object_attributes(WorldObject *object, TiXmlElement *elmt)
         if (strcmp(attr->Name(), "id") == 0) {
             object->m_id = atoi(attr->Value());
         }
+        else if (strcmp(attr->Name(), "location_x") == 0) {
+            object->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "location_y") == 0) {
+            object->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
         else if (strcmp(attr->Name(), "location") == 0) {
             object->m_location = std::string(attr->Value());
         }
@@ -89,6 +89,9 @@ bool WorldDB::load_object_attributes(WorldObject *object, TiXmlElement *elmt)
             }
             else if (strcmp(attr->Value(), "curse") == 0) {
                 object->m_object_type = Object::TypeCurse;
+            }
+            else if (strcmp(attr->Value(), "event") == 0) {
+                object->m_object_type = Object::TypeEvent;
             }
             else {
                 result = false;
@@ -112,6 +115,36 @@ bool WorldDB::load_object_attributes(WorldObject *object, TiXmlElement *elmt)
         }
         else if (strcmp(attr->Name(), "start_y") == 0) {
             object->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "event_type") == 0) {
+            if (strcmp(attr->Value(), "area") == 0) {
+                object->m_strings[std::string(attr->Name())] =
+                    std::string(attr->Value());
+            }
+            else {
+                result = false;
+                break;
+            }
+        }
+        else if (strcmp(attr->Name(), "event") == 0) {
+            object->m_strings[std::string(attr->Name())] =
+                std::string(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "x") == 0) {
+            object->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "y") == 0) {
+            object->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "width") == 0) {
+            object->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "height") == 0) {
+            object->m_integers[std::string(attr->Name())] = atoi(attr->Value());
+        }
+        else if (strcmp(attr->Name(), "area_type") == 0) {
+            object->m_strings[std::string(attr->Name())] =
+                std::string(attr->Value());
         }
         else {
             result = false;
@@ -172,67 +205,6 @@ bool WorldDB::load_chest_attributes(WorldChest *chest, TiXmlElement *elmt)
         }
         else if (strcmp(attr->Name(), "location") == 0) {
             chest->m_location = std::string(attr->Value());
-        }
-        else {
-            result = false;
-            break;
-        }
-
-        attr = attr->Next();
-    }
-
-    return result;
-}
-
-bool WorldDB::load_event_attributes(WorldEvent *event, TiXmlElement *elmt)
-{
-    bool result = true;
-
-    TiXmlAttribute *attr = elmt->FirstAttribute();
-    while (attr) {
-        if (strcmp(attr->Name(), "location_x") == 0) {
-            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "location_y") == 0) {
-            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "location") == 0) {
-            event->m_location = std::string(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "event") == 0) {
-            event->m_strings[std::string(attr->Name())] =
-                std::string(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "type") == 0) {
-            if (strcmp(attr->Value(), "area") == 0) {
-                event->m_event_type = Object::TypeArea;
-            }
-        }
-        else if (strcmp(attr->Name(), "x") == 0) {
-            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "y") == 0) {
-            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "width") == 0) {
-            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "height") == 0) {
-            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "name") == 0) {
-            event->m_strings[std::string(attr->Name())] =
-                std::string(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "start_x") == 0) {
-            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "start_y") == 0) {
-            event->m_integers[std::string(attr->Name())] = atoi(attr->Value());
-        }
-        else if (strcmp(attr->Name(), "area_type") == 0) {
-            event->m_strings[std::string(attr->Name())] =
-                std::string(attr->Value());
         }
         else {
             result = false;
@@ -307,19 +279,6 @@ bool WorldDB::load_nodes(TiXmlNode *node)
                 }
             }
         }
-        else if (strcmp(node->Value(), "event") == 0) {
-            WorldEvent *event = new WorldEvent;
-            result = load_event_attributes(event, node->ToElement());
-            if (result) {
-
-                // Check if location exists, otherwise allocate new and insert
-                WorldLocation *location =
-                    get_location(event->m_location.c_str());
-                if (location) {
-                    location->m_nodes.push_back(event);
-                }
-            }
-        }
         else if (strcmp(node->Value(), "chest") == 0) {
             WorldChest *chest = new WorldChest;
             result = load_chest_attributes(chest, node->ToElement());
@@ -374,6 +333,42 @@ WorldDB::WorldDB(const char *name)
     }
 }
 
+bool WorldDB::load_event_info(EventInfo *info, WorldObject *object) const
+{
+    bool result = false;
+
+    info->location_x = object->m_integers["location_x"];
+    info->location_y = object->m_integers["location_y"];
+    info->event = object->m_strings[std::string("event")].c_str();
+    if (object->m_strings[std::string("event_type")] == std::string("area")) {
+        info->event_type = Object::TypeArea;
+        result = true;
+    }
+
+    if (result) {
+        switch (info->event_type) {
+            case Object::TypeArea:
+                info->data.area.x = object->m_integers["x"];
+                info->data.area.y = object->m_integers["y"];
+                info->data.area.width = object->m_integers["width"];
+                info->data.area.height = object->m_integers["height"];
+                info->data.area.name =
+                    object->m_strings[std::string("name")].c_str();
+                info->data.area.start_x = object->m_integers["start_x"];
+                info->data.area.start_y = object->m_integers["start_y"];
+                info->data.area.type =
+                    object->m_strings[std::string("area_type")].c_str();
+                break;
+
+            default:
+                result = false;
+                break;
+        }
+    }
+
+    return result;
+}
+
 bool WorldDB::load_object_info(ObjectInfo *info, WorldObject *object) const
 {
     bool result = false;
@@ -383,29 +378,33 @@ bool WorldDB::load_object_info(ObjectInfo *info, WorldObject *object) const
 
     switch(object->m_object_type) {
         case Object::TypeItem:
-            strcpy(info->data.material.name,
-                   object->m_strings[std::string("name")].c_str());
+            info->data.material.name =
+                   object->m_strings[std::string("name")].c_str();
             result = true;
             break;
 
         case Object::TypeCollectable:
-            strcpy(info->data.material.name,
-                   object->m_strings[std::string("name")].c_str());
+            info->data.material.name =
+                   object->m_strings[std::string("name")].c_str();
             result = true;
             break;
 
         case Object::TypeCurse:
-            strcpy(info->data.curse.name,
-                   object->m_strings[std::string("name")].c_str());
-            strcpy(info->data.curse.player,
-                   object->m_strings[std::string("player")].c_str());
-            strcpy(info->data.curse.destination,
-                   object->m_strings[std::string("destination")].c_str());
+            info->data.curse.name =
+                   object->m_strings[std::string("name")].c_str();
+            info->data.curse.player =
+                   object->m_strings[std::string("player")].c_str();
+            info->data.curse.destination =
+                   object->m_strings[std::string("destination")].c_str();
             info->data.curse.start_x =
                 object->m_integers[std::string("start_x")];
             info->data.curse.start_y =
                 object->m_integers[std::string("start_y")];
             result = true;
+            break;
+
+        case Object::TypeEvent:
+            result = load_event_info(&info->data.event, object);
             break;
 
         default:
@@ -428,6 +427,29 @@ bool WorldDB::get_object_info(ObjectInfo *info,
             if ((*it)->m_type == WorldNode::TypeObject) {
                 WorldObject *object = (WorldObject *) *it;
                 if (object->m_id == id) {
+                    result = load_object_info(info, object);
+                }
+            }
+        }
+    }
+
+    return result;
+}
+
+bool WorldDB::get_object_info(ObjectInfo *info, int location_x, int location_y,
+                              const char *location_name) const
+{
+    bool result = false;
+    WorldLocation *location = find_location(location_name);
+
+    if (location) {
+        for (std::list<WorldNode*>::iterator it = location->m_nodes.begin();
+             it != location->m_nodes.end();
+             ++it) {
+            if ((*it)->m_type == WorldNode::TypeObject) {
+                WorldObject *object = (WorldObject *) *it;
+                if (object->m_integers["location_x"] == location_x &&
+                    object->m_integers["location_y"] == location_y) {
                     result = load_object_info(info, object);
                 }
             }
@@ -498,58 +520,6 @@ bool WorldDB::get_chest_info(ChestInfo *info,
     }
 
 error:
-    return result;
-}
-
-bool WorldDB::get_event_info(EventInfo *info,
-                             int x, int y, const char *location_name) const
-{
-    bool result = false;
-    WorldLocation *location = find_location(location_name);
-
-    if (location) {
-        for (std::list<WorldNode*>::iterator it = location->m_nodes.begin();
-             it != location->m_nodes.end();
-             ++it) {
-            if ((*it)->m_type == WorldNode::TypeEvent) {
-                WorldEvent *event = (WorldEvent *) *it;
-                //if (event->m_id == id) {
-                if (event->m_integers["location_x"] == x &&
-                    event->m_integers["location_y"] == y) {
-                    info->key = event->m_key;
-                    info->location_x = event->m_integers["location_x"];
-                    info->location_y = event->m_integers["location_y"];
-                    info->event =
-                        event->m_strings[std::string("event")].c_str();
-                    info->event_type = event->m_event_type;
-                    switch (event->m_event_type) {
-                        case Object::TypeArea:
-                            info->data.area.x = event->m_integers["x"];
-                            info->data.area.y = event->m_integers["y"];
-                            info->data.area.width = event->m_integers["width"];
-                            info->data.area.height =
-                                event->m_integers["height"];
-                            info->data.area.name =
-                                event->m_strings[std::string("name")].c_str();
-                            info->data.area.start_x =
-                                event->m_integers["start_x"];
-                            info->data.area.start_y =
-                                event->m_integers["start_y"];
-                            info->data.area.area_type =
-                                event->m_strings[
-                                    std::string("area_type")].c_str();
-                            break;
-
-                        default:
-                            break;
-                    }
-                    result = true;
-                    break;
-                }
-            }
-        }
-    }
-
     return result;
 }
 

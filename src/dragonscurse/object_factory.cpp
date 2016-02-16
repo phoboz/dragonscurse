@@ -1,4 +1,3 @@
-#include <iostream>
 #include <map>
 #include <string>
 #include <stdlib.h>
@@ -38,6 +37,7 @@
 #include "area.h"
 #include "chest.h"
 #include "curse.h"
+#include "event.h"
 #include "object_factory.h"
 
 static char priv_object_type[80];
@@ -319,6 +319,10 @@ Object* ObjectFactory::create_object(ObjectInfo *info, MediaDB *media)
 
         case Object::TypeCurse:
             object = new Curse(info, media);
+            break;
+
+        case Object::TypeEvent:
+            object = new Event(0, 0, &info->data.event, media);
             break;
 
         default:
