@@ -22,8 +22,9 @@
 #include "diver.h"
 #include "hovering.h"
 #include "floater.h"
-#include "waver.h"
 #include "swimmer.h"
+#include "haunter.h"
+#include "waver.h"
 #include "dancer.h"
 #include "roller.h"
 #include "falling.h"
@@ -223,11 +224,15 @@ Object* ObjectFactory::create_object(const char *name,
     else if (strcmp(type, "Floater") == 0) {
         object = new Floater(name, media, x, y, dir);
     }
-    else if (strcmp(type, "Waver") == 0) {
-        object = new Waver(name, media, x, y, dir);
-    }
     else if (strcmp(type, "Swimmer") == 0) {
         object = new Swimmer(name, media, x, y, dir);
+    }
+    else if (strcmp(type, "Haunter") == 0) {
+        object = new Haunter(name, media, x, y,
+                            obj->GetWidth(), obj->GetHeight(), dir);
+    }
+    else if (strcmp(type, "Waver") == 0) {
+        object = new Waver(name, media, x, y, dir);
     }
     else if (strcmp(type, "Dancer") == 0) {
         object = new Dancer(name, media, x, y, dir);

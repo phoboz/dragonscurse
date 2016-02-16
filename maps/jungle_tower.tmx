@@ -117,5 +117,10 @@
     <property name="direction" value="left"/>
    </properties>
   </object>
+  <object name="air_giant_red.xml" type="Haunter" x="2064" y="1408" width="64" height="256">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
