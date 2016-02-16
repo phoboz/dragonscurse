@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "world.h"
 #include "item.h"
 #include "coin.h"
@@ -101,9 +102,10 @@ Object* Monster::release_object()
         m_objects.pop_back();
     }
     else {
-        const char *col = get_string("collectable");
-        if (col) {
-            object = ObjectFactory::create_collectable(col, m_media);
+        // TODO: Higher number collectables should occur more rarely
+        const char *curr = get_string("collectable", rand() % 3);
+        if (curr) {
+            object = ObjectFactory::create_collectable(curr, m_media);
         }
     }
 

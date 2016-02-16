@@ -33,6 +33,8 @@
                 </object>
             </actor>
             <string collectable="coin.xml" />
+            <string collectable="heart_small.xml" />
+            <string collectable="stone.xml" />
         </monster>
     </guardian>
 </cobra>

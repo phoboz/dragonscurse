@@ -80,7 +80,8 @@ void Object::load_strings(TiXmlElement *elmt)
 {
     TiXmlAttribute *attr = elmt->FirstAttribute();
     while (attr) {
-        m_strings[std::string(attr->Name())] = std::string(attr->Value());
+        m_strings.insert(std::pair<std::string, std::string>(attr->Name(),
+                                                             attr->Value()));
         attr = attr->Next();
     }
 }
@@ -458,16 +459,22 @@ int Object::get_attribute(const char *name) const
     return value;
 }
 
-const char* Object::get_string(const char *name) const
+const char* Object::get_string(const char *name, int index) const
 {
-    const char *str;
+    const char *str = 0;
+    int i = 0;
 
-    std::map<std::string, std::string>::const_iterator it = m_strings.find(name);
-    if (it == m_strings.end()) {
-        str = 0;
-    }
-    else {
+    std::pair<std::multimap<std::string, std::string>::const_iterator,
+              std::multimap<std::string, std::string>::const_iterator> ret;
+    ret = m_strings.equal_range(name);
+    for (std::multimap<std::string, std::string>::const_iterator it = ret.first;
+         it != ret.second;
+         ++it) {
+
         str = it->second.c_str();
+        if (++i > index) {
+            break;
+        }
     }
 
     return str;

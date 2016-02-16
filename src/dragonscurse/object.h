@@ -90,9 +90,9 @@ public:
     void set_attribute(const char *name, int value) {
         m_attributes[std::string(name)] = value;
     }
-    const char* get_string(const char *name) const;
+    const char* get_string(const char *name, int index = 0) const;
     void set_string(const char *name, const char *value) {
-        m_strings[std::string(name)] = std::string(value);
+        m_strings.insert(std::pair<std::string, std::string>(name, value));
     }
     virtual bool get_visible(Map *map, int clip_x, int clip_y,
                              int clip_w, int clip_h) const;
@@ -135,7 +135,7 @@ protected:
     int check_above(Map *map, int len, int start = 0, int end = 0);
 
     std::map<std::string, int> m_attributes;
-    std::map<std::string, std::string> m_strings;
+    std::multimap<std::string, std::string> m_strings;
     std::vector<CollisionParts*> m_weak_parts;
     std::vector<CollisionParts*> m_shielded_parts;
     std::vector<CollisionParts*> m_attack_parts;
