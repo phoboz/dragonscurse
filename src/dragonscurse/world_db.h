@@ -14,11 +14,11 @@ struct WorldLock;
 struct WorldChest;
 struct WorldLocation;
 
-struct MaterialData {
+struct MaterialInfo {
     const char *name;
 };
 
-struct CurseData {
+struct CurseInfo {
     const char *name;
     const char *player;
     const char *destination;
@@ -37,29 +37,25 @@ struct EventArea {
     const char *type;
 };
 
-union EventData {
-    EventArea area;
-};
-
 struct EventInfo {
     int key;
     enum Object::Type event_type;
     int location_x;
     int location_y;
     const char *event;
-    EventData data;
-};
-
-union ObjectData {
-    MaterialData material;
-    CurseData curse;
-    EventInfo event;
+    union {
+        EventArea area;
+    } data;
 };
 
 struct ObjectInfo {
     int key;
     Object::Type object_type;
-    ObjectData data;
+    union {
+        MaterialInfo material;
+        CurseInfo curse;
+        EventInfo event;
+    } data;
 };
 
 struct LockInfo {
