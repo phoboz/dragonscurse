@@ -38,7 +38,6 @@ struct EventArea {
 };
 
 struct EventInfo {
-    int key;
     enum Object::Type event_type;
     int location_x;
     int location_y;

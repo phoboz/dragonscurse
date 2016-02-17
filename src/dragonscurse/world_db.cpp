@@ -11,7 +11,6 @@ struct WorldNode {
 
     int m_key;
     Type m_type;
-    int m_id;
     int m_user;
     std::string m_location;
     std::map<std::string, std::string> m_strings;
@@ -69,7 +68,7 @@ bool WorldDB::load_object_attributes(WorldObject *object, TiXmlElement *elmt)
     TiXmlAttribute *attr = elmt->FirstAttribute();
     while (attr) {
         if (strcmp(attr->Name(), "id") == 0) {
-            object->m_id = atoi(attr->Value());
+            object->m_integers[std::string(attr->Name())] = atoi(attr->Value());
         }
         else if (strcmp(attr->Name(), "location_x") == 0) {
             object->m_integers[std::string(attr->Name())] = atoi(attr->Value());
@@ -164,7 +163,7 @@ bool WorldDB::load_lock_attributes(WorldLock *lock, TiXmlElement *elmt)
     TiXmlAttribute *attr = elmt->FirstAttribute();
     while (attr) {
         if (strcmp(attr->Name(), "id") == 0) {
-            lock->m_id = atoi(attr->Value());
+            lock->m_integers[std::string(attr->Name())] = atoi(attr->Value());
         }
         else if (strcmp(attr->Name(), "type") == 0) {
             lock->m_strings[std::string(attr->Name())] =
@@ -198,7 +197,7 @@ bool WorldDB::load_chest_attributes(WorldChest *chest, TiXmlElement *elmt)
     TiXmlAttribute *attr = elmt->FirstAttribute();
     while (attr) {
         if (strcmp(attr->Name(), "id") == 0) {
-            chest->m_id = atoi(attr->Value());
+            chest->m_integers[std::string(attr->Name())] = atoi(attr->Value());
         }
         else if (strcmp(attr->Name(), "once") == 0) {
             chest->m_integers[std::string(attr->Name())] = atoi(attr->Value());
@@ -426,7 +425,7 @@ bool WorldDB::get_object_info(ObjectInfo *info,
              ++it) {
             if ((*it)->m_type == WorldNode::TypeObject) {
                 WorldObject *object = (WorldObject *) *it;
-                if (object->m_id == id) {
+                if (object->m_integers[std::string("id")] == id) {
                     result = load_object_info(info, object);
                 }
             }
@@ -471,7 +470,7 @@ bool WorldDB::get_lock_info(LockInfo *info,
              ++it) {
             if ((*it)->m_type == WorldNode::TypeLock) {
                 WorldLock *lock = (WorldLock *) *it;
-                if (lock->m_id == id) {
+                if (lock->m_integers[std::string("id")] == id) {
                     info->key = lock->m_key;
                     info->type_name =
                         lock->m_strings[std::string("type")].c_str();
@@ -500,7 +499,7 @@ bool WorldDB::get_chest_info(ChestInfo *info,
              ++it) {
             if ((*it)->m_type == WorldNode::TypeChest) {
                 WorldChest *chest = (WorldChest *) *it;
-                if (chest->m_id == id) {
+                if (chest->m_integers[std::string("id")] == id) {
                     info->key = chest->m_key;
                     info->once = chest->m_integers["once"];
                     info->user = chest->m_user;
