@@ -56,12 +56,12 @@ public:
 
     void add_hearts(int num);
     void add_potions(int num);
-    void add_stones(int num) { m_stones += num; }
-    void add_fires(int num) { m_fires += num; }
-    void add_tornados(int num) { m_tornados += num; }
-    void add_arrows(int num) { m_arrows += num; }
-    void add_boomerangs(int num) { m_boomerangs += num; }
-    void add_thunders(int num) { m_thunders += num; }
+    void add_stones(int num);
+    void add_fires(int num);
+    void add_tornados(int num);
+    void add_arrows(int num);
+    void add_boomerangs(int num);
+    void add_thunders(int num);
     void add_break_rock() { m_break_rock = true; }
     void add_create_rock() { m_create_rock = true; }
 
@@ -95,6 +95,8 @@ public:
 private:
     static const int c_max_hearts = 8;
     static const int c_max_potions = 3;
+    static const int c_max_stones = 99;
+    static const int c_max_magic = 99;
 
     std::list<Item*> m_items;
     Arm *m_arm;

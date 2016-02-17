@@ -253,9 +253,59 @@ void Status::add_hearts(int num)
 
 void Status::add_potions(int num)
 {
-    int i = num + 1;
-    while (--i && m_potions < c_max_potions) {
-        m_potions++;
+    m_potions += num;
+    if (m_potions > c_max_potions) {
+        m_potions = c_max_potions;
+    }
+}
+
+void Status::add_stones(int num)
+{
+    m_stones += num;
+    if (m_stones > c_max_stones) {
+        m_stones = c_max_stones;
+    }
+
+    update();
+}
+
+void Status::add_fires(int num)
+{
+    m_fires += num;
+    if (m_fires > c_max_magic) {
+        m_fires = c_max_magic;
+    }
+}
+
+void Status::add_tornados(int num)
+{
+    m_tornados += num;
+    if (m_tornados > c_max_magic) {
+        m_tornados = c_max_magic;
+    }
+}
+
+void Status::add_arrows(int num)
+{
+    m_arrows += num;
+    if (m_arrows > c_max_magic) {
+        m_arrows = c_max_magic;
+    }
+}
+
+void Status::add_boomerangs(int num)
+{
+    m_boomerangs += num;
+    if (m_boomerangs > c_max_magic) {
+        m_boomerangs = c_max_magic;
+    }
+}
+
+void Status::add_thunders(int num)
+{
+    m_thunders += num;
+    if (m_thunders > c_max_magic) {
+        m_thunders = c_max_magic;
     }
 }
 
