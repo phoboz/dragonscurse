@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<boomerang_refill>
+     <collectable type="boomerang_refill">
+        <material rise_speed="22"
+                  move_speed="0"
+                  chest_speed="4"
+                  weight="20"
+                  treshold="6"
+                  move_start="10"
+                  move_end="10"
+                  still="10">
+            <object image="icons.png"
+                    left="1" right="31" top="1" bottom="31" />
+        </material>
+    </collectable>
+</boomerang_refill>
+

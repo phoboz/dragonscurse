@@ -9,6 +9,11 @@
 #include "heart_refill.h"
 #include "potion.h"
 #include "stone.h"
+#include "fire_refill.h"
+#include "tornado_refill.h"
+#include "arrow_refill.h"
+#include "boomerang_refill.h"
+#include "thunder_refill.h"
 #include "break_rock.h"
 #include "create_rock.h"
 #include "knight.h"
@@ -170,6 +175,21 @@ Object* ObjectFactory::create_object(const char *name,
         }
         else if (strcmp(priv_object_type, "stone") == 0) {
             object = new Stone(name, media, x, y);
+        }
+        else if (strcmp(priv_object_type, "fire_refill") == 0) {
+            object = new FireRefill(name, media, x, y);
+        }
+        else if (strcmp(priv_object_type, "tornado_refill") == 0) {
+            object = new TornadoRefill(name, media, x, y);
+        }
+        else if (strcmp(priv_object_type, "arrow_refill") == 0) {
+            object = new ArrowRefill(name, media, x, y);
+        }
+        else if (strcmp(priv_object_type, "boomerang_refill") == 0) {
+            object = new BoomerangRefill(name, media, x, y);
+        }
+        else if (strcmp(priv_object_type, "thunder_refill") == 0) {
+            object = new ThunderRefill(name, media, x, y);
         }
         else if (strcmp(priv_object_type, "break_rock") == 0) {
             object = new BreakRock(name, media, x, y);

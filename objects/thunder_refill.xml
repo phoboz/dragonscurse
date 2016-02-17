@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<thunder_refill>
+     <collectable type="thunder_refill">
+        <material rise_speed="22"
+                  move_speed="0"
+                  chest_speed="4"
+                  weight="20"
+                  treshold="6"
+                  move_start="11"
+                  move_end="11"
+                  still="11">
+            <object image="icons.png"
+                    left="1" right="31" top="1" bottom="31" />
+        </material>
+    </collectable>
+</thunder_refill>
+

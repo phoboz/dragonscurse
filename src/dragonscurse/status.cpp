@@ -151,6 +151,26 @@ void Status::aquire_collectable(Collectable *collectable)
             add_stones(collectable->get_value());
             break;
 
+        case Collectable::TypeFireRefill:
+            add_fires(collectable->get_value());
+            break;
+
+        case Collectable::TypeTornadoRefill:
+            add_tornados(collectable->get_value());
+            break;
+
+        case Collectable::TypeArrowRefill:
+            add_arrows(collectable->get_value());
+            break;
+
+        case Collectable::TypeBoomerangRefill:
+            add_boomerangs(collectable->get_value());
+            break;
+
+        case Collectable::TypeThunderRefill:
+            add_thunders(collectable->get_value());
+            break;
+
         case Collectable::TypeBreakRock:
             add_break_rock();
             break;
@@ -334,6 +354,11 @@ bool Status::write(std::ofstream &f)
     StoreRestore::write_integer(f, m_hearts);
     StoreRestore::write_integer(f, m_potions);
     StoreRestore::write_integer(f, m_stones);
+    StoreRestore::write_integer(f, m_fires);
+    StoreRestore::write_integer(f, m_tornados);
+    StoreRestore::write_integer(f, m_arrows);
+    StoreRestore::write_integer(f, m_boomerangs);
+    StoreRestore::write_integer(f, m_thunders);
     StoreRestore::write_boolean(f, m_break_rock);
     StoreRestore::write_boolean(f, m_create_rock);
 
@@ -382,6 +407,11 @@ bool Status::read(std::ifstream &f, MediaDB *media)
     add_hearts(StoreRestore::read_integer(f));
     add_potions(StoreRestore::read_integer(f));
     add_stones(StoreRestore::read_integer(f));
+    add_fires(StoreRestore::read_integer(f));
+    add_tornados(StoreRestore::read_integer(f));
+    add_arrows(StoreRestore::read_integer(f));
+    add_boomerangs(StoreRestore::read_integer(f));
+    add_thunders(StoreRestore::read_integer(f));
 
     if (StoreRestore::read_boolean(f)) {
         add_break_rock();

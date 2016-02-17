@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<fire_refill>
+     <collectable type="fire_refill">
+        <material rise_speed="22"
+                  move_speed="0"
+                  chest_speed="4"
+                  weight="20"
+                  treshold="6"
+                  move_start="7"
+                  move_end="7"
+                  still="7">
+            <object image="icons.png"
+                    left="1" right="31" top="1" bottom="31" />
+        </material>
+    </collectable>
+</fire_refill>
+

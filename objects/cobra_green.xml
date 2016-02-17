@@ -34,6 +34,11 @@
             </actor>
             <string collectable="coin.xml" />
             <string collectable="heart_small.xml" />
+            <string collectable="fire_refill.xml" />
+            <string collectable="tornado_refill.xml" />
+            <string collectable="arrow_refill.xml" />
+            <string collectable="boomerang_refill.xml" />
+            <string collectable="thunder_refill.xml" />
             <string collectable="stone.xml" />
         </monster>
     </guardian>

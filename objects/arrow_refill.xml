@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<arrow_refill>
+     <collectable type="arrow_refill">
+        <material rise_speed="22"
+                  move_speed="0"
+                  chest_speed="4"
+                  weight="20"
+                  treshold="6"
+                  move_start="9"
+                  move_end="9"
+                  still="9">
+            <object image="icons.png"
+                    left="1" right="31" top="1" bottom="31" />
+        </material>
+    </collectable>
+</arrow_refill>
+

@@ -12,6 +12,11 @@ public:
         TypeHeartRefill,
         TypePotion,
         TypeStone,
+        TypeFireRefill,
+        TypeTornadoRefill,
+        TypeArrowRefill,
+        TypeBoomerangRefill,
+        TypeThunderRefill,
         TypeBreakRock,
         TypeCreateRock
     };

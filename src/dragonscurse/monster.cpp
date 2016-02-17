@@ -103,7 +103,7 @@ Object* Monster::release_object()
     }
     else {
         // TODO: Higher number collectables should occur more rarely
-        const char *curr = get_string("collectable", rand() % 3);
+        const char *curr = get_string("collectable", rand() % 8);
         if (curr) {
             object = ObjectFactory::create_collectable(curr, m_media);
         }
