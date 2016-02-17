@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <air_giant>
-    <haunter fall_speed="12"
-             attack_distance="80"
+    <haunter fall_ratio="18"
+             attack_distance="64"
              hit_time="20">
         <monster hp="12"
                  ap="32"

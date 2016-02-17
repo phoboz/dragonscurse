@@ -1,5 +1,5 @@
-#include "haunter.h"
 #include <math.h>
+#include "haunter.h"
 
 bool Haunter::m_circle_init = false;
 int Haunter::m_circle_x[c_num_steps];
@@ -10,7 +10,7 @@ Haunter::Haunter(const char *fn, MediaDB *media, int x, int y, int w, int h,
                  Direction dir)
     : Monster(fn, media, x, y, dir),
       m_circle_index(0),
-      start_x(x), start_y(y),
+      m_start_x(x), m_start_y(y),
       m_w(w), m_h(h)
 {
     if (!m_circle_init) {
@@ -23,16 +23,15 @@ Haunter::Haunter(const char *fn, MediaDB *media, int x, int y, int w, int h,
 
     set_solid(false);
     set_sprite_hidden(true);
+    m_fall_speed = m_h / get_attribute("fall_ratio");
 }
 
 bool Haunter::check_range()
 {
     bool result = false;
 
-    int x_dist = get_attribute("attack_distance");
-
-    if (m_xref - get_front() < get_attribute("attack_distance")) {
-        if (m_yref >= start_y && m_yref <= start_y + m_h) {
+    if (abs(m_xref - get_front()) < get_attribute("attack_distance")) {
+        if (m_yref >= m_start_y && m_yref <= m_start_y + m_h) {
             result = true;
         }
     }
@@ -44,8 +43,8 @@ void Haunter::move(Map *map)
 {
     switch(m_action) {
         case Still:
-            m_center_x = start_x + m_w / 2;
-            m_center_y = start_y + m_h - get_attribute("bottom");
+            m_center_x = m_start_x + m_w / 2;
+            m_center_y = m_start_y + m_h - get_attribute("bottom");
             m_x = m_center_x;
             if (check_range()) {
                 set_sprite_hidden(false);
@@ -65,7 +64,7 @@ void Haunter::move(Map *map)
         case Fall:
             animate_move();
             if (m_y < m_center_y + m_w / 2) {
-                m_y += get_attribute("fall_speed");
+                m_y += m_fall_speed;
                 if (m_y > m_center_y + m_w / 2) {
                     m_y = m_center_y + m_w / 2;
                 }
