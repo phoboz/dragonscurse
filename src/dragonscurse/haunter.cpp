@@ -10,6 +10,7 @@ Haunter::Haunter(const char *fn, MediaDB *media, int x, int y, int w, int h,
                  Direction dir)
     : Monster(fn, media, x, y, dir),
       m_circle_index(0),
+      start_x(x), start_y(y),
       m_w(w), m_h(h)
 {
     if (!m_circle_init) {
@@ -21,17 +22,35 @@ Haunter::Haunter(const char *fn, MediaDB *media, int x, int y, int w, int h,
     }
 
     set_solid(false);
+    set_sprite_hidden(true);
+}
+
+bool Haunter::check_range()
+{
+    bool result = false;
+
+    int x_dist = get_attribute("attack_distance");
+
+    if (m_xref - get_front() < get_attribute("attack_distance")) {
+        if (m_yref >= start_y && m_yref <= start_y + m_h) {
+            result = true;
+        }
+    }
+
+    return result;
 }
 
 void Haunter::move(Map *map)
 {
     switch(m_action) {
         case Still:
-            m_center_x = m_x + m_w / 2;
-            m_center_y = m_y + m_h - get_attribute("bottom");
+            m_center_x = start_x + m_w / 2;
+            m_center_y = start_y + m_h - get_attribute("bottom");
             m_x = m_center_x;
-            // TODO: Check if player is close enought
-            set_action(Fall);
+            if (check_range()) {
+                set_sprite_hidden(false);
+                set_action(Fall);
+            }
             break;
 
         case Move:

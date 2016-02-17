@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <bat>
     <diver turn_width="80"
+           attack_distance="100"
            weight="7"
            hit_time="20">
         <monster hp="10"

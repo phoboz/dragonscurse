@@ -17,9 +17,12 @@ private:
     static int m_circle_y[c_num_steps];
 
     int m_circle_index;
+    int start_x, start_y;
     int m_w, m_h;
     int m_center_x;
     int m_center_y;
+
+    bool check_range();
 };
 
 #endif

@@ -48,7 +48,8 @@ public:
 
     Object(Type type, int x = 0, int y = 0, Direction dir = None)
         : m_x(x), m_y(y), m_dx(0), m_dy(0), m_frame(0),
-          m_dir(dir), m_loaded(false), m_type(type), m_always_visible(false),
+          m_dir(dir), m_loaded(false), m_type(type),
+          m_always_visible(false), m_sprite_hidden(false),
           m_reused(false),
           m_xref(0), m_yref(0) { }
 
@@ -83,6 +84,7 @@ public:
 
     void set_reused(bool reused) { m_reused = reused; }
     void set_always_visible(bool value) { m_always_visible = value; }
+    void set_sprite_hidden(bool value) { m_sprite_hidden = value; }
 
     const char* get_filename() const { return m_fn.c_str(); }
     const char* get_name() const { return m_name.c_str(); }
@@ -112,13 +114,7 @@ public:
 
     virtual void move(Map *map) = 0;
     virtual void draw(Surface *dest, Map *map,
-                      int clip_x, int clip_y, int clip_w, int clip_h) {
-        m_spr->draw(dest,
-                    m_x - map->get_x() + clip_x,
-                    m_y - map->get_y() + clip_y,
-                    m_frame,
-                    clip_x, clip_y, clip_w, clip_h);
-    }
+                      int clip_x, int clip_y, int clip_w, int clip_h);
 
 protected:
     bool check_collision(int x, int y, Map *map,
@@ -160,6 +156,7 @@ private:
     bool m_loaded;
     Type m_type;
     bool m_always_visible;
+    bool m_sprite_hidden;
     bool m_reused;
     Sprite *m_spr;
 };

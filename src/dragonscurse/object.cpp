@@ -656,3 +656,14 @@ check_attack_end:
     return result;
 }
 
+void Object::draw(Surface *dest, Map *map,
+                  int clip_x, int clip_y, int clip_w, int clip_h) {
+    if (!m_sprite_hidden) {
+        m_spr->draw(dest,
+                    m_x - map->get_x() + clip_x,
+                    m_y - map->get_y() + clip_y,
+                    m_frame,
+                    clip_x, clip_y, clip_w, clip_h);
+    }
+}
+
