@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="45" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="bg_color" value="16729088"/>
+  <property name="music" value="desert.ogg"/>
+  <property name="offset_y" value="-64"/>
+  <property name="start_x" value="0"/>
+  <property name="start_y" value="928"/>
+ </properties>
+ <tileset firstgid="1" name="vulcan" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <properties>
+   <property name="catapult" value="3"/>
+   <property name="climb" value="4"/>
+   <property name="solid_end" value="14"/>
+   <property name="solid_start" value="1"/>
+  </properties>
+  <image source="vulcan.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="100" height="45">
+  <data encoding="base64" compression="zlib">
+   eJzt0UEKwjAQQNEBL+ARKnRfIWsVXAft3vvfwwYKZmKoxloz6n8wC5tYdL4IAAAAAAAAAAAAAAAAgG+yXvB+6buhzd3fM9+n0TytTO+w/dQP+RPNMJvkWbxj98J5kGtIu8e6Ybai9+cy5zJxfkjOG8k3cplnuNkNs5f7fYYdnwvOT+PnPnqWNgyO0b3+Lf/gt/hxcvv0hec+mbRh0CV3oF0WnLhh3DG+A21VeaDRwxZ62EIPW+hhCz1soYct9LCFHrbQw5baPeii1e5AC40WttDDlisOKiIn
+  </data>
+ </layer>
+</map>
