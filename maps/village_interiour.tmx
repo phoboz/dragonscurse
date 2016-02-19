@@ -11,6 +11,7 @@
    <property name="catapult" value="4"/>
    <property name="climb" value="3"/>
    <property name="rock" value="5"/>
+   <property name="rock_broken" value="121"/>
    <property name="solid_end" value="14"/>
    <property name="solid_start" value="1"/>
    <property name="water_end" value="152"/>
@@ -31,9 +32,9 @@
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
-  <object name="village.tmx" type="Area" x="2144" y="1184" width="32" height="128">
+  <object name="village_sewer.tmx" type="Area" x="2144" y="1184" width="32" height="128">
    <properties>
-    <property name="start_x" value="3328"/>
+    <property name="start_x" value="32"/>
     <property name="start_y" value="1312"/>
     <property name="type" value="warp"/>
    </properties>

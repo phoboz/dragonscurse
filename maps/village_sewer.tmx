@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="71" height="48" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="bg_color" value="65450"/>
+  <property name="music" value="village.ogg"/>
+  <property name="offset_y" value="-64"/>
+  <property name="start_x" value="2400"/>
+  <property name="start_y" value="832"/>
+ </properties>
+ <tileset firstgid="1" name="village" tilewidth="32" tileheight="32" spacing="1" margin="1">
+  <properties>
+   <property name="catapult" value="4"/>
+   <property name="climb" value="3"/>
+   <property name="rock" value="5"/>
+   <property name="rock_broken" value="61"/>
+   <property name="solid_end" value="14"/>
+   <property name="solid_start" value="1"/>
+   <property name="water_end" value="152"/>
+   <property name="water_start" value="135"/>
+  </properties>
+  <image source="village.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Villlage" width="71" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztlslOxDAQRMMgzZmdI3BibuwwF+C7WMRyA7H8DevX0RZpqdXyjp1kUJX0pJnErrQrTidNA0EQBEEQBEEQBEEQBEEQBEEQVEdvxDvx0XchPSi09k/ii/gu4BWrBWLR48nn5bjc6/vmlFy7zSu2XjluiVj2ePJ5Oc41NlRHyvp9yvHRczaITcHEMm6FWPV48vnQOF8dQ9J285vFIbGjMMcnYuwase7x4vOhcX/VSJAzx4ZNe8S+IuSTi5Hcn1sJa3Otk+Xa97Y5sdmcEmct4xb+z/OuiItEbNc3Ncv9eaTW4OrlWtpT+xp2lWetbK6Jy0Rs1+d9eUxM298HohZXL/dlIz1PWqbCl71ysxk7KJ2NvA/MuagltpdLT+2nfdlr1rOJ7eUp2bBXbD9k//kAMdmk9OLQ9fok9/1SKptS3BTGeL4QrwJz7I649RDKxveeCnnH0kU2T8SjwBy7j5iX229C3im1/7dsZumZ6jKb1G/FWOYq5W3LJgbdp3TPGmVkl4vJ5qECzyqb3Hm2fLvMxlXLUNB7C9mkP4816HvtqZmU+I7J/d4ZOqXfqz66vA8l6DIbAEBZfgDGowBr
+  </data>
+ </layer>
+ <objectgroup name="Areas" width="71" height="48">
+  <object name="seaside.tmx" type="Area" x="2240" y="1184" width="32" height="128">
+   <properties>
+    <property name="start_x" value="160"/>
+    <property name="start_y" value="288"/>
+    <property name="type" value="warp"/>
+   </properties>
+  </object>
+  <object name="village_interiour.tmx" type="Area" x="0" y="1248" width="32" height="128">
+   <properties>
+    <property name="start_x" value="2112"/>
+    <property name="start_y" value="1248"/>
+    <property name="type" value="warp"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="Front" width="71" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt0LENADAIA0EGDNl/nKRgASoo7qTvLUcAAAAAAAAAAACbnF9Wd3jLNr4BAAAAuh6/QAJp
+  </data>
+ </layer>
+</map>
