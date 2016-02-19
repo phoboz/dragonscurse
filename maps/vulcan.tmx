@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="100" height="45" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="200" height="34" tilewidth="32" tileheight="32">
  <properties>
   <property name="bg_color" value="16729088"/>
   <property name="music" value="desert.ogg"/>
@@ -16,9 +16,18 @@
   </properties>
   <image source="vulcan.png" width="512" height="512"/>
  </tileset>
- <layer name="Tile Layer 1" width="100" height="45">
+ <layer name="vulcan" width="200" height="34">
   <data encoding="base64" compression="zlib">
-   eJzt0UEKwjAQQNEBL+ARKnRfIWsVXAft3vvfwwYKZmKoxloz6n8wC5tYdL4IAAAAAAAAAAAAAAAAgG+yXvB+6buhzd3fM9+n0TytTO+w/dQP+RPNMJvkWbxj98J5kGtIu8e6Ybai9+cy5zJxfkjOG8k3cplnuNkNs5f7fYYdnwvOT+PnPnqWNgyO0b3+Lf/gt/hxcvv0hec+mbRh0CV3oF0WnLhh3DG+A21VeaDRwxZ62EIPW+hhCz1soYct9LCFHrbQw5baPeii1e5AC40WttDDlisOKiIn
+   eJztlFtqwzAQRQXeQLsDF/Kfgr/TQr5Nkv/soPtfQB1q0YkylixLtmxzDgylet15XMcYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJjKT+kEYNXE+iPmfOjsVG+Ovaed890d826Kdiw588n5Rk4PzKmfWzu116n5LKGfmyW/lzHvlJjBoaB+6W/1ELhz8OzlYO36kin9j/XWFFLfDfWg6eIjUSNFX5L7G6jNa21yZlrtof2hHDQvb10/ldT8fbmM9UGt5BDTg3MXnyP11zaD0DtH81ebrKVR9o1n/9vZr40+80ZZ27p+DFUfrrdS8tfWhu4PEeqB5v+9zMDXv1MXX+a1tkc+14j9S///TaxpvydncU6e3ar+zVmvzb8n7Bw0cud/Vd7X7msM1Wi19j4D+9fde+Te9qHV1kbsa+HWY3W1s1vVt960c/D50vVDzvxbkUNlnv2kecSuSW9P6cElYw2h9335uTPQdI15nsGY/t1nDFmPrGlOzbXoS12rfe/nMFf+0juun7RYoh+lZqDVfgrc0fpXEUnxlhh7yWHLM9hzb0rHe2LsJYctz2DPvSGIOeMX5iTE8w==
   </data>
  </layer>
+ <objectgroup name="Areas" width="200" height="34">
+  <object name="desert.tmx" type="Area" x="0" y="864" width="32" height="128">
+   <properties>
+    <property name="start_x" value="14432"/>
+    <property name="start_y" value="928"/>
+    <property name="type" value="warp"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

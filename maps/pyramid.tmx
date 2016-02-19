@@ -4,7 +4,7 @@
   <property name="bg_color" value="0"/>
   <property name="music" value="dungeon.ogg"/>
   <property name="offset_y" value="-64"/>
-  <property name="start_x" value="10688"/>
+  <property name="start_x" value="10656"/>
   <property name="start_y" value="224"/>
  </properties>
  <tileset firstgid="1" name="desert" tilewidth="32" tileheight="32" spacing="1" margin="1">
@@ -35,6 +35,13 @@
     <property name="start_x" value="352"/>
     <property name="start_y" value="352"/>
     <property name="type" value="regular_door.xml"/>
+   </properties>
+  </object>
+  <object name="pyramid.tmx" type="Area" x="10720" y="160" width="32" height="128">
+   <properties>
+    <property name="start_x" value="10656"/>
+    <property name="start_y" value="224"/>
+    <property name="type" value="warp"/>
    </properties>
   </object>
  </objectgroup>
