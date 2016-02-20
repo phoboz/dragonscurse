@@ -36,6 +36,7 @@ public:
     Action get_action() const { return m_action; }
     bool get_damaged() const { return m_damaged; }
     bool get_invisible() const { return m_invisible; }
+    bool hit_ground(Map *map);
 
     virtual bool attack_object(Object *object) { return false; }
 

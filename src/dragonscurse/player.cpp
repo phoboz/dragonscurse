@@ -9,7 +9,6 @@
 Player::Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
     : Actor(Object::TypePlayer, x, y, dir),
       m_morph(0), m_area(0),
-      m_hit_ground(false),
       m_jump_ready(true), m_in_water(false)
 {
     load(fn, media);
@@ -40,7 +39,6 @@ void Player::check_water(Map *map)
         set_ay(get_attribute("weight"));
         m_in_water = false;
     }
-
 }
 
 void Player::set_jump(Map *map, bool catapult)
@@ -67,8 +65,6 @@ void Player::set_jump(Map *map, bool catapult)
             set_action(Jump);
         }
     }
-
-    m_hit_ground = false;
 }
 
 void Player::set_attack()
@@ -104,7 +100,6 @@ bool Player::set_hit(Object *object, Status *status)
             else {
                 set_vy(-get_attribute("jump_speed"));
             }
-            m_hit_ground = false;
 
             Monster *monster = (Monster *) object;
             if (status->set_hit(monster->get_attribute("ap")) &&
@@ -188,7 +183,8 @@ void Player::player_move(Map *map)
 
             // Check for jump
             if (input & PRESS_JUMP) {
-                if (m_jump_ready && m_hit_ground) {
+
+                if (m_jump_ready && hit_ground(map)) {
                     if (input & PRESS_RIGHT) {
                         set_vx(get_attribute("move_speed"));
                     }
@@ -208,9 +204,6 @@ void Player::player_move(Map *map)
             if (get_fall()) {
                 set_action(Fall);
             }
-            else {
-                m_hit_ground = true;
-            }
             break;
 
         case Fall:
@@ -223,8 +216,7 @@ void Player::player_move(Map *map)
             }
 
             Body::move(map);
-            if (!get_fall()) {
-                m_hit_ground = true;
+            if (hit_ground(map)) {
                 set_action(Still);
             }
             break;
@@ -240,9 +232,6 @@ void Player::player_move(Map *map)
         case Crouch:
             set_vx(0);
             Body::move(map);
-            if (!get_fall()) {
-                m_hit_ground = true;
-            }
 
             if (!(input & PRESS_DOWN)) {
                 set_action(Still);
@@ -256,9 +245,6 @@ void Player::player_move(Map *map)
                 reset_hit();
             }
             Body::move(map);
-            if (!get_fall()) {
-                m_hit_ground = true;
-            }
             break;
 
         case HitPerish:
@@ -278,9 +264,6 @@ void Player::player_move(Map *map)
                 reset_attack();
             }
             Body::move(map);
-            if (!get_fall()) {
-                m_hit_ground = true;
-            }
             break;
 
         default:

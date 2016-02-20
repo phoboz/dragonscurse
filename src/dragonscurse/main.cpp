@@ -115,7 +115,7 @@ bool load_area(const char *ar_name,
             fprintf(stderr, "Fatal Error -- Unable to player %s\n", pl_name);
             return false;
         }
-        status->initial_shape(player);
+        status->aquire_shape(player);
     }
     else {
         player->set_x(sx);

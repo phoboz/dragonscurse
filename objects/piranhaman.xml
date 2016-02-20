@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <piranhaman>
     <knight attack_treshold="5">
-        <player type="knight"
+        <player type="natator"
                 jump_speed="16"
                 catapult_speed="30"
                 water_jump_speed="10"

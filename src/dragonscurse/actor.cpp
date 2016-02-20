@@ -200,6 +200,18 @@ void Actor::reset_attack()
     }
 }
 
+bool Actor::hit_ground(Map *map)
+{
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+
+    int solid_start = prop.GetNumericProperty("solid_start");
+    int solid_end = prop.GetNumericProperty("solid_end");
+
+    return !check_below(map, 1, solid_start, solid_end);
+
+}
+
 void Actor::animate_move()
 {
     if (m_anim_timer.expired(get_attribute("treshold"))) {
