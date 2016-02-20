@@ -38,10 +38,10 @@
                         <weak_part x1="30" y1="4" x2="66" y2="63" />
                     </weak_parts>
                     <shielded_parts frame="0">
-                        <shielded_part x1="54" y1="34" x2="67" y2="54" />
+                        <shielded_part x1="54" y1="32" x2="67" y2="54" />
                     </shielded_parts>
                     <shielded_parts frame="7">
-                        <shielded_part x1="27" y1="33" x2="42" y2="54" />
+                        <shielded_part x1="27" y1="32" x2="42" y2="54" />
                     </shielded_parts>
                     <attack_parts frame="5">
                         <attack_part x1="67" y1="37" x2="94" y2="46" />
