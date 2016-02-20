@@ -108,7 +108,7 @@
                 location="wb.tmx"
                 type="curse"
                 name="blue_flame.xml"
-                player="mouseman.xml"
+                player="piranhaman.xml"
                 destination="desert.tmx"
                 start_x="1344"
                 start_y="288" />

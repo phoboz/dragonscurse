@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<morph treshold="8" right_start="0" right_end="6" left_start="7" left_end="13">
+    <object image="mouseman_to_piranhaman.png"
+            left="24" right="70" top="7" bottom="62" />
+</morph>
+
