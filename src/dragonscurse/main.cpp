@@ -65,7 +65,7 @@ void set_state(State new_state)
 }
 
 bool load_area(const char *ar_name,
-               bool new_game,
+               bool new_shape,
                const char *pl_name,
                int sx = -1, int sy = -1,
                const char *music = 0)
@@ -108,7 +108,7 @@ bool load_area(const char *ar_name,
         sy = map->get_numeric_property("start_y");
     }
 
-    if (new_game) {
+    if (new_shape) {
         player = (Player *) ObjectFactory::create_player(pl_name, media,
                                                          sx, sy);
         if (!player->get_loaded()) {
@@ -136,6 +136,15 @@ void new_game(char *map_name, char *player_name, int sx, int sy)
 
     status = db->get_status();
     statusbar = new Statusbar(status, media);
+
+    player = (Player *) ObjectFactory::create_player(player_name, media,
+                                                         sx, sy);
+    if (!player->get_loaded()) {
+        fprintf(stderr, "Fatal Error -- Unable to player %s\n", player_name);
+        exit(1);
+    }
+    status->initial_shape(player);
+
     status->add_hearts(1);
     status->add_potions(1);
     status->aquire_item((Item *) ObjectFactory::create_item(
@@ -153,7 +162,7 @@ void new_game(char *map_name, char *player_name, int sx, int sy)
 
     status_screen = new StatusScreen(status, media);
 
-    load_area(map_name, true, player_name, sx, sy);
+    load_area(map_name, false, player_name, sx, sy);
 }
 
 void load_game(const char *fn)
