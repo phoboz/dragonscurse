@@ -221,6 +221,12 @@ Item* Status::get_equiped_item(Item::ItemType type) const
     return item;
 }
 
+void Status::initial_shape(Player *player)
+{
+    m_shape = player;
+    update();
+}
+
 void Status::aquire_shape(Player *player)
 {
     bool found = false;

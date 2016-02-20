@@ -52,6 +52,7 @@ public:
     int get_potions() const { return m_potions; }
     int get_cure_price() const { return 10 * m_hearts; }
 
+    void initial_shape(Player *player);
     void aquire_shape(Player *player);
 
     void add_hearts(int num);
