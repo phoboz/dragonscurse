@@ -103,8 +103,8 @@ bool Area::is_over(Actor *actor)
         // Special handling for map area temporary storage of delta components
         if (m_type == TypeMap) {
             if (m_state == StateOpen) {
-                m_sx = abs(actor->get_x() - m_x);
-                m_sy = abs(actor->get_y() - m_y);
+                m_sx = actor->get_x() - m_x;
+                m_sy = actor->get_y() - m_y;
             }
         }
 
@@ -190,6 +190,7 @@ void Area::draw(Surface *dest, Map *map,
 bool Area::map_to_world(World *world)
 {
     bool result = false;
+    int id = get_attribute("destination_id");
     Area *area = world->find_area(get_attribute("destination_id"));
 
     if (area) {

@@ -121,15 +121,19 @@ protected:
     bool check_collision(int x, int y, Map *map,
                          int start = 0, int end = 0) const;
     bool check_center(Map *map, int start = 0, int end = 0);
-    bool check_below(Map *map, int start = 0, int end = 0);
+    bool check_below(Map *map);
+    bool check_below(Map *map, int start, int end);
     int check_below(Map *map, int len, int start, int end);
-    bool check_ahead(Map *map, int start = 0, int end = 0);
+    bool check_ahead(Map *map);
+    bool check_ahead(Map *map, int start, int end);
     int check_ahead(Map *map, int len, int start, int end);
     int check_right(Map *map, int len = 1, int start = 0, int end = 0);
     int check_left(Map *map, int len = 1, int start = 0, int end = 0);
-    bool check_behind(Map *map, int start = 0, int end = 0);
-    bool check_above(Map *map, int start = 0, int end = 0);
-    int check_above(Map *map, int len, int start = 0, int end = 0);
+    bool check_behind(Map *map);
+    bool check_behind(Map *map, int start, int end);
+    bool check_above(Map *map);
+    bool check_above(Map *map, int start, int end);
+    int check_above(Map *map, int len, int start, int end);
 
     std::map<std::string, int> m_attributes;
     std::multimap<std::string, std::string> m_strings;

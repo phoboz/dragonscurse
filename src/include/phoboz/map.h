@@ -22,6 +22,8 @@ public:
     const char* get_filename() const { return m_filename.c_str(); }
     int get_x() const { return m_x; }
     int get_y() const { return m_y; }
+    int get_width() const { return m_tmx->GetWidth(); }
+    int get_height() const { return m_tmx->GetHeight(); }
     int get_tile_width() const { return m_tmx->GetTileWidth(); }
     int get_tile_height() const { return m_tmx->GetTileHeight(); }
     int get_num_layers() const { return m_tmx->GetNumLayers(); }
