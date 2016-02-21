@@ -123,7 +123,7 @@ protected:
     bool check_center(Map *map, int start = 0, int end = 0);
     bool check_below(Map *map);
     bool check_below(Map *map, int start, int end);
-    int check_below(Map *map, int len, int start, int end);
+    int check_below(Map *map, int len, int start = 0, int end = 0);
     bool check_ahead(Map *map);
     bool check_ahead(Map *map, int start, int end);
     int check_ahead(Map *map, int len, int start, int end);
@@ -133,7 +133,7 @@ protected:
     bool check_behind(Map *map, int start, int end);
     bool check_above(Map *map);
     bool check_above(Map *map, int start, int end);
-    int check_above(Map *map, int len, int start, int end);
+    int check_above(Map *map, int len, int start = 0, int end = 0);
 
     std::map<std::string, int> m_attributes;
     std::multimap<std::string, std::string> m_strings;
