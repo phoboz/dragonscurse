@@ -977,11 +977,17 @@ void Climber::move_climb(Map *map, int input)
                     if (m_leave_ready) {
                         climb_above_turn_up(map);
                     }
+                    set_action(Still);
+                    set_dir(Keep);
+                    set_vx(0);
                 }
                 else if (input & PRESS_DOWN) {
                     if (m_leave_ready) {
                         climb_above_turn_down(map);
                     }
+                    set_action(Still);
+                    set_dir(Keep);
+                    set_vx(0);
                 }
                 else {
                     set_action(Still);
@@ -1007,11 +1013,17 @@ void Climber::move_climb(Map *map, int input)
                     if (m_leave_ready) {
                         climb_below_turn_up(map);
                     }
+                    set_action(Still);
+                    set_dir(Keep);
+                    set_vx(0);
                 }
                 else if (input & PRESS_DOWN) {
                     if (m_leave_ready) {
                         climb_below_turn_down(map);
                     }
+                    set_action(Still);
+                    set_dir(Keep);
+                    set_vx(0);
                 }
                 else {
                     set_action(Still);
@@ -1037,11 +1049,17 @@ void Climber::move_climb(Map *map, int input)
                     if (m_leave_ready) {
                         climb_right_turn_right(map);
                     }
+                    set_action(Still);
+                    set_dir(Keep);
+                    set_vy(0);
                 }
                 else if (input & PRESS_LEFT) {
                     if (m_leave_ready) {
                         climb_right_turn_left(map);
                     }
+                    set_action(Still);
+                    set_dir(Keep);
+                    set_vy(0);
                 }
                 else {
                     set_action(Still);
@@ -1067,11 +1085,17 @@ void Climber::move_climb(Map *map, int input)
                     if (m_leave_ready) {
                         climb_left_turn_right(map);
                     }
+                    set_action(Still);
+                    set_dir(Keep);
+                    set_vy(0);
                 }
                 else if (input & PRESS_LEFT) {
                     if (m_leave_ready) {
                         climb_left_turn_left(map);
                     }
+                    set_action(Still);
+                    set_dir(Keep);
+                    set_vy(0);
                 }
                 else {
                     set_action(Still);
