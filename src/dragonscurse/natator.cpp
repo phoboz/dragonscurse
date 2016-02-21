@@ -2,6 +2,70 @@
 #include "phoboz/ctrl.h"
 #include "natator.h"
 
+void Natator::set_swim_dir(Direction set_dir)
+{
+    switch(m_action) {
+        case Still:
+            if (set_dir == Right) {
+                m_frame = get_attribute("right_still");
+            }
+            else if (set_dir == Left) {
+                m_frame = get_attribute("left_still");
+            }
+            break;
+
+        case Attack:
+            if (set_dir == Right) {
+                if (m_frame < get_attribute("right_attack_start") ||
+                    m_frame > get_attribute("right_attack_end")) {
+                    m_frame = get_attribute("right_attack_start");
+                }
+            }
+            else if (set_dir == Left) {
+                if (m_frame < get_attribute("left_attack_start") ||
+                    m_frame > get_attribute("left_attack_end")) {
+                    m_frame = get_attribute("left_attack_start");
+                }
+            }
+            break;
+
+        default:
+            if (set_dir == Right) {
+                if (m_frame < get_attribute("right_swim_start") ||
+                    m_frame > get_attribute("right_swim_end")) {
+                    m_frame = get_attribute("right_swim_start");
+                }
+            }
+            else if (set_dir == Left) {
+                if (m_frame < get_attribute("left_swim_start") ||
+                    m_frame > get_attribute("left_swim_end")) {
+                    m_frame = get_attribute("left_swim_start");
+                }
+            }
+            break;
+    }
+}
+
+void Natator::set_dir(Direction dir)
+{
+    if (!m_swimming) {
+        Knight::set_dir(dir);
+    }
+    else {
+        Body::set_dir(dir);
+        dir = m_dir;
+        set_swim_dir(dir);
+    }
+}
+
+bool Natator::set_hit(Object *object, Status *status)
+{
+    m_swimming = false;
+    bool result = Player::set_hit(object, status);
+
+    return result;
+}
+
 bool Natator::in_water(Map *map)
 {
     bool result = false;
@@ -18,32 +82,85 @@ bool Natator::in_water(Map *map)
     return result;
 }
 
-bool Natator::set_hit(Object *object, Status *status)
+void Natator::animate_swim()
 {
-    m_swimming = false;
-    bool result = Player::set_hit(object, status);
+    switch(m_dir) {
+        case Right:
+            if (m_frame == get_attribute("right_swim_start")) {
+                m_frame = get_attribute("right_swim_end");
+            }
+            else {
+                m_frame = get_attribute("right_swim_start");
+            }
+            break;
 
-    return result;
+        case Left:
+            if (m_frame == get_attribute("left_swim_start")) {
+                m_frame = get_attribute("left_swim_end");
+            }
+            else {
+                m_frame = get_attribute("left_swim_start");
+            }
+            break;
+
+        default:
+            break;
+    }
 }
 
 void Natator::move_swim(Map *map)
 {
-    Actor::move(map);
+    int input = get_input();
+
     Body::move(map);
+
+    if (input & PRESS_RIGHT) {
+        set_dir(Right);
+        set_vx(get_attribute("move_speed"));
+    }
+    else if (input & PRESS_LEFT) {
+        set_dir(Left);
+        set_vx(-get_attribute("move_speed"));
+    }
+    else {
+        set_vx(0);
+    }
+
+    if (m_swim_timer.check(get_attribute("swim_treshold"))) {
+        if (input & PRESS_JUMP) {
+            animate_swim();
+            set_vy(-get_attribute("swim_speed"));
+            m_swim_timer.reset();
+        }
+    }
+
+    if (m_action == Fall && hit_ground(map)) {
+        m_swimming = false;
+    }
+
+    Actor::move(map);
 }
 
 void Natator::move(Map *map)
 {
+    int input = get_input();
 
     if (m_swimming) {
-        move_swim(map);
+        if (in_water(map)) {
+            move_swim(map);
+        }
+
+        if (check_attack(input)) {
+            set_dir(m_dir);
+        }
+        else {
+            m_swimming = false;
+        }
     }
     else {
         if (in_water(map)) {
-            // TODO: Shall we also start to swim after hit above seafloor
-            if (m_action == Jump || m_action == Fall) {
-                if (get_input() & PRESS_JUMP) {
-std::cout << "Enter swim" << std::endl;
+            if (m_action == Fall) {
+                if (input & PRESS_JUMP) {
                     m_swimming = true;
                 }
             }
