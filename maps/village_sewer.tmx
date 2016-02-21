@@ -28,16 +28,16 @@
  <objectgroup name="Areas" width="71" height="48">
   <object name="seaside.tmx" type="Area" x="2240" y="1184" width="32" height="128">
    <properties>
-    <property name="start_x" value="160"/>
-    <property name="start_y" value="288"/>
-    <property name="type" value="warp"/>
+    <property name="destination_id" value="9"/>
+    <property name="id" value="8"/>
+    <property name="type" value="map"/>
    </properties>
   </object>
   <object name="village_interiour.tmx" type="Area" x="0" y="1248" width="32" height="128">
    <properties>
-    <property name="start_x" value="2112"/>
-    <property name="start_y" value="1248"/>
-    <property name="type" value="warp"/>
+    <property name="destination_id" value="6"/>
+    <property name="id" value="7"/>
+    <property name="type" value="map"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,3 +1,4 @@
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -64,29 +65,38 @@ void set_state(State new_state)
     state = new_state;
 }
 
-bool load_area(const char *ar_name,
-               bool new_shape,
-               const char *pl_name,
-               int sx = -1, int sy = -1,
-               const char *music = 0)
+bool load_room(const char *name)
 {
-    if (std::string(ar_name) == std::string("Church")) {
+    bool result = false;
+
+    if (std::string(name) == std::string("Church")) {
         room = new Church(media, db, map->get_filename(),
                           player->get_x(), player->get_y());
-        set_state(StateRoom);
-        return true;
+        result = true;
     }
-    else if (std::string(ar_name).compare(0, 4, "Shop") == 0) {
-        room = new Shop(ar_name, media, db,
+    else if (std::string(name).compare(0, 4, "Shop") == 0) {
+        room = new Shop(name, media, db,
                         map->get_filename(),
                         player->get_x(), player->get_y());
-        set_state(StateRoom);
-        return true;
+        result = true;
     }
-    else if (std::string(ar_name) == std::string("Hospital")) {
+    else if (std::string(name) == std::string("Hospital")) {
         room = new Hospital(media, db,
                             map->get_filename(),
                             player->get_x(), player->get_y());
+        result = true;
+    }
+
+    return result;
+}
+
+bool load_area(const char *ar_name,
+               bool new_shape,
+               const char *pl_name,
+               int sx, int sy,
+               const char *music = 0)
+{
+    if (load_room(ar_name)) {
         set_state(StateRoom);
         return true;
     }
@@ -121,6 +131,50 @@ bool load_area(const char *ar_name,
         player->set_x(sx);
         player->set_y(sy);
     }
+}
+
+bool load_area(Area *area)
+{
+    if (load_room(area->get_name())) {
+        set_state(StateRoom);
+        return true;
+    }
+
+    map = media->get_map(area->get_name());
+    if (!map) {
+        fprintf(stderr,
+                "Fatal Error -- Unable to load map %s\n",
+                area->get_name());
+            return false;
+    }
+
+    world = new World(map, media, db, area->get_music());
+
+    if (area->get_type() == Area::TypeMap) {
+        area->map_to_world(world);
+    }
+
+    if (area->get_type() == Area::TypeCurse) {
+        player = (Player *) ObjectFactory::create_player(area->get_data(),
+                                                         media,
+                                                         area->get_sx(),
+                                                         area->get_sy());
+        if (!player->get_loaded()) {
+            fprintf(stderr,
+                    "Fatal Error -- Unable to player %s\n",
+                     area->get_data());
+            return false;
+        }
+        status->aquire_shape(player);
+    }
+    else {
+        player->set_x(area->get_sx());
+        player->set_y(area->get_sy());
+    }
+
+    set_state(StateMap);
+
+    return true;
 }
 
 void new_game(char *map_name, char *player_name, int sx, int sy)
@@ -202,10 +256,7 @@ void move()
         }
 
         if (area) {
-            load_area(area->get_name(),
-                      area->get_type() == Area::TypeCurse, area->get_data(),
-                      area->get_sx(), area->get_sy(),
-                      area->get_music());
+            load_area(area);
         }
     }
     else if (state == StateMainMenu ||
@@ -221,9 +272,7 @@ void move_keydown(int key)
         Area *area = room->move(key);
 
         if (area) {
-            load_area(area->get_name(),
-                      area->get_type() == Area::TypeCurse, area->get_data(),
-                      area->get_sx(), area->get_sy(), area->get_music());
+            load_area(area);
         }
     }
     else if (state == StateTitleMenu) {

@@ -34,9 +34,9 @@
   </object>
   <object name="village_sewer.tmx" type="Area" x="2144" y="1184" width="32" height="128">
    <properties>
-    <property name="start_x" value="32"/>
-    <property name="start_y" value="1312"/>
-    <property name="type" value="warp"/>
+    <property name="destination_id" value="7"/>
+    <property name="id" value="6"/>
+    <property name="type" value="map"/>
    </properties>
   </object>
   <object name="village.tmx" type="Area" x="128" y="928" width="64" height="64">

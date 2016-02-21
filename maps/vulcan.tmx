@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="531" height="34" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="531" height="45" tilewidth="32" tileheight="32">
  <properties>
   <property name="bg_color" value="16729088"/>
   <property name="music" value="desert.ogg"/>
@@ -16,17 +16,17 @@
   </properties>
   <image source="vulcan.png" width="512" height="512"/>
  </tileset>
- <layer name="vulcan" width="531" height="34">
+ <layer name="vulcan" width="531" height="45">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
- <objectgroup name="Areas" width="531" height="34">
-  <object name="desert.tmx" type="Area" x="0" y="864" width="32" height="128">
+ <objectgroup name="Areas" width="531" height="45">
+  <object name="desert.tmx" type="Area" x="0" y="0" width="32" height="992">
    <properties>
-    <property name="start_x" value="14432"/>
-    <property name="start_y" value="928"/>
-    <property name="type" value="warp"/>
+    <property name="destination_id" value="14"/>
+    <property name="id" value="15"/>
+    <property name="type" value="map"/>
    </properties>
   </object>
  </objectgroup>

@@ -13,8 +13,21 @@ struct EventArea;
 
 class Area : public Object {
 public:
-    enum Type { TypeWarp, TypeCurse, TypeMorph, TypeUser };
-    enum State { StateLocked, StateClosed, StateOpening, StateOpen };
+    enum Type {
+        TypeWarp,
+        TypeMap,
+        TypeCurse,
+        TypeMorph,
+        TypeUser
+    };
+
+    enum State {
+        StateLocked,
+        StateClosed,
+        StateOpening,
+        StateOpen,
+        StateInactive
+    };
 
     Area(const char *name, MediaDB *media,
          const char *type, int x, int y, int w, int h);
@@ -30,8 +43,8 @@ public:
     int get_y1() const { return m_y; }
     int get_x2() const { return m_x + m_w; }
     int get_y2() const { return m_y + m_h; }
-    int get_sx() const { get_attribute("start_x"); }
-    int get_sy() const { get_attribute("start_y"); }
+    int get_sx() const { return m_sx; }
+    int get_sy() const { return m_sy; }
     const char* get_music() const { return get_string("music"); }
     bool is_over(Actor *actor);
     bool is_locked() const { return m_state == StateLocked; }
@@ -46,10 +59,13 @@ public:
     virtual void draw(Surface *dest, Map *map,
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
+    bool map_to_world(World *world);
+
 private:
     std::string m_name;
     Type m_type;
     int m_w, m_h;
+    int m_sx, m_sy;
     std::string m_data;
     int m_world_key;
     int m_once;

@@ -73,6 +73,7 @@ public:
     int get_front() const;
     int get_bottom() const;
     int get_medium_y() const;
+    int get_top() const;
     bool get_reused() { return m_reused; }
     int get_left() const { return m_x + get_attribute("left"); }
     int get_right() const { return m_x + get_attribute("right"); }

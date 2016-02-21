@@ -217,6 +217,11 @@ int Object::get_medium_y() const
            get_attribute("top");
 }
 
+int Object::get_top() const
+{
+    return m_y + get_attribute("top");
+}
+
 bool Object::check_collision(int x, int y, Map *map, int start, int end) const
 {
     bool result = false;

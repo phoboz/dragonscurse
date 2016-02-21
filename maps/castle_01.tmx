@@ -16,29 +16,29 @@
  </tileset>
  <layer name="Corridor" width="149" height="40">
   <data encoding="base64" compression="zlib">
-   eJztm2lOwzAQha0GDgCF3+QEbF2A+18MR8RiasWe8RYn9vukJyKPm5jp85I0VgoAsAaD1iPRULc5oAEmDx3V/jw1CATCkORUKttTe9GT1oNDpa7ZMlxOOdHPPqt/T/nqcedZK27KaLtf1O0cXqoN9nfQmuj4YufUVWZ0FNblrrFm3Fc2Cv/X1DZQttLHcsSX+ulSTqV59tU9MnXWjPvKfMrZBkrtPparj8bkNOUcXL0acbvsQBTjwZA4ZWTqbj0uzcHBodrzdMm5n47hZuwudU3KVvpYjrjvc655tDXs9aQt+/sv1YbWFDIHtoYrD64xBfD07inDkqdAHDSX94r3V6vAU/lIWVu2BDwFUuHWlT31J5CHySP2s2DfnA9PAY7QexN4CnDAUyA38BTIje2ppd+hcB8IQoCnQG5a8dSdUKA8LXnqR+vVI6nvelKJ5/ytPDef8vOmddZ61/rQ+pz/nuZy4y3Oez3Fpe/G9+ypq/rz1Gnh+EvrMtdz+a63eMj9fuw7PrXeM0qFeuoyazo+k2NTbsYz47Nvq25PcamnQt/Nj93nk7o/IGZcdWE8Zfof7ZtXUm5yeiFltF5vcamnJoW+mx+zzyd1f0DO+bb2Wnev4vYeuL7PkYm76nDnSd0fsPc1XAtw9/k+z4TGJfVyXQOeqket9fMe1ugAAAAAAAAAAAAAAACwNX4BsquNEw==
+   eJztm31uhCAQxcnaHqC1/bueoF+7btv7X6yYSjpLhBkQQeH9kpcahlV2+hB0QSkAQA46rUeirmxzQAVMHurV8TzVCQTCkORUKttTR9GT1oNDOa5fG1xOOdHPPqt/T/nqcefJFTdltN0v6nYMz9HG0n1qC9H7i51TV5lRL6zLXSNn3Fc2CL9ryjbupY+liC/106WcSvPsq9szdXLGfWU+bdXG0n0sVR+Nyemac3D1SsTtshNRjAdj4wNTd+9xaQ5ODpUep7cc++k93Ny7c1x/L30sRdz3Odc4Whv2fNJWl6kNtSlkDKwNVx5oOQijdU8ZljwF4qC5vFe8v2oFnkpH6DhZK/AUWAs3r2ypP4E0TB6x3wX7xnx4CnCEPpvAU4ADngKpgadAamxPLf0OhedAEAI8BVJTi6fuhALbU5OnfrRePZL6riVt8Z6/lvfmU37etC5a71ofWp/z3/NcbrzFea+luG8Nq72uW0ptnrqqP0+dF46/tMa5nst3rcVDnvdj1/iUWme0FuqpcdZ0fCHHptzcz4zPvq26LcWlngpdmx+7z2ft/oCY+6oL4ynT/2jfvJJyk9ORlNF6rcWlnpoUujY/Zp/P2v0BKcfb0nPdo4rbe+D6fw5M3FWHO8/a/QFHn8PVAPec7/NMaFxSL9U14KlylJo/H2GODgAAAAAAAAAAAAAAAHvjF04gjhU=
   </data>
  </layer>
  <objectgroup name="Areas" width="149" height="40">
   <object name="castle_01.tmx" type="Area" x="2016" y="288" width="32" height="128">
    <properties>
-    <property name="start_x" value="32"/>
-    <property name="start_y" value="256"/>
-    <property name="type" value="warp"/>
+    <property name="destination_id" value="1"/>
+    <property name="id" value="2"/>
+    <property name="type" value="map"/>
    </properties>
   </object>
   <object name="castle_01.tmx" type="Area" x="3936" y="704" width="96" height="32">
    <properties>
-    <property name="start_x" value="2272"/>
-    <property name="start_y" value="32"/>
-    <property name="type" value="warp"/>
+    <property name="destination_id" value="5"/>
+    <property name="id" value="4"/>
+    <property name="type" value="map"/>
    </properties>
   </object>
-  <object name="castle_01.tmx" type="Area" x="4640" y="128" width="32" height="128">
+  <object name="castle_01.tmx" type="Area" x="4736" y="128" width="32" height="128">
    <properties>
-    <property name="start_x" value="32"/>
-    <property name="start_y" value="256"/>
-    <property name="type" value="warp"/>
+    <property name="destination_id" value="1"/>
+    <property name="id" value="3"/>
+    <property name="type" value="map"/>
    </properties>
   </object>
   <object name="castle_boss.tmx" type="Area" x="576" y="832" width="64" height="64">
@@ -58,9 +58,16 @@
   </object>
   <object name="castle_01.tmx" type="Area" x="0" y="192" width="32" height="128">
    <properties>
-    <property name="start_x" value="32"/>
-    <property name="start_y" value="255"/>
-    <property name="type" value="warp"/>
+    <property name="destination_id" value="1"/>
+    <property name="id" value="1"/>
+    <property name="type" value="map"/>
+   </properties>
+  </object>
+  <object name="castle_01.tmx" type="Area" x="2272" y="32" width="96" height="32">
+   <properties>
+    <property name="destination_id" value="0"/>
+    <property name="id" value="5"/>
+    <property name="type" value="map"/>
    </properties>
   </object>
  </objectgroup>

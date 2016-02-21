@@ -27,6 +27,8 @@ public:
     void draw(Surface *dest, Player *player,
               int clip_x, int clip_y, int clip_w, int clip_h);
 
+    Area* find_area(int id);
+
 private:
     MediaDB *m_media;
     Map *m_map;

@@ -18,6 +18,11 @@ Area::Area(const char *name, MediaDB *media,
         m_state = StateOpen;
         m_frame = 0;
     }
+    else if (strcmp(type, "map") == 0) {
+        m_type = TypeMap;
+        m_state = StateOpen;
+        m_frame = 0;
+    }
     else {
         m_type = TypeUser;
         m_state = StateClosed;
@@ -34,8 +39,8 @@ Area::Area(Curse *curse)
       m_data(curse->get_player()),
       m_state(StateOpen)
 {
-    set_attribute("start_x", curse->get_sx());
-    set_attribute("start_y", curse->get_sy());
+    m_sx = curse->get_sx();
+    m_sy = curse->get_sy();
 }
 
 Area::Area(const char *destination, int sx, int sy)
@@ -45,8 +50,8 @@ Area::Area(const char *destination, int sx, int sy)
       m_w(0), m_h(0),
       m_state(StateOpen)
 {
-    set_attribute("start_x", sx);
-    set_attribute("start_y", sy);
+    m_sx = sx;
+    m_sy = sy;
 }
 
 Area::Area(EventArea *area, MediaDB *media)
@@ -56,8 +61,8 @@ Area::Area(EventArea *area, MediaDB *media)
       m_name(area->name),
       m_w(area->width), m_h(area->height)
 {
-    set_attribute("start_x", area->start_x);
-    set_attribute("start_y", area->start_y);
+    m_sx = area->start_x;
+    m_sy = area->start_y;
 
     load(area->type, media);
     m_frame = get_attribute("open_start");
@@ -65,6 +70,11 @@ Area::Area(EventArea *area, MediaDB *media)
 
 void Area::world_initialize(World *world)
 {
+    if (m_type != TypeMap) {
+        m_sx = get_attribute("start_x");
+        m_sy = get_attribute("start_y");
+    }
+
     int lock_id = get_attribute("lock_id");
 
     if (lock_id) {
@@ -89,7 +99,19 @@ bool Area::is_over(Actor *actor)
     // Check if inside
     if (x >= m_x && x <= m_x + m_w &&
         y >= m_y && y <= m_y + m_h) {
+
+        // Special handling for map area temporary storage of delta components
+        if (m_type == TypeMap) {
+            if (m_state == StateOpen) {
+                m_sx = abs(actor->get_x() - m_x);
+                m_sy = abs(actor->get_y() - m_y);
+            }
+        }
+
         result = true;
+    }
+    else if (m_state == StateInactive) {
+        m_state = StateOpen;
     }
 
     return result;
@@ -162,5 +184,21 @@ void Area::draw(Surface *dest, Map *map,
     if (m_type == TypeUser) {
         Object::draw(dest, map, clip_x, clip_y, clip_w, clip_h);
     }
+}
+
+
+bool Area::map_to_world(World *world)
+{
+    bool result = false;
+    Area *area = world->find_area(get_attribute("destination_id"));
+
+    if (area) {
+        m_sx += area->get_x();
+        m_sy += area->get_y();
+        area->m_state = StateInactive;
+        result = true;
+    }
+
+    return result;
 }
 

@@ -306,3 +306,25 @@ void World::draw(Surface *dest, Player *player,
 
 }
 
+Area* World::find_area(int id)
+{
+    Area *result = 0;
+
+    for (std::list<Object*>::iterator it = m_objects.begin();
+         it != m_objects.end();
+         ++it) {
+        Object *object = *it;
+
+        if (object->get_type() == Object::TypeArea) {
+            Area *area = (Area *) object;
+            if (area->get_type() == Area::TypeMap) {
+                if (area->get_attribute("id") == id) {
+                    result = area;
+                }
+            }
+        }
+    }
+
+    return result;
+}
+

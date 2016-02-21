@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="576" height="45" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="576" height="48" tilewidth="32" tileheight="32">
  <properties>
   <property name="bg_color" value="65450"/>
   <property name="music" value="jungle.ogg"/>
@@ -18,20 +18,20 @@
   </properties>
   <image source="jungle.png" width="512" height="512"/>
  </tileset>
- <layer name="Jungle" width="576" height="45">
+ <layer name="Jungle" width="576" height="48">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
- <objectgroup name="Areas" width="576" height="45">
-  <object name="village.tmx" type="Area" x="18400" y="896" width="32" height="128">
+ <objectgroup name="Areas" width="576" height="48">
+  <object name="village.tmx" type="Area" x="18400" y="0" width="32" height="1056">
    <properties>
-    <property name="start_x" value="32"/>
-    <property name="start_y" value="992"/>
-    <property name="type" value="warp"/>
+    <property name="destination_id" value="12"/>
+    <property name="id" value="13"/>
+    <property name="type" value="map"/>
    </properties>
   </object>
-  <object name="jungle_tower.tmx" type="Area" x="224" y="512" width="64" height="64">
+  <object name="jungle_tower.tmx" type="Area" x="224" y="544" width="64" height="64">
    <properties>
     <property name="lock_id" value="1"/>
     <property name="start_x" value="2976"/>
@@ -39,101 +39,93 @@
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
-  <object name="jungle_room.tmx" type="Area" x="384" y="1120" width="64" height="64">
+  <object name="jungle_room.tmx" type="Area" x="384" y="1152" width="64" height="64">
    <properties>
     <property name="start_x" value="96"/>
     <property name="start_y" value="351"/>
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
-  <object name="Shop_jungle" type="Area" x="12672" y="928" width="64" height="64">
+  <object name="Shop_jungle" type="Area" x="12672" y="960" width="64" height="64">
    <properties>
     <property name="type" value="window_door.xml"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Monsters" width="576" height="45">
-  <object name="fuzzball.xml" type="Obstacle" x="17424" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="17040" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="16688" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="16560" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="16304" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="16176" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="16048" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="14992" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="14480" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="14128" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="14000" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="13744" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="13552" y="992" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="13512" y="992" width="32" height="32"/>
-  <object name="hovering_smog_red.xml" type="Hovering" x="13248" y="736" width="2240" height="34">
+ <objectgroup name="Monsters" width="576" height="48">
+  <object name="fuzzball.xml" type="Obstacle" x="17424" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="17040" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="16688" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="16560" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="16304" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="16176" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="16048" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="14992" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="14480" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="14128" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="14000" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="13744" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="13552" y="1024" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="13512" y="1024" width="32" height="32"/>
+  <object name="hovering_smog_red.xml" type="Hovering" x="13248" y="768" width="2240" height="34">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="spark_red.xml" type="Roller" x="13120" y="768">
+  <object name="spark_red.xml" type="Roller" x="13120" y="800">
    <polyline points="-1,-1 -64,-1 -64,68 -30,68"/>
   </object>
-  <object name="hovering_smog_red.xml" type="Hovering" x="15552" y="736" width="2752" height="34">
+  <object name="hovering_smog_red.xml" type="Hovering" x="15552" y="768" width="2752" height="34">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="spark_red.xml" type="Roller" x="12802" y="991">
+  <object name="spark_red.xml" type="Roller" x="12802" y="1023">
    <polyline points="0,0 223,0 223,-31"/>
   </object>
-  <object name="spark_red.xml" type="Roller" x="12802" y="767">
+  <object name="spark_red.xml" type="Roller" x="12802" y="799">
    <polyline points="0,0 191,0 191,65 127,65"/>
   </object>
-  <object name="giant_toad_green.xml" type="Guardian" x="12224" y="928" width="50" height="64">
+  <object name="giant_toad_green.xml" type="Guardian" x="12224" y="960" width="50" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="giant_toad_green.xml" type="Guardian" x="12096" y="928" width="50" height="64">
+  <object name="giant_toad_green.xml" type="Guardian" x="12096" y="960" width="50" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="fuzzball.xml" type="Obstacle" x="11984" y="960" width="32" height="32"/>
-  <object name="fuzzball.xml" type="Obstacle" x="11824" y="960" width="32" height="32"/>
-  <object name="giant_toad_green.xml" type="Guardian" x="11504" y="928" width="50" height="64">
+  <object name="fuzzball.xml" type="Obstacle" x="11984" y="992" width="32" height="32"/>
+  <object name="fuzzball.xml" type="Obstacle" x="11824" y="992" width="32" height="32"/>
+  <object name="giant_toad_green.xml" type="Guardian" x="11504" y="960" width="50" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="fuzzball.xml" type="Obstacle" x="11424" y="960" width="32" height="32"/>
-  <object name="giant_toad_green.xml" type="Guardian" x="11264" y="928" width="50" height="64">
+  <object name="fuzzball.xml" type="Obstacle" x="11424" y="992" width="32" height="32"/>
+  <object name="giant_toad_green.xml" type="Guardian" x="11264" y="960" width="50" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="giant_toad_green.xml" type="Guardian" x="11184" y="928" width="50" height="64">
+  <object name="giant_toad_green.xml" type="Guardian" x="11184" y="960" width="50" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="skeleton.xml" type="Dancer" x="10800" y="928" width="48" height="64">
+  <object name="skeleton.xml" type="Dancer" x="10800" y="960" width="48" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="fuzzball.xml" type="Obstacle" x="10608" y="960" width="32" height="32"/>
-  <object name="skeleton.xml" type="Dancer" x="9904" y="928" width="48" height="64">
+  <object name="fuzzball.xml" type="Obstacle" x="10608" y="992" width="32" height="32"/>
+  <object name="skeleton.xml" type="Dancer" x="9904" y="960" width="48" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="bat_red.xml" type="Diver" x="9651" y="832" width="32" height="32">
-   <properties>
-    <property name="attack_distance" value="170"/>
-    <property name="direction" value="right"/>
-    <property name="dive_time" value="11"/>
-    <property name="fly_power" value="3"/>
-   </properties>
-  </object>
-  <object name="bat_red.xml" type="Diver" x="9456" y="864" width="32" height="32">
+  <object name="bat_red.xml" type="Diver" x="9651" y="864" width="32" height="32">
    <properties>
     <property name="attack_distance" value="170"/>
     <property name="direction" value="right"/>
@@ -141,7 +133,15 @@
     <property name="fly_power" value="3"/>
    </properties>
   </object>
-  <object name="bat_red.xml" type="Diver" x="9227" y="896" width="32" height="32">
+  <object name="bat_red.xml" type="Diver" x="9456" y="896" width="32" height="32">
+   <properties>
+    <property name="attack_distance" value="170"/>
+    <property name="direction" value="right"/>
+    <property name="dive_time" value="11"/>
+    <property name="fly_power" value="3"/>
+   </properties>
+  </object>
+  <object name="bat_red.xml" type="Diver" x="9227" y="928" width="32" height="32">
    <properties>
     <property name="attack_distance" value="170"/>
     <property name="direction" value="right"/>
@@ -149,7 +149,7 @@
     <property name="fly_power" value="3"/>
    </properties>
   </object>
-  <object name="bat_red.xml" type="Diver" x="9131" y="864" width="32" height="32">
+  <object name="bat_red.xml" type="Diver" x="9131" y="896" width="32" height="32">
    <properties>
     <property name="attack_distance" value="170"/>
     <property name="direction" value="right"/>
@@ -157,25 +157,12 @@
     <property name="fly_power" value="3"/>
    </properties>
   </object>
-  <object name="skeleton.xml" type="Dancer" x="8944" y="928" width="48" height="64">
+  <object name="skeleton.xml" type="Dancer" x="8944" y="960" width="48" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="bat_red.xml" type="Diver" x="8561" y="864" width="32" height="32">
-   <properties>
-    <property name="attack_distance" value="170"/>
-    <property name="direction" value="right"/>
-    <property name="dive_time" value="11"/>
-    <property name="fly_power" value="3"/>
-   </properties>
-  </object>
-  <object name="skeleton.xml" type="Dancer" x="8384" y="928" width="48" height="64">
-   <properties>
-    <property name="direction" value="right"/>
-   </properties>
-  </object>
-  <object name="bat_red.xml" type="Diver" x="8272" y="848" width="32" height="32">
+  <object name="bat_red.xml" type="Diver" x="8561" y="896" width="32" height="32">
    <properties>
     <property name="attack_distance" value="170"/>
     <property name="direction" value="right"/>
@@ -183,109 +170,122 @@
     <property name="fly_power" value="3"/>
    </properties>
   </object>
-  <object name="roper_green.xml" type="Erupter" x="7904" y="960" width="50" height="34">
+  <object name="skeleton.xml" type="Dancer" x="8384" y="960" width="48" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="roper_green.xml" type="Erupter" x="7400" y="960" width="50" height="34">
+  <object name="bat_red.xml" type="Diver" x="8272" y="880" width="32" height="32">
+   <properties>
+    <property name="attack_distance" value="170"/>
+    <property name="direction" value="right"/>
+    <property name="dive_time" value="11"/>
+    <property name="fly_power" value="3"/>
+   </properties>
+  </object>
+  <object name="roper_green.xml" type="Erupter" x="7904" y="992" width="50" height="34">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="skeleton.xml" type="Dancer" x="7344" y="928" width="48" height="64">
+  <object name="roper_green.xml" type="Erupter" x="7400" y="992" width="50" height="34">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="spark_red.xml" type="Roller" x="6464" y="832">
+  <object name="skeleton.xml" type="Dancer" x="7344" y="960" width="48" height="64">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object name="spark_red.xml" type="Roller" x="6464" y="864">
    <polyline points="0,0 0,128 32,128 32,32"/>
   </object>
-  <object name="spark_red.xml" type="Roller" x="6336" y="800">
+  <object name="spark_red.xml" type="Roller" x="6336" y="832">
    <polyline points="0,0 0,160 64,160 64,32"/>
   </object>
-  <object name="spark_red.xml" type="Roller" x="6240" y="896">
+  <object name="spark_red.xml" type="Roller" x="6240" y="928">
    <polyline points="0,0 0,64 32,64 32,-96"/>
   </object>
-  <object name="skeleton.xml" type="Dancer" x="5872" y="928" width="48" height="64">
+  <object name="skeleton.xml" type="Dancer" x="5872" y="960" width="48" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="spark_green.xml" type="Roller" x="5440" y="832">
+  <object name="spark_green.xml" type="Roller" x="5440" y="864">
    <polyline points="0,0 0,128 32,128 32,32"/>
   </object>
-  <object name="spark_green.xml" type="Roller" x="5312" y="800">
+  <object name="spark_green.xml" type="Roller" x="5312" y="832">
    <polyline points="0,0 0,160 64,160 64,32"/>
   </object>
-  <object name="spark_green.xml" type="Roller" x="5216" y="896">
+  <object name="spark_green.xml" type="Roller" x="5216" y="928">
    <polyline points="0,0 0,64 32,64 32,-96"/>
   </object>
-  <object name="skeleton.xml" type="Dancer" x="5088" y="928" width="48" height="64">
+  <object name="skeleton.xml" type="Dancer" x="5088" y="960" width="48" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="skeleton.xml" type="Dancer" x="4848" y="928" width="48" height="64">
+  <object name="skeleton.xml" type="Dancer" x="4848" y="960" width="48" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="roper_green.xml" type="Erupter" x="3688" y="960" width="50" height="34">
+  <object name="roper_green.xml" type="Erupter" x="3688" y="992" width="50" height="34">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="spark_green.xml" type="Roller" x="3392" y="832">
+  <object name="spark_green.xml" type="Roller" x="3392" y="864">
    <polyline points="0,0 0,128 32,128 32,32"/>
   </object>
-  <object name="spark_green.xml" type="Roller" x="3264" y="800">
+  <object name="spark_green.xml" type="Roller" x="3264" y="832">
    <polyline points="0,0 0,160 64,160 64,32"/>
   </object>
-  <object name="spark_green.xml" type="Roller" x="3168" y="896">
+  <object name="spark_green.xml" type="Roller" x="3168" y="928">
    <polyline points="0,0 0,64 32,64 32,-96"/>
   </object>
-  <object name="spark_green.xml" type="Roller" x="2976" y="864">
+  <object name="spark_green.xml" type="Roller" x="2976" y="896">
    <polyline points="0,0 0,96 128,96 128,32"/>
   </object>
-  <object name="spark_green.xml" type="Roller" x="2752" y="800">
+  <object name="spark_green.xml" type="Roller" x="2752" y="832">
    <polyline points="0,0 0,160 64,160 64,32"/>
   </object>
-  <object name="spark_green.xml" type="Roller" x="2464" y="864">
+  <object name="spark_green.xml" type="Roller" x="2464" y="896">
    <polyline points="0,0 0,96 128,96 128,32"/>
   </object>
-  <object name="roper_green.xml" type="Erupter" x="2544" y="960" width="50" height="34">
+  <object name="roper_green.xml" type="Erupter" x="2544" y="992" width="50" height="34">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="spark_green.xml" type="Roller" x="2304" y="960">
+  <object name="spark_green.xml" type="Roller" x="2304" y="992">
    <polyline points="0,0 0,-160 64,-160 64,0"/>
   </object>
-  <object name="spark_green.xml" type="Roller" x="2176" y="960">
+  <object name="spark_green.xml" type="Roller" x="2176" y="992">
    <polyline points="0,0 0,-192 64,-192 64,0"/>
   </object>
-  <object name="skeleton.xml" type="Dancer" x="1936" y="928" width="48" height="64">
+  <object name="skeleton.xml" type="Dancer" x="1936" y="960" width="48" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="roper_green.xml" type="Erupter" x="1760" y="960" width="50" height="34">
+  <object name="roper_green.xml" type="Erupter" x="1760" y="992" width="50" height="34">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="skeleton.xml" type="Dancer" x="1056" y="928" width="48" height="64">
+  <object name="skeleton.xml" type="Dancer" x="1056" y="960" width="48" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="skeleton.xml" type="Dancer" x="592" y="928" width="48" height="64">
+  <object name="skeleton.xml" type="Dancer" x="592" y="960" width="48" height="64">
    <properties>
     <property name="direction" value="right"/>
    </properties>
   </object>
-  <object name="will_owisp_red.xml" type="Waver" x="162" y="928" width="34" height="34">
+  <object name="will_owisp_red.xml" type="Waver" x="162" y="960" width="34" height="34">
    <properties>
     <property name="amplitude" value="3"/>
     <property name="direction" value="right"/>
@@ -293,7 +293,7 @@
     <property name="object_id" value="1"/>
    </properties>
   </object>
-  <object name="cyclop_red.xml" type="Walker" x="416" y="1309" width="50" height="66">
+  <object name="cyclop_red.xml" type="Walker" x="416" y="1341" width="50" height="66">
    <properties>
     <property name="direction" value="left"/>
    </properties>

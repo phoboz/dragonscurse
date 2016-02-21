@@ -37,11 +37,11 @@
     <property name="type" value="regular_door.xml"/>
    </properties>
   </object>
-  <object name="pyramid.tmx" type="Area" x="10720" y="160" width="32" height="128">
+  <object name="pyramid.tmx" type="Area" x="10720" y="64" width="32" height="224">
    <properties>
-    <property name="start_x" value="10656"/>
-    <property name="start_y" value="224"/>
-    <property name="type" value="warp"/>
+    <property name="destination_id" value="10"/>
+    <property name="id" value="10"/>
+    <property name="type" value="map"/>
    </properties>
   </object>
  </objectgroup>
