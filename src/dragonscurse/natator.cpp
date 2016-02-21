@@ -86,19 +86,13 @@ void Natator::animate_swim()
 {
     switch(m_dir) {
         case Right:
-            if (m_frame == get_attribute("right_swim_start")) {
-                m_frame = get_attribute("right_swim_end");
-            }
-            else {
+            if (++m_frame > get_attribute("right_swim_end")) {
                 m_frame = get_attribute("right_swim_start");
             }
             break;
 
         case Left:
-            if (m_frame == get_attribute("left_swim_start")) {
-                m_frame = get_attribute("left_swim_end");
-            }
-            else {
+            if (++m_frame > get_attribute("left_swim_end")) {
                 m_frame = get_attribute("left_swim_start");
             }
             break;
