@@ -127,8 +127,8 @@ protected:
     bool check_ahead(Map *map);
     bool check_ahead(Map *map, int start, int end);
     int check_ahead(Map *map, int len, int start, int end);
-    int check_right(Map *map, int len = 1, int start = 0, int end = 0);
-    int check_left(Map *map, int len = 1, int start = 0, int end = 0);
+    int check_right(Map *map, int len, int start = 0, int end = 0);
+    int check_left(Map *map, int len, int start = 0, int end = 0);
     bool check_behind(Map *map);
     bool check_behind(Map *map, int start, int end);
     bool check_above(Map *map);

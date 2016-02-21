@@ -719,7 +719,7 @@ bool Climber::climb_above_turn_up(Map *map)
     const Tmx::PropertySet prop = tileset->GetProperties();
     int block_id = prop.GetNumericProperty("climb");
 
-    if (!check_left(map)) {
+    if (check_left(map, 1) == 0) {
         int x = m_x + get_attribute("left") - 1;
         int y = m_y + get_attribute("bottom");
         if (check_collision(x, y, map, block_id, block_id)) {
@@ -727,7 +727,7 @@ bool Climber::climb_above_turn_up(Map *map)
             result = true;
         }
     }
-    else if (!check_right(map)) {
+    else if (check_right(map, 1) == 0) {
         int x = m_x + get_attribute("right") + 1;
         int y = m_y + get_attribute("bottom");
         if (check_collision(x, y, map, block_id, block_id)) {
@@ -808,7 +808,7 @@ bool Climber::climb_below_turn_down(Map *map)
     const Tmx::PropertySet prop = tileset->GetProperties();
     int block_id = prop.GetNumericProperty("climb");
 
-    if (!check_left(map)) {
+    if (check_left(map, 1) == 0) {
         int x = m_x + get_attribute("left") - 1;
         int y = m_y + get_attribute("bottom");
         if (check_collision(x, y, map, block_id, block_id)) {
@@ -816,7 +816,7 @@ bool Climber::climb_below_turn_down(Map *map)
             result = true;
         }
     }
-    else if (!check_right(map)) {
+    else if (check_right(map, 1) == 0) {
         int x = m_x + get_attribute("right") + 1;
         int y = m_y + get_attribute("bottom");
         if (check_collision(x, y, map, block_id, block_id)) {
