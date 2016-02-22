@@ -94,6 +94,7 @@ public:
         m_attributes[std::string(name)] = value;
     }
     const char* get_string(const char *name, int index = 0) const;
+    bool string_exists(const char *name, const char *check) const;
     void set_string(const char *name, const char *value) {
         m_strings.insert(std::pair<std::string, std::string>(name, value));
     }

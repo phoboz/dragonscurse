@@ -3,6 +3,7 @@
 
 #include <list>
 #include "phoboz/map.h"
+#include "hazard.h"
 #include "object.h"
 #include "player.h"
 #include "area.h"
@@ -37,6 +38,7 @@ private:
     int m_offset_y;
     int m_lock_x;
     int m_lock_y;
+    Hazard *m_hazard;
     std::list<Object*> m_objects;
     WorldDB *m_db;
 };

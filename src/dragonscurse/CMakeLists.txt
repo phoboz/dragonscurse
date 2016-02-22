@@ -1,5 +1,5 @@
 ADD_EXECUTABLE(dragonscurse
-    object.cpp body.cpp actor.cpp player.cpp
+    object.cpp body.cpp actor.cpp hazard.cpp player.cpp
     bullet.cpp vector_bullet.cpp solid_bullet.cpp gravity_bullet.cpp
     world_db.cpp world.cpp status.cpp
     knight.cpp dragon.cpp climber.cpp flyer.cpp natator.cpp

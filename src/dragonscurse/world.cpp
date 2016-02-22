@@ -25,6 +25,15 @@ World::World(Map *map, MediaDB *media, WorldDB *db, const char *music)
     m_lock_x = m_map->get_numeric_property("lock_x");
     m_lock_y = m_map->get_numeric_property("lock_y");
 
+    // Load hazard
+    std::string hazard_name = m_map->get_literal_property("hazard");
+    if (hazard_name == std::string("No such property!")) {
+        m_hazard = 0;
+    }
+    else {
+        m_hazard = new Hazard(hazard_name.c_str(), media);
+    }
+
     // Play music
     if (music) {
         media->play_music(music);
@@ -87,6 +96,11 @@ Area* World::move(Player *player,
             map_y = 0;
         }
         m_map->set_y(map_y, window_height);
+    }
+
+    // Handle environment
+    if (m_hazard) {
+        player->check_hazard(m_map, m_hazard, m_db->get_status());
     }
 
     // Handle player world altering abilities

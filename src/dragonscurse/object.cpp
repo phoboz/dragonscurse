@@ -559,6 +559,26 @@ const char* Object::get_string(const char *name, int index) const
     return str;
 }
 
+bool Object::string_exists(const char *name, const char *check) const
+{
+    bool result = false;
+
+    std::pair<std::multimap<std::string, std::string>::const_iterator,
+              std::multimap<std::string, std::string>::const_iterator> ret;
+    ret = m_strings.equal_range(name);
+    for (std::multimap<std::string, std::string>::const_iterator it = ret.first;
+         it != ret.second;
+         ++it) {
+
+        if (it->second == std::string(check)) {
+            result = true;
+            break;
+        }
+    }
+
+    return result;
+}
+
 bool Object::get_visible(Map *map, int clip_x, int clip_y, int clip_w, int clip_h) const
 {
     bool result;

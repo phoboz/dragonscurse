@@ -3,6 +3,7 @@
 
 #include <list>
 #include "phoboz/timer.h"
+#include "hazard.h"
 #include "actor.h"
 
 class Morph;
@@ -15,6 +16,9 @@ public:
 
     void set_jump(Map *map, bool catapult = false);
     virtual bool set_hit(Object *object, Status *status);
+
+    bool check_hazard(Map *map, Hazard *hazard, Status *status);
+
     virtual bool check_break_rock(int *x, int *y, Map *map) { return false; }
     virtual bool check_create_rock(Map *map) { return false; }
 

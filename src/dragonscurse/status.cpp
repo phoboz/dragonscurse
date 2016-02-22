@@ -328,6 +328,22 @@ void Status::cure(int value)
     }
 }
 
+bool Status::check_hit(Hazard *hazard)
+{
+    bool result = false;
+
+    if (m_armour) {
+        if (!m_armour->string_exists("resistance", hazard->get_name())) {
+            result = true;
+        }
+    }
+    else {
+        result = true;
+    }
+
+    return result;
+}
+
 bool Status::set_hit(int ap)
 {
     bool result = false;

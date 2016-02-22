@@ -1,4 +1,3 @@
-#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -210,6 +209,7 @@ void new_game(char *map_name, char *player_name, int sx, int sy)
     status->aquire_item((Item *) ObjectFactory::create_item(
                                      "ivory_armour.xml", media));
 
+status->aquire_item((Item *) ObjectFactory::create_item("dragon_mail.xml", media));
     status->equip_item("ivory_sword.xml");
     status->equip_item("ivory_shield.xml");
     status->equip_item("ivory_armour.xml");

@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<lava>
+    <hazard points="64"
+            icon="1">
+        <object image="hazards.png"
+                left="0" right="31" top="0" bottom="31" />
+        <string name="lava" />
+    </hazard>
+</lava>
+

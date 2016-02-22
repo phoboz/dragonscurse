@@ -1,4 +1,3 @@
-#include "phoboz/ctrl.h"
 #include "natator.h"
 
 bool Natator::in_medium(Map *map)

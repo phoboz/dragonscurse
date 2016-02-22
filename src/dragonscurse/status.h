@@ -6,6 +6,7 @@
 #include <list>
 #include "phoboz/media_db.h"
 #include "item.h"
+#include "hazard.h"
 
 class Arm;
 class Shield;
@@ -68,6 +69,7 @@ public:
 
     void cure(int value = 0);
 
+    bool check_hit(Hazard *hazard);
     bool set_hit(int ap);
 
     bool use_potion();

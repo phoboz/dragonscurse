@@ -1,4 +1,3 @@
-#include <iostream>
 #include "area.h"
 #include "event.h"
 
