@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <piranhaman>
     <natator attack_treshold="5"
-             swim_speed="5"
-             swim_treshold="3">
+             rise_speed="5"
+             rise_treshold="3">
         <player type="natator"
                 jump_speed="16"
                 catapult_speed="30"
@@ -19,21 +19,21 @@
                    invisible_time="32"
                    right_still="0"
                    right_move_start="1" right_move_end="2"
-                   right_jump="3"
-                   right_fall="3"
+                   right_jump="2"
+                   right_fall="2"
                    right_crouch="0"
                    right_attack_start="5" right_attack_end="5"
                    right_attack_low_start="5" right_attack_low_end="5"
-                   right_swim_start="3" right_swim_end="4"
+                   right_rise_start="3" right_rise_end="4"
                    right_hit="6"
                    left_still="7"
                    left_move_start="8" left_move_end="9"
-                   left_jump="10"
-                   left_fall="10"
+                   left_jump="9"
+                   left_fall="9"
                    left_crouch="7"
                    left_attack_start="12" left_attack_end="12"
                    left_attack_low_start="12" left_attack_low_end="12"
-                   left_swim_start="10" left_swim_end="11"
+                   left_rise_start="10" left_rise_end="11"
                    left_hit="6"
                    perish_start="6" perish_end="6">
                 <object image="piranhaman.png"

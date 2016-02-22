@@ -2,27 +2,15 @@
 #define _Natator_H
 
 #include "phoboz/timer.h"
-#include "knight.h"
+#include "flyer.h"
 
-class Natator : public Knight {
+class Natator : public Flyer {
 public:
     Natator(const char *fn, MediaDB *media, int x, int y, Direction dir)
-        : Knight(fn, media, x, y, dir), 
-          m_swimming(false) { }
-
-    virtual void set_dir(Direction dir);
-    virtual bool set_hit(Object *object, Status *status);
-
-    void move_swim(Map *map);
-    virtual void move(Map *map);
+        : Flyer(fn, media, x, y, dir) { }
 
 private:
-    bool m_swimming;
-    Timer m_swim_timer;
-
-    void set_swim_dir(Direction set_dir);
-    bool in_water(Map *map);
-    void animate_swim();
+    virtual bool in_medium(Map *map);
 };
 
 #endif
