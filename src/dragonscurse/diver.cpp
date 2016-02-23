@@ -26,10 +26,10 @@ void Diver::move(Map *map)
                 if (x * x + y * y < dist * dist) {
                     set_ay(get_attribute("weight"));
                     if (m_dir == Right) {
-                        set_vx(get_attribute("move_speed"));
+                        set_vx(get_move_speed(map));
                     }
                     else {
-                        set_vx(-get_attribute("move_speed"));
+                        set_vx(-get_move_speed(map));
                     }
                 }
             }

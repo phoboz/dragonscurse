@@ -5,6 +5,7 @@
 #include "body.h"
 
 class Status;
+class Map;
 
 class Actor : public Body {
 public:
@@ -29,7 +30,7 @@ public:
           m_damaged(false),
           m_invisible(false) { }
 
-    virtual bool set_hit(Object *object = 0, Status *status = 0);
+    virtual bool set_hit(Object *object = 0, Status *status = 0, Map *map = 0);
     void set_damaged() { m_damaged = true; }
     void reset_hit();
     void set_perish(bool invisible = true);
@@ -45,6 +46,10 @@ public:
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
 protected:
+    virtual int get_move_speed(Map *map) const {
+        return get_attribute("move_speed");
+    }
+
     void set_action(Action action);
     virtual void set_dir(Direction dir = Keep);
     void swap_move_dir();

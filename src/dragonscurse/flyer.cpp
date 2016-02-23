@@ -57,10 +57,10 @@ void Flyer::set_dir(Direction dir)
     }
 }
 
-bool Flyer::set_hit(Object *object, Status *status)
+bool Flyer::set_hit(Object *object, Status *status, Map *map)
 {
     m_flying = false;
-    bool result = Player::set_hit(object, status);
+    bool result = Player::set_hit(object, status, map);
 
     return result;
 }
@@ -85,19 +85,17 @@ void Flyer::animate_rise()
     }
 }
 
-void Flyer::move_fly(Map *map)
+void Flyer::move_fly(Map *map, int input)
 {
-    int input = get_input();
-
     Body::move(map);
 
     if (input & PRESS_RIGHT) {
         set_dir(Right);
-        set_vx(get_attribute("move_speed"));
+        set_vx(get_move_speed(map));
     }
     else if (input & PRESS_LEFT) {
         set_dir(Left);
-        set_vx(-get_attribute("move_speed"));
+        set_vx(-get_move_speed(map));
     }
     else {
         set_vx(0);
@@ -123,7 +121,7 @@ void Flyer::move(Map *map)
     int input = get_input();
 
     if (m_flying) {
-        move_fly(map);
+        move_fly(map, input);
 
         if (check_attack(input)) {
             m_flying = false;

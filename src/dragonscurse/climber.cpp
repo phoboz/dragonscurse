@@ -580,13 +580,13 @@ void Climber::enter_climb(Map *map, ClimbDir dir, int x, int y)
     set_dir(Left);
 }
 
-void Climber::leave_climb()
+void Climber::leave_climb(Map *map)
 {
     if (m_climb_dir == ClimbRight) {
-        set_vx(-get_attribute("move_speed"));
+        set_vx(-get_move_speed(map));
     }
     else if (m_climb_dir == ClimbLeft) {
-        set_vx(get_attribute("move_speed"));
+        set_vx(get_move_speed(map));
     }
 
     m_climb_dir = ClimbNone;
@@ -954,7 +954,7 @@ void Climber::move_climb(Map *map, int input)
 
     if (input & PRESS_JUMP) {
         if (m_leave_ready) {
-            leave_climb();
+            leave_climb(map);
             Player::set_jump(map);
         }
     }
@@ -965,13 +965,13 @@ void Climber::move_climb(Map *map, int input)
                     animate_climb();
                     set_action(Move);
                     set_dir(Right);
-                    set_vx(check_climb(map, get_attribute("move_speed")));
+                    set_vx(check_climb(map, get_move_speed(map)));
                 }
                 else if (input & PRESS_LEFT) {
                     animate_climb();
                     set_action(Move);
                     set_dir(Left);
-                    set_vx(-check_climb(map, get_attribute("move_speed")));
+                    set_vx(-check_climb(map, get_move_speed(map)));
                 }
                 else if (input & PRESS_UP) {
                     if (m_leave_ready) {
@@ -1001,13 +1001,13 @@ void Climber::move_climb(Map *map, int input)
                     animate_climb();
                     set_action(Move);
                     set_dir(Right);
-                    set_vx(check_climb(map, get_attribute("move_speed")));
+                    set_vx(check_climb(map, get_move_speed(map)));
                 }
                 else if (input & PRESS_LEFT) {
                     animate_climb();
                     set_action(Move);
                     set_dir(Left);
-                    set_vx(-check_climb(map, get_attribute("move_speed")));
+                    set_vx(-check_climb(map, get_move_speed(map)));
                 }
                 else if (input & PRESS_UP) {
                     if (m_leave_ready) {
@@ -1037,13 +1037,13 @@ void Climber::move_climb(Map *map, int input)
                     animate_climb();
                     set_action(Move);
                     set_dir(Right);
-                    set_vy(check_climb(map, get_attribute("move_speed")));
+                    set_vy(check_climb(map, get_move_speed(map)));
                 }
                 else if (input & PRESS_UP) {
                     animate_climb();
                     set_action(Move);
                     set_dir(Left);
-                    set_vy(-check_climb(map, get_attribute("move_speed")));
+                    set_vy(-check_climb(map, get_move_speed(map)));
                 }
                 else if (input & PRESS_RIGHT) {
                     if (m_leave_ready) {
@@ -1073,13 +1073,13 @@ void Climber::move_climb(Map *map, int input)
                     animate_climb();
                     set_action(Move);
                     set_dir(Right);
-                    set_vy(check_climb(map, get_attribute("move_speed")));
+                    set_vy(check_climb(map, get_move_speed(map)));
                 }
                 else if (input & PRESS_UP) {
                     animate_climb();
                     set_action(Move);
                     set_dir(Left);
-                    set_vy(-check_climb(map, get_attribute("move_speed")));
+                    set_vy(-check_climb(map, get_move_speed(map)));
                 }
                 else if (input & PRESS_RIGHT) {
                     if (m_leave_ready) {
@@ -1109,10 +1109,10 @@ void Climber::move_climb(Map *map, int input)
     Body::move(map);
 }
 
-bool Climber::set_hit(Object *object, Status *status)
+bool Climber::set_hit(Object *object, Status *status, Map *map)
 {
-    leave_climb();
-    bool result = Player::set_hit(object, status);
+    leave_climb(map);
+    bool result = Player::set_hit(object, status, map);
 
     return result;
 }

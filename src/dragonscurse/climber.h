@@ -13,7 +13,7 @@ public:
           m_leave_ready(false) { }
 
     virtual void set_dir(Direction dir);
-    virtual bool set_hit(Object *object, Status *status);
+    virtual bool set_hit(Object *object, Status *status, Map *map);
 
     virtual void move(Map *map);
 
@@ -36,7 +36,7 @@ private:
     virtual bool animate_attack();
 
     void enter_climb(Map *map, ClimbDir dir, int x, int y);
-    void leave_climb();
+    void leave_climb(Map *map);
 
     int check_climb(Map *map, int len = 1, Direction dir = Keep);
     bool climb_above_turn_up(Map *map);

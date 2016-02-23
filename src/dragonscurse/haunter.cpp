@@ -53,7 +53,7 @@ void Haunter::move(Map *map)
             break;
 
         case Move:
-            m_circle_index += get_attribute("move_speed");
+            m_circle_index += get_move_speed(map);
             if (m_circle_index >= c_num_steps) {
                 m_circle_index = m_circle_index - c_num_steps;
             }

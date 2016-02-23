@@ -28,10 +28,10 @@ void Waver::move(Map *map)
             face_reference(get_attribute("turn_width"));
             animate_move();
             if (m_dir == Right) {
-                set_vx(get_attribute("move_speed"));
+                set_vx(get_move_speed(map));
             }
             else {
-                set_vx(-get_attribute("move_speed"));
+                set_vx(-get_move_speed(map));
             }
 
             m_wave_index += get_attribute("frequency");

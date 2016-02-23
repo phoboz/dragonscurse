@@ -43,7 +43,7 @@ void Monster::set_jump(Map *map)
     set_action(Jump);
 }
 
-bool Monster::set_hit(Object *object, Status *status)
+bool Monster::set_hit(Object *object, Status *status, Map *map)
 {
     bool result = false;
 
@@ -56,10 +56,10 @@ bool Monster::set_hit(Object *object, Status *status)
             // Move backwards if recursive hit
             if(m_recursive_hit) {
                 if (get_reference() == Right) {
-                    set_speed(-get_attribute("move_speed"), 0);
+                    set_speed(-get_move_speed(map), 0);
                 }
                 else {
-                    set_speed(get_attribute("move_speed"), 0);
+                    set_speed(get_move_speed(map), 0);
                 }
             }
 

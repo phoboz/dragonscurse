@@ -15,6 +15,25 @@ Player::Player(const char *fn, MediaDB *media, int x, int y, Direction dir)
     set_ay(get_attribute("weight"));
 }
 
+int Player::get_move_speed(Map *map)
+{
+    int result;
+    const Tmx::Tileset *tileset = map->get_tileset(0);
+    const Tmx::PropertySet prop = tileset->GetProperties();
+
+    // Check if under water
+    int start = prop.GetNumericProperty("water_start");
+    int end = prop.GetNumericProperty("water_end");
+    if (start && check_center(map, start, end)) {
+        result = get_attribute("water_move_speed");
+    }
+    else {
+        result = get_attribute("move_speed");
+    }
+
+    return result;
+}
+
 void Player::check_water(Map *map)
 {
     const Tmx::Tileset *tileset = map->get_tileset(0);
@@ -76,7 +95,7 @@ void Player::set_attack()
     Actor::set_attack();
 }
 
-bool Player::set_hit(Object *object, Status *status)
+bool Player::set_hit(Object *object, Status *status, Map *map)
 {
     bool result = false;
 
@@ -88,10 +107,10 @@ bool Player::set_hit(Object *object, Status *status)
 
             // Move backwards and upwards
             if (m_dir == Right) {
-                set_vx(-get_attribute("move_speed"));
+                set_vx(-get_move_speed(map));
             }
             else {
-                set_vx(get_attribute("move_speed"));
+                set_vx(get_move_speed(map));
             }
 
             if (m_in_water) {
@@ -134,10 +153,10 @@ bool Player::check_hazard(Map *map, Hazard *hazard, Status *status)
 
             // Move backwards and upwards
             if (m_dir == Right) {
-                set_vx(-get_attribute("move_speed"));
+                set_vx(-get_move_speed(map));
             }
             else {
-                set_vx(get_attribute("move_speed"));
+                set_vx(get_move_speed(map));
             }
 
             if (m_in_water) {
@@ -195,10 +214,10 @@ void Player::player_move(Map *map)
     int catid = prop.GetNumericProperty("catapult");
     if (catid && check_below(map, 1, catid, catid) == 0) {
         if (input & PRESS_RIGHT) {
-            set_vx(get_attribute("move_speed"));
+            set_vx(get_move_speed(map));
         }
         else if (input & PRESS_LEFT) {
-            set_vx(-get_attribute("move_speed"));
+            set_vx(-get_move_speed(map));
         }
         set_jump(map, true);
     }
@@ -215,12 +234,12 @@ void Player::player_move(Map *map)
             else if (input & PRESS_RIGHT) {
                 animate_move();
                 set_action(Move);
-                set_vx(get_attribute("move_speed"));
+                set_vx(get_move_speed(map));
             }
             else if (input & PRESS_LEFT) {
                 animate_move();
                 set_action(Move);
-                set_vx(-get_attribute("move_speed"));
+                set_vx(-get_move_speed(map));
             }
             else {
                 set_action(Still);
@@ -231,10 +250,10 @@ void Player::player_move(Map *map)
 
                 if (m_jump_ready && hit_ground(map)) {
                     if (input & PRESS_RIGHT) {
-                        set_vx(get_attribute("move_speed"));
+                        set_vx(get_move_speed(map));
                     }
                     else if (input & PRESS_LEFT) {
-                        set_vx(-get_attribute("move_speed"));
+                        set_vx(-get_move_speed(map));
                     }
                     set_jump(map, false);
                 }
@@ -254,10 +273,10 @@ void Player::player_move(Map *map)
         case Fall:
             // Check for change of direction during fall
             if (input & PRESS_RIGHT) {
-                set_vx(get_attribute("move_speed"));
+                set_vx(get_move_speed(map));
             }
             else if (input & PRESS_LEFT) {
-                set_vx(-get_attribute("move_speed"));
+                set_vx(-get_move_speed(map));
             }
 
             Body::move(map);
@@ -294,7 +313,7 @@ void Player::player_move(Map *map)
 
         case HitPerish:
             animate_perish();
-            set_speed(0, -get_attribute("move_speed"));
+            set_speed(0, -get_move_speed(map));
             Body::move(map);
             if (m_y < -get_image_height()) {
                 set_solid(true);

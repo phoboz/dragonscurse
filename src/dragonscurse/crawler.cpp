@@ -113,10 +113,10 @@ void Crawler::move(Map *map)
             }
             check_ground(map);
             if (m_dir == Right) {
-                set_vx(get_attribute("move_speed"));
+                set_vx(get_move_speed(map));
             }
             else {
-                set_vx(-get_attribute("move_speed"));
+                set_vx(-get_move_speed(map));
             }
             animate_move();
 

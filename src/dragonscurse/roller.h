@@ -8,7 +8,7 @@ public:
     Roller(const char *fn, MediaDB *media, int x, int y,
            const Tmx::Polyline *polyline);
 
-    virtual bool set_hit(Object *object, Status *status);
+    virtual bool set_hit(Object *object, Status *status, Map *map);
     virtual void move(Map *map);
 
 private:
@@ -20,9 +20,9 @@ private:
     int m_tx, m_ty;
     int m_old_dx, m_old_dy;
 
-    void next_point(void);
-    void prev_point(void);
-    void update_speed(void);
+    void next_point();
+    void prev_point();
+    void update_speed(Map *map);
 };
 
 #endif

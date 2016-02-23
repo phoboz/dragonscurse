@@ -32,17 +32,17 @@ void Floater::move(Map *map)
             if (check_env(map)) {
                 int delta = get_attribute("turn_width");
                 if (m_lock_x + delta < m_x) {
-                    set_vx(-get_attribute("move_speed"));
+                    set_vx(-get_move_speed(map));
                 }
                 else if (m_lock_x - delta > m_x) {
-                    set_vx(get_attribute("move_speed"));
+                    set_vx(get_move_speed(map));
                 }
 
                 if (m_lock_y + delta < m_y) {
-                    set_vy(-get_attribute("move_speed"));
+                    set_vy(-get_move_speed(map));
                 }
                 else if (m_lock_y - delta > m_y) {
-                    set_vy(get_attribute("move_speed"));
+                    set_vy(get_move_speed(map));
                 }
 
                 if (m_attack_timer.expired(get_attribute("attack_timer"))) {

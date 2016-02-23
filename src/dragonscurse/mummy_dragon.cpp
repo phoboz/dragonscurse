@@ -126,10 +126,10 @@ void MummyDragon::move(Map *map)
                 }
 
                 if (m_dir == Right) {
-                    set_speed(get_attribute("move_speed"), 0);
+                    set_speed(get_move_speed(map), 0);
                 }
                 else {
-                    set_speed(-get_attribute("move_speed"), 0);
+                    set_speed(-get_move_speed(map), 0);
                 }
             }
 

@@ -6,6 +6,7 @@
 #include "hazard.h"
 #include "actor.h"
 
+class Map;
 class Morph;
 class Area;
 class Item;
@@ -15,7 +16,7 @@ public:
     Player(const char *fn, MediaDB *media, int x, int y, Direction dir);
 
     void set_jump(Map *map, bool catapult = false);
-    virtual bool set_hit(Object *object, Status *status);
+    virtual bool set_hit(Object *object, Status *status, Map *map);
 
     bool check_hazard(Map *map, Hazard *hazard, Status *status);
 
@@ -33,6 +34,7 @@ public:
                       int clip_x, int clip_y, int clip_w, int clip_h);
 
 protected:
+    virtual int get_move_speed(Map *map);
     virtual void set_attack();
 
 private:

@@ -10,6 +10,7 @@
         <player type="climber"
                 jump_speed="14"
                 catapult_speed="24"
+                water_move_speed="3"
                 water_jump_speed="7"
                 water_weight="3"
                 water_catapult_speed="17"

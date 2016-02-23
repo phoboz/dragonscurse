@@ -85,7 +85,7 @@ void Hovering::move(Map *map)
             animate_move();
             if (m_dir == Right) {
                 if (m_x < m_x1) {
-                    set_vx(get_attribute("move_speed"));
+                    set_vx(get_move_speed(map));
                 }
                 else {
                     swap_move_dir();
@@ -94,7 +94,7 @@ void Hovering::move(Map *map)
             }
             else {
                 if (m_x > m_x0) {
-                    set_vx(-get_attribute("move_speed"));
+                    set_vx(-get_move_speed(map));
                 }
                 else {
                     swap_move_dir();

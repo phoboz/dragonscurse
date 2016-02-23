@@ -2,10 +2,11 @@
 <piranhaman>
     <natator attack_treshold="5"
              rise_speed="5"
-             rise_treshold="3">
+             rise_treshold="6">
         <player type="natator"
                 jump_speed="16"
                 catapult_speed="30"
+                water_move_speed="4"
                 water_jump_speed="10"
                 water_weight="5"
                 water_catapult_speed="19"

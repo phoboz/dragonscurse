@@ -411,7 +411,7 @@ void Actor::set_invisible(bool invisible)
     m_invisible = invisible;
 }
 
-bool Actor::set_hit(Object *object, Status *status)
+bool Actor::set_hit(Object *object, Status *status, Map *map)
 {
     int result = false;
 

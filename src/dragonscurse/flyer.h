@@ -12,9 +12,9 @@ public:
           m_flying(false) { }
 
     virtual void set_dir(Direction dir);
-    virtual bool set_hit(Object *object, Status *status);
+    virtual bool set_hit(Object *object, Status *status, Map *map);
 
-    void move_fly(Map *map);
+    void move_fly(Map *map, int input);
     virtual void move(Map *map);
 
 private:

@@ -95,10 +95,10 @@ void MekaDragon::move(Map *map)
             if (m_horizontal_dir == HorizontalForward) {
 
                 if (m_dir == Right) {
-                    set_vx(get_attribute("move_speed"));
+                    set_vx(get_move_speed(map));
                 }
                 else {
-                    set_vx(-get_attribute("move_speed"));
+                    set_vx(-get_move_speed(map));
                 }
                 animate_move();
 
@@ -109,10 +109,10 @@ void MekaDragon::move(Map *map)
             else if (m_horizontal_dir == HorizontalBackward) {
 
                 if (m_dir == Right) {
-                    set_vx(-get_attribute("move_speed"));
+                    set_vx(-get_move_speed(map));
                 }
                 else {
-                    set_vx(get_attribute("move_speed"));
+                    set_vx(get_move_speed(map));
                 }
                 animate_move();
 

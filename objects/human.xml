@@ -4,6 +4,7 @@
         <player type="knight"
                 jump_speed="16"
                 catapult_speed="30"
+                water_move_speed="3"
                 water_jump_speed="10"
                 water_weight="5"
                 water_catapult_speed="19"
