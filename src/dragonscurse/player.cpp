@@ -141,7 +141,7 @@ bool Player::check_hazard(Map *map, Hazard *hazard, Status *status)
     bool result = false;
 
     int start, end;
-    if (!m_invisible && hazard->get_hazard_range(&start, &end, map)) {
+    if (hazard->get_hazard_range(&start, &end, map)) {
         if (check_center(map, start, end)) {
             if (status->check_hit(hazard)) {
                 result = set_hit(hazard, status, map);
