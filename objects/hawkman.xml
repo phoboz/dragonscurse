@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<hawkman>
+    <flyer attack_treshold="5"
+           rise_speed="8"
+           rise_treshold="4">
+        <player type="flyer"
+                jump_speed="16"
+                catapult_speed="30"
+                water_move_speed="4"
+                water_jump_speed="10"
+                water_weight="5"
+                water_catapult_speed="19"
+                ap="30"
+                dp="20"
+                cp="10">
+            <actor move_speed="6"
+                   treshold="4"
+                   weight="16"
+                   hit_time="10"
+                   invisible_time="32"
+                   right_still="0"
+                   right_move_start="1" right_move_end="2"
+                   right_jump="1"
+                   right_fall="1"
+                   right_crouch="0"
+                   right_attack_start="5" right_attack_end="5"
+                   right_attack_low_start="5" right_attack_low_end="5"
+                   right_rise_start="3" right_rise_end="4"
+                   right_hit="6"
+                   left_still="7"
+                   left_move_start="8" left_move_end="9"
+                   left_jump="8"
+                   left_fall="8"
+                   left_crouch="7"
+                   left_attack_start="12" left_attack_end="12"
+                   left_attack_low_start="12" left_attack_low_end="12"
+                   left_rise_start="10" left_rise_end="11"
+                   left_hit="6"
+                   perish_start="6" perish_end="6">
+                <object image="hawkman.png"
+                        left="19" right="59" top="4" bottom="63">
+                    <weak_parts frame="-1">
+                        <weak_part x1="19" y1="4" x2="59" y2="63" />
+                    </weak_parts>
+                    <shielded_parts frame="0">
+                        <shielded_part x1="48" y1="31" x2="63" y2="56" />
+                    </shielded_parts>
+                    <shielded_parts frame="7">
+                        <shielded_part x1="16" y1="31" x2="32" y2="56" />
+                    </shielded_parts>
+                    <attack_parts frame="5">
+                        <attack_part x1="60" y1="33" x2="82" y2="42" />
+                    </attack_parts>
+                    <attack_parts frame="12">
+                        <attack_part x1="3" y1="32" x2="25" y2="42" />
+                    </attack_parts>
+                </object>
+            </actor>
+        </player>
+        <string strike="sword.wav" />
+    </flyer>
+</hawkman>
+

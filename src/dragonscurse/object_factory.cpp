@@ -19,6 +19,7 @@
 #include "knight.h"
 #include "dragon.h"
 #include "climber.h"
+#include "flyer.h"
 #include "natator.h"
 #include "walker.h"
 #include "crawler.h"
@@ -147,6 +148,9 @@ Object* ObjectFactory::create_object(const char *name,
         }
         else if (strcmp(priv_object_type, "climber") == 0) {
             object = new Climber(name, media, x, y, dir);
+        }
+        else if (strcmp(priv_object_type, "flyer") == 0) {
+            object = new Flyer(name, media, x, y, dir);
         }
         else if (strcmp(priv_object_type, "natator") == 0) {
             object = new Natator(name, media, x, y, dir);

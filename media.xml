@@ -71,6 +71,8 @@
                 width="50" height="64" margin="1" spacing="1" />
         <sprite filename="goblin_red.png"
                 width="50" height="64" margin="1" spacing="1" />
+        <sprite filename="hawkman.png"
+                width="84" height="64" margin="1" spacing="1" />
         <sprite filename="hazards.png"
                 width="32" height="32" margin="0" spacing="0" />
         <sprite filename="heart_big.png"

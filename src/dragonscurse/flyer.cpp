@@ -13,6 +13,17 @@ void Flyer::set_rise_dir(Direction set_dir)
             }
             break;
 
+#if 0
+        case Fall:
+            if (set_dir == Right) {
+                m_frame = get_attribute("right_fall");
+            }
+            else if (set_dir == Left) {
+                m_frame = get_attribute("left_fall");
+            }
+            break;
+#endif
+
         case Attack:
             if (set_dir == Right) {
                 if (m_frame < get_attribute("right_attack_start") ||
@@ -47,19 +58,20 @@ void Flyer::set_rise_dir(Direction set_dir)
 
 void Flyer::set_dir(Direction dir)
 {
-    if (!m_flying) {
-        Knight::set_dir(dir);
-    }
-    else {
+    if (m_flying) {
         Body::set_dir(dir);
         dir = m_dir;
         set_rise_dir(dir);
+    }
+    else {
+        Knight::set_dir(dir);
     }
 }
 
 bool Flyer::set_hit(Object *object, Status *status, Map *map)
 {
     m_flying = false;
+    m_fly_ready = false;
     bool result = Player::set_hit(object, status, map);
 
     return result;
@@ -67,27 +79,35 @@ bool Flyer::set_hit(Object *object, Status *status, Map *map)
 
 void Flyer::animate_rise()
 {
-    switch(m_dir) {
-        case Right:
-            if (++m_frame > get_attribute("right_rise_end")) {
-                m_frame = get_attribute("right_rise_start");
-            }
-            break;
+    if (m_anim_timer.expired(get_attribute("treshold"))) {
+        switch(m_dir) {
+            case Right:
+                if (++m_frame > get_attribute("right_rise_end")) {
+                    m_frame = get_attribute("right_rise_start");
+                }
+                break;
 
-        case Left:
-            if (++m_frame > get_attribute("left_rise_end")) {
-                m_frame = get_attribute("left_rise_start");
-            }
-            break;
+            case Left:
+                if (++m_frame > get_attribute("left_rise_end")) {
+                    m_frame = get_attribute("left_rise_start");
+                }
+                break;
 
-        default:
-            break;
+            default:
+                break;
+        }
     }
 }
 
 void Flyer::move_fly(Map *map, int input)
 {
     Body::move(map);
+    if (get_fall()) {
+        set_action(Fall);
+    }
+    else {
+        animate_rise();
+    }
 
     if (input & PRESS_RIGHT) {
         set_dir(Right);
@@ -103,7 +123,7 @@ void Flyer::move_fly(Map *map, int input)
 
     if (m_rise_timer.check(get_attribute("rise_treshold"))) {
         if (input & PRESS_JUMP) {
-            animate_rise();
+            set_action(Jump);
             set_vy(-get_attribute("rise_speed"));
             m_rise_timer.reset();
         }
@@ -112,7 +132,6 @@ void Flyer::move_fly(Map *map, int input)
     if (m_action == Fall && hit_ground(map)) {
         m_flying = false;
     }
-
     Actor::move(map);
 }
 
@@ -125,6 +144,7 @@ void Flyer::move(Map *map)
 
         if (check_attack(input)) {
             m_flying = false;
+            m_fly_ready = false;
             set_dir(m_dir);
         }
 
@@ -133,9 +153,13 @@ void Flyer::move(Map *map)
         }
     }
     else {
+        if (hit_ground(map)) {
+            m_fly_ready = true;
+        }
+
         if (in_medium(map)) {
             if (m_action == Fall) {
-                if (input & PRESS_JUMP) {
+                if (m_fly_ready && input & PRESS_JUMP) {
                     m_flying = true;
                 }
             }

@@ -9,7 +9,8 @@ class Flyer : public Knight {
 public:
     Flyer(const char *fn, MediaDB *media, int x, int y, Direction dir)
         : Knight(fn, media, x, y, dir), 
-          m_flying(false) { }
+          m_flying(false),
+          m_fly_ready(true) { }
 
     virtual void set_dir(Direction dir);
     virtual bool set_hit(Object *object, Status *status, Map *map);
@@ -20,6 +21,7 @@ public:
 private:
     std::string m_medium_start, m_medium_end;
     bool m_flying;
+    bool m_fly_ready;
     Timer m_rise_timer;
 
     void set_rise_dir(Direction set_dir);
