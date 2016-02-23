@@ -55,5 +55,6 @@
         <string bullet="firebreath.xml" />
         <string fire="firebreath.wav" />
     </dragon>
+    <string resistance="water" />
 </lizardman>
 

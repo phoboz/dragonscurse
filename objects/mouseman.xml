@@ -121,5 +121,6 @@
         </player>
         <string strike="sword.wav" />
     </climber>
+    <string resistance="water" />
 </mouseman>
 

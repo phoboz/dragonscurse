@@ -73,5 +73,6 @@
         </player>
         <string strike="sword.wav" />
     </knight>
+    <string resistance="water" />
 </lionman>
 

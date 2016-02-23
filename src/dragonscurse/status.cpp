@@ -332,7 +332,7 @@ bool Status::check_hit(Hazard *hazard)
 {
     bool result = false;
 
-    if (hazard->string_exists("damages", m_shape->get_name())) {
+    if (!m_shape->string_exists("resistance", hazard->get_name())) {
         if (m_armour) {
             if (!m_armour->string_exists("resistance", hazard->get_name())) {
                 result = true;

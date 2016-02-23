@@ -13,17 +13,6 @@ void Flyer::set_rise_dir(Direction set_dir)
             }
             break;
 
-#if 0
-        case Fall:
-            if (set_dir == Right) {
-                m_frame = get_attribute("right_fall");
-            }
-            else if (set_dir == Left) {
-                m_frame = get_attribute("left_fall");
-            }
-            break;
-#endif
-
         case Attack:
             if (set_dir == Right) {
                 if (m_frame < get_attribute("right_attack_start") ||

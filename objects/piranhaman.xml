@@ -59,5 +59,6 @@
         </player>
         <string strike="sword.wav" />
     </natator>
+    <string resistance="water" />
 </piranhaman>
 

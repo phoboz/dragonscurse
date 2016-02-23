@@ -5,12 +5,6 @@
         <object image="hazards.png"
                 left="0" right="31" top="0" bottom="31" />
         <string name="lava" />
-        <string damages="human" />
-        <string damages="lizardman" />
-        <string damages="mouseman" />
-        <string damages="piranhaman" />
-        <string damages="lionman" />
-        <string damages="hawkman" />
     </hazard>
 </lava>
 
