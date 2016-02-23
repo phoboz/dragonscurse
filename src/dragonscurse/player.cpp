@@ -120,8 +120,7 @@ bool Player::set_hit(Object *object, Status *status, Map *map)
                 set_vy(-get_attribute("jump_speed"));
             }
 
-            Monster *monster = (Monster *) object;
-            if (status->set_hit(monster->get_attribute("ap")) &&
+            if (status->set_hit(object->get_attribute("ap")) &&
                 !status->use_potion()) {
                 set_invisible(true);
                 set_solid(false);
@@ -144,37 +143,8 @@ bool Player::check_hazard(Map *map, Hazard *hazard, Status *status)
     int start, end;
     if (!m_invisible && hazard->get_hazard_range(&start, &end, map)) {
         if (check_center(map, start, end)) {
-            result = status->check_hit(hazard);
-        }
-
-        if (result) {
-            set_action(Hit);
-            set_lock_direction(true);
-
-            // Move backwards and upwards
-            if (m_dir == Right) {
-                set_vx(-get_move_speed(map));
-            }
-            else {
-                set_vx(get_move_speed(map));
-            }
-
-            if (m_in_water) {
-                set_vy(-get_attribute("water_jump_speed"));
-            }
-            else {
-                set_vy(-get_attribute("jump_speed"));
-            }
-
-            if (status->set_hit(hazard->get_attribute("points")) &&
-                !status->use_potion()) {
-                set_invisible(true);
-                set_solid(false);
-                set_perish(false);
-            }
-            else {
-                // Make player invisible for a certain time
-                set_invisible(true);
+            if (status->check_hit(hazard)) {
+                result = set_hit(hazard, status, map);
             }
         }
     }

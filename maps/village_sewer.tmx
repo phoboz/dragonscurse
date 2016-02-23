@@ -2,6 +2,7 @@
 <map version="1.0" orientation="orthogonal" width="71" height="48" tilewidth="32" tileheight="32">
  <properties>
   <property name="bg_color" value="65450"/>
+  <property name="hazard" value="water.xml"/>
   <property name="music" value="village.ogg"/>
   <property name="offset_y" value="-64"/>
   <property name="start_x" value="2400"/>
@@ -22,7 +23,7 @@
  </tileset>
  <layer name="Villlage" width="71" height="48">
   <data encoding="base64" compression="zlib">
-   eJztlslOxDAQRMMgzZmdI3BibuwwF+C7WMRyA7H8DevX0RZpqdXyjp1kUJX0pJnErrQrTidNA0EQBEEQBEEQBEEQBEEQBEEQVEdvxDvx0XchPSi09k/ii/gu4BWrBWLR48nn5bjc6/vmlFy7zSu2XjluiVj2ePJ5Oc41NlRHyvp9yvHRczaITcHEMm6FWPV48vnQOF8dQ9J285vFIbGjMMcnYuwase7x4vOhcX/VSJAzx4ZNe8S+IuSTi5Hcn1sJa3Otk+Xa97Y5sdmcEmct4xb+z/OuiItEbNc3Ncv9eaTW4OrlWtpT+xp2lWetbK6Jy0Rs1+d9eUxM298HohZXL/dlIz1PWqbCl71ysxk7KJ2NvA/MuagltpdLT+2nfdlr1rOJ7eUp2bBXbD9k//kAMdmk9OLQ9fok9/1SKptS3BTGeL4QrwJz7I649RDKxveeCnnH0kU2T8SjwBy7j5iX229C3im1/7dsZumZ6jKb1G/FWOYq5W3LJgbdp3TPGmVkl4vJ5qECzyqb3Hm2fLvMxlXLUNB7C9mkP4816HvtqZmU+I7J/d4ZOqXfqz66vA8l6DIbAEBZfgDGowBr
+   eJztlslOw0AQRBOQcmbnCJzIjR1yAb6LRSw3EMvfsH4dPcIttVqz9TC2E1QlPSmxZ8o95XHbgwEEQRAEQRAEQRAEQRAEQRAEQVA7eiPeiY++C+lBqbV/El/EdwWvXC0QixFPPi/HlV4/Nqfm2n1eufXKcUvEcsSTz8txobGpOizrj6nER8/ZIDYFY8+4FWI14snnU+NidUyTtge/WRwSOwp3fCzGrhHrES8+nxr3V80JSub48GmP2FekfEpxkvtzy7C20DpZoX3vm5ObzSlx1jBq4P8874q4MOK7vqtZ7s8jtYZQL9fSntrXsas828rmmrg04rs+78tjYtL8PhC1hHp5LBvpedIwEb7sVZrNKEDtbOR9YM5FLbm9XHpqP+3LXrOeTW4vt2TDXqlshsLf/Z5PkJONpRenrtcnQ0XummplU4ubyjjPF+JV4I7dEbcRUtnE3lMp71y6yOaJeBS4Y/cZ80r7TcrbUvt/y2aWnqkus7F+K+Zi6ZMWfNnkoPuU7llzBdmV4rJ5aIFnlU3pPF++XWYTqmVa0HsL2difxzboe+3WTGp8x5R+70w7td+rMbq8DzXoMhsAQF1+AGKvAGU=
   </data>
  </layer>
  <objectgroup name="Areas" width="71" height="48">

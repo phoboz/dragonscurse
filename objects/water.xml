@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<water>
+    <hazard ap="64"
+            icon="1">
+        <object image="hazards.png"
+                left="0" right="31" top="0" bottom="31" />
+        <string name="water" />
+        <string damages="hawkman" />
+    </hazard>
+</water>
+
