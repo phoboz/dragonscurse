@@ -4,7 +4,6 @@
             icon="2">
         <object image="hazards.png"
                 left="0" right="31" top="0" bottom="31" />
-        <string name="lava" />
     </hazard>
 </lava>
 

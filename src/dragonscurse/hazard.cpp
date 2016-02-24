@@ -6,7 +6,7 @@ Hazard::Hazard(const char *fn, MediaDB *media)
 {
     load(fn, media);
 
-    const char *name = get_string("name");
+    const char *name = get_name();
     if (name) {
         m_start_name = std::string(name) + std::string("_start");
         m_end_name = std::string(name) + std::string("_end");
