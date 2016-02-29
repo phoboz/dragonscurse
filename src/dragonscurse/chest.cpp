@@ -2,6 +2,8 @@
 #include "world_db.h"
 #include "object_factory.h"
 #include "actor.h"
+#include "item.h"
+#include "collectable.h"
 #include "chest.h"
 
 Chest::Chest(const char *fn, MediaDB *media, int x, int y)
@@ -33,7 +35,10 @@ void Chest::world_initialize(World *world)
                         ((Item *) object)->set_from_chest(true);
                     }
                     else if (object->get_type() == Object::TypeCollectable) {
-                        ((Item *) object)->set_from_chest(true);
+                        ((Collectable *) object)->set_from_chest(true);
+                    }
+                    else {
+                        ((Material *) object)->set_from_chest(true);
                     }
                     m_objects.push_back(object);
                 }

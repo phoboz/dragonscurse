@@ -216,6 +216,12 @@
             <treasure id="1" type="collectable" name="coin.xml" />
             <treasure id="1" type="collectable" name="coin.xml" />
         </chest>
+        <chest id="1" once="0" location="wb.tmx">
+            <treasure id="1" type="collectable" name="thunder_saber.xml" />
+        </chest>
+        <chest id="2" once="0" location="wb.tmx">
+            <treasure id="2" type="collectable" name="magical_saber.xml" />
+        </chest>
     </chests>
 </world>
 
