@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <morph treshold="8" right_start="0" right_end="6" left_start="7" left_end="13">
-    <object image="human_to_lizardman.png"
-            left="12" right="56" top="0" bottom="64" />
+    <object image="piranhaman_to_lionman.png"
+            left="30" right="66" top="4" bottom="63" />
 </morph>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<morph treshold="8" right_start="0" right_end="7" left_start="8" left_end="15">
+<morph treshold="8" right_start="0" right_end="6" left_start="7" left_end="13">
     <object image="lizardman_to_mouseman.png"
             left="12" right="56" top="7" bottom="63" />
 </morph>
