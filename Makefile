@@ -53,4 +53,5 @@ dist : cmakeinstall
 clean:
 	cmake -E remove_directory ${build_dir} ; \
 	rm dragonscurse
+	rm tmx2bin
 
