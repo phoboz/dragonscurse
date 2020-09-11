@@ -3,8 +3,8 @@
 #include "Tmx/TmxLayer.h"
 
 void write_word(short value, FILE *fp) {
-  fputc(value & 0x00ff, fp);
   fputc((value & 0xff00) >> 8, fp);
+  fputc(value & 0x00ff, fp);
 }
 
 int main(int argc, char **argv) {
